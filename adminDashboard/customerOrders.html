@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Customer Orders</title>
+
+    <!-- Bootstrap -->
+    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+
+    <style type="text/css">
+      
+      button.btn.add::before {
+        font-family: fontAwesome;
+        content: "\f067\00a0";
+      }
+
+
+      button.btn.upload::before {
+        font-family: fontAwesome;
+        content: "\f093\00a0";
+      }
+
+      /* Multi select*/
+      #droptxt {
+          padding: 8px;
+          width: 300px;
+          cursor: pointer;
+          box-sizing: border-box
+      }
+      .dropdown {
+          position: relative;
+          display: inline-block
+      }
+      .content {
+          display: none;
+          position: absolute;
+          background-color: #f1f1f1;
+          min-width: 200px;
+          overflow: auto;
+          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
+          z-index: 1
+      }
+      .quantity {
+          float: right;
+          width: 40px
+      }
+      .content div {
+          padding: 10px 15px
+      }
+      .content div:hover {
+          background-color: #ddd
+      }
+      .show {
+        display: block
+      }
+    </style>
+
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view" id="accordionSidebar">
+            
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <div class="nav toggle">
+                  <a id="menu_toggle" style="padding-bottom: 15px;"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+          </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Reports</h3>
+              </div>
+
+              <div class="title_right">
+                <!-- <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search"> -->
+                <div class="form-group pull-right top_search">
+                  <div class="input-group">
+                    <button class="btn add btn-primary" data-toggle="modal" data-target="#addCustomerOrderModal">Place Customer Order</button></a>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Customer Orders</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Settings 1</a>
+                            <a class="dropdown-item" href="#">Settings 2</a>
+                          </div>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                      <div class="row">
+                          <div class="col-sm-12">
+                            <div class="card-box table-responsive">
+                    <p class="text-muted font-13 m-b-30">
+                      Region wise sales report accross different dates.
+                    </p>
+                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                  
+
+                      <thead>
+                        <tr>
+                          <th>Order ID</th>
+                          <th>Order Date</th>
+                          <th>Customer</th>
+                          <th>Contact Person</th>
+                          <th>Total Quantity</th>
+                          <th>Total Amount</th>
+                          <th>Details</th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody>
+                        <tr>
+                          <td>GG145</td>
+                          <td>14/07/2020</td>
+                          <td>Coffee Beans</td>
+                          <td>Jack Ryan</td>
+                          <td>10</td>
+                          <td>$ 10,000</td>
+                          <td class=" last"><a href="#">View</a>
+                        </tr>
+                        
+                        <tr>
+                          <td>PL905</td>
+                          <td>14/07/2020</td>
+                          <td>Western Coffee House</td>
+                          <td>Jay Payes</td>
+                          <td>10</td>
+                          <td>$ 10,000</td>
+                          <td class=" last"><a href="#">View</a>
+                        </tr>
+
+                        <tr>
+                          <td>NB567</td>
+                          <td>13/07/2020</td>
+                          <td>Ritchie Goldie</td>
+                          <td>Ron Jacob</td>
+                          <td>10</td>
+                          <td>$ 10,000</td>
+                          <td class=" last"><a href="#">View</a>
+                        </tr>
+
+                        <tr>
+                          <td>LA192</td>
+                          <td>13/07/2020</td>
+                          <td>Coffee Beans</td>
+                          <td>Jenffer Anniston</td>
+                          <td>10</td>
+                          <td>$ 10,000</td>
+                          <td class=" last"><a href="#">View</a>
+                        </tr>
+
+                        <tr>
+                          <td>BO920</td>
+                          <td>12/07/2020</td>
+                          <td>Hot Coffee</td>
+                          <td>Vivian James</td>
+                          <td>10</td>
+                          <td>$ 10,000</td>
+                          <td class=" last"><a href="#">View</a>
+                        </tr>
+
+                        <tr>
+                          <td>IP987</td>
+                          <td>12/07/2020</td>
+                          <td>Blec Coffee</td>
+                          <td>Daniel Sani</td>
+                          <td>10</td>
+                          <td>$ 10,000</td>
+                          <td class=" last"><a href="#">View</a>
+                        </tr>
+
+                     
+                       
+                      </tbody>
+                    </table>
+                  </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+
+
+        <!-- Modal for Edit data -->
+          <div class="modal fade bd-example-modal-l" id="addCustomerOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-l" role="document" >
+              <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">Place Customer Orders</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                
+                            <div class="col-md-12 col-sm-12 ">
+                              <div class="x_panel">
+                                <div class="x_content">
+                                  <br />
+                                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                                    
+
+                                    <div class="form-group row">
+                                      <label class="col-form-label col-md-3 col-sm-3 label-align ">Customer</label>
+                                      <div class="col-md-6 col-sm-6 ">
+                                        <select class="form-control">
+                                          <option>Choose Customer</option>
+                                          <option>Customer 1</option>
+                                          <option>Customer 2</option>
+                                          <option>Customer 3</option>
+                                          <option>Customer 4</option>
+                                          <option>Customer 5</option>
+                                        </select>
+                                      </div>
+                                    </div>
+
+                                    <!-- <div class="form-group row">
+                                      <label class="col-form-label col-md-3 col-sm-3 label-align ">Item</label>
+                                      <div class="col-md-6 col-sm-6 ">
+                                        <select class="form-control">
+                                          <option>Choose Item</option>
+                                          <option>Item 1</option>
+                                          <option>Item 2</option>
+                                          <option>Item 3</option>
+                                          <option>Item 4</option>
+                                        </select>
+                                      </div>
+                                      <input type="number" id="quantity" name="quantity" min="1" max="5" style="width: 60px;" value="1">
+                                    </div> -->
+
+
+                                    <div class="dropdown">
+                                        <input type="text" id="droptxt"  >
+                                            <div id="content" class="content">
+                                                <div class="list">
+                                                    <input type="checkbox" id="apple" class="list" value="Apple" />
+                                                    <label for="apple" class="list">Apple </label>
+                                                    <input type="hidden" class="list quantity" min="1" value="1" />
+                                                </div>
+                                                <div class="list">
+                                                    <input type="checkbox" id="banana" class="list" value="Banana" />
+                                                    <label for="banana" class="list">Banana </label>
+                                                    <input type="hidden" class="list quantity" min="1" value="1" />
+                                                </div>
+                                                <div class="list">
+                                                    <input type="checkbox" id="pineapple" class="list" value="Pineapple" />
+                                                    <label for="pineapple" class="list">Pineapple </label>
+                                                    <input type="hidden" class="list quantity" min="1" value="1" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    
+
+
+                                    <div class="item form-group">
+                                      <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                      </label>
+                                      <div class="col-md-6 col-sm-6 ">
+                                          <button>Add Item</button>
+                                      </div>
+                                    </div>
+
+
+                                    
+
+
+
+                                    <div class="ln_solid"></div>
+                                    <div class="item form-group">
+                                      <div class="col-md-6 col-sm-6 offset-md-3">
+                                        <button class="btn btn-primary" type="button">Cancel</button>
+                                        <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                      </div>
+                                    </div>
+
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+
+              </div>
+            </div>
+          </div>
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+   <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    <script src="../build/js/dataTables.cellEdit.js"></script>
+<!-- <script src="../build/js/basic.js"></script> -->
+
+    <!-- Side NavBar -->
+    <script src="js/sideNavBar.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.js"></script>
+
+  </body>
+</html>
