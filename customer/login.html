@@ -39,6 +39,8 @@
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 </head>
 
 <body>
@@ -474,19 +476,16 @@
                         <form action="#">
                             <p>
                                 <label>Username or email <span>*</span></label>
-                                <input type="text">
+                                <input type="text" id="email">
                             </p>
                             <p>
                                 <label>Passwords <span>*</span></label>
-                                <input type="password">
+                                <input type="password" id="password">
                             </p>
                             <div class="login_submit">
-                                <a href="#">Lost your password?</a>
-                                <label for="remember">
-                                    <input id="remember" type="checkbox">
-                                    Remember me
-                                </label>
-                                <button type="submit">login</button>
+                                <a id="forgotPassword">Lost your password?</a>
+                               
+                                <button id="login" type="submit">login</button>
 
                             </div>
 
@@ -633,10 +632,15 @@
             </div>
         </div>
     </footer>
-    <!--footer area end-->
-    
+    <!--footer area end-->    
+
+   
 <!-- JS
 ============================================ -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
 <!--jquery min js-->
 <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
 <!--popper min js-->
@@ -664,8 +668,36 @@
 
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/notification.js"></script>
 
 
+ <script>
+        $(document).ready(function(){
+        $("#forgotPassword").click(async function(){
+            var result = confirm( "Send new password to registered email?" );
+            if ( result ) {
+                await forgotPassword($("#email").val());
+            }
+        });
+        $("#login").click(async function(){
+            var email = $("#email").val();
+            var password = $("#password").val();
+            
+                login(email,password,function(response){
+                    notifySuccess('Login Success');
+                    updateAccessToken(response.data.access_token);
+
+                    //redirect
+                },
+                function(error){
+                   notifyError('Login error');
+                })
+
+        })
+    });
+    </script>
 
 </body>
 
