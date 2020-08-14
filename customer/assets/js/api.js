@@ -3,8 +3,8 @@ var BASE_URL = "http://3.106.131.179/api/";
 async function login(email,pass,onSuceess,onError){
 
 	var data = new FormData();
-	data.append('password', email);
-	data.append('email', pass);
+	data.append('password', pass);
+	data.append('email', email);
 
 	var config = {
 	  method: 'post',

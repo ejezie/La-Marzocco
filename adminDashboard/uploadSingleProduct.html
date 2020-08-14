@@ -18,6 +18,9 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
   </head>
 
   <body class="nav-md">
@@ -124,7 +127,7 @@ function autofillShippingAddress(f) {
 
                     <!-- Smart Wizard -->
                     <!-- <p>This is a basic form wizard example that inherits the colors from the selected scheme.</p> -->
-                    <div id="wizard" class="form_wizard wizard_horizontal">
+                    <div id="createItemWizard" class="form_wizard wizard_horizontal">
                       <ul class="wizard_steps">
                         <li>
                           <a href="#step-1">
@@ -167,6 +170,43 @@ function autofillShippingAddress(f) {
                         <form class="form-horizontal form-label-left">
 
                           
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Parent ID <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="input_parent_item_id" required="required" class="form-control  ">
+                            </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Group</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select id="input_item_group" class="form-control">
+                              
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Family</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select  id="input_item_family"  class="form-control">
+                              
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Type</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select  id="input_item_type"   class="form-control">
+                              
+                              </select>
+                            </div>
+                          </div>
+<!-- 
+
                           <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Family</label>
                             <div class="col-md-6 col-sm-6 ">
@@ -215,7 +255,10 @@ function autofillShippingAddress(f) {
                                 <option>Option four</option>
                               </select>
                             </div>
-                          </div>
+                          </div> -->
+
+
+
                           <!-- <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
                             <div class="col-md-6 col-sm-6 ">
@@ -239,33 +282,57 @@ function autofillShippingAddress(f) {
                         <form class="form-horizontal form-label-left">
 
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Item Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input type="text" id="contactPersonFirstName" required="required" class="form-control  ">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Short Code <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <input type="text" id="contactPersonLastName" name="last-name" required="required" class="form-control ">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Item Type</label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <select class="form-control">
-                                <option>Choose option</option>
-                                <option>Option one</option>
-                                <option>Option two</option>
-                                <option>Option three</option>
-                                <option>Option four</option>
-                              </select>
+                              <input type="text" id="input_code" required="required" class="form-control  ">
                             </div>
                           </div>
 
                           <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Name <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Short Code <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="input_short_code" required="required" class="form-control  ">
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="input_desc" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Super Session Item Id <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="input_super_session_item_id" name="last-name" required="required" class="form-control ">
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Manage Serial Number</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select id="input_manage_serial_no" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <!-- <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align ">Active</label>
                             <div class="col-md-6 col-sm-6 ">
                               <select class="form-control">
@@ -300,7 +367,7 @@ function autofillShippingAddress(f) {
                                 <option>Option four</option>
                               </select>
                             </div>
-                          </div>
+                          </div> -->
 
                       </form>
                     </div>
@@ -310,37 +377,86 @@ function autofillShippingAddress(f) {
                         <form class="form-horizontal form-label-left">
 
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Weight (grams) <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Length (cm) <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input type="text" id="billingAddressLine1" required="required" class="form-control  ">
+                              <input type="text" id="input_length" required="required" class="form-control  ">
                             </div>
                           </div>
 
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Is Consumable <span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Width (cm) <span class="required">*</span>
+                            </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <select class="form-control">
-                                <option>Choose option</option>
-                                <option>Option one</option>
-                                <option>Option two</option>
-                                <option>Option three</option>
-                                <option>Option four</option>
-                              </select>
+                              <input type="text" id="input_width" required="required" class="form-control  ">
                             </div>
                           </div>
+
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Is Recommednded <span class="required">*</span></label>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Height (cm) <span class="required">*</span>
+                            </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <select class="form-control">
-                                <option>Choose option</option>
-                                <option>Option one</option>
-                                <option>Option two</option>
-                                <option>Option three</option>
-                                <option>Option four</option>
+                              <input type="text" id="input_height" required="required" class="form-control  ">
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Weight (grams) <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="input_weight" required="required" class="form-control  ">
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Volume (ml) <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="input_volume" required="required" class="form-control  ">
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Consumable</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select id="input_is_consumable" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
                               </select>
                             </div>
                           </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Recommended</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select id="input_is_recommended" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                              </select>
+                            </div>
+                          </div>
+ 
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Slow Moving</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select id="input_is_slow_moving" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Active</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select id="input_is_active" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                              </select>
+                            </div>
+                          </div>
+
+                         
 
                       </form>
                     </div>
@@ -416,6 +532,19 @@ function autofillShippingAddress(f) {
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+    <script src="js/localstorage.js"></script>
+
+    <script src="js/notification.js"></script>
+
+    <!-- Main API -->
+    <script src="js/api.js"></script>
+
+    <!-- Main Page Script -->
+    <script src="js/uploadSingleProduct.js"></script>
 	
   </body>
 </html>

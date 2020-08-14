@@ -20,6 +20,9 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+
   </head>
 
   <body class="login">
@@ -33,22 +36,22 @@
             <form>
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="email" class="form-control" placeholder="Email" required="" />
               </div>
               <div>
                 <input type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Log in</a>
-                <a class="reset_pass" href="#">Lost your password?</a>
+                <a class="btn btn-default submit" id="login">Log in</a>
+                <a class="reset_pass" id="forgotPassword">Lost your password?</a>
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">New to site?
+                <!-- <p class="change_link">New to site?
                   <a href="#signup" class="to_register"> Create Account </a>
-                </p>
+                </p> -->
 
                 <div class="clearfix"></div>
                 <br />
@@ -62,7 +65,7 @@
           </section>
         </div>
 
-        <div id="register" class="animate form registration_form">
+       <!--  <div id="register" class="animate form registration_form">
           <section class="login_content">
             <form>
               <h1>Create Account</h1>
@@ -96,8 +99,60 @@
               </div>
             </form>
           </section>
-        </div>
+        </div> -->
+
+
       </div>
     </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+<!-- Main JS -->
+<script src="js/main.js"></script>
+<script src="js/api.js"></script>
+<script src="js/localstorage.js"></script>
+<script src="js/notification.js"></script>
+
+
+ <script>
+        $(document).ready(function(){
+        $("#forgotPassword").click(async function(){
+            var result = confirm( "Send new password to registered email?" );
+            if ( result ) {
+                await forgotPassword($("#email").val(),
+                  function(response){
+                    notifySuccess('New password is sent to your mail');
+                },
+                function(error){
+                   notifyError('Reset password error');
+                });
+            }
+        });
+        $("#login").click(async function(){
+            var email = $("#email").val();
+            var password = $("#password").val();
+            const id = notifyInfo("Please wait");
+                login(email,password,
+                  function(response){
+                     dismiss(id);
+                    if(response.data.status){
+                      notifySuccess('Login Success');
+                      updateAPIToken(response.data.access_token);
+                      //redirect
+                    }else{
+                      notifyError(response.data.message);
+                    }
+                },
+                function(error){
+                   dismiss(id);
+                   notifyError('Login error '+error);
+                })
+
+        });
+    });
+    </script>
+
   </body>
 </html>
