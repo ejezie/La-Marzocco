@@ -39,6 +39,11 @@
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
+<<<<<<< HEAD
+=======
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+>>>>>>> 9cbd62b1571c6a1fe53cdaa5239bc60e9007e745
 </head>
 
 <body>
@@ -474,6 +479,7 @@
                         <form action="#">
                             <p>
                                 <label>Username or email <span>*</span></label>
+<<<<<<< HEAD
                                 <input type="text">
                             </p>
                             <p>
@@ -487,6 +493,18 @@
                                     Remember me
                                 </label>
                                 <button type="submit">login</button>
+=======
+                                <input type="text" id="email">
+                            </p>
+                            <p>
+                                <label>Passwords <span>*</span></label>
+                                <input type="password" id="password">
+                            </p>
+                            <div class="login_submit">
+                                <a id="forgotPassword">Lost your password?</a>
+                               
+                                <button id="login" type="submit">login</button>
+>>>>>>> 9cbd62b1571c6a1fe53cdaa5239bc60e9007e745
 
                             </div>
 
@@ -633,10 +651,22 @@
             </div>
         </div>
     </footer>
+<<<<<<< HEAD
     <!--footer area end-->
     
 <!-- JS
 ============================================ -->
+=======
+    <!--footer area end-->    
+
+   
+<!-- JS
+============================================ -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+>>>>>>> 9cbd62b1571c6a1fe53cdaa5239bc60e9007e745
 <!--jquery min js-->
 <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
 <!--popper min js-->
@@ -664,8 +694,41 @@
 
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
+<<<<<<< HEAD
 
 
+=======
+<script src="assets/js/api.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/notification.js"></script>
+
+
+ <script>
+        $(document).ready(function(){
+        $("#forgotPassword").click(async function(){
+            var result = confirm( "Send new password to registered email?" );
+            if ( result ) {
+                await forgotPassword($("#email").val());
+            }
+        });
+        $("#login").click(async function(){
+            var email = $("#email").val();
+            var password = $("#password").val();
+            
+                login(email,password,function(response){
+                    notifySuccess('Login Success');
+                    updateAccessToken(response.data.access_token);
+
+                    //redirect
+                },
+                function(error){
+                   notifyError('Login error');
+                })
+
+        })
+    });
+    </script>
+>>>>>>> 9cbd62b1571c6a1fe53cdaa5239bc60e9007e745
 
 </body>
 
