@@ -97,6 +97,20 @@ var categoryArr = {
 				}
 
 
+var newsletterArr = [{
+						"newsletterName" : "Jan 2020",
+						"pdfURL" : "https://www.careerpower.in/2020/The-Hindu-Review-June-2020.pdf"
+					},
+					{
+						"newsletterName" : "Feb 2020",
+						"pdfURL" : "https://www.careerpower.in/2020/The-Hindu-Review-June-2020.pdf"
+					},
+					{
+						"newsletterName" : "Mar 2020",
+						"pdfURL" : "https://www.careerpower.in/2020/The-Hindu-Review-June-2020.pdf"
+					}]
+
+
 function showMenubarCommercialMachine(category){
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
@@ -203,8 +217,22 @@ function showMenubarModbar(category){
 	$("#modbar_menu").append(menuBarHTML)
 }
 
+
+
+
+function showNewsletter(newsletterArr){
+	var newsletterHTML = ""
+	for(i=0 ; i<newsletterArr.length;i++){
+		newsletterHTML += '<li><a href="'+newsletterArr[i]["pdfURL"]+'">'+newsletterArr[i]["newsletterName"]+'</a></li>'
+	}
+
+	$("#newsletter").append(newsletterHTML)
+
+}
+
 showMenubarCommercialMachine("Commercial Machines")
 showMenubarGrinders("Grinders")
 showMenubarModbar("Modbar")
+showNewsletter(newsletterArr)
 
 
