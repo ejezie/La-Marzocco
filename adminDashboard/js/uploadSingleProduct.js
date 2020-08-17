@@ -2,9 +2,9 @@ function populateGroup(){
 
 	var groupDropdown = $("#input_item_group");
 	var onResponse = function(response){
-		for(var i=0; i< response.data.groups.length; i++){
-		const group = response.data.groups[i];
-         groupDropdown.append($("<option>").text(group.name +"   "+ group.desc).val(group.id));
+		for(var i=0; i< response.data.groups.data.length; i++){
+		const group = response.data.groups.data[i];
+         groupDropdown.append($("<option>").text(group.name +"   "+((group.desc != null)? group.desc : "")).val(group.id));
     	}
 	};
 	var onError =function(error){
@@ -17,9 +17,9 @@ function populateFamily(){
 
 	var familyDropdown = $("#input_item_family");
 	var onResponse = function(response){
-		for(var i=0; i< response.data.groups.length; i++){
-		const group = response.data.groups[i];
-         familyDropdown.append($("<option>").text(group.code +"   "+ group.desc).val(group.id));
+		for(var i=0; i< response.data.families.data.length; i++){
+		const group = response.data.families.data[i];
+         familyDropdown.append($("<option>").text(group.code +"   "+((group.desc != null)? group.desc : "")).val(group.id));
     	}
 	};
 	var onError =function(error){
@@ -33,9 +33,9 @@ function populateType(){
 
 	var typeDropdown = $("#input_item_type");
 	var onResponse = function(response){
-		for(var i=0; i< response.data.groups.length; i++){
-		const group = response.data.groups[i];
-         typeDropdown.append($("<option>").text(group.name +"   "+ group.desc).val(group.id));
+		for(var i=0; i< response.data.types.data.length; i++){
+		const group = response.data.types.data[i];
+         typeDropdown.append($("<option>").text(group.name +"   "+((group.desc != null)? group.desc : "")).val(group.id));
     	}
 	};
 	var onError =function(error){
@@ -46,13 +46,30 @@ function populateType(){
 	getTypes(onResponse,onError);
 
 }
+function populateParent(){
+
+	var typeDropdown = $("#input_item_parent");
+	var onResponse = function(response){
+		for(var i=0; i< response.data.parents.data.length; i++){
+		const group = response.data.parents.data[i];
+         typeDropdown.append($("<option>").text(group.name +"   "+ ((group.desc != null)? group.desc : "")).val(group.id));
+    	}
+	};
+	var onError =function(error){
+		console.log(error)
+		notifyError("Failed to load parents");
+	};
+
+	getParents(onResponse,onError);
+
+}
 
 function uploadProduct(){
 
 	var item_group_id = $("#input_item_group").val();
 	var item_type_id = $("#input_item_type").val();
 	var item_family_id = $("#input_item_family").val();
-	var parent_item_id = $("#input_parent_item_id").val();
+	var parent_item_id = $("#input_item_parent").val();
 
 
 	var code = $("#input_code").val();
@@ -79,9 +96,15 @@ function uploadProduct(){
 	var is_active = $("#input_is_active").val();
 	var onResponse = function(response){
 		notifySuccess("sucess");
+		window.location.href = 'productMaster.html';
 	};
 	var onError =function(error){
-		notifyError(error.response.data.message);
+		for (var key of Object.keys(error.response.data.message)) {
+		    notifyError(error.response.data.message[key][0]);
+		}
+
+		// if(Array.isArray(error.response.data) )
+		// notifyError(error.response.data.message);
 	};
 	createItem(
 		code,
@@ -151,6 +174,7 @@ $(document).ready(function(){
 	    populateGroup();
 	    populateFamily();
 	    populateType();
+	    populateParent();
 
 	    // $('#createItemWizard').smartWizard("loader", "hide");
 
