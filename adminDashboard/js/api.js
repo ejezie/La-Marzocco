@@ -1,152 +1,152 @@
 const BASE_URL = "http://3.106.131.179/api/";
 
 async function updateItem(
-    item_id,
-    code,
-    name,
-    short_code,
-    desc,
-    parent_item_id,
-    super_session_item_id,
-    manage_serial_number,
-    item_group_id,
-    item_type_id,
-    item_family_id,
-    length,
-    length_uom,
-    width,
-    width_uom,
-    height,
-    height_uom,
-    weight,
-    weight_uom,
-    volume,
-    volume_uom,
-    is_consumable,
-    is_recommended,
-    is_slow_moving,
-    is_active,
-    onResponse,
-    onError){
+  item_id,
+  code,
+  name,
+  short_code,
+  desc,
+  parent_item_id,
+  super_session_item_id,
+  manage_serial_number,
+  item_group_id,
+  item_type_id,
+  item_family_id,
+  length,
+  length_uom,
+  width,
+  width_uom,
+  height,
+  height_uom,
+  weight,
+  weight_uom,
+  volume,
+  volume_uom,
+  is_consumable,
+  is_recommended,
+  is_slow_moving,
+  is_active,
+  onResponse,
+  onError){
 
-    var data = new FormData();
+  var data = new FormData();
 
-    data.append('item_parent_id',parent_item_id);
-    data.append('item_group_id',item_group_id);
-    data.append('item_family_id',item_family_id);
-    data.append('item_type_id',item_type_id);
+  data.append('item_parent_id',parent_item_id);
+  data.append('item_group_id',item_group_id);
+  data.append('item_family_id',item_family_id);
+  data.append('item_type_id',item_type_id);
 
-    data.append('code',code);
-    data.append('name',name);
-    data.append('short_code',short_code);
-    data.append('desc',desc);
-    data.append('super_session_item_id',super_session_item_id);
-    data.append('manage_serial_number',manage_serial_number);
+  data.append('code',code);
+  data.append('name',name);
+  data.append('short_code',short_code);
+  data.append('desc',desc);
+  data.append('super_session_item_id',super_session_item_id);
+  data.append('manage_serial_number',manage_serial_number);
 
-    data.append('length',length);
-    data.append('length_uom',length_uom);
-    data.append('width',width);
-    data.append('width_uom',width_uom);
-    data.append('height',height);
-    data.append('height_uom',height_uom);
-    data.append('weight',weight);
-    data.append('weight_uom',weight_uom);
-    data.append('volume',volume);
-    data.append('volume_uom',volume_uom);
-    data.append('is_consumable',is_consumable);
-    data.append('is_recommended',is_recommended);
-    data.append('is_slow_moving',is_slow_moving);
-    data.append('is_active',is_active);
+  data.append('length',length);
+  data.append('length_uom',length_uom);
+  data.append('width',width);
+  data.append('width_uom',width_uom);
+  data.append('height',height);
+  data.append('height_uom',height_uom);
+  data.append('weight',weight);
+  data.append('weight_uom',weight_uom);
+  data.append('volume',volume);
+  data.append('volume_uom',volume_uom);
+  data.append('is_consumable',is_consumable);
+  data.append('is_recommended',is_recommended);
+  data.append('is_slow_moving',is_slow_moving);
+  data.append('is_active',is_active);
 
-    var config = {
-      method: 'post',
-      url:BASE_URL+'item/'+item_id,
-      headers: { 
-        'Authorization': getAPIToken(), 
-        'Accept': 'application/json', 
-        'Content-Type': 'multipart/form-data' 
-      },
-      data : data
-    };
+  var config = {
+    method: 'post',
+    url:BASE_URL+'item/'+item_id,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json', 
+      'Content-Type': 'multipart/form-data' 
+    },
+    data : data
+  };
 
-    axios(config)
-    .then(onResponse)
-    .catch(onError);
+  axios(config)
+  .then(onResponse)
+  .catch(onError);
 
 }
 
 
 async function createItem(
-    code,
-    name,
-    short_code,
-    desc,
-    parent_item_id,
-    super_session_item_id,
-    manage_serial_number,
-    item_group_id,
-    item_type_id,
-    item_family_id,
-    length,
-    length_uom,
-    width,
-    width_uom,
-    height,
-    height_uom,
-    weight,
-    weight_uom,
-    volume,
-    volume_uom,
-    is_consumable,
-    is_recommended,
-    is_slow_moving,
-    is_active,
-    onResponse,
-    onError){
+  code,
+  name,
+  short_code,
+  desc,
+  parent_item_id,
+  super_session_item_id,
+  manage_serial_number,
+  item_group_id,
+  item_type_id,
+  item_family_id,
+  length,
+  length_uom,
+  width,
+  width_uom,
+  height,
+  height_uom,
+  weight,
+  weight_uom,
+  volume,
+  volume_uom,
+  is_consumable,
+  is_recommended,
+  is_slow_moving,
+  is_active,
+  onResponse,
+  onError){
 
-    var data = new FormData();
+  var data = new FormData();
 
-    data.append('item_parent_id',parent_item_id);
-    data.append('item_group_id',item_group_id);
-    data.append('item_family_id',item_family_id);
-    data.append('item_type_id',item_type_id);
+  data.append('item_parent_id',parent_item_id);
+  data.append('item_group_id',item_group_id);
+  data.append('item_family_id',item_family_id);
+  data.append('item_type_id',item_type_id);
 
-    data.append('code',code);
-    data.append('name',name);
-    data.append('short_code',short_code);
-    data.append('desc',desc);
-    data.append('super_session_item_id',super_session_item_id);
-    data.append('manage_serial_number',manage_serial_number);
+  data.append('code',code);
+  data.append('name',name);
+  data.append('short_code',short_code);
+  data.append('desc',desc);
+  data.append('super_session_item_id',super_session_item_id);
+  data.append('manage_serial_number',manage_serial_number);
 
-    data.append('length',length);
-    data.append('length_uom',length_uom);
-    data.append('width',width);
-    data.append('width_uom',width_uom);
-    data.append('height',height);
-    data.append('height_uom',height_uom);
-    data.append('weight',weight);
-    data.append('weight_uom',weight_uom);
-    data.append('volume',volume);
-    data.append('volume_uom',volume_uom);
-    data.append('is_consumable',is_consumable);
-    data.append('is_recommended',is_recommended);
-    data.append('is_slow_moving',is_slow_moving);
-    data.append('is_active',is_active);
+  data.append('length',length);
+  data.append('length_uom',length_uom);
+  data.append('width',width);
+  data.append('width_uom',width_uom);
+  data.append('height',height);
+  data.append('height_uom',height_uom);
+  data.append('weight',weight);
+  data.append('weight_uom',weight_uom);
+  data.append('volume',volume);
+  data.append('volume_uom',volume_uom);
+  data.append('is_consumable',is_consumable);
+  data.append('is_recommended',is_recommended);
+  data.append('is_slow_moving',is_slow_moving);
+  data.append('is_active',is_active);
 
-    var config = {
-      method: 'post',
-      url:BASE_URL+'item',
-      headers: { 
-        'Authorization': getAPIToken(), 
-        'Accept': 'application/json', 
-        'Content-Type': 'multipart/form-data' 
-      },
-      data : data
-    };
+  var config = {
+    method: 'post',
+    url:BASE_URL+'item',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json', 
+      'Content-Type': 'multipart/form-data' 
+    },
+    data : data
+  };
 
-    axios(config)
-    .then(onResponse)
-    .catch(onError);
+  axios(config)
+  .then(onResponse)
+  .catch(onError);
 
 }
 
@@ -154,89 +154,111 @@ async function createItem(
 
 async function getItems(onResponse,onError,page,page_size){
 
-var data = new FormData();
+  var data = new FormData();
 
-var config = {
-  method: 'get',
-  url: BASE_URL+'item?page='+page+'&page_size='+page_size,
-  headers: { 
-        'Authorization': getAPIToken(), 
-        'Accept': 'application/json'
-      },
-  data : data
-};
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item?page='+page+'&page_size='+page_size,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
   
-    axios(config)
-    .then(onResponse)
-    .catch(onError);  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+async function bulkUploadItems(onResponse,onError,file){
+
+  var data = new FormData();
+  data.append("file",file);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'upload/inventory',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
 
 }
 
 
 async function getGroups(onResponse,onError){
 
-    var config = {
-      method: 'get',
-      url: BASE_URL+'group',
-      headers: { 
-        'Authorization': getAPIToken(), 
-        'Accept': 'application/json'
-      }
-    };
+  var config = {
+    method: 'get',
+    url: BASE_URL+'group',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
 
-    axios(config)
-    .then(onResponse)
-    .catch(onError);  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
 }
 
 async function getFamilies(onResponse,onError){
 
-    var config = {
-      method: 'get',
-      url: BASE_URL+'family',
-      headers: { 
-        'Authorization': getAPIToken(), 
-        'Accept': 'application/json'
-      }
-    };
-    
-    axios(config)
-    .then(onResponse)
-    .catch(onError);  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'family',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
 }
 
 async function getTypes(onResponse,onError){
 
-    var config = {
-      method: 'get',
-      url: BASE_URL+'type',
-      headers: { 
-        'Authorization': getAPIToken(), 
-        'Accept': 'application/json'
-      }
-    };
-    
-    axios(config)
-    .then(onResponse)
-    .catch(onError);  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'type',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
 }
 
 async function getParents(onResponse,onError){
 
-var data = new FormData();
+  var data = new FormData();
 
-    var config = {
-      method: 'get',
-      url: BASE_URL+'parent',
-      headers: { 
-        'Authorization': getAPIToken(), 
-        'Accept': 'application/json'
-      }
-    };
-    
-    axios(config)
-    .then(onResponse)
-    .catch(onError);  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'parent',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
 }
 
 

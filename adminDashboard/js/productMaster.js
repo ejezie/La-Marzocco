@@ -7,30 +7,30 @@ function populateGroup(currentVal){
 
   var onResponse = function(response){
     for(var i=0; i< response.data.groups.data.length; i++){
-    const group = response.data.groups.data[i];
-         groupDropdown.append($("<option>").text(group.name +"   "+((group.desc != null)? group.desc : "")).val(group.id));
-      }
+      const group = response.data.groups.data[i];
+      groupDropdown.append($("<option>").text(group.name +"   "+((group.desc != null)? group.desc : "")).val(group.id));
+    }
 
-      groupDropdown.val(currentVal);
+    groupDropdown.val(currentVal);
 
   };
   var onError =function(error){
     notifyError("Failed to load groups");
   };
   getGroups(onResponse,onError);
-    
+  
 }
 function populateFamily(currentVal){
 
   var familyDropdown = $("#input_item_family");
-    familyDropdown.empty();
+  familyDropdown.empty();
 
   var onResponse = function(response){
     for(var i=0; i< response.data.families.data.length; i++){
-    const group = response.data.families.data[i];
-         familyDropdown.append($("<option>").text(group.code +"   "+((group.desc != null)? group.desc : "")).val(group.id));
-      }
-            familyDropdown.val(currentVal);
+      const group = response.data.families.data[i];
+      familyDropdown.append($("<option>").text(group.code +"   "+((group.desc != null)? group.desc : "")).val(group.id));
+    }
+    familyDropdown.val(currentVal);
 
   };
   var onError =function(error){
@@ -43,14 +43,14 @@ function populateFamily(currentVal){
 function populateType(currentVal){
 
   var typeDropdown = $("#input_item_type");
-    typeDropdown.empty();
+  typeDropdown.empty();
 
   var onResponse = function(response){
     for(var i=0; i< response.data.types.data.length; i++){
-    const group = response.data.types.data[i];
-         typeDropdown.append($("<option>").text(group.name +"   "+((group.desc != null)? group.desc : "")).val(group.id));
-      }
-                  typeDropdown.val(currentVal);
+      const group = response.data.types.data[i];
+      typeDropdown.append($("<option>").text(group.name +"   "+((group.desc != null)? group.desc : "")).val(group.id));
+    }
+    typeDropdown.val(currentVal);
 
   };
   var onError =function(error){
@@ -64,14 +64,14 @@ function populateType(currentVal){
 function populateParent(currentVal){
 
   var parentDropdown = $("#input_item_parent");
-    parentDropdown.empty();
+  parentDropdown.empty();
 
   var onResponse = function(response){
     for(var i=0; i< response.data.parents.data.length; i++){
-    const group = response.data.parents.data[i];
-         parentDropdown.append($("<option>").text(group.name +"   "+ ((group.desc != null)? group.desc : "")).val(group.id));
-      }
-      parentDropdown.val(currentVal);
+      const group = response.data.parents.data[i];
+      parentDropdown.append($("<option>").text(group.name +"   "+ ((group.desc != null)? group.desc : "")).val(group.id));
+    }
+    parentDropdown.val(currentVal);
 
   };
   var onError =function(error){
@@ -85,34 +85,34 @@ function populateParent(currentVal){
 
 
 function loadProducts(beatdata) {
-     itemMasterTable = $('#items_master').dataTable( {
-       processing: true,
-        serverSide: true,
-      pageLength: 10,
-      bSort : false,
-      lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
-      ajax: function(data, callback, settings) {
-        const loadingId = notifyInfo("Please wait");
-        console.log(JSON.stringify(data,null,2));
+ itemMasterTable = $('#items_master').dataTable( {
+   processing: true,
+   serverSide: true,
+   pageLength: 10,
+   bSort : false,
+   lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
+   ajax: function(data, callback, settings) {
+    const loadingId = notifyInfo("Please wait");
+    console.log(JSON.stringify(data,null,2));
 
-            var onResponse = function(res){
+    var onResponse = function(res){
               //alert("onresponse");
               dismiss(loadingId);
               console.log("recordsTotal "+res.data.items.data.length)
               // notifySuccess("sucess");
-                callback({
+              callback({
                 draw:data.draw,
                 recordsTotal: res.data.items.total,
                 recordsFiltered: res.data.items.total,
                 data: res.data.items.data
-            });
+              });
 
             };
             var onError =function(error){
 
               dismiss(loadingId);
               for (var key of Object.keys(error.response.data.message)) {
-                  notifyError(error.response.data.message[key][0]);
+                notifyError(error.response.data.message[key][0]);
               }
               notifyError(error.response.data.message);
             };
@@ -121,7 +121,7 @@ function loadProducts(beatdata) {
               // var pageIndex = (data.start+10)/10;
               var pageIndex = data.start / data.length + 1 ;
               console.log("apgedinnnnnnnnnnndex  " +pageIndex)
-          getItems(onResponse,onError,pageIndex,data.length);
+              getItems(onResponse,onError,pageIndex,data.length);
           // var sort_column_name = data.columns[data.order[0].column].data.replace(/\./g,"__");
           // var direction = "";
 
@@ -139,9 +139,9 @@ function loadProducts(beatdata) {
           //         data: res.objects
           //     });
           // });
-      },
-      buttons : [{
-                extend: 'csv',
+        },
+        buttons : [{
+          extend: 'csv',
                 // className: 'btn btn-sm btn-success',
                 titleAttr: 'CSV export.',
                 text: 'CSV',
@@ -153,80 +153,80 @@ function loadProducts(beatdata) {
                 titleAttr: 'Copy table data.',
                 text: 'PDF'
               }],
-      columns: [
-        {
-          "title":"Group",
-          render: function(data, type, row, meta){
-            return row.group.name;
-          }
-        },
-        {
-          "title":"Family",
-          render: function(data, type, row){
-            return row.family.code;
-          }
-        },
-        {
-          "title":"Type",
-          render: function(data, type, row){
-            return row.type.name;
-          }
-        },
-        {
-          "title":"Parent",
-          render: function(data, type, row){
-            return (row.parent == null ? "-" : row.parent.name);
-          }
-        },
-        {
-          "title":"Item Code",
-          render: function(data, type, row){
-            return row.code;
-          }
-        },
-        {
-          "title":"Item Name",
-          render: function(data, type, row){
+              columns: [
+              {
+                "title":"Group",
+                render: function(data, type, row, meta){
+                  return row.group.name;
+                }
+              },
+              {
+                "title":"Family",
+                render: function(data, type, row){
+                  return row.family.code;
+                }
+              },
+              {
+                "title":"Type",
+                render: function(data, type, row){
+                  return row.type.name;
+                }
+              },
+              {
+                "title":"Parent",
+                render: function(data, type, row){
+                  return (row.parent == null ? "-" : row.parent.name);
+                }
+              },
+              {
+                "title":"Item Code",
+                render: function(data, type, row){
+                  return row.code;
+                }
+              },
+              {
+                "title":"Item Name",
+                render: function(data, type, row){
            // console.log("row.salesperson.fullname",row.salesPerson.fullName)
-            return row.name;
-          }
-        },
-        {
-          "title":"Weight",
-          render: function(data, type, row){
+           return row.name;
+         }
+       },
+       {
+        "title":"Weight",
+        render: function(data, type, row){
            // console.log("row.salesperson.fullname",row.salesPerson.fullName)
-            return (row.weight != null ? (row.weight+" "+row.weight_uom) : "-" );
-          }
-        },
-        {
-          "title":"Active",
-          render: function(data, type, row){
+           return (row.weight != null ? (row.weight+" "+row.weight_uom) : "-" );
+         }
+       },
+       {
+        "title":"Active",
+        render: function(data, type, row){
            // console.log("row.salesperson.fullname",row.salesPerson.fullName)
-            return (row.is_active == 0 ? "Inactive" : "Active") ;  
-          }
-        },
-        {
-          "title":"Recommended",
-          render: function(data, type, row){
+           return (row.is_active == 0 ? "Inactive" : "Active") ;  
+         }
+       },
+       {
+        "title":"Recommended",
+        render: function(data, type, row){
            // console.log("row.salesperson.fullname",row.salesPerson.fullName)
-            return (row.is_recommended == 0 ? "Not Recommended" : "Recommended") ;  
-          }
-        },
-        {
-          "title":"Edit",
-          render: function(data, type, row){
+           return (row.is_recommended == 0 ? "Not Recommended" : "Recommended") ;  
+         }
+       },
+       {
+        "title":"Edit",
+        render: function(data, type, row){
            // console.log("row.salesperson.fullname",row.salesPerson.fullName)
-            return "<button type=\"button\" class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\"></span></button>"
+           return "<button type=\"button\" class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\"></span></button>"
             // return "EDIT";
           }
         }
-      ]
-    })
+        ]
+      })
 }
 
 function showItemEditModal(data){
 
-      $('#editItemModal').modal('show');
+  $('#editItemModal').modal('show');
 }
 
 function submitEditItemModal(data){
@@ -264,7 +264,7 @@ function submitEditItemModal(data){
   };
   var onError =function(error){
     for (var key of Object.keys(error.response.data.message)) {
-        notifyError(error.response.data.message[key][0]);
+      notifyError(error.response.data.message[key][0]);
     }
 
     // if(Array.isArray(error.response.data) )
@@ -302,7 +302,7 @@ function submitEditItemModal(data){
 }
 
 $(document).ready(function(){
-    loadProducts();
+  loadProducts();
     // $('#items_master tbody').on( 'click', 'button', function () {
     //   var data = $('#items_master').dataTable().row( $(this).parents('tr') ).data();
     //   alert( data[0] +"'s salary is: "+ data[ 5 ] );
@@ -318,56 +318,72 @@ $(document).ready(function(){
 
     $('#items_master').on('click', '.btn', function () {
 
-        var RowIndex = $(this).closest('tr');
-        var data = itemMasterTable.api().row(RowIndex).data();
-            populateGroup(data.group.id);
-            populateFamily(data.family.id);
-            populateType(data.type.id);
-            populateParent(data.parent.id);
+      var RowIndex = $(this).closest('tr');
+      var data = itemMasterTable.api().row(RowIndex).data();
+      populateGroup(data.group.id);
+      populateFamily(data.family.id);
+      populateType(data.type.id);
+      populateParent(data.parent.id);
 
-             $("#input_code").val(data.code);
-            $("#input_name").val(data.name);
-             $("#input_short_code").val(data.short_code);
-            $("#input_desc").val(data.desc);
-             $("#input_super_session_item_id").val(data.super_session_item_id);
-            $("#input_manage_serial_no").val(data.manage_serial_number);
+      $("#input_code").val(data.code);
+      $("#input_name").val(data.name);
+      $("#input_short_code").val(data.short_code);
+      $("#input_desc").val(data.desc);
+      $("#input_super_session_item_id").val(data.super_session_item_id);
+      $("#input_manage_serial_no").val(data.manage_serial_number);
 
 
-             $("#input_length").val(data.length);
+      $("#input_length").val(data.length);
             // var length_uom = $("input_length_uom").val();
-             $("#input_width").val(data.width);
+            $("#input_width").val(data.width);
             // var width_uom = $("input_width_uom").val();
-             $("#input_height").val(data.height);
+            $("#input_height").val(data.height);
             // var height_uom = $("input_height_uom").val();
-             $("#input_weight").val(data.weight);
+            $("#input_weight").val(data.weight);
             // var weight_uom = $("input_weight_uom").val();
-             $("#input_volume").val(data.volume);
+            $("#input_volume").val(data.volume);
             // var volume_uom = $("#input_volume_uom").val();
-             $("#input_is_consumable").val(data.is_consumable);
-             $("#input_is_recommended").val(data.is_recommended);
-             $("#input_is_slow_moving").val(data.is_slow_moving);
-             $("#input_is_active").val(data.is_active);
+            $("#input_is_consumable").val(data.is_consumable);
+            $("#input_is_recommended").val(data.is_recommended);
+            $("#input_is_slow_moving").val(data.is_slow_moving);
+            $("#input_is_active").val(data.is_active);
 
 
-               $('#cancelEditItemModal').click(function () {
-                    $('#editItemModal').modal('hide');
-                });
+            $('#cancelEditItemModal').click(function () {
+              $('#editItemModal').modal('hide');
+            });
 
 
-               $('#submitEditItemModal').click(function () {
-                    submitEditItemModal(data);
-                  });
-             
+            $('#submitEditItemModal').click(function () {
+              submitEditItemModal(data);
+            });
+            
 
-        showItemEditModal(data);
+            showItemEditModal(data);
 
-        console.log(JSON.stringify(data,null,2));
+            console.log(JSON.stringify(data,null,2));
+          });
+
+
+    $('#uploadFile').click(function () {
+      var xlsx = document.querySelector('#excelfile');
+      var onResponse = function(response){
+        $('#bulkUploadModal').modal('hide');
+        notifySuccess("File uploaded!");
+      };
+      var onError =function(error){
+        notifyError("Failed to upload file");
+      };
+      bulkUploadItems(onResponse,onError, xlsx.files[0]);
     });
+    
 
 
 
 
-               
+
+
+    
 // });
                 // .on('click', '.btn', function () {
                 //     alert("submitting")
@@ -376,7 +392,7 @@ $(document).ready(function(){
                 //     // $('#editItemModal').modal('hide');
                 // });
 
-    });
+              });
 
 
 
