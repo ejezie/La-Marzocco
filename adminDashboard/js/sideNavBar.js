@@ -46,6 +46,7 @@ function sideNavBar(){
 		sideNavBarHTML +=  '<li><a href="employeeMaster.html">EmployeeMaster</a></li>'
 		sideNavBarHTML +=  '<li><a href="customerMaster.html">Customer Master</a></li>'
 		sideNavBarHTML +=  '<li><a href="productMaster.html">Product Master</a></li>'
+		sideNavBarHTML +=  '<li><a href="productHierarchy.html">Product Hierarchy</a></li>'
 		sideNavBarHTML +=  '<li><a href="newsletter.html">Newsletter</a></li>'
 		sideNavBarHTML +=  '</ul>'
 		sideNavBarHTML +=  '</li>'
