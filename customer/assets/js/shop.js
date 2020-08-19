@@ -1,6 +1,6 @@
 var catalogList = [{
 						"productCode" : "HSO567",
-						"productName" : "Vulcano1",
+						"productName" : "Vulcano199999",
 						"productFamily" : "Espresso Machines",
 						"productActualPrice" : "$1199.00",
 						"productOfferPrice" : "$999.00",
