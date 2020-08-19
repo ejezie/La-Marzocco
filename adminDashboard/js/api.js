@@ -195,6 +195,68 @@ async function bulkUploadItems(onResponse,onError,file){
 }
 
 
+async function getGroupsWithPaging(onResponse,onError,page,page_size){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'group?page='+page+'&page_size='+page_size,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+async function getParentsWithPaging(onResponse,onError,page,page_size){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'parent?page='+page+'&page_size='+page_size,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+async function getTypesWithPaging(onResponse,onError,page,page_size){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'type?page='+page+'&page_size='+page_size,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+async function getFamiliesWithPaging(onResponse,onError,page,page_size){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'family?page='+page+'&page_size='+page_size,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
 async function getGroups(onResponse,onError){
 
   var config = {
@@ -278,6 +340,7 @@ async function forgotPassword(email,onResponse,onError){
   .catch(onError);
 
 }
+
 
 
 async function login(email,pass,onResponse,onError){
