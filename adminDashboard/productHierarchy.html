@@ -143,13 +143,14 @@
                                                         <a class="nav-item nav-link active" id="nav-type-tab" data-toggle="tab" href="#nav-type" role="tab" aria-controls="nav-type" aria-selected="true">Type </a>
                                                         <a class="nav-item nav-link" id="nav-parent-tab" data-toggle="tab" href="#nav-parent" role="tab" aria-controls="nav-parent" aria-selected="false">Parent</a>
                                                         <a class="nav-item nav-link" id="nav-family-tab" data-toggle="tab" href="#nav-family" role="tab" aria-controls="nav-family" aria-selected="false">Family</a>
+                                                        <a class="nav-item nav-link" id="nav-groupDesc-tab" data-toggle="tab" href="#nav-groupDesc" role="tab" aria-controls="nav-groupDesc" aria-selected="false">Group Description</a>
                                                         <a class="nav-item nav-link" id="nav-group-tab" data-toggle="tab" href="#nav-group" role="tab" aria-controls="nav-group" aria-selected="false">Group </a>
                                                     </div>
                                                 </nav>
                                                 <div class="tab-content" id="nav-tabContent">
                                                     <div class="tab-pane fade show active" id="nav-type" role="tabpanel" aria-labelledby="nav-type-tab">
                                                         <table class="table table-striped table-bordered" cellspacing="0" id="productType">
-                                                            <thead>
+                                                            <!-- <thead>
                                                                 <tr>
                                                                     <th>Sr. No.</th>
                                                                     <th>Code</th>
@@ -158,7 +159,7 @@
 
                                                                 </tr>
                                                             </thead>
-                                                          <!--   <tbody>
+                                                            <tbody>
                                                                 <tr>
                                                                     <td>1</td>
                                                                     <td>MCLINEA</td>
@@ -171,16 +172,16 @@
                                                                     <td>Spare Parts</td>
                                                                     <td>Spare Parts</td>
                                                                 </tr>
-                                                                <tr>
+                                                                <tr> -->
                                                                <!--      <td>3</td>
                                                                     <td>Dooley</td>
                                                                     <td>july@example.com</td>
-                                                                </tr> -->
+                                                                </tr>
                                                             </tbody> -->
                                                         </table>
                                                         <div class="row">
                                                           <div class="col-sm-6">
-                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductTypeModal">Add Group</button>
+                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductTypeModal">Add Type</button>
                                                             
                                                           </div>
                                                           <div class="col-sm-6">
@@ -191,7 +192,7 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="nav-parent" role="tabpanel" aria-labelledby="nav-parent-tab">
                                                         <table class="table table-striped table-bordered" cellspacing="0" id="productParent">
-                                                            <thead>
+                                                            <!-- <thead>
                                                                 <tr>
                                                                     <th>Sr. No.</th>
                                                                     <th>Code</th>
@@ -218,11 +219,11 @@
                                                                     <td>Parent Item</td>
                                                                     <td>Parent Item</td>
                                                                 </tr>
-                                                            </tbody>
+                                                            </tbody> -->
                                                         </table>
                                                         <div class="row">
                                                           <div class="col-sm-6">
-                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductParentModal">Add Group</button>
+                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductParentModal">Add Parent</button>
                                                             
                                                           </div>
                                                           <div class="col-sm-6">
@@ -233,7 +234,7 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="nav-family" role="tabpanel" aria-labelledby="nav-family-tab">
                                                         <table class="table table-striped table-bordered" cellspacing="0" id="productFamily">
-                                                            <thead>
+                                                            <!-- <thead>
                                                                 <tr>
                                                                     <th>Sr. No.</th>
                                                                     <th>Code</th>
@@ -260,11 +261,11 @@
                                                                     <td>Modbar</td>
                                                                     <td>Modbar</td>
                                                                 </tr>
-                                                            </tbody>
+                                                            </tbody> -->
                                                         </table>
                                                         <div class="row">
                                                           <div class="col-sm-6">
-                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductFamilyModal">Add Group</button>
+                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductFamilyModal">Add Family</button>
                                                             
                                                           </div>
                                                           <div class="col-sm-6">
@@ -273,9 +274,50 @@
                                                           </div>
                                                         </div>
                                                     </div>
+                                                    <div class="tab-pane fade" id="nav-groupDesc" role="tabpanel" aria-labelledby="nav-groupDesc-tab">
+                                                        <table class="table table-striped table-bordered" cellspacing="0" id="productgroupDesc">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Sr. No.</th>
+                                                                    <th>Code</th>
+                                                                    <th>Group Desc</th>
+                                                                    <th>Description</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>CMMACHINE</td>
+                                                                    <td>Commercial Machine</td>
+                                                                    <td>Commercial Machine</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2</td>
+                                                                    <td>PANELPARTS</td>
+                                                                    <td>Panels and external parts</td>
+                                                                    <td>Panels and external parts</td>
+                                                                </tr>
+                                                               <!--  <tr>
+                                                                    <td><a href="#">Work 3</a></td>
+                                                                    <td>Dooley</td>
+                                                                    <td>Patti.com</td>
+                                                                </tr> -->
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="row">
+                                                          <div class="col-sm-6">
+                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductGroupDescModal">Add Group Description</button>
+                                                            
+                                                          </div>
+                                                          <div class="col-sm-6">
+                                                            
+                                                            <button type="button" value="Add New" id="" class="btn upload btn-primary btn-block" data-toggle="modal" data-target="#bulkUploadGroupDescModal">Bulk Upload</button>
+                                                          </div>
+                                                        </div>
+                                                </div>
                                                     <div class="tab-pane fade" id="nav-group" role="tabpanel" aria-labelledby="nav-group-tab">
                                                         <table class="table table-striped table-bordered" cellspacing="0" id="productGroup">
-                                                            <thead>
+                                                            <!-- <thead>
                                                                 <tr>
                                                                     <th>Sr. No.</th>
                                                                     <th>Code</th>
@@ -283,7 +325,7 @@
                                                                     <th>Description</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody> -->
                                                               <!--   <tr>
                                                                     <td>1</td>
                                                                     <td>CMMACHINE</td>
@@ -531,7 +573,65 @@
           </div>
 
 
+           <!-- Modal for uploading Excel/Bulk Product Type -->
+          <div class="modal fade bd-example-modal-lg" id="bulkUploadGroupDesceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document" >
+              <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">Upload Product Group Description</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                
+                <div class="modal-body">
+                  <!-- Sample Table -->
+                  <div class="table-responsive">
+                    <h5>Sample Data:</h5>
+                    <!-- <table class="table table-striped table-bordered table-sm"> -->
+                      <table id="sampleUploadFormatTable" class="table table-striped table-bordered" style="width:100%">
+                        <tr>
+                          <th>Code</th>
+                          <th>Group Description</th>
+                          
+                          
+                        </tr>
+                        <tr>
+                          <td>CMCOM</td>
+                          <td>Commercial Machines</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <br>
+                    <!-- Upload data -->
+                    <h5>Upload Excel:</h5>
+                    <div>
+                      <input type="file" class="btn btn-info" accept=".xls, .xlsx" id="excelfile"/>  
+                      <input type="button" class="btn btn-primary" id="uploadFile" value="Upload" onclick="ExportToTable('Upload')"/>  
+                      <table id="exceltable" ></table>
+                    </div>
+                    <br>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-sm" id="tab3">
+                              <thead><tr></tr></thead>
+                              <tbody></tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
+                    <table class="table table-hover" id="tab2">
+                      <thead><tr></tr></thead>
+                    </table>
+                  </div>
+                </div>
+              </div>
+          </div>
 
 
         <!-- Modal for uploading Excel/Bulk Product Group -->
@@ -705,6 +805,42 @@
           </div>
 
 
+
+           <!-- Modal Form for a Adding New Product Group -->
+          <div class="modal fade" id="addProductGroupDescModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add Product Group Description</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id= "addTargetForm">
+                    <div class="form-group row">
+                      <label class="control-label col-md-3 col-sm-3 ">Code</label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <input type="password" class="form-control" value="">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="control-label col-md-3 col-sm-3 "> Group Description</label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <input type="password" class="form-control" value="">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</button>
+                  <button type="button" id="addnew" class="btn btn-primary" onclick="saveCustomerTarget()">Save</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
           <!-- Modal Form for a Adding New Product Group -->
           <div class="modal fade" id="addProductGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -723,6 +859,20 @@
                         <input type="password" class="form-control" value="">
                       </div>
                     </div>
+
+                    <div class="form-group row">
+                      <label class="control-label col-md-3 col-sm-3 ">Group Desc</label>
+                      <div class="col-md-9 col-sm-9 ">
+                        <select class="form-control">
+                          <option>Choose option</option>
+                          <option>Option one</option>
+                          <option>Option two</option>
+                          <option>Option three</option>
+                          <option>Option four</option>
+                        </select>
+                      </div>
+                    </div>
+
                     <div class="form-group row">
                       <label class="control-label col-md-3 col-sm-3 ">Product Group</label>
                       <div class="col-md-9 col-sm-9 ">
@@ -738,6 +888,340 @@
               </div>
             </div>
           </div>
+
+
+
+          <!-- Modal for Edit Product Type -->
+            <div class="modal fade bd-example-modal-l" id="editProductType" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog modal-l" role="document" >
+                <div class="modal-content">
+                  <!--Header-->
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Edit Product Type</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                      <div class="x_content">
+                        <br />
+
+                          <form class="form-horizontal form-label-left">
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_code"  class="form-control  ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Type <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
+                              </div>
+                            </div>
+
+
+                            
+
+                            
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                              <div class="col-md-6 col-sm-6 offset-md-3">
+                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <!-- Modal for Edit Product Parent -->
+            <div class="modal fade bd-example-modal-l" id="editProductParent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog modal-l" role="document" >
+                <div class="modal-content">
+                  <!--Header-->
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Edit Product Parent</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                      <div class="x_content">
+                        <br />
+
+                          <form class="form-horizontal form-label-left">
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_code"  class="form-control  ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Name <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
+                              </div>
+                            </div>
+
+
+                            
+
+                            
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                              <div class="col-md-6 col-sm-6 offset-md-3">
+                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+              <!-- Modal for Edit Product Family -->
+            <div class="modal fade bd-example-modal-l" id="editProductFamily" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog modal-l" role="document" >
+                <div class="modal-content">
+                  <!--Header-->
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Edit Product Family</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                      <div class="x_content">
+                        <br />
+
+                          <form class="form-horizontal form-label-left">
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_code"  class="form-control  ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Family <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
+                              </div>
+                            </div>
+
+
+                            
+
+                            
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                              <div class="col-md-6 col-sm-6 offset-md-3">
+                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Modal for Edit Product Group Description -->
+            <div class="modal fade bd-example-modal-l" id="editProductGroupDesc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog modal-l" role="document" >
+                <div class="modal-content">
+                  <!--Header-->
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Edit Product Group Desc</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                      <div class="x_content">
+                        <br />
+
+                          <form class="form-horizontal form-label-left">
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_code"  class="form-control  ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Group Description <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
+                              </div>
+                            </div>
+
+
+                            
+
+                            
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                              <div class="col-md-6 col-sm-6 offset-md-3">
+                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Modal for Edit Product Group -->
+            <div class="modal fade bd-example-modal-l" id="editProductGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog modal-l" role="document" >
+                <div class="modal-content">
+                  <!--Header-->
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Edit Product Group</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                      <div class="x_content">
+                        <br />
+
+                          <form class="form-horizontal form-label-left">
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_code"  class="form-control  ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Group <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
+                              </div>
+                            </div>
+
+
+                            
+
+                            
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                              <div class="col-md-6 col-sm-6 offset-md-3">
+                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
 
 
 
@@ -788,7 +1272,7 @@
     <script src="js/sideNavBar.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <!-- <script src="../build/js/custom.js"></script> -->
+    <script src="../build/js/custom.js"></script>
 
 
           <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

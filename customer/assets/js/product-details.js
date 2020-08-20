@@ -116,7 +116,7 @@ async function showProductInfo(item){
 	infoHTML += '</div>'
 	infoHTML += '<div class="tab-pane fade " id="info" role="tabpanel">'
 	infoHTML += '<div class="product_info_content">'
-	infoHTML += '<p>'+item["description"]+'</p>'
+	infoHTML += '<p>'+item["description"]+' </p>'
 	infoHTML += '</div>'
 	infoHTML += '</div>'
 	infoHTML += '</div>'
