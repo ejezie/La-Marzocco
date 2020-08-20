@@ -47,21 +47,21 @@ function populateGroup(){
 		{
 			"title":"Type",
 			render: function(data, type, row){
-	            return row.name ;
-	        }
-	    },
-	    {
-	    	"title":"Description",
-	    	render: function(data, type, row){
-	           return row.desc;
-	       }
-	   }
-	   ]
+				return row.name ;
+			}
+		},
+		{
+			"title":"Description",
+			render: function(data, type, row){
+				return row.desc;
+			}
+		}
+		]
 	});
 
 }
 function populateFamily(){
-$('#productFamily').dataTable( {
+	$('#productFamily').dataTable( {
 
 		processing: true,
 		serverSide: true,
@@ -109,22 +109,22 @@ $('#productFamily').dataTable( {
 		{
 			"title":"Family",
 			render: function(data, type, row){
-	            return row.code ;
-	        }
-	    },
-	    {
-	    	"title":"Description",
-	    	render: function(data, type, row){
-	           return row.desc;
-	       }
-	   }
-	   ]
+				return row.code ;
+			}
+		},
+		{
+			"title":"Description",
+			render: function(data, type, row){
+				return row.desc;
+			}
+		}
+		]
 	});
 
 }
 function populateType(){
 
-$('#productType').dataTable( {
+	$('#productType').dataTable( {
 
 		processing: true,
 		serverSide: true,
@@ -172,23 +172,23 @@ $('#productType').dataTable( {
 		{
 			"title":"Type",
 			render: function(data, type, row){
-	            return row.name ;
-	        }
-	    },
-	    {
-	    	"title":"Description",
-	    	render: function(data, type, row){
-	           return row.desc;
-	       }
-	   }
-	   ]
+				return row.name ;
+			}
+		},
+		{
+			"title":"Description",
+			render: function(data, type, row){
+				return row.desc;
+			}
+		}
+		]
 	});
 
 
 }
 function populateParent(){
 
-$('#productParent').dataTable( {
+	$('#productParent').dataTable( {
 
 		processing: true,
 		serverSide: true,
@@ -237,16 +237,16 @@ $('#productParent').dataTable( {
 		{
 			"title":"Name",
 			render: function(data, type, row){
-	            return row.name ;
-	        }
-	    },
-	    {
-	    	"title":"Description",
-	    	render: function(data, type, row){
-	           return row.desc;
-	       }
-	   }
-	   ]
+				return row.name ;
+			}
+		},
+		{
+			"title":"Description",
+			render: function(data, type, row){
+				return row.desc;
+			}
+		}
+		]
 	});
 
 
@@ -258,10 +258,73 @@ $('#productParent').dataTable( {
 
 $(document).ready(function(){
 
+	$.fn.extend({
+		trackChanges: function() {
+			this.off('change');
+			this.removeData("changed");
+			this.change(function() {
+				this.data("changed", this.val());
+			});
+		}
+		,
+		getChanged: function() { 
+			return this.data("changed"); 
+		}
+	});
+
 	populateGroup();
 	populateFamily();
 	populateType();
 	populateParent();
+
+
+	$('#productGroup').on('click', '#btnEdit', function () {
+		var RowIndex = $(this).closest('tr');
+		var data = itemMasterTable.api().row(RowIndex).data();
+
+		$("#inputEditGroupName").val(data.name);
+		$("#inputEditGroupDesc").val(data.desc);
+
+
+		$("#inputEditGroupName").trackChanges();
+		$("#inputEditGroupDesc").trackChanges();
+		
+		$('#cancelEditGroupModal').click(function () {
+			$('#editGroupModal').modal('hide');
+		});
+
+		$('#submitEditGroupModal').click(function () {
+			const name = $("#inputEditGroupName").getChanged();
+			const desc = $("#inputEditGroupDesc").getChanged();
+			var onResponse = function(response){
+				notifySuccess("Updated successfully");
+				window.location.reload();
+			};
+			var onError =function(error){
+				notifyError("Failed to update");
+			};
+			updateGroup(onResponse,onError, data.id,name,desc);
+		});
+		
+		$('#editGroupModal').modal('show');
+
+
+	});
+	$('#productGroup').on('click', '#btnDelete', function () {
+		var RowIndex = $(this).closest('tr');
+		var data = itemMasterTable.api().row(RowIndex).data();
+		var r = confirm("Delete this group?");
+		if (r == true) {
+			var onResponse = function(response){
+				notifySuccess("Group deleted");
+				window.location.reload();
+			};
+			var onError =function(error){
+				notifyError("Failed to delete thr group");
+			};
+			deleteGroup(onResponse,onError,data.id);
+		}
+	});
 
 
 });

@@ -257,6 +257,67 @@ async function getFamiliesWithPaging(onResponse,onError,page,page_size){
 
 }
 
+async function deleteGroup(onResponse,onError,groupid){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'group/'+groupid,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+async function deleteFamily(onResponse,onError,familyid){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'family/'+familyid,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+async function deleteType(onResponse,onError,typeid){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'type/'+typeid,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+async function deleteParent(onResponse,onError,parentid){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'parent/'+parentid,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
 async function getGroups(onResponse,onError){
 
   var config = {
@@ -266,6 +327,31 @@ async function getGroups(onResponse,onError){
       'Authorization': getAPIToken(), 
       'Accept': 'application/json'
     }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+async function updateGroup(onResponse,onError,groupid,newGroupName,newGroupDesc){
+
+  var data = new FormData();
+  if(newGroupName!=null){
+    data.append('name', newGroupName);
+  }
+  if(newGroupDesc!=null){
+    data.append('desc', newGroupDesc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'group/'+groupid,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
   };
 
   axios(config)
