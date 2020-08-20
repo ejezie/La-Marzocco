@@ -1346,6 +1346,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .main_menu nav > ul > li:hover > a {
   color: #ffd54c;
+  background: #000
 }
 .main_menu nav > ul > li:first-child > a {
   padding-left: 0;

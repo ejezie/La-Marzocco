@@ -56,7 +56,7 @@ async function showProductDetails(item){
 	detailsHTML += '<p>'+item["description"]+'</p>'
 	detailsHTML += '</div>'
 	detailsHTML += '<div class="product_meta">'
-	detailsHTML += '<span>Family: <a href="#">'+item["family"]+'</a></span>'
+	detailsHTML += '<span>Family : <a href="#">'+item["family"]+'</a></span>'
 	detailsHTML += '</div>'
 	detailsHTML += '<div class="product_variant quantity">'
 	detailsHTML += '<label>quantity</label>'
@@ -101,25 +101,14 @@ async function showProductInfo(item){
 	infoHTML += '<table>'
 	infoHTML += '<tbody>'
 
-	Object.keys(item["specification"]).forEach(function(key) {
+	Object.keys(item["specification"][0]).forEach(function(key) {
 	  // console.table('Key : ' + key + ', Value : ' + data[key])
 		infoHTML += '<tr>'
 		infoHTML += '<td class="first_child">'+key+'</td>'
-		infoHTML += '<td>'+item["specification"][key]+'</td>'
+		infoHTML += '<td>'+item["specification"][0][key]+'</td>'
 		infoHTML += '</tr>'
 	})
 
-	// for(i=0 ; i<item["specification"].length ; i++){
-
-	// }
-	// infoHTML += '<tr>'
-	// infoHTML += '<td class="first_child">Styles</td>'
-	// infoHTML += '<td>Girly</td>'
-	// infoHTML += '</tr>'
-	// infoHTML += '<tr>'
-	// infoHTML += '<td class="first_child">Properties</td>'
-	// infoHTML += '<td>Short Dress</td>'
-	// infoHTML += '</tr>'
 	infoHTML += '</tbody>'
 	infoHTML += '</table>'
 	infoHTML += '</form>'
@@ -127,8 +116,7 @@ async function showProductInfo(item){
 	infoHTML += '</div>'
 	infoHTML += '<div class="tab-pane fade " id="info" role="tabpanel">'
 	infoHTML += '<div class="product_info_content">'
-	infoHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla.</p>'
-	infoHTML += '<p>Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget.</p>'
+	infoHTML += '<p>'+item["description"]+'</p>'
 	infoHTML += '</div>'
 	infoHTML += '</div>'
 	infoHTML += '</div>'
