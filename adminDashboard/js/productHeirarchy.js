@@ -3,6 +3,7 @@ function populateGroup(){
 
 		processing: true,
 		serverSide: true,
+		"autoWidth": false,
 		pageLength: 10,
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
@@ -55,6 +56,18 @@ function populateGroup(){
 	    	render: function(data, type, row){
 	           return row.desc;
 	       }
+	   },
+	   {
+	    	"title":"Edit",
+	    	render: function(data, type, row){
+	           return '<button type="button" data-toggle="modal" data-target="#editProductGroup" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">'
+	       }
+	   },
+	   {
+	    	"title":"Delete",
+	    	render: function(data, type, row){
+	           return '<button type="button"  class="btn btn-default btn-sm"><span class=" 	glyphicon glyphicon-trash">'
+	       }
 	   }
 	   ]
 	});
@@ -66,14 +79,15 @@ $('#productFamily').dataTable( {
 		processing: true,
 		serverSide: true,
 		pageLength: 10,
+		"autoWidth": false,
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Please wait");
+			// const loadingId = notifyInfo("Please wait");
 			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
-				dismiss(loadingId);
+				// dismiss(loadingId);
 				callback({
 					draw:data.draw,
 					recordsTotal: res.data.families.total,
@@ -117,6 +131,18 @@ $('#productFamily').dataTable( {
 	    	render: function(data, type, row){
 	           return row.desc;
 	       }
+	   },
+	   {
+	    	"title":"Edit",
+	    	render: function(data, type, row){
+	           return '<button type="button" data-toggle="modal" data-target="#editProductFamily" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">'
+	       }
+	   },
+	   {
+	    	"title":"Delete",
+	    	render: function(data, type, row){
+	           return '<button type="button"  class="btn btn-default btn-sm"><span class=" 	glyphicon glyphicon-trash">'
+	       }
 	   }
 	   ]
 	});
@@ -129,6 +155,7 @@ $('#productType').dataTable( {
 		processing: true,
 		serverSide: true,
 		pageLength: 10,
+		"autoWidth": false,
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
@@ -178,7 +205,19 @@ $('#productType').dataTable( {
 	    {
 	    	"title":"Description",
 	    	render: function(data, type, row){
-	           return row.desc;
+	           return row.desc
+	       }
+	   },
+	   {
+	    	"title":"Edit",
+	    	render: function(data, type, row){
+	           return '<button type="button" data-toggle="modal" data-target="#editProductType" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">'
+	       }
+	   },
+	   {
+	    	"title":"Delete",
+	    	render: function(data, type, row){
+	           return '<button type="button"  class="btn btn-default btn-sm"><span class=" 	glyphicon glyphicon-trash">'
 	       }
 	   }
 	   ]
@@ -193,6 +232,7 @@ $('#productParent').dataTable( {
 		processing: true,
 		serverSide: true,
 		pageLength: 10,
+		"autoWidth": false,
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
@@ -245,6 +285,18 @@ $('#productParent').dataTable( {
 	    	render: function(data, type, row){
 	           return row.desc;
 	       }
+	   },
+	   {
+	    	"title":"Edit",
+	    	render: function(data, type, row){
+	           return '<button type="button" data-toggle="modal" data-target="#editProductParent" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">'
+	       }
+	   },
+	   {
+	    	"title":"Delete",
+	    	render: function(data, type, row){
+	           return '<button type="button"  class="btn btn-default btn-sm"><span class=" 	glyphicon glyphicon-trash">'
+	       }
 	   }
 	   ]
 	});
@@ -258,9 +310,9 @@ $('#productParent').dataTable( {
 
 $(document).ready(function(){
 
+	populateType();
 	populateGroup();
 	populateFamily();
-	populateType();
 	populateParent();
 
 
