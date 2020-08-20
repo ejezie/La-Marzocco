@@ -4,6 +4,7 @@ function populateGroup(){
 		processing: true,
 		serverSide: true,
 		pageLength: 10,
+		autoWidth: false,
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
@@ -55,7 +56,19 @@ function populateGroup(){
 			render: function(data, type, row){
 				return row.desc;
 			}
-		}
+		},
+	   {
+	    	"title":"Edit",
+	    	render: function(data, type, row){
+	           return '<button type="button" data-toggle="modal" data-target="#editProductFamily" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">'
+	       }
+	   },
+	   {
+	    	"title":"Delete",
+	    	render: function(data, type, row){
+	           return '<button type="button"  class="btn btn-default btn-sm"><span class=" 	glyphicon glyphicon-trash">'
+	       }
+	   }
 		]
 	});
 
@@ -65,6 +78,7 @@ function populateFamily(){
 
 		processing: true,
 		serverSide: true,
+		autoWidth: false,
 		pageLength: 10,
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
@@ -117,7 +131,19 @@ function populateFamily(){
 			render: function(data, type, row){
 				return row.desc;
 			}
-		}
+		},
+	   {
+	    	"title":"Edit",
+	    	render: function(data, type, row){
+	           return '<button type="button" data-toggle="modal" data-target="#editProductFamily" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">'
+	       }
+	   },
+	   {
+	    	"title":"Delete",
+	    	render: function(data, type, row){
+	           return '<button type="button"  class="btn btn-default btn-sm"><span class=" 	glyphicon glyphicon-trash">'
+	       }
+	   }
 		]
 	});
 
@@ -128,6 +154,7 @@ function populateType(){
 
 		processing: true,
 		serverSide: true,
+		autoWidth: false,
 		pageLength: 10,
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
@@ -180,7 +207,19 @@ function populateType(){
 			render: function(data, type, row){
 				return row.desc;
 			}
-		}
+		},
+	   {
+	    	"title":"Edit",
+	    	render: function(data, type, row){
+	           return '<button type="button" data-toggle="modal" data-target="#editProductFamily" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">'
+	       }
+	   },
+	   {
+	    	"title":"Delete",
+	    	render: function(data, type, row){
+	           return '<button type="button"  class="btn btn-default btn-sm"><span class=" 	glyphicon glyphicon-trash">'
+	       }
+	   }
 		]
 	});
 
@@ -192,6 +231,7 @@ function populateParent(){
 
 		processing: true,
 		serverSide: true,
+		autoWidth: false,
 		pageLength: 10,
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
@@ -245,7 +285,19 @@ function populateParent(){
 			render: function(data, type, row){
 				return row.desc;
 			}
-		}
+		},
+	   {
+	    	"title":"Edit",
+	    	render: function(data, type, row){
+	           return '<button type="button" data-toggle="modal" data-target="#editProductFamily" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">'
+	       }
+	   },
+	   {
+	    	"title":"Delete",
+	    	render: function(data, type, row){
+	           return '<button type="button"  class="btn btn-default btn-sm"><span class=" 	glyphicon glyphicon-trash">'
+	       }
+	   }
 		]
 	});
 
