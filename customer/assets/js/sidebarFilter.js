@@ -68,10 +68,13 @@ var machineList = [{
 					}
 				]
 
+var groupList = ["Commercial Machines","Panels and external parts","Group1","Group2"]
+
+var familyList = ["LINEA","MODBAR","ESPRESSO MACHINES"]
 
 
 
-async function showMachines(){
+async function showMachinesSideFilter(machineList){
 	var sidebarHTML = ""
 
 	for(i=0; i<machineList.length ;i++){
@@ -95,5 +98,33 @@ async function showMachines(){
 }
 
 
-showMachines(machineList)
+async function showGroupSideFilter(groupList){
+	var sidebarHTML = ""
+
+	for(i=0; i<groupList.length ;i++){
+
+		sidebarHTML += '<li class="menu_item_children"><a href="#">'+groupList[i]+'</a>'
+	}
+
+	$("#sidebarGroupFilter").append(sidebarHTML)
+
+}
+
+
+async function showFamilySideFilter(familyList){
+	var sidebarHTML = ""
+
+	for(i=0; i<familyList.length ;i++){
+
+		sidebarHTML += '<li class="menu_item_children"><a href="#">'+familyList[i]+'</a>'
+	}
+
+	$("#sidebarFamilyFilter").append(sidebarHTML)
+
+}
+
+
+showMachinesSideFilter(machineList)
+showGroupSideFilter(groupList)
+showFamilySideFilter(familyList)
 
