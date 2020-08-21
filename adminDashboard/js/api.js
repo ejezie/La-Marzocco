@@ -359,6 +359,105 @@ async function updateGroup(onResponse,onError,groupid,newGroupName,newGroupDesc)
   .catch(onError);  
 }
 
+
+async function addGroup(onResponse,onError,newGroupName,newGroupDesc){
+
+  var data = new FormData();
+  if(newGroupName!=null){
+    data.append('name', newGroupName);
+  }
+  if(newGroupDesc!=null){
+    data.append('desc', newGroupDesc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'group',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+async function addType(onResponse,onError,name,desc){
+
+  var data = new FormData();
+  if(name!=null){
+    data.append('name', name);
+  }
+  if(desc!=null){
+    data.append('desc', desc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'type',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+async function addParent(onResponse,onError,name,desc){
+
+  var data = new FormData();
+  if(name!=null){
+    data.append('name', name);
+  }
+  if(desc!=null){
+    data.append('desc', desc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'parent',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+async function addFamily(onResponse,onError,code,desc){
+
+  var data = new FormData();
+  if(code!=null){
+    data.append('code', code);
+  }
+  if(desc!=null){
+    data.append('desc', desc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'family',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
 async function getFamilies(onResponse,onError){
 
   var config = {
@@ -375,6 +474,33 @@ async function getFamilies(onResponse,onError){
   .catch(onError);  
 }
 
+
+async function updateFamily(onResponse,onError,id,name,desc){
+
+  var data = new FormData();
+  if(name!=null){
+    data.append('code', name);
+  }
+  if(desc!=null){
+    data.append('desc', desc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'family/'+id,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+
 async function getTypes(onResponse,onError){
 
   var config = {
@@ -390,6 +516,33 @@ async function getTypes(onResponse,onError){
   .then(onResponse)
   .catch(onError);  
 }
+
+
+async function updateType(onResponse,onError,id,name,desc){
+
+  var data = new FormData();
+  if(name!=null){
+    data.append('name', name);
+  }
+  if(desc!=null){
+    data.append('desc', desc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'type/'+id,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
 
 async function getParents(onResponse,onError){
 
@@ -408,6 +561,33 @@ async function getParents(onResponse,onError){
   .then(onResponse)
   .catch(onError);  
 }
+
+
+async function updateParent(onResponse,onError,id,name,desc){
+
+  var data = new FormData();
+  if(name!=null){
+    data.append('name', name);
+  }
+  if(desc!=null){
+    data.append('desc', desc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'parent/'+id,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
 
 
 async function forgotPassword(email,onResponse,onError){

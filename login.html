@@ -388,7 +388,7 @@
                 login(email,password,function(response){
                     notifySuccess('Login Success');
                     updateAccessToken(response.data.access_token);
-                    window.location = '/adminDashboard/dashboard.html', true;
+                    window.location = 'adminDashboard/dashboard.html', true;
                 },
                 function(error){
                    notifyError('Login error');

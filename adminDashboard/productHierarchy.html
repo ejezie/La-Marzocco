@@ -131,7 +131,7 @@
                           <div class="col-sm-12">
                             <div class="card-box table-responsive">
                     
-                    <!-- <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                    <!-- <table id="datatable" clearfixass="table table-striped table-bordered" style="width:100%">
          
                     </table> -->
                                 <section id="tabs" class="project-tab">
@@ -181,7 +181,7 @@
                                                         </table>
                                                         <div class="row">
                                                           <div class="col-sm-6">
-                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductTypeModal">Add Type</button>
+                                                            <button type="button" value="Add New" id="btnAddType" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductTypeModal">Add Type</button>
                                                             
                                                           </div>
                                                           <div class="col-sm-6">
@@ -223,7 +223,7 @@
                                                         </table>
                                                         <div class="row">
                                                           <div class="col-sm-6">
-                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductParentModal">Add Parent</button>
+                                                            <button type="button" value="Add New" id="btnAddParent" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductParentModal">Add Parent</button>
                                                             
                                                           </div>
                                                           <div class="col-sm-6">
@@ -265,7 +265,7 @@
                                                         </table>
                                                         <div class="row">
                                                           <div class="col-sm-6">
-                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductFamilyModal">Add Family</button>
+                                                            <button type="button" value="Add New" id="btnAddFamily" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductFamilyModal">Add Family</button>
                                                             
                                                           </div>
                                                           <div class="col-sm-6">
@@ -347,7 +347,7 @@
                                                         </table>
                                                         <div class="row">
                                                           <div class="col-sm-6">
-                                                            <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductGroupModal">Add Group</button>
+                                                            <button type="button" value="Add New" id="btnAddGroup" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addGroupModal">Add Group</button>
                                                             
                                                           </div>
                                                           <div class="col-sm-6">
@@ -701,46 +701,48 @@
 
 
           <!-- Modal Form for a Adding New Product Type -->
-          <div class="modal fade" id="addProductTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add Product Type</h5>
+                  <h5 class="modal-title" >Add Product Type</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form id= "addTargetForm">
+                  <form>
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Code</label>
+                      <label class="control-label col-md-3 col-sm-3 ">Name</label>
                       <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
+                        <input id="inputAddTypeName" class="form-control" value="">
                       </div>
                     </div>
+
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Product Type</label>
+                      <label class="control-label col-md-3 col-sm-3 ">Description</label>
                       <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
+                        <input id="inputAddTypeDesc" class="form-control" value="">
                       </div>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
+                                      <button type="button" id="confirmAddType" class="btn btn-success">Confirm</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</button>
-                  <button type="button" id="addnew" class="btn btn-primary" onclick="saveCustomerTarget()">Save</button>
                 </div>
               </div>
             </div>
           </div>
+
 
 
           <!-- Modal Form for a Adding New Product Parent -->
-          <div class="modal fade" id="addProductParentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal fade" id="addParentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add Product Parent</h5>
+                  <h5 class="modal-title" >Add Parent Family</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
@@ -748,34 +750,36 @@
                 <div class="modal-body">
                   <form id= "addTargetForm">
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Code</label>
+                      <label class="control-label col-md-3 col-sm-3 ">Name</label>
                       <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
+                        <input id="inputAddParentName" class="form-control" value="">
                       </div>
                     </div>
+
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Product Parent</label>
+                      <label class="control-label col-md-3 col-sm-3 ">Description</label>
                       <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
+                        <input id="inputAddParentDesc" class="form-control" value="">
                       </div>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
+                                      <button type="button" id="confirmAddParent" class="btn btn-success">Confirm</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</button>
-                  <button type="button" id="addnew" class="btn btn-primary" onclick="saveCustomerTarget()">Save</button>
                 </div>
               </div>
             </div>
           </div>
+
 
 
           <!-- Modal Form for a Adding New Product Family -->
-          <div class="modal fade" id="addProductFamilyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal fade" id="addFamilyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add Product Family</h5>
+                  <h5 class="modal-title" >Add Product Family</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
@@ -785,24 +789,26 @@
                     <div class="form-group row">
                       <label class="control-label col-md-3 col-sm-3 ">Code</label>
                       <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
+                        <input id="inputAddFamilyCode" class="form-control" value="">
                       </div>
                     </div>
+
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Product Family</label>
+                      <label class="control-label col-md-3 col-sm-3 ">Description</label>
                       <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
+                        <input id="inputAddFamilyDesc" class="form-control" value="">
                       </div>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
+                                      <button type="button" id="confirmAddFamily" class="btn btn-success">Confirm</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</button>
-                  <button type="button" id="addnew" class="btn btn-primary" onclick="saveCustomerTarget()">Save</button>
                 </div>
               </div>
             </div>
           </div>
+
 
 
 
@@ -842,11 +848,11 @@
 
 
           <!-- Modal Form for a Adding New Product Group -->
-          <div class="modal fade" id="addProductGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="addGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add Product Group</h5>
+                  <h5 class="modal-title" >Add Product Group</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                   </button>
@@ -854,36 +860,23 @@
                 <div class="modal-body">
                   <form id= "addTargetForm">
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Code</label>
+                      <label class="control-label col-md-3 col-sm-3 ">Name</label>
                       <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
+                        <input id="inputAddGroupName" class="form-control" value="">
                       </div>
                     </div>
 
                     <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Group Desc</label>
+                      <label class="control-label col-md-3 col-sm-3 ">Description</label>
                       <div class="col-md-9 col-sm-9 ">
-                        <select class="form-control">
-                          <option>Choose option</option>
-                          <option>Option one</option>
-                          <option>Option two</option>
-                          <option>Option three</option>
-                          <option>Option four</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Product Group</label>
-                      <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
+                        <input id="inputAddGroupDesc" class="form-control" value="">
                       </div>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
+                                      <button type="button" id="confirmAddGroup" class="btn btn-success">Confirm</button>
                   <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Close</button>
-                  <button type="button" id="addnew" class="btn btn-primary" onclick="saveCustomerTarget()">Save</button>
                 </div>
               </div>
             </div>
@@ -892,7 +885,7 @@
 
 
           <!-- Modal for Edit Product Type -->
-            <div class="modal fade bd-example-modal-l" id="editProductType" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+           <div class="modal fade bd-example-modal-l" id="editTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog modal-l" role="document" >
                 <div class="modal-content">
                   <!--Header-->
@@ -914,15 +907,15 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_code"  class="form-control  ">
+                                <input disabled="disabled" type="text" id="inputEditTypeId"  class="form-control  ">
                               </div>
                             </div>
 
                             <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Type <span class="required">*</span>
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Group 
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                                <input type="text" id="inputEditTypeName" name="last-name"  class="form-control ">
                               </div>
                             </div>
 
@@ -930,20 +923,17 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
+                                <input type="text" id="inputEditTypeDesc" name="last-name"  class="form-control ">
                               </div>
                             </div>
-
-
-                            
 
                             
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                               <div class="col-md-6 col-sm-6 offset-md-3">
-                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                <button id="cancelEditTypeModal" class="btn btn-primary" type="button">Cancel</button>
                                 <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                                <button id="submitEditTypeModal"  type="button" class="btn">Confirm</button>
                               </div>
                             </div>
 
@@ -959,8 +949,11 @@
 
 
 
+
+
+
               <!-- Modal for Edit Product Parent -->
-            <div class="modal fade bd-example-modal-l" id="editProductParent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+           <div class="modal fade bd-example-modal-l" id="editParentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog modal-l" role="document" >
                 <div class="modal-content">
                   <!--Header-->
@@ -982,15 +975,15 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_code"  class="form-control  ">
+                                <input disabled="disabled" type="text" id="inputEditParentId"  class="form-control  ">
                               </div>
                             </div>
 
                             <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Name <span class="required">*</span>
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Group 
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                                <input type="text" id="inputEditParentName" name="last-name"  class="form-control ">
                               </div>
                             </div>
 
@@ -998,20 +991,17 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
+                                <input type="text" id="inputEditParentDesc" name="last-name"  class="form-control ">
                               </div>
                             </div>
-
-
-                            
 
                             
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                               <div class="col-md-6 col-sm-6 offset-md-3">
-                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                <button id="cancelEditParentModal" class="btn btn-primary" type="button">Cancel</button>
                                 <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                                <button id="submitEditParentModal"  type="button" class="btn">Confirm</button>
                               </div>
                             </div>
 
@@ -1026,8 +1016,11 @@
 
 
 
+
+
+
               <!-- Modal for Edit Product Family -->
-            <div class="modal fade bd-example-modal-l" id="editProductFamily" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+           <div class="modal fade bd-example-modal-l" id="editFamilyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog modal-l" role="document" >
                 <div class="modal-content">
                   <!--Header-->
@@ -1049,15 +1042,15 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_code"  class="form-control  ">
+                                <input disabled="disabled" type="text" id="inputEditFamilyId"  class="form-control  ">
                               </div>
                             </div>
 
                             <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Family <span class="required">*</span>
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Code 
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                                <input type="text" id="inputEditFamilyCode" name="last-name"  class="form-control ">
                               </div>
                             </div>
 
@@ -1065,20 +1058,17 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
+                                <input type="text" id="inputEditFamilyDesc" name="last-name"  class="form-control ">
                               </div>
                             </div>
-
-
-                            
 
                             
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                               <div class="col-md-6 col-sm-6 offset-md-3">
-                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                <button id="cancelEditFamilyModal" class="btn btn-primary" type="button">Cancel</button>
                                 <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                                <button id="submitEditFamilyModal"  type="button" class="btn">Confirm</button>
                               </div>
                             </div>
 
@@ -1092,74 +1082,10 @@
               </div>
 
 
-              <!-- Modal for Edit Product Group Description -->
-            <div class="modal fade bd-example-modal-l" id="editProductGroupDesc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-              <div class="modal-dialog modal-l" role="document" >
-                <div class="modal-content">
-                  <!--Header-->
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Edit Product Group Desc</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  
-                  <div class="col-md-12 col-sm-12 ">
-                    <div class="x_panel">
-                      <div class="x_content">
-                        <br />
-
-                          <form class="form-horizontal form-label-left">
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
-                              </label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_code"  class="form-control  ">
-                              </div>
-                            </div>
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Group Description <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
-                              </div>
-                            </div>
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
-                              </label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
-                              </div>
-                            </div>
 
 
-                            
-
-                            
-                            <div class="ln_solid"></div>
-                            <div class="item form-group">
-                              <div class="col-md-6 col-sm-6 offset-md-3">
-                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
-                                <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
-                              </div>
-                            </div>
-
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-
-              <!-- Modal for Edit Product Group -->
-            <div class="modal fade bd-example-modal-l" id="editProductGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <!-- Modal for Edit Product Group Description --><!-- //TODO -->
+           <div class="modal fade bd-example-modal-l" id="editGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog modal-l" role="document" >
                 <div class="modal-content">
                   <!--Header-->
@@ -1181,15 +1107,15 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_code"  class="form-control  ">
+                                <input disabled="disabled" type="text" id="inputEditGroupId"  class="form-control  ">
                               </div>
                             </div>
 
                             <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Group <span class="required">*</span>
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Group 
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_name" name="last-name" required="required" class="form-control ">
+                                <input type="text" id="inputEditGroupName" name="last-name"  class="form-control ">
                               </div>
                             </div>
 
@@ -1197,20 +1123,83 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
                               </label>
                               <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_desc" name="last-name"  class="form-control ">
+                                <input type="text" id="inputEditGroupDesc" name="last-name"  class="form-control ">
                               </div>
                             </div>
-
-
-                            
 
                             
                             <div class="ln_solid"></div>
                             <div class="item form-group">
                               <div class="col-md-6 col-sm-6 offset-md-3">
-                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                <button id="cancelEditGroupModal" class="btn btn-primary" type="button">Cancel</button>
                                 <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                                <button id="submitEditGroupModal"  type="button" class="btn">Confirm</button>
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+              <!-- Modal for Edit Product Group -->
+            <div class="modal fade bd-example-modal-l" id="editGroupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog modal-l" role="document" >
+                <div class="modal-content">
+                  <!--Header-->
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Edit Product Group</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  
+                  <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                      <div class="x_content">
+                        <br />
+
+                          <form class="form-horizontal form-label-left">
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input disabled="disabled" type="text" id="inputEditGroupId"  class="form-control  ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Group 
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="inputEditGroupName" name="last-name"  class="form-control ">
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Description
+                              </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input type="text" id="inputEditGroupDesc" name="last-name"  class="form-control ">
+                              </div>
+                            </div>
+
+                            
+                            <div class="ln_solid"></div>
+                            <div class="item form-group">
+                              <div class="col-md-6 col-sm-6 offset-md-3">
+                                <button id="cancelEditGroupModal" class="btn btn-primary" type="button">Cancel</button>
+                                <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+                                <button id="submitEditGroupModal"  type="button" class="btn">Confirm</button>
                               </div>
                             </div>
 
@@ -1284,6 +1273,7 @@
           <script src="js/notification.js"></script>
 
           <!-- Main API -->
+          <script src="js/genericErrorHandler.js"></script>
           <script src="js/api.js"></script>
 
           
