@@ -230,6 +230,7 @@ function showItemEditModal(data){
 }
 
 function submitEditItemModal(data){
+
   var item_group_id = $("#input_item_group").val();
   var item_type_id = $("#input_item_type").val();
   var item_family_id = $("#input_item_family").val();
@@ -259,16 +260,11 @@ function submitEditItemModal(data){
   var is_slow_moving = $("#input_is_slow_moving").val();
   var is_active = $("#input_is_active").val();
   var onResponse = function(response){
-    notifySuccess("sucess");
+    notifySuccess("Item updated");
     // window.location.href = 'productMaster.html';
   };
   var onError =function(error){
-    for (var key of Object.keys(error.response.data.message)) {
-      notifyError(error.response.data.message[key][0]);
-    }
-
-    // if(Array.isArray(error.response.data) )
-    // notifyError(error.response.data.message);
+    notifyError("Failed to update item")
   };
   updateItem(
     data.id,

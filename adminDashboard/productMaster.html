@@ -631,7 +631,7 @@
 
 
 
-                          <form class="form-horizontal form-label-left">
+                          <form class="form-horizontal form-label-left" onsubmit="return false">
 
                             <div class="form-group row">
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
@@ -771,7 +771,7 @@
                               <div class="col-md-6 col-sm-6 offset-md-3">
                                 <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
                                 <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-                                <button id="submitEditItemModal" class="btn btn-success">Submit</button>
+                                <button id="submitEditItemModal" type="button" class="btn btn-success">Submit</button>
                               </div>
                             </div>
 
@@ -837,12 +837,13 @@
 
           <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
-          <script src="js/localstorage.js"></script>
+          <script src="../assets/js/common/localstorage.js"></script>
 
-          <script src="js/notification.js"></script>
+          <script src="../assets/js/common/notification.js"></script>
 
           <!-- Main API -->
-          <script src="js/api.js"></script>
+          <script src="../assets/js/common/api.js"></script>
+          <script src="../assets/js/common/genericErrorHandler.js"></script>
 
           
           <script src="js/productMaster.js"></script>

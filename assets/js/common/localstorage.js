@@ -1,7 +1,7 @@
 var KEY_ACCESS_TOKEN = "accessToken";
 
 function updateAPIToken(token){
-	localStorage.setItem(KEY_ACCESS_TOKEN, token);
+	localStorage.setItem(KEY_ACCESS_TOKEN,"Bearer "+ token);
 }
 
 function getAPIToken(){
