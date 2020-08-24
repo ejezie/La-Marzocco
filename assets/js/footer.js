@@ -71,7 +71,7 @@ async function showFooter(){
 	footerHTML += '<div class="col-lg-6 col-md-6">'
 	footerHTML += '<div class="copyright_area">'
 	// footerHTML += '<p>Copyright &copy; 2020 <a href="#">Autima</a> All Right Reserved.</p>'
-	footerHTML += '<p>  &copy; 2020 <a href="#">La Marzocco</a></p>'
+	footerHTML += '<p>  &copy; 2020 <a href="#">La Marzocco enabled by PCPL</a></p>'
 	footerHTML += '</div>'
 	footerHTML += '</div>'
 	footerHTML += '<div class="col-lg-6 col-md-6">'
