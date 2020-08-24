@@ -9,20 +9,23 @@ function errorResponseHandler(error) {
         if(error.response.status==401){
             window.location = 'login.html', true;
              // window.location.pathname   = "/login.html";
-        }else if(error.response.message){
-                if(typeof error.response.message === 'string' || error.response.message instanceof String){
-                 notifyError(error.response.message);
-                }else if(typeof error.response.message === 'object'){
+        }else if(error.response.data.message){
+            console.log(JSON.stringify(error.response.data.message,null,2))
+                if(typeof error.response.data.message === 'string' || error.response.data.message instanceof String){
+                 notifyError(error.response.data.message);
+                }else if(typeof error.response.data.message === 'object'){
                     for (var key of Object.keys(error.response.data.message)) {
                         notifyError(error.response.data.message[key][0]);
                     }
                 }
             }else{
-             notifyError("Something went wrong");
+             notifyError("Something went wrong...");
             }
         }else{
             notifyError("Please check your connection!");
       }
+
+        return Promise.reject(error);
  }
 
 // apply interceptor on response

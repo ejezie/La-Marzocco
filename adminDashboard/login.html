@@ -36,10 +36,10 @@
             <form>
               <h1>Login Form</h1>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+                <input id="email" type="email" class="form-control" placeholder="Email" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input id="password" type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
                 <a class="btn btn-default submit" id="login">Log in</a>
@@ -111,13 +111,20 @@
 
 <!-- Main JS -->
 <script src="js/main.js"></script>
-<script src="js/api.js"></script>
-<script src="js/localstorage.js"></script>
-<script src="js/notification.js"></script>
+
+          <script src="../assets/js/common/localstorage.js"></script>
+
+          <script src="../assets/js/common/notification.js"></script>
+
+          <!-- Main API -->
+          <script src="../assets/js/common/genericErrorHandler.js"></script>
+          <script src="../assets/js/common/api.js"></script>
+
 
 
  <script>
         $(document).ready(function(){
+          alert("login")
         $("#forgotPassword").click(async function(){
             var result = confirm( "Send new password to registered email?" );
             if ( result ) {
@@ -130,6 +137,7 @@
                 });
             }
         });
+
         $("#login").click(async function(){
             var email = $("#email").val();
             var password = $("#password").val();
@@ -140,7 +148,8 @@
                     if(response.data.status){
                       notifySuccess('Login Success');
                       updateAPIToken(response.data.access_token);
-                      //redirect
+                      history.go(-1);
+
                     }else{
                       notifyError(response.data.message);
                     }
