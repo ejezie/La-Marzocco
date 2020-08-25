@@ -8,7 +8,7 @@ function populateGroup(){
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Please wait");
+			const loadingId = notifyInfo("Loading groups");
 			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
@@ -160,7 +160,7 @@ function populateFamily(){
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Please wait");
+			const loadingId = notifyInfo("Loading family");
 			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
@@ -309,7 +309,7 @@ function populateType(){
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Please wait");
+			const loadingId = notifyInfo("Loading types");
 			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
@@ -457,7 +457,7 @@ function populateParent(){
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Please wait");
+			const loadingId = notifyInfo("Loading parents");
 			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){

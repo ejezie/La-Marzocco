@@ -181,11 +181,8 @@
                                 <input type="password" id="password">
                             </p>
                             <div class="login_submit">
-                                <a href="#">Forgot password?</a>
-                                <label for="remember">
-                                    <input id="remember" type="checkbox">
-                                    Remember me
-                                </label>
+                                <a id="forgotPassword">Forgot password?</a>
+                               
                                 <button id="login" type="submit">login</button>
 
                             </div>
@@ -368,9 +365,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
-<script src="assets/js/api.js"></script>
-<script src="assets/js/storage.js"></script>
-<script src="assets/js/notification.js"></script>
+<script src="assets/js/common/api.js"></script>
+<script src="assets/js/common/localstorage.js"></script>
+<script src="assets/js/common/notification.js"></script>
 
 
  <script>
@@ -378,26 +375,60 @@
         $("#forgotPassword").click(async function(){
             var result = confirm( "Send new password to registered email?" );
             if ( result ) {
-                await forgotPassword($("#email").val());
+                await forgotPassword($("#email").val(),
+                  function(response){
+                    notifySuccess('New password is sent to your mail');
+                },
+                function(error){
+                   notifyError('Reset password error');
+                });
             }
         });
+
         $("#login").click(async function(){
             var email = $("#email").val();
             var password = $("#password").val();
-            
-                login(email,password,function(response){
-                    notifySuccess('Login Success');
-                    updateAccessToken(response.data.access_token);
-                    window.location = 'adminDashboard/dashboard.html', true;
+            const id = notifyInfo("Please wait");
+                login(email,password,
+                  function(response){
+                     dismiss(id);
+                    if(response.data.status){
+                      notifySuccess('Login Success');
+                      updateAPIToken(response.data.access_token);
+                      // if(document.referrer!=null){
+                      //   history.go(-1);
+                      // }else{
+                        // window.location.assign("/path")
+                        window.location.href  ="adminDashboard/dashboard.html";
+                      // }
+
+                    }else{
+                      notifyError(response.data.message);
+                    }
                 },
                 function(error){
-                   notifyError('Login error');
+                   dismiss(id);
+                   console.log(error)
+                   if (error.response) {
+                   if(error.response.data.message){
+                            if(typeof error.response.data.message === 'string' || error.response.data.message instanceof String){
+                             notifyError(error.response.data.message);
+                            }else if(typeof error.response.data.message === 'object'){
+                                for (var key of Object.keys(error.response.data.message)) {
+                                    notifyError(error.response.data.message[key][0]);
+                                }
+                            }
+                        }else{
+                         notifyError("Something went wrong...");
+                        }
+                    }else{
+                        notifyError("Please check your connection!");
+                  }
                 })
 
         });
     });
     </script>
-
 
 </body>
 

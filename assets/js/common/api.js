@@ -627,3 +627,28 @@ async function login(email,pass,onResponse,onError){
   .catch(onError);
 
 }
+
+async function getSearchResults(onResponse,onError,url){
+
+  var data = new FormData();
+  if(url==null){
+    url = BASE_URL+'item?page=1&page_size=5';
+  }
+
+  var config = {
+    method: 'post',
+    url:url,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);
+
+
+}

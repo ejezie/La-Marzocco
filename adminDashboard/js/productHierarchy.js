@@ -1,5 +1,4 @@
 function populateGroup(){
-		alert("popgrp");
 	itemMasterTable = $('#productGroup').dataTable( {
 
 		processing: true,
@@ -8,8 +7,7 @@ function populateGroup(){
 		bSort : false,
 		lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Please wait");
-			console.log(JSON.stringify(data,null,2));
+			const loadingId = notifyInfo("Loading groups");
 
 			var onResponse = function(res){
 				dismiss(loadingId);
@@ -22,10 +20,6 @@ function populateGroup(){
 			};
 			var onError =function(error){
 				dismiss(loadingId);
-				for (var key of Object.keys(error.response.data.message)) {
-					notifyError(error.response.data.message[key][0]);
-				}
-				notifyError(error.response.data.message);
 			};
 			var pageIndex = data.start / data.length + 1 ;
 			getGroupsWithPaging(onResponse,onError,pageIndex,data.length);
@@ -118,9 +112,9 @@ function populateParent(){
 $(document).ready(function(){
 
 	populateGroup();
-	// populateFamily();
-	// populateType();
-	// populateParent();
+	populateFamily();
+	populateType();
+	populateParent();
 
 
 });

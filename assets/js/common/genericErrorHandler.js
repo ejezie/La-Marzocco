@@ -7,10 +7,9 @@ function errorResponseHandler(error) {
      // if9 has response show the error
      if (error.response) {
         if(error.response.status==401){
-            window.location = 'login.html', true;
+            window.location = "../"+window.location.host+'login.html', true;
              // window.location.pathname   = "/login.html";
         }else if(error.response.data.message){
-            console.log(JSON.stringify(error.response.data.message,null,2))
                 if(typeof error.response.data.message === 'string' || error.response.data.message instanceof String){
                  notifyError(error.response.data.message);
                 }else if(typeof error.response.data.message === 'object'){

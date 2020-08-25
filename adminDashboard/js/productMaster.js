@@ -96,7 +96,6 @@ function loadProducts(beatdata) {
     console.log(JSON.stringify(data,null,2));
 
     var onResponse = function(res){
-              //alert("onresponse");
               dismiss(loadingId);
               console.log("recordsTotal "+res.data.items.data.length)
               // notifySuccess("sucess");

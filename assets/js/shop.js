@@ -185,6 +185,50 @@ async function showCatalog(catalogList){
 
 	$("#catalog").append(catalogHTML)
 }
+getSearchResults
 
 
-showCatalog(catalogList)
+function showSearchResults(){
+
+  var onResponse = function(response){
+  	var results = [];
+    for(var i=0; i< response.data.items.length; i++){
+      const item = response.data.items[i];
+      const element = {
+						"productCode" : item.code,
+						"productName" : item.name,
+						"productFamily" : item.family.code,
+						"productActualPrice" : "$1199.00",
+						"productOfferPrice" : "$999.00",
+						"productOffPercent" : "-20%",
+						"productQuantityInStock" : "50"
+					};
+	  results.add(element);
+    }
+
+    showCatalog(results);
+    // initPagination(response.data.items);
+  };
+
+  var onError =function(error){
+    notifyError("Failed to load results");
+  };
+  getSearchResults(onResponse,onError,null);
+}
+
+function initPagination(data){
+	// var paginationHtml = "<ul>";
+	// 	paginationHtml += (data.prev_page_url==null)?"":" <li><a href="#">2</a></li>";
+ //                                <li class=\"current\">"+data.current_page+"</li>\
+ //                                <li><a href="#">2</a></li>\
+ //                                <li><a href="#">3</a></li>\
+ //                                <li class="next"><a href="#">next</a></li>\
+ //                                <li><a href="#">>></a></li>\
+ //                            </ul>";
+	// $("#catalog").append(catalogHTML)
+}
+
+$(document).ready(function(){
+	showSearchResults();
+// showCatalog(catalogList)
+});
