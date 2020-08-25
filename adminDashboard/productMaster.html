@@ -41,6 +41,18 @@
       font-family: fontAwesome;
       content: "\f093\00a0";
     }
+
+    /*Select Dropdown*/
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      /* Some browsers will not display the caret when using calc, so we put the fallback first */ 
+      background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 98.5% !important; /* !important used for overriding all other customisations */
+      background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 10px) !important; /* Better placement regardless of input width */
+    }
+    /*For IE*/
+    select::-ms-expand { display: none; }
   </style>
 
   
@@ -107,7 +119,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Product Master Data</h2>
-                    <ul class="nav navbar-right panel_toolbox">
+                    <!-- <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
@@ -119,7 +131,7 @@
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
-                    </ul>
+                    </ul> -->
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -544,6 +556,12 @@
                       </table>
                     </div>
                     <br>
+
+                    <form>
+                    <input type="button" class="btn btn-success" value="Download Sample Data Template" onClick="window.location.href='files/productMaster_sample.xlsx'">
+                    </form>
+                    <br>
+
                     <!-- Upload data -->
                     <h5>Upload Product Master Excel:</h5>
                     <div>
