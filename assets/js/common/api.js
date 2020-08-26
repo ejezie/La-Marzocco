@@ -1,4 +1,4 @@
-const BASE_URL = "http://3.106.131.179/api/";
+const BASE_URL = "http://54.252.24.196/v1/api/";
 
 async function updateItem(
   item_id,
