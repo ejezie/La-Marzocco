@@ -372,15 +372,21 @@
 
  <script>
         $(document).ready(function(){
+        updateAPIToken("");
+
         $("#forgotPassword").click(async function(){
             var result = confirm( "Send new password to registered email?" );
             if ( result ) {
+                if($("#email").val()===null || $("#email").val() ===""){
+                    notifyError("Please enter valid email");
+                    return;
+                }
                 await forgotPassword($("#email").val(),
                   function(response){
                     notifySuccess('New password is sent to your mail');
                 },
                 function(error){
-                   notifyError('Reset password error');
+                   notifyError('Failed to reset password');
                 });
             }
         });
