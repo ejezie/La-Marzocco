@@ -54,6 +54,17 @@
         font-size: 16px;
         font-weight: bold;
     }
+    /*Select Dropdown*/
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      /* Some browsers will not display the caret when using calc, so we put the fallback first */ 
+      background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 98.5% !important; /* !important used for overriding all other customisations */
+      background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 10px) !important; /* Better placement regardless of input width */
+    }
+    /*For IE*/
+    select::-ms-expand { display: none; }
 
 
 
@@ -90,7 +101,7 @@
                 <h3>Product Management</h3>
               </div>
 
-              <div class="title_right">
+              <!-- <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
@@ -99,7 +110,7 @@
                     </span>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
 
 
