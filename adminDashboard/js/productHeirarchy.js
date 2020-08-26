@@ -8,11 +8,11 @@ function populateGroup(){
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Loading groups");
+			// const loadingId = notifyInfo("Loading groups");
 			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
-				dismiss(loadingId);
+				// dismiss(loadingId);
 				callback({
 					draw:data.draw,
 					recordsTotal: res.data.groups.total,
@@ -21,7 +21,7 @@ function populateGroup(){
 				});
 			};
 			var onError =function(error){
-				dismiss(loadingId);
+				// dismiss(loadingId);
 				for (var key of Object.keys(error.response.data.message)) {
 					notifyError(error.response.data.message[key][0]);
 				}
@@ -122,9 +122,12 @@ function populateGroup(){
 			var name = $("#inputAddGroupName").val();
 			var onResponse = function(response){
 				notifySuccess("Added successfully");
+				// productGroupTable.api().clear();
+				// populateGroup();
 				window.location.reload();
 			};
 			var onError =function(error){
+				console.log(error);
 				notifyError("Failed to add");
 			};
 			addGroup(onResponse,onError,name,desc);
@@ -160,11 +163,11 @@ function populateFamily(){
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Loading family");
+			// const loadingId = notifyInfo("Loading family");
 			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
-				dismiss(loadingId);
+				// dismiss(loadingId);
 				callback({
 					draw:data.draw,
 					recordsTotal: res.data.families.total,
@@ -173,7 +176,7 @@ function populateFamily(){
 				});
 			};
 			var onError =function(error){
-				dismiss(loadingId);
+				// dismiss(loadingId);
 				for (var key of Object.keys(error.response.data.message)) {
 					notifyError(error.response.data.message[key][0]);
 				}
@@ -309,11 +312,11 @@ function populateType(){
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Loading types");
+			// const loadingId = notifyInfo("Loading types");
 			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
-				dismiss(loadingId);
+				// dismiss(loadingId);
 				callback({
 					draw:data.draw,
 					recordsTotal: res.data.types.total,
@@ -322,7 +325,7 @@ function populateType(){
 				});
 			};
 			var onError =function(error){
-				dismiss(loadingId);
+				// dismiss(loadingId);
 				for (var key of Object.keys(error.response.data.message)) {
 					notifyError(error.response.data.message[key][0]);
 				}
@@ -457,11 +460,11 @@ function populateParent(){
 		bSort : false,
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
-			const loadingId = notifyInfo("Loading parents");
+			// const loadingId = notifyInfo("Loading parents");
 			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
-				dismiss(loadingId);
+				// dismiss(loadingId);
 				callback({
 					draw:data.draw,
 					recordsTotal: res.data.parents.total,
@@ -471,7 +474,7 @@ function populateParent(){
 			};
 			var onError =function(error){
 				console.log(error)
-				dismiss(loadingId);
+				// dismiss(loadingId);
 				for (var key of Object.keys(error.response.data.message)) {
 					notifyError(error.response.data.message[key][0]);
 				}
