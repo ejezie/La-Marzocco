@@ -99,9 +99,9 @@ function uploadProduct(){
 		window.location.href = 'productMaster.html';
 	};
 	var onError =function(error){
-		for (var key of Object.keys(error.response.data.message)) {
-		    notifyError(error.response.data.message[key][0]);
-		}
+		// for (var key of Object.keys(error.response.data.message)) {
+		//     notifyError(error.response.data.message[key][0]);
+		// }
 
 		// if(Array.isArray(error.response.data) )
 		// notifyError(error.response.data.message);

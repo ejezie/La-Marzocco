@@ -14,14 +14,16 @@ function errorResponseHandler(error) {
                     notifyError(error.response.data.message);
                 }else if(typeof error.response.data.message === 'object'){
                     var longMessage="";
+                    var duration = 1000;
                     for (var key of Object.keys(error.response.data.message)) {
                         longMessage+=(error.response.data.message[key][0]);
                         longMessage+="\n\n";
+                        duration += 3000;
                     }
 
                     new Notyf().error({
                       message: longMessage,
-                      duration: 60000,
+                      duration: duration,
                       icon: false,
                       dismissible: true
                     })

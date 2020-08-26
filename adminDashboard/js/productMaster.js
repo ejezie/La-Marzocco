@@ -364,7 +364,11 @@ $(document).ready(function(){
       var xlsx = document.querySelector('#excelfile');
       var onResponse = function(response){
         $('#bulkUploadModal').modal('hide');
-        notifySuccess("File uploaded!");
+        if(response.data.is_valid){
+            notifySuccess("File uploaded!");
+        }else{
+            notifyError(response.data.message);
+        }
       };
       var onError =function(error){
         notifyError("Failed to upload file");
