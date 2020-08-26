@@ -112,11 +112,6 @@ function populateGroup(){
 
 	});
 
-
-		$('#btnAddGroup').click(function () {
-			$('#addGroupModal').modal('show');
-		});
-
 		$('#confirmAddGroup').click(function () {
 			var desc = $("#inputAddGroupDesc").val();
 			var name = $("#inputAddGroupName").val();
@@ -265,9 +260,7 @@ function populateFamily(){
 	});
 
 	
-		$('#btnAddFamily').click(function () {
-			$('#addFamilyModal').modal('show');
-		});
+
 
 		$('#confirmAddFamily').click(function () {
 			var desc = $("#inputAddFamilyDesc").val();
@@ -426,10 +419,7 @@ function populateType(){
 	});
 
 
-	
-		$('#btnAddType').click(function () {
-			$('#addTypeModal').modal('show');
-		});
+
 
 		$('#confirmAddType').click(function () {
 			var desc = $("#inputAddTypeDesc").val();
@@ -562,10 +552,7 @@ function populateParent(){
 
 	});
 
-	
-		$('#btnAddParent').click(function () {
-			$('#addParentModal').modal('show');
-		});
+
 
 		$('#confirmAddParent').click(function () {
 			var desc = $("#inputAddParentDesc").val();
@@ -602,8 +589,6 @@ function populateParent(){
 }
 
 
-
-
 $(document).ready(function(){
 
 	$.fn.extend({
@@ -625,8 +610,33 @@ $(document).ready(function(){
 	populateFamily();
 	populateType();
 	populateParent();
+			$('#btnAddNew').click(function () {
+				$('#addTypeModal').modal('show');
+			});
 
-
-
+		$('#nav-group-tab').click(function () {
+			$('#btnAddNew').unbind();
+			$('#btnAddNew').click(function () {
+				$('#addGroupModal').modal('show');
+			});
+		});
+		$('#nav-family-tab').click(function () {
+			$('#btnAddNew').unbind();
+			$('#btnAddNew').click(function () {
+				$('#addFamilyModal').modal('show');
+			});
+		});
+		$('#nav-parent-tab').click(function () {
+			$('#btnAddNew').unbind();
+			$('#btnAddNew').click(function () {
+				$('#addParentModal').modal('show');
+			});
+		});
+		$('#nav-type-tab').click(function () {
+			$('#btnAddNew').unbind();
+			$('#btnAddNew').click(function () {
+				$('#addTypeModal').modal('show');
+			});
+		});
 
 });
