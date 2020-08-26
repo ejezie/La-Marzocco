@@ -101,16 +101,18 @@
                 <h3>Product Management</h3>
               </div>
 
-              <!-- <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+              <div class="title_right">
+                <!-- <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search"> -->
+                <div class="form-group pull-right top_search">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
+                    <!-- <input type="text" class="form-control" placeholder="Search for..."> -->
+                    <!-- <span class="input-group-btn">
                       <button class="btn btn-secondary" type="button">Go!</button>
-                    </span>
+                    </span> -->
+                    <button id="addProductTypeBtn" class="btn add btn-primary">Add Product Type</button></a>
                   </div>
-                </div>
-              </div> -->
+                <!-- </div> -->
+              </div>
             </div>
 
 
@@ -153,9 +155,10 @@
                                                 <nav>
                                                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                                         <a class="nav-item nav-link active" id="nav-type-tab" data-toggle="tab" href="#nav-type" role="tab" aria-controls="nav-type" aria-selected="true">Type </a>
-                                                        <a class="nav-item nav-link" id="nav-parent-tab" data-toggle="tab" href="#nav-parent" role="tab" aria-controls="nav-parent" aria-selected="false">Parent</a>
+                                                        
                                                         <a class="nav-item nav-link" id="nav-family-tab" data-toggle="tab" href="#nav-family" role="tab" aria-controls="nav-family" aria-selected="false">Family</a>
-                                                        <a class="nav-item nav-link" id="nav-groupDesc-tab" data-toggle="tab" href="#nav-groupDesc" role="tab" aria-controls="nav-groupDesc" aria-selected="false">Group Description</a>
+                                                        <a class="nav-item nav-link" id="nav-parent-tab" data-toggle="tab" href="#nav-parent" role="tab" aria-controls="nav-parent" aria-selected="false">Parent</a>
+                                                        <!-- <a class="nav-item nav-link" id="nav-groupDesc-tab" data-toggle="tab" href="#nav-groupDesc" role="tab" aria-controls="nav-groupDesc" aria-selected="false">Group Description</a> -->
                                                         <a class="nav-item nav-link" id="nav-group-tab" data-toggle="tab" href="#nav-group" role="tab" aria-controls="nav-group" aria-selected="false">Group </a>
                                                     </div>
                                                 </nav>
@@ -191,7 +194,7 @@
                                                                 </tr>
                                                             </tbody> -->
                                                         </table>
-                                                        <div class="row">
+                                                        <!-- <div class="row">
                                                           <div class="col-sm-6">
                                                             <button type="button" value="Add New" id="btnAddType" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductTypeModal">Add Type</button>
                                                             
@@ -200,7 +203,7 @@
                                                             
                                                             <button type="button" value="Add New" id="" class="btn upload btn-primary btn-block" data-toggle="modal" data-target="#bulkUploadTypeModal">Bulk Upload</button>
                                                           </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="tab-pane fade" id="nav-parent" role="tabpanel" aria-labelledby="nav-parent-tab">
                                                         <table class="table table-striped table-bordered" cellspacing="0" id="productParent">
@@ -233,7 +236,7 @@
                                                                 </tr>
                                                             </tbody> -->
                                                         </table>
-                                                        <div class="row">
+                                                        <!-- <div class="row">
                                                           <div class="col-sm-6">
                                                             <button type="button" value="Add New" id="btnAddParent" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductParentModal">Add Parent</button>
                                                             
@@ -242,7 +245,7 @@
                                                             
                                                             <button type="button" value="Add New" id="" class="btn upload btn-primary btn-block" data-toggle="modal" data-target="#bulkUploadParentModal">Bulk Upload</button>
                                                           </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="tab-pane fade" id="nav-family" role="tabpanel" aria-labelledby="nav-family-tab">
                                                         <table class="table table-striped table-bordered" cellspacing="0" id="productFamily">
@@ -275,7 +278,7 @@
                                                                 </tr>
                                                             </tbody> -->
                                                         </table>
-                                                        <div class="row">
+                                                        <!-- <div class="row">
                                                           <div class="col-sm-6">
                                                             <button type="button" value="Add New" id="btnAddFamily" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductFamilyModal">Add Family</button>
                                                             
@@ -284,7 +287,7 @@
                                                             
                                                             <button type="button" value="Add New" id="" class="btn upload btn-primary btn-block" data-toggle="modal" data-target="#bulkUploadFamilyModal">Bulk Upload</button>
                                                           </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <div class="tab-pane fade" id="nav-groupDesc" role="tabpanel" aria-labelledby="nav-groupDesc-tab">
                                                         <table class="table table-striped table-bordered" cellspacing="0" id="productgroupDesc">
@@ -316,7 +319,7 @@
                                                                 </tr> -->
                                                             </tbody>
                                                         </table>
-                                                        <div class="row">
+                                                        <!-- <div class="row">
                                                           <div class="col-sm-6">
                                                             <button type="button" value="Add New" id="" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductGroupDescModal">Add Group Description</button>
                                                             
@@ -325,7 +328,7 @@
                                                             
                                                             <button type="button" value="Add New" id="" class="btn upload btn-primary btn-block" data-toggle="modal" data-target="#bulkUploadGroupDescModal">Bulk Upload</button>
                                                           </div>
-                                                        </div>
+                                                        </div> -->
                                                 </div>
                                                     <div class="tab-pane fade" id="nav-group" role="tabpanel" aria-labelledby="nav-group-tab">
                                                         <table class="table table-striped table-bordered" cellspacing="0" id="productGroup">
@@ -357,7 +360,7 @@
                                                                 </tr> -->
                                                             </tbody>
                                                         </table>
-                                                        <div class="row">
+                                                        <!-- <div class="row">
                                                           <div class="col-sm-6">
                                                             <button type="button" value="Add New" id="btnAddGroup" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addGroupModal">Add Group</button>
                                                             
@@ -366,7 +369,7 @@
                                                             
                                                             <button type="button" value="Add New" id="" class="btn upload btn-primary btn-block" data-toggle="modal" data-target="#bulkUploadGroupModal">Bulk Upload</button>
                                                           </div>
-                                                        </div>
+                                                        </div> -->
                                                 </div>
                                             </div>
                                         </div>
