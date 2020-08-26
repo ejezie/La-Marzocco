@@ -21,7 +21,14 @@ function errorResponseHandler(error) {
                         duration += 3000;
                     }
 
-                    new Notyf().error({
+                    new Notyf(
+                    // {
+                    //     position: {
+                    //     x: 'center',
+                    //     y: 'top',
+                    //   }
+                    // }
+                    ).error({
                       message: longMessage,
                       duration: duration,
                       icon: false,
