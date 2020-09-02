@@ -153,6 +153,25 @@ async function createItem(
 
 
 
+function getItemDetail(onResponse,onError,item_id){
+  var data = new FormData();
+
+var config = {
+  method: 'get',
+  url: BASE_URL + "item/"+item_id,
+  headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+  data : data
+};
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
 async function getItems(onResponse,onError,page,page_size){
 
   var data = new FormData();
@@ -633,11 +652,11 @@ async function getSearchResults(onResponse,onError,url){
 
   var data = new FormData();
   if(url==null){
-    url = BASE_URL+'item?page=1&page_size=5';
+    url = BASE_URL+'item?page=1';
   }
 
   var config = {
-    method: 'post',
+    method: 'get',
     url:url,
     headers: {
       'Content-Type': 'multipart/form-data',

@@ -186,17 +186,19 @@ async function showCatalog(catalogList){
 	}
 
 
-	$("#catalog").append(catalogHTML)
+	$("#catalog").html(catalogHTML)
 }
-getSearchResults
 
 
-function showSearchResults(){
 
-  var onResponse = function(response){
+function showSearchResults(url){
+
+	var loadingNotification = notifyInfo("Loading results");
+  	var onResponse = function(response){
+  	dismiss(loadingNotification);
   	var results = [];
-    for(var i=0; i< response.data.items.length; i++){
-      const item = response.data.items[i];
+    for(var i=0; i< response.data.items.data.length; i++){
+      const item = response.data.items.data[i];
       const element = {
 						"productCode" : item.code,
 						"productName" : item.name,
@@ -206,30 +208,54 @@ function showSearchResults(){
 						"productOffPercent" : "-20%",
 						"productQuantityInStock" : "50"
 					};
-	  results.add(element);
+	  results.push(element);
     }
 
     showCatalog(results);
-    // initPagination(response.data.items);
+
+    $("#pagination_current").text(response.data.items.current_page);
+    if(response.data.items.prev_page_url!=null){
+    	$("#pagination_prev").show();
+    	$("#pagination_prev").text(response.data.items.current_page-1);
+    	    	$('#pagination_prev').unbind();
+
+    	$('#pagination_prev').click(function () {
+				showSearchResults(response.data.items.prev_page_url)
+			});
+    }else{
+    	$("#pagination_prev").hide();
+    }
+    if(response.data.items.next_page_url!=null){
+    	$("#pagination_next").show();
+    	$("#pagination_next").text(response.data.items.current_page+1);
+    	$('#pagination_next').unbind();
+    	$('#pagination_next').click(function () {
+				showSearchResults(response.data.items.next_page_url)
+			});
+    }else{
+    	$("#pagination_next").hide();
+    }
+    if(response.data.items.last_page_url!=null){
+    	$("#pagination_last").show();
+    	$("#pagination_last").text(response.data.items.last_page+" >>");
+    	$('#pagination_last').unbind();
+    	$('#pagination_last').click(function () {
+				showSearchResults(response.data.items.last_page_url);
+			});
+    }else{
+    	$("#pagination_last").hide();
+    }
+    
   };
 
   var onError =function(error){
+  	  	dismiss(loadingNotification);
+  	console.log(error);
     notifyError("Failed to load results");
   };
-  getSearchResults(onResponse,onError,null);
+  getSearchResults(onResponse,onError,url);
 }
 
-function initPagination(data){
-	// var paginationHtml = "<ul>";
-	// 	paginationHtml += (data.prev_page_url==null)?"":" <li><a href="#">2</a></li>";
- //                                <li class=\"current\">"+data.current_page+"</li>\
- //                                <li><a href="#">2</a></li>\
- //                                <li><a href="#">3</a></li>\
- //                                <li class="next"><a href="#">next</a></li>\
- //                                <li><a href="#">>></a></li>\
- //                            </ul>";
-	// $("#catalog").append(catalogHTML)
-}
 
 $(document).ready(function(){
 	showSearchResults();

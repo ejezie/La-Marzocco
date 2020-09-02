@@ -1,25 +1,25 @@
-var item = {	
-				"name" : "la marzocco linea mini",
-				"price" : "$700.00",
-				"description" : "You have the choice of coffee beans from three incredible Australian roasters, tailored to your liking and delivered to your door. Choose from our roasters in the tabs below. Based on our iconic Linea Classic coffee machine, the Linea Mini lets you brew coffee and steam milk to create your favourite drinks at home. Each Linea Mini is hand-crafted at our headquarters in Italy, then tested at our workshop in Melbourne so that it delivers perfection in every cup. Our coffee machines all come with La Marzocco Home connectivity as standard, so that you can use our app to control your machine and contact our experts. Everything you need to make your first drink comes in the box. High-powered steam, professional-grade components, and no plumbing or installation means you can enjoy coffee immediately. Each machine has a 24-month warranty and comes with the full support of our Australian team to assist with queries, advice and tips. ",
-				"family" : "Linea",
-				"image" : "https://au.lamarzoccohome.com/wp-content/uploads/2017/01/linea-mini_steel_front-400px.png",
-				"specification" : [
-									{
-										"Boiler Type" : "Dual Boiler",
-										"PID Temperature Controller" : "Yes",
-										"Pump Type" : "Single Internal Rotary Pump",
-										"Indicator Lights" : "Heating and Water Level Lights",
-										"Height" : "377mm",
-										"Width" : "357mm",
-										"Depth" : "530mm",
-										"Weight" : "30kgs (machine only)",
-										"Voltage" : "220-240v" ,
-										"Steam Boiler" : "3.5 litres",
-										"Water Reservoir capacity" : "2.5 litres"
-									}
-								]
-			}
+// var item = {	
+// 				"name" : "la marzocco linea mini",
+// 				"price" : "$700.00",
+// 				"description" : "You have the choice of coffee beans from three incredible Australian roasters, tailored to your liking and delivered to your door. Choose from our roasters in the tabs below. Based on our iconic Linea Classic coffee machine, the Linea Mini lets you brew coffee and steam milk to create your favourite drinks at home. Each Linea Mini is hand-crafted at our headquarters in Italy, then tested at our workshop in Melbourne so that it delivers perfection in every cup. Our coffee machines all come with La Marzocco Home connectivity as standard, so that you can use our app to control your machine and contact our experts. Everything you need to make your first drink comes in the box. High-powered steam, professional-grade components, and no plumbing or installation means you can enjoy coffee immediately. Each machine has a 24-month warranty and comes with the full support of our Australian team to assist with queries, advice and tips. ",
+// 				"family" : "Linea",
+// 				"image" : "https://au.lamarzoccohome.com/wp-content/uploads/2017/01/linea-mini_steel_front-400px.png",
+// 				"specification" : [
+// 									{
+// 										"Boiler Type" : "Dual Boiler",
+// 										"PID Temperature Controller" : "Yes",
+// 										"Pump Type" : "Single Internal Rotary Pump",
+// 										"Indicator Lights" : "Heating and Water Level Lights",
+// 										"Height" : "377mm",
+// 										"Width" : "357mm",
+// 										"Depth" : "530mm",
+// 										"Weight" : "30kgs (machine only)",
+// 										"Voltage" : "220-240v" ,
+// 										"Steam Boiler" : "3.5 litres",
+// 										"Water Reservoir capacity" : "2.5 litres"
+// 									}
+// 								]
+// 			}
 
 
 
@@ -41,7 +41,7 @@ async function showProductDetails(item){
 	detailsHTML += '<div class="product_d_right">'
 	detailsHTML += '<form action="#">'
 	detailsHTML += ''
-	detailsHTML += '<h1>la marzocco linea mini</h1>'
+	detailsHTML += '<h1>'+item["name"]+'</h1>'
 	// detailsHTML += '<div class="product_nav">'
 	// detailsHTML += '<ul>'
 	// detailsHTML += '<li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>'
@@ -51,13 +51,13 @@ async function showProductDetails(item){
 	detailsHTML += '<div class="price_box">'
 	detailsHTML += '<span class="current_price">'+item["price"]+'</span>'
 	detailsHTML += ''
-	detailsHTML += '</div>'
-	detailsHTML += '<div class="product_desc">'
-	detailsHTML += '<p>'+item["description"]+'</p>'
-	detailsHTML += '</div>'
-	detailsHTML += '<div class="product_meta">'
-	detailsHTML += '<span>Family : <a href="#">'+item["family"]+'</a></span>'
-	detailsHTML += '</div>'
+	// detailsHTML += '</div>'
+	// detailsHTML += '<div class="product_desc">'
+	// // detailsHTML += '<p>'+item["description"]+'</p>'
+	// detailsHTML += '</div>'
+	// detailsHTML += '<div class="product_meta">'
+	// detailsHTML += '<span>Family : <a href="#">'+item["family"]+'</a></span>'
+	// detailsHTML += '</div>'
 	detailsHTML += '<div class="product_variant quantity">'
 	detailsHTML += '<label>quantity</label>'
 	detailsHTML += '<input min="1" max="100" value="1" type="number">'
@@ -129,13 +129,73 @@ async function showProductInfo(item){
 }
 
 
+var itemId;
+function initProductDetails() {
+	
+	var loadingNotification = notifyInfo("Loading");
+  	var onResponse = function(response){
+  	dismiss(loadingNotification);
+   
+      const i = response.data.item;
+      const element = {
+						"name" : i.name,
+						"price" : "$700.00",
+						"description": i.desc,
+						"family" : i.family.code,
+						"image" : i.images[0].main,
+						"specification" : [
+									{
+										"Name" : i.name,
+										"Code": i.code,
+										"Short Code" : i.shortCode,
+										"Group" : i.group.name + " - " +i.group.desc,
+										"Family" : i.family.code + " - " +i.family.desc,
+										"Type" : i.type.name + " - " +i.type.desc,
+										"Parent" : i.parent.name + " - " +i.parent.desc,
+										"Lenght" : i.lenght+" "+i.lenght_uom,
+										"Height" : i.height+" "+i.height_uom,
+										"Width" : i.width+" "+i.width_uom,
+										"Weight" : i.weight+" "+i.weight_uom,
+										"Volume" : i.volume+" "+i.volume_uom
+									}
+								]
+					};    
 
+	showProductDetails(element);
+	showProductInfo(element);
 
-showProductDetails(item)
-showProductInfo(item)
+  };
 
+  var onError =function(error){
+  	  	dismiss(loadingNotification);
+  	console.log(error);
+    notifyError("Failed to load item");
+  };
 
+  getItemDetail(onResponse,onError,itemId);
+}
 
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
+
+$(document).ready(function(){
+	itemId = findGetParameter("item")
+	if(itemId==null || itemId == undefined ){
+		notifyError("This item is not available");
+	}else{
+		initProductDetails();
+	}
+});
 
 
 
