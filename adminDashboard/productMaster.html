@@ -29,7 +29,18 @@
   <script async src="//jsfiddle.net/sonusindhu/Tn9WM/embed/"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
+  <!-- Admin Dashboard Custom CSS -->
+   <link rel="stylesheet" href="css/adminDashboard.css">
+
+   <!-- Custom Theme Style -->
+  <link href="../build/css/custom.min.css" rel="stylesheet">
+
   <style type="text/css">
+
+    div.dataTables_wrapper div.dataTables_length select {
+      width: 120px;
+      display: inline-block;
+    }
     
     button.btn.add::before {
       font-family: fontAwesome;
@@ -42,23 +53,19 @@
       content: "\f093\00a0";
     }
 
-    /*Select Dropdown*/
-    select {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
-      /* Some browsers will not display the caret when using calc, so we put the fallback first */ 
-      background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 98.5% !important; /* !important used for overriding all other customisations */
-      background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 10px) !important; /* Better placement regardless of input width */
-    }
-    /*For IE*/
-    select::-ms-expand { display: none; }
+    /* Current Page sidebar color*/
+     li.current-page, li.active {
+        border-right: 10px solid #ae0000;
+        /*background: #ae0000;*/
+    }*
+
+
+
   </style>
 
   
 
-  <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  
 </head>
 
 <body class="nav-md">
