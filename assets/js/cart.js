@@ -27,11 +27,11 @@ async function showCart(cartItems){
 	cartHTML += '<table>'
 	cartHTML += '<thead>'
 	cartHTML += '<tr>'
-	cartHTML += '<th class="product_remove">Delete</th>'
-	cartHTML += '<th class="product_thumb">Image</th>'
 	cartHTML += '<th class="product_name">Product</th>'
+	cartHTML += '<th class="product_thumb">Name</th>'
 	cartHTML += '<th class="product-price">Price</th>'
 	cartHTML += '<th class="product_quantity">Quantity</th>'
+	// cartHTML += '<th class="product_remove">Delete</th>'
 	cartHTML += '<th class="product_total">Total</th>'
 	cartHTML += '</tr>'
 	cartHTML += '</thead>'
@@ -40,11 +40,11 @@ async function showCart(cartItems){
 	for(i=0;i<cartItems.length;i++){
 
 		cartHTML += '<tr>'
-		cartHTML += '<td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>'
 		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
 		cartHTML += '<td class="product_name"><a href="#">'+cartItems[i]["productName"]+'</a></td>'
 		cartHTML += '<td class="product-price">'+cartItems[i]["productPrice"]+'</td>'
-		cartHTML += '<td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="'+cartItems[i]["productQuantity"]+'" type="number"></td>'
+		cartHTML += '<td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="'+cartItems[i]["productQuantity"]+'" type="number"><a href="#"><i class="fa fa-trash-o" style="width: 30px;font-size:17px"></i></a></td>'
+		// cartHTML += '<td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>'
 		cartHTML += '<td class="product_total">'+cartItems[i]["productPrice"]+'</td>'
 		cartHTML += '</tr>'
 

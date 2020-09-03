@@ -504,7 +504,7 @@
                     <div class="breadcrumb_content">
                         <ul>
                             <li><a href="index.html">home</a></li>
-                            <li>Shopping Cart</li>
+                            <li>My Orders</li>
                         </ul>
                     </div>
                 </div>
@@ -570,7 +570,7 @@
                             </div>
                             <div class="cart_submit">
                                 <!-- <button type="submit">update cart</button> -->
-                                <button type="submit">Get Quotation </button>
+                                <!-- <button type="submit">Get Quotation </button> -->
                             </div>
                         </div>
                     </div>
@@ -578,16 +578,16 @@
                 <!--coupon code area start-->
                 <div class="coupon_area">
                     <div class="row" id="subTotal">
-                        <div class="col-lg-6 col-md-6">
+                        <!-- <div class="col-lg-6 col-md-6">
                             <div class="coupon_code left">
                                 <h3>Purchase Orders</h3>
                                 <div class="coupon_inner">
-                                    <!-- <p>Upload PO.</p> -->
+                                    <p>Upload PO.</p>
                                     <input placeholder="Upload" type="text">
                                     <button type="submit">Upload Purchase orders</button>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- <div class="col-lg-6 col-md-6">
                             <div class="coupon_code right">
                                 <h3>Cart Totals</h3>
@@ -619,6 +619,82 @@
         </div>
     </div>
     <!--shopping cart area end -->
+
+
+
+      <!-- modal area start-->
+    <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Order Details</strong></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="table_desc">     -->
+                                <div class="cart_page table-responsive" id="cart">
+                                    <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product_thumb">Product</th>
+                                            <th class="product_name">Name</th>
+                                            <th class="product-price">Price</th>
+                                            <th class="product_quantity">Quantity</th>
+                                            <th class="product_total">Total</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>
+                                            <td class="product_name"><a href="#">Leva s</a></td>
+                                            <td class="product-price">$799.00</td>
+                                            <td class="product_quantity">1</td>
+                                            <td class="product_total">$799.00</td>
+                                            <td><a>Add to cart</a></td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a></td>
+                                            <td class="product_name"><a href="#">Modbar</a></td>
+                                            <td class="product-price">$990.00</td>
+                                            <td class="product_quantity">1</td>
+                                            <td class="product_total">$990.00</td>
+                                            <td>Add to cart</td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product5.jpg" alt=""></a></td>
+                                            <td class="product_name"><a href="#">Linea Mini</a></td>
+                                            <td class="product-price">$880.00</td>
+                                            <td class="product_quantity">1</td>
+                                            <td class="product_total">$880.00</td>
+                                            <td>Add to cart</td>
+
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal area end-->
+
+
+
 
     <!--call to action start-->
     <!-- <section class="call_to_action">
@@ -777,7 +853,7 @@
 <script src="assets/js/miniCart.js"></script>
 
 <!--  Cart JS-->
-<script src="assets/js/cart.js"></script>
+<script src="assets/js/myOrders.js"></script>
 
 
 </body>
