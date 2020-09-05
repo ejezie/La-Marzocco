@@ -50,6 +50,35 @@ var shoppingCart = (function () {
         saveCart();
     };
 
+
+	obj.itemExists = function (id) {
+			for (var i in cart) {
+	            if (cart[i].id === id) {
+	                return true;
+	            }
+	        }
+	        return false;
+	};
+
+	obj.getItemFromCart = function (id) {
+	        for (var i in cart) {
+	            if (cart[i].id === id) {
+	                return cart[i];
+	            }
+	        }
+	    };				
+
+
+	obj.getCountForItem = function (id) {
+	        for (var i in cart) {
+	            if (cart[i].id === id) {
+	                return cart[i].count;
+	            }
+	        }
+	        return 0;
+	    };				
+
+
     obj.setCountForItem = function (id, count) {
         for (var i in cart) {
             if (cart[i].id === id) {
@@ -63,11 +92,8 @@ var shoppingCart = (function () {
 
     obj.removeItemFromCart = function (id) { // Removes one item
         for (var i in cart) {
-            if (cart[i].id === id) { // "3" === 3 false
-                cart[i].count--; // cart[i].count --
-                if (cart[i].count === 0) {
+            if (cart[i].id.valueOf() == id.valueOf()) { // "3" === 3 false
                     cart.splice(i, 1);
-                }
                 break;
             }
         }

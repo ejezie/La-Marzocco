@@ -57,11 +57,11 @@ async function showProductDetails(item){
 	// detailsHTML += '</div>'
 	// detailsHTML += '<div class="product_meta">'
 	// detailsHTML += '<span>Family : <a href="#">'+item["family"]+'</a></span>'
-	// detailsHTML += '</div>'
+	// detailsHTML += '</div>'	
 	detailsHTML += '<div class="product_variant quantity">'
 	detailsHTML += '<label>quantity</label>'
-	detailsHTML += '<input min="1" max="100" value="1" type="number">'
-	detailsHTML += '<button class="button" type="submit">add to cart</button>'
+	detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
+	detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
 	detailsHTML += ''
 	detailsHTML += '</div>'
 	detailsHTML += '</form>'
@@ -125,20 +125,39 @@ async function showProductInfo(item){
 	infoHTML += '</div>'
 	infoHTML += '</div>'
 
-	$("#productInfo").append(infoHTML)
+	$("#productInfo").append(infoHTML);
+	$("#btAddToCart").click(async function(){
+		$("#btAddToCart").html("Added to Cart");
+		if(!shoppingCart.itemExists(itemId)){
+			shoppingCart.addItemToCart(itemId,i.name,999,$("#inputQuantity").val());
+		}else{
+			shoppingCart.setCountForItem(itemId,$("#inputQuantity").val());
+		}
+	});
+
+}
+
+function changeQuantity(id,quantity){
+	// if(shoppingCart.getItemFromCart(id)!=null){
+		$("#btAddToCart").html("Update")
+	// }else{
+	// 	$("#btAddToCart").html("Update")
+	// }
 }
 
 
 var itemId;
+var i;
 function initProductDetails() {
 	
 	var loadingNotification = notifyInfo("Loading");
   	var onResponse = function(response){
   	dismiss(loadingNotification);
    
-      const i = response.data.item;
+      i = response.data.item;
       const element = {
 						"name" : i.name,
+						"id" : i.id,
 						"price" : "$700.00",
 						"description": i.desc,
 						"family" : i.family.code,
@@ -163,6 +182,8 @@ function initProductDetails() {
 
 	showProductDetails(element);
 	showProductInfo(element);
+	$("#inputQuantity").val(shoppingCart.getCountForItem(itemId));
+
 
   };
 

@@ -1,15 +1,15 @@
-var cartItems = [
-					{
-						"productName" : "Leva s",
-						"productQuantity" : "1",
-						"productPrice" : "$1000"
-					},
-					{
-						"productName" : "Linea Mini",
-						"productQuantity" : "1",
-						"productPrice" : "$980"
-					}
-				]
+// var cartItems = [
+// 					{
+// 						"productName" : "Leva s",
+// 						"productQuantity" : "1",
+// 						"productPrice" : "$1000"
+// 					},
+// 					{
+// 						"productName" : "Linea Mini",
+// 						"productQuantity" : "1",
+// 						"productPrice" : "$980"
+// 					}
+// 				]
 				
 
 
@@ -19,6 +19,10 @@ var cartSubtotal = {
 					}
 
 
+function loadMiniCart(){
+		var cart = shoppingCart.listCart();
+		showMiniCart(cart,cartSubtotal);
+}
 
 async function showMiniCart(cartItems,cartSubtotal){
 	var miniCartHTML = ''
@@ -32,12 +36,12 @@ async function showMiniCart(cartItems,cartSubtotal){
 		miniCartHTML += '<a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a>'
 		miniCartHTML += '</div>'
 		miniCartHTML += '<div class="cart_info">'
-		miniCartHTML += '<a href="#">'+cartItems[i]["productName"]+'</a>'
-		miniCartHTML += '<span class="quantity">Qty: '+cartItems[i]["productQuantity"]+'</span>'
-		miniCartHTML += '<span class="price_cart">'+cartItems[i]["productPrice"]+'</span>'
+		miniCartHTML += '<a href="#">'+cartItems[i]["name"]+'</a>'
+		miniCartHTML += '<span class="quantity">Qty: '+cartItems[i]["count"]+'</span>'
+		miniCartHTML += '<span class="price_cart"> $'+cartItems[i]["price"]+'</span>'
 		miniCartHTML += '</div>'
 		miniCartHTML += '<div class="cart_remove">'
-		miniCartHTML += '<a href="#"><i class="ion-android-close"></i></a>'
+		miniCartHTML += '<a onclick="removeItem('+cartItems[i]["id"]+')" ><i class="ion-android-close"></i></a>'
 		miniCartHTML += '</div>'
 		miniCartHTML += '</div>'
 	}
@@ -68,5 +72,15 @@ async function showMiniCart(cartItems,cartSubtotal){
 	$("#miniCart").append(miniCartHTML)
 }
 
+function removeItem(id){
+	if(confirm("Remove this item "+ id +" ?")){
+		shoppingCart.removeItemFromCart(id);
+		$("#miniCart").html("");
+		loadMiniCart();
+	}
+}
 
-showMiniCart(cartItems,cartSubtotal)
+$(document).ready(function(){
+	loadMiniCart();
+});
+// showMiniCart(cartItems,cartSubtotal)
