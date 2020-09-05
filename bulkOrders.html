@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>LaMarzocco - My Orders</title>
+    <title>LaMarzocco - Bulk Orders</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -504,7 +504,7 @@
                     <div class="breadcrumb_content">
                         <ul>
                             <li><a href="index.html">home</a></li>
-                            <li>My Orders</li>
+                            <li>Bulk Orders</li>
                         </ul>
                     </div>
                 </div>
@@ -519,8 +519,45 @@
             <form action="#">
                 <div class="row">
                     <div class="col-12">
+                        <h3>Sample Data Format</h3>
+                        <br>
                         <div class="table_desc">
                             <div class="cart_page table-responsive" id="myOrders">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class="product_name">ProductId</th>
+                                            <th class="product_quantity">Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="product_name"><a href="#">Strada s</a></td>
+                                            <td class="product_quantity">2</td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td class="product_name"><a href="#">Escresso x</a></td>
+                                            <td class="product_quantity">2</td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+
+                            <div>
+                                <input type="file" class="btn btn-info" accept=".xls, .xlsx"  style="background: #ffd54c;
+                                    color: black;" id="excelfile"/>  
+                                <input type="button" style="background: black;" class="btn btn-success" id="uploadFile" value="Preview" onclick="ExportToTable('Preview')"/>  
+                                <table id="exceltable" ></table>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="table_desc"id="bulkOrders">
+                            <!-- <div class="cart_page table-responsive" > -->
                                 <!-- <table>
                                     <thead>
                                         <tr>
@@ -567,54 +604,13 @@
 
                                     </tbody>
                                 </table> -->
-                            </div>
-                            <div class="my_orders_submit">
-                                <!-- <button type="submit">update cart</button> -->
-                                <!-- <button type="submit">Get Quotation </button> -->
-                            </div>
+                            <!-- </div>
+                            <div class="cart_submit"> -->
+                             <!--    <button type="submit">Add to Cart </button>
+                            </div> -->
                         </div>
                     </div>
                 </div>
-                <!--coupon code area start-->
-                <div class="coupon_area">
-                    <div class="row" id="subTotal">
-                        <!-- <div class="col-lg-6 col-md-6">
-                            <div class="coupon_code left">
-                                <h3>Purchase Orders</h3>
-                                <div class="coupon_inner">
-                                    <p>Upload PO.</p>
-                                    <input placeholder="Upload" type="text">
-                                    <button type="submit">Upload Purchase orders</button>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-lg-6 col-md-6">
-                            <div class="coupon_code right">
-                                <h3>Cart Totals</h3>
-                                <div class="coupon_inner">
-                                    <div class="cart_subtotal">
-                                        <p>Subtotal</p>
-                                        <p class="cart_amount">£215.00</p>
-                                    </div>
-                                    <div class="cart_subtotal ">
-                                        <p>Shipping</p>
-                                        <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
-                                    </div>
-                                    <a href="#">Calculate shipping</a>
-
-                                    <div class="cart_subtotal">
-                                        <p>Total</p>
-                                        <p class="cart_amount">£215.00</p>
-                                    </div>
-                                    <div class="checkout_btn">
-                                        <a href="#">Proceed to Checkout</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-                <!--coupon code area end-->
             </form>
         </div>
     </div>
@@ -837,6 +833,8 @@
 <!-- Plugins JS -->
 <script src="assets/js/plugins.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
+
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 
@@ -853,7 +851,7 @@
 <script src="assets/js/miniCart.js"></script>
 
 <!--  Cart JS-->
-<script src="assets/js/myOrders.js"></script>
+<script src="assets/js/bulkOrders.js"></script>
 
 
 </body>
