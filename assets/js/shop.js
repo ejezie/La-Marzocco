@@ -8,7 +8,7 @@ var catalogList = [{
 						"productQuantityInStock" : "50"
 					},
 					{
-						"productCode" : "HSO567",
+						"productCoxde" : "HSO567",
 						"productName" : "Vulcano2",
 						"productFamily" : "Espresso Machines",
 						"productActualPrice" : "$1199.00",
@@ -100,20 +100,20 @@ async function showCatalog(catalogList){
 		catalogHTML += '<div class="col-lg-4 col-md-4 col-12 ">'
 		catalogHTML += '<div class="single_product">'
 		catalogHTML += '<div class="product_name grid_name">'
-		catalogHTML += '<h3><a href="product-details.html">'+catalogList[i]["productName"]+'</a></h3>'
+		catalogHTML += '<h3><a href="product-details.html?item='+catalogList[i]["productId"]+'">'+catalogList[i]["productName"]+'</a></h3>'
 		catalogHTML += '<p class="manufacture_product"><a href="#">Accessories</a></p>'
 		catalogHTML += '</div>'
 		catalogHTML += '<div class="product_thumb">'
-		catalogHTML += '<a class="primary_img" href="product-details.html"><img src="assets/img/product/product10.jpg" alt=""></a>'
-		catalogHTML += '<a class="secondary_img" href="product-details.html"><img src="assets/img/product/product11.jpg" alt=""></a>'
+		catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product10.jpg" alt=""></a>'
+		catalogHTML += '<a class="secondary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product11.jpg" alt=""></a>'
 		catalogHTML += '<div class="label_product">'
 		catalogHTML += '<span class="label_sale">'+catalogList[i]["productOffPercent"]+'</span>'
 		catalogHTML += '</div>'
 		catalogHTML += '<div class="action_links">'
 		catalogHTML += '<ul>'
 		catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
-		catalogHTML += '<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>'
-		catalogHTML += '<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>'
+		// catalogHTML += '<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>'
+		// catalogHTML += '<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>'
 		catalogHTML += '</ul>'
 		catalogHTML += '</div>'
 		catalogHTML += '</div>'
@@ -134,7 +134,7 @@ async function showCatalog(catalogList){
 		catalogHTML += '<span class="old_price">'+catalogList[i]["productActualPrice"]+'</span>'
 		catalogHTML += '</div>'
 		catalogHTML += '<div class="add_to_cart">'
-		catalogHTML += '<a href="cart.html" title="add to cart"><span class="lnr lnr-cart"></span></a>'
+		catalogHTML += '<a onclick="addToCart()" title="add to cart"><span class="lnr lnr-cart"></span></a>'
 		catalogHTML += '</div>'
 		catalogHTML += '</div>'
 		catalogHTML += '</div>'
@@ -199,7 +199,9 @@ function showSearchResults(url){
   	var results = [];
     for(var i=0; i< response.data.items.data.length; i++){
       const item = response.data.items.data[i];
+      console.log(item);
       const element = {
+						"productId" : item.id,
 						"productCode" : item.code,
 						"productName" : item.name,
 						"productFamily" : item.family.code,
