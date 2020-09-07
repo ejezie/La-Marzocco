@@ -74,23 +74,97 @@ var familyList = ["LINEA","MODBAR","ESPRESSO MACHINES"]
 
 
 
+// async function showMachinesSideFilter(machineList){
+// 	var sidebarHTML = ""
+
+// 	for(i=0; i<machineList.length ;i++){
+
+// 		sidebarHTML += '<li class="menu_item_children">'
+// 		sidebarHTML += '<div class="widget_list widget_categories">'
+// 		sidebarHTML += '<h2>'+machineList[i]["family"]+'</h2>'
+// 		sidebarHTML += '<ul>'
+
+// 		for(j=0; j<machineList[i]["machines"].length;j++){
+
+// 			sidebarHTML += '<li><input type="checkbox"><a href="#">'+machineList[i]["machines"][j]+'</a><span class="checkmark"></span></li>'
+// 		}
+// 		sidebarHTML += '</ul>'
+// 		sidebarHTML += '</div>'
+// 		sidebarHTML += '</li>'
+// 	}
+
+// 	$("#sidebarMachineFilter").append(sidebarHTML)
+
+// }
+
+
+// async function showGroupSideFilter(groupList){
+// 	var sidebarHTML = ""
+
+// 	sidebarHTML += '<li class="menu_item_children">'
+// 	sidebarHTML += '<div class="widget_list widget_categories">'
+// 	sidebarHTML += '<h2>Group</h2>'
+// 	sidebarHTML += '<ul>'
+
+// 	for(i=0; i<groupList.length ;i++){
+
+// 		sidebarHTML += '<li><input type="checkbox"><a href="#">'+groupList[i]+'</a><span class="checkmark"></span></li>'
+// 		// sidebarHTML += '<li class="menu_item_children"><input type="checkbox"><a href="#">'+groupList[i]+'</a>'
+// 		// sidebarHTML += '<li class="menu_item_children"><a href="#">'+groupList[i]+'</a>'
+// 	}
+
+// 	sidebarHTML += '</ul>'
+// 	sidebarHTML += '</div>'
+// 	sidebarHTML += '</li>'
+
+// 	$("#sidebarGroupFilter").append(sidebarHTML)
+
+// }
+
+
+// async function showFamilySideFilter(familyList){
+// 	var sidebarHTML = ""
+
+// 	sidebarHTML += '<li class="menu_item_children">'
+// 	sidebarHTML += '<div class="widget_list widget_categories">'
+// 	sidebarHTML += '<h2>Family</h2>'
+// 	sidebarHTML += '<ul>'
+
+// 	for(i=0; i<familyList.length ;i++){
+// 		sidebarHTML += '<li><input type="checkbox"><a href="#">'+familyList[i]+'</a><span class="checkmark"></span></li>'
+// 		// sidebarHTML += '<li class="menu_item_children"><a href="#">'+familyList[i]+'</a>'
+// 	}
+
+// 	sidebarHTML += '</ul>'
+// 	sidebarHTML += '</div>'
+// 	sidebarHTML += '</li>'
+
+// 	$("#sidebarFamilyFilter").append(sidebarHTML)
+
+// }
+
+
+// 
+
+
+
 async function showMachinesSideFilter(machineList){
 	var sidebarHTML = ""
 
 	for(i=0; i<machineList.length ;i++){
 
-		sidebarHTML += '<li class="menu_item_children">'
-		sidebarHTML += '<div class="widget_list widget_categories">'
-		sidebarHTML += '<h2>'+machineList[i]["family"]+'</h2>'
-		sidebarHTML += '<ul>'
+	sidebarHTML += '<a class="menu_item_children" href="#'+machineList[i]["family"]+'"  data-toggle="collapse"><strong>'+machineList[i]["family"]+ '  <i class="icon-control fa fa-chevron-down"></i></strong></a>'
+	sidebarHTML += '<div id="'+machineList[i]["family"]+'" class="collapse">'
 
 		for(j=0; j<machineList[i]["machines"].length;j++){
 
-			sidebarHTML += '<li><input type="checkbox"><a href="#">'+machineList[i]["machines"][j]+'</a><span class="checkmark"></span></li>'
+			sidebarHTML += '<label class="custom-control"> <input type="checkbox"  class="custom-control-input">'
+			sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]+' </div>'
+			sidebarHTML += '</label> '
+
 		}
-		sidebarHTML += '</ul>'
 		sidebarHTML += '</div>'
-		sidebarHTML += '</li>'
+		sidebarHTML += '<br>'
 	}
 
 	$("#sidebarMachineFilter").append(sidebarHTML)
@@ -98,24 +172,17 @@ async function showMachinesSideFilter(machineList){
 }
 
 
+
 async function showGroupSideFilter(groupList){
 	var sidebarHTML = ""
 
-	sidebarHTML += '<li class="menu_item_children">'
-	sidebarHTML += '<div class="widget_list widget_categories">'
-	sidebarHTML += '<h2>Group</h2>'
-	sidebarHTML += '<ul>'
 
 	for(i=0; i<groupList.length ;i++){
 
-		sidebarHTML += '<li><input type="checkbox"><a href="#">'+groupList[i]+'</a><span class="checkmark"></span></li>'
-		// sidebarHTML += '<li class="menu_item_children"><input type="checkbox"><a href="#">'+groupList[i]+'</a>'
-		// sidebarHTML += '<li class="menu_item_children"><a href="#">'+groupList[i]+'</a>'
+		sidebarHTML += '<label class="custom-control"> <input type="checkbox"  class="custom-control-input">'
+		sidebarHTML += '<div class="custom-control-label">'+groupList[i]+' </div>'
+		sidebarHTML += '</label> '
 	}
-
-	sidebarHTML += '</ul>'
-	sidebarHTML += '</div>'
-	sidebarHTML += '</li>'
 
 	$("#sidebarGroupFilter").append(sidebarHTML)
 
@@ -125,19 +192,13 @@ async function showGroupSideFilter(groupList){
 async function showFamilySideFilter(familyList){
 	var sidebarHTML = ""
 
-	sidebarHTML += '<li class="menu_item_children">'
-	sidebarHTML += '<div class="widget_list widget_categories">'
-	sidebarHTML += '<h2>Family</h2>'
-	sidebarHTML += '<ul>'
-
 	for(i=0; i<familyList.length ;i++){
-		sidebarHTML += '<li><input type="checkbox"><a href="#">'+familyList[i]+'</a><span class="checkmark"></span></li>'
-		// sidebarHTML += '<li class="menu_item_children"><a href="#">'+familyList[i]+'</a>'
+
+		sidebarHTML += '<label class="custom-control"> <input type="checkbox"  class="custom-control-input">'
+		sidebarHTML += '<div class="custom-control-label">'+familyList[i]+' </div>'
+		sidebarHTML += '</label> '
 	}
 
-	sidebarHTML += '</ul>'
-	sidebarHTML += '</div>'
-	sidebarHTML += '</li>'
 
 	$("#sidebarFamilyFilter").append(sidebarHTML)
 
