@@ -211,7 +211,7 @@
                         <div class="main_menu header_position">
                             <nav>
                                 <ul>
-                                    <li ><a href="index.html"> home</a>
+                                    <li ><a href="index.html" style="padding-left: 20px;"> home</a>
                                        <!--  <ul class="sub_menu">
                                             <li><a href="index.html">Home 1</a></li>
                                             <li><a href="index-2.html">Home 2</a></li>
@@ -526,20 +526,52 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th class="product_name">ProductId</th>
-                                            <th class="product_quantity">Quantity</th>
+                                            <th class="product_ItemCode"> ItemCode</th>
+                                            <th class="product_ItemName"> ItemName</th>
+                                            <th class="product_Itemtype"> Itemtype</th>
+                                            <th class="product_FamilyCode"> FamilyCode</th>
+                                            <th class="product_FamilyDesc"> FamilyDesc</th>
+                                            <th class="product_Isactive"> Isactive</th>
+                                            <th class="product_Weight"> Weight</th>
+                                            <th class="product_WeightUoM"> WeightUoM</th>
+                                            <th class="product_Itemgroup"> Itemgroup</th>
+                                            <th class="product_GroupDescription"> GroupDescription</th>
+                                            <th class="product_ModelNumber"> ModelNumber</th>
+                                            <th class="product_Quantity"> Quantity</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="product_name"><a href="#">Strada s</a></td>
-                                            <td class="product_quantity">2</td>
+                                            <td class="product_ItemCode"> levas123 </td>
+                                            <td class="product_ItemName"> Leva S</td>
+                                            <td class="product_Itemtype"> Machine</td>
+                                            <td class="product_FamilyCode"> Leva S</td>
+                                            <td class="product_FamilyDesc"> Commercial Machine</td>
+                                            <td class="product_Isactive"> Yes</td>
+                                            <td class="product_Weight"> 5000</td>
+                                            <td class="product_WeightUoM"> Grams</td>
+                                            <td class="product_Itemgroup"> </td>
+                                            <td class="product_GroupDescription"> </td>
+                                            <td class="product_ModelNumber"> levas123</td>
+                                            <td class="product_Quantity"> 2</td>
+
 
                                         </tr>
 
                                         <tr>
-                                            <td class="product_name"><a href="#">Escresso x</a></td>
-                                            <td class="product_quantity">2</td>
+                                            <td class="product_ItemCode"> levac123 </td>
+                                            <td class="product_ItemName"> Leva C</td>
+                                            <td class="product_Itemtype"> Machine</td>
+                                            <td class="product_FamilyCode"> Leva C</td>
+                                            <td class="product_FamilyDesc"> Commercial Machine</td>
+                                            <td class="product_Isactive"> Yes</td>
+                                            <td class="product_Weight"> 7500</td>
+                                            <td class="product_WeightUoM"> Grams</td>
+                                            <td class="product_Itemgroup"> </td>
+                                            <td class="product_GroupDescription"> </td>
+                                            <td class="product_ModelNumber"> levas123</td>
+                                            <td class="product_Quantity"> 4</td>
+
 
                                         </tr>
 
@@ -547,6 +579,16 @@
                                 </table>
                                 
                             </div>
+                            <br>
+                            <h5>Note :  Download below excel and input quantity for the required products and upload. </h5>
+
+                            <div>
+                                <form>
+                                    <input type="button" class="btn btn-success" value="Download Sample Data Template" onClick="window.location.href='adminDashboard/files/bulkOrders.xlsx'">
+                                </form>
+                                
+                            </div>
+                            <br>
 
                             <div>
                                 <input type="file" class="btn btn-info" accept=".xls, .xlsx"  style="background: #ffd54c;
@@ -721,7 +763,7 @@
     <!--call to action end-->
 
     <!--footer area start-->
-    <footer class="footer_widgets" style="background: #d19900;" id="footer">
+    <footer class="footer_widgets" style="background: #000;" id="footer">
         <!-- <div class="container">
             <div class="footer_top">
                 <div class="row">
@@ -849,8 +891,9 @@
 
 <!-- mini Cart JS -->
 <script src="assets/js/miniCart.js"></script>
+<script src="assets/js/common/cart.js"></script>
 
-<!--  Cart JS-->
+<!--  Bulk Order JS-->
 <script src="assets/js/bulkOrders.js"></script>
 
 
