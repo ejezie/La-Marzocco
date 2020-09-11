@@ -1,5 +1,6 @@
 // const BASE_URL = "http://54.252.24.196/v1/api/";
-const BASE_URL = "http://3.106.30.129/v1/api/";
+// const BASE_URL = "http://3.106.30.129/v1/api/";
+const BASE_URL = "http://54.252.24.196/v1/api/";
 
 async function updateItem(
   item_id,
@@ -228,8 +229,24 @@ async function getGroupsWithPaging(onResponse,onError,page,page_size){
   axios(config)
   .then(onResponse)
   .catch(onError);  
-
 }
+
+async function getFamilyDescWithPaging(onResponse,onError,page,page_size){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'family-desc?page='+page+'&page_size='+page_size,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+
 async function getParentsWithPaging(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
@@ -307,6 +324,22 @@ async function deleteFamily(onResponse,onError,familyid){
   .then(onResponse)
   .catch(onError);  
 }
+async function deleteFamilyDesc(onResponse,onError,familyDescId){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'family-desc/'+familyDescId,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
 async function deleteType(onResponse,onError,typeid){
 
   var config = {
@@ -478,6 +511,31 @@ async function addFamily(onResponse,onError,code,desc){
   .catch(onError);  
 }
 
+async function addFamilyDesc(onResponse,onError,code,desc){
+
+  var data = new FormData();
+  if(code!=null){
+    data.append('code', code);
+  }
+  if(desc!=null){
+    data.append('desc', desc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'family-desc',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
 async function getFamilies(onResponse,onError){
 
   var config = {
@@ -508,6 +566,32 @@ async function updateFamily(onResponse,onError,id,name,desc){
   var config = {
     method: 'post',
     url: BASE_URL+'family/'+id,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+
+async function updateFamilyDesc(onResponse,onError,id,name,desc){
+
+  var data = new FormData();
+  if(name!=null){
+    data.append('code', name);
+  }
+  if(desc!=null){
+    data.append('desc', desc);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'family-desc/'+id,
     headers: { 
       'Authorization': getAPIToken(), 
       'Accept': 'application/json'
@@ -666,9 +750,32 @@ async function getSearchResults(onResponse,onError,url){
     data : data
   };
 
-  axios(config)
-  .then(onResponse)
-  .catch(onError);
+  axios(config).then(onResponse).catch(onError);
+}
 
 
+async function getMappingsMain(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'mapping/main',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getMappingsMachine(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'mapping/machine',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+  };
+  axios(config).then(onResponse).catch(onError);
 }

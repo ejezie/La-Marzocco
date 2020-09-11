@@ -204,7 +204,7 @@ function showSearchResults(url){
 						"productId" : item.id,
 						"productCode" : item.code,
 						"productName" : item.name,
-						"productFamily" : item.family.code,
+						"productFamily" : item.item_family[0].code,
 						"productActualPrice" : "$1199.00",
 						"productOfferPrice" : "$999.00",
 						"productOffPercent" : "-20%",

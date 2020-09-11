@@ -133,6 +133,8 @@ async function showProductInfo(item){
 		}else{
 			shoppingCart.setCountForItem(itemId,$("#inputQuantity").val());
 		}
+			reloadMiniCart();
+
 	});
 
 }
@@ -160,7 +162,7 @@ function initProductDetails() {
 						"id" : i.id,
 						"price" : "$700.00",
 						"description": i.desc,
-						"family" : i.family.code,
+						"family" : i.item_family[0].code,
 						"image" : i.images[0].main,
 						"specification" : [
 									{
