@@ -39,7 +39,7 @@ async function showFooter(){
 	footerHTML += '<div class="col-lg-4 col-md-6">'
 	footerHTML += '<div class="widgets_container">'
 	footerHTML += '<h3>Parts Orders </h3>'
-	footerHTML += '<p>parts.australia@lamarzocco.com</p>'
+	footerHTML += '<p><a href="mailto:parts.australia@lamarzocco.com">parts.australia@lamarzocco.com</a></p>'
 	footerHTML += '<p>T +61 2 8396 6111</p>'
 	footerHTML += '</div>'
 	footerHTML += '</div>'
