@@ -75,9 +75,13 @@ async function showMiniCart(cartItems,cartSubtotal){
 function removeItem(id){
 	if(confirm("Remove this item "+ id +" ?")){
 		shoppingCart.removeItemFromCart(id);
-		$("#miniCart").html("");
-		loadMiniCart();
+		reloadMiniCart();
 	}
+}
+
+function reloadMiniCart(){
+	$("#miniCart").html("");
+		loadMiniCart();
 }
 
 $(document).ready(function(){

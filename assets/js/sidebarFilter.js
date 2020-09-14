@@ -153,13 +153,12 @@ async function showMachinesSideFilter(machineList){
 
 	for(i=0; i<machineList.length ;i++){
 
-	sidebarHTML += '<a class="menu_item_children" href="#'+machineList[i]["family"]+'"  data-toggle="collapse"><strong>'+machineList[i]["family"]+ '  <i class="icon-control fa fa-chevron-down"></i></strong></a>'
-	sidebarHTML += '<div id="'+machineList[i]["family"]+'" class="collapse">'
+	sidebarHTML += '<a class="menu_item_children"'+machineList[i]["code"]+'"  data-toggle="collapse"><strong>'+machineList[i]["code"]+ '  <i class="icon-control fa fa-chevron-down"></i></strong></a>'
+	sidebarHTML += '<div id="'+machineList[i]["code"]+'" class="collapse">'
 
 		for(j=0; j<machineList[i]["machines"].length;j++){
-
 			sidebarHTML += '<label class="custom-control"> <input type="checkbox"  class="custom-control-input">'
-			sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]+' </div>'
+			sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]["code"]+' </div>'
 			sidebarHTML += '</label> '
 
 		}
@@ -172,6 +171,32 @@ async function showMachinesSideFilter(machineList){
 }
 
 
+function refreshCatalog(){
+	var machines = getCheckedMachines();
+	var groups = getCheckedGroups();
+
+
+
+}
+
+function getCheckedMachines(){
+	var machines = [];
+	    $('#sidebarMachineFilter input:checked').each(function(){
+	        machines.push(this.value);
+	    });        
+	console.log(machines);
+	return machines;
+}
+function getCheckedGroups(){
+	var groups = [];
+	    $('#sidebarGroupFilter input:checked').each(function(){
+	        groups.push(this.value);
+	    });        
+	console.log(groups);
+	return groups;
+}
+
+
 
 async function showGroupSideFilter(groupList){
 	var sidebarHTML = ""
@@ -179,12 +204,15 @@ async function showGroupSideFilter(groupList){
 
 	for(i=0; i<groupList.length ;i++){
 
-		sidebarHTML += '<label class="custom-control"> <input type="checkbox"  class="custom-control-input">'
+		sidebarHTML += '<label class="custom-control"> <input onchange="refreshCatalog()" type="checkbox"  class="custom-control-input">'
 		sidebarHTML += '<div class="custom-control-label">'+groupList[i]+' </div>'
 		sidebarHTML += '</label> '
 	}
 
-	$("#sidebarGroupFilter").append(sidebarHTML)
+	$("#sidebarGroupFilter").append(sidebarHTML);
+	$('#sidebarGroupFilter input[type="checkbox"]').on('change', function() {
+   		$('#sidebarGroupFilter input[type="checkbox"]').not(this).prop('checked', false);
+	});
 
 }
 
@@ -193,19 +221,30 @@ async function showFamilySideFilter(familyList){
 	var sidebarHTML = ""
 
 	for(i=0; i<familyList.length ;i++){
-
-		sidebarHTML += '<label class="custom-control"> <input type="checkbox"  class="custom-control-input">'
+		sidebarHTML += '<label class="custom-control"> <input  onchange="refreshCatalog()" type="checkbox"  class="custom-control-input">'
 		sidebarHTML += '<div class="custom-control-label">'+familyList[i]+' </div>'
 		sidebarHTML += '</label> '
 	}
 
-
-	$("#sidebarFamilyFilter").append(sidebarHTML)
-
+	$("#sidebarFamilyFilter").append(sidebarHTML);
+	$('#sidebarFamilyFilter input[type="checkbox"]').on('change', function() {
+   		$('#sidebarFamilyFilter input[type="checkbox"]').not(this).prop('checked', false);
+	});
 }
 
 
-showMachinesSideFilter(machineList)
-showGroupSideFilter(groupList)
-showFamilySideFilter(familyList)
+// showMachinesSideFilter(machineList)
+// showGroupSideFilter(groupList)
+// showFamilySideFilter(familyList)
 
+
+$(document).ready(function(){
+	var onResponse = function(response){
+		showMachinesSideFilter(response.data.mapping)
+	};
+	var onError =function(error){
+		// notifyError("Failed to");
+	};
+
+	getMappingsMachine(onResponse,onError);
+});

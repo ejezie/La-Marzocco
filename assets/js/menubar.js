@@ -151,22 +151,24 @@ var newsletterArr = [{
 					}]
 
 
-function showMenubarCommercialMachine(category){
+function showMenubarCommercialMachine(data){
+	var category = "Commercial Machines";
+	var categoryArr = { Categories: data.mapping};
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
 
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
 		if(categoryName == category){
-			for(j=0; j < categoryArr["Categories"][i]["family"].length; j++){
-				var family = categoryArr["Categories"][i]["family"][j]["name"]
-				menuBarHTML += '<li><a href="#">'+family+'</a>'
+			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
+				var family = categoryArr["Categories"][i]["families"][j]["code"]
+				menuBarHTML += '<li>'+family+'</a>'
 				menuBarHTML += '<ul>'
 
 
-				for(k=0; k< categoryArr["Categories"][i]["family"][j]["type"].length ; k++){
-					var type = categoryArr["Categories"][i]["family"][j]["type"][k]["name"]
-					menuBarHTML += '<li><a href="#">'+type+'</a></li>'
+				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
+					menuBarHTML += '<li><a href="product-details.html?item='+categoryArr["Categories"][i]["families"][j]["machines"][k]["id"]+'">'+type+'</a></li>'
 				}
 
 				menuBarHTML += '</ul>'
@@ -178,9 +180,9 @@ function showMenubarCommercialMachine(category){
 
 	menuBarHTML += '</ul>';
 	// Image
-	menuBarHTML += '<div class="banner_static_menu">'
-	menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
-	menuBarHTML += '</div>'
+	// menuBarHTML += '<div class="banner_static_menu">'
+	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
+	// menuBarHTML += '</div>'
 
 	$("#commercial_machine_menu").append(menuBarHTML)
 }
@@ -193,15 +195,15 @@ function showMenubarGrinders(category){
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
 		if(categoryName == category){
-			for(j=0; j < categoryArr["Categories"][i]["family"].length; j++){
-				var family = categoryArr["Categories"][i]["family"][j]["name"]
+			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
+				var family = categoryArr["Categories"][i]["families"][j]["code"]
 				menuBarHTML += '<li><a href="#">'+family+'</a>'
 				menuBarHTML += '<ul>'
 
 
-				for(k=0; k< categoryArr["Categories"][i]["family"][j]["type"].length ; k++){
+				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 
-					var type = categoryArr["Categories"][i]["family"][j]["type"][k]["name"]
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
 					menuBarHTML += '<li><a href="#">'+type+'</a></li>'
 				}
 
@@ -215,7 +217,7 @@ function showMenubarGrinders(category){
 	menuBarHTML += '</ul>';
 	// Image
 	menuBarHTML += '<div class="banner_static_menu">'
-	menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
+	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
 	menuBarHTML += '</div>'
 
 	$("#grinders_menu").append(menuBarHTML)
@@ -229,15 +231,15 @@ function showMenubarModbar(category){
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
 		if(categoryName == category){
-			for(j=0; j < categoryArr["Categories"][i]["family"].length; j++){
-				var family = categoryArr["Categories"][i]["family"][j]["name"]
+			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
+				var family = categoryArr["Categories"][i]["families"][j]["code"]
 				menuBarHTML += '<li><a href="#">'+family+'</a>'
 				menuBarHTML += '<ul>'
 
 
-				for(k=0; k< categoryArr["Categories"][i]["family"][j]["type"].length ; k++){
+				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 
-					var type = categoryArr["Categories"][i]["family"][j]["type"][k]["name"]
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
 					menuBarHTML += '<li><a href="#">'+type+'</a></li>'
 				}
 
@@ -251,7 +253,7 @@ function showMenubarModbar(category){
 	menuBarHTML += '</ul>';
 	// Image
 	menuBarHTML += '<div class="banner_static_menu">'
-	menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
+	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
 	menuBarHTML += '</div>'
 
 	$("#modbar_menu").append(menuBarHTML)
@@ -264,15 +266,15 @@ function showMenubarGS3(category){
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
 		if(categoryName == category){
-			for(j=0; j < categoryArr["Categories"][i]["family"].length; j++){
-				var family = categoryArr["Categories"][i]["family"][j]["name"]
+			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
+				var family = categoryArr["Categories"][i]["families"][j]["code"]
 				menuBarHTML += '<li><a href="#">'+family+'</a>'
 				menuBarHTML += '<ul>'
 
 
-				for(k=0; k< categoryArr["Categories"][i]["family"][j]["type"].length ; k++){
+				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 
-					var type = categoryArr["Categories"][i]["family"][j]["type"][k]["name"]
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
 					menuBarHTML += '<li><a href="#">'+type+'</a></li>'
 				}
 
@@ -286,7 +288,7 @@ function showMenubarGS3(category){
 	menuBarHTML += '</ul>';
 	// Image
 	menuBarHTML += '<div class="banner_static_menu">'
-	menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
+	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
 	menuBarHTML += '</div>'
 
 	$("#gs3_menu").append(menuBarHTML)
@@ -300,15 +302,15 @@ function showMenubarLMHome(category){
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
 		if(categoryName == category){
-			for(j=0; j < categoryArr["Categories"][i]["family"].length; j++){
-				var family = categoryArr["Categories"][i]["family"][j]["name"]
+			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
+				var family = categoryArr["Categories"][i]["families"][j]["code"]
 				menuBarHTML += '<li><a href="#">'+family+'</a>'
 				menuBarHTML += '<ul>'
 
 
-				for(k=0; k< categoryArr["Categories"][i]["family"][j]["type"].length ; k++){
+				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 
-					var type = categoryArr["Categories"][i]["family"][j]["type"][k]["name"]
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
 					menuBarHTML += '<li><a href="#">'+type+'</a></li>'
 				}
 
@@ -322,7 +324,7 @@ function showMenubarLMHome(category){
 	menuBarHTML += '</ul>';
 	// Image
 	menuBarHTML += '<div class="banner_static_menu">'
-	menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
+	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
 	menuBarHTML += '</div>'
 
 	$("#lmHome_menu").append(menuBarHTML)
@@ -369,7 +371,21 @@ function showNewsletter(newsletterArr){
 
 // }
 
-showMenubarCommercialMachine("Commercial Machines")
+
+
+// showMenubarCommercialMachine("Commercial Machines")
+// showMenubarGrinders("Grinders")
+// showMenubarModbar("Modbar")
+// showMenubarGS3("GS3")
+// showMenubarLMHome("LM Home")
+// showNewsletter(newsletterArr)
+
+
+
+$(document).ready(function(){
+	var onResponse = function(response){
+		showMenubarCommercialMachine(response.data);
+
 showMenubarGrinders("Grinders")
 showMenubarModbar("Modbar")
 showMenubarGS3("GS3")
@@ -377,3 +393,13 @@ showMenubarLMHome("LM Home")
 showNewsletter(newsletterArr)
 
 
+	};
+	var onError =function(error){
+		// notifyError("Failed to");
+	};
+
+	getMappingsMain(onResponse,onError);
+
+
+
+});

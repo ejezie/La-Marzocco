@@ -148,6 +148,152 @@ function populateGroup(){
 
 
 }
+
+function populateFamilyDesc(){
+	var productGroupTable = $('#productFamilyDesc').dataTable( {
+
+		processing: true,
+		serverSide: true,
+		pageLength: 10,
+		autoWidth: false,
+		bSort : false,
+		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
+		ajax: function(data, callback, settings) {
+			// const loadingId = notifyInfo("Loading groups");
+			console.log(JSON.stringify(data,null,2));
+
+			var onResponse = function(res){
+				// dismiss(loadingId);
+				callback({
+					draw:data.draw,
+					recordsTotal: res.data.groups.total,
+					recordsFiltered: res.data.groups.total,
+					data: res.data.groups.data
+				});
+			};
+			var onError =function(error){
+				// dismiss(loadingId);
+			};
+			var pageIndex = data.start / data.length + 1 ;
+			getFamilyDescWithPaging(onResponse,onError,pageIndex,data.length);
+
+		},
+		columns: [
+		{
+			"title":"Sr No",
+			render: function(data, type, row, meta){
+				var row_index = meta.row+1
+				return row_index
+			}
+		},
+		{
+			"title":"Code",
+			render: function(data, type, row){
+				return row.id ;
+			}
+		},
+		{
+			"title":"Type",
+			render: function(data, type, row){
+				return row.name ;
+			}
+		},
+		{
+			"title":"Description",
+			render: function(data, type, row){
+				return row.desc;
+			}
+		},
+	   {
+	    	"title":"Edit",
+	    	render: function(data, type, row){
+	           return '<button type="button" id="btnEdit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">'
+	       }
+	   },
+	   {
+	    	"title":"Delete",
+	    	render: function(data, type, row){
+	           return '<button type="button"  id="btnDelete" class="btn btn-default btn-sm"><span class=" 	glyphicon glyphicon-trash">'
+	       }
+	   }
+		]
+	});
+
+
+	$('#productFamilyDesc').on('click', '#btnEdit', function () {
+		var RowIndex = $(this).closest('tr');
+		var data = productGroupTable.api().row(RowIndex).data();
+
+		$("#inputEditFamilyDescId").val(data.id);
+		$("#inputEditFamilyDescName").val(data.name);
+		$("#inputEditFamilyDescDesc").val(data.desc);
+
+
+		$("#inputEditFamilyDescName").trackChanges();
+		$("#inputEditFamilyDescDesc").trackChanges();
+		
+		$('#cancelEditFamilyDescModal').click(function () {
+			$('#editFamilyDescModal').modal('hide');
+		});
+
+
+		
+		$('#submitEditFamilyDescModal').click(function () {
+			const name = $("#inputEditFamilyDescName").getChanged();
+			const desc = $("#inputEditFamilyDescDesc").getChanged();
+			var onResponse = function(response){
+				notifySuccess("Updated successfully");
+				window.location.reload();
+			};
+			var onError =function(error){
+				notifyError("Failed to update");
+			};
+			updateFamilyDesc(onResponse,onError, data.id,name,desc);
+		});
+
+		$('#editFamilyDescModal').modal('show');
+	});
+
+		$('#confirmAddFamilyDesc').click(function () {
+			var desc = $("#inputAddFamilyDescDesc").val();
+			var name = $("#inputAddFamilyDescName").val();
+			var onResponse = function(response){
+				notifySuccess("Added successfully");
+				// productGroupTable.api().clear();
+				// populateGroup();
+				window.location.reload();
+			};
+			var onError =function(error){
+				console.log(error);
+				notifyError("Failed to add");
+			};
+			addFamilyDesc(onResponse,onError,name,desc);
+		});
+			
+		
+	$('#productFamilyDesc').on('click', '#btnDelete', function () {
+		var RowIndex = $(this).closest('tr');
+		var data = productFamilyDescTable.api().row(RowIndex).data();
+		var r = confirm("Delete this family desc?");
+		if (r == true) {
+			var onResponse = function(response){
+				notifySuccess("Item deleted");
+				window.location.reload();
+			};
+			var onError =function(error){
+				notifyError("Failed to delete");
+			};
+			deleteFamilyDesc(onResponse,onError,data.id);
+		}
+	});
+
+
+
+}
+
+
+
+
 function populateFamily(){
 	const tableFamily = $('#productFamily').dataTable( {
 
@@ -610,6 +756,7 @@ $(document).ready(function(){
 	populateFamily();
 	populateType();
 	populateParent();
+	populateFamilyDesc();
 			$('#btnAddNew').click(function () {
 				$('#addTypeModal').modal('show');
 			});
@@ -624,6 +771,12 @@ $(document).ready(function(){
 			$('#btnAddNew').unbind();
 			$('#btnAddNew').click(function () {
 				$('#addFamilyModal').modal('show');
+			});
+		});
+		$('#nav-familyDesc-tab').click(function () {
+			$('#btnAddNew').unbind();
+			$('#btnAddNew').click(function () {
+				$('#addProductFamilyDescModal').modal('show');
 			});
 		});
 		$('#nav-parent-tab').click(function () {
