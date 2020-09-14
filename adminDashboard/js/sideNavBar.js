@@ -31,7 +31,7 @@ function sideNavBar(){
 		sideNavBarHTML +=  '<ul class="nav side-menu">'
 		sideNavBarHTML +=  '<li><a href="dashboard.html"><i class="fa fa-home"></i> DASHBOARD </a>'
 		sideNavBarHTML +=  '</li>'
-		sideNavBarHTML +=  '<li><a href="customerOrders.html"><i class="fa fa-shopping-cart"></i>PLACE ORDER </a>'
+		sideNavBarHTML +=  '<li><a href="customerOrders.html"><i class="fa fa-shopping-cart"></i>ORDERS </a>'
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '<li><a><i class="fa fa-bar-chart-o"></i> REPORTS <span class="fa fa-chevron-down"></span></a>'
 		sideNavBarHTML +=  '<ul class="nav child_menu">'

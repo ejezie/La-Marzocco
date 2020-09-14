@@ -1,11 +1,11 @@
 var itemArr = [
                     {
-                        "productId" : "levas123",
+                        "ItemCode" : "levas123",
                         "productName" : "Leva s",
                         "productPrice" : "$1000"
                     },
                     {
-                        "productId" : "lineamini123",
+                        "ItemCode" : "lineamini123",
                         "productName" : "Linea Mini",
                         "productPrice" : "$980"
                     }
@@ -63,7 +63,7 @@ function ExportToTable(action) {
                 }  
 
                  // Ckeck if the uploaded excel contains all required columns
-                let requiredcolumns = ["CustomerName","ContactPerson","ContactNumber", "GSTIN","Zone","Address","Latitude","Longitude"],
+                let requiredcolumns = ["ItemCode","Quantity"],
                      uploadedcolumns = keys;
                 let checker = (arr, target) => target.every(v => arr.includes(v));
 
@@ -71,10 +71,11 @@ function ExportToTable(action) {
                  
                   // if (checker(uploadedcolumns, requiredcolumns)== true) {
                 if (uploadedcolumns.length >0) {
-                    console.log("<<<<<<Data is Correct>>>>>>>>");
                     // For preview of the uploaded data
                     if (action == 'Preview'){
-                        showBulkOrders(exceljson)
+                        console.log("exceljson :  ",exceljson)
+                        var excelDataWithQty = exceljson.filter(function(item){return parseInt(item.Quantity) > 0;});
+                        showBulkOrders(excelDataWithQty)
                     } 
                 }else {
                     alert("Enter Valid Data ")
@@ -126,8 +127,8 @@ async function showBulkOrders(bulkOrderData){
 
     for(i=0; i<bulkOrderData.length;i++){
 
-        var productId = bulkOrderData[i]["ProductId"]
-        var orderItem = itemArr.filter(function(item){return item.productId == productId;});
+        var ItemCode = bulkOrderData[i]["ItemCode"]
+        var orderItem = itemArr.filter(function(item){return item.ItemCode == ItemCode;});
 
         bulkOrdersHTML += '<tr>'
         bulkOrdersHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
