@@ -1,4 +1,4 @@
-var machineList = [{
+var machineLists = [{
 						"family" : "LINEA",
 						"machines" : [
 										"Linea 1",
@@ -148,22 +148,33 @@ var familyList = ["LINEA","MODBAR","ESPRESSO MACHINES"]
 
 
 
+
+
 async function showMachinesSideFilter(machineList){
+
 	var sidebarHTML = ""
 
 	for(i=0; i<machineList.length ;i++){
 
-	sidebarHTML += '<a class="menu_item_children"'+machineList[i]["code"]+'"  data-toggle="collapse"><strong>'+machineList[i]["code"]+ '  <i class="icon-control fa fa-chevron-down"></i></strong></a>'
-	sidebarHTML += '<div id="'+machineList[i]["code"]+'" class="collapse">'
+		sidebarHTML += '<article class="filter-group">'
+		sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<h4 class="title">'+machineList[i]["code"]+' </h4>'
+		sidebarHTML += '</a> </header>'
+		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
+		sidebarHTML += '<div class="card-body">'
 
 		for(j=0; j<machineList[i]["machines"].length;j++){
-			sidebarHTML += '<label class="custom-control"> <input type="checkbox"  class="custom-control-input">'
-			sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]["code"]+' </div>'
-			sidebarHTML += '</label> '
 
-		}
+			sidebarHTML += '<label class="custom-control">'
+			sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
+			sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]["code"]+' </div>'
+			sidebarHTML += '</label>'
+		}	
+
+
+		sidebarHTML += ' </div>'
 		sidebarHTML += '</div>'
-		sidebarHTML += '<br>'
+		sidebarHTML += '</article> '
 	}
 
 	$("#sidebarMachineFilter").append(sidebarHTML)
