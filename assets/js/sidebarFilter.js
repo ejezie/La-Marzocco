@@ -181,7 +181,11 @@ async function showMachinesSideFilter(machineList){
 		sidebarHTML += '</article> '
 	}
 
-	$("#sidebarMachineFilter").append(sidebarHTML)
+	$("#sidebarMachineFilter").append(sidebarHTML);
+	$('#sidebarMachineFilter input[type="checkbox"]').on('change', function() {
+   		$('input[type="checkbox"]').not(this).prop('checked', false);
+   		showSearchResults();
+	});
 
 }
 
@@ -189,9 +193,13 @@ async function showMachinesSideFilter(machineList){
 function refreshCatalog(){
 	var machines = getCheckedMachines();
 	var groups = getCheckedGroups();
+}
 
-
-
+function getCheckedMachine(){
+	    $('#sidebarMachineFilter input:checked').each(function(){
+	        return this.value;
+	    });        
+	return null;
 }
 
 function getCheckedMachines(){
@@ -202,6 +210,16 @@ function getCheckedMachines(){
 	console.log(machines);
 	return machines;
 }
+
+
+
+function getCheckedGroup(){
+	    $('#sidebarGroupFilter input:checked').each(function(){
+	        return this.value;
+	    });        
+	return null;
+}
+
 function getCheckedGroups(){
 	var groups = [];
 	    $('#sidebarGroupFilter input:checked').each(function(){
@@ -213,37 +231,124 @@ function getCheckedGroups(){
 
 
 
+function getCheckedParent(){
+	    $('#sidebarParentFilter input:checked').each(function(){
+	        return this.value;
+	    });        
+	return null;
+}
+
+
 async function showGroupSideFilter(groupList){
 	var sidebarHTML = ""
 
-
 	for(i=0; i<groupList.length ;i++){
 
-		sidebarHTML += '<label class="custom-control"> <input onchange="refreshCatalog()" type="checkbox"  class="custom-control-input">'
-		sidebarHTML += '<div class="custom-control-label">'+groupList[i]+' </div>'
-		sidebarHTML += '</label> '
+		const item = groupList[i];
+
+		sidebarHTML += '<article class="filter-parent">'
+		// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
+		sidebarHTML += '</a> </header>'
+		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
+		sidebarHTML += '<div class="card-body">'
+
+
+
+		for(j=0; j<item["machines"].length;j++){ 
+
+			const inneritem = groupList[i]["machines"][j];
+
+				sidebarHTML += '<article class="filter-parent">'
+			// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
+			sidebarHTML += '</a> </header>'
+			sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
+			sidebarHTML += '<div class="card-body">'
+
+		for(k=0; k<inneritem["groups"].length;k++){ 
+
+					const innerMostitem = inneritem["groups"][k];
+					sidebarHTML += '<label class="custom-control">'
+					sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
+					sidebarHTML += '<div class="custom-control-label">'+innerMostitem["name"]+' </div>'
+					sidebarHTML += '</label>'
+			}
+
+			sidebarHTML += ' </div>'
+			sidebarHTML += '</div>'
+			sidebarHTML += '</article> '
+		}	
+
+
+		sidebarHTML += ' </div>'
+		sidebarHTML += '</div>'
+		sidebarHTML += '</article> '
 	}
 
 	$("#sidebarGroupFilter").append(sidebarHTML);
 	$('#sidebarGroupFilter input[type="checkbox"]').on('change', function() {
-   		$('#sidebarGroupFilter input[type="checkbox"]').not(this).prop('checked', false);
+   		$('input[type="checkbox"]').not(this).prop('checked', false);
+   		showSearchResults();
 	});
-
 }
 
 
-async function showFamilySideFilter(familyList){
+async function showParentSideFilter(familyList){
 	var sidebarHTML = ""
 
 	for(i=0; i<familyList.length ;i++){
-		sidebarHTML += '<label class="custom-control"> <input  onchange="refreshCatalog()" type="checkbox"  class="custom-control-input">'
-		sidebarHTML += '<div class="custom-control-label">'+familyList[i]+' </div>'
-		sidebarHTML += '</label> '
+
+		const item = familyList[i];
+
+		sidebarHTML += '<article class="filter-parent">'
+		// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
+		sidebarHTML += '</a> </header>'
+		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
+		sidebarHTML += '<div class="card-body">'
+
+
+
+		for(j=0; j<item["machines"].length;j++){ 
+
+			const inneritem = familyList[i]["machines"][j];
+
+				sidebarHTML += '<article class="filter-parent">'
+			// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
+			sidebarHTML += '</a> </header>'
+			sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
+			sidebarHTML += '<div class="card-body">'
+
+		for(k=0; k<inneritem["parents"].length;k++){ 
+
+					const innerMostitem = inneritem["parents"][k];
+					sidebarHTML += '<label class="custom-control">'
+					sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
+					sidebarHTML += '<div class="custom-control-label">'+innerMostitem["name"]+' </div>'
+					sidebarHTML += '</label>'
+			}
+
+			sidebarHTML += ' </div>'
+			sidebarHTML += '</div>'
+			sidebarHTML += '</article> '
+		}	
+
+
+		sidebarHTML += ' </div>'
+		sidebarHTML += '</div>'
+		sidebarHTML += '</article> '
 	}
 
-	$("#sidebarFamilyFilter").append(sidebarHTML);
-	$('#sidebarFamilyFilter input[type="checkbox"]').on('change', function() {
-   		$('#sidebarFamilyFilter input[type="checkbox"]').not(this).prop('checked', false);
+	$("#sidebarParentFilter").append(sidebarHTML);
+	$('#sidebarParentFilter input[type="checkbox"]').on('change', function() {
+   		$('input[type="checkbox"]').not(this).prop('checked', false);
+   		showSearchResults();
 	});
 }
 
@@ -254,12 +359,23 @@ async function showFamilySideFilter(familyList){
 
 
 $(document).ready(function(){
-	var onResponse = function(response){
-		showMachinesSideFilter(response.data.mapping)
-	};
 	var onError =function(error){
 		// notifyError("Failed to");
 	};
 
-	getMappingsMachine(onResponse,onError);
+	getMappingsMachine(function(response){
+		showMachinesSideFilter(response.data.mapping)
+	},onError);
+	
+	getMappingParent(function(response){
+		showParentSideFilter(response.data.mapping)
+	},onError);
+
+
+	getMappingGroup(function(response){
+		showGroupSideFilter(response.data.mapping)
+	},onError);
+
+	
+
 });

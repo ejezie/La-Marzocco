@@ -778,6 +778,31 @@ async function getMappingsMain(onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+async function getMappingGroup(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'mapping/group',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getMappingParent(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'mapping/parent',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+  };
+  axios(config).then(onResponse).catch(onError);
+}
 
 async function getMappingsMachine(onResponse,onError){
   var config = {
