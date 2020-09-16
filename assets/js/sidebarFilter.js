@@ -158,20 +158,20 @@ async function showMachinesSideFilter(machineList){
 
 		sidebarHTML += '<article class="filter-group">'
 		// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
-		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_machine'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
 		sidebarHTML += '<h4 class="title">'+machineList[i]["code"]+' </h4>'
 		sidebarHTML += '</a> </header>'
-		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
+		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_machine'+i+'" style="">'
 		sidebarHTML += '<div class="card-body">'
 
 
 
-			for(j=0; j<machineList[i]["machines"].length;j++){ 
+		for(j=0; j<machineList[i]["machines"].length;j++){ 
 
-				sidebarHTML += '<label class="custom-control">'
-				sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
-				sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]["code"]+' </div>'
-				sidebarHTML += '</label>'
+			sidebarHTML += '<label class="custom-control">'
+			sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
+			sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]["code"]+' </div>'
+			sidebarHTML += '</label>'
 
 		}	
 
@@ -248,10 +248,10 @@ async function showGroupSideFilter(groupList){
 
 		sidebarHTML += '<article class="filter-parent">'
 		// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
-		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_group'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
 		sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
 		sidebarHTML += '</a> </header>'
-		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
+		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_group'+i+'" style="">'
 		sidebarHTML += '<div class="card-body">'
 
 
@@ -260,15 +260,15 @@ async function showGroupSideFilter(groupList){
 
 			const inneritem = groupList[i]["machines"][j];
 
-				sidebarHTML += '<article class="filter-parent">'
+			sidebarHTML += '<article class="filter-parent">'
 			// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
-			sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_group_'+j+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
 			sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
 			sidebarHTML += '</a> </header>'
-			sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
-			sidebarHTML += '<div class="card-body">'
+			sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_group_'+j+'" style="">'
+			sidebarHTML += '<div class="card-body" style="overflow: auto;height: 400px; overflow-y: auto;">'
 
-		for(k=0; k<inneritem["groups"].length;k++){ 
+			for(k=0; k<inneritem["groups"].length;k++){ 
 
 					const innerMostitem = inneritem["groups"][k];
 					sidebarHTML += '<label class="custom-control">'
@@ -305,10 +305,10 @@ async function showParentSideFilter(familyList){
 
 		sidebarHTML += '<article class="filter-parent">'
 		// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
-		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_parent'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
 		sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
 		sidebarHTML += '</a> </header>'
-		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
+		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_parent'+i+'" style="">'
 		sidebarHTML += '<div class="card-body">'
 
 
@@ -319,13 +319,13 @@ async function showParentSideFilter(familyList){
 
 				sidebarHTML += '<article class="filter-parent">'
 			// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
-			sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_parent_'+j+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
 			sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
 			sidebarHTML += '</a> </header>'
-			sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
-			sidebarHTML += '<div class="card-body">'
+			sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_parent_'+j+'" style="">'
+			sidebarHTML += '<div class="card-body" style="overflow: auto;height: 400px; overflow-y: auto;">'
 
-		for(k=0; k<inneritem["parents"].length;k++){ 
+			for(k=0; k<inneritem["parents"].length;k++){ 
 
 					const innerMostitem = inneritem["parents"][k];
 					sidebarHTML += '<label class="custom-control">'
