@@ -753,6 +753,18 @@ async function getSearchResults(onResponse,onError,url){
   axios(config).then(onResponse).catch(onError);
 }
 
+async function logout(){
+  var config = {
+    method: 'post',
+    url: BASE_URL+'auth/logout',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+  };
+  axios(config);
+}
 
 async function getMappingsMain(onResponse,onError){
   var config = {
