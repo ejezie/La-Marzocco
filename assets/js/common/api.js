@@ -753,11 +753,48 @@ async function getSearchResults(onResponse,onError,url){
   axios(config).then(onResponse).catch(onError);
 }
 
+async function logout(){
+  var config = {
+    method: 'post',
+    url: BASE_URL+'auth/logout',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+  };
+  axios(config);
+}
 
 async function getMappingsMain(onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'mapping/main',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+async function getMappingGroup(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'mapping/group',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getMappingParent(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'mapping/parent',
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 

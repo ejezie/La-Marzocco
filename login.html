@@ -373,8 +373,10 @@
 
  <script>
         $(document).ready(function(){
-        updateAPIToken("");
+            
+        logout();
 
+        updateAPIToken("");
         $("#forgotPassword").click(async function(){
             var result = confirm( "Send new password to registered email?" );
             if ( result ) {
