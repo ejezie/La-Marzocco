@@ -96,7 +96,7 @@ async function showCatalog(catalogList){
 
 	for(i=0; i<catalogList.length; i++){
 
-		catalogHTML += '<table>'
+		// catalogHTML += '<table>'
 		catalogHTML += '<div class="col-lg-4 col-md-4 col-12 ">'
 		catalogHTML += '<div class="single_product">'
 		catalogHTML += '<div class="product_name grid_name">'
@@ -181,7 +181,7 @@ async function showCatalog(catalogList){
 		catalogHTML += '</div>'
 		catalogHTML += '</div>'
 		catalogHTML += '</div>'
-		catalogHTML += '</table>'
+		// catalogHTML += '</table>'
 
 	}
 

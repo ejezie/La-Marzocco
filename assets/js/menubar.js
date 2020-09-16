@@ -188,23 +188,25 @@ function showMenubarCommercialMachine(data){
 }
 
 
-function showMenubarGrinders(category){
+function showMenubarGrinders(){
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
 
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
-		if(categoryName == category){
+		if(categoryName == "Grinders"){
 			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
-				menuBarHTML += '<li><a href="#">'+family+'</a>'
+				// menuBarHTML += '<li><a href="#">'+family+'</a>'
+				menuBarHTML += '<li><a>'+family+'</a>'
 				menuBarHTML += '<ul>'
 
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 
 					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
-					menuBarHTML += '<li><a href="#">'+type+'</a></li>'
+					// menuBarHTML += '<li><a href="#">'+type+'</a></li>'
+					menuBarHTML += '<li><a>'+type+'</a></li>'
 				}
 
 				menuBarHTML += '</ul>'
@@ -224,23 +226,25 @@ function showMenubarGrinders(category){
 }
 
 
-function showMenubarModbar(category){
+function showMenubarModbar(){
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
 
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
-		if(categoryName == category){
+		if(categoryName == "Modbar"){
 			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
-				menuBarHTML += '<li><a href="#">'+family+'</a>'
+				// menuBarHTML += '<li><a href="#">'+family+'</a>'
+				menuBarHTML += '<li><a>'+family+'</a>'
 				menuBarHTML += '<ul>'
 
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 
 					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
-					menuBarHTML += '<li><a href="#">'+type+'</a></li>'
+					// menuBarHTML += '<li><a href="#">'+type+'</a></li>'
+					menuBarHTML += '<li><a>'+type+'</a></li>'
 				}
 
 				menuBarHTML += '</ul>'
@@ -259,23 +263,25 @@ function showMenubarModbar(category){
 	$("#modbar_menu").append(menuBarHTML)
 }
 
-function showMenubarGS3(category){
+function showMenubarGS3(){
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
 
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
-		if(categoryName == category){
+		if(categoryName == "GS3"){
 			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
-				menuBarHTML += '<li><a href="#">'+family+'</a>'
+				// menuBarHTML += '<li><a href="#">'+family+'</a>'
+				menuBarHTML += '<li><a>'+family+'</a>'
 				menuBarHTML += '<ul>'
 
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 
 					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
-					menuBarHTML += '<li><a href="#">'+type+'</a></li>'
+					// menuBarHTML += '<li><a href="#">'+type+'</a></li>'
+					menuBarHTML += '<li><a >'+type+'</a></li>'
 				}
 
 				menuBarHTML += '</ul>'
@@ -295,23 +301,25 @@ function showMenubarGS3(category){
 }
 
 
-function showMenubarLMHome(category){
+function showMenubarLMHome(){
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
 
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
-		if(categoryName == category){
+		if(categoryName == "LM Home"){
 			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
-				menuBarHTML += '<li><a href="#">'+family+'</a>'
+				// menuBarHTML += '<li><a href="#">'+family+'</a>'
+				menuBarHTML += '<li><a >'+family+'</a>'
 				menuBarHTML += '<ul>'
 
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 
 					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
-					menuBarHTML += '<li><a href="#">'+type+'</a></li>'
+					// menuBarHTML += '<li><a href="#">'+type+'</a></li>'
+					menuBarHTML += '<li><a>'+type+'</a></li>'
 				}
 
 				menuBarHTML += '</ul>'
@@ -386,10 +394,10 @@ $(document).ready(function(){
 	var onResponse = function(response){
 		showMenubarCommercialMachine(response.data);
 
-showMenubarGrinders("Grinders")
-showMenubarModbar("Modbar")
-showMenubarGS3("GS3")
-showMenubarLMHome("LM Home")
+showMenubarGrinders()
+showMenubarModbar()
+showMenubarGS3()
+showMenubarLMHome()
 showNewsletter(newsletterArr)
 
 

@@ -109,6 +109,8 @@ async function showBulkOrders(bulkOrderData){
 
     console.log(bulkOrderData)
 
+    $("#bulkOrders").empty(bulkOrdersHTML)
+
 
     var bulkOrdersHTML = ""
 
