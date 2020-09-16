@@ -157,18 +157,22 @@ async function showMachinesSideFilter(machineList){
 	for(i=0; i<machineList.length ;i++){
 
 		sidebarHTML += '<article class="filter-group">'
-		sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
 		sidebarHTML += '<h4 class="title">'+machineList[i]["code"]+' </h4>'
 		sidebarHTML += '</a> </header>'
 		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside'+i+'" style="">'
 		sidebarHTML += '<div class="card-body">'
 
-		for(j=0; j<machineList[i]["machines"].length;j++){
 
-			sidebarHTML += '<label class="custom-control">'
-			sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
-			sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]["code"]+' </div>'
-			sidebarHTML += '</label>'
+
+			for(j=0; j<machineList[i]["machines"].length;j++){ 
+
+				sidebarHTML += '<label class="custom-control">'
+				sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
+				sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]["code"]+' </div>'
+				sidebarHTML += '</label>'
+
 		}	
 
 
