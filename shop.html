@@ -45,7 +45,16 @@
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
+
+    <!--jquery min js-->
+    <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
+
+
+
+
 </head>
+
+
 
 <body>
 
@@ -71,7 +80,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="top_right text-right">
                                 <ul>
-                                    <li class="top_links"><a href="#"><i class="ion-android-person"></i> My Account<i class="ion-ios-arrow-down"></i></a>
+                                    <li class="top_links"><a href="#" style="color: white"><i class="ion-android-person"></i> My Account<i class="ion-ios-arrow-down"></i></a>
                                         <ul class="dropdown_links">
                                             <li><a href="my-account.html">My Account </a></li>
                                             <li><a href="myOrders.html">My Orders </a></li>
@@ -81,14 +90,14 @@
                                         </ul>
                                     </li>
                                     <!-- <li class="language"><a href="#"><img src="assets/img/logo/aus_language.png" alt="">en-gb<i class="ion-ios-arrow-down"></i></a> -->
-                                    <li class="language"><a href="#"><img src="assets/img/logo/aus_language.png" alt="" style="width: 30px">Aus</a> 
+                                    <li class="language"><a href="#" style="color: white"><img src="assets/img/logo/aus_language.png" alt="" style="width: 30px">Aus</a> 
                                         <!-- <ul class="dropdown_language">
                                             <li><a href="#"><img src="assets/img/logo/language.png" alt=""> English</a></li>
                                             <li><a href="#"><img src="assets/img/logo/language2.png" alt=""> Germany</a></li>
                                         </ul> -->
                                     </li>
                                     <!-- <li class="currency"><a href="#">$ USD<i class="ion-ios-arrow-down"></i></a> -->
-                                    <li class="currency"><a href="#">$ AUD</a>
+                                    <li class="currency"><a href="#" style="color: white">$ AUD</a>
                                        <!--  <ul class="dropdown_currency">
                                             <li><a href="#">EUR – Euro</a></li>
                                             <li><a href="#">GBP – British Pound</a></li>
@@ -112,7 +121,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-6">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/lmalogo.png" alt=""></a>
+                            <a href="index.html"><img src="assets/img/logo/lmalogo_white.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-6">
@@ -132,7 +141,7 @@
                                     <span class="wishlist_quantity">3</span>
                                 </div> -->
                                 <div class="mini_cart_wrapper">
-                                    <a href="javascript:void(0)"><span class="lnr lnr-cart"></span>My Cart </a>
+                                    <a href="javascript:void(0)" style="color: white"><span class="lnr lnr-cart"></span>My Cart </a>
                                     <span class="cart_quantity">2</span>
                                     
                                 </div>
@@ -522,7 +531,8 @@
     <!--breadcrumbs area end-->
 
     <!--shop  area start-->
-    <div class="shop_area shop_reverse">
+    <section class="slider_section mb-50">
+    <!-- <div class="shop_area shop_reverse"> -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-12">
@@ -532,12 +542,12 @@
                         </div>
                         <div class="categories_menu_toggle" style="display: none;">
                             <ul>
-                                <article class="filter-group">
+                                <article class="filter-machine">
                                     <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside1" data-abc="true" class="collapsed" aria-expanded="false"> 
-                                            <h4 class="title" >Machine <i class="icon-control fa fa-chevron-down"></i></h4>
+                                            <h4 class="title" id="more-btn-machine">Machine <i class="icon-control fa fa-chevron-down"></i></h4>
                                         </a> </header>
-                                    <div class="filter-content collapse" id="collapse_aside1" style="">
-                                        <div class="card-body" id="sidebarMachineFilter"> 
+                                    <!-- <div class="filter-content collapse" id="collapse_aside1" style="">
+                                        <div class="card-body" id="sidebarMachineFilter">  -->
 
                                             <!-- <article class="filter-group">
                                                  <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside4" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>
@@ -593,17 +603,47 @@
                                             </div> -->
 
 
-                                        </div>
-
-                                    </div>
+                                     
                                 </article>
+
+                                <li class="hidden_machine menu_item_children categorie_list" id="sidebarMachineFilter">
+                                   
+                                </li>
+
                                 <article class="filter-parent">
+                                    <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside2" data-abc="true" class="collapsed" aria-expanded="false"> 
+                                            <h4 class="title" id="more-btn-catalog">Catalog <i class="icon-control fa fa-chevron-down"></i></h4>
+                                        </a> </header>
+                                    
+                                            <!-- <label class="custom-control"> <input type="checkbox"  class="custom-control-input">
+                                                <div class="custom-control-label">Leva </div>
+                                            </label> 
+                                            <label class="custom-control"> <input type="checkbox"  class="custom-control-input">
+                                                 <div class="custom-control-label">Modbar </div>
+                                            </label>
+                                            <label class="custom-control"> <input type="checkbox"  class="custom-control-input">
+                                                 <div class="custom-control-label">Strada</div>
+                                            </label> 
+                                            <label class="custom-control"> <input type="checkbox"  class="custom-control-input">
+                                                 <div class="custom-control-label">GS3</div>
+                                             </label>  -->
+                                             
+                                </article>
+
+
+
+                                <li class="hidden_catalog menu_item_children categorie_list" id="sidebarParentFilter">
+                                   
+                                </li>
+
+
+                                <!-- <article class="filter-parent">
                                     <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside2" data-abc="true" class="collapsed" aria-expanded="false"> 
                                             <h4 class="title">Catalog <i class="icon-control fa fa-chevron-down"></i></h4>
                                         </a> </header>
                                     <div class="filter-content collapse" id="collapse_aside2" style="">
                                         <div class="card-body" id="sidebarParentFilter"> 
-                                            <!-- <label class="custom-control"> <input type="checkbox"  class="custom-control-input">
+                                            <label class="custom-control"> <input type="checkbox"  class="custom-control-input">
                                                 <div class="custom-control-label">Leva </div>
                                             </label> 
                                             <label class="custom-control"> <input type="checkbox"  class="custom-control-input">
@@ -614,18 +654,33 @@
                                             </label> 
                                             <label class="custom-control"> <input type="checkbox"  class="custom-control-input">
                                                  <div class="custom-control-label">GS3</div>
-                                             </label>  -->
+                                             </label> 
                                              
                                          </div>
 
                                     </div>
-                                </article>
+                                </article> -->
+
+                                
                                 <article class="filter-group">
                                     <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside4" data-abc="true" class="collapsed" aria-expanded="false"> 
-                                            <h4 class="title">Group <i class="icon-control fa fa-chevron-down"></i></h4>
+                                            <h4 class="title" id="more-btn-group">Group <i class="icon-control fa fa-chevron-down"></i></h4>
                                         </a> </header>
-                                    <div class="filter-content collapse" id="collapse_aside4" style="" >
-                                        <div class="card-body" id="sidebarGroupFilter"> 
+                                   
+
+
+                                            
+
+
+                                        <!-- <div class="categories_menu">
+                                            <div class="categories_title">
+                                                <h2 class="categori_toggle">Browse categories</h2>
+                                            </div> -->
+                                            <!-- <div class="categories_menu_toggle"> -->
+                                               
+                                        
+                                            <!-- </div> -->
+                                        <!-- </div>  -->
                                             <!-- <label class="custom-control"> <input type="checkbox"  class="custom-control-input">
                                                 <div class="custom-control-label">Leva </div>
                                             </label> 
@@ -639,10 +694,161 @@
                                                  <div class="custom-control-label">GS3</div>
                                              </label>  -->
                                              
-                                         </div>
-
-                                    </div>
+                                   
                                 </article>
+                                <li class="hidden_group menu_item_children categorie_list"><a href="#">Brake Parts html <i class="fa fa-angle-right"></i></a>
+                                    <ul class="categories_mega_menu">
+                                        <li class="menu_item_children"><a href="#">Wheel Bearings</a>
+                                            <ul class="categorie_sub_menu">
+                                                <li><a href="">Bower</a></li>
+                                                <li><a href="">Flipbac</a></li>
+                                                <li><a href="">Gary Fong</a></li>
+                                                <li><a href="">GigaPan</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu_item_children"><a href="#">Wheel Rim Screws</a>
+                                            <ul class="categorie_sub_menu">
+                                                <li><a href="">Accessories</a></li>
+                                                <li><a href="">2-Stroke</a></li>
+                                                <li><a href="">Handbag</a></li>
+                                                <li><a href="">Clothing</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu_item_children last_child"><a href="#">Wheel Simulators</a>
+                                            <ul class="categorie_sub_menu">
+                                                <li><a href="">Bags & Cases</a></li>
+                                                <li><a href="">Binoculars & Scopes</a></li>
+                                                <li><a href="">Film Photography</a></li>
+                                                <li><a href="">Lighting & Studio</a></li>
+                                            </ul>
+                                            <div class="categorie_banner">
+                                                <a href="#"><img src="assets/img/bg/banner2.jpg" alt=""></a>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+
+
+                                <script type="text/javascript">
+                                    // $( ".filter-group" ).append( "<p>Test</p>" );
+                                </script>
+
+                                <li class="hidden_group menu_item_children categorie_list" id="sidebarGroupFilter">
+                             
+                                    <!-- <a href="#"> Wheels & Tires <i class="fa fa-angle-right"></i></a>
+                                    <ul class="categories_mega_menu">
+                                        <li class="menu_item_children"><a href="#">Dresses</a>
+                                            <div class="categorie_sub_menu">
+                                                <ul>
+                                                    <li><a href="">Sweater</a></li>
+                                                    <li><a href="">Evening</a></li>
+                                                    <li><a href="">Day</a></li>
+                                                    <li><a href="">Sports</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="menu_item_children"><a href="#">Handbags</a>
+                                            <div class="categorie_sub_menu">
+                                                <ul>
+                                                    <li><a href="">Shoulder</a></li>
+                                                    <li><a href="">Satchels</a></li>
+                                                    <li><a href="">kids</a></li>
+                                                    <li><a href="">coats</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="menu_item_children"><a href="#">shoes</a>
+                                            <div class="categorie_sub_menu">
+                                                <ul>
+                                                    <li><a href="">Ankle Boots</a></li>
+                                                    <li><a href="">Clog sandals </a></li>
+                                                    <li><a href="">run</a></li>
+                                                    <li><a href="">Books</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="menu_item_children"><a href="#">Clothing</a>
+                                            <div class="categorie_sub_menu">
+                                                <ul>
+                                                    <li><a href="">Coats Jackets </a></li>
+                                                    <li><a href="">Raincoats</a></li>
+                                                    <li><a href="">Jackets</a></li>
+                                                    <li><a href="">T-shirts</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                    </ul> -->
+                                </li>
+                                <!-- <li class=" hidden_group menu_item_children categorie_list">
+                                    <a href="#">Brake Parts <i class="fa fa-angle-right"></i></a>
+                                    <ul class="categories_mega_menu">
+                                        <li class="menu_item_children"><a href="#">Wheel Bearings</a>
+                                            <ul class="categorie_sub_menu">
+                                                <li><a href="">Bower</a></li>
+                                                <li><a href="">Flipbac</a></li>
+                                                <li><a href="">Gary Fong</a></li>
+                                                <li><a href="">GigaPan</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu_item_children"><a href="#">Wheel Rim Screws</a>
+                                            <ul class="categorie_sub_menu">
+                                                <li><a href="">Accessories</a></li>
+                                                <li><a href="">2-Stroke</a></li>
+                                                <li><a href="">Handbag</a></li>
+                                                <li><a href="">Clothing</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu_item_children last_child"><a href="#">Wheel Simulators</a>
+                                            <ul class="categorie_sub_menu">
+                                                <li><a href="">Bags & Cases</a></li>
+                                                <li><a href="">Binoculars & Scopes</a></li>
+                                                <li><a href="">Film Photography</a></li>
+                                                <li><a href="">Lighting & Studio</a></li>
+                                            </ul>
+                                            <div class="categorie_banner">
+                                                <a href="#"><img src="assets/img/bg/banner2.jpg" alt=""></a>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </li> -->
+                                <!-- <li class="hidden_group menu_item_children categorie_list">
+                                    <a href="#">Brake Parts <i class="fa fa-angle-right"></i></a>
+                                    <ul class="categories_mega_menu">
+                                        <li class="menu_item_children"><a href="#">Wheel Bearings</a>
+                                            <ul class="categorie_sub_menu">
+                                                <li><a href="">Bower</a></li>
+                                                <li><a href="">Flipbac</a></li>
+                                                <li><a href="">Gary Fong</a></li>
+                                                <li><a href="">GigaPan</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu_item_children"><a href="#">Wheel Rim Screws</a>
+                                            <ul class="categorie_sub_menu">
+                                                <li><a href="">Accessories</a></li>
+                                                <li><a href="">2-Stroke</a></li>
+                                                <li><a href="">Handbag</a></li>
+                                                <li><a href="">Clothing</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu_item_children last_child"><a href="#">Wheel Simulators</a>
+                                            <ul class="categorie_sub_menu">
+                                                <li><a href="">Bags & Cases</a></li>
+                                                <li><a href="">Binoculars & Scopes</a></li>
+                                                <li><a href="">Film Photography</a></li>
+                                                <li><a href="">Lighting & Studio</a></li>
+                                            </ul>
+                                            <div class="categorie_banner">
+                                                <a href="#"><img src="assets/img/bg/banner2.jpg" alt=""></a>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </li> -->
+                                
                                 <!-- <li class="menu_item_children categorie_list"><a href="#">Machine <i class="fa fa-angle-right"></i></a>
                                     <ul class="categories_mega_menu"  id="sidebarMachineFilter"> -->
 
@@ -997,6 +1203,7 @@
                                 <li class="hidden"><a href="#">Recommended Products</a></li>
                                 <li class="hidden"><a href="#">Special Offers</a></li>
                                 <li><a href="#" id="more-btn"><i class="fa fa-plus" aria-hidden="true"></i> More Categories</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -2063,7 +2270,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
+    </section>
     <!--shop  area end-->
 
     <!--call to action start-->
@@ -2096,7 +2304,7 @@
 
 
     <!--footer area start-->
-    <footer class="footer_widgets" id="footer" style="background: #000;color: #fff;">
+    <footer class="footer_widgets" id="footer" style="background: #414141;color: #fff;">
  <!--        <div class="container">
             <div class="footer_top">
                 <div class="row">
@@ -2300,6 +2508,9 @@
 ============================================ -->
 <!--jquery min js-->
 <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
+
+
+
 <!--popper min js-->
 <script src="assets/js/popper.js"></script>
 <!--bootstrap min js-->
@@ -2327,6 +2538,10 @@
 <script src="assets/js/main.js"></script>
 
 
+<!-- SideBar filter JS -->
+<script src="assets/js/sidebarFilter.js"></script>
+
+
 
 <!-- Menubar JS -->
 <script src="assets/js/menubar.js"></script>
@@ -2334,24 +2549,23 @@
 <!-- Footer JS -->
 <script src="assets/js/footer.js"></script>
 
-<!-- SideBar filter JS -->
-<script src="assets/js/sidebarFilter.js"></script>
+
 
 <!-- Mini Cart JS -->
 <script src="assets/js/miniCart.js"></script>
 <script src="assets/js/common/cart.js"></script>
 
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
-      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-      <script src="assets/js/common/localstorage.js"></script>
-      <script src="assets/js/common/notification.js"></script>
-      <script src="assets/js/common/api.js"></script>
-      <script src="assets/js/common/genericErrorHandler.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="assets/js/common/localstorage.js"></script>
+    <script src="assets/js/common/notification.js"></script>
+    <script src="assets/js/common/api.js"></script>
+    <script src="assets/js/common/genericErrorHandler.js"></script>
 
-      <script src="assets/js/shop.js"></script>
+    <script src="assets/js/shop.js"></script>
 
 <!-- <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js'></script>
@@ -2362,3 +2576,5 @@
 </body>
 
 </html>
+
+

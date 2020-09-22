@@ -156,7 +156,7 @@ async function showRecommendedProducts(recommendedProductsArray){
 
 		recommendedProductsHTML += '<div class="single_product">'
 		recommendedProductsHTML += '<div class="product_content">'
-		recommendedProductsHTML += '<h3><a href="product-details.html"><strong>'+recommendedProductsArray[i]["productName"]+'</strong></a></h3>'
+		recommendedProductsHTML += '<h3><a href="product-details.html" style="text-transform: lowercase;"><strong>'+recommendedProductsArray[i]["productName"]+'</strong></a></h3>'
 		// recommendedProductsHTML += '<div class="product_ratings">'
 		// recommendedProductsHTML += '<ul>'
 		// recommendedProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
@@ -166,9 +166,9 @@ async function showRecommendedProducts(recommendedProductsArray){
 		// recommendedProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
 		// recommendedProductsHTML += '</ul>'
 		// recommendedProductsHTML += '</div>'
-		recommendedProductsHTML += '<h5><a href="product-details.html">'+recommendedProductsArray[i]["productGroup"]+'</a></h5>'
-		recommendedProductsHTML += '<h5><a href="product-details.html">'+recommendedProductsArray[i]["productParent"]+'</a></h5>'
-		recommendedProductsHTML += '<h5><a href="product-details.html">'+recommendedProductsArray[i]["productFamily"]+'</a></h5>'
+		recommendedProductsHTML += '<h5><a href="product-details.html" >'+recommendedProductsArray[i]["productGroup"]+'</a></h5>'
+		recommendedProductsHTML += '<h5><a href="product-details.html" >'+recommendedProductsArray[i]["productParent"]+'</a></h5>'
+		recommendedProductsHTML += '<h5><a href="product-details.html" >'+recommendedProductsArray[i]["productFamily"]+'</a></h5>'
 
 		// recommendedProductsHTML += '<div class="price_box">'
 		// recommendedProductsHTML += '<span class="regular_price">'+recommendedProductsArray[i]["productPrice"]+'</span>'
@@ -193,7 +193,7 @@ async function showTopSellingProducts(topSellingItemList){
 
 		topSellingProductsHTML += '<div class="single_product">'
 		topSellingProductsHTML += '<div class="product_content">'
-		topSellingProductsHTML += '<h3><a href="product-details.html"><strong>'+topSellingItemList[i]["productName"]+'</strong></a></h3>'
+		topSellingProductsHTML += '<h3><a href="product-details.html" style="text-transform: lowercase;"><strong>'+topSellingItemList[i]["productName"]+'</strong></a></h3>'
 		// topSellingProductsHTML += '<div class="product_ratings">'
 		// topSellingProductsHTML += '<ul>'
 		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
@@ -230,10 +230,10 @@ async function showSpecialOffersProducts(specialOffersItemList){
 
 		specialOffersProductsHTML += '<div class="single_product">'
 		specialOffersProductsHTML += '<div class="product_name">'
-		specialOffersProductsHTML += '<h3><a href="product-details.html"><strong>'+specialOffersItemList[i]["productName"]+'</strong></a></h3>'
-		specialOffersProductsHTML += '<p class="manufacture_product"><a href="#">'+specialOffersItemList[i]["productGroup"]+'</a></p>'
-		specialOffersProductsHTML += '<p class="manufacture_product"><a href="#">'+specialOffersItemList[i]["productParent"]+'</a></p>'
-		specialOffersProductsHTML += '<p class="manufacture_product"><a href="#">'+specialOffersItemList[i]["productFamily"]+'</a></p>'
+		specialOffersProductsHTML += '<h3><a href="product-details.html" style="text-transform: lowercase;"><strong>'+specialOffersItemList[i]["productName"]+'</strong></a></h3>'
+		specialOffersProductsHTML += '<p class="manufacture_product"><a href="#" >'+specialOffersItemList[i]["productGroup"]+'</a></p>'
+		specialOffersProductsHTML += '<p class="manufacture_product"><a href="#" >'+specialOffersItemList[i]["productParent"]+'</a></p>'
+		specialOffersProductsHTML += '<p class="manufacture_product"><a href="#" >'+specialOffersItemList[i]["productFamily"]+'</a></p>'
 		specialOffersProductsHTML += '</div>'
 		specialOffersProductsHTML += '<div class="product_thumb">'
 		specialOffersProductsHTML += '<a class="primary_img" href="product-details.html"><img src="assets/img/product/product19.jpg" alt=""></a>'
@@ -281,3 +281,55 @@ async function showSpecialOffersProducts(specialOffersItemList){
 showRecommendedProducts(recommendedItemList)
 showTopSellingProducts(topSellingItemList)
 showSpecialOffersProducts(specialOffersItemList)
+
+
+
+
+$.fn.dropdown = (function() {
+    var $bsDropdown = $.fn.dropdown;
+    return function(config) {
+        if (typeof config === 'string' && config === 'toggle') { // dropdown toggle trigged
+            $('.has-child-dropdown-show').removeClass('has-child-dropdown-show');
+            $(this).closest('.dropdown').parents('.dropdown').addClass('has-child-dropdown-show');
+        }
+        var ret = $bsDropdown.call($(this), config);
+        $(this).off('click.bs.dropdown'); // Turn off dropdown.js click event, it will call 'this.toggle()' internal
+        return ret;
+    }
+})();
+
+$(function() {
+    $('.dropdown [data-toggle="dropdown"]').on('click', function(e) {
+        $(this).dropdown('toggle');
+        e.stopPropagation(); // do not fire dropdown.js click event, it will call 'this.toggle()' internal
+    });
+    $('.dropdown').on('hide.bs.dropdown', function(e) {
+        if ($(this).is('.has-child-dropdown-show')) {
+        	$(this).removeClass('has-child-dropdown-show');
+            e.preventDefault();
+        }
+        e.stopPropagation();    // do not need pop in multi level mode
+    });
+});
+
+// for hover
+$('.dropdown-hover').on('mouseenter',function() {
+  if(!$(this).hasClass('show')){
+    $('>[data-toggle="dropdown"]', this).dropdown('toggle');
+  }
+});
+$('.dropdown-hover').on('mouseleave',function() {
+  if($(this).hasClass('show')){
+    $('>[data-toggle="dropdown"]', this).dropdown('toggle');
+  }
+});
+$('.dropdown-hover-all').on('mouseenter', '.dropdown', function() {
+  if(!$(this).hasClass('show')){
+    $('>[data-toggle="dropdown"]', this).dropdown('toggle');
+  }
+});
+$('.dropdown-hover-all').on('mouseleave', '.dropdown', function() {
+  if($(this).hasClass('show')){
+    $('>[data-toggle="dropdown"]', this).dropdown('toggle');
+  }
+});

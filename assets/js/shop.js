@@ -100,7 +100,7 @@ async function showCatalog(catalogList){
 		catalogHTML += '<div class="col-lg-4 col-md-4 col-12 ">'
 		catalogHTML += '<div class="single_product">'
 		catalogHTML += '<div class="product_name grid_name">'
-		catalogHTML += '<h3><a href="product-details.html?item='+catalogList[i]["productId"]+'">'+catalogList[i]["productName"]+'</a></h3>'
+		catalogHTML += '<h3><strong><a href="product-details.html?item='+catalogList[i]["productId"]+'" style="text-transform: lowercase;">'+catalogList[i]["productName"]+'</a></strong></h3>'
 		catalogHTML += '<p class="manufacture_product"><a href="#">Accessories</a></p>'
 		catalogHTML += '</div>'
 		catalogHTML += '<div class="product_thumb">'

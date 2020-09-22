@@ -156,30 +156,30 @@ async function showMachinesSideFilter(machineList){
 
 	for(i=0; i<machineList.length ;i++){
 
-		// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-		sidebarHTML += '<a href="#"> '+machineList[i]["code"]+' <i class="fa fa-angle-right"></i></a>'
-		sidebarHTML += '<ul class="categories_mega_menu" style="width : max-content;white-space: nowrap;overflow-y: scroll;height: 500px;">'
+		sidebarHTML += '<article class="filter-group">'
+		// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_machine'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<h4 class="title">'+machineList[i]["code"]+' </h4>'
+		sidebarHTML += '</a> </header>'
+		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_machine'+i+'" style="">'
+		sidebarHTML += '<div class="card-body">'
 
-		// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-		sidebarHTML += '<li class="menu_item_children"><a href="#">'+machineList[i]["code"]+'</a>'
-		sidebarHTML += '<div class="categorie_sub_menu">'
-		sidebarHTML += '<ul>'
 
-		for(k=0; k<machineList[i]["machines"].length;k++){
 
-		console.log(">>>>>>>>>>",machineList[i]["machines"]) 
+		for(j=0; j<machineList[i]["machines"].length;j++){ 
 
-				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
-		}
-		sidebarHTML += '</ul>'
+			sidebarHTML += '<label class="custom-control">'
+			sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
+			sidebarHTML += '<div class="custom-control-label">'+machineList[i]["machines"][j]["code"]+' </div>'
+			sidebarHTML += '</label>'
+
+		}	
+
+
+		sidebarHTML += ' </div>'
 		sidebarHTML += '</div>'
-		sidebarHTML += '</li>'
-
-
-
-		sidebarHTML += '</ul>'
+		sidebarHTML += '</article> '
 	}
-
 
 	$("#sidebarMachineFilter").append(sidebarHTML);
 	$('#sidebarMachineFilter input[type="checkbox"]').on('change', function() {
@@ -242,74 +242,51 @@ function getCheckedParent(){
 async function showGroupSideFilter(groupList){
 	var sidebarHTML = ""
 
-	// for(i=0; i<groupList.length ;i++){
+	for(i=0; i<groupList.length ;i++){
 
-	// 	const item = groupList[i];
+		const item = groupList[i];
 
-	// 	// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-	// 	sidebarHTML += '<a href="#"> '+item["code"]+' <i class="fa fa-angle-right"></i></a>'
-	// 	sidebarHTML += '<ul class="categories_mega_menu" style="width : max-content;white-space: nowrap;overflow-y: scroll;height: 500px;">'
-
-
-
-	// 	for(j=0; j<item["machines"].length;j++){ 
-
-	// 		const inneritem = groupList[i]["machines"][j];
-
-	// 		console.log("inneritem : ", inneritem)
-
-	// 		// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-	// 		sidebarHTML += '<li class="menu_item_children"><a href="#">'+inneritem["code"]+'</a>'
-	// 		sidebarHTML += '<div class="categorie_sub_menu">'
-	// 		sidebarHTML += '<ul>'
-
-	// 		for(k=0; k<inneritem["groups"].length;k++){ 
-
-	// 				const innerMostitem = inneritem["groups"][k];
-	// 				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+innerMostitem["name"]+' </div></label></li>'
-	// 		}
-	// 		sidebarHTML += '</ul>'
-	// 		sidebarHTML += '</div>'
-	// 		sidebarHTML += '</li>'
-
-	// 	}
+		sidebarHTML += '<article class="filter-parent">'
+		// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_group'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
+		sidebarHTML += '</a> </header>'
+		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_group'+i+'" style="">'
+		sidebarHTML += '<div class="card-body">'
 
 
-	// 	sidebarHTML += '</ul>'
-	// }
 
-	sidebarHTML += '<a href="#">Brake Parts js<i class="fa fa-angle-right"></i></a>'
-	sidebarHTML += '<ul class="categories_mega_menu">'
-	sidebarHTML += '<li class="menu_item_children"><a href="#">Wheel Bearings</a>'
-	sidebarHTML += '<ul class="categorie_sub_menu">'
-	sidebarHTML += '<li><a href="">Bower</a></li>'
-	sidebarHTML += '<li><a href="">Flipbac</a></li>'
-	sidebarHTML += '<li><a href="">Gary Fong</a></li>'
-	sidebarHTML += '<li><a href="">GigaPan</a></li>'
-	sidebarHTML += '</ul>'
-	sidebarHTML += '</li>'
-	sidebarHTML += '<li class="menu_item_children"><a href="#">Wheel Rim Screws</a>'
-	sidebarHTML += '<ul class="categorie_sub_menu">'
-	sidebarHTML += '<li><a href="">Accessories</a></li>'
-	sidebarHTML += '<li><a href="">2-Stroke</a></li>'
-	sidebarHTML += '<li><a href="">Handbag</a></li>'
-	sidebarHTML += '<li><a href="">Clothing</a></li>'
-	sidebarHTML += '</ul>'
-	sidebarHTML += '</li>'
-	sidebarHTML += '<li class="menu_item_children last_child"><a href="#">Wheel Simulators</a>'
-	sidebarHTML += '<ul class="categorie_sub_menu">'
-	sidebarHTML += '<li><a href="">Bags & Cases</a></li>'
-	sidebarHTML += '<li><a href="">Binoculars & Scopes</a></li>'
-	sidebarHTML += '<li><a href="">Film Photography</a></li>'
-	sidebarHTML += '<li><a href="">Lighting & Studio</a></li>'
-	sidebarHTML += '</ul>'
-	sidebarHTML += '<div class="categorie_banner">'
-	sidebarHTML += '<a href="#"><img src="assets/img/bg/banner2.jpg" alt=""></a>'
-	sidebarHTML += '</div>'
-	sidebarHTML += '</li>'
-	sidebarHTML += ''
-	sidebarHTML += '</ul>'
+		for(j=0; j<item["machines"].length;j++){ 
 
+			const inneritem = groupList[i]["machines"][j];
+
+			sidebarHTML += '<article class="filter-parent">'
+			// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_group_'+j+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
+			sidebarHTML += '</a> </header>'
+			sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_group_'+j+'" style="">'
+			sidebarHTML += '<div class="card-body" style="overflow: auto;height: 400px; overflow-y: auto;">'
+
+			for(k=0; k<inneritem["groups"].length;k++){ 
+
+					const innerMostitem = inneritem["groups"][k];
+					sidebarHTML += '<label class="custom-control">'
+					sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
+					sidebarHTML += '<div class="custom-control-label">'+innerMostitem["name"]+' </div>'
+					sidebarHTML += '</label>'
+			}
+
+			sidebarHTML += ' </div>'
+			sidebarHTML += '</div>'
+			sidebarHTML += '</article> '
+		}	
+
+
+		sidebarHTML += ' </div>'
+		sidebarHTML += '</div>'
+		sidebarHTML += '</article> '
+	}
 
 	$("#sidebarGroupFilter").append(sidebarHTML);
 	$('#sidebarGroupFilter input[type="checkbox"]').on('change', function() {
@@ -322,14 +299,17 @@ async function showGroupSideFilter(groupList){
 async function showParentSideFilter(familyList){
 	var sidebarHTML = ""
 
-
 	for(i=0; i<familyList.length ;i++){
 
 		const item = familyList[i];
 
-		// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-		sidebarHTML += '<a href="#"> '+item["code"]+' <i class="fa fa-angle-right"></i></a>'
-		sidebarHTML += '<ul class="categories_mega_menu" style="width : max-content;white-space: nowrap;overflow-y: scroll;height: 500px;">'
+		sidebarHTML += '<article class="filter-parent">'
+		// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_parent'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+		sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
+		sidebarHTML += '</a> </header>'
+		sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_parent'+i+'" style="">'
+		sidebarHTML += '<div class="card-body">'
 
 
 
@@ -337,26 +317,32 @@ async function showParentSideFilter(familyList){
 
 			const inneritem = familyList[i]["machines"][j];
 
-			console.log("inneritem : ", inneritem)
-
-			// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-			sidebarHTML += '<li class="menu_item_children"><a href="#">'+inneritem["code"]+'</a>'
-			sidebarHTML += '<div class="categorie_sub_menu">'
-			sidebarHTML += '<ul>'
+				sidebarHTML += '<article class="filter-parent">'
+			// sidebarHTML += '<header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside'+i+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<header class="card-header"> <a data-toggle="collapse" data-target="#collapse_aside_parent_'+j+'" data-abc="true" class="collapsed" aria-expanded="false"> <i class="icon-control fa fa-chevron-down"></i>'
+			sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
+			sidebarHTML += '</a> </header>'
+			sidebarHTML += '<div class="filter-content collapse" id="collapse_aside_parent_'+j+'" style="">'
+			sidebarHTML += '<div class="card-body" style="overflow: auto;height: 400px; overflow-y: auto;">'
 
 			for(k=0; k<inneritem["parents"].length;k++){ 
 
 					const innerMostitem = inneritem["parents"][k];
-					sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+innerMostitem["name"]+' </div></label></li>'
+					sidebarHTML += '<label class="custom-control">'
+					sidebarHTML += '<input type="checkbox"  class="custom-control-input">'
+					sidebarHTML += '<div class="custom-control-label">'+innerMostitem["name"]+' </div>'
+					sidebarHTML += '</label>'
 			}
-			sidebarHTML += '</ul>'
+
+			sidebarHTML += ' </div>'
 			sidebarHTML += '</div>'
-			sidebarHTML += '</li>'
+			sidebarHTML += '</article> '
+		}	
 
-		}
 
-
-		sidebarHTML += '</ul>'
+		sidebarHTML += ' </div>'
+		sidebarHTML += '</div>'
+		sidebarHTML += '</article> '
 	}
 
 	$("#sidebarParentFilter").append(sidebarHTML);
@@ -392,71 +378,4 @@ $(document).ready(function(){
 
 	
 
-});
-
-
-
-/*----------  Group SideFilter  ----------*/
-$(".categories_menu_toggle li.hidden_group").hide();
-   $("#more-btn-group").on('click', function (e) {
-
-	e.preventDefault();
-	$(".categories_menu_toggle li.hidden_group").toggle(500);
-	var htmlAfter = 'Group <i class="icon-control fa fa-chevron-up"></i>';
-	var htmlBefore = 'Group <i class="icon-control fa fa-chevron-down"></i>';
-
-
-	if ($(this).html() == htmlBefore) {
-		$(this).html(htmlAfter);
-	} else {
-		$(this).html(htmlBefore);
-	}
-});
-
-
-/*----------  Catalog SideFilter  ----------*/
-$(".categories_menu_toggle li.hidden_catalog").hide();
-   $("#more-btn-catalog").on('click', function (e) {
-
-	e.preventDefault();
-	$(".categories_menu_toggle li.hidden_catalog").toggle(500);
-	var htmlAfter = 'Catalog <i class="icon-control fa fa-chevron-up"></i>';
-	var htmlBefore = 'Catalog <i class="icon-control fa fa-chevron-down"></i>';
-
-
-	if ($(this).html() == htmlBefore) {
-		$(this).html(htmlAfter);
-	} else {
-		$(this).html(htmlBefore);
-	}
-});
-
-
-
-/*----------  Machine SideFilter  ----------*/
-$(".categories_menu_toggle li.hidden_machine").hide();
-   $("#more-btn-machine").on('click', function (e) {
-
-	e.preventDefault();
-	$(".categories_menu_toggle li.hidden_machine").toggle(500);
-	var htmlAfter = 'Machine <i class="icon-control fa fa-chevron-up"></i>';
-	var htmlBefore = 'Machine <i class="icon-control fa fa-chevron-down"></i>';
-
-
-	if ($(this).html() == htmlBefore) {
-		$(this).html(htmlAfter);
-	} else {
-		$(this).html(htmlBefore);
-	}
-});
-
-
-
-
-
-$('.child').hide(); //Hide children by default
-$('.parent').children().click(function () {
-	event.preventDefault();
-	$(this).children('.child').slideToggle('slow');
-	$(this).find('span').toggle();
 });
