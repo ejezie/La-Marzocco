@@ -156,28 +156,32 @@ async function showMachinesSideFilter(machineList){
 
 	for(i=0; i<machineList.length ;i++){
 
-		// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-		sidebarHTML += '<a href="#"> '+machineList[i]["code"]+' <i class="fa fa-angle-right"></i></a>'
-		sidebarHTML += '<ul class="categories_mega_menu" style="width : max-content;white-space: nowrap;overflow-y: scroll;height: 500px;">'
+		sidebarHTML += '<li class="dropdown dropdown-large">'
+		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown">'+machineList[i]["code"]+' </a>'
+		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
-		// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-		sidebarHTML += '<li class="menu_item_children"><a href="#">'+machineList[i]["code"]+'</a>'
-		sidebarHTML += '<div class="categorie_sub_menu">'
+		sidebarHTML += '<li class="col-sm-3">'
 		sidebarHTML += '<ul>'
+		sidebarHTML += '<li class="dropdown-header">'+machineList[i]["code"]+'</li>'
 
 		for(k=0; k<machineList[i]["machines"].length;k++){
 
 		console.log(">>>>>>>>>>",machineList[i]["machines"]) 
+		sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
+		sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
+		// sidebarHTML += '<li><label><input type="checkbox"><span>some text</span></label></li>'
 
-				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
 		}
+		
+
 		sidebarHTML += '</ul>'
-		sidebarHTML += '</div>'
+		sidebarHTML += '</li>'
+
+		sidebarHTML += '</ul>'
 		sidebarHTML += '</li>'
 
 
 
-		sidebarHTML += '</ul>'
 	}
 
 
@@ -242,73 +246,41 @@ function getCheckedParent(){
 async function showGroupSideFilter(groupList){
 	var sidebarHTML = ""
 
-	// for(i=0; i<groupList.length ;i++){
+	
 
-	// 	const item = groupList[i];
+	for(i=0; i<groupList.length ;i++){
 
-	// 	// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-	// 	sidebarHTML += '<a href="#"> '+item["code"]+' <i class="fa fa-angle-right"></i></a>'
-	// 	sidebarHTML += '<ul class="categories_mega_menu" style="width : max-content;white-space: nowrap;overflow-y: scroll;height: 500px;">'
+		const item = groupList[i];
 
+		sidebarHTML += '<li class="dropdown dropdown-large">'
+		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown">'+item["code"]+' </a>'
+		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
+		sidebarHTML += '<li class="col-sm-3">'
+		sidebarHTML += '<ul>'
 
-	// 	for(j=0; j<item["machines"].length;j++){ 
+		for(j=0; j<item["machines"].length;j++){ 
 
-	// 		const inneritem = groupList[i]["machines"][j];
+			const inneritem = groupList[i]["machines"][j];
+			console.log("inneritem : ", inneritem)
+			sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
 
-	// 		console.log("inneritem : ", inneritem)
+			for(k=0; k<inneritem["groups"].length;k++){
 
-	// 		// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-	// 		sidebarHTML += '<li class="menu_item_children"><a href="#">'+inneritem["code"]+'</a>'
-	// 		sidebarHTML += '<div class="categorie_sub_menu">'
-	// 		sidebarHTML += '<ul>'
+				const innerMostitem = inneritem["groups"][k];
+				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
 
-	// 		for(k=0; k<inneritem["groups"].length;k++){ 
+			}
+		}
+		
 
-	// 				const innerMostitem = inneritem["groups"][k];
-	// 				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+innerMostitem["name"]+' </div></label></li>'
-	// 		}
-	// 		sidebarHTML += '</ul>'
-	// 		sidebarHTML += '</div>'
-	// 		sidebarHTML += '</li>'
+		sidebarHTML += '</ul>'
+		sidebarHTML += '</li>'
 
-	// 	}
+		sidebarHTML += '</ul>'
+		sidebarHTML += '</li>'
 
-
-	// 	sidebarHTML += '</ul>'
-	// }
-
-	sidebarHTML += '<a href="#">Brake Parts js<i class="fa fa-angle-right"></i></a>'
-	sidebarHTML += '<ul class="categories_mega_menu">'
-	sidebarHTML += '<li class="menu_item_children"><a href="#">Wheel Bearings</a>'
-	sidebarHTML += '<ul class="categorie_sub_menu">'
-	sidebarHTML += '<li><a href="">Bower</a></li>'
-	sidebarHTML += '<li><a href="">Flipbac</a></li>'
-	sidebarHTML += '<li><a href="">Gary Fong</a></li>'
-	sidebarHTML += '<li><a href="">GigaPan</a></li>'
-	sidebarHTML += '</ul>'
-	sidebarHTML += '</li>'
-	sidebarHTML += '<li class="menu_item_children"><a href="#">Wheel Rim Screws</a>'
-	sidebarHTML += '<ul class="categorie_sub_menu">'
-	sidebarHTML += '<li><a href="">Accessories</a></li>'
-	sidebarHTML += '<li><a href="">2-Stroke</a></li>'
-	sidebarHTML += '<li><a href="">Handbag</a></li>'
-	sidebarHTML += '<li><a href="">Clothing</a></li>'
-	sidebarHTML += '</ul>'
-	sidebarHTML += '</li>'
-	sidebarHTML += '<li class="menu_item_children last_child"><a href="#">Wheel Simulators</a>'
-	sidebarHTML += '<ul class="categorie_sub_menu">'
-	sidebarHTML += '<li><a href="">Bags & Cases</a></li>'
-	sidebarHTML += '<li><a href="">Binoculars & Scopes</a></li>'
-	sidebarHTML += '<li><a href="">Film Photography</a></li>'
-	sidebarHTML += '<li><a href="">Lighting & Studio</a></li>'
-	sidebarHTML += '</ul>'
-	sidebarHTML += '<div class="categorie_banner">'
-	sidebarHTML += '<a href="#"><img src="assets/img/bg/banner2.jpg" alt=""></a>'
-	sidebarHTML += '</div>'
-	sidebarHTML += '</li>'
-	sidebarHTML += ''
-	sidebarHTML += '</ul>'
+	}
 
 
 	$("#sidebarGroupFilter").append(sidebarHTML);
@@ -323,43 +295,42 @@ async function showParentSideFilter(familyList){
 	var sidebarHTML = ""
 
 
+
 	for(i=0; i<familyList.length ;i++){
 
 		const item = familyList[i];
 
-		// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-		sidebarHTML += '<a href="#"> '+item["code"]+' <i class="fa fa-angle-right"></i></a>'
-		sidebarHTML += '<ul class="categories_mega_menu" style="width : max-content;white-space: nowrap;overflow-y: scroll;height: 500px;">'
+		sidebarHTML += '<li class="dropdown dropdown-large">'
+		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown">'+item["code"]+' </a>'
+		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
-
+		sidebarHTML += '<li class="col-sm-3">'
+		sidebarHTML += '<ul>'
 
 		for(j=0; j<item["machines"].length;j++){ 
 
 			const inneritem = familyList[i]["machines"][j];
-
 			console.log("inneritem : ", inneritem)
+			sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
 
-			// sidebarHTML += '<h4 class="title">'+item["code"]+' </h4>'
-			sidebarHTML += '<li class="menu_item_children"><a href="#">'+inneritem["code"]+'</a>'
-			sidebarHTML += '<div class="categorie_sub_menu">'
-			sidebarHTML += '<ul>'
+			for(k=0; k<inneritem["parents"].length;k++){
 
-			for(k=0; k<inneritem["parents"].length;k++){ 
+				const innerMostitem = inneritem["parents"][k];
+				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
 
-					const innerMostitem = inneritem["parents"][k];
-					sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+innerMostitem["name"]+' </div></label></li>'
 			}
-			sidebarHTML += '</ul>'
-			sidebarHTML += '</div>'
-			sidebarHTML += '</li>'
-
 		}
-
+		
 
 		sidebarHTML += '</ul>'
+		sidebarHTML += '</li>'
+
+		sidebarHTML += '</ul>'
+		sidebarHTML += '</li>'
+
 	}
 
-	$("#sidebarParentFilter").append(sidebarHTML);
+	$("#sidebarCatalogFilter").append(sidebarHTML);
 	$('#sidebarParentFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
    		showSearchResults();
@@ -460,3 +431,6 @@ $('.parent').children().click(function () {
 	$(this).children('.child').slideToggle('slow');
 	$(this).find('span').toggle();
 });
+
+
+
