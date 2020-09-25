@@ -1106,3 +1106,17 @@ async function cartList(onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+
+async function getQuote(user_id,desc,onResponse,onError){
+  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'quotation/create',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}

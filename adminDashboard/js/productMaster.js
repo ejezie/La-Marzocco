@@ -108,12 +108,8 @@ function loadProducts(beatdata) {
 
             };
             var onError =function(error){
-
+              console.log(error);
               dismiss(loadingId);
-              for (var key of Object.keys(error.response.data.message)) {
-                notifyError(error.response.data.message[key][0]);
-              }
-              notifyError(error.response.data.message);
             };
 
               // var info = table.page.info();
@@ -156,25 +152,26 @@ function loadProducts(beatdata) {
               {
                 "title":"Group",
                 render: function(data, type, row, meta){
-                  return row.group.name;
+                  console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['item_group','name'],row,"");
                 }
               },
               {
                 "title":"Family",
                 render: function(data, type, row){
-                  return row.family.code;
+                  return safeAccess(['item_family','code'],row,"");
                 }
               },
               {
                 "title":"Type",
                 render: function(data, type, row){
-                  return row.type.name;
+                  return  safeAccess(['type','code'],row,"");
                 }
               },
               {
                 "title":"Parent",
                 render: function(data, type, row){
-                  return (row.parent == null ? "-" : row.parent.name);
+                  return  safeAccess(['item_parent','name'],row,"");
                 }
               },
               {
