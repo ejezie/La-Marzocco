@@ -135,7 +135,7 @@ function autofillShippingAddress(f) {
                                           </span>
                           </a>
                         </li>
-                        <li>
+                        <!-- <li>
                           <a href="#step-2">
                             <span class="step_no">2</span>
                             <span class="step_descr">
@@ -161,45 +161,69 @@ function autofillShippingAddress(f) {
                                               <small>Discount Structure</small>
                                           </span>
                           </a>
-                        </li>
+                        </li> -->
                       </ul>
                       <div id="step-1">
                         <form class="form-horizontal form-label-left">
 
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Customer First Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Short Code<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input type="text" id="customerFirstName" required="required" class="form-control  ">
+                              <input type="text" id="inputShortCode" required="required" class="form-control  ">
                             </div>
                           </div>
+
+
                           <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Customer Last Name <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Industry</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select id="inputIndustry" class="form-control">
+                              </select>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input type="text" id="customerLastName" required="required" class="form-control ">
+                              <input type="text" id="inputFirstName" required="required" class="form-control  ">
                             </div>
                           </div>
+                          
                           <div class="form-group row">
-                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Customer Middle Name / Initial</label>
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Middle Name</label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input id="customerMiddleName" class="form-control col" type="text" name="middle-name">
+                              <input id="inputMiddleName" class="form-control col" type="text" name="middle-name">
                             </div>
                           </div>
+
                           <div class="form-group row">
-                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Customer Phone Number <span class="required">*</span></label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <input id="customerPhoneNumber" class="form-control col" type="text" name="middle-name">
-                            </div>
-                          </div>
-                          <div class="form-group row">
-                            <label for="customerEmailId" class="col-form-label col-md-3 col-sm-3 label-align">Customer Email Id <span class="required">*</span>
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
-                              <input id="customerEmailId" class="form-control col" type="text" name="middle-name">
+                              <input type="text" id="inputLastName" required="required" class="form-control ">
                             </div>
                           </div>
+
                           <div class="form-group row">
+                            <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Company Name <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input id="inputCompanyName" class="form-control col" type="text" name="middle-name">
+                            </div>
+                          </div>
+                         
+                          <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Deposit Required</label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <select id="inputDepositRequired" class="form-control">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <!-- <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Customer Legal Name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -262,7 +286,7 @@ function autofillShippingAddress(f) {
                                 <option>Option four</option>
                               </select>
                             </div>
-                          </div>
+                          </div> -->
                           <!-- <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
                             <div class="col-md-6 col-sm-6 ">
@@ -281,16 +305,14 @@ function autofillShippingAddress(f) {
                         </form>
 
                       </div>
-                      <div id="step-2">
+                    <!--   <div id="step-2">
 
                         <form class="form-horizontal form-label-left">
 
                           <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> <span></span>
                             </label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <!-- <input type="text" id="last-name" name="last-name" required="required" class="form-control "> -->
-                              <input type="checkbox" onclick="autofillContactDetails(this.form)" name="sameContactDetailsRadioButton">
+                            <div class="col-md-6 col-sm-6 "><input type="checkbox" onclick="autofillContactDetails(this.form)" name="sameContactDetailsRadioButton">
                               <em>Check this box if Customer info same as Contact person.</em>
                             </div>
                           </div>
@@ -331,19 +353,17 @@ function autofillShippingAddress(f) {
                           </div>
 
 
-                      </form>
-                    </div>
+                      </form> 
+                    </div>-->
 
-                    <div id="step-3">
+                   <!--  <div id="step-3">
 
                         <form class="form-horizontal form-label-left">
 
                           <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> <span></span>
                             </label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <!-- <input type="text" id="last-name" name="last-name" required="required" class="form-control "> -->
-                              
+                            <div class="col-md-6 col-sm-6 "> 
                               <h4><strong>Billing Address</strong></h4>
                             </div>
                           </div>
@@ -409,9 +429,7 @@ function autofillShippingAddress(f) {
                           <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> <span></span>
                             </label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <!-- <input type="text" id="last-name" name="last-name" required="required" class="form-control "> -->
-                              <input type="checkbox" onclick="autofillShippingAddress(this.form)" name="sameAddressRadioButton">
+                            <div class="col-md-6 col-sm-6 "> <input type="checkbox" onclick="autofillShippingAddress(this.form)" name="sameAddressRadioButton">
                               <em>Shippng Address same as Billing Address.</em>
                             </div>
                           </div>
@@ -421,9 +439,7 @@ function autofillShippingAddress(f) {
                           <div class="form-group row">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> <span></span>
                             </label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <!-- <input type="text" id="last-name" name="last-name" required="required" class="form-control "> -->
-                              
+                            <div class="col-md-6 col-sm-6 ">   
                               <h4><strong>Shipping Address</strong></h4>
                             </div>
                           </div>
@@ -488,9 +504,9 @@ function autofillShippingAddress(f) {
 
 
                       </form>
-                    </div>
+                    </div> -->
 
-                    <div id="step-4">
+                   <!--  <div id="step-4">
 
                       <form class="form-horizontal form-label-left">
 
@@ -539,7 +555,7 @@ function autofillShippingAddress(f) {
 
 
                       </form>
-                    </div>
+                    </div> -->
 
                     </div>
                     <!-- End SmartWizard Content -->
@@ -588,6 +604,22 @@ function autofillShippingAddress(f) {
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
 
+          <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+          <script src="../assets/js/common/localstorage.js"></script>
+
+          <script src="../assets/js/common/notification.js"></script>
+
+          <!-- Main API -->
+          <script src="../assets/js/common/api.js"></script>
+          <script src="../assets/js/common/genericErrorHandler.js"></script>
+
+          
+          <script src="js/uploadSingleCustomer.js"></script>
 	
   </body>
 </html>

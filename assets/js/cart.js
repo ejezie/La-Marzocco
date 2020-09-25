@@ -59,8 +59,9 @@ async function showCart(cartItems){
 
 function deleteItem(itemid){
 	if(confirm("Remove this item from cart?")){
-		shoppingCart.removeItemFromCart(itemid);
+		shoppingCart.removeItemFromCart(itemid,function(){refreshCart();});
 	}
+
 }
 
 function editQuantity(itemid,e){
@@ -105,29 +106,37 @@ async function showSubTotal(cartSubTotal){
 }
 
 $(document).ready(function(){
-	
+		refreshCart();
+	});
 
-	// shoppingCart.addItemToCart(22,"name", 80, 2)
+function refreshCart(){
+		$("#cart").html("");
+
+	var onResponse = function(response){
+				// var cart = shoppingCart.listCart();
+				console.log(JSON.stringify(response.data,null,2));
+				var cart = safeAccess(['data','carts','data'],response);
+				var cartItems = [];
+					for(cartItem of cart){
+						var element = {
+										"productId" : cartItem.id,
+										"productName" : cartItem.item.name,
+										"productQuantity" : cartItem.qty,
+										"productPrice" : safeAccess(["price"],cartItem,"-")
+									}
+
+						cartItems.push(element);
+					}
+					showCart(cartItems);
+					var cartSubTotals = {
+										"subTotal" : "$"+ shoppingCart.totalCart(),
+										"total" :  "$"+shoppingCart.totalCart()+20,
+										"shipping" : "$20"
+									}
+					showSubTotal(cartSubTotals);
+			}
+			cartList(onResponse);
 
 	var cart = shoppingCart.listCart();
 
-	var cartItems = [];
-	for(cartItem of cart){
-		var element = {
-						"productId" : cartItem.id,
-						"productName" : cartItem.name,
-						"productQuantity" : cartItem.count,
-						"productPrice" : cartItem.price
-					}
-
-		cartItems.push(element);
-	}
-	showCart(cartItems);
-	var cartSubTotals = {
-						"subTotal" : "$"+ shoppingCart.totalCart(),
-						"total" :  "$"+shoppingCart.totalCart()+20,
-						"shipping" : "$20"
-					}
-	showSubTotal(cartSubTotals);
-	// console.log(cart);
-});
+}

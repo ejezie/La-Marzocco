@@ -35,19 +35,23 @@ var shoppingCart = (function () {
     var obj = {};
 
     obj.addItemToCart = function (id,name, price, count) {
-        for (var i in cart) {
-            if (cart[i].id === id) {
-                cart[i].count += count;
-                saveCart();
-                return;
+
+        var onResponse = function(response){ 
+            for (var i in cart) {
+                if (cart[i].id === id) {
+                    cart[i].count += count;
+                    saveCart();
+                    return;
+                }
             }
-        }
-
-        console.log("addItemToCart:",id, name, price, count);
-
-        var item = new Item(id,name, price, count);
-        cart.push(item);
-        saveCart();
+            var item = new Item(id,name, price, count);
+            cart.push(item);
+            saveCart();
+      };
+      var onError =function(error){
+        notifyError("Failed to add item");
+      };
+        cartAddItem(id,count,null,null,onResponse,onError);
     };
 
 
@@ -80,25 +84,40 @@ var shoppingCart = (function () {
 
 
     obj.setCountForItem = function (id, count) {
-        for (var i in cart) {
+        
+        var onResponse = function(response){ 
+           for (var i in cart) {
             if (cart[i].id === id) {
                 cart[i].count = count;
                 break;
             }
         }
         saveCart();
+      };
+      var onError =function(error){
+        // notifyError("Failed to up item");
+      };
+        cartUpdateItem(id,count,null,null,onResponse,onError);
     };
 
 
-    obj.removeItemFromCart = function (id) { // Removes one item
-        for (var i in cart) {
-            if (cart[i].id.valueOf() == id.valueOf()) { // "3" === 3 false
+    obj.removeItemFromCart = function (id,onSuccess) { 
+        var onResponse = function(response){ 
+           for (var i in cart) {
+            if (cart[i].id.valueOf() == id.valueOf()) { 
                     cart.splice(i, 1);
                 break;
             }
         }
         saveCart();
+        onSuccess();
+      };
+      var onError =function(error){
+        // notifyError("Failed to up item");
+      };
+        cartDeleteItem(id,onResponse,onError);
     };
+        
 
 
     obj.removeItemFromCartAll = function (id) { // removes all item name

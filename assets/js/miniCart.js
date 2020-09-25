@@ -20,28 +20,33 @@ var cartSubtotal = {
 
 
 function loadMiniCart(){
-		var cart = shoppingCart.listCart();
-		showMiniCart(cart,cartSubtotal);
+			var onResponse = function(response){
+				// var cart = shoppingCart.listCart();
+				console.log(JSON.stringify(response.data,null,2));
+				var cart = safeAccess(['data','carts','data'],response);
+				console.log(cart)
+				showMiniCart(cart,cartSubtotal);
+			}
+			cartList(onResponse);
 }
 
 async function showMiniCart(cartItems,cartSubtotal){
 	var miniCartHTML = ''
 
-
-
 	for(i=0; i<cartItems.length;i++){
 
+		const item  = cartItems[i];
 		miniCartHTML += '<div class="cart_item">'
 		miniCartHTML += '<div class="cart_img">'
 		miniCartHTML += '<a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a>'
 		miniCartHTML += '</div>'
 		miniCartHTML += '<div class="cart_info">'
-		miniCartHTML += '<a href="#">'+cartItems[i]["name"]+'</a>'
-		miniCartHTML += '<span class="quantity">Qty: '+cartItems[i]["count"]+'</span>'
-		miniCartHTML += '<span class="price_cart"> $'+cartItems[i]["price"]+'</span>'
+		miniCartHTML += '<a href="#">'+item.item["name"]+'</a>'
+		miniCartHTML += '<span class="quantity">Qty: '+item["qty"]+'</span>'
+		miniCartHTML += '<span class="price_cart"> $'+safeAccess(["price"],item,"-")+'</span>'
 		miniCartHTML += '</div>'
 		miniCartHTML += '<div class="cart_remove">'
-		miniCartHTML += '<a onclick="removeItem('+cartItems[i]["id"]+')" ><i class="ion-android-close"></i></a>'
+		miniCartHTML += '<a onclick="removeItem('+item["id"]+')" ><i class="ion-android-close"></i></a>'
 		miniCartHTML += '</div>'
 		miniCartHTML += '</div>'
 	}

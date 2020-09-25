@@ -2,6 +2,54 @@
 // const BASE_URL = "http://3.106.30.129/v1/api/";
 const BASE_URL = "http://54.252.24.196/v1/api/";
 
+const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) => (prefix && prefix[val]) ? prefix[val] : defaultValue, object);
+
+function errorResponseHandler(error) {
+     // check for errorHandle config
+     if( error.config.hasOwnProperty('errorHandle') && error.config.errorHandle === false ) {
+         return Promise.reject(error);
+     }
+
+     // if9 has response show the error
+     if (error.response) {
+        if(error.response.status==401){
+            window.location = '/login.html', true;
+             // window.location.pathname   = "/login.html";
+        }else if(error.response.data.message){
+                if(typeof error.response.data.message === 'string' || error.response.data.message instanceof String){
+                    notifyError(error.response.data.message);
+                }else if(typeof error.response.data.message === 'object'){
+                    var longMessage="";
+                    var duration = 1000;
+                    for (var key of Object.keys(error.response.data.message)) {
+                        longMessage+=(error.response.data.message[key][0]);
+                        longMessage+="\n\n";
+                        duration += 3000;
+                    }
+
+                    new Notyf().error({
+                      message: longMessage,
+                      duration: duration,
+                      icon: false,
+                      dismissible: true
+                    })
+                }
+            }else{
+             notifyError("Something went wrong...");
+            }
+        }else{
+            notifyError("Please check your connection!");
+      }
+
+        return Promise.reject(error);
+ }
+
+// apply interceptor on response
+axios.interceptors.response.use(
+    response => response,
+    errorResponseHandler
+);
+
 async function updateItem(
   item_id,
   code,
@@ -64,6 +112,50 @@ async function updateItem(
     method: 'post',
     url:BASE_URL+'item/'+item_id,
     headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json', 
+      'Content-Type': 'multipart/form-data' 
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);
+
+}
+
+function appendIfNotNull(data,key,val){
+  if(val!=null && val!= undefined){
+      data.append(key,val);
+  }
+}
+
+async function updateCustomer(
+  onResponse,onError,id,
+        short_code,
+        industry_id,
+        first_name,
+        middle_name,
+        last_name,
+        company_name,
+        deposit_required
+        ){
+
+  var data = new FormData();
+
+  appendIfNotNull(data,'short_code',short_code);
+  appendIfNotNull(data,'industry_id',industry_id);
+  appendIfNotNull(data,'first_name',first_name);
+  appendIfNotNull(data,'middle_name',middle_name);
+  appendIfNotNull(data,'last_name',last_name);
+  appendIfNotNull(data,'company_name',company_name);
+  appendIfNotNull(data,'deposit_required',deposit_required);
+
+  var config = {
+    method: 'post',
+    url:BASE_URL+'customer-master/'+id,
+    headers: {
       'Authorization': getAPIToken(), 
       'Accept': 'application/json', 
       'Content-Type': 'multipart/form-data' 
@@ -153,6 +245,44 @@ async function createItem(
 }
 
 
+async function createCustomer(
+    industry_id,
+    short_code,
+    first_name,
+    middle_name,
+    last_name,
+    company_name,
+    deposit_required,
+    onResponse,
+    onError){
+
+  var data = new FormData();
+  data.append('industry_id',industry_id);
+  data.append('short_code',short_code);
+  data.append('first_name',first_name);
+  data.append('middle_name',middle_name);
+  data.append('last_name',last_name);
+  data.append('company_name',company_name);
+  data.append('deposit_required',deposit_required);
+
+  var config = {
+    method: 'post',
+    url:BASE_URL+'customer-master',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json', 
+      'Content-Type': 'multipart/form-data' 
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);
+
+}
+
+
 
 function getItemDetail(onResponse,onError,item_id){
   var data = new FormData();
@@ -192,6 +322,25 @@ async function getItems(onResponse,onError,page,page_size){
   .catch(onError);  
 
 }
+async function getCustomerList(onResponse,onError,page,page_size){
+
+  var data = new FormData();
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'customer-master?page='+page+'&page_size='+page_size,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
 
 async function bulkUploadItems(onResponse,onError,file){
 
@@ -202,6 +351,48 @@ async function bulkUploadItems(onResponse,onError,file){
   var config = {
     method: 'post',
     url: BASE_URL+'upload/inventory',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+async function bulkUploadCustomers(onResponse,onError,file){
+
+  var data = new FormData();
+  data.append("file",file);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'upload/customers',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+async function bulkUploadEmployees(onResponse,onError,file){
+
+  var data = new FormData();
+  data.append("file",file);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'upload/employees',
     headers: { 
       'Authorization': getAPIToken(), 
       'Accept': 'application/json'
@@ -294,6 +485,21 @@ async function getFamiliesWithPaging(onResponse,onError,page,page_size){
 
 }
 
+async function deleteCustomer(onResponse,onError,id){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'customer-master/'+id,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
 async function deleteGroup(onResponse,onError,groupid){
 
   var config = {
@@ -376,6 +582,22 @@ async function getGroups(onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'group',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+async function getIndustryList(onResponse,onError){
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'industry',
     headers: { 
       'Authorization': getAPIToken(), 
       'Accept': 'application/json'
@@ -813,6 +1035,74 @@ async function getMappingsMachine(onResponse,onError){
       'Authorization': getAPIToken(), 
       'Accept': 'application/json'
      },
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function cartAddItem(itemId,qty,userId,desc,onResponse,onError){
+  var data = new FormData();
+  data.append('item_id', itemId);
+  data.append('qty', qty);
+  appendIfNotNull(data,'user_id',userId);
+  appendIfNotNull(data,'desc',desc);
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'cart',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+     data :data
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function cartUpdateItem(itemId,qty,userId,desc,onResponse,onError){
+  var data = new FormData();
+  data.append('item_id', itemId);
+  data.append('qty', qty);
+  appendIfNotNull(data,'user_id',userId);
+  appendIfNotNull(data,'desc',desc);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'cart',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+     data :data
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function cartDeleteItem(itemId,onResponse,onError){
+  
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'cart/'+itemId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function cartList(onResponse,onError){
+  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'cart',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
   };
   axios(config).then(onResponse).catch(onError);
 }
