@@ -188,22 +188,25 @@ async function showMachinesSideFilter(machineList){
 	$("#sidebarMachineFilter").append(sidebarHTML);
 	$('#sidebarMachineFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
-   		showSearchResults();
+   		refreshCatalog();
 	});
 
 }
 
-
 function refreshCatalog(){
-	var machines = getCheckedMachines();
-	var groups = getCheckedGroups();
+	alert("refresh getCheckedParent "+getCheckedParent()+"  getCheckedGroup "+getCheckedGroup())
+	filterParentId = getCheckedParent();
+	filterGroupId = getCheckedGroup();
+	showSearchResults();
 }
 
 function getCheckedMachine(){
+		var returnValue=null;
+
 	    $('#sidebarMachineFilter input:checked').each(function(){
-	        return this.value;
+	        returnValue = this.value;
 	    });        
-	return null;
+	return returnValue;
 }
 
 function getCheckedMachines(){
@@ -218,10 +221,12 @@ function getCheckedMachines(){
 
 
 function getCheckedGroup(){
+	var returnValue=null;
 	    $('#sidebarGroupFilter input:checked').each(function(){
-	        return this.value;
+	    	alert("found grp "+this.value)
+	        returnValue =  this.value;
 	    });        
-	return null;
+	return returnValue;
 }
 
 function getCheckedGroups(){
@@ -236,7 +241,8 @@ function getCheckedGroups(){
 
 
 function getCheckedParent(){
-	    $('#sidebarParentFilter input:checked').each(function(){
+	    $('#sidebarCatalogFilter input:checked').each(function(){
+	    	alert("found "+JSON.stringify(this,null,2))
 	        return this.value;
 	    });        
 	return null;
@@ -268,7 +274,7 @@ async function showGroupSideFilter(groupList){
 			for(k=0; k<inneritem["groups"].length;k++){
 
 				const innerMostitem = inneritem["groups"][k];
-				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
+				sidebarHTML += '<li><label class="custom-control"> <input  value="'+innerMostitem["id"]+'" type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
 
 			}
 		}
@@ -286,7 +292,7 @@ async function showGroupSideFilter(groupList){
 	$("#sidebarGroupFilter").append(sidebarHTML);
 	$('#sidebarGroupFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
-   		showSearchResults();
+   		refreshCatalog();
 	});
 }
 
@@ -316,7 +322,7 @@ async function showParentSideFilter(familyList){
 			for(k=0; k<inneritem["parents"].length;k++){
 
 				const innerMostitem = inneritem["parents"][k];
-				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
+				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
 
 			}
 		}
@@ -331,9 +337,9 @@ async function showParentSideFilter(familyList){
 	}
 
 	$("#sidebarCatalogFilter").append(sidebarHTML);
-	$('#sidebarParentFilter input[type="checkbox"]').on('change', function() {
+	$('#sidebarCatalogFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
-   		showSearchResults();
+   		refreshCatalog();
 	});
 }
 
@@ -364,7 +370,6 @@ $(document).ready(function(){
 	
 
 });
-
 
 
 /*----------  Group SideFilter  ----------*/
