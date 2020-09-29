@@ -4,6 +4,7 @@ const BASE_URL = "http://54.252.24.196/v1/api/";
 
 const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) => (prefix && prefix[val]) ? prefix[val] : defaultValue, object);
 
+
 function errorResponseHandler(error) {
      // check for errorHandle config
      if( error.config.hasOwnProperty('errorHandle') && error.config.errorHandle === false ) {
@@ -126,7 +127,7 @@ async function updateItem(
 }
 
 function appendIfNotNull(data,key,val){
-  if(val!=null && val!= undefined){
+  if(val || val == false){
       data.append(key,val);
   }
 }
@@ -954,11 +955,28 @@ async function login(email,pass,onResponse,onError){
 
 }
 
-async function getSearchResults(onResponse,onError,url){
 
+var filterParentId =2;
+var filterGroupId=2;
+async function getSearchResults(onResponse,onError,url,parent_id,group_id){
+
+  console.log("url  "+url,"  parent_id  "+filterParentId+"  grp "+filterGroupId)
   var data = new FormData();
+  appendIfNotNull(data,"parent_id",filterParentId);
+  appendIfNotNull(data,"group_id",filterGroupId);
+  data.append("key","val");
+
+
   if(url==null){
-    url = BASE_URL+'item?page=1';
+    url = BASE_URL+'item?page=1' ;
+  }
+
+  if(filterGroupId){
+    url+='&group_id='+filterGroupId;
+  }
+
+  if(filterParentId){
+    url+='&parent_id='+filterParentId;
   }
 
   var config = {
@@ -1112,6 +1130,34 @@ async function getQuote(user_id,desc,onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'quotation/create',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getMachineParentMapping(itemId,onResponse,onError){
+  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'machine-parent/'+itemId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getItemParentImages(itemId,onResponse,onError){
+  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item-parent-image/?item_id='+itemId,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 

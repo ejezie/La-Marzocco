@@ -53,6 +53,54 @@ async function showCart(cartItems){
 	cartHTML += '</tbody>'
 	cartHTML += '</table>'
 
+		$("#cart").html("");
+
+
+	$("#cart").append(cartHTML)
+}
+
+
+async function showCartFromQuote(quoteItems){
+
+	if(!quoteItems){
+		notifyError("Failed to get quote");
+		return;
+	}
+	var cartHTML = ""
+
+	cartHTML += '<table>'
+	cartHTML += '<thead>'
+	cartHTML += '<tr>'
+	cartHTML += '<th class="product_name">Product</th>'
+	cartHTML += '<th class="product_thumb">Name</th>'
+	cartHTML += '<th class="product-price">Price</th>'
+	cartHTML += '<th class="product_quantity">Quantity</th>'
+	// cartHTML += '<th class="product_remove">Delete</th>'
+	cartHTML += '<th class="product_total">Total</th>'
+	cartHTML += '</tr>'
+	cartHTML += '</thead>'
+	cartHTML += '<tbody>'
+
+	for(i=0;i<quoteItems.length;i++){
+
+		var quoteItemProduct = quoteItems[i].item;
+		var quoteItem = quoteItems[i];
+ 
+		cartHTML += '<tr>'
+		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+		cartHTML += '<td class="product_name"><a href="#">'+quoteItemProduct["name"]+'</a></td>'
+		cartHTML += '<td class="product-price">'+quoteItem["price"]+'</td>'
+		cartHTML += '<td class="product_quantity"><a>'+quoteItem["qty"]+'</a></td>'
+		// cartHTML += '<td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>'
+		cartHTML += '<td class="product_total">'+quoteItem["total"]+'</td>'
+		cartHTML += '</tr>'
+	}
+
+	cartHTML += '</tbody>'
+	cartHTML += '</table>'
+
+		$("#cart").html("");
+
 	$("#cart").append(cartHTML)
 }
 
@@ -107,6 +155,12 @@ async function showSubTotal(cartSubTotal){
 
 $(document).ready(function(){
 		refreshCart();
+		$("#showQuote").click(function(){
+			notifyInfo("Requesting quote")
+			getQuote(null,null,function(response){
+					showCartFromQuote(safeAccess(["data","quote","quote_line"],response));
+			});
+		});
 	});
 
 function refreshCart(){

@@ -189,17 +189,19 @@ async function showCatalog(catalogList){
 	$("#catalog").html(catalogHTML)
 }
 
-
+function showQuote(){
+	getQuote(function(response){
+		
+	})
+}
 
 function showSearchResults(url){
-
 	var loadingNotification = notifyInfo("Loading results");
   	var onResponse = function(response){
   	dismiss(loadingNotification);
   	var results = [];
     for(var i=0; i< response.data.items.data.length; i++){
       const item = response.data.items.data[i];
-      console.log(item);
       const element = {
 						"productId" : item.id,
 						"productCode" : item.code,
@@ -255,7 +257,7 @@ function showSearchResults(url){
   	console.log(error);
     notifyError("Failed to load results");
   };
-  getSearchResults(onResponse,onError,url);
+  getSearchResults(onResponse,onError,url,filterParentId,filterGroupId);
 }
 
 
