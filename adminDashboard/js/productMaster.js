@@ -84,16 +84,48 @@ function populateParent(currentVal){
 }
 
 
+
+// var itemMasterTable 
 function loadProducts(beatdata) {
- itemMasterTable = $('#items_master').dataTable( {
+ itemMasterTable = $('#items_master').DataTable( {
+  // dom: 'Blfrtip',
    processing: true,
    serverSide: true,
    pageLength: 10,
    bSort : false,
    lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
+       'columnDefs': [
+         {
+            'targets': 0,
+            defaultContent: null,
+            'checkboxes': {
+               'selectRow': true
+            }
+         }
+      ],
+      'select': {
+         'style': 'multi'
+      },
+      'order': [[1, 'asc']],
+   // columnDefs: [{
+   //              targets: 0,
+   //              data: 6,
+   //              'checkboxes': {
+   //                  'selectRow': true
+   //              }
+   //          },
+   //         {
+   //           targets: '_all',
+   //           defaultContent: '-'
+   //          },
+   //          // { "visible": false, "targets": 1 }
+   //          ],
+   //          select: {
+   //              style: 'multi'
+   //          },
    ajax: function(data, callback, settings) {
     const loadingId = notifyInfo("Please wait");
-    console.log(JSON.stringify(data,null,2));
+    // console.log(JSON.stringify(data,null,2));
 
     var onResponse = function(res){
               dismiss(loadingId);
@@ -115,7 +147,7 @@ function loadProducts(beatdata) {
               // var info = table.page.info();
               // var pageIndex = (data.start+10)/10;
               var pageIndex = data.start / data.length + 1 ;
-              console.log("apgedinnnnnnnnnnndex  " +pageIndex)
+              // console.log("apgedinnnnnnnnnnndex  " +pageIndex)
               getItems(onResponse,onError,pageIndex,data.length);
           // var sort_column_name = data.columns[data.order[0].column].data.replace(/\./g,"__");
           // var direction = "";
@@ -135,7 +167,17 @@ function loadProducts(beatdata) {
           //     });
           // });
         },
-        buttons : [{
+       
+        buttons : [
+        {
+                text: 'Get selected data',
+                action: function () {
+                    var count = itemMasterTable.rows( { selected : true } ).data();;
+                    // var count = itemMasterTable.column(0).checkboxes.selected();
+ 
+                    console.log("nvcjdsvcndsvndsvnj : ", count)
+                }
+            },{
           extend: 'csv',
                 // className: 'btn btn-sm btn-success',
                 titleAttr: 'CSV export.',
@@ -150,9 +192,12 @@ function loadProducts(beatdata) {
               }],
               columns: [
               {
+             
+              },
+              {
                 "title":"Group",
                 render: function(data, type, row, meta){
-                  console.log(JSON.stringify(row,null,2))
+                  // console.log(JSON.stringify(row,null,2))
                   return safeAccess(['item_group','name'],row,"");
                 }
               },
@@ -218,7 +263,71 @@ function loadProducts(beatdata) {
         }
         ]
       })
+
+// Handle form submission event 
+   $('#frm-example').on('submit', function(e){
+      var form = this;
+      
+      var rows_selected = itemMasterTable.column(0).checkboxes.selected();
+
+      // Iterate over all selected checkboxes
+      $.each(rows_selected, function(index, rowId){
+         // Create a hidden element 
+         $(form).append(
+             $('<input>')
+                .attr('type', 'hidden')
+                .attr('name', 'id[]')
+                .val(rowId)
+         );
+      });
+
+      // FOR DEMONSTRATION ONLY
+      // The code below is not needed in production
+      
+      // Output form data to a console     
+      $('#example-console-rows').text(rows_selected.join(","));
+      
+      // Output form data to a console     
+      $('#example-console-form').text($(form).serialize());
+       
+      // Remove added elements
+      $('input[name="id\[\]"]', form).remove();
+       
+      // Prevent actual form submission
+      e.preventDefault();
+   });   
+
 }
+
+
+ $('#button').on('submit', function(e){
+      var form = this;
+      
+      var rows_selected = table.column(0).checkboxes.selected();
+    })
+
+
+//  $("#submit").click(function(){
+//   var tblData = itemMasterTable.rows('.selected').data();
+//   var tmpData;
+//   $.each(tblData, function(i, val) {
+//     tmpData = tblData[i];
+//     console.log(" >>>>>>>>> ___",tmpData);
+//   }); 
+// }); 
+
+
+
+ function getSelected(){
+  var selectedIds = $('#items_master').DataTable().columns().checkboxes.selected()[0];
+  console.log(selectedIds)
+ 
+  selectedIds.forEach(function(selectedId) {
+    alert(selectedId);
+  });
+}
+
+
 
 function showItemEditModal(data){
 
