@@ -88,25 +88,26 @@ function populateParent(currentVal){
 // var itemMasterTable 
 function loadProducts(beatdata) {
  itemMasterTable = $('#items_master').DataTable( {
-  // dom: 'Blfrtip',
+  dom: 'Blfrtip',
    processing: true,
    serverSide: true,
    pageLength: 10,
    bSort : false,
    lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
-       'columnDefs': [
-         {
-            'targets': 0,
-            defaultContent: null,
-            'checkboxes': {
-               'selectRow': true
-            }
-         }
-      ],
-      'select': {
-         'style': 'multi'
-      },
-      'order': [[1, 'asc']],
+          columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ,
+        {
+             targets: '_all',
+             defaultContent: '-'
+            },],
+        select: {
+            style:    'multi',
+            selector: 'td:first-child'
+        },
+        order: [[ 1, 'asc' ]],
    // columnDefs: [{
    //              targets: 0,
    //              data: 6,
@@ -169,30 +170,34 @@ function loadProducts(beatdata) {
         },
        
         buttons : [
-        {
-                text: 'Get selected data',
-                action: function () {
-                    var count = itemMasterTable.rows( { selected : true } ).data();;
-                    // var count = itemMasterTable.column(0).checkboxes.selected();
+            'selectAll',
+            'selectNone',
+            //  {
+            //     text: 'Get selected data',
+            //     action: function () {
+            //         var count = itemMasterTable.rows( { selected : true } ).data()[0];;
+            //         // var count = $('#items_master').DataTable().columns().checkboxes.selected()[0];
  
-                    console.log("nvcjdsvcndsvndsvnj : ", count)
-                }
-            },{
-          extend: 'csv',
-                // className: 'btn btn-sm btn-success',
-                titleAttr: 'CSV export.',
-                text: 'CSV',
-                // filename: 'attendance',
-                extension: '.csv'
-              }, {
-                extend: 'pdf',
-                // className: 'btn btn-sm btn-danger',
-                titleAttr: 'Copy table data.',
-                text: 'PDF'
-              }],
+            //         console.log("nvcjdsvcndsvndsvnj : ", count)
+            //     }
+            // },
+          //   {
+          // extend: 'csv',
+          //       // className: 'btn btn-sm btn-success',
+          //       titleAttr: 'CSV export.',
+          //       text: 'CSV',
+          //       // filename: 'attendance',
+          //       extension: '.csv'
+          //     }, {
+          //       extend: 'pdf',
+          //       // className: 'btn btn-sm btn-danger',
+          //       titleAttr: 'Copy table data.',
+          //       text: 'PDF'
+          //     }
+              ],
               columns: [
               {
-             
+               
               },
               {
                 "title":"Group",
@@ -297,14 +302,78 @@ function loadProducts(beatdata) {
       e.preventDefault();
    });   
 
+
+
+ // $('<div class="pull-right">' +
+ //  '<select class="form-control">'+
+ //  '<option value="volvo">Bulk Update</option>'+
+ //  '<option value="saab">Recommend</option>'+
+ //  '<option value="opel">Active</option>'+
+ //  '</select>' + 
+ //  '</div>').appendTo("#items_master_wrapper .dataTables_filter");
+
+ // $(".dataTables_filter label").addClass("pull-right");
+
+
+
 }
 
 
- $('#button').on('submit', function(e){
-      var form = this;
-      
-      var rows_selected = table.column(0).checkboxes.selected();
-    })
+$('#selectBulkUpdate').on('change', function() {
+  // alert( this.value );
+
+  var tblData = itemMasterTable.rows('.selected').data();
+  var tmpData;
+  var idArray = []
+  $.each(tblData, function(i, val) {
+    tmpData = tblData[i];
+    idArray.push(tmpData.id)
+    console.log(" >>>>>>>>> ___",tmpData);
+    console.log(" idArray ___",idArray);
+  }); 
+
+
+  var bulkUpdateAction = this.value
+
+  var bulkUpdateObj = {}
+
+  if(bulkUpdateAction == "Price"){
+
+    $('#bulkUpdatePrice').modal('toggle');
+  } else if(bulkUpdateAction == "Recommended"){
+    bulkUpdateObj["is_recommended"] = "1"
+  }
+   else if(bulkUpdateAction == "Not Recommended"){
+    bulkUpdateObj["is_recommended"] = "0"
+  }
+   else if(bulkUpdateAction == "Is Consumable"){
+    bulkUpdateObj["is_consumable"] = "1"
+  }
+   else if(bulkUpdateAction == "Not Consumable"){
+    bulkUpdateObj["is_consumable"] = "0"
+  }
+   else if(bulkUpdateAction == "Slow Moving"){
+    bulkUpdateObj["is_slow_moving"] = "1"
+  } 
+    else if(bulkUpdateAction == "Fast Moving"){
+    bulkUpdateObj["is_slow_moving"] = "0"
+  } 
+    else if(bulkUpdateAction == "Active"){
+    bulkUpdateObj["is_active"] = "1"
+  }
+    else if(bulkUpdateAction == "Inactive"){
+    bulkUpdateObj["is_active"] = "0"
+  }
+
+
+  bulkUpdateObj["ids"] = idArray
+
+  console.log("bulkUpdateObj : ",bulkUpdateObj)
+
+
+});
+
+
 
 
 //  $("#submit").click(function(){
@@ -420,11 +489,13 @@ $(document).ready(function(){
     $('#items_master').on('click', '.btn', function () {
 
       var RowIndex = $(this).closest('tr');
-      var data = itemMasterTable.api().row(RowIndex).data();
-      populateGroup(data.group.id);
-      populateFamily(data.family.id);
-      populateType(data.type.id);
-      populateParent(data.parent.id);
+      var data = $('#items_master').dataTable().api().row(RowIndex).data();
+
+      console.log("data :",data)
+      populateGroup(data.item_group.id);
+      populateFamily(data.item_family.id);
+      // populateType(data.type.id);
+      // populateParent(data.parent.id);
 
       $("#input_code").val(data.code);
       $("#input_name").val(data.name);
