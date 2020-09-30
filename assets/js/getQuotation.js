@@ -52,7 +52,12 @@ async function showCart(quotationItem){
 	$("#quotation").append(quotationHTML)
 }
 
-showCart(quotationItem)
+
+
+$(document).ready(function(){
+	showCart(quotationItem)
+});
+
 
 
 

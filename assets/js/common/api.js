@@ -6,6 +6,7 @@ const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) =
 
 
 function errorResponseHandler(error) {
+  console.log(error);
      // check for errorHandle config
      if( error.config.hasOwnProperty('errorHandle') && error.config.errorHandle === false ) {
          return Promise.reject(error);
@@ -1153,11 +1154,37 @@ async function getMachineParentMapping(itemId,onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function getItemParentImages(itemId,onResponse,onError){
+async function getItemParentImages(itemParentId,onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item-parent-image?parent_id='+itemParentId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getMachineParentMapping(itemParentId,onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'machine-parent/'+itemParentId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getQuoteList(itemId,onResponse,onError){
   
   var config = {
     method: 'get',
-    url: BASE_URL+'item-parent-image/?item_id='+itemId,
+    url: BASE_URL+'quotation/list',
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 

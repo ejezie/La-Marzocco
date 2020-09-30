@@ -4,13 +4,15 @@ var parts = ["STEAM WAND BODY","ASSEMBLY COPPER WASHER","SHAFT GASKET","STEAM SH
 
 
 
-function toItemDetailsPage(itemId){
-    window.location.href ='product-details.html?item='+itemid;
+function toitemdetailpage(itemId){
+    const newUrl = 'product-details.html?item='+itemId;
+    window.location = newUrl, true;
 }
 
 
+// https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg
 
-async function showCarrouselParts(parts){
+async function showCarrouselParts(imageUrl,parts){
     if(!parts){
         notifyError("Failed to load parts");
         return;
@@ -20,7 +22,7 @@ async function showCarrouselParts(parts){
     carouselHTML += '<div class="player-wrap" >'
     carouselHTML += '<div class="fluid-ratio-wrap">'
     carouselHTML += '<div class="fluid-ratio-inner">'
-    carouselHTML += '<img class="img-responsive" src="https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg">'
+    carouselHTML += '<img class="img-responsive" src="'+imageUrl+'">'
     carouselHTML += '</div>'
     carouselHTML += '</div>'
     carouselHTML += '</div>'
@@ -30,7 +32,7 @@ async function showCarrouselParts(parts){
 
     for(i=0; i<parts.length;i++){
         const part = parts[i];
-        carouselHTML += '<li class="playlist-item onclick="toItemDetailsPage('+safeAccess(["id"],part)+')">'
+        carouselHTML += '<li class="playlist-item" onclick="toitemdetailpage('+safeAccess(["id"],part)+')">'
         carouselHTML += '<div class="thumb">'
         // carouselHTML += '<img class="img-responsive" src="https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg">'
 
@@ -38,7 +40,7 @@ async function showCarrouselParts(parts){
         carouselHTML += '<div class="fluid-ratio-inner"></div>'
         carouselHTML += '</div>'
         carouselHTML += '</div>'
-        carouselHTML += '<div class="details">'+(i+1)+". " +safeAccess(["name"],part)+'</div>'
+        carouselHTML += '<div class="details">'+(i+1)+". " +safeAccess(["item","name"],part)+'</div>'
         carouselHTML += '</li>'
     }
     carouselHTML += ' <li class="playlist-item more">'
@@ -72,27 +74,30 @@ $(document).ready(function(){
         if(!parentId){
             notifyError("This item is not available");
         }else{
-           getItemParentImages(parentId,function(response){
-                   showCarrouselParts(safeAccess(["data","item_parent_images","data"],response));
+           getMachineParentMapping(parentId,function(response1){
+                getItemParentImages(parentId,function(response2){
+                   const imageUrl = safeAccess(["data","machine_parent","image","image"],response1);
+                   showCarrouselParts(imageUrl,safeAccess(["data","item_parent_images","data"],response2));
+                    
+                $('.video-playlist-wrap.two-col .scroll-wrap').perfectScrollbar();
+
+                $('.video-playlist-wrap').not('.two-col').find('.scroll-wrap').slick({
+                  slidesToShow: 6,
+                  responsive: [
+                  {
+                    breakpoint: 980,
+                    settings: {
+                      slidesToShow: 4 } },
+
+
+                  {
+                    breakpoint: 720,
+                    settings: {
+                      slidesToShow: 2 } }] });
+               });
            });
+           
     }
 });
 
-
-
-$('.video-playlist-wrap.two-col .scroll-wrap').perfectScrollbar();
-
-$('.video-playlist-wrap').not('.two-col').find('.scroll-wrap').slick({
-  slidesToShow: 6,
-  responsive: [
-  {
-    breakpoint: 980,
-    settings: {
-      slidesToShow: 4 } },
-
-
-  {
-    breakpoint: 720,
-    settings: {
-      slidesToShow: 2 } }] });
 
