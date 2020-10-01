@@ -553,13 +553,6 @@ $(document).ready(function(){
       bulkUploadItems(onResponse,onError, xlsx.files[0]);
     });
     
-
-
-
-
-
-
-    
 // });
                 // .on('click', '.btn', function () {
                 //     alert("submitting")

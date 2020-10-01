@@ -100,7 +100,7 @@ async function showCatalog(catalogList){
 		catalogHTML += '<div class="col-lg-4 col-md-4 col-12 ">'
 		catalogHTML += '<div class="single_product">'
 		catalogHTML += '<div class="product_name grid_name">'
-		catalogHTML += '<h3><strong><a href="product-details.html?item='+catalogList[i]["productId"]+'" style="text-transform: lowercase;">'+catalogList[i]["productName"]+'</a></strong></h3>'
+		catalogHTML += '<h3><strong><a href="' +catalogList[i]["href"] +'" style="text-transform: lowercase;">'+catalogList[i]["productName"]+'</a></strong></h3>'
 		catalogHTML += '<p class="manufacture_product"><a href="#">Accessories</a></p>'
 		catalogHTML += '</div>'
 		catalogHTML += '<div class="product_thumb">'
@@ -191,7 +191,6 @@ async function showCatalog(catalogList){
 
 function showQuote(){
 	getQuote(function(response){
-		
 	})
 }
 
@@ -204,6 +203,7 @@ function showSearchResults(url){
       const item = response.data.items.data[i];
       const element = {
 						"productId" : item.id,
+						"href": "product-details.html?item="+item["id"],
 						"productCode" : item.code,
 						"productName" : item.name,
 						"productFamily" : item.item_family[0].code,
@@ -258,6 +258,72 @@ function showSearchResults(url){
     notifyError("Failed to load results");
   };
   getSearchResults(onResponse,onError,url,filterParentId,filterGroupId);
+}
+
+function showCatalogDropdownSelection(machineId){
+	var loadingNotification = notifyInfo("Loading results");
+  	var onResponse = function(response){
+  	dismiss(loadingNotification);
+  	var results = [];
+    for(var i=0; i< response.data.machine_parent.data.length; i++){
+      const item = response.data.machine_parent.data[i].item;
+      const element = {
+						"productId" : item.id,
+						"href": "carouselParts.html?mainitem="+machineId+"&parent="+response.data.machine_parent.data[i].id,
+						"productCode" : item.code,
+						"productName" : item.name,
+						"productFamily" : safeAccess(["parents","name"],item),
+						"productActualPrice" : "$1199.00",
+						"productOfferPrice" : "$999.00",
+						"productOffPercent" : "-20%",
+						"productQuantityInStock" : "50"
+					};
+	  results.push(element);
+    }
+
+    showCatalog(results);
+
+    $("#pagination_current").text(response.data.machine_parent.current_page);
+    if(response.data.machine_parent.prev_page_url!=null){
+    	$("#pagination_prev").show();
+    	$("#pagination_prev").text(response.data.machine_parent.current_page-1);
+    	    	$('#pagination_prev').unbind();
+
+    	$('#pagination_prev').click(function () {
+				showSearchResults(response.data.machine_parent.prev_page_url)
+			});
+    }else{
+    	$("#pagination_prev").hide();
+    }
+    if(response.data.machine_parent.next_page_url!=null){
+    	$("#pagination_next").show();
+    	$("#pagination_next").text(response.data.machine_parent.current_page+1);
+    	$('#pagination_next').unbind();
+    	$('#pagination_next').click(function () {
+				showSearchResults(response.data.machine_parent.next_page_url)
+			});
+    }else{
+    	$("#pagination_next").hide();
+    }
+    if(response.data.machine_parent.last_page_url!=null){
+    	$("#pagination_last").show();
+    	$("#pagination_last").text(response.data.machine_parent.last_page+" >>");
+    	$('#pagination_last').unbind();
+    	$('#pagination_last').click(function () {
+				showSearchResults(response.data.machine_parent.last_page_url);
+			});
+    }else{
+    	$("#pagination_last").hide();
+    }
+    
+  };
+
+  var onError =function(error){
+  	  	dismiss(loadingNotification);
+  	console.log(error);
+    notifyError("Failed to load results");
+  };
+  getMachineParentList(onResponse,onError,machineId);
 }
 
 

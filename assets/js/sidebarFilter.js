@@ -239,11 +239,12 @@ function getCheckedGroups(){
 
 
 function getCheckedParent(){
+		var returnValue=null;
+
 	    $('#sidebarCatalogFilter input:checked').each(function(){
-	    	alert("found "+JSON.stringify(this,null,2))
-	        return this.value;
+	        returnValue =  this.value;
 	    });        
-	return null;
+	return returnValue;
 }
 
 
@@ -315,14 +316,15 @@ async function showParentSideFilter(familyList){
 
 			const inneritem = familyList[i]["machines"][j];
 			console.log("inneritem : ", inneritem)
-			sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
+			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
+			sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
 
-			for(k=0; k<inneritem["parents"].length;k++){
+			// for(k=0; k<inneritem["parents"].length;k++){
 
-				const innerMostitem = inneritem["parents"][k];
-				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
+			// 	const innerMostitem = inneritem["parents"][k];
+			// 	sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
 
-			}
+			// }
 		}
 		
 
@@ -337,7 +339,7 @@ async function showParentSideFilter(familyList){
 	$("#sidebarCatalogFilter").append(sidebarHTML);
 	$('#sidebarCatalogFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
-   		refreshCatalog();
+   		showCatalogDropdownSelection(getCheckedParent());
 	});
 }
 

@@ -68,14 +68,16 @@ function findGetParameter(parameterName) {
     }
 
 var parentId;
+var mainitemid;
 
 $(document).ready(function(){
-   parentId = findGetParameter("parent")
-        if(!parentId){
+   parentId = findGetParameter("parent");
+   mainitemid = findGetParameter("mainitem");
+        if(!parentId || !mainitemid){
             notifyError("This item is not available");
         }else{
            getMachineParentMapping(parentId,function(response1){
-                getItemParentImages(parentId,function(response2){
+                getItemParentImages(parentId,mainitemid,function(response2){
                    const imageUrl = safeAccess(["data","machine_parent","image","image"],response1);
                    showCarrouselParts(imageUrl,safeAccess(["data","item_parent_images","data"],response2));
                     
