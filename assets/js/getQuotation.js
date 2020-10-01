@@ -62,40 +62,116 @@ var orderArr = [
 
 
 
-async function showCart(orderArr){
+async function showQuotation(orderArr){
 
-	var myOrdersHTML = ""
-
-
-	myOrdersHTML += '<table>'
-	myOrdersHTML += '<thead>'
-	myOrdersHTML += '<tr>'
-	myOrdersHTML += '<th class="product_name">Date</th>'
-	myOrdersHTML += '<th >Items</th>'
-	myOrdersHTML += '<th class="product_quantity">Quantity</th>'
-	myOrdersHTML += '<th class="product-price">Price</th>'
-	// myOrdersHTML += '<th >Status</th>'
-	myOrdersHTML += '</tr>'
-	myOrdersHTML += '</thead>'
-	myOrdersHTML += '<tbody>'
-
-	for(i=0;i<orderArr.length;i++){
-
-		myOrdersHTML += '<tr>'
-		myOrdersHTML += '<td >'+orderArr[i]["date"]+'</td>'
-		myOrdersHTML += '<td><a class="primary" data-toggle="modal" data-target="#modal_box" id='+orderArr[i]["orderId"]+' onclick="showOrderDetails(`'+orderArr[i]["orderId"]+'`)">View Details</a></td>'
-		myOrdersHTML += '<td>'+orderArr[i]["totalPrice"]+'</td>'
-		myOrdersHTML += '<td class="product_total">'+orderArr[i]["totalPrice"]+'</td>'
-		// myOrdersHTML += '<td>'+orderArr[i]["status"]+'</td>'
-		myOrdersHTML += '</tr>'
+	// var myOrdersHTML = ""
 
 
-	}
 
-	myOrdersHTML += '</tbody>'
-	myOrdersHTML += '</table>'
+	// for(i=0;i<orderArr.length;i++){
 
-	$("#myOrders").append(myOrdersHTML)
+	// 	myOrdersHTML += '<tr>'
+	// 	myOrdersHTML += '<td >'+orderArr[i]["date"]+'</td>'
+	// 	myOrdersHTML += '<td><a class="primary" data-toggle="modal" data-target="#modal_box" id='+orderArr[i]["orderId"]+' onclick="showOrderDetails(`'+orderArr[i]["orderId"]+'`)">View Details</a></td>'
+	// 	myOrdersHTML += '<td>'+orderArr[i]["totalPrice"]+'</td>'
+	// 	myOrdersHTML += '<td class="product_total">'+orderArr[i]["totalPrice"]+'</td>'
+	// 	// myOrdersHTML += '<td>'+orderArr[i]["status"]+'</td>'
+	// 	myOrdersHTML += '</tr>'
+
+
+	// }
+
+
+	// $("#myOrders").append(myOrdersHTML)
+
+
+	 itemMasterTable = $('#tableQuoteList').DataTable( {
+  dom: 'Blfrtip',
+   processing: true,
+   serverSide: true,
+   pageLength: 10,
+   bSort : false,
+   lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
+          columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ,
+        {
+             targets: '_all',
+             defaultContent: '-'
+            },],
+        select: {
+            style:    'multi',
+            selector: 'td:first-child'
+        },
+        order: [[ 1, 'asc' ]],
+   	ajax: function(data, callback, settings) {
+    const loadingId = notifyInfo("Please wait");
+    var onResponse = function(res){
+              dismiss(loadingId);
+              console.log("recordsTotal "+res.data.quotes.data.length)
+              callback({
+                draw:data.draw,
+                recordsTotal: res.data.quotes.total,
+                recordsFiltered: res.data.quotes.total,
+                data: res.data.quotes.data
+              });
+
+            };
+            var onError =function(error){
+              console.log(error);
+              dismiss(loadingId);
+            };
+              var pageIndex = data.start / data.length + 1 ;
+			getQuotationList(onResponse,onError,pageIndex,data.length);
+        },
+       
+        buttons : [
+            'selectAll',
+            'selectNone',
+              ],
+              columns: [
+            
+              {
+                "title":"Date",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['created_at',],row,"");
+                }
+              },
+              {
+                "title":"Items",
+                render: function(data, type, row){
+                  return safeAccess(['quote_line',],row,[]).length;
+                }
+              },
+              {
+                "title":"Quantity",
+                render: function(data, type, row){
+                  return safeAccess(['quote_line',],row,[]).length;
+                }
+              },
+              {
+                "title":"Price",
+                render: function(data, type, row){
+                  return  safeAccess(['total'],row,"-");
+                }
+              },
+              {
+                "title":"Details",
+                render: function(data, type, row){
+                  return "Details";
+                }
+              },
+              {
+                "title":"Add to Cart",
+                render: function(data, type, row){
+                  return "Add to cart";
+                }
+              }
+        ]
+      })
 }
 
 
@@ -149,6 +225,6 @@ async function showOrderDetails(orderId){
 }
 
 
-
-
-showCart(orderArr)
+$(document).ready(function(){
+	showQuotation()
+});

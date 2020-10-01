@@ -6,8 +6,10 @@ const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) =
 
 
 function errorResponseHandler(error) {
+  console.log(error);
+  console.log(JSON.stringify(error));
      // check for errorHandle config
-     if( error.config.hasOwnProperty('errorHandle') && error.config.errorHandle === false ) {
+     if( error.config.url.includes("logout") || (error.config.hasOwnProperty('errorHandle') && error.config.errorHandle === false) ) {
          return Promise.reject(error);
      }
 
@@ -311,6 +313,25 @@ async function getItems(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'item?page='+page+'&page_size='+page_size,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+async function getQuotationList(onResponse,onError,page,page_size){
+
+  var data = new FormData();
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'quotation/list?page='+page+'&page_size='+page_size,
     headers: { 
       'Authorization': getAPIToken(), 
       'Accept': 'application/json'
@@ -946,7 +967,8 @@ async function login(email,pass,onResponse,onError){
     method: 'post',
     url: BASE_URL+'auth/login',
     headers: {'Content-Type': 'multipart/form-data' },
-    data : data
+    data : data,
+    errorHandle: false
   };
 
   axios(config)
@@ -1000,7 +1022,8 @@ async function logout(){
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+       errorHandle: false
      },
   };
   axios(config);
@@ -1153,11 +1176,37 @@ async function getMachineParentMapping(itemId,onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function getItemParentImages(itemId,onResponse,onError){
+async function getItemParentImages(itemParentId,onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item-parent-image?parent_id='+itemParentId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getMachineParentMapping(itemParentId,onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'machine-parent/'+itemParentId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getQuoteList(itemId,onResponse,onError){
   
   var config = {
     method: 'get',
-    url: BASE_URL+'item-parent-image/?item_id='+itemId,
+    url: BASE_URL+'quotation/list',
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 

@@ -193,7 +193,6 @@ async function showMachinesSideFilter(machineList){
 }
 
 function refreshCatalog(){
-	alert("refresh getCheckedParent "+getCheckedParent()+"  getCheckedGroup "+getCheckedGroup())
 	filterParentId = getCheckedParent();
 	filterGroupId = getCheckedGroup();
 	showSearchResults();
@@ -222,7 +221,6 @@ function getCheckedMachines(){
 function getCheckedGroup(){
 	var returnValue=null;
 	    $('#sidebarGroupFilter input:checked').each(function(){
-	    	alert("found grp "+this.value)
 	        returnValue =  this.value;
 	    });        
 	return returnValue;
