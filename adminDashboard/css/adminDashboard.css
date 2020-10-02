@@ -73,3 +73,19 @@ select:focus {
     border-right: 5px solid #1ABB9C;
     background: #ae0000;
 }*/
+
+
+
+
+/*  Current Pahe Highligh Start*/
+.nav li li.current-page a {
+          border-right: 5px solid #1ABB9C;
+          background: #ae0000;
+}
+
+.nav.side-menu > li.current-page {
+    border-right: 5px solid #1ABB9C;
+    background: #ae0000;
+}
+
+/*  Current Pahe Highligh End*/

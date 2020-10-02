@@ -29,6 +29,9 @@
 
   <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet">
+
+  <!-- Admin Dashboard Custom CSS -->
+    <link href="css/adminDashboard.css" rel="stylesheet">
   
 
   <!-- <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"> -->
@@ -75,13 +78,6 @@ table.dataTable tr th.select-checkbox.selected::after {
       font-family: fontAwesome;
       content: "\f093\00a0";
     }
-
-    /* Current Page sidebar color*/
-     li.current-page, li.active {
-        border-right: 10px solid #ae0000;
-        /*background: #ae0000;*/
-    }*
-
 
 
   </style>
@@ -193,7 +189,6 @@ table.dataTable tr th.select-checkbox.selected::after {
                             Below table consists of the complete inventory with options to add and update product.
                           </p>
                           <!-- <table id="items_master" class="table table-striped table-bordered" style="width:100%"> -->
-
                           <table id="items_master" class="table table-striped jambo_table bulk_action" style="width:100%">
                             
                            <!--  <thead>
