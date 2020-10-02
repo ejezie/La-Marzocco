@@ -1082,7 +1082,8 @@ async function getMappingsMachine(onResponse,onError){
 
 async function cartAddItem(itemId,qty,userId,desc,onResponse,onError){
   var data = new FormData();
-  data.append('item_id', itemId);
+  console.log("id "+itemId +" qty "+qty)
+  data.append("item_id", itemId);
   data.append('qty', qty);
   appendIfNotNull(data,'user_id',userId);
   appendIfNotNull(data,'desc',desc);
@@ -1176,10 +1177,22 @@ async function getMachineParentMapping(itemId,onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function getItemParentImages(itemParentId,onResponse,onError){
+async function getItemParentImages(parent_id,main_item_id,onResponse,onError){
   var config = {
     method: 'get',
-    url: BASE_URL+'item-parent-image?parent_id='+itemParentId,
+    url: BASE_URL+'item-parent-image?parent_id='+parent_id+"&main_item_id="+main_item_id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+async function getItemParentImagesForMachineDropdown(main_item_id,onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item-parent-image?main_item_id='+main_item_id,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
@@ -1193,6 +1206,19 @@ async function getMachineParentMapping(itemParentId,onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'machine-parent/'+itemParentId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getMachineParentList(onResponse,onError,machineId){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'machine-parent?page=2&page_size=10&item_id='+machineId,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 

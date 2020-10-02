@@ -60,33 +60,11 @@ var orderArr = [
 				]
 
 
-
+var itemMasterTable;
 
 async function showQuotation(orderArr){
-
-	// var myOrdersHTML = ""
-
-
-
-	// for(i=0;i<orderArr.length;i++){
-
-	// 	myOrdersHTML += '<tr>'
-	// 	myOrdersHTML += '<td >'+orderArr[i]["date"]+'</td>'
-	// 	myOrdersHTML += '<td><a class="primary" data-toggle="modal" data-target="#modal_box" id='+orderArr[i]["orderId"]+' onclick="showOrderDetails(`'+orderArr[i]["orderId"]+'`)">View Details</a></td>'
-	// 	myOrdersHTML += '<td>'+orderArr[i]["totalPrice"]+'</td>'
-	// 	myOrdersHTML += '<td class="product_total">'+orderArr[i]["totalPrice"]+'</td>'
-	// 	// myOrdersHTML += '<td>'+orderArr[i]["status"]+'</td>'
-	// 	myOrdersHTML += '</tr>'
-
-
-	// }
-
-
-	// $("#myOrders").append(myOrdersHTML)
-
-
-	 itemMasterTable = $('#tableQuoteList').DataTable( {
-  dom: 'Blfrtip',
+   itemMasterTable = $('#tableQuoteList').DataTable( {
+   dom: 'Blfrtip',
    processing: true,
    serverSide: true,
    pageLength: 10,
@@ -147,40 +125,35 @@ async function showQuotation(orderArr){
                 }
               },
               {
-                "title":"Quantity",
-                render: function(data, type, row){
-                  return safeAccess(['quote_line',],row,[]).length;
-                }
-              },
-              {
                 "title":"Price",
                 render: function(data, type, row){
                   return  safeAccess(['total'],row,"-");
                 }
               },
-              {
-                "title":"Details",
-                render: function(data, type, row){
-                  return "Details";
-                }
-              },
-              {
-                "title":"Add to Cart",
-                render: function(data, type, row){
-                  return "Add to cart";
-                }
-              }
+		       {
+		        "title":"Product Details",
+		        render: function(data, type, row){
+		           return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Products</span></button>"
+		          }
+		        },
+		       {
+		        "title":"Order",
+		        render: function(data, type, row){
+		           return "<button type=\"button\" id='btnAddToCart' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Submit</span></button>"
+		          }
+        }
         ]
       })
+
 }
 
 
-async function showOrderDetails(orderId){
+async function showOrderDetails(quoteLine){
 
-	var orderDetails = orderArr.filter(function(order){return order.orderId == orderId;});
+	// var orderDetails = orderArr.filter(function(order){return order.orderId == orderId;});
 
 
-	console.log("orderDetails : ",orderDetails[0]["orderDetails"])
+	// console.log("orderDetails : ",orderDetails[0]["orderDetails"])
 
 
 	var orderDetailsHTML = ""
@@ -195,23 +168,23 @@ async function showOrderDetails(orderId){
 	orderDetailsHTML += '<th class="product-price">Price</th>'
 	orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
 	orderDetailsHTML += '<th class="product_total">Total</th>'
-	orderDetailsHTML += '<th class="product_status">Status</th>'
+	orderDetailsHTML += '<th class="product_status">Expected Delivery</th>'
 	orderDetailsHTML += '<th></th>'
 	orderDetailsHTML += '</tr>'
 	orderDetailsHTML += '</thead>'
 	orderDetailsHTML += '<tbody>'
 
 
-	for(i=0;i<orderDetails[0]["orderDetails"].length;i++){
+	for(i=0;i<quoteLine.length;i++){
+		const quoteItem = quoteLine[i];
 
 		orderDetailsHTML += '<tr>'
 		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+orderDetails[0]["orderDetails"][i]["productName"]+'</a></td>'
-		orderDetailsHTML += '<td class="product-price">'+orderDetails[0]["orderDetails"][i]["productPrice"]+'</td>'
-		orderDetailsHTML += '<td class="product_quantity">'+orderDetails[0]["orderDetails"][i]["productQuantity"]+'</td>'
-		orderDetailsHTML += '<td class="product_total">'+orderDetails[0]["orderDetails"][i]["totalProductPrice"]+'</td>'
-		orderDetailsHTML += '<td class="product_total">'+orderDetails[0]["orderDetails"][i]["status"]+'</td>'
-		orderDetailsHTML += '<td><a>Add to cart</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
+		orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'
+		orderDetailsHTML += '<td class="product_total">'+safeAccess(["total"],quoteItem,"-")+'</td>'
+		orderDetailsHTML += '<td class="product_total">'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
 		orderDetailsHTML += '</tr>'
 	}
 
@@ -220,11 +193,30 @@ async function showOrderDetails(orderId){
 	orderDetailsHTML += '</table>'
 
 
-    $("#orderDetails").append(orderDetailsHTML)
-
+    $("#orderDetails").append(orderDetailsHTML);
+    $('#modal_box').modal('show');
 }
 
 
 $(document).ready(function(){
-	showQuotation()
+	showQuotation();
+
+  $('#tableQuoteList').on('click', '#btnDetails', function () {
+  	var RowIndex = $(this).closest('tr');
+    var data = $('#tableQuoteList').dataTable().api().row(RowIndex).data();
+  	showOrderDetails(data.quote_line);
+  });
+
+
+  $('#tableQuoteList').on('click', '#btnAddToCart',async function () {
+  		var RowIndex = $(this).closest('tr');
+    	var data = $('#tableQuoteList').dataTable().api().row(RowIndex).data();
+    	notifyInfo("Adding items to cart");
+    	for(var item of data.quote_line){
+    		await shoppingCart.addItemToCart(item.item.id,item.item.name,item.price,item.qty);
+    	}
+    	// window.location.href  ="cart.html";
+  });
+
+  
 });
