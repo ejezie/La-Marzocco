@@ -326,6 +326,73 @@ function showCatalogDropdownSelection(machineId){
   getMachineParentList(onResponse,onError,machineId);
 }
 
+function showMachineDropdownSelection(mainItemId){
+	var loadingNotification = notifyInfo("Loading results");
+  	var onResponse = function(response){
+  	dismiss(loadingNotification);
+  	var results = [];
+    for(var i=0; i< response.data.item_parent_images.data.length; i++){
+      const item = response.data.item_parent_images.data[i].item;
+      const element = {
+						"productId" : item.id,
+						"href": "product-details.html?item="+item["id"],
+						"productCode" : item.code,
+						"productName" : item.name,
+						"productFamily" : safeAccess(["parent","name"],item),
+						"productActualPrice" : "$1199.00",
+						"productOfferPrice" : "$999.00",
+						"productOffPercent" : "-20%",
+						"productQuantityInStock" : "50"
+					};
+	  results.push(element);
+    }
+
+    showCatalog(results);
+
+    $("#pagination_current").text(response.data.item_parent_images.current_page);
+    if(response.data.item_parent_images.prev_page_url!=null){
+    	$("#pagination_prev").show();
+    	$("#pagination_prev").text(response.data.item_parent_images.current_page-1);
+    	    	$('#pagination_prev').unbind();
+
+    	$('#pagination_prev').click(function () {
+				showSearchResults(response.data.item_parent_images.prev_page_url)
+			});
+    }else{
+    	$("#pagination_prev").hide();
+    }
+    if(response.data.item_parent_images.next_page_url!=null){
+    	$("#pagination_next").show();
+    	$("#pagination_next").text(response.data.item_parent_images.current_page+1);
+    	$('#pagination_next').unbind();
+    	$('#pagination_next').click(function () {
+				showSearchResults(response.data.item_parent_images.next_page_url)
+			});
+    }else{
+    	$("#pagination_next").hide();
+    }
+    if(response.data.item_parent_images.last_page_url!=null){
+    	$("#pagination_last").show();
+    	$("#pagination_last").text(response.data.item_parent_images.last_page+" >>");
+    	$('#pagination_last').unbind();
+    	$('#pagination_last').click(function () {
+				showSearchResults(response.data.item_parent_images.last_page_url);
+			});
+    }else{
+    	$("#pagination_last").hide();
+    }
+    
+  };
+
+
+  // var onError =function(error){
+  // 	  	dismiss(loadingNotification);
+  // 	console.log(error);
+  //   notifyError("Failed to load results");
+  // };
+  getItemParentImagesForMachineDropdown(mainItemId,onResponse);
+}
+
 
 $(document).ready(function(){
 	showSearchResults();

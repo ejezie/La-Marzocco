@@ -187,7 +187,7 @@ async function showMachinesSideFilter(machineList){
 	$("#sidebarMachineFilter").append(sidebarHTML);
 	$('#sidebarMachineFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
-   		refreshCatalog();
+   		showMachineDropdownSelection(289);
 	});
 
 }
@@ -200,7 +200,6 @@ function refreshCatalog(){
 
 function getCheckedMachine(){
 		var returnValue=null;
-
 	    $('#sidebarMachineFilter input:checked').each(function(){
 	        returnValue = this.value;
 	    });        
@@ -256,18 +255,18 @@ async function showGroupSideFilter(groupList){
 
 		const item = groupList[i];
 
-		sidebarHTML += '<li class="dropdown dropdown-large">'
-		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown">'+item["code"]+' </a>'
-		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
+		// sidebarHTML += '<li class="dropdown dropdown-large">'
+		// sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown">'+item["code"]+' </a>'
+		// sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
-		sidebarHTML += '<li class="col-sm-3">'
-		sidebarHTML += '<ul>'
+		// sidebarHTML += '<li class="col-sm-3">'
+		// sidebarHTML += '<ul>'
 
 		for(j=0; j<item["machines"].length;j++){ 
 
 			const inneritem = groupList[i]["machines"][j];
 			console.log("inneritem : ", inneritem)
-			sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
+			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
 
 			for(k=0; k<inneritem["groups"].length;k++){
 
@@ -278,11 +277,11 @@ async function showGroupSideFilter(groupList){
 		}
 		
 
-		sidebarHTML += '</ul>'
-		sidebarHTML += '</li>'
+		// sidebarHTML += '</ul>'
+		// sidebarHTML += '</li>'
 
-		sidebarHTML += '</ul>'
-		sidebarHTML += '</li>'
+		// sidebarHTML += '</ul>'
+		// sidebarHTML += '</li>'
 
 	}
 
@@ -315,15 +314,15 @@ async function showParentSideFilter(familyList){
 
 			const inneritem = familyList[i]["machines"][j];
 			console.log("inneritem : ", inneritem)
-			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
-			sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
+			sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
+			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
 
-			// for(k=0; k<inneritem["parents"].length;k++){
+			for(k=0; k<inneritem["parents"].length;k++){
 
-			// 	const innerMostitem = inneritem["parents"][k];
-			// 	sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
+				const innerMostitem = inneritem["parents"][k];
+				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
 
-			// }
+			}
 		}
 		
 
@@ -352,6 +351,7 @@ $(document).ready(function(){
 	var onError =function(error){
 		// notifyError("Failed to");
 	};
+
 
 	getMappingsMachine(function(response){
 		showMachinesSideFilter(response.data.mapping)

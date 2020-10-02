@@ -1188,6 +1188,18 @@ async function getItemParentImages(parent_id,main_item_id,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+async function getItemParentImagesForMachineDropdown(main_item_id,onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item-parent-image?main_item_id='+main_item_id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
 
 async function getMachineParentMapping(itemParentId,onResponse,onError){
   var config = {

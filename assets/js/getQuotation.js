@@ -131,15 +131,15 @@ async function showQuotation(orderArr){
                 }
               },
 		       {
-		        "title":"Details",
+		        "title":"Product Details",
 		        render: function(data, type, row){
-		           return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Details</span></button>"
+		           return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Products</span></button>"
 		          }
 		        },
 		       {
-		        "title":"Add to Cart",
+		        "title":"Orde",
 		        render: function(data, type, row){
-		           return "<button type=\"button\" id='btnAddToCart' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Add to cart</span></button>"
+		           return "<button type=\"button\" id='btnAddToCart' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Submit</span></button>"
 		          }
         }
         ]
