@@ -137,7 +137,7 @@ async function showQuotation(orderArr){
 		          }
 		        },
 		       {
-		        "title":"Orde",
+		        "title":"Order",
 		        render: function(data, type, row){
 		           return "<button type=\"button\" id='btnAddToCart' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Submit</span></button>"
 		          }
@@ -208,8 +208,14 @@ $(document).ready(function(){
   });
 
 
-  $('#tableQuoteList').on('click', '#btnAddToCart', function () {
-
+  $('#tableQuoteList').on('click', '#btnAddToCart',async function () {
+  		var RowIndex = $(this).closest('tr');
+    	var data = $('#tableQuoteList').dataTable().api().row(RowIndex).data();
+    	notifyInfo("Adding items to cart");
+    	for(var item of data.quote_line){
+    		await shoppingCart.addItemToCart(item.item.id,item.item.name,item.price,item.qty);
+    	}
+    	// window.location.href  ="cart.html";
   });
 
   

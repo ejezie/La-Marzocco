@@ -34,7 +34,7 @@ var shoppingCart = (function () {
     // Public methods and properties
     var obj = {};
 
-    obj.addItemToCart = function (id,name, price, count) {
+    obj.addItemToCart = async function (id,name, price, count) {
 
         var onResponse = function(response){ 
             for (var i in cart) {
@@ -51,7 +51,7 @@ var shoppingCart = (function () {
       var onError =function(error){
         notifyError("Failed to add item");
       };
-        cartAddItem(id,count,null,null,onResponse,onError);
+       await cartAddItem(id,count,null,null,onResponse,onError);
     };
 
 

@@ -179,8 +179,6 @@ async function showMachinesSideFilter(machineList){
 		sidebarHTML += '</ul>'
 		sidebarHTML += '</li>'
 
-
-
 	}
 
 

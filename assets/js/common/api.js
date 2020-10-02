@@ -1082,7 +1082,8 @@ async function getMappingsMachine(onResponse,onError){
 
 async function cartAddItem(itemId,qty,userId,desc,onResponse,onError){
   var data = new FormData();
-  data.append('item_id', itemId);
+  console.log("id "+itemId +" qty "+qty)
+  data.append("item_id", itemId);
   data.append('qty', qty);
   appendIfNotNull(data,'user_id',userId);
   appendIfNotNull(data,'desc',desc);
