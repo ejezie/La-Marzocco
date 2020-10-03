@@ -62,7 +62,7 @@ var orderArr = [
 
 
 
-async function showCart(cartItems){
+async function showCart(orderArr){
 
 	var myOrdersHTML = ""
 
@@ -151,4 +151,4 @@ async function showOrderDetails(orderId){
 
 
 
-showCart(cartItems)
+showCart(orderArr)
