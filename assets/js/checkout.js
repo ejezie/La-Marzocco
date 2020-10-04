@@ -1,5 +1,3 @@
-
-
 var addArr = [{ 
 				"user_id" : "A1",
 				"add_id" : "A1AD1",
@@ -34,31 +32,26 @@ async function showAddressSlider(addArr){
 
 	var addSliderHTML = ""
 
-
 	for(i=0; i<addArr.length;i++){
 
+		const address = addArr[i];
+
 		addSliderHTML += '<div class="optionsecoptions" style="border-style: solid ; width: initial;font-family: trade gothic;font-size: 14px;width: 100%;">'
-		addSliderHTML += ''+ addArr[i]["add_line_1"] + ', '+ addArr[i]["add_line_2"]+ ', ' + addArr[i]["area_code"]+ ', '+ addArr[i]["state"] + ', '+ addArr[i]["country"]+''
-		addSliderHTML += '<br>'
-		addSliderHTML += '<input type="checkbox" name="drone"><label style="font-size:13px">Billing Address</label>'
-		addSliderHTML += '<br>'
-		addSliderHTML += '<input type="checkbox" name="drone"><label style="font-size:13px">Shipping Address</label>'
+		addSliderHTML += ''+ address.address+''
+			addSliderHTML += '<br>'
+		if(address.is_billable != 0){
+			addSliderHTML += '<input id="billingAddrCheckbox" type="checkbox" value="'+address.id+'" ><label style="font-size:13px">Billing Address</label>'
+		}
+			addSliderHTML += '<br>'
+		if(address.is_shippable != 0){
+			addSliderHTML += '<input id="shippingAddrCheckbox" type="checkbox" value="'+address.id+'"  ><label style="font-size:13px">Shipping Address</label>'
+		}
 		addSliderHTML += '</div>'
 	}
-
-	
-
-
 
 	$("#addressSlider").append(addSliderHTML)
 }
 
-showAddressSlider(addArr)
-
-
-
-
-// On button click change color
 $(".select_add").click(function() {
 
 	alert(this.id);
@@ -68,55 +61,70 @@ $(".select_add").click(function() {
    $(this).css("background-color", "#ae0000"); 
 });
 
-
-// JS for slider
-// var slideIndex = 1;
-// showSlides(slideIndex);
-
-// function plusSlides(n) {
-//   	showSlides(slideIndex += n);
-// }
-
-// function currentSlide(n) {
-//   showSlides(slideIndex = n);
-// }
-
-// function showSlides(n) {
-//   var i;
-//   var slides = document.getElementsByClassName("mySlides");
-//   var dots = document.getElementsByClassName("dot");
-//   if (n > slides.length) {slideIndex = 1}    
-//   if (n < 1) {slideIndex = slides.length}
-//   for (i = 0; i < slides.length; i++) {
-//       slides[i].style.display = "none";  
-//   }
-//   for (i = 0; i < dots.length; i++) {
-//       dots[i].className = dots[i].className.replace(" active", "");
-//   }
-//   slides[slideIndex-1].style.display = "block";  
-//   dots[slideIndex-1].className += " active";
-// }
+function findGetParameter(parameterName) {
+		var result = null,
+		tmp = [];
+		location.search
+		.substr(1)
+		.split("&")
+		.forEach(function (item) {
+			tmp = item.split("=");
+			if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+		});
+		return result;
+	}
 
 
-// var selectedDiv = "";
-// var x = document.getElementsByClassName('optionsecoptions')
-// for (var i = 0; i < x.length; i++) {
-//     x[i].addEventListener("click", function(){
-        
-//     var selectedEl = document.querySelector(".selected");
-//     if(selectedEl){
-//         selectedEl.classList.remove("selected");
-//     }
-//     this.classList.add("selected");
-        
-//     }, false);;
-// }
+var quoteId;
+$(document).ready(function(){
+	quoteId = findGetParameter("quote")
+		if(quoteId==null || quoteId == undefined ){
+			notifyError("Something went wrong");
+			// window.location = "cart.html";
+		}else{
+			initProductDetails();
+		}
 
-// document.getElementById('confirmBtn').addEventListener('click',function(){
-    
-//     var selectedEl = document.querySelector(".selected");
-//     if(selectedEl)
-//         alert(selectedEl.innerText);    
-//     else
-//         alert('please choose an option')
-// })
+	$("#btProceedToPayment").click(function(){
+		confirmOrder();
+	});
+	initAddresses();
+});
+
+function initAddresses(){
+	getAddressesList(function(response){
+			showAddressSlider(safeAccess(["data","addresses","data"],response));
+	});
+}
+
+function initProductDetails(){
+	//need html work
+}
+
+function confirmOrder(){
+	const orderNotes = $("#inputOrderNotes").val();
+	const billingAddressId = getBillingAddressId();
+	const shippingAddressId = getShippingAddressId();
+	createOrder(quoteId,billingAddressId,shippingAddressId,orderNotes,function(response){
+			notifySuccess("Order Successful");
+	});
+}
+
+function getBillingAddressId(){
+	var returnValue=null;
+	    // $('#addressSlider #billingAddrCheckbox input:checked').each(function(){
+	    $('input:checkbox[id^="billingAddrCheckbox"]:checked').each(function(){
+	        returnValue = this.value;
+	    });        
+	return returnValue;
+}
+
+function getShippingAddressId(){
+	var returnValue=null;
+	    // $('#addressSlider  #shippingAddrCheckbox input:checked').each(function(){
+	    $('input:checkbox[id^="shippingAddrCheckbox"]:checked').each(function(){
+	    	console.log("xxxx")
+	        returnValue = this.value;
+	    });        
+	return returnValue;
+}

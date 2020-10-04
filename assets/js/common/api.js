@@ -1264,3 +1264,51 @@ async function getQuoteList(itemId,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+
+async function getQuoteList(itemId,onResponse,onError){
+  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'quotation/list',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getAddressesList(onResponse,onError){
+  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'address',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function createOrder(quoteId,shippingAddrId,billingAddrId,desc,onResponse,onError){
+  var data = new FormData();
+  data.append('quote_id', quoteId);
+  data.append('shipping_address_id', shippingAddrId);
+  data.append('billing_address_id', billingAddrId);
+  data.append('desc', desc);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'order/create',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+     data :data
+  };
+  axios(config).then(onResponse).catch(onError);
+}
