@@ -344,6 +344,25 @@ async function getQuotationList(onResponse,onError,page,page_size){
   .catch(onError);  
 
 }
+async function getOrderList(onResponse,onError,page,page_size){
+
+  var data = new FormData();
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'order/list?page='+page+'&page_size='+page_size,
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
 async function getCustomerList(onResponse,onError,page,page_size){
 
   var data = new FormData();
@@ -1082,9 +1101,13 @@ async function getMappingsMachine(onResponse,onError){
 
 async function cartAddItem(itemId,qty,userId,desc,onResponse,onError){
   var data = new FormData();
-  console.log("id "+itemId +" qty "+qty)
-  data.append("item_id", itemId);
-  data.append('qty', qty);
+  console.log("id "+itemId +" qty "+qty);
+  // data.append('item_id', itemId);
+  // data.append('qty', qty);
+  // alert(data.)
+  console.log("data=" + JSON.stringify(data));
+  appendIfNotNull(data,'item_id',itemId);
+  appendIfNotNull(data,'qty',qty);
   appendIfNotNull(data,'user_id',userId);
   appendIfNotNull(data,'desc',desc);
 

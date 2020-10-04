@@ -62,7 +62,7 @@ var orderArr = [
 
 
 
-async function showCart(cartItems){
+async function showCart(orderArr){
 
 	var myOrdersHTML = ""
 
@@ -99,13 +99,164 @@ async function showCart(cartItems){
 }
 
 
-async function showOrderDetails(orderId){
+// async function showOrderDetails(orderId){
 
-	var orderDetails = orderArr.filter(function(order){return order.orderId == orderId;});
+// 	var orderDetails = orderArr.filter(function(order){return order.orderId == orderId;});
 
 
-	console.log("orderDetails : ",orderDetails[0]["orderDetails"])
+// 	console.log("orderDetails : ",orderDetails[0]["orderDetails"])
 
+
+// 	var orderDetailsHTML = ""
+// 	$("#orderDetails").empty()
+
+
+// 	orderDetailsHTML += '<table>'
+// 	orderDetailsHTML += '<thead>'
+// 	orderDetailsHTML += '<tr>'
+// 	orderDetailsHTML += '<th class="product_thumb">Product</th>'
+// 	orderDetailsHTML += '<th class="product_name">Name</th>'
+// 	orderDetailsHTML += '<th class="product-price">Price</th>'
+// 	orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
+// 	orderDetailsHTML += '<th class="product_total">Total</th>'
+// 	orderDetailsHTML += '<th class="product_status">Status</th>'
+// 	orderDetailsHTML += '<th></th>'
+// 	orderDetailsHTML += '</tr>'
+// 	orderDetailsHTML += '</thead>'
+// 	orderDetailsHTML += '<tbody>'
+
+
+// 	for(i=0;i<orderDetails[0]["orderDetails"].length;i++){
+
+// 		orderDetailsHTML += '<tr>'
+// 		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+// 		orderDetailsHTML += '<td class="product_name"><a href="#">'+orderDetails[0]["orderDetails"][i]["productName"]+'</a></td>'
+// 		orderDetailsHTML += '<td class="product-price">'+orderDetails[0]["orderDetails"][i]["productPrice"]+'</td>'
+// 		orderDetailsHTML += '<td class="product_quantity">'+orderDetails[0]["orderDetails"][i]["productQuantity"]+'</td>'
+// 		orderDetailsHTML += '<td class="product_total">'+orderDetails[0]["orderDetails"][i]["totalProductPrice"]+'</td>'
+// 		orderDetailsHTML += '<td class="product_total">'+orderDetails[0]["orderDetails"][i]["status"]+'</td>'
+// 		orderDetailsHTML += '<td><a>Add to cart</a></td>'
+// 		orderDetailsHTML += '</tr>'
+// 	}
+
+
+// 	orderDetailsHTML += '</tbody>'
+// 	orderDetailsHTML += '</table>'
+
+
+//     $("#orderDetails").append(orderDetailsHTML)
+
+// }
+
+var itemMasterTable;
+async function showOrders(orderArr){
+   itemMasterTable = $('#tableOrders').DataTable( {
+   dom: 'Blfrtip',
+   processing: true,
+   serverSide: true,
+   pageLength: 10,
+   bSort : false,
+   lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
+          columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ,
+        {
+             targets: '_all',
+             defaultContent: '-'
+            },],
+        select: {
+            style:    'multi',
+            selector: 'td:first-child'
+        },
+        order: [[ 1, 'asc' ]],
+   	ajax: function(data, callback, settings) {
+    const loadingId = notifyInfo("Please wait");
+    var onResponse = function(res){
+              dismiss(loadingId);
+              console.log("recordsTotal "+res.data.order.data.length)
+              callback({
+                draw:data.draw,
+                recordsTotal: res.data.order.total,
+                recordsFiltered: res.data.order.total,
+                data: res.data.order.data
+              });
+
+            };
+            var onError =function(error){
+              console.log(error);
+              dismiss(loadingId);
+            };
+              var pageIndex = data.start / data.length + 1 ;
+			getOrderList(onResponse,onError,pageIndex,data.length);
+        },
+       
+        buttons : [
+            'selectAll',
+            'selectNone',
+              ],
+              columns: [
+            
+              {
+                "title":"Date",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['created_at',],row,"");
+                }
+              },
+              {
+                "title":"Items",
+                render: function(data, type, row){
+                  return safeAccess(['quote_line',],row,[]).length;
+                }
+              },
+              {
+                "title":"Price",
+                render: function(data, type, row){
+                  return  safeAccess(['total'],row,"-");
+                }
+              },
+		       {
+		        "title":"Product Details",
+		        render: function(data, type, row){
+		           return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Products</span></button>"
+		          }
+		        },
+		       {
+		        "title":"Order",
+		        render: function(data, type, row){
+		           return "<button type=\"button\" id='btnAddToCart' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Submit</span></button>"
+		          }
+        }
+        ]
+      })
+
+}
+
+
+
+$(document).ready(function(){
+	alert("load")
+	showOrders();
+
+  $('#tableOrders').on('click', '#btnDetails', function () {
+  	var RowIndex = $(this).closest('tr');
+    var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+  	showOrderDetails(data.order_line);
+  });
+
+
+  $('#tableOrders').on('click', '#btnTrackOrder',async function () {
+  		var RowIndex = $(this).closest('tr');
+    	var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+    	
+  });
+});
+
+
+
+async function showOrderDetails(quoteLine){
 
 	var orderDetailsHTML = ""
 	$("#orderDetails").empty()
@@ -119,23 +270,23 @@ async function showOrderDetails(orderId){
 	orderDetailsHTML += '<th class="product-price">Price</th>'
 	orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
 	orderDetailsHTML += '<th class="product_total">Total</th>'
-	orderDetailsHTML += '<th class="product_status">Status</th>'
+	orderDetailsHTML += '<th class="product_status">Expected Delivery</th>'
 	orderDetailsHTML += '<th></th>'
 	orderDetailsHTML += '</tr>'
 	orderDetailsHTML += '</thead>'
 	orderDetailsHTML += '<tbody>'
 
 
-	for(i=0;i<orderDetails[0]["orderDetails"].length;i++){
+	for(i=0;i<quoteLine.length;i++){
+		const quoteItem = quoteLine[i];
 
 		orderDetailsHTML += '<tr>'
 		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+orderDetails[0]["orderDetails"][i]["productName"]+'</a></td>'
-		orderDetailsHTML += '<td class="product-price">'+orderDetails[0]["orderDetails"][i]["productPrice"]+'</td>'
-		orderDetailsHTML += '<td class="product_quantity">'+orderDetails[0]["orderDetails"][i]["productQuantity"]+'</td>'
-		orderDetailsHTML += '<td class="product_total">'+orderDetails[0]["orderDetails"][i]["totalProductPrice"]+'</td>'
-		orderDetailsHTML += '<td class="product_total">'+orderDetails[0]["orderDetails"][i]["status"]+'</td>'
-		orderDetailsHTML += '<td><a>Add to cart</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
+		orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'
+		orderDetailsHTML += '<td class="product_total">'+safeAccess(["total"],quoteItem,"-")+'</td>'
+		orderDetailsHTML += '<td class="product_total">'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
 		orderDetailsHTML += '</tr>'
 	}
 
@@ -144,11 +295,6 @@ async function showOrderDetails(orderId){
 	orderDetailsHTML += '</table>'
 
 
-    $("#orderDetails").append(orderDetailsHTML)
-
+    $("#orderDetails").append(orderDetailsHTML);
+    $('#modal_box').modal('show');
 }
-
-
-
-
-showCart(cartItems)
