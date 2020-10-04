@@ -58,7 +58,10 @@
     <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
 
 
-    <style type="text/css">.dropdown-large {
+    <style type="text/css">
+
+
+        .dropdown-large {
   position: static !important;
 }
 .dropdown-menu-large {
@@ -119,6 +122,13 @@
   .dropdown-menu-large .dropdown-header {
     padding: 3px 15px !important;
   }
+}
+
+
+
+/*Product Name Grid*/
+.product_name {
+    height: 80px;
 }
 
 
@@ -231,6 +241,7 @@ label:hover:before {
                                         <ul class="dropdown_links">
                                             <li><a href="my-account.html">My Account </a></li>
                                             <li><a href="myOrders.html">My Orders </a></li>
+                                            <li><a href="getQuotation.html">Quotation </a></li>
                                             <li><a href="cart.html">Shopping Cart</a></li>
                                             <li><a href="checkout.html">Logout </a></li>
                                             <!-- <li><a href="wishlist.html">Wishlist</a></li> -->
@@ -303,7 +314,7 @@ label:hover:before {
         
         
         <!--mini cart-->
-        <div class="mini_cart" id="miniCart" style="overflow: auto;">
+        <div class="mini_cart"  style="overflow: auto;">
             <div class="cart_close">
                 <div class="cart_text">
                     <h3>cart</h3>
@@ -312,54 +323,56 @@ label:hover:before {
                     <a href="javascript:void(0)"><i class="ion-android-close"></i></a>
                 </div>
             </div>
-            <!-- <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">JBL Flip 3 Splasroof Portable Bluetooth 2</a>
+            <div id="miniCart">
+                <!-- <div class="cart_item">
+                    <div class="cart_img">
+                        <a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a>
+                    </div>
+                    <div class="cart_info">
+                        <a href="#">JBL Flip 3 Splasroof Portable Bluetooth 2</a>
 
-                    <span class="quantity">Qty: 1</span>
-                    <span class="price_cart">$60.00</span>
+                        <span class="quantity">Qty: 1</span>
+                        <span class="price_cart">$60.00</span>
 
+                    </div>
+                    <div class="cart_remove">
+                        <a href="#"><i class="ion-android-close"></i></a>
+                    </div>
                 </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="ion-android-close"></i></a>
+                <div class="cart_item">
+                    <div class="cart_img">
+                        <a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a>
+                    </div>
+                    <div class="cart_info">
+                        <a href="#">Koss Porta Pro On Ear Headphones </a>
+                        <span class="quantity">Qty: 1</span>
+                        <span class="price_cart">$69.00</span>
+                    </div>
+                    <div class="cart_remove">
+                        <a href="#"><i class="ion-android-close"></i></a>
+                    </div>
                 </div>
+                <div class="mini_cart_table">
+                    <div class="cart_total">
+                        <span>Sub total:</span>
+                        <span class="price">$138.00</span>
+                    </div>
+                    <div class="cart_total mt-10">
+                        <span>total:</span>
+                        <span class="price">$138.00</span>
+                    </div>
+                </div>
+
+                <div class="mini_cart_footer">
+                    <div class="cart_button">
+                        <a href="cart.html">View cart</a>
+                    </div>
+                    <div class="cart_button">
+                        <a class="active" href="checkout.html">Checkout</a>
+                    </div>
+
+                </div> -->
             </div>
-            <div class="cart_item">
-                <div class="cart_img">
-                    <a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a>
-                </div>
-                <div class="cart_info">
-                    <a href="#">Koss Porta Pro On Ear Headphones </a>
-                    <span class="quantity">Qty: 1</span>
-                    <span class="price_cart">$69.00</span>
-                </div>
-                <div class="cart_remove">
-                    <a href="#"><i class="ion-android-close"></i></a>
-                </div>
-            </div>
-            <div class="mini_cart_table">
-                <div class="cart_total">
-                    <span>Sub total:</span>
-                    <span class="price">$138.00</span>
-                </div>
-                <div class="cart_total mt-10">
-                    <span>total:</span>
-                    <span class="price">$138.00</span>
-                </div>
-            </div>
-
-            <div class="mini_cart_footer">
-                <div class="cart_button">
-                    <a href="cart.html">View cart</a>
-                </div>
-                <div class="cart_button">
-                    <a class="active" href="checkout.html">Checkout</a>
-                </div>
-
-            </div> -->
 
         </div>
         <!--mini cart end-->

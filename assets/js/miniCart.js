@@ -33,6 +33,7 @@ function loadMiniCart(){
 async function showMiniCart(cartItems,cartSubtotal){
 	var miniCartHTML = ''
 
+
 	for(i=0; i<cartItems.length;i++){
 
 		const item  = cartItems[i];
