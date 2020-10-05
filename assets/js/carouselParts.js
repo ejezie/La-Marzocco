@@ -40,7 +40,7 @@ async function showCarrouselParts(imageUrl,parts){
         carouselHTML += '<div class="fluid-ratio-inner"></div>'
         carouselHTML += '</div>'
         carouselHTML += '</div>'
-        carouselHTML += '<div class="details">'+(i+1)+". " +safeAccess(["item","name"],part)+'</div>'
+        carouselHTML += '<div class="details">'+part.part_ref_number+" " +safeAccess(["item","name"],part)+'</div>'
         carouselHTML += '</li>'
     }
     carouselHTML += ' <li class="playlist-item more">'
