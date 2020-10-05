@@ -3798,7 +3798,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-size: 18px;
   display: block;
   text-align: center;
-  border: 1px solid #42474a;
+  border: 1px solid #fff;
   border-radius: 50%;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
