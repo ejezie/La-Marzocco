@@ -26,6 +26,28 @@ var addArr = [{
 				"country" : "India",
 				}]
 
+var orderSummary = [{
+						"product" : "Linea Mini",
+						"quantity" : "3",
+						"price" : "$1600.00"
+					},
+					{
+						"product" : "Vulcano",
+						"quantity" : "3",
+						"price" : "$400.00"
+					},
+					{
+						"product" : "Modbar",
+						"quantity" : "2",
+						"price" : "$1000.00"
+					},
+					{
+						"product" : "Strada S",
+						"quantity" : "1",
+						"price" : "$1000.00"
+					}
+				]		
+
 
 
 async function showAddressSlider(addArr){
@@ -128,3 +150,61 @@ function getShippingAddressId(){
 	    });        
 	return returnValue;
 }
+
+
+
+
+
+async function showCheckoutOrderSummary(orderSummary){
+
+	var orderSummaryHTML = ''
+
+
+
+	orderSummaryHTML += '<table>'
+	orderSummaryHTML += '<thead>'
+	orderSummaryHTML += '<tr>'
+	orderSummaryHTML += '<th>Product</th>'
+	orderSummaryHTML += '<th>Total</th>'
+	orderSummaryHTML += '</tr>'
+	orderSummaryHTML += '</thead>'
+	orderSummaryHTML += '<tbody>'
+
+	for(i=0;i<orderSummary.length;i++){
+
+		orderSummaryHTML += '<tr>'
+		orderSummaryHTML += '<td> '+ orderSummary[i]["product"]+' <strong> × '+ orderSummary[i]["quantity"]+'</strong></td>'
+		orderSummaryHTML += '<td> '+ orderSummary[i]["price"]+'</td>'
+		orderSummaryHTML += '</tr>'
+	}
+
+
+	orderSummaryHTML += '</tbody>'
+	orderSummaryHTML += '<tfoot>'
+	orderSummaryHTML += '<tr>'
+	orderSummaryHTML += '<th>Cart Subtotal</th>'
+	orderSummaryHTML += '<td>$4000.00</td>'
+	orderSummaryHTML += '</tr>'
+	orderSummaryHTML += '<tr>'
+	orderSummaryHTML += '<th>Shipping</th>'
+	orderSummaryHTML += '<td><strong>$20.00</strong></td>'
+	orderSummaryHTML += '</tr>'
+	orderSummaryHTML += '<tr>'
+	orderSummaryHTML += '<th>Tax</th>'
+	orderSummaryHTML += '<td><strong>$20.00</strong></td>'
+	orderSummaryHTML += '</tr>'
+	orderSummaryHTML += '<tr class="order_total">'
+	orderSummaryHTML += '<th>Order Total</th>'
+	orderSummaryHTML += '<td><strong>$4040.00</strong></td>'
+	orderSummaryHTML += '</tr>'
+	orderSummaryHTML += '</tfoot>'
+	orderSummaryHTML += '</table>'
+
+
+	$("#checkoutOrderSummary").append(orderSummaryHTML)
+
+
+}
+
+
+showCheckoutOrderSummary(orderSummary)
