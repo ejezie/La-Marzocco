@@ -312,15 +312,13 @@ async function showParentSideFilter(familyList){
 
 			const inneritem = familyList[i]["machines"][j];
 			console.log("inneritem : ", inneritem)
-			sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
-			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
+			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
+			sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
 
-			for(k=0; k<inneritem["parents"].length;k++){
-
-				const innerMostitem = inneritem["parents"][k];
-				sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
-
-			}
+			// for(k=0; k<inneritem["parents"].length;k++){
+			// 	const innerMostitem = inneritem["parents"][k];
+			// 	sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
+			// }
 		}
 		
 

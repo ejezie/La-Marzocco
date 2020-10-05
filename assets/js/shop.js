@@ -104,7 +104,11 @@ async function showCatalog(catalogList){
 		catalogHTML += '<p class="manufacture_product"><a href="#">Accessories</a></p>'
 		catalogHTML += '</div>'
 		catalogHTML += '<div class="product_thumb">'
-		catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product10.jpg" alt=""></a>'
+		if(catalogList[i]["image"]){
+			catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="'+catalogList[i]["image"]+'" alt=""></a>'
+		}else{
+			catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product1.jpg" alt=""></a>'
+		}
 		catalogHTML += '<a class="secondary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product11.jpg" alt=""></a>'
 		catalogHTML += '<div class="label_product">'
 		catalogHTML += '<span class="label_sale">'+catalogList[i]["productOffPercent"]+'</span>'
@@ -266,12 +270,13 @@ function showCatalogDropdownSelection(machineId){
   	dismiss(loadingNotification);
   	var results = [];
     for(var i=0; i< response.data.machine_parent.data.length; i++){
-      const item = response.data.machine_parent.data[i].item;
+      const item = response.data.machine_parent.data[i];
       const element = {
-						"productId" : item.id,
-						"href": "carouselParts.html?mainitem="+machineId+"&parent="+response.data.machine_parent.data[i].id,
-						"productCode" : item.code,
-						"productName" : item.name,
+						"productId" :safeAccess(["parents","id"],item),
+						"image": safeAccess(["image","thumbnail"],item),
+						"href": "carouselParts.html?mainitem="+machineId+"&parent="+safeAccess(["parents","id"],item),
+						"productCode" : safeAccess(["parents","id"],item),
+						"productName" : safeAccess(["parents","name"],item),
 						"productFamily" : safeAccess(["parents","name"],item),
 						"productActualPrice" : "$1199.00",
 						"productOfferPrice" : "$999.00",
