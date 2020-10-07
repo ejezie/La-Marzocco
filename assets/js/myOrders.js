@@ -202,19 +202,19 @@ async function showOrders(orderArr){
                 "title":"Date",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['created_at',],row,"");
+                  return safeAccess(['created_at'],row,"").match(/([^T]+)/)[0].split("-").reverse().join("/");;
                 }
               },
               {
                 "title":"Items",
                 render: function(data, type, row){
-                  return safeAccess(['quote_line',],row,[]).length;
+                  return safeAccess(['order_line'],row,[]).length;
                 }
               },
               {
                 "title":"Price",
                 render: function(data, type, row){
-                  return  safeAccess(['total'],row,"-");
+                  return  "$"+safeAccess(['total'],row,"-");
                 }
               },
 		       {
@@ -224,9 +224,9 @@ async function showOrders(orderArr){
 		          }
 		        },
 		       {
-		        "title":"Order",
+		        "title":"Track Order",
 		        render: function(data, type, row){
-		           return "<button type=\"button\" id='btnAddToCart' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Submit</span></button>"
+		           return "<button type=\"button\" id='btnTrackOrder' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Track</span></button>"
 		          }
         }
         ]
@@ -249,11 +249,51 @@ $(document).ready(function(){
   $('#tableOrders').on('click', '#btnTrackOrder',async function () {
   		var RowIndex = $(this).closest('tr');
     	var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
-    	
+    	notifyInfo("Please wait");
+    	trackOrder(data.id,function(res){
+    		 showOrderTrackingDetails(res.data.track_items);
+    	})
+
   });
 });
 
 
+
+async function showOrderTrackingDetails(items){
+var orderDetailsHTML = ""
+	$("#orderTrackingDetails").empty()
+
+
+	orderDetailsHTML += '<table>'
+	orderDetailsHTML += '<thead>'
+	orderDetailsHTML += '<tr>'
+	orderDetailsHTML += '<th class="product_thumb">Item Part No.</th>'
+	orderDetailsHTML += '<th class="product_name">Quantity</th>'
+	orderDetailsHTML += '<th class="product-price">Status</th>'
+	orderDetailsHTML += '<th></th>'
+	orderDetailsHTML += '</tr>'
+	orderDetailsHTML += '</thead>'
+	orderDetailsHTML += '<tbody>'
+
+
+	for(i=0;i<items.length;i++){
+		const item = items[i];
+
+		orderDetailsHTML += '<tr>'
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item_part_number"],item,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["quantity"],item,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["status"],item,"-")+'</a></td>'
+		orderDetailsHTML += '</tr>'
+	}
+
+
+	orderDetailsHTML += '</tbody>'
+	orderDetailsHTML += '</table>'
+
+
+    $("#orderTrackingDetails").append(orderDetailsHTML);
+    $('#modal_tracking').modal('show');
+}
 
 async function showOrderDetails(quoteLine){
 
