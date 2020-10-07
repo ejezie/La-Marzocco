@@ -1,94 +1,4 @@
-var catalogList = [{
-						"productCode" : "HSO567",
-						"productName" : "Vulcano1",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					},
-					{
-						"productCoxde" : "HSO567",
-						"productName" : "Vulcano2",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					},
-					{
-						"productCode" : "HSO567",
-						"productName" : "Vulcano3",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					},
-					{
-						"productCode" : "HSO567",
-						"productName" : "Vulcano4",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					},
-					{
-						"productCode" : "HSO567",
-						"productName" : "Vulcano5",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					},
-					{
-						"productCode" : "HSO567",
-						"productName" : "Vulcano6",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					},
-					{
-						"productCode" : "HSO567",
-						"productName" : "Vulcano7",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					},
-					{
-						"productCode" : "HSO567",
-						"productName" : "Vulcano8",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					},
-					{
-						"productCode" : "HSO567",
-						"productName" : "Vulcano9",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					},
-					{
-						"productCode" : "HSO567",
-						"productName" : "Vulcano10",
-						"productFamily" : "Espresso Machines",
-						"productActualPrice" : "$1199.00",
-						"productOfferPrice" : "$999.00",
-						"productOffPercent" : "-20%",
-						"productQuantityInStock" : "50"
-					}
-				]
+var searchQuery;
 
 
 async function showCatalog(catalogList){
@@ -257,11 +167,11 @@ function showSearchResults(url){
   };
 
   var onError =function(error){
-  	  	dismiss(loadingNotification);
+  	dismiss(loadingNotification);
   	console.log(error);
     notifyError("Failed to load results");
   };
-  getSearchResults(onResponse,onError,url,filterParentId,filterGroupId);
+  getSearchResults(onResponse,onError,url,searchQuery,filterParentId,filterGroupId);
 }
 
 function showCatalogDropdownSelection(machineId){
@@ -399,7 +309,28 @@ function showMachineDropdownSelection(mainItemId){
 }
 
 
+function findGetParameter(parameterName) {
+		var result = null,
+		tmp = [];
+		location.search
+		.substr(1)
+		.split("&")
+		.forEach(function (item) {
+			tmp = item.split("=");
+			if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+		});
+		return result;
+	}
+
+
 $(document).ready(function(){
+	searchQuery = findGetParameter("q")
 	showSearchResults();
+	$("#inputSearchQueryBtn").click(function(){
+		searchQuery = $("#inputSearchQuery").val();
+		console.log(searchQuery);
+		showSearchResults();
+	});
+
 // showCatalog(catalogList)
 });

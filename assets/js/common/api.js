@@ -284,6 +284,49 @@ async function createCustomer(
   .catch(onError);
 
 }
+async function createAddress(
+    type,
+    name,
+    zip_code,
+    address,
+    landmark,
+    phone,
+    area_code_id,
+    city_id,
+    state_id,
+    country_id,
+    onResponse){
+
+  var data = new FormData();
+
+  data.append('is_billable',(type == 1 || type == 3)?1:0);
+  data.append('is_shippable',(type == 2 || type == 3)?1:0);
+
+  data.append('name',name);
+  data.append('zip_code',zip_code);
+  data.append('address',address);
+  appendIfNotNull(data,"landmark",landmark);
+  data.append('phone',phone);
+
+  data.append('area_code_id',area_code_id);
+  data.append('city_id',city_id);
+  data.append('state_id',state_id);
+  data.append('country_id',country_id);
+
+  var config = {
+    method: 'post',
+    url:BASE_URL+'address',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json', 
+      'Content-Type': 'multipart/form-data' 
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+}
 
 
 
@@ -999,10 +1042,12 @@ async function login(email,pass,onResponse,onError){
 
 var filterParentId =2;
 var filterGroupId=2;
-async function getSearchResults(onResponse,onError,url,parent_id,group_id){
+async function getSearchResults(onResponse,onError,url,searchQuery,parent_id,group_id){
 
-  console.log("url  "+url,"  parent_id  "+filterParentId+"  grp "+filterGroupId)
+
+  console.log("url  "+url,"  parent_id  "+filterParentId+"  grp "+filterGroupId +" searchQuery: "+searchQuery)
   var data = new FormData();
+  appendIfNotNull(data,"name",searchQuery);
   appendIfNotNull(data,"parent_id",filterParentId);
   appendIfNotNull(data,"group_id",filterGroupId);
   data.append("key","val");
@@ -1018,6 +1063,10 @@ async function getSearchResults(onResponse,onError,url,parent_id,group_id){
 
   if(filterParentId){
     url+='&parent_id='+filterParentId;
+  }
+  
+  if(filterParentId){
+    url+='&name='+searchQuery;
   }
 
   var config = {
@@ -1112,7 +1161,7 @@ async function cartAddItem(itemId,qty,userId,desc,onResponse,onError){
   appendIfNotNull(data,'desc',desc);
 
   var config = {
-    method: 'get',
+    method: 'post',
     url: BASE_URL+'cart',
      headers: {
       'Content-Type': 'multipart/form-data',
@@ -1177,6 +1226,19 @@ async function getQuote(user_id,desc,onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'quotation/create',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+async function getQuoteDetails(quoteId,onResponse,onError){
+  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'quotation/get/'+quoteId,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
@@ -1293,9 +1355,10 @@ async function getAddressesList(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function createOrder(quoteId,shippingAddrId,billingAddrId,desc,onResponse,onError){
+async function createOrder(quoteId,po,shippingAddrId,billingAddrId,desc,onResponse,onError){
   var data = new FormData();
   data.append('quote_id', quoteId);
+  appendIfNotNull(data,"po",po)
   data.append('shipping_address_id', shippingAddrId);
   data.append('billing_address_id', billingAddrId);
   data.append('desc', desc);
@@ -1309,6 +1372,64 @@ async function createOrder(quoteId,shippingAddrId,billingAddrId,desc,onResponse,
       'Accept': 'application/json'
      },
      data :data
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getCountries(onResponse,onError){
+  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'countries',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getStates(countryId,onResponse,onError){
+  
+  var config = {
+    method: 'get',
+    url: BASE_URL+'states/'+countryId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+async function getCities(keyid,onResponse,onError){
+ 
+  var config = {
+    method: 'get',
+    url: BASE_URL+'cities/'+keyid,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getAreas(city_id,onResponse,onError){
+   var data = new FormData();
+  data.append('city_id', city_id);
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'area-codes?city_id='+city_id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+     data:data
   };
   axios(config).then(onResponse).catch(onError);
 }

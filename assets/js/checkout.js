@@ -1,31 +1,3 @@
-var addArr = [{ 
-				"user_id" : "A1",
-				"add_id" : "A1AD1",
-				"add_line_1" : "A1 Aaron Tower",
-				"add_line_2" : "Aundh Road",
-				"area_code" : "45267",
-				"state" : "Maharashtra",
-				"country" : "India",
-				},
-				{ 
-				"user_id" : "A1",
-				"add_id" : "A1AD2",
-				"add_line_1" : "B1 Blooming Dale",
-				"add_line_2" : "Balewadi",
-				"area_code" : "45267",
-				"state" : "Maharashtra",
-				"country" : "India",
-				},
-				{ 
-				"user_id" : "A1",
-				"add_id" : "A1AD3",
-				"add_line_1" : "C1 Citadel",
-				"add_line_2" : "Chinchwad",
-				"area_code" : "45267",
-				"state" : "Maharashtra",
-				"country" : "India",
-				}]
-
 var orderSummary = [{
 						"product" : "Linea Mini",
 						"quantity" : "3",
@@ -47,7 +19,6 @@ var orderSummary = [{
 						"price" : "$1000.00"
 					}
 				]		
-
 
 
 async function showAddressSlider(addArr){
@@ -75,8 +46,6 @@ async function showAddressSlider(addArr){
 }
 
 $(".select_add").click(function() {
-
-	alert(this.id);
     $("button").each(function() {
            $(this).css("background-color", "#414141"); 
     });
@@ -111,6 +80,7 @@ $(document).ready(function(){
 		confirmOrder();
 	});
 	initAddresses();
+	initAddAddress();
 });
 
 function initAddresses(){
@@ -119,12 +89,52 @@ function initAddresses(){
 	});
 }
 
+function initAddAddress(){
+	
+  $("#submitAddAddress").click(function(){
+
+
+  	  var type = $("#addressType").val();
+  	  var name = $("#inputName").val();
+	  var zip_code= $("#inputZipCode").val();
+	  var address = $("#inputAddress").val() + $("#inputAddress2").val();
+	  var landmark = $("#inputLandmark").val();
+	  var phone = $("#inputPhone").val();
+	  var area_code_id = $("#inputArea").val();
+	  var city_id = $("#inputCity").val();
+	  var state_id = $("#inputState").val();
+	  var country_id = $("#inputCountry").val();
+
+	  var onResponse = function(response){
+	    notifySuccess("Updated");
+	    // window.location.href = 'productMaster.html';
+	  };
+	  createAddress(
+	  	type,
+	    name,
+	    zip_code,
+	    address,
+	    landmark,
+	    phone,
+	    area_code_id,
+	    city_id,
+	    state_id,
+	    country_id,
+	    onResponse);
+  });
+  populateCountry();
+}
+
 function initProductDetails(){
 	//need html work
+	getQuoteDetails(quoteId,function(response){
+		showCheckoutOrderSummary(response.data.quote.quote_line);
+	});
 }
 
 function confirmOrder(){
 	const orderNotes = $("#inputOrderNotes").val();
+	const po = document.querySelector('#excelfile').files[0];
 	const billingAddressId = getBillingAddressId();
 	const shippingAddressId = getShippingAddressId();
 	createOrder(quoteId,billingAddressId,shippingAddressId,orderNotes,function(response){
@@ -159,8 +169,6 @@ async function showCheckoutOrderSummary(orderSummary){
 
 	var orderSummaryHTML = ''
 
-
-
 	orderSummaryHTML += '<table>'
 	orderSummaryHTML += '<thead>'
 	orderSummaryHTML += '<tr>'
@@ -173,11 +181,10 @@ async function showCheckoutOrderSummary(orderSummary){
 	for(i=0;i<orderSummary.length;i++){
 
 		orderSummaryHTML += '<tr>'
-		orderSummaryHTML += '<td> '+ orderSummary[i]["product"]+' <strong> × '+ orderSummary[i]["quantity"]+'</strong></td>'
-		orderSummaryHTML += '<td> '+ orderSummary[i]["price"]+'</td>'
+		orderSummaryHTML += '<td> '+ orderSummary[i]["item"]["name"]+' <strong> × '+ orderSummary[i]["qty"]+'</strong></td>'
+		orderSummaryHTML += '<td> '+ orderSummary[i]["total"]+'</td>'
 		orderSummaryHTML += '</tr>'
 	}
-
 
 	orderSummaryHTML += '</tbody>'
 	orderSummaryHTML += '<tfoot>'
@@ -207,4 +214,68 @@ async function showCheckoutOrderSummary(orderSummary){
 }
 
 
-showCheckoutOrderSummary(orderSummary)
+
+function populateCountry(){
+
+  var dropdown = $("#inputCountry");
+
+  var onResponse = function(response){
+    for(var i=0; i< response.data.countries.length; i++){
+    	const item = response.data.countries[i];
+         dropdown.append($("<option>").text(item.name).val(item.id));
+      }
+
+      $('#inputCountry').change( function() {
+		  populateState(this.value);
+	  });
+	   dropdown.prop("selectedIndex", -1);
+
+
+  };
+  getCountries(onResponse);
+}
+
+function populateState(keyId){
+
+  var dropdown = $("#inputState");
+  var onResponse = function(response){
+    for(var i=0; i< response.data.states.length; i++){
+    const item = response.data.states[i];
+         dropdown.append($("<option>").text(item.name).val(item.id));
+      }
+
+      $('#inputState').change( function() {
+		  populateCities(keyId);
+	  });
+  };
+  getStates(keyId,onResponse);
+}
+
+function populateCities(keyId){
+
+  var dropdown = $("#inputCity");
+  var onResponse = function(response){
+    for(var i=0; i< response.data.cities.length; i++){
+    const item = response.data.cities[i];
+         dropdown.append($("<option>").text(item.name).val(item.id));
+      }
+         $('#inputCity').change( function() {
+		  populateAreas(keyId);
+	  });
+  };
+  getCities(keyId,onResponse);
+}
+
+
+function populateAreas(keyId){
+
+  var dropdown = $("#inputArea");
+  var onResponse = function(response){
+    for(var i=0; i< response.data.area_codes.length; i++){
+    const item = response.data.area_codes[i];
+         dropdown.append($("<option>").text(item.name).val(item.id));
+      }
+  };
+  getAreas(keyId,onResponse);
+}
+

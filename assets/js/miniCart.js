@@ -22,9 +22,7 @@ var cartSubtotal = {
 function loadMiniCart(){
 			var onResponse = function(response){
 				// var cart = shoppingCart.listCart();
-				console.log(JSON.stringify(response.data,null,2));
 				var cart = safeAccess(['data','carts','data'],response);
-				console.log(cart)
 				showMiniCart(cart,cartSubtotal);
 			}
 			cartList(onResponse);
