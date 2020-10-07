@@ -25,6 +25,9 @@ async function showCart(cartItems){
 		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
 		cartHTML += '<td class="product_name"><a href="#">'+cartItems[i]["productName"]+'</a></td>'
 		cartHTML += '<td >'
+
+
+		console.log("cartItems >>>>>>>>> : ", cartItems)
 		if(cartItems[i]["documentUrl"]){
 			var url = cartItems[i]["documentUrl"]+"";
 			cartHTML += '<input type="button" class="btn btn-success" value="Download"  onClick="downloadFile(`'+url+'`)"  >'
@@ -32,7 +35,7 @@ async function showCart(cartItems){
 			cartHTML += '<input type="button" class="btn btn-info" value="Update">'
 		}else{
 			cartHTML += '<input type="file" class="btn btn-info"  id="excelfile"/>'
-			cartHTML += '<input type="button" class="btn btn-info" value="Upload Spec">'
+			cartHTML += '<input type="button" class="btn btn-info" value="Upload Spec" id="'+cartItems[i]["productId"]+'" onclick="uploadExcel('+cartItems[i]["productId"]+')">'
 		}
 		cartHTML += '</td>'
 		cartHTML += '<td class="product-price">'+cartItems[i]["productPrice"]+'</td>'
@@ -217,4 +220,11 @@ function refreshCart(){
 
 	var cart = shoppingCart.listCart();
 
+}
+
+
+
+
+async function uploadExcel(productId){
+    alert(productId);
 }
