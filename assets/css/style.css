@@ -35,6 +35,28 @@
     
 
 -----------------------------------------------------------------------------------*/
+
+
+@font-face {
+         font-family: 'laFont2';
+         src: url('../fonts/lamarzocco.woff') format('embedded-opentype'), /* Internet Explorer */
+         url('../fonts/lamarzocco.woff') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/lamarzocco.woff') format('woff'), /* Pretty Modern Browsers */
+         url('../fonts/lamarzocco.woff')  format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/lamarzocco.woff') format('svg'); /* Legacy iOS */
+}
+
+
+
+@font-face {
+         font-family: 'laFont3';
+      src: url('https://fonts.googleapis.com/css?family=Raleway');
+}
+@font-face {
+         font-family: 'laFont';
+      src: url('../fonts/lafont.ttf');
+}
+
 @import url("https://fonts.googleapis.com/css?family=Lato:100,300,300i,400,400i,700,700i,900,900i|Open+Sans:300,400,400i,600,600i,700,700i,800,800i");
 * {
   box-sizing: border-box;
@@ -53,9 +75,12 @@
   box-sizing: border-box;
 }
 
+
 html, body {
   height: 100%;
 }
+
+
 
 body {
   line-height: 24px;
@@ -64,15 +89,27 @@ body {
   font-weight: 400;
   visibility: visible;
   /*font-family: "Open Sans", sans-serif;*/
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  font-family: laFont;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
   color: #414141;
   letter-spacing: -0.025em;
 }
 
+
+/*
+
+html *
+{
+   font-family: laFont !important;
+}
+
+*/
 h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
   margin-top: 0;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+    font-family: laFont;
+
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
 }
 
 h1 {
@@ -1359,7 +1396,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 24px;
   text-transform: uppercase;
   font-weight: 700;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .main_menu nav > ul > li > a {
@@ -1394,7 +1433,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display: block;
   line-height: 30px;
   text-transform: uppercase;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+  font-family: laFont;
   font-size: 13px;
 }
 .main_menu nav > ul > li ul.sub_menu li a:hover {
@@ -1461,7 +1501,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 24px;
   text-transform: uppercase;
   font-weight: 700;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
   display: block;
   margin-bottom: 8px;
 }
@@ -1603,7 +1645,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   cursor: pointer;
   margin-bottom: 0;
   display: inline-block;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+  font-family: laFont;
 }
 
 .categories_menu_toggle {
@@ -2414,7 +2457,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 48px;
   font-weight: 700;
   margin-bottom: 0;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+  font-family: laFont;
   max-width: 355px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2432,7 +2476,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .slider_content h2 {
   margin-bottom: 10px;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
   font-weight: 400;
   font-style: italic;
   font-size: 24px;
@@ -2472,7 +2518,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 47px;
   padding: 0 25px;
   display: inline-block;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
   border-radius: 5px;
 }
 .slider_content a:hover {
@@ -2574,7 +2622,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 1;
   font-weight: 700;
   margin-bottom: 0;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
   max-width: 355px;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2591,7 +2641,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .slider_six .slider_content h2 {
   margin-bottom: 10px;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
   font-weight: 400;
   font-style: italic;
   font-size: 22px;
@@ -2630,7 +2682,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   line-height: 47px;
   padding: 0 25px;
   display: inline-block;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
   border-radius: 5px;
 }
 .slider_six .slider_content a:hover {
@@ -2767,7 +2821,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-weight: 700;
   text-transform: capitalize;
   margin-bottom: 21px;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
   width: 220px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -2797,7 +2853,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-weight: 400;
   text-transform: capitalize;
   margin-bottom: 3px;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .banner_text h3 {
@@ -2822,7 +2880,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   pointer-events: visible;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .banner_text a {
@@ -2932,7 +2992,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .banner_fullwidth .banner_text p {
   font-size: 18px;
   line-height: 25px;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
   font-weight: 300;
   margin-bottom: 35px;
 }
@@ -3252,7 +3314,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   position: relative;
   display: block;
   padding: 0 15px;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
 }
 @media only screen and (max-width: 767px) {
   .section_title ul.product_tab_button li a {
@@ -3453,7 +3517,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   text-transform: capitalize;
   margin: 15px 0 4px 0;
   font-weight: 400;
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
+    font-family: laFont;
+
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -3583,7 +3649,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 }
 .featured_content h3 {
   font-size: 18px;
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
+    font-family: laFont;
+
   line-height: 22px;
   margin-bottom: 8px;
 }
@@ -3640,7 +3708,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   text-transform: capitalize;
   margin-bottom: 15px;
   font-weight: 400;
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
+    font-family: laFont;
+
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
@@ -3745,7 +3815,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .call_text h3 {
   font-size: 30px;
   line-height: 39px;
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
+    font-family: laFont;
+
+
   text-transform: capitalize;
   margin-bottom: 3px;
 }
@@ -3905,7 +3978,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .product_tab_button.tab_button2 li a {
   font-size: 26px;
   line-height: 33px;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
   color: #333;
   background: #f6f6f6;
   position: relative;
@@ -4216,7 +4291,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   font-weight: 400;
   padding-bottom: 17px;
   position: relative;
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
+    font-family: laFont;
+
 }
 .blog_content h3 a:hover {
   color: #414141;
@@ -4485,7 +4562,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   text-transform: capitalize;
   font-weight: 700;
   margin-bottom: 4px;
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
+    font-family: laFont;
+
 }
 .shipping_content p {
   font-size: 13px;
@@ -4732,7 +4811,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   margin-bottom: 18px;
   text-transform: capitalize;
   font-weight: 700;
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
+    font-family: laFont;
+
 }
 @media only screen and (max-width: 767px) {
   .widgets_container h3 {
@@ -6468,7 +6549,9 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   text-transform: uppercase;
   font-weight: 500;
   color: #333;
-  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
+  /*font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;*/
+    font-family: laFont;
+
 }
 
 .s-tab-zoom.owl-carousel .owl-nav {

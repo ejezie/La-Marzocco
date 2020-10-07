@@ -1433,3 +1433,21 @@ async function getAreas(city_id,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+
+async function updateCartItemSpec(itemId,qty,specs_file,onResponse,onError){
+   var data = new FormData();
+  data.append('qty', qty);
+  data.append('specs_file', specs_file);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'cart/update/'+itemId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+     data:data
+  };
+  axios(config).then(onResponse).catch(onError);
+}

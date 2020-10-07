@@ -34,8 +34,8 @@ async function showCart(cartItems){
 			cartHTML += '<input type="file" class="btn btn-info"  id="excelfile"/>'
 			cartHTML += '<input type="button" class="btn btn-info" value="Update">'
 		}else{
-			cartHTML += '<input type="file" class="btn btn-info"  id="excelfile"/>'
-			cartHTML += '<input type="button" class="btn btn-info" value="Upload Spec" id="'+cartItems[i]["productId"]+'" onclick="uploadExcel('+cartItems[i]["productId"]+')">'
+			cartHTML += '<input type="file" id="fileUpload'+cartItems[i]["productId"]+'" class="btn btn-info"  id="excelfile"/>'
+			cartHTML += '<input type="button" class="btn btn-info" value="Upload Spec" id="'+cartItems[i]["productId"]+'" onclick="uploadExcel('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+')">'
 		}
 		cartHTML += '</td>'
 		cartHTML += '<td class="product-price">'+cartItems[i]["productPrice"]+'</td>'
@@ -225,6 +225,11 @@ function refreshCart(){
 
 
 
-async function uploadExcel(productId){
-    alert(productId);
+async function uploadExcel(id,qty){
+	const element = "#fileUpload"+id;
+	var file = $(element).prop('files')[0];
+	updateCartItemSpec(id,qty,file,function(){
+		notifySuccess("Done");
+		refreshCart();
+	})
 }

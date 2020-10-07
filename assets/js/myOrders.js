@@ -237,7 +237,6 @@ async function showOrders(orderArr){
 
 
 $(document).ready(function(){
-	alert("load")
 	showOrders();
 
   $('#tableOrders').on('click', '#btnDetails', function () {
