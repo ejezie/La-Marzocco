@@ -1065,7 +1065,7 @@ async function getSearchResults(onResponse,onError,url,searchQuery,parent_id,gro
     url+='&parent_id='+filterParentId;
   }
   
-  if(filterParentId){
+  if(searchQuery){
     url+='&name='+searchQuery;
   }
 

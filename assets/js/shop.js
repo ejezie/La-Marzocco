@@ -2,6 +2,8 @@ var searchQuery;
 
 
 async function showCatalog(catalogList){
+	// alert(JSON.stringify(catalogList,null,2))
+
 	var catalogHTML = ""
 
 	for(i=0; i<catalogList.length; i++){
@@ -99,8 +101,8 @@ async function showCatalog(catalogList){
 
 	}
 
-
-	$("#catalog").html(catalogHTML)
+	$("#resultsGrid").html("")
+	$("#resultsGrid").html(catalogHTML)
 }
 
 function showQuote(){
@@ -113,6 +115,7 @@ function showSearchResults(url){
   	var onResponse = function(response){
   	dismiss(loadingNotification);
   	var results = [];
+  	console.log("Data "+JSON.stringify(response.data,null,2))
     for(var i=0; i< response.data.items.data.length; i++){
       const item = response.data.items.data[i];
       const element = {
@@ -175,6 +178,7 @@ function showSearchResults(url){
 }
 
 function showCatalogDropdownSelection(machineId){
+
 	var loadingNotification = notifyInfo("Loading results");
   	var onResponse = function(response){
   	dismiss(loadingNotification);
@@ -326,11 +330,11 @@ function findGetParameter(parameterName) {
 $(document).ready(function(){
 	searchQuery = findGetParameter("q")
 	showSearchResults();
-	$("#inputSearchQueryBtn").click(function(){
-		searchQuery = $("#inputSearchQuery").val();
-		console.log(searchQuery);
-		showSearchResults();
-	});
+	// $("#inputSearchQueryBtn").click(function(){
+	// 	searchQuery = $("#inputSearchQuery").val();
+	// 	console.log(searchQuery);
+	// 	showSearchResults();
+	// });
 
 // showCatalog(catalogList)
 });
