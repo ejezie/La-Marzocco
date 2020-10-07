@@ -157,18 +157,18 @@ async function showMachinesSideFilter(machineList){
 	for(i=0; i<machineList.length ;i++){
 
 		sidebarHTML += '<li class="dropdown dropdown-large">'
-		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown">'+machineList[i]["code"]+' </a>'
+		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="white-space: nowrap;font-size:14px; font-weight:500;color:#333">'+machineList[i]["code"]+' </a>'
 		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
 		sidebarHTML += '<li class="col-sm-3">'
 		sidebarHTML += '<ul>'
-		sidebarHTML += '<li class="dropdown-header">'+machineList[i]["code"]+'</li>'
+		// sidebarHTML += '<li class="dropdown-header">'+machineList[i]["code"]+'</li>'
 
 		for(k=0; k<machineList[i]["machines"].length;k++){
 
-		console.log(">>>>>>>>>>",machineList[i]["machines"]) 
-		// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
-		sidebarHTML += '<li><form><p><input type="checkbox" id="test2" checked="checked" /><label for="test2">'+machineList[i]["machines"][k]["code"]+'</label></p></form></li>'
+			// console.log(">>>>>>>>>>",machineList[i]["machines"]) 
+			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
+			sidebarHTML += '<li><form><p><input type="checkbox" id="machine"  /><label for="machine" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">'+machineList[i]["machines"][k]["code"]+'</label></p></form></li>'
 
 		}
 		
@@ -253,12 +253,12 @@ async function showGroupSideFilter(groupList){
 
 		const item = groupList[i];
 
-		// sidebarHTML += '<li class="dropdown dropdown-large">'
-		// sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown">'+item["code"]+' </a>'
-		// sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
+		sidebarHTML += '<li class="dropdown dropdown-large">'
+		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="font-size:14px; font-weight:500 ;color:#333">'+item["code"]+' </a>'
+		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
-		// sidebarHTML += '<li class="col-sm-3">'
-		// sidebarHTML += '<ul>'
+		sidebarHTML += '<li class="col-sm-3">'
+		sidebarHTML += '<ul>'
 
 		for(j=0; j<item["machines"].length;j++){ 
 
@@ -269,17 +269,17 @@ async function showGroupSideFilter(groupList){
 			for(k=0; k<inneritem["groups"].length;k++){
 
 				const innerMostitem = inneritem["groups"][k];
-				sidebarHTML += '<li><label class="custom-control"> <input  value="'+innerMostitem["id"]+'" type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
-
+				// sidebarHTML += '<li><label class="custom-control"> <input  value="'+innerMostitem["id"]+'" type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
+				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="group"  /><label for="group" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["name"]+'</label></p></form></li>'
 			}
 		}
 		
 
-		// sidebarHTML += '</ul>'
-		// sidebarHTML += '</li>'
+		sidebarHTML += '</ul>'
+		sidebarHTML += '</li>'
 
-		// sidebarHTML += '</ul>'
-		// sidebarHTML += '</li>'
+		sidebarHTML += '</ul>'
+		sidebarHTML += '</li>'
 
 	}
 
@@ -302,7 +302,7 @@ async function showParentSideFilter(familyList){
 		const item = familyList[i];
 
 		sidebarHTML += '<li class="dropdown dropdown-large">'
-		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown">'+item["code"]+' </a>'
+		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="font-size:14px; font-weight:500;color:#333">'+item["code"]+' </a>'
 		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
 		sidebarHTML += '<li class="col-sm-3">'
@@ -313,8 +313,8 @@ async function showParentSideFilter(familyList){
 			const inneritem = familyList[i]["machines"][j];
 			console.log("inneritem : ", inneritem)
 			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
-			sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
-
+			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
+			sidebarHTML += '<li><form><p><input type="checkbox" value="'+inneritem["id"]+'" id="catalog"  /><label for="catalog" style="white-space: nowrap;font-size:14px; font-weight:500;">'+inneritem["name"]+'</label></p></form></li>'
 			// for(k=0; k<inneritem["parents"].length;k++){
 			// 	const innerMostitem = inneritem["parents"][k];
 			// 	sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'

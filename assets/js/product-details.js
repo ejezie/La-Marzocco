@@ -105,6 +105,7 @@
 		  // console.table('Key : ' + key + ', Value : ' + data[key])
 		  infoHTML += '<tr>'
 		  infoHTML += '<td class="first_child">'+key+'</td>'
+		  console.log("key : ",key)
 		  infoHTML += '<td>'+item["specification"][0][key]+'</td>'
 		  infoHTML += '</tr>'
 		})
@@ -172,12 +173,20 @@
 					"Group" : safeAccess(['item_group', 'name'],i,"") + " - " + safeAccess([ 'item_group', 'desc'],i,"") ,
 					"Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
 					"Type" :safeAccess(['type', 'name'],i,"") + " - " + safeAccess(['type', 'desc'],i,"") ,
-					"Parent" : safeAccess(['parent', 'name'],i,"") + " - " + safeAccess([ 'parent', 'desc'],i,"") ,
-					"Lenght" : safeAccess(['length'],i,"") + " - " + safeAccess(['lenght_uom'],i,"") ,
-					"Height" : safeAccess(['height'],i,"") + " - " + safeAccess([ 'height_uom'],i,"") ,
-					"Width" : safeAccess(['width'],i,"") + " - " + safeAccess([ 'width_uom'],i,"") ,
+					// "Parent" : safeAccess(['parent', 'name'],i,"") + " - " + safeAccess([ 'parent', 'desc'],i,"") ,
+					// "Lenght" : safeAccess(['length'],i,"") + " - " + safeAccess(['lenght_uom'],i,"") ,
+					// "Height" : safeAccess(['height'],i,"") + " - " + safeAccess([ 'height_uom'],i,"") ,
+					// "Width" : safeAccess(['width'],i,"") + " - " + safeAccess([ 'width_uom'],i,"") ,
 					"Weight" : safeAccess(['weight'],i,"")  + safeAccess([ 'weight_uom'],i,"") ,
 					"Volume" : safeAccess(['volume'],i,"")  + safeAccess([ 'volume_uom'],i,"") ,
+
+					"Boiler Type" : safeAccess(['boiler_type'],i,"") ,
+					"Pid Temperature Controller" : safeAccess(['pid_temperature_controller'],i,"") ,
+					"Pump Type" : safeAccess(['pump_type'],i,"")  ,
+					"Indicator Lights" : safeAccess(['indicator_lights'],i,"")  ,
+					"Voltage" : safeAccess(['voltage'],i,"")  ,
+					"Steam Boiler" : safeAccess(['steam_boiler'],i,"")  ,
+					"Water Reservoir Capacity" : safeAccess(['water_reservoir_capacity'],i,"")  ,
 				}
 				]
 			};    

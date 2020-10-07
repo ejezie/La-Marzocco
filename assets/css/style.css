@@ -63,7 +63,8 @@ body {
   font-style: normal;
   font-weight: 400;
   visibility: visible;
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
+  font-family: "trade-gothic-regular",Helvetica,Arial,sans-serif;
   color: #414141;
   letter-spacing: -0.025em;
 }
@@ -2521,6 +2522,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .active .slider_content a {
   -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;
+  color: white;
 }
 
 /*home two css here*/
