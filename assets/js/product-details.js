@@ -134,7 +134,7 @@
 			}else{
 				shoppingCart.setCountForItem(itemId,$("#inputQuantity").val());
 			}
-			reloadMiniCart();
+			// reloadMiniCart();
 
 		});
 

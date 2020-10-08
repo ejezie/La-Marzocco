@@ -34,6 +34,7 @@ async function showCarrouselParts(imageUrl,parts){
         const part = parts[i];
         carouselHTML += '<li class="playlist-item" onclick="toitemdetailpage('+safeAccess(["id"],part)+')">'
         carouselHTML += '<div class="thumb">'
+        carouselHTML += '<span class="label_sale">'+part.part_ref_number+'</span>'
         // carouselHTML += '<img class="img-responsive" src="https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg">'
 
         carouselHTML += '<div class="fluid-ratio-wrap">'

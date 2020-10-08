@@ -7037,11 +7037,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .coupon_inner input {
   border: 1px solid #f0f0f0;
   height: 42px;
-  background: none;
+  background: #414141;
   padding: 0 20px;
   margin-right: 20px;
-  font-size: 12px;
-  color: #333;
+  font-size: 15px;
+  color: #fff;
 }
 @media only screen and (max-width: 767px) {
   .coupon_inner input {

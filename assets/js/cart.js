@@ -30,7 +30,7 @@ async function showCart(cartItems){
 		console.log("cartItems >>>>>>>>> : ", cartItems)
 		if(cartItems[i]["documentUrl"]){
 			var url = cartItems[i]["documentUrl"]+"";
-			cartHTML += '<input type="button" class="btn btn-success" value="Download"  onClick="downloadFile(`'+url+'`)"  >'
+			cartHTML += '<input type="button" class="btn btn-success" style="color:white; background:#414141" value="Download"  onClick="downloadFile(`'+url+'`)"  >'
 			cartHTML += '<input type="file" class="btn upload-spec"  id="excelfile"/>'
 			cartHTML += '<input type="button" class="btn upload-spec" value="Update">'
 		}else{
@@ -131,6 +131,23 @@ async function showSubTotal(cartSubTotal,quoteId){
 	var subTotalHTML = '';
 	var checkoutLink = "checkout.html?quote="+quoteId;
 
+
+
+	subTotalHTML += '<div class="col-lg-6 col-md-6">'
+	subTotalHTML += '<div class="coupon_code left">'
+	subTotalHTML += '<h3>Purchase Orders</h3>'
+	subTotalHTML += '<div class="coupon_inner">'
+	// subTotalHTML += '<input placeholder="Upload" type="text">'
+	// subTotalHTML += '<button type="submit">Upload Purchase orders</button>'
+	subTotalHTML += '<div style="white-space:nowrap">'
+	subTotalHTML += '<input type="file" class="btn upload-po" style="background:#ccc; color:#333" id="po_excelfile"/>'
+	subTotalHTML += '<input type="button" class="btn upload-po"  value="Upload PO">'
+	subTotalHTML += '</div>'
+	subTotalHTML += '</div>'
+	subTotalHTML += ''
+	subTotalHTML += '</div>'
+	subTotalHTML += '</div>'
+
 	subTotalHTML += '<div class="col-lg-6 col-md-6">'
 	subTotalHTML += '<div class="coupon_code right">'
 	subTotalHTML += '<h3>Cart Totals</h3>'
@@ -151,12 +168,12 @@ async function showSubTotal(cartSubTotal,quoteId){
 	subTotalHTML += '<p class="cart_amount">'+cartSubTotal["total"]+'</p>'
 	subTotalHTML += '</div>'
 	subTotalHTML += '<div class="checkout_btn">'
-		subTotalHTML += '<div>'
+	// 	subTotalHTML += '<div>'
 
-	subTotalHTML += '<input type="file" class="btn btn-info" accept=".xls, .xlsx" id="excelfile"/>'
-		subTotalHTML += '</div>'
+	// subTotalHTML += '<input type="file" class="btn btn-info" accept=".xls, .xlsx" id="excelfile"/>'
+	// 	subTotalHTML += '</div>'
 
-	subTotalHTML += '<a id="btCheckout" >Proceed to Checkout</a>'
+	subTotalHTML += '<a style="color:white" id="btCheckout" >Proceed to Checkout</a>'
 	subTotalHTML += '</div>'
 	subTotalHTML += '</div>'
 	subTotalHTML += '</div>'
@@ -216,7 +233,7 @@ function refreshCart(){
 										"total" :  "$"+shoppingCart.totalCart()+20,
 										"shipping" : "$20"
 									}
-					showSubTotal(cartSubTotals);
+					// showSubTotal(cartSubTotals);
 			}
 			cartList(onResponse);
 
