@@ -269,8 +269,10 @@ async function showGroupSideFilter(groupList){
 			for(k=0; k<inneritem["groups"].length;k++){
 
 				const innerMostitem = inneritem["groups"][k];
+
+				console.log("innerMostitem >>>>>>> : ", innerMostitem)
 				// sidebarHTML += '<li><label class="custom-control"> <input  value="'+innerMostitem["id"]+'" type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
-				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="group"  /><label for="group" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["name"]+'</label></p></form></li>'
+				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="group"  /><label for="group" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
 			}
 		}
 		

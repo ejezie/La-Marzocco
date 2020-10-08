@@ -135,6 +135,8 @@ function showSearchResults(url){
     showCatalog(results);
 
     $("#pagination_current").text(response.data.items.current_page);
+    console.log(" response.data.items.current_page  : ", response.data.items.current_page)
+    console.log(" response.data.items.prev_page_url  : ", response.data.items.prev_page_url)
     if(response.data.items.prev_page_url!=null){
     	$("#pagination_prev").show();
     	$("#pagination_prev").text(response.data.items.current_page-1);
@@ -144,7 +146,9 @@ function showSearchResults(url){
 				showSearchResults(response.data.items.prev_page_url)
 			});
     }else{
-    	$("#pagination_prev").hide();
+    	// $("#pagination_prev").hide();
+    	$("#pagination_prev").text("<");
+    	$('#pagination_prev').attr("disabled","disabled");
     }
     if(response.data.items.next_page_url!=null){
     	$("#pagination_next").show();
@@ -154,9 +158,11 @@ function showSearchResults(url){
 				showSearchResults(response.data.items.next_page_url)
 			});
     }else{
-    	$("#pagination_next").hide();
+    	// $("#pagination_next").hide();
+    	$("#pagination_next").text(">");
+    	$('#pagination_next').attr("disabled","disabled");
     }
-    if(response.data.items.last_page_url!=null){
+    if(response.data.items.last_page_url > 1 ){
     	$("#pagination_last").show();
     	$("#pagination_last").text(response.data.items.last_page+" >>");
     	$('#pagination_last').unbind();
@@ -164,7 +170,9 @@ function showSearchResults(url){
 				showSearchResults(response.data.items.last_page_url);
 			});
     }else{
-    	$("#pagination_last").hide();
+    	// $("#pagination_last").remove();
+    	$("#pagination_last").text(">>");
+    	$('#pagination_last').attr("disabled","disabled");
     }
     
   };
