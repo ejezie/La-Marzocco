@@ -66,16 +66,13 @@ async function showMiniCart(cartItems,cartSubtotal){
 	// miniCartHTML += '<a href="cart.html">View cart</a>'
 	// miniCartHTML += '</div>'
 	miniCartHTML += '<div class="cart_button">'
-<<<<<<< HEAD
 	miniCartHTML += '<a class="active" href="cart.html">View cart</a>'
 	miniCartHTML += '</div>'
-=======
 	miniCartHTML += '<a href="cart.html">View cart</a>'
 	miniCartHTML += '</div>'
 	// miniCartHTML += '<div class="cart_button">'
 	// miniCartHTML += '<a class="active" href="checkout.html">Checkout</a>'
 	// miniCartHTML += '</div>'
->>>>>>> 43c9d57204e491abad6721f103a1c41b1e8c1db8
 	miniCartHTML += ''
 	miniCartHTML += '</div>'
 

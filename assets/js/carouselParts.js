@@ -34,7 +34,7 @@ async function showCarrouselParts(imageUrl,parts){
         const part = parts[i];
         carouselHTML += '<li class="playlist-item" onclick="toitemdetailpage('+safeAccess(["id"],part)+')">'
         carouselHTML += '<div class="thumb">'
-        carouselHTML += '<span class="label_sale">'+part.part_ref_number+'</span>'
+        carouselHTML += '<span style="  padding: 0 10px;border-radius: 2px;text-transform: capitalize;font-size: 12px;font-weight: 500;text-align: center;display: inline-block;" class="label_sale">'+part.part_ref_number+'</span>'
         // carouselHTML += '<img class="img-responsive" src="https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg">'
 
         carouselHTML += '<div class="fluid-ratio-wrap">'
@@ -54,6 +54,136 @@ async function showCarrouselParts(imageUrl,parts){
 
     $("#carouselParts").append(carouselHTML);
 }
+
+
+
+
+var specialOffersItemList = [{
+                                "productCode" : "HSO567",
+                                "productName" : "Part1",
+                                "productFamily" : "Espresso Machines",
+                                "productActualPrice" : "$1199.00",
+                                "productOfferPrice" : "$999.00",
+                                "productOffPercent" : "-20%",
+                                "productParent" : "Machines - LINEA",
+                                "productGroup" : "Commercial Machine"
+
+
+                            },
+                            {
+                                "productCode" : "HSO567",
+                                "productName" : "Part2",
+                                "productFamily" : "Espresso Machines",
+                                "productActualPrice" : "$1199.00",
+                                "productOfferPrice" : "$999.00",
+                                "productOffPercent" : "-20%",
+                                "productParent" : "Machines - Espresso",
+                                "productGroup" : "Commercial Machine"
+
+                            },
+                            {
+                                "productCode" : "HSO567",
+                                "productName" : "Part3",
+                                "productFamily" : "Espresso Machines",
+                                "productActualPrice" : "$1199.00",
+                                "productOfferPrice" : "$999.00",
+                                "productOffPercent" : "-20%",
+                                "productParent" : "Machines - Espresso",
+                                "productGroup" : "Commercial Machine"
+
+                            },
+                            {
+                                "productCode" : "HSO567",
+                                "productName" : "Part4",
+                                "productFamily" : "Espresso Machines",
+                                "productActualPrice" : "$1199.00",
+                                "productOfferPrice" : "$999.00",
+                                "productOffPercent" : "-20%",
+                                "productParent" : "Machines - LINEA",
+                                "productGroup" : "Commercial Machine"
+
+                            },
+                            {
+                                "productCode" : "HSO567",
+                                "productName" : "Part5",
+                                "productFamily" : "Espresso Machines",
+                                "productActualPrice" : "$1199.00",
+                                "productOfferPrice" : "$999.00",
+                                "productOffPercent" : "-20%",
+                                "productParent" : "Machines - Espresso",
+                                "productGroup" : "Commercial Machine"
+
+                            },
+                            {
+                                "productCode" : "HSO567",
+                                "productName" : "Part6",
+                                "productFamily" : "Espresso Machines",
+                                "productActualPrice" : "$1199.00",
+                                "productOfferPrice" : "$999.00",
+                                "productOffPercent" : "-20%",
+                                "productParent" : "Machines - Espresso",
+                                "productGroup" : "Commercial Machine"
+
+
+                            }
+                        ]
+
+
+async function showSpecialOffersProducts(specialOffersItemList){
+
+    var specialOffersProductsHTML = ""
+
+    for(i=0 ; i<specialOffersItemList.length ;i++){
+
+        specialOffersProductsHTML += '<div class="single_product">'
+        specialOffersProductsHTML += '<div class="product_name">'
+        specialOffersProductsHTML += '<h3><a href="product-details.html" style="text-transform: lowercase;"><strong>'+specialOffersItemList[i]["productName"]+'</strong></a></h3>'
+        specialOffersProductsHTML += '<p class="manufacture_product"><a href="#" >'+specialOffersItemList[i]["productGroup"]+'</a></p>'
+        specialOffersProductsHTML += '<p class="manufacture_product"><a href="#" >'+specialOffersItemList[i]["productParent"]+'</a></p>'
+        specialOffersProductsHTML += '<p class="manufacture_product"><a href="#" >'+specialOffersItemList[i]["productFamily"]+'</a></p>'
+        specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += '<div class="product_thumb">'
+        specialOffersProductsHTML += '<a class="primary_img" href="product-details.html"><img src="assets/img/product/product19.jpg" alt=""></a>'
+        specialOffersProductsHTML += '<a class="secondary_img" href="product-details.html"><img src="assets/img/product/product11.jpg" alt=""></a>'
+        specialOffersProductsHTML += '<div class="label_product">'
+        specialOffersProductsHTML += '<span  class="label_sale">'+specialOffersItemList[i]["productOffPercent"]+'</span>'
+        specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += ''
+        specialOffersProductsHTML += '<div class="action_links">'
+        specialOffersProductsHTML += '<ul>'
+        // specialOffersProductsHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
+        // specialOffersProductsHTML += '<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>'
+        // specialOffersProductsHTML += '<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>'
+        specialOffersProductsHTML += '</ul>'
+        specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += '<div class="product_content">'
+        // specialOffersProductsHTML += '<div class="product_ratings">'
+        // specialOffersProductsHTML += '<ul>'
+        // specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+        // specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+        // specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+        // specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+        // specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+        // specialOffersProductsHTML += '</ul>'
+        // specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += '<div class="product_footer d-flex align-items-center">'
+        // specialOffersProductsHTML += '<div class="price_box">'
+        // specialOffersProductsHTML += '<span class="current_price">'+specialOffersItemList[i]["productOfferPrice"]+'</span>'
+     //    specialOffersProductsHTML += '<span class="old_price">'+specialOffersItemList[i]["productActualPrice"]+'</span>'
+        // specialOffersProductsHTML += '</div>'
+        // specialOffersProductsHTML += '<div class="add_to_cart">'
+        // specialOffersProductsHTML += '<a href="cart.html" title="add to cart"><span class="lnr lnr-cart"></span></a>'
+        // specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += '</div>'
+    }
+
+    $("#specialOffersProducts").append(specialOffersProductsHTML)
+
+}
+
 
 function findGetParameter(parameterName) {
         var result = null,
@@ -81,6 +211,10 @@ $(document).ready(function(){
                 getItemParentImages(parentId,mainitemid,function(response2){
                    const imageUrl = safeAccess(["data","machine_parent","image","image"],response1);
                    showCarrouselParts(imageUrl,safeAccess(["data","item_parent_images","data"],response2));
+                   // showSpecialOffersProducts(specialOffersItemList)
+
+
+
                     
                 $('.video-playlist-wrap.two-col .scroll-wrap').perfectScrollbar();
 
@@ -102,5 +236,9 @@ $(document).ready(function(){
            
     }
 });
+
+
+
+
 
 
