@@ -128,11 +128,12 @@
 
 		$("#productInfo").append(infoHTML);
 		$("#btAddToCart").click(async function(){
+			const newQty = $("#inputQuantity").val();
 			$("#btAddToCart").html("Added to Cart");
 			if(!shoppingCart.itemExists(itemId)){
-				shoppingCart.addItemToCart(itemId,i.name,999,$("#inputQuantity").val());
+				shoppingCart.addItemToCart(itemId,i.name,999,newQty);
 			}else{
-				shoppingCart.setCountForItem(itemId,$("#inputQuantity").val());
+				shoppingCart.setCountForItem(itemId,newQty);
 			}
 			reloadMiniCart();
 
@@ -193,9 +194,9 @@
 
 			showProductDetails(element);
 			showProductInfo(element);
-			$("#inputQuantity").val(shoppingCart.getCountForItem(itemId));
-
-
+			if(shoppingCart.getCountForItem(itemId)>0){
+				$("#inputQuantity").val(shoppingCart.getCountForItem(itemId));
+			}
 		};
 
 		var onError =function(error){
