@@ -31,11 +31,13 @@ async function showCart(cartItems){
 		if(cartItems[i]["documentUrl"]){
 			var url = cartItems[i]["documentUrl"]+"";
 			cartHTML += '<input type="button" class="btn btn-success" value="Download"  onClick="downloadFile(`'+url+'`)"  >'
-			cartHTML += '<input type="file" class="btn btn-info"  id="excelfile"/>'
-			cartHTML += '<input type="button" class="btn btn-info" value="Update">'
+			cartHTML += '<input type="file" class="btn upload-spec"  id="excelfile"/>'
+			cartHTML += '<input type="button" class="btn upload-spec" value="Update">'
 		}else{
-			cartHTML += '<input type="file" id="fileUpload'+cartItems[i]["productId"]+'" class="btn btn-info"  id="excelfile"/>'
-			cartHTML += '<input type="button" class="btn btn-info" value="Upload Spec" id="'+cartItems[i]["productId"]+'" onclick="uploadExcel('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+')">'
+			// cartHTML += '<div style="white-space:nowrap">'
+			cartHTML += '<input type="file" id="fileUpload'+cartItems[i]["productId"]+'" class="btn upload-file"  id="excelfile"/>'
+			cartHTML += '<input type="button" class="btn upload-spec" style="color:white" value="Upload Spec" id="'+cartItems[i]["productId"]+'" onclick="uploadExcel('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+')">'
+			// cartHTML += '</div>'
 		}
 		cartHTML += '</td>'
 		cartHTML += '<td class="product-price">'+cartItems[i]["productPrice"]+'</td>'
