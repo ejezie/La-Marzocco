@@ -1451,3 +1451,17 @@ async function updateCartItemSpec(itemId,qty,specs_file,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+
+async function trackOrder(id,onResponse,onError){
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'order/track/'+id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
