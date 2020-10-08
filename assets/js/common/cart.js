@@ -47,6 +47,7 @@ var shoppingCart = (function () {
             var item = new Item(id,name, price, count);
             cart.push(item);
             saveCart();
+            reloadMiniCart()
       };
       var onError =function(error){
         notifyError("Failed to add item");
@@ -93,6 +94,7 @@ var shoppingCart = (function () {
             }
         }
         saveCart();
+        reloadMiniCart()
       };
       var onError =function(error){
         // notifyError("Failed to up item");

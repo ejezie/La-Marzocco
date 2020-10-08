@@ -69,8 +69,9 @@
                                         <ul class="dropdown_links">
                                             <li><a href="my-account.html">My Account </a></li>
                                             <li><a href="myOrders.html">My Orders </a></li>
+                                            <li><a href="getQuotation.html">Quotation </a></li>
                                             <li><a href="cart.html">Shopping Cart</a></li>
-                                            <li><a href="checkout.html">Logout </a></li>
+                                            <li><a href="login.html">Logout </a></li>
                                             <!-- <li><a href="wishlist.html">Wishlist</a></li> -->
                                         </ul>
                                     </li>
@@ -114,8 +115,8 @@
                             <div class="search-container">
                                 <form action="#">
                                     <div class="search_box">
-                                        <input placeholder="Search by Item Code, Item Name ..." type="text">
-                                        <button type="submit"><i class="ion-ios-search-strong"></i></button>
+                                        <input id="inputSearch" placeholder="Search by Item Code, Item Name ..." type="text">
+                                        <button  onclick="location.href='shop.html?q=' + document.getElementById('inputSearch').value"  type="submit"><i class="ion-ios-search-strong"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -127,8 +128,7 @@
                                 </div> -->
                                 <div class="mini_cart_wrapper">
                                     <a href="javascript:void(0)" style="color: white"><span class="lnr lnr-cart"></span>My Cart </a>
-                                    <span class="cart_quantity">2</span>
-                                    
+                                    <!-- <span class="cart_quantity">2</span> -->
                                 </div>
                             </div>
 
