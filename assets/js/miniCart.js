@@ -75,6 +75,7 @@ async function showMiniCart(cartItems,cartSubtotal){
 	// miniCartHTML += '</div>'
 	miniCartHTML += ''
 	miniCartHTML += '</div>'
+	$("#miniCart").html("")
 	$("#miniCart").append(miniCartHTML)
 }
 

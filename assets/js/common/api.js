@@ -393,7 +393,7 @@ async function getOrderList(onResponse,onError,page,page_size){
 
   var config = {
     method: 'get',
-    url: BASE_URL+'order/list?page='+page+'&page_size='+page_size,
+    url: BASE_URL+'order/list?page='+page+'&page_size='+page_size+'&sort_by_creation=0',
     headers: { 
       'Authorization': getAPIToken(), 
       'Accept': 'application/json'
@@ -1042,11 +1042,10 @@ async function login(email,pass,onResponse,onError){
 
 async function getSearchResults(onResponse,onError,url,searchQuery,parent_id,group_id){
   console.log("url  "+url,"  parent_id  "+filterParentId+"  grp "+filterGroupId +" searchQuery: "+searchQuery)
-  var data = new FormData();
-  appendIfNotNull(data,"name",searchQuery);
-  appendIfNotNull(data,"parent_id",filterParentId);
-  appendIfNotNull(data,"group_id",filterGroupId);
-  data.append("key","val");
+  // var data = new FormData();
+  // appendIfNotNull(data,"search_text ",searchQuery);
+  // appendIfNotNull(data,"parent_id",filterParentId);
+  // appendIfNotNull(data,"group_id",filterGroupId);
 
 
   if(url==null){
@@ -1062,7 +1061,7 @@ async function getSearchResults(onResponse,onError,url,searchQuery,parent_id,gro
   }
   
   if(searchQuery){
-    url+='&name='+searchQuery;
+    url+='&search_text ='+searchQuery;
   }
 
   var config = {
@@ -1072,8 +1071,9 @@ async function getSearchResults(onResponse,onError,url,searchQuery,parent_id,gro
       'Content-Type': 'multipart/form-data',
     'Authorization': getAPIToken(), 
       'Accept': 'application/json'
-     },
-    data : data
+     }
+    //  ,
+    // data : data
   };
 
   axios(config).then(onResponse).catch(onError);
@@ -1171,14 +1171,14 @@ async function cartAddItem(itemId,qty,userId,desc,onResponse,onError){
 
 async function cartUpdateItem(itemId,qty,userId,desc,onResponse,onError){
   var data = new FormData();
-  data.append('item_id', itemId);
+  // data.append('item_id', itemId);
   data.append('qty', qty);
   appendIfNotNull(data,'user_id',userId);
   appendIfNotNull(data,'desc',desc);
 
   var config = {
     method: 'post',
-    url: BASE_URL+'cart',
+    url: BASE_URL+'cart/update/'+itemId,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
@@ -1207,7 +1207,7 @@ async function cartList(onResponse,onError){
   
   var config = {
     method: 'get',
-    url: BASE_URL+'cart',
+    url: BASE_URL+'cart?page_size=10000',
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
@@ -1362,6 +1362,27 @@ async function createOrder(quoteId,po,shippingAddrId,billingAddrId,desc,onRespon
   var config = {
     method: 'post',
     url: BASE_URL+'order/create',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     },
+     data :data
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+async function createPayment(order_id,amount,cart_number,cart_exp_month,cart_exp_year,card_cvc,onResponse,onError){
+  var data = new FormData();
+  data.append('order_id', order_id);
+  data.append('amount', amount);
+  data.append('card_number', cart_number);
+  data.append('card_exp_month', cart_exp_month);
+  data.append('card_exp_year', cart_exp_year);
+  data.append('card_cvc', card_cvc);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'order/order-payment',
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 

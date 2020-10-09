@@ -1,3 +1,6 @@
+$(document).ready(function(){
+	shoppingCart.sync();
+})
 
 var recommendedItemList = [{
 								"productCode" : "HSO567",

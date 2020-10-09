@@ -767,6 +767,22 @@ body {font-family: Verdana, sans-serif; margin:0}
                                         <textarea id="inputOrderNotes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div>
                                 </div>
+
+                                <div class="col-12">
+                                    <div class="coupon_code left">
+                                    <h3>Purchase Orders</h3>
+                                    <div class="coupon_inner">
+<!--                                     <input placeholder="Upload" type="text">
+ -->                                    
+                                    <div style="white-space:nowrap">
+                                    <input type="file" id="pofile" class="btn upload-po" style="background:#ccc; color:#333" id="po_excelfile"/>
+                                    <!-- <input type="button" class="btn upload-po"  value="Upload PO"> -->
+                                    </div>
+                                    <!-- <button type="submit">Upload Purchase orders</button> -->
+                                    </div>
+                                    </div>
+                                </div>
+                                
                             </div>
                         <!-- </form> -->
                     </div>
@@ -819,7 +835,12 @@ body {font-family: Verdana, sans-serif; margin:0}
                                     </tfoot>
                                 </table> -->
                             </div>
-                            <div class="payment_method">
+    
+
+                             <div class="order_button col-12 mb-20">
+                                    <button id="btConfirmOrder" type="button">Confirm Order</button>
+                                </div>
+                            <div id="payment_method" style="display: none;" class="payment_method">
                                 <!-- <div class="panel-default">
                                     <input id="payment" name="check_method" type="radio" data-target="createp_account" />
                                     <label for="payment" data-toggle="collapse" data-target="#method" aria-controls="method">Create an account?</label>
@@ -838,26 +859,33 @@ body {font-family: Verdana, sans-serif; margin:0}
 
                                 <div class="col-12 mb-20">
                                     <label>Card Number <span>*</span></label>
-                                    <input placeholder="" type="text">
+                                    <input id="inputCardNumber" placeholder="" type="text">
                                 </div>
 
-
-                                <div class="col-12 mb-20">
-                                    <label>Name on Card <span>*</span></label>
-                                    <input placeholder="" type="text">
-                                </div>
 
                                 <div class="col-12 mb-20">
                                     <div class="row">
                                         <div class="col-5 mb-8">
-                                            <label>Expiry <span>*</span></label>
-                                            <input type="text">
+                                            <label>Expiry Month<span>*</span></label>
+                                            <input  id="inputExpireyMonth" type="text">
+                                        </div>
+                                        <div class="col-5 mb-8">
+                                            <label>Expiry Year<span>*</span></label>
+                                            <input  id="inputExpireyYear" type="text">
                                         </div>
                                         <div class="col-5 mb-8">
                                             <label>CVV <span>*</span></label>
-                                            <input type="text">
+                                            <input  id="inputCvc" type="text">
                                         </div>
+                                    <select class="form-control" id="inputPaymentType">
+                                        <option value="1">Full Payment</option>
+                                        <option value="2">Partial Payment</option>
+                                    </select>
+                                  </div>
                                     </div>
+                                    <div class="order_button col-12 mb-20">
+                                    <button id="btProceedToPayment" type="button">Proceed to Payment</button>
+                                </div>
                                 </div>
                                 <!-- <div class="panel-default">
                                     <input id="payment_defult" name="check_method" type="radio" data-target="createp_account" />
@@ -869,9 +897,7 @@ body {font-family: Verdana, sans-serif; margin:0}
                                         </div>
                                     </div>
                                 </div> -->
-                                <div class="order_button col-12 mb-20">
-                                    <button id="btProceedToPayment" type="button">Proceed to Payment</button>
-                                </div>
+                                
                             </div>
                         </form>
                     </div>

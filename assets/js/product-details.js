@@ -81,7 +81,6 @@
 		  // console.table('Key : ' + key + ', Value : ' + data[key])
 		  infoHTML += '<tr>'
 		  infoHTML += '<td class="first_child">'+key+'</td>'
-		  console.log("key : ",key)
 		  infoHTML += '<td>'+item["specification"][0][key]+'</td>'
 		  infoHTML += '</tr>'
 		})
