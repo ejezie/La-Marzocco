@@ -1040,11 +1040,7 @@ async function login(email,pass,onResponse,onError){
 }
 
 
-var filterParentId =2;
-var filterGroupId=2;
 async function getSearchResults(onResponse,onError,url,searchQuery,parent_id,group_id){
-
-
   console.log("url  "+url,"  parent_id  "+filterParentId+"  grp "+filterGroupId +" searchQuery: "+searchQuery)
   var data = new FormData();
   appendIfNotNull(data,"name",searchQuery);

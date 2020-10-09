@@ -50,8 +50,7 @@ async function showCart(cartItems){
 	cartHTML += '</tbody>'
 	cartHTML += '</table>'
 
-		$("#cart").html("");
-
+	$("#cart").html("");
 
 	$("#cart").append(cartHTML)
 }
@@ -117,22 +116,25 @@ async function showCartFromQuote(quoteItems){
 
 function deleteItem(itemid){
 	if(confirm("Remove this item from cart?")){
-		shoppingCart.removeItemFromCart(itemid,function(){refreshCart();});
+		shoppingCart.modify(itemid,0,function(){
+			reloadMiniCart();
+			refreshCart();
+		});
 	}
 
 }
 
 function editQuantity(itemid,e){
-	shoppingCart.setCountForItem(itemid,e.value);
+	shoppingCart.modify(itemid,e.value,function(){
+		reloadMiniCart();
+		notifyInfo("Updated");
+	});
 }
 
 async function showSubTotal(cartSubTotal,quoteId){
 
 	var subTotalHTML = '';
 	var checkoutLink = "checkout.html?quote="+quoteId;
-
-
-
 	subTotalHTML += '<div class="col-lg-6 col-md-6">'
 	subTotalHTML += '<div class="coupon_code left">'
 	subTotalHTML += '<h3>Purchase Orders</h3>'
@@ -228,11 +230,11 @@ function refreshCart(){
 						cartItems.push(element);
 					}
 					showCart(cartItems);
-					var cartSubTotals = {
-										"subTotal" : "$"+ shoppingCart.totalCart(),
-										"total" :  "$"+shoppingCart.totalCart()+20,
-										"shipping" : "$20"
-									}
+					// var cartSubTotals = {
+					// 					"subTotal" : "$"+ shoppingCart.totalCart(),
+					// 					"total" :  "$"+shoppingCart.totalCart()+20,
+					// 					"shipping" : "$20"
+					// 				}
 					// showSubTotal(cartSubTotals);
 			}
 			cartList(onResponse);
