@@ -9,7 +9,6 @@ async function showCart(cartItems){
 	cartHTML += '<tr>'
 	cartHTML += '<th class="product_name">Product</th>'
 	cartHTML += '<th class="product_thumb">Name</th>'
-	cartHTML += '<th class="product_thumb">Specs</th>'
 	cartHTML += '<th class="product-price">Price</th>'
 	cartHTML += '<th class="product_quantity">Quantity</th>'
 	// cartHTML += '<th class="product_remove">Delete</th>'
@@ -23,25 +22,25 @@ async function showCart(cartItems){
 		// console.log(cartItems[i]);
 		cartHTML += '<tr>'
 		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
-		cartHTML += '<td class="product_name"><a href="#">'+cartItems[i]["productName"]+'</a></td>'
-		cartHTML += '<td >'
+		cartHTML += '<td class="product_name"><a href="#">'+cartItems[i]["productName"]+'<br></a>';
+		if(!cartItems[i]["specs"]){cartHTML+= '<a onclick="showSpec('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+","+cartItems[i]["documentUrl"]+')">Specs</a>';}
+		cartHTML+= '</td>'
+
+		// 	if(cartItems[i]["documentUrl"]){
+		// 	var url = cartItems[i]["documentUrl"]+"";
+		// 	cartHTML += '<input type="button" class="btn btn-success" style="color:white; background:#414141" value="Download"  onClick="downloadFile(`'+url+'`)"  >'
+		// 	cartHTML += '<input type="file" class="btn upload-spec"  id="excelfile"/>'
+		// 	cartHTML += '<input type="button" class="btn upload-spec" value="Update">'
+		// }else{
+		// 	// cartHTML += '<div style="white-space:nowrap">'
+		// 	cartHTML += '<input type="file" id="fileUpload'+cartItems[i]["productId"]+'" class="btn upload-file"  id="excelfile"/>'
+		// 	cartHTML += '<input type="button" class="btn upload-spec" style="color:white" value="Upload Spec" id="'+cartItems[i]["productId"]+'" onclick="uploadExcel('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+')">'
+		// 	// cartHTML += '</div>'
+		// }
 
 
-		console.log("cartItems >>>>>>>>> : ", cartItems)
-		if(cartItems[i]["documentUrl"]){
-			var url = cartItems[i]["documentUrl"]+"";
-			cartHTML += '<input type="button" class="btn btn-success" style="color:white; background:#414141" value="Download"  onClick="downloadFile(`'+url+'`)"  >'
-			cartHTML += '<input type="file" class="btn upload-spec"  id="excelfile"/>'
-			cartHTML += '<input type="button" class="btn upload-spec" value="Update">'
-		}else{
-			// cartHTML += '<div style="white-space:nowrap">'
-			cartHTML += '<input type="file" id="fileUpload'+cartItems[i]["productId"]+'" class="btn upload-file"  id="excelfile"/>'
-			cartHTML += '<input type="button" class="btn upload-spec" style="color:white" value="Upload Spec" id="'+cartItems[i]["productId"]+'" onclick="uploadExcel('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+')">'
-			// cartHTML += '</div>'
-		}
-		cartHTML += '</td>'
 		cartHTML += '<td class="product-price">'+cartItems[i]["productPrice"]+'</td>'
-		cartHTML += '<td class="product_quantity"><label>Quantity</label> <input onchange="editQuantity('+cartItems[i]["productId"]+',this)" min="1" max="100" value="'+cartItems[i]["productQuantity"]+'" type="number"><a ><i onclick="deleteItem('+cartItems[i]["productId"]+')" class="fa fa-trash-o" style="width: 30px;font-size:17px"></i></a></td>'
+		cartHTML += '<td class="product_quantity"><label>Quantity</label> <input onchange="editQuantity('+cartItems[i]["productItemId"]+',this)" min="1" max="100" value="'+cartItems[i]["productQuantity"]+'" type="number"><a ><i onclick="deleteItem('+cartItems[i]["productItemId"]+')" class="fa fa-trash-o" style="width: 30px;font-size:17px"></i></a></td>'
 		// cartHTML += '<td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>'
 		cartHTML += '<td class="product_total">'+cartItems[i]["productPrice"]+'</td>'
 		cartHTML += '</tr>'
@@ -51,10 +50,32 @@ async function showCart(cartItems){
 	cartHTML += '</table>'
 
 	$("#cart").html("");
-
 	$("#cart").append(cartHTML)
 }
 
+function showSpec(id,qty,url){
+	$("#btDownloadSpec").unbind('click');
+	$("#btUploadSpec").unbind('click');
+	if(url){
+		$("#btDownloadSpec").show();
+		$("#btDownloadSpec").click(function(){
+			downloadFile(url);
+		});
+	}else{
+		$("#btDownloadSpec").css('display','none');
+	}
+
+	$("#btUploadSpec").click(function(){
+			if($("#inputProductSpecFile").prop('files') && $("#inputProductSpecFile").prop('files')[0]){
+				uploadExcel(id, $("#inputProductSpecFile").prop('files')[0],qty);
+			}else{
+				notifyError("Please select valid file");
+			}
+		});
+
+	$("#specModal").modal().show();
+
+}
 
 function downloadFile(uri){
 	// var link=document.createElement('a');
@@ -135,21 +156,7 @@ async function showSubTotal(cartSubTotal,quoteId){
 
 	var subTotalHTML = '';
 	var checkoutLink = "checkout.html?quote="+quoteId;
-	subTotalHTML += '<div class="col-lg-6 col-md-6">'
-	subTotalHTML += '<div class="coupon_code left">'
-	subTotalHTML += '<h3>Purchase Orders</h3>'
-	subTotalHTML += '<div class="coupon_inner">'
-	// subTotalHTML += '<input placeholder="Upload" type="text">'
-	// subTotalHTML += '<button type="submit">Upload Purchase orders</button>'
-	subTotalHTML += '<div style="white-space:nowrap">'
-	subTotalHTML += '<input type="file" class="btn upload-po" style="background:#ccc; color:#333" id="po_excelfile"/>'
-	subTotalHTML += '<input type="button" class="btn upload-po"  value="Upload PO">'
-	subTotalHTML += '</div>'
-	subTotalHTML += '</div>'
-	subTotalHTML += ''
-	subTotalHTML += '</div>'
-	subTotalHTML += '</div>'
-
+	
 	subTotalHTML += '<div class="col-lg-6 col-md-6">'
 	subTotalHTML += '<div class="coupon_code right">'
 	subTotalHTML += '<h3>Cart Totals</h3>'
@@ -203,7 +210,7 @@ $(document).ready(function(){
 					var cartSubTotals = {
 										"subTotal" : "$"+ safeAccess(["data","quote","sub_total"],response),
 										"total" :  "$"+ safeAccess(["data","quote","total"],response),
-										"shipping" : "$"+safeAccess(["data","quote","shipping_cost"],response)
+										"shipping" : "$"+parseInt(safeAccess(["data","quote","shipping_cost"],response))
 									}
 					showSubTotal(cartSubTotals,safeAccess(["data","quote","id"],response));
 			});
@@ -221,6 +228,7 @@ function refreshCart(){
 					for(cartItem of cart){
 						var element = {
 										"productId" : cartItem.id,
+										"productItemId" : cartItem.item_id,
 										"productName" : cartItem.item.name,
 										"productQuantity" : cartItem.qty,
 										"documentUrl" : safeAccess(["document","document"],cartItem),
@@ -246,11 +254,12 @@ function refreshCart(){
 
 
 
-async function uploadExcel(id,qty){
-	const element = "#fileUpload"+id;
-	var file = $(element).prop('files')[0];
-	updateCartItemSpec(id,qty,file,function(){
-		notifySuccess("Done");
-		refreshCart();
-	})
+async function uploadExcel(id,file,qty){
+		updateCartItemSpec(id,qty,file,function(){
+			notifySuccess("Done");
+			$("#specModal").modal().hide();
+			$('body').removeClass('modal-open');
+			$('.modal-backdrop').remove();
+			refreshCart();
+		})
 }

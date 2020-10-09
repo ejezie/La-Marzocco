@@ -68,6 +68,7 @@ function findGetParameter(parameterName) {
 
 var quoteId;
 $(document).ready(function(){
+	$("payment_method").hide();
 	quoteId = findGetParameter("quote")
 		if(quoteId==null || quoteId == undefined ){
 			notifyError("Something went wrong");
@@ -76,7 +77,7 @@ $(document).ready(function(){
 			initProductDetails();
 		}
 
-	$("#btProceedToPayment").click(function(){
+	$("#btConfirmOrder").click(function(){
 		confirmOrder();
 	});
 	initAddresses();
@@ -92,8 +93,6 @@ function initAddresses(){
 function initAddAddress(){
 	
   $("#submitAddAddress").click(function(){
-
-
   	  var type = $("#addressType").val();
   	  var name = $("#inputName").val();
 	  var zip_code= $("#inputZipCode").val();
@@ -134,11 +133,40 @@ function initProductDetails(){
 
 function confirmOrder(){
 	const orderNotes = $("#inputOrderNotes").val();
-	const po = document.querySelector('#excelfile').files[0];
+	const po = document.querySelector('#pofile').files[0];
 	const billingAddressId = getBillingAddressId();
 	const shippingAddressId = getShippingAddressId();
-	createOrder(quoteId,billingAddressId,shippingAddressId,orderNotes,function(response){
-			notifySuccess("Order Successful");
+	if(!billingAddressId || !shippingAddressId){
+		notifyError("Please select shipping and billing address")
+		return;
+	}
+	notifyInfo("Please wait");
+
+	createOrder(quoteId,po,shippingAddressId,billingAddressId,orderNotes,function(response){
+			// notifySuccess("Proceed to payment");
+			$("#btConfirmOrder").hide();
+			$("#payment_method").css("display", "unset");
+			$("#btProceedToPayment").click(function(){
+				confirmPayment(response);
+			});
+	});
+}
+
+function confirmPayment(response){
+
+	// const amount = $("#inputPaymentType").val();
+	const orderId = response.data.order[0].id;
+	const amount = response.data.order[0].total;
+	const inputCardNumber = $("#inputCardNumber").val();
+	const inputExpireyMonth = $("#inputExpireyMonth").val();
+	const inputExpireyYear = $("#inputExpireyYear").val();
+	const inputCvc = $("#inputCvc").val();
+
+	notifyInfo("Please wait");
+	createPayment(orderId,amount,inputCardNumber,inputExpireyMonth,inputExpireyYear,inputCvc,function(response){
+			notifySuccess("Payment Successful");
+			alert("Order #"+orderId+" is placed successfully");
+			window.location.href = "index.html";
 	});
 }
 
