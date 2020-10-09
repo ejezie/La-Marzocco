@@ -177,7 +177,7 @@ function getBillingAddressId(){
 	        returnValue = this.value;
 	    });        
 	return returnValue;
-}
+} 
 
 function getShippingAddressId(){
 	var returnValue=null;
