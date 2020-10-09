@@ -41,6 +41,58 @@
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
 
+    <!-- Datatable -->
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+  
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+
+
+    <style>
+
+
+
+
+    .optionsecoptions 
+    {
+    width: 400px;
+    padding-left:10px;
+    height: auto;
+    background: #ddd;
+    float: left;
+    font-size:20px;
+    cursor:pointer;
+    }
+/*.optionsecoptions:hover,
+    .optionsecoptions:active {
+        background-color: #226fa3;
+        transition: background-color 0.4s ease-in, border-color 0.4s ease-in;
+        color:#ffffff;
+    }
+*/
+
+/*.selected{
+        background-color: #226fa3;
+        transition: background-color 0.4s ease-in, border-color 0.4s ease-in;
+        color:#ffffff;    
+}*/
+
+
+
+/** {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+*/
+
+
+
+
+
+
+</style>
+
 </head>
 
 <body>
@@ -524,9 +576,9 @@
                         <!-- Nav tabs -->
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
-                                <li><a href="#dashboard" data-toggle="tab" class="nav-link active">Dashboard</a></li>
+                                <!-- <li><a href="#dashboard" data-toggle="tab" class="nav-link active">Dashboard</a></li> -->
                                 <li> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li>
-                                <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li>
+                                <!-- <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li> -->
                                 <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
                                 <li><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
                                 <li><a href="login.html" class="nav-link">logout</a></li>
@@ -536,15 +588,17 @@
                     <div class="col-sm-12 col-md-9 col-lg-9">
                         <!-- Tab panes -->
                         <div class="tab-content dashboard_content">
-                            <div class="tab-pane fade show active" id="dashboard">
+                            <!-- <div class="tab-pane fade show active" id="dashboard">
                                 <h3>Dashboard </h3>
                                 <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">Edit your password and account details.</a></p>
-                            </div>
-                            <div class="tab-pane fade" id="orders">
-                                <h3>Orders</h3>
+                            </div> -->
+                            <div class="tab-pane fade show active" id="orders">
+                                <div class="checkout_form">
+                                    <h3>Orders</h3>
+                                </div>
                                 <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
+                                    <table class="table" id="tableOrders">
+                                       <!--  <thead>
                                             <tr>
                                                 <th>Order</th>
                                                 <th>Date</th>
@@ -568,11 +622,11 @@
                                                 <td>$17.00 for 1 item </td>
                                                 <td><a href="cart.html" class="view">view</a></td>
                                             </tr>
-                                        </tbody>
+                                        </tbody> -->
                                     </table>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="downloads">
+                            <!-- <div class="tab-pane fade" id="downloads">
                                 <h3>Downloads</h3>
                                 <div class="table-responsive">
                                     <table class="table">
@@ -600,60 +654,116 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="tab-pane" id="address">
-                                <p>The following addresses will be used on the checkout page by default.</p>
-                                <h4 class="billing-address">Billing address</h4>
-                                <a href="#" class="view">Edit</a>
-                                <p><strong>Bobby Jackson</strong></p>
-                                <address>
-                                    House #15<br>
-                                    Road #1<br>
-                                    Block #C <br>
-                                    Banasree <br>
-                                    Dhaka <br>
-                                    1212
-                                </address>
-                                    <p>Bangladesh</p>
+                                <!-- <p>The following addresses will be used on the checkout page by default.</p> -->
+
+                                <div class="checkout_form">
+                                <!-- <button>Akasj</button> -->
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <!-- <form action="#"> -->
+                                                <h3>Addresses</h3>
+                                                <div class="address_slider" style="margin-top:10px; height: 300px; overflow: auto; padding-left: 20px;
+                                                        padding-right: 20px;" id="addressSlider">
+                                                       <!--  <div class="optionsecoptions" style="border-style: solid ; width: 100%">
+                                                            A1 1022, Arcade line, Aundh Road, Pune -20, Maharashtra.
+                                                            <br>
+                                                            <input type="checkbox" name="drone"><label style="font-size:15px">Billing Address</label>
+                                                            <br>
+                                                            <input type="checkbox" name="drone"><label style="font-size:15px">Shipping Address</label>
+                                                        </div>
+                                                        <div class="optionsecoptions" style="border-style: solid ; width: 100%">
+                                                            B5 Block-4, Udaygiri Society, Dehu Road, Pune -19, Maharashtra.
+                                                            <br>
+                                                            <input type="checkbox" name="drone"><label style="font-size:15px">Billing Address</label>
+                                                            <br>
+                                                            <input type="checkbox" name="drone"><label style="font-size:15px">Shipping Address</label>
+                                                        </div>
+                                                        <div class="optionsecoptions" style="border-style: solid ; width: 100%">
+                                                            C1 09, Citadel Enclave, Kalyani Nagar, Pune - 15, Maharashtra.
+                                                            <br>
+                                                            <input type="checkbox"><label style="font-size:15px">Billing Address</label>
+                                                            <br>
+                                                            <input type="checkbox"><label style="font-size:15px">Shipping Address</label>
+                                                        </div> -->
+                                                        
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="tab-pane fade" id="account-details">
-                                <h3>Account details </h3>
-                                <div class="login">
-                                    <div class="login_form_container">
-                                        <div class="account_login_form">
-                                            <form action="#">
-                                                <p>Already have an account? <a href="#">Log in instead!</a></p>
-                                                <div class="input-radio">
-                                                    <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
-                                                    <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mrs.</span>
-                                                </div> <br>
-                                                <label>First Name</label>
-                                                <input type="text" name="first-name">
-                                                <label>Last Name</label>
-                                                <input type="text" name="last-name">
-                                                <label>Email</label>
-                                                <input type="text" name="email-name">
-                                                <label>Password</label>
-                                                <input type="password" name="user-password">
-                                                <label>Birthdate</label>
-                                                <input type="text" placeholder="MM/DD/YYYY" value="" name="birthday">
-                                                <span class="example">
-                                                  (E.g.: 05/31/1970)
-                                                </span>
-                                                <br>
-                                                <span class="custom_checkbox">
-                                                    <input type="checkbox" value="1" name="optin">
-                                                    <label>Receive offers from our partners</label>
-                                                </span>
-                                                <br>
-                                                <span class="custom_checkbox">
-                                                    <input type="checkbox" value="1" name="newsletter">
-                                                    <label>Sign up for our newsletter<br><em>You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.</em></label>
-                                                </span>
-                                                <div class="save_button primary_btn default_button">
-                                                    <button type="submit">Save</button>
-                                                </div>
-                                            </form>
+                                <div class="checkout_form">
+                                    <h3>Account details </h3>
+                                    <div class="login">
+                                        <div class="login_form_container">
+                                            <div class="account_login_form">
+                                                <form action="#">
+                                                    <!-- <p>Already have an account? <a href="#">Log in instead!</a></p> -->
+                                                    <!-- <div class="input-radio">
+                                                        <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mr.</span>
+                                                        <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mrs.</span>
+                                                    </div> <br> -->
+                                                    <label>First Name</label>
+                                                    <input type="text" name="first-name" disabled="disabled">
+                                                    <label>Last Name</label>
+                                                    <input type="text" name="last-name" disabled="disabled">
+                                                    <label>Email</label>
+                                                    <input type="text" name="email-name" disabled="disabled">
+                                                    <!-- Change Password -->
+                                                    <div class="col-12 mb-20">
+                                                        <label class="righ_0" for="address" data-toggle="collapse" data-target="#collapsethree" aria-controls="collapseOne">Change Password</label>
+
+                                                        <div id="collapsethree" class="collapse one" data-parent="#accordion">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 mb-20">
+                                                                    <label>Current Password <span>*</span></label>
+                                                                    <input type="password" id="shippingAddFname">
+                                                                </div>
+                                                                <br>
+                                                                <p>
+                                                                    
+                                                                <div class="col-lg-6 mb-20">
+                                                                    <label>New Password <span>*</span></label>
+                                                                    <input type="password" id="shippingAddFname">
+                                                                </div>
+
+                                                                <div class="col-lg-6 mb-20">
+                                                                    <label>Confirm Password <span>*</span></label>
+                                                                    <input type="password" id="shippingAddFname">
+                                                                </div>
+                                                                </p>
+                                                                <br>
+                                                                <div class="col-lg-6 mb-20 save_button primary_btn default_button">
+                                                                    <button type="submit">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <label>Password</label>
+                                                    <input type="password" name="user-password" disabled="disabled">
+                                                    <label>Birthdate</label>
+                                                    <input type="text" placeholder="MM/DD/YYYY" value="" name="birthday">
+                                                    <span class="example">
+                                                      (E.g.: 05/31/1970)
+                                                    </span>
+                                                    <br>
+                                                    <span class="custom_checkbox">
+                                                        <input type="checkbox" value="1" name="optin">
+                                                        <label>Receive offers from our partners</label>
+                                                    </span>
+                                                    <br>
+                                                    <span class="custom_checkbox">
+                                                        <input type="checkbox" value="1" name="newsletter">
+                                                        <label>Sign up for our newsletter<br><em>You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.</em></label>
+                                                    </span>
+                                                    <div class="save_button primary_btn default_button">
+                                                        <button type="submit">Save</button>
+                                                    </div> -->
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -694,6 +804,63 @@
         </div>
     </section> -->
     <!--call to action end-->
+
+
+
+
+  <!-- Show Order Details modal area start-->
+    <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Order Details</strong></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="table_desc">     -->
+                                <div class="cart_page table-responsive" id="orderDetails">
+                               
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!--  Show tracking modal area start-->
+    <div class="modal fade" id="modal_tracking" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Order Tracking</strong></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="table_desc">     -->
+                                <div class="cart_page table-responsive" id="orderTrackingDetails">
+                               
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal area end-->
+
+
+
+
 
     <!--footer area start-->
     <footer class="footer_widgets" style="background: #414141;color: #fff;" id="footer">
@@ -813,6 +980,73 @@
 
 <!-- Footer -->
 <script src="assets/js/footer.js"></script>
+
+
+
+<!-- LMA Menubar JS -->
+<script src="assets/js/menubar.js"></script>
+
+<!-- Footer -->
+<script src="assets/js/footer.js"></script>
+
+<!-- Sidebar browse product filter JS -->
+<!-- <script src="assets/js/sidebarFilter.js"></script> -->
+
+<!-- mini Cart JS -->
+<!-- <script src="assets/js/miniCart.js"></script> -->
+<script src="assets/js/common/cart.js"></script>
+
+<!--  Cart JS-->
+
+
+
+          <!-- Datatables -->
+          <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+          <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+          <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+          <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+          <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+          <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+          <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+          <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+          <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+          <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+          <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+          <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+          <script src="../vendors/jszip/dist/jszip.min.js"></script>
+          <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+          <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+          <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+
+
+          <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+          <script src="../build/js/dataTables.cellEdit.js"></script>
+          <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script> -->
+          <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.1.0/js/dataTables.checkboxes.min.js"></script> -->
+          <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+          <!-- <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> -->
+          <!-- <script src="../build/js/basic.js"></script> -->
+
+          <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+          
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+          <script src="../assets/js/common/localstorage.js"></script>
+
+          <script src="../assets/js/common/notification.js"></script>
+
+          <!-- Main API -->
+          <script src="../assets/js/common/api.js"></script>
+          <script src="../assets/js/common/genericErrorHandler.js"></script>
+
+<!--  Cart JS-->
+<script src="assets/js/myOrders.js"></script>
+
+<!--  Cart JS-->
+<script src="assets/js/checkout.js"></script>
 
 
 </body>
