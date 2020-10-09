@@ -1,27 +1,3 @@
-	// var item = {	
-	// 				"name" : "la marzocco linea mini",
-	// 				"price" : "$700.00",
-	// 				"description" : "You have the choice of coffee beans from three incredible Australian roasters, tailored to your liking and delivered to your door. Choose from our roasters in the tabs below. Based on our iconic Linea Classic coffee machine, the Linea Mini lets you brew coffee and steam milk to create your favourite drinks at home. Each Linea Mini is hand-crafted at our headquarters in Italy, then tested at our workshop in Melbourne so that it delivers perfection in every cup. Our coffee machines all come with La Marzocco Home connectivity as standard, so that you can use our app to control your machine and contact our experts. Everything you need to make your first drink comes in the box. High-powered steam, professional-grade components, and no plumbing or installation means you can enjoy coffee immediately. Each machine has a 24-month warranty and comes with the full support of our Australian team to assist with queries, advice and tips. ",
-	// 				"family" : "Linea",
-	// 				"image" : "https://au.lamarzoccohome.com/wp-content/uploads/2017/01/linea-mini_steel_front-400px.png",
-	// 				"specification" : [
-	// 									{
-	// 										"Boiler Type" : "Dual Boiler",
-	// 										"PID Temperature Controller" : "Yes",
-	// 										"Pump Type" : "Single Internal Rotary Pump",
-	// 										"Indicator Lights" : "Heating and Water Level Lights",
-	// 										"Height" : "377mm",
-	// 										"Width" : "357mm",
-	// 										"Depth" : "530mm",
-	// 										"Weight" : "30kgs (machine only)",
-	// 										"Voltage" : "220-240v" ,
-	// 										"Steam Boiler" : "3.5 litres",
-	// 										"Water Reservoir capacity" : "2.5 litres"
-	// 									}
-	// 								]
-	// 			}
-
-
 
 	async function showProductDetails(item){
 		var detailsHTML = ""
@@ -128,13 +104,21 @@
 
 		$("#productInfo").append(infoHTML);
 		$("#btAddToCart").click(async function(){
+
+			const newQty = $("#inputQuantity").val();
+			if(newQty>0){
 			$("#btAddToCart").html("Added to Cart");
-			if(!shoppingCart.itemExists(itemId)){
-				shoppingCart.addItemToCart(itemId,i.name,999,$("#inputQuantity").val());
-			}else{
-				shoppingCart.setCountForItem(itemId,$("#inputQuantity").val());
-			}
+			// if(!shoppingCart.itemExists(itemId)){
+			// 	shoppingCart.addItemToCart(itemId,i.name,999,newQty);
+			// }else{
+			// 	shoppingCart.setCountForItem(itemId,newQty);
+			// }
+
+			shoppingCart.modify(itemId,newQty,function(){reloadMiniCart();});
 			// reloadMiniCart();
+		}else{
+			notifyError("Amount not valid!");
+		}
 
 		});
 
@@ -193,9 +177,8 @@
 
 			showProductDetails(element);
 			showProductInfo(element);
-			$("#inputQuantity").val(shoppingCart.getCountForItem(itemId));
-
-
+			$("#inputQuantity").val(shoppingCart.getQty(itemId));
+			
 		};
 
 		var onError =function(error){

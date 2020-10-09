@@ -185,15 +185,17 @@ async function showMachinesSideFilter(machineList){
 	$("#sidebarMachineFilter").append(sidebarHTML);
 	$('#sidebarMachineFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
-   		showMachineDropdownSelection(289);
+   		resultController = machineResultController;
+		resultController.loadResults(289);
 	});
 
 }
 
 function refreshCatalog(){
+	resultController = basicResultController;
 	filterParentId = getCheckedParent();
 	filterGroupId = getCheckedGroup();
-	showSearchResults();
+	resultController.loadResults();
 }
 
 function getCheckedMachine(){
@@ -263,14 +265,14 @@ async function showGroupSideFilter(groupList){
 		for(j=0; j<item["machines"].length;j++){ 
 
 			const inneritem = groupList[i]["machines"][j];
-			console.log("inneritem : ", inneritem)
+			// console.log("inneritem : ", inneritem)
 			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
 
 			for(k=0; k<inneritem["groups"].length;k++){
 
 				const innerMostitem = inneritem["groups"][k];
 
-				console.log("innerMostitem >>>>>>> : ", innerMostitem)
+				// console.log("innerMostitem >>>>>>> : ", innerMostitem)
 				// sidebarHTML += '<li><label class="custom-control"> <input  value="'+innerMostitem["id"]+'" type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
 				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="group"  /><label for="group" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
 			}
@@ -335,7 +337,10 @@ async function showParentSideFilter(familyList){
 	$("#sidebarCatalogFilter").append(sidebarHTML);
 	$('#sidebarCatalogFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
-   		showCatalogDropdownSelection(getCheckedParent());
+   		resultController = catalogResultController;
+   		resultController.loadResults(getCheckedParent());
+
+   		// showCatalogDropdownSelection(getCheckedParent());
 	});
 }
 

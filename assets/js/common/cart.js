@@ -9,8 +9,9 @@ var shoppingCart = (function () {
     // Private methods and properties
     var cart = [];
 
-    function Item(id,name, price, count) {
+    function Item(id,productId,name, price, count) {
         this.id = id
+        this.productId = productId
         this.name = name
         this.price = price
         this.count = count
@@ -30,9 +31,76 @@ var shoppingCart = (function () {
     loadCart();
 
 
-
     // Public methods and properties
     var obj = {};
+
+
+
+    obj.getItem =  function (productId) {
+           for (var i in cart) {
+                if (cart[i].productId === productId) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    obj.modify =  function (productId,quantity,callback) {
+         var existing = getItem(productId);
+
+        if (!existing) {
+                var onResponse = function(response){ 
+                    const cartItemId = safeAccess(["data","id"],response);
+                    if(cartItemId){
+                        var item = new Item(cartItemId,productId,name, price, count);
+                        cart.push(item);
+                        saveCart();
+                        reloadMiniCart()
+                        callback();
+                    }
+              };
+                cartAddItem(id,count,null,null,onResponse);    
+        } else {
+            if (quantity == 0) {
+                //("Deleting "+varient.getId());
+                var onResponse = function(response){ 
+                    //    for (var i in cart) {
+                    //     if (cart[i].id.valueOf() == id.valueOf()) { 
+                    //             cart.splice(i, 1);
+                    //         break;
+                    //     }
+                    // }
+                    saveCart();
+                    callback();
+                  };
+                    cartDeleteItem(existing.id,onResponse);
+            } else {
+                //("Updating "+quantity+" to "+varient.getId());
+                    var onResponse = function(response){ 
+                    const cartItemId = existing.id;
+
+                    // for (var i in cart) {
+                    //     if (cart[i].id === id) {
+                    //         cart[i].count = count;
+                    //         break;
+                    //     }
+                    // }   
+                    //     saveCart();
+                        callback();
+                  };
+                    cartUpdateItem(cartItemId,count,null,null,onResponse);
+            }
+        }
+    }
+
+    obj.getQty = async function (productId) {
+        var item = getItem(productId);
+        return item === null?0:item.count;
+    }
+
+
+
+
 
     obj.addItemToCart = async function (id,name, price, count) {
 

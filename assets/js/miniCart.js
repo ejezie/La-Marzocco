@@ -75,16 +75,14 @@ async function showMiniCart(cartItems,cartSubtotal){
 	// miniCartHTML += '</div>'
 	miniCartHTML += ''
 	miniCartHTML += '</div>'
-
-
-
 	$("#miniCart").append(miniCartHTML)
 }
 
 function removeItem(id){
-	if(confirm("Remove this item "+ id +" ?")){
-		shoppingCart.removeItemFromCart(id);
-		reloadMiniCart();
+	if(confirm("Remove this item from cart?")){
+		shoppingCart.modify(id,0,function(){
+			reloadMiniCart();
+		});
 	}
 }
 
