@@ -115,7 +115,7 @@
                             <div class="search-container">
                                 <form action="#">
                                     <div class="search_box">
-                                        <input id="inputSearch" placeholder="Search by Item Name ..." type="text">
+                                        <input id="inputSearch" placeholder="Search by Item Code, Item Name ..." type="text">
                                         <button  onclick="location.href='shop.html?q=' + document.getElementById('inputSearch').value"  type="submit"><i class="ion-ios-search-strong"></i></button>
                                     </div>
                                 </form>
@@ -587,18 +587,18 @@
 
                             <div>
                                 <form>
-                                    <input type="button" class="btn btn-success" value="Download Sample Data Template" onClick="window.location.href='adminDashboard/files/bulkOrders.xlsx'">
+                                    <input type="button" style="background: #414141;" class="btn btn-success" value="Download Sample Data Template" onClick="window.location.href='adminDashboard/files/bulkOrders.xlsx'">
                                 </form>
                                 
-                            </div>
-                            <br>
-
-                            <div>
-                                <input type="file" class="btn btn-info" accept=".xls, .xlsx"  style="background: #ffd54c;
+                            <!-- <div> -->
+                                <input type="file" class="btn" accept=".xls, .xlsx"  style="background: #f2f2f2;
                                     color: black;" id="excelfile"/>  
-                                <input type="button" style="background: black;" class="btn btn-success" id="uploadFile" value="Preview" onclick="ExportToTable('Preview')"/>  
+                                <input type="button" style="background: #414141;" class="btn btn-success" id="uploadFile" value="Preview" onclick="ExportToTable('Preview')"/>  
                                 <table id="exceltable" ></table>
+                            <!-- </div> -->
                             </div>
+                            <!-- <br> -->
+
                         </div>
                         <br>
                         <div class="table_desc"id="bulkOrders">
@@ -766,7 +766,7 @@
     <!--call to action end-->
 
     <!--footer area start-->
-    <footer class="footer_widgets" style="background: #000;color: #fff;" id="footer">
+    <footer class="footer_widgets" style="background: #414141;color: #fff;" id="footer">
         <!-- <div class="container">
             <div class="footer_top">
                 <div class="row">

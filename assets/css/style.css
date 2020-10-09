@@ -54,7 +54,8 @@
 }
 @font-face {
          font-family: 'laFont';
-      src: url('../fonts/lafont.ttf');
+      /*src: url('../fonts/lafont.ttf');*/
+      src: url('../fonts/lafontText.ttf');
 }
 
 @import url("https://fonts.googleapis.com/css?family=Lato:100,300,300i,400,400i,700,700i,900,900i|Open+Sans:300,400,400i,600,600i,700,700i,800,800i");
@@ -135,7 +136,8 @@ h4 {
 }
 
 h5 {
-  font-size: 14px;
+  /*font-size: 14px;*/
+  font-size: 15px;
   line-height: 18px;
 }
 
@@ -1599,7 +1601,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   padding-left: 49px;
   position: relative;
   cursor: pointer;
-  height: 55px;
+  height: 50px;
   line-height: 55px;
 }
 @media only screen and (max-width: 767px) {
@@ -3509,11 +3511,11 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display: inline-block;
 }
 .label_product span.label_new {
-  background: #2777d0;
+  background: #000;
 }
 
 .product_name h3 {
-  font-size: 14px;
+  font-size: 16px;
   text-transform: capitalize;
   margin: 15px 0 4px 0;
   font-weight: 400;
@@ -3528,7 +3530,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display: block;
 }
 .product_name h3 a:hover {
-  color: #2777d0;
+  color: #000;
 }
 .product_name p {
   line-height: 20px;
@@ -3541,7 +3543,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 .product_name p a {
   text-transform: uppercase;
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
 }
 .product_name p a:hover {
@@ -3704,7 +3706,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   width: 55%;
 }
 .small_product .product_content h3 {
-  font-size: 14px;
+  font-size: 16px;
   text-transform: capitalize;
   margin-bottom: 15px;
   font-weight: 400;
@@ -3719,7 +3721,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   display: block;
 }
 .small_product .product_content h3 a:hover {
-  color: #2777d0;
+  color: #000;
 }
 .small_product .product_thumb {
   width: 45%;
@@ -4465,7 +4467,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   transition: 0.3s;
 }
 .newletter_subscribe form button:hover {
-  background: #2777d0;
+  background: #000;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .newletter_subscribe form button {
