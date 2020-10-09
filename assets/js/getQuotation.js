@@ -106,8 +106,8 @@ async function showQuotation(orderArr){
         },
        
         buttons : [
-            'selectAll',
-            'selectNone',
+            // 'selectAll',
+            // 'selectNone',
               ],
               columns: [
             

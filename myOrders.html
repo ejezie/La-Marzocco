@@ -40,6 +40,17 @@
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
+
+    <!-- Datatable -->
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+  
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -115,7 +126,7 @@
                             <div class="search-container">
                                 <form action="#">
                                     <div class="search_box">
-                                        <input id="inputSearch" placeholder="Search by Item Code, Item Name ..." type="text">
+                                        <input id="inputSearch" placeholder="Search by Item Name ..." type="text">
                                         <button  onclick="location.href='shop.html?q=' + document.getElementById('inputSearch').value"  type="submit"><i class="ion-ios-search-strong"></i></button>
                                     </div>
                                 </form>
@@ -653,7 +664,7 @@
     <div class="modal fade" id="modal_tracking" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Order Details</strong></span>
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Order Tracking</strong></span>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

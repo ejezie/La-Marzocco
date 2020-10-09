@@ -193,8 +193,8 @@ async function showOrders(orderArr){
         },
        
         buttons : [
-            'selectAll',
-            'selectNone',
+            // 'selectAll',
+            // 'selectNone',
               ],
               columns: [
             
@@ -264,7 +264,7 @@ var orderDetailsHTML = ""
 	$("#orderTrackingDetails").empty()
 
 
-	orderDetailsHTML += '<table>'
+	orderDetailsHTML += '<table style="width:-moz-available">'
 	orderDetailsHTML += '<thead>'
 	orderDetailsHTML += '<tr>'
 	orderDetailsHTML += '<th class="product_thumb">Item Part No.</th>'
@@ -290,7 +290,7 @@ var orderDetailsHTML = ""
 	orderDetailsHTML += '</tbody>'
 	orderDetailsHTML += '</table>'
 
-
+// 
     $("#orderTrackingDetails").append(orderDetailsHTML);
     $('#modal_tracking').modal('show');
 }
