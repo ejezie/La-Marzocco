@@ -15,7 +15,7 @@
      <!--bootstrap min css-->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!--owl carousel min css-->
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    
     <!--slick min css-->
     <link rel="stylesheet" href="assets/css/slick.css">
     <!--magnific popup min css-->
@@ -48,6 +48,11 @@
     <link rel='stylesheet' href='https://rawgit.com/kenwheeler/slick/master/slick/slick.css'>
     <link rel='stylesheet' href='https://rawgit.com/kenwheeler/slick/master/slick/slick-theme.css'>
     <link rel="stylesheet" href="assets/css/carouselParts.css">
+
+
+
+
+
 
 </head>
 
@@ -124,7 +129,7 @@
                             <div class="search-container">
                                 <form action="#">
                                     <div class="search_box">
-                                        <input id="inputSearch" placeholder="Search by Item Name ..." type="text">
+                                        <input id="inputSearch" placeholder="Search by Item Code, Item Name ..." type="text">
                                         <button  onclick="location.href='shop.html?q=' + document.getElementById('inputSearch').value"  type="submit"><i class="ion-ios-search-strong"></i></button>
                                     </div>
                                 </form>
@@ -358,7 +363,7 @@
 
 
     <!--Offcanvas menu area start-->
-    <div class="off_canvars_overlay"></div>
+    <!-- <div class="off_canvars_overlay"></div>
     <div class="Offcanvas_menu canvas_padding">
         <div class="container">
             <div class="row">
@@ -505,7 +510,7 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
     <!--Offcanvas menu area end-->
 
     <!--breadcrumbs area start-->
@@ -642,9 +647,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="section_title">
+                    <!-- <div class="section_title">
                         <h2><span> <strong>Catalog</strong>Parts</span></h2>
-                    </div>
+                    </div> -->
                     <div class="product_carousel product_column5 owl-carousel" id="specialOffersProducts">
                         <!-- <div class="single_product">
                             <div class="product_name">
@@ -904,11 +909,34 @@
 <script src="assets/js/bootstrap.min.js"></script>
 <!--owl carousel min js-->
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+<script src="https://unpkg.com/cart-localstorage@1.1.2/dist/cart-localstorage.min.js" type="text/javascript"></script>
+
+<script src="assets/js/common/cart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+<script src="../assets/js/common/localstorage.js"></script>
+
+<script src="../assets/js/common/notification.js"></script>
+
+<!-- Main API -->
+<script src="../assets/js/common/genericErrorHandler.js"></script>
+<script src="../assets/js/common/api.js"></script>
+
+<!--  Carousel JS-->
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.11/js/min/perfect-scrollbar.jquery.min.js'></script>
+<script src='https://rawgit.com/kenwheeler/slick/master/slick/slick.js'></script>
+<!-- <script src="assets/js/carouselParts.js"></script> -->
 
 <!-- <script src="assets/js/index.js"></script> -->
-<script src="assets/js/carouselParts.js"></script>
 
+<script src="assets/js/carouselParts.js"></script>
 
 <script src="assets/js/owl.carousel.min.js"></script>
 <!--slick min js-->
@@ -944,31 +972,10 @@
 <script src="assets/js/miniCart.js"></script>
 
 
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
-<script src="https://unpkg.com/cart-localstorage@1.1.2/dist/cart-localstorage.min.js" type="text/javascript"></script>
-
-<script src="assets/js/common/cart.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-
-<script src="../assets/js/common/localstorage.js"></script>
-
-<script src="../assets/js/common/notification.js"></script>
-
-<!-- Main API -->
-<script src="../assets/js/common/genericErrorHandler.js"></script>
-<script src="../assets/js/common/api.js"></script>
-
-<!--  Carousel JS-->
-
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.11/js/min/perfect-scrollbar.jquery.min.js'></script>
-<script src='https://rawgit.com/kenwheeler/slick/master/slick/slick.js'></script>
-<!-- <script src="assets/js/carouselParts.js"></script> -->
 
 </body>
 

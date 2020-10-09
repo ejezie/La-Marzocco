@@ -34,14 +34,14 @@ async function showCarrouselParts(imageUrl,parts){
         const part = parts[i];
         carouselHTML += '<li class="playlist-item" onclick="toitemdetailpage('+safeAccess(["id"],part)+')">'
         carouselHTML += '<div class="thumb">'
-        carouselHTML += '<span style="  padding: 0 10px;border-radius: 2px;text-transform: capitalize;font-size: 12px;font-weight: 500;text-align: center;display: inline-block;" class="label_sale">'+part.part_ref_number+'</span>'
+        // carouselHTML += '<span style="  padding: 0 10px;border-radius: 2px;text-transform: capitalize;font-size: 16px;font-weight: 500;text-align: center;display: inline-block;" class="label_sale">'+parseInt(part.part_ref_number)+'</span>'
         // carouselHTML += '<img class="img-responsive" src="https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg">'
 
         carouselHTML += '<div class="fluid-ratio-wrap">'
-        carouselHTML += '<div class="fluid-ratio-inner"></div>'
+        carouselHTML += '<div class="fluid-ratio-inner"><span style="background-color:#414141; color:#fff; padding:4px; font-weight:bold;">'+parseInt(part.part_ref_number)+'</span></div>'
         carouselHTML += '</div>'
         carouselHTML += '</div>'
-        carouselHTML += '<div class="details">'+part.part_ref_number+" " +safeAccess(["item","name"],part)+'</div>'
+        carouselHTML += '<div class="details">'+safeAccess(["item","name"],part)+'</div>'
         carouselHTML += '</li>'
     }
     carouselHTML += ' <li class="playlist-item more">'
@@ -130,6 +130,7 @@ var specialOffersItemList = [{
 
 
 async function showSpecialOffersProducts(specialOffersItemList){
+    alert("Yes")
 
     var specialOffersProductsHTML = ""
 
@@ -200,7 +201,13 @@ function findGetParameter(parameterName) {
 
 var parentId;
 var mainitemid;
+// window.setTimeout( showSpecialOffersProducts(specialOffersItemList), 5000 )
+// setTimeout(function(){
+//     showSpecialOffersProducts(specialOffersItemList)
 
+// },5000); 
+
+                   // showSpecialOffersProducts(specialOffersItemList)
 $(document).ready(function(){
    parentId = findGetParameter("parent");
    mainitemid = findGetParameter("mainitem");
@@ -211,7 +218,6 @@ $(document).ready(function(){
                 getItemParentImages(parentId,mainitemid,function(response2){
                    const imageUrl = safeAccess(["data","machine_parent","image","image"],response1);
                    showCarrouselParts(imageUrl,safeAccess(["data","item_parent_images","data"],response2));
-                   // showSpecialOffersProducts(specialOffersItemList)
 
 
 

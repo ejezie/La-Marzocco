@@ -274,7 +274,7 @@ label:hover:before {
                             <div class="search-container">
                                 <form action="#">
                                     <div class="search_box">
-                                        <input id="inputSearch" placeholder="Search by Item Name ..." type="text">
+                                        <input id="inputSearch" placeholder="Search by Item Code, Item Name ..." type="text">
                                         <button  onclick="location.href='shop.html?q=' + document.getElementById('inputSearch').value"  type="submit"><i class="ion-ios-search-strong"></i></button>
                                     </div>
                                 </form>
@@ -505,6 +505,24 @@ label:hover:before {
         <!--header bottom end-->
     </header>
     <!--header area end-->
+
+
+    <!--breadcrumbs area start-->
+    <div class="breadcrumbs_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb_content">
+                        <ul>
+                            <!-- <li><a href="index.html">home</a></li> -->
+                            <li>home</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--breadcrumbs area end-->
 
 
     <!--Offcanvas menu area start-->
@@ -3295,127 +3313,9 @@ label:hover:before {
 
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-     <!-- modal area start-->
-    <div class="modal fade" id="submitEnquiryModal" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Submit Enquiry</strong></span>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal_body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                            <!-- <div class="table_desc">     -->
-
-                                <form>
-                                <div class="modal-body">
-
-                                    <div class="form-group">
-                                    <label for="enquiryType">Enquiry Type</label>
-                                    <select type="enquiryType" class="form-control" id="enquiryType">
-                                        <option value="">Choose</option>
-                                        <option value="1">A technical question and/or need support documents for La Marzocco or Mazzer equipment</option>
-                                        <option value="2">Purchasing La Marzocco or Mazzer equipment</option>
-                                        <option value="3">Marketing materials/events</option>
-                                        <option value="4">Purchasing a La Marzocco machine for my home</option>
-                                        <option value="5">A general question</option>
-                                  
-                                    </select>
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label for="fname">First Name</label>
-                                    <input type="fname" class="form-control" id="fname1" aria-describedby="fnameHelp" placeholder="Enter First Name">
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label for="lname">Last Name</label>
-                                    <input type="lname" class="form-control" id="lname1" aria-describedby="fnameHelp" placeholder="Enter Last Name">
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label for="companyName">Company Name</label>
-                                    <input type="companyName" class="form-control" id="companyName1" aria-describedby="companyNameHelp" placeholder="Enter Company Name">
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email1" aria-describedby="emailHelp" placeholder="Enter Email Id">
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label for="phoneNumber">Phone Number</label>
-                                    <input type="phoneNumber" class="form-control" id="phoneNumber1" aria-describedby="phoneNumberHelp" placeholder="Enter Phone Number">
-                                  </div>
 
 
-                                  <div class="form-group">
-                                    <label for="country">Country</label>
-                                    <select type="password" class="form-control" id="passwossrd2" placeholder="Enter State">
-                                        <option value="2">Australia</option>
-                                        <option value="3">Algeria</option>
-                                        <option value="4">Afghanistan</option>
-                                        <option value="5">Ghana</option>
-                                        <option value="6">Albania</option>
-                                        <option value="7">Bahrain</option>
-                                        <option value="8">Colombia</option>
-                                        <option value="9">Dominican Republic</option>
-                                    </select>
-                                  </div>
-
-
-                                  <div class="form-group">
-                                    <label for="country">State</label>
-                                    <select type="password" class="form-control" id="passwossrd2" placeholder="Confirm Password">
-                                        <option>Victoria</option>
-                                     
-                                    </select>
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label for="enquiryDetails">Specifically, What can we help you with?</label>
-                                    <input type="enquiryDetails" class="form-control" id="enquiryDetails" aria-describedby="enquiryDetailsHelp" placeholder="">
-                                  </div>
-
-
-
-
-                                <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                  <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
-
-                              </form>   
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
 
     <!-- modal area start-->
     <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
