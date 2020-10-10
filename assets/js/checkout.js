@@ -106,6 +106,7 @@ function initAddAddress(){
 
 	  var onResponse = function(response){
 	    notifySuccess("Updated");
+	    location.reload(true);
 	    // window.location.href = 'productMaster.html';
 	  };
 	  createAddress(
@@ -144,19 +145,44 @@ function confirmOrder(){
 
 	createOrder(quoteId,po,shippingAddressId,billingAddressId,orderNotes,function(response){
 			// notifySuccess("Proceed to payment");
-			$("#btConfirmOrder").hide();
-			$("#payment_method").css("display", "unset");
-			$("#btProceedToPayment").click(function(){
+			if(!response.data.payment){ //tofixkey
+				$("#btConfirmOrder").hide();
+				$("#payment_method").css("display", "unset");
+
+				const partialPayment = safeAccess(["data","order","payment","partial"],response,0);
+				const fullPayment = safeAccess(["data","order","payment","full"],response,0);
+				const paymentTypeDropdown =  $("#inputPaymentType");
+				paymentTypeDropdown.html("");
+		         paymentTypeDropdown.append($("<option>").text("Partial Payment $"+partialPayment).val(partialPayment));
+		         paymentTypeDropdown.append($("<option>").text("Full Payment $"+fullPayment).val(fullPayment));
+				$("#btProceedToPayment").click(function(){
 				confirmPayment(response);
 			});
+			}else{
+				notifyOrderSuccess();
+			}
+			
 	});
+}
+
+
+
+function notifyOrderSuccess(orderId){
+			notifySuccess("Payment Successful");
+			shoppingCart.clearCart();
+			if(orderId){
+			alert("Order #"+orderId+" is placed successfully");
+		}else{
+			alert("Order  is placed successfully");
+		}
+			window.location.href = "index.html";
 }
 
 function confirmPayment(response){
 
-	// const amount = $("#inputPaymentType").val();
+	const amount = $("#inputPaymentType").val();
 	const orderId = response.data.order[0].id;
-	const amount = response.data.order[0].total;
+	// const amount = response.data.order[0].total;
 	const inputCardNumber = $("#inputCardNumber").val();
 	const inputExpireyMonth = $("#inputExpireyMonth").val();
 	const inputExpireyYear = $("#inputExpireyYear").val();
@@ -164,9 +190,7 @@ function confirmPayment(response){
 
 	notifyInfo("Please wait");
 	createPayment(orderId,amount,inputCardNumber,inputExpireyMonth,inputExpireyYear,inputCvc,function(response){
-			notifySuccess("Payment Successful");
-			alert("Order #"+orderId+" is placed successfully");
-			window.location.href = "index.html";
+			notifyOrderSuccess(orderId);
 	});
 }
 
@@ -261,11 +285,15 @@ function populateCountry(){
 
   };
   getCountries(onResponse);
+  $('#inputZipCode').on("change paste keyup", function() {
+		  populateAreas($(this).val());
+   });
 }
 
 function populateState(keyId){
 
   var dropdown = $("#inputState");
+  dropdown.html("");
   var onResponse = function(response){
     for(var i=0; i< response.data.states.length; i++){
     const item = response.data.states[i];
@@ -282,28 +310,27 @@ function populateState(keyId){
 function populateCities(keyId){
 
   var dropdown = $("#inputCity");
+  dropdown.html("");
   var onResponse = function(response){
     for(var i=0; i< response.data.cities.length; i++){
     const item = response.data.cities[i];
          dropdown.append($("<option>").text(item.name).val(item.id));
       }
-         $('#inputCity').change( function() {
-		  populateAreas(keyId);
-	  });
   };
   getCities(keyId,onResponse);
 }
 
 
-function populateAreas(keyId){
+function populateAreas(postcode){
 
   var dropdown = $("#inputArea");
+  dropdown.html("");
   var onResponse = function(response){
-    for(var i=0; i< response.data.area_codes.length; i++){
-    const item = response.data.area_codes[i];
+    for(var i=0; i< response.data.area_codes.data.length; i++){
+    const item = response.data.area_codes.data[i];
          dropdown.append($("<option>").text(item.name).val(item.id));
       }
   };
-  getAreas(keyId,onResponse);
+  getAreas(postcode,onResponse);
 }
 
