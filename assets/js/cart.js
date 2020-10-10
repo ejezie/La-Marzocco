@@ -167,6 +167,8 @@ async function showSubTotal(cartSubTotal,quoteId){
 	subTotalHTML += '</div>'
 	subTotalHTML += '<div class="cart_subtotal ">'
 	subTotalHTML += '<p>Shipping</p>'
+
+	console.log("cartSubTotal  >>>>>>> : ", cartSubTotal)
 	subTotalHTML += '<p class="cart_amount"> '+cartSubTotal["shipping"]+'</p>'
 	subTotalHTML += '</div>'
 	// subTotalHTML += '<a href="#">Calculate shipping</a>'
@@ -210,7 +212,7 @@ $(document).ready(function(){
 					var cartSubTotals = {
 										"subTotal" : "$"+ safeAccess(["data","quote","sub_total"],response),
 										"total" :  "$"+ safeAccess(["data","quote","total"],response),
-										"shipping" : "$"+parseInt(safeAccess(["data","quote","shipping_cost"],response))
+										"shipping" : "$"+(safeAccess(["data","quote","shipping_cost"],response))
 									}
 					showSubTotal(cartSubTotals,safeAccess(["data","quote","id"],response));
 			});
