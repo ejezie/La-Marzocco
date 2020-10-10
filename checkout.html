@@ -769,6 +769,11 @@ body {font-family: Verdana, sans-serif; margin:0}
                                     <div class="coupon_inner">
 <!--                                     <input placeholder="Upload" type="text">
  -->                                    
+
+                                    <label>PO Number </label>
+                                    <input id="inputPoName"  type="text">
+
+                                      <label>Attach PO </label>
                                     <div style="white-space:nowrap">
                                     <input type="file" id="pofile" class="btn upload-po" style="background:#eee; color:#333; text-align: initial;padding-top: 4px" id="po_excelfile"/>
                                     <!-- <input type="button" class="btn upload-po"  value="Upload PO"> -->
@@ -859,6 +864,11 @@ body {font-family: Verdana, sans-serif; margin:0}
                                     <h3>Payment</h3>
                                 </div>
 
+
+                                <div class="col-12 mb-20">
+                                    <label>Name on Card <span>*</span></label>
+                                    <input id="inputCardName" placeholder="" type="text">
+                                </div>
 
                                 <div class="col-12 mb-20">
                                     <label>Card Number <span>*</span></label>
@@ -977,10 +987,6 @@ body {font-family: Verdana, sans-serif; margin:0}
                                     <input  class="form-control" id="inputName" aria-describedby="fnameHelp" placeholder="Enter Full Name">
                                   </div>
 
-                                  <div class="form-group">
-                                    <label>Area Code</label>
-                                    <input  class="form-control" id="inputZipCode" aria-describedby="companyNameHelp" placeholder="Enter Zip Code">
-                                  </div>
 
                                   <div class="form-group">
                                     <label>Address Line 1</label>
@@ -1017,6 +1023,12 @@ body {font-family: Verdana, sans-serif; margin:0}
                                     <select class="form-control" id="inputCity" placeholder="Select City" ></select>
                                   </div>
 
+
+                                  <div class="form-group">
+                                    <label>Area Code</label>
+                                    <input  class="form-control" id="inputZipCode" aria-describedby="companyNameHelp" placeholder="Enter Zip Code">
+                                  </div>
+                                  
                                   <div class="form-group">
                                     <label >Area</label>
                                     <select class="form-control" id="inputArea" placeholder="Select Area" ></select>

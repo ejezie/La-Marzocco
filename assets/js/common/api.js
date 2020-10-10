@@ -1348,10 +1348,11 @@ async function getAddressesList(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function createOrder(quoteId,po,shippingAddrId,billingAddrId,desc,onResponse,onError){
+async function createOrder(quoteId,po,poName,shippingAddrId,billingAddrId,desc,onResponse,onError){
   var data = new FormData();
   data.append('quote_id', quoteId);
   appendIfNotNull(data,"po",po)
+  appendIfNotNull(data,"poName",poName)
   data.append('shipping_address_id', shippingAddrId);
   data.append('billing_address_id', billingAddrId);
   data.append('desc', desc);
@@ -1368,14 +1369,15 @@ async function createOrder(quoteId,po,shippingAddrId,billingAddrId,desc,onRespon
   };
   axios(config).then(onResponse).catch(onError);
 }
-async function createPayment(order_id,amount,cart_number,cart_exp_month,cart_exp_year,card_cvc,onResponse,onError){
+async function createPayment(order_id,amount,card_name,cart_number,cart_exp_month,cart_exp_year,card_cvc,onResponse,onError){
   var data = new FormData();
   data.append('order_id', order_id);
   data.append('amount', amount);
-  data.append('card_number', cart_number);
-  data.append('card_exp_month', cart_exp_month);
-  data.append('card_exp_year', cart_exp_year);
-  data.append('card_cvc', card_cvc);
+  data.append('card_name',card_name);
+  data.append('card_number', btoa(cart_number));
+  data.append('card_exp_month', btoa(cart_exp_month));
+  data.append('card_exp_year', btoa(cart_exp_year));
+  data.append('card_cvc', btoa(card_cvc));
 
   var config = {
     method: 'post',
@@ -1431,13 +1433,13 @@ async function getCities(keyid,onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function getAreas(city_id,onResponse,onError){
+async function getAreas(postcode,onResponse,onError){
    var data = new FormData();
-  data.append('city_id', city_id);
+  data.append('postcode', postcode);
 
   var config = {
     method: 'get',
-    url: BASE_URL+'area-codes?city_id='+city_id,
+    url: BASE_URL+'area-codes?postcode='+postcode+"&page_size=9999",
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
