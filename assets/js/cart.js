@@ -39,7 +39,7 @@ async function showCart(cartItems){
 		// }
 
 
-		cartHTML += '<td class="product-price">'+cartItems[i]["productPrice"]+'</td>'
+		cartHTML += '<td class="product-price">'+cartItems[i]["productPrice"].toLocaleString("en-AU")+'</td>'
 		cartHTML += '<td class="product_quantity"><label>Quantity</label> <input onchange="editQuantity('+cartItems[i]["productItemId"]+',this)" min="1" max="100" value="'+cartItems[i]["productQuantity"]+'" type="number"><a ><i onclick="deleteItem('+cartItems[i]["productItemId"]+')" class="fa fa-trash-o" style="width: 30px;font-size:17px"></i></a></td>'
 		// cartHTML += '<td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>'
 		cartHTML += '<td class="product_total">'+cartItems[i]["productPrice"]+'</td>'
@@ -119,10 +119,10 @@ async function showCartFromQuote(quoteItems){
 		cartHTML += '<tr>'
 		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
 		cartHTML += '<td class="product_name"><a href="#">'+quoteItemProduct["name"]+'</a></td>'
-		cartHTML += '<td class="product-price">'+quoteItem["price"]+'</td>'
+		cartHTML += '<td class="product-price">$'+quoteItem["price"].toLocaleString("en-AU")+'</td>'
 		cartHTML += '<td class="product_quantity"><a>'+quoteItem["qty"]+'</a></td>'
 		// cartHTML += '<td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>'
-		cartHTML += '<td class="product_total">'+quoteItem["total"]+'</td>'
+		cartHTML += '<td class="product_total">$'+quoteItem["total"].toLocaleString("en-AU")+'</td>'
 		cartHTML += '</tr>'
 	}
 
@@ -163,20 +163,33 @@ async function showSubTotal(cartSubTotal,quoteId){
 	subTotalHTML += '<div class="coupon_inner">'
 	subTotalHTML += '<div class="cart_subtotal">'
 	subTotalHTML += '<p>Subtotal</p>'
-	subTotalHTML += '<p class="cart_amount">'+cartSubTotal["subTotal"]+'</p>'
+	subTotalHTML += '<p class="cart_amount">$'+cartSubTotal["subTotal"].toLocaleString("en-AU")+'</p>'
 	subTotalHTML += '</div>'
 	subTotalHTML += '<div class="cart_subtotal ">'
 	subTotalHTML += '<p>Shipping</p>'
 
 	console.log("cartSubTotal  >>>>>>> : ", cartSubTotal)
-	subTotalHTML += '<p class="cart_amount"> '+cartSubTotal["shipping"]+'</p>'
+	if(cartSubTotal["shipping"] == undefined){
+		subTotalHTML += '<p class="cart_amount"> $0</p>'
+	}else{
+		subTotalHTML += '<p class="cart_amount"> $'+cartSubTotal["shipping"].toLocaleString("en-AU")+'</p>'
+
+	}
 	subTotalHTML += '</div>'
+
+
+
+	subTotalHTML += '<div class="cart_subtotal ">'
+	subTotalHTML += '<p>Tax</p>'
+	subTotalHTML += '<p class="cart_amount"> $'+cartSubTotal["tax"].toLocaleString("en-AU")+'</p>'
+	subTotalHTML += '</div>'
+
 	// subTotalHTML += '<a href="#">Calculate shipping</a>'
 	subTotalHTML += '<a href="#"></a>'
 	subTotalHTML += ''
 	subTotalHTML += '<div class="cart_subtotal">'
 	subTotalHTML += '<p>Total</p>'
-	subTotalHTML += '<p class="cart_amount">'+cartSubTotal["total"]+'</p>'
+	subTotalHTML += '<p class="cart_amount">$'+cartSubTotal["total"].toLocaleString("en-AU")+'</p>'
 	subTotalHTML += '</div>'
 	subTotalHTML += '<div class="checkout_btn">'
 	// 	subTotalHTML += '<div>'
@@ -210,9 +223,10 @@ $(document).ready(function(){
 					showCartFromQuote(safeAccess(["data","quote","quote_line"],response));
 					$("#showQuote").hide();
 					var cartSubTotals = {
-										"subTotal" : "$"+ safeAccess(["data","quote","sub_total"],response),
-										"total" :  "$"+ safeAccess(["data","quote","total"],response),
-										"shipping" : "$"+(safeAccess(["data","quote","shipping_cost"],response))
+										"subTotal" : safeAccess(["data","quote","sub_total"],response),
+										"total" :  safeAccess(["data","quote","total"],response),
+										"shipping" : (safeAccess(["data","quote","shipping_cost"],response)),
+										"tax" : (safeAccess(["data","quote","total_tax"],response))
 									}
 					showSubTotal(cartSubTotals,safeAccess(["data","quote","id"],response));
 			});
