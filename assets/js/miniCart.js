@@ -45,7 +45,7 @@ async function showMiniCart(cartItems,cartSubtotal){
 		// miniCartHTML += '<span class="price_cart"> $'+safeAccess(["price"],item,"-")+'</span>'
 		miniCartHTML += '</div>'
 		miniCartHTML += '<div class="cart_remove">'
-		miniCartHTML += '<a onclick="removeItem('+item["id"]+')" ><i class="ion-android-close"></i></a>'
+		miniCartHTML += '<a onclick="removeItem('+item["id"]+')" ><i class="fa fa-trash"></i></a>'
 		miniCartHTML += '</div>'
 		miniCartHTML += '</div>'
 	}

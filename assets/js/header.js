@@ -1,12 +1,6 @@
 
+$('#itemSearchBtn').click(function(){
 
-
-$('#submitEnquiry').click(function(){
-    //Some code
-    alert("Yres")
-    // $('#submitEnquiryModal').modal('show'); 
-    $('#submitEnquiryModal').appendTo("body").modal('show');
-
-});
-
-
+   location.href='shop.html?q=' + document.getElementById('inputSearch').value
+   return false;
+})

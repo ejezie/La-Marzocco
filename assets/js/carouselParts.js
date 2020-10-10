@@ -12,6 +12,14 @@ function toitemdetailpage(itemId){
 
 // https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg
 
+
+function sortByKey(array, key) {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    });
+}
+
 async function showCarrouselParts(imageUrl,parts){
     if(!parts){
         notifyError("Failed to load parts");
@@ -30,7 +38,9 @@ async function showCarrouselParts(imageUrl,parts){
     carouselHTML += '<div class="playlist-wrap" style="padding-top: inherit;">'
     carouselHTML += '<ul class="remove-bullets scroll-wrap">'
 
+
     for(i=0; i<parts.length;i++){
+        // var parts = sortByKey(parts,part_ref_number)
         const part = parts[i];
         carouselHTML += '<li class="playlist-item" onclick="toitemdetailpage('+safeAccess(["id"],part)+')">'
         carouselHTML += '<div class="thumb">'
@@ -39,6 +49,8 @@ async function showCarrouselParts(imageUrl,parts){
 
         carouselHTML += '<div class="fluid-ratio-wrap">'
         carouselHTML += '<div class="fluid-ratio-inner"><span style="background-color:#414141; color:#fff; padding:4px; font-weight:bold;">'+parseInt(part.part_ref_number)+'</span></div>'
+        console.log("part : ",part)
+        console.log("part.part_ref_number : ",part.part_ref_number)
         carouselHTML += '</div>'
         carouselHTML += '</div>'
         carouselHTML += '<div class="details">'+safeAccess(["item","name"],part)+'</div>'

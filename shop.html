@@ -292,7 +292,7 @@ label:hover:before {
                                 <form action="#">
                                     <div class="search_box">
                                         <input id="inputSearch" placeholder="Search by Item Code, Item Name ..." type="text">
-                                        <button  onclick="location.href='shop.html?q=' + document.getElementById('inputSearch').value"  type="submit"><i class="ion-ios-search-strong"></i></button>
+                                        <button  id="itemSearchBtn"   type="submit"><i class="ion-ios-search-strong"></i></button>
                                     </div>
                                 </form>
                             </div>
@@ -888,7 +888,7 @@ label:hover:before {
 
                                 <article class="filter-machine">
                                     <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside4" data-abc="true" class="collapsed" aria-expanded="false"> 
-                                            <h4 class="title" id="more-btn-machine">Catalog <i class="icon-control fa fa-chevron-down"></i></h4>
+                                            <h4 class="title" id="more-btn-machine" style="padding-top: 10px;">Catalog <i class="icon-control fa fa-chevron-down"></i></h4>
                                         </a> </header>
                                     <div class="filter-content collapse" id="collapse_aside4" style="">
                                         <!-- <div class="card-body" id="sidebarMachineFjjilter">  -->
@@ -917,7 +917,7 @@ label:hover:before {
 
                                 <article class="filter-machine">
                                     <header class="card-header"> <a href="#" data-toggle="collapse" data-target="#collapse_aside5" data-abc="true" class="collapsed" aria-expanded="false"> 
-                                            <h4 class="title" id="more-btn-machine">Group <i class="icon-control fa fa-chevron-down"></i></h4>
+                                            <h4 class="title" id="more-btn-machine" style="padding-top: 10px;">Group <i class="icon-control fa fa-chevron-down"></i></h4>
                                         </a> </header>
                                     <div class="filter-content collapse" id="collapse_aside5" style="">
                                         <!-- <div class="card-body" id="sidebarMachineFjjilter">  -->
@@ -1767,6 +1767,9 @@ label:hover:before {
 <script src="assets/js/sidebarFilter.js"></script>
 
     <script src="assets/js/shop.js"></script>
+    
+    <!-- Header -->
+    <script src="assets/js/header.js"></script>
 
 <!-- <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css'>
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js'></script>
