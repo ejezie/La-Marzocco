@@ -29,7 +29,7 @@ async function showAddressSlider(addArr){
 
 		const address = addArr[i];
 
-		addSliderHTML += '<div class="optionsecoptions" style="border-style: solid ; width: initial;font-family: trade gothic;font-size: 14px;width: 100%;">'
+		addSliderHTML += '<div class="optionsecoptions" style="border:1px solid #ccc; ; width: initial;;font-size: 14px;width: 100%;">'
 		addSliderHTML += ''+ address.address+''
 			addSliderHTML += '<br>'
 		if(address.is_billable != 0){
@@ -128,7 +128,7 @@ function initAddAddress(){
 function initProductDetails(){
 	//need html work
 	getQuoteDetails(quoteId,function(response){
-		showCheckoutOrderSummary(response.data.quote.quote_line);
+		showCheckoutOrderSummary(response.data.quote.quote_line,response.data.quote );
 	});
 }
 
@@ -217,7 +217,7 @@ function getShippingAddressId(){
 
 
 
-async function showCheckoutOrderSummary(orderSummary){
+async function showCheckoutOrderSummary(orderSummary, orderDetails){
 
 	var orderSummaryHTML = ''
 
@@ -234,27 +234,27 @@ async function showCheckoutOrderSummary(orderSummary){
 
 		orderSummaryHTML += '<tr>'
 		orderSummaryHTML += '<td> '+ orderSummary[i]["item"]["name"]+' <strong> × '+ orderSummary[i]["qty"]+'</strong></td>'
-		orderSummaryHTML += '<td> '+ orderSummary[i]["total"]+'</td>'
+		orderSummaryHTML += '<td> $'+ orderSummary[i]["total"].toLocaleString("en-AU")+'</td>'
 		orderSummaryHTML += '</tr>'
 	}
-
+	console.log("orderDetails -------", orderDetails)
 	orderSummaryHTML += '</tbody>'
 	orderSummaryHTML += '<tfoot>'
 	orderSummaryHTML += '<tr>'
 	orderSummaryHTML += '<th>Cart Subtotal</th>'
-	orderSummaryHTML += '<td>$4000.00</td>'
+	orderSummaryHTML += '<td>$'+orderDetails["sub_total"].toLocaleString("en-AU")+'</td>'
 	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '<tr>'
 	orderSummaryHTML += '<th>Shipping</th>'
-	orderSummaryHTML += '<td><strong>$20.00</strong></td>'
+	orderSummaryHTML += '<td><strong>$'+orderDetails["shipping_cost"].toLocaleString("en-AU")+'</strong></td>'
 	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '<tr>'
 	orderSummaryHTML += '<th>Tax</th>'
-	orderSummaryHTML += '<td><strong>$20.00</strong></td>'
+	orderSummaryHTML += '<td><strong>$'+orderDetails["total_tax"].toLocaleString("en-AU")+'</strong></td>'
 	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '<tr class="order_total">'
 	orderSummaryHTML += '<th>Order Total</th>'
-	orderSummaryHTML += '<td><strong>$4040.00</strong></td>'
+	orderSummaryHTML += '<td><strong>$'+orderDetails["total"].toLocaleString("en-AU")+'</strong></td>'
 	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '</tfoot>'
 	orderSummaryHTML += '</table>'

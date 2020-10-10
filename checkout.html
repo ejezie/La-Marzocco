@@ -55,6 +55,7 @@
     float: left;
     font-size:20px;
     cursor:pointer;
+    font-family: lafont
     }
 /*.optionsecoptions:hover,
     .optionsecoptions:active {
@@ -626,7 +627,7 @@ body {font-family: Verdana, sans-serif; margin:0}
                             <div class="row">
 
 
-                                <div class="address_slider" style="margin-top:10px; height: 300px; overflow: auto; padding-left: 20px;
+                                <div class="address_slider" style="margin-top:10px; height: 350px; overflow: auto; padding-left: 20px;
                                         padding-right: 20px;" id="addressSlider">
                                        <!--  <div class="optionsecoptions" style="border-style: solid ; width: 100%">
                                             A1 1022, Arcade line, Aundh Road, Pune -20, Maharashtra.
@@ -761,12 +762,6 @@ body {font-family: Verdana, sans-serif; margin:0}
 
 
 
-                                <div class="col-12">
-                                    <div class="order-notes">
-                                        <label for="order_note">Order Notes</label>
-                                        <textarea id="inputOrderNotes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                    </div>
-                                </div>
 
                                 <div class="col-12">
                                     <div class="coupon_code left">
@@ -775,7 +770,7 @@ body {font-family: Verdana, sans-serif; margin:0}
 <!--                                     <input placeholder="Upload" type="text">
  -->                                    
                                     <div style="white-space:nowrap">
-                                    <input type="file" id="pofile" class="btn upload-po" style="background:#ccc; color:#333" id="po_excelfile"/>
+                                    <input type="file" id="pofile" class="btn upload-po" style="background:#eee; color:#333; text-align: initial;padding-top: 4px" id="po_excelfile"/>
                                     <!-- <input type="button" class="btn upload-po"  value="Upload PO"> -->
                                     </div>
                                     <!-- <button type="submit">Upload Purchase orders</button> -->
@@ -783,6 +778,14 @@ body {font-family: Verdana, sans-serif; margin:0}
                                     </div>
                                 </div>
                                 
+                                <div class="col-12">
+                                    <div class="order-notes">
+                                        <label for="order_note">Order Notes</label>
+                                        <textarea id="inputOrderNotes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                    </div>
+                                </div>
+
+
                             </div>
                         <!-- </form> -->
                     </div>
@@ -875,15 +878,19 @@ body {font-family: Verdana, sans-serif; margin:0}
                                         </div>
                                         <div class="col-5 mb-8">
                                             <label>CVV <span>*</span></label>
-                                            <input  id="inputCvc" type="text">
+                                            <input  id="inputCvc" type="password">
                                         </div>
-                                    <select class="form-control" id="inputPaymentType">
-                                        <option value="1">Full Payment</option>
-                                        <option value="2">Partial Payment</option>
-                                    </select>
-                                  </div>
+
+                                        <div class="col-12 mb-20">
+                                            <label>Payment Type<span>*</span></label>
+                                            <select class="form-control" id="inputPaymentType">
+                                                <option value="1">Full Payment</option>
+                                                <option value="2">Partial Payment</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="order_button col-12 mb-20">
+                                </div>
+                                <div class="order_button col-12 mb-20">
                                     <button id="btProceedToPayment" type="button">Proceed to Payment</button>
                                 </div>
                                 </div>
