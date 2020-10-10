@@ -134,6 +134,7 @@ function initProductDetails(){
 
 function confirmOrder(){
 	const orderNotes = $("#inputOrderNotes").val();
+	const poName = $("#inputPoName").val();
 	const po = document.querySelector('#pofile').files[0];
 	const billingAddressId = getBillingAddressId();
 	const shippingAddressId = getShippingAddressId();
@@ -143,7 +144,7 @@ function confirmOrder(){
 	}
 	notifyInfo("Please wait");
 
-	createOrder(quoteId,po,shippingAddressId,billingAddressId,orderNotes,function(response){
+	createOrder(quoteId,po,poName,shippingAddressId,billingAddressId,orderNotes,function(response){
 			// notifySuccess("Proceed to payment");
 			if(!response.data.payment){ //tofixkey
 				$("#btConfirmOrder").hide();
@@ -183,13 +184,14 @@ function confirmPayment(response){
 	const amount = $("#inputPaymentType").val();
 	const orderId = response.data.order[0].id;
 	// const amount = response.data.order[0].total;
+	const inputCardName = $("#inputCardName").val();
 	const inputCardNumber = $("#inputCardNumber").val();
 	const inputExpireyMonth = $("#inputExpireyMonth").val();
 	const inputExpireyYear = $("#inputExpireyYear").val();
 	const inputCvc = $("#inputCvc").val();
 
 	notifyInfo("Please wait");
-	createPayment(orderId,amount,inputCardNumber,inputExpireyMonth,inputExpireyYear,inputCvc,function(response){
+	createPayment(orderId,amount,inputCardName, inputCardNumber,inputExpireyMonth,inputExpireyYear,inputCvc,function(response){
 			notifyOrderSuccess(orderId);
 	});
 }
