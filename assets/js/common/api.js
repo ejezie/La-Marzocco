@@ -1040,17 +1040,14 @@ async function login(email,pass,onResponse,onError){
 }
 
 
-async function getSearchResults(onResponse,onError,url,searchQuery,parent_id,group_id){
+async function getSearchResults(currentPage,pageSize,searchQuery,filterParentId,filterGroupId,onResponse,onError){
   console.log("url  "+url,"  parent_id  "+filterParentId+"  grp "+filterGroupId +" searchQuery: "+searchQuery)
   // var data = new FormData();
   // appendIfNotNull(data,"search_text ",searchQuery);
   // appendIfNotNull(data,"parent_id",filterParentId);
   // appendIfNotNull(data,"group_id",filterGroupId);
 
-
-  if(url==null){
-    url = BASE_URL+'item?page=1' ;
-  }
+  var  url = BASE_URL+'item?page='+currentPage+ "&page_size="+pageSize;
 
   if(filterGroupId){
     url+='&group_id='+filterGroupId;
@@ -1061,7 +1058,7 @@ async function getSearchResults(onResponse,onError,url,searchQuery,parent_id,gro
   }
   
   if(searchQuery){
-    url+='&search_text ='+searchQuery;
+    url+='&search_text='+searchQuery;
   }
 
   var config = {
@@ -1270,10 +1267,10 @@ async function getItemParentImages(parent_id,main_item_id,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
-async function getItemParentImagesForMachineDropdown(main_item_id,onResponse,onError){
+async function getItemParentImagesForMachineDropdown(currentPage,pageSize,main_item_id,onResponse,onError){
   var config = {
     method: 'get',
-    url: BASE_URL+'item-parent-image?main_item_id='+main_item_id,
+    url: BASE_URL+'item-parent-image?main_item_id='+main_item_id+'&page='+currentPage+ '&page_size='+pageSize,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
@@ -1296,10 +1293,10 @@ async function getMachineParentMapping(itemParentId,onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function getMachineParentList(onResponse,onError,machineId){
+async function getMachineParentList(currentPage,pageSize,onResponse,onError,machineId){
   var config = {
     method: 'get',
-    url: BASE_URL+'machine-parent?page=2&page_size=10&item_id='+machineId,
+    url: BASE_URL+'machine-parent?item_id='+machineId+'&page='+currentPage+ '&page_size='+pageSize,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 

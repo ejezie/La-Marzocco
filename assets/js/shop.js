@@ -2,18 +2,14 @@ var searchQuery;
 
 var resultController;
 
-var filterParentId,filterGroupId;
 var basicResultController = (function () {
 	 var obj = {};
 	 var url;
-
-    obj.next =  function (catalogList) {
-    	alert("next");
-    }
-
-    obj.previous =  function (catalogList) {
-    	 alert("previous");
-    }
+	 var itemsPerPage =20;
+	 var currentPage=1;
+	 var filterParentId;
+	 var filterGroupId;
+	
 
     obj.loadResults =  function () {
     	 var loadingNotification = notifyInfo("Loading results");
@@ -36,6 +32,17 @@ var basicResultController = (function () {
 							};
 			  results.push(element);
 		    }
+		    if(currentPage==1){
+		      $('#pagination-container').pagination({
+			        items: response.data.items.total,
+			        itemsOnPage: itemsPerPage,
+			        cssStyle: 'dark-theme',
+			        onPageClick: function(pageNo){
+			        	currentPage = pageNo;
+			        	obj.loadResults(results);
+			        }
+			    });
+			}
 
 		    obj.showResult(results);
 
@@ -46,7 +53,7 @@ var basicResultController = (function () {
 		  	console.log(error);
 		    notifyError("Failed to load results");
 		  };
-		  getSearchResults(onResponse,onError,url,searchQuery,filterParentId,filterGroupId);
+		  getSearchResults(currentPage,itemsPerPage,searchQuery,filterParentId,filterGroupId,onResponse,onError);
     }
 
     obj.showResult =  function (catalogList) {
@@ -73,7 +80,7 @@ var basicResultController = (function () {
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="action_links">'
 				catalogHTML += '<ul>'
-				catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
+				// catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
 				catalogHTML += '</ul>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
@@ -84,9 +91,9 @@ var basicResultController = (function () {
 				catalogHTML += '<span class="current_price">'+catalogList[i]["productOfferPrice"]+'</span>'
 				catalogHTML += '<span class="old_price">'+catalogList[i]["productActualPrice"]+'</span>'
 				catalogHTML += '</div>'
-				catalogHTML += '<div class="add_to_cart">'
-				catalogHTML += '<a onclick="addToCart()" title="add to cart"><span class="lnr lnr-cart"></span></a>'
-				catalogHTML += '</div>'
+				// catalogHTML += '<div class="add_to_cart">'
+				// catalogHTML += '<a onclick="addToCart()" title="add to cart"><span class="lnr lnr-cart"></span></a>'
+				// catalogHTML += '</div>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
@@ -111,9 +118,9 @@ var basicResultController = (function () {
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="action_links_btn">'
 				catalogHTML += '<ul>'
-				catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
-				catalogHTML += '<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>'
-				catalogHTML += '<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>'
+				// catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
+				// catalogHTML += '<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>'
+				// catalogHTML += '<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>'
 				catalogHTML += '</ul>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
@@ -131,17 +138,15 @@ return obj;
 
 var catalogResultController = (function () {
 	 var obj = {};
+	 var itemsPerPage =20;
+	 var currentPage=1;
+	 var machineId;
 
-		    obj.next =  function (catalogList) {
-		    	alert("next");
+		    obj.loadResults =  function (id) {
+		    if(id){
+		    	machineId = id;
 		    }
-
-		    obj.previous =  function (catalogList) {
-		    	 alert("previous");
-		    }
-
-		    obj.loadResults =  function (machineId) {
-		    	 var loadingNotification = notifyInfo("Loading results");
+		    var loadingNotification = notifyInfo("Loading results");
 		  	var onResponse = function(response){
 		  	dismiss(loadingNotification);
 		  	var results = [];
@@ -157,6 +162,19 @@ var catalogResultController = (function () {
 							};
 			  results.push(element);
 		    }
+
+		     if(currentPage==1){
+		      $('#pagination-container').pagination({
+			        items: response.data.machine_parent.total,
+			        itemsOnPage: itemsPerPage,
+			        cssStyle: 'dark-theme',
+			        onPageClick: function(pageNo){
+			        	currentPage = pageNo;
+			        	obj.loadResults();
+			        }
+			    });
+			}
+
 		    obj.showResult(results);
 		  };
 
@@ -165,7 +183,7 @@ var catalogResultController = (function () {
 		  	console.log(error);
 		    notifyError("Failed to load results");
 		  };
-		  getMachineParentList(onResponse,onError,machineId);
+		  getMachineParentList(currentPage,itemsPerPage, onResponse,onError,machineId);
     	  }
 
     obj.showResult =  function (catalogList) {
@@ -181,18 +199,20 @@ var catalogResultController = (function () {
 				catalogHTML += '<p class="manufacture_product"><a href="#">Accessories</a></p>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="product_thumb">'
-				if(catalogList[i]["image"]){
-					catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="'+catalogList[i]["image"]+'" alt=""></a>'
-				}else{
-					catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product1.jpg" alt=""></a>'
-				}
+
+				catalogHTML += '<img src="'+catalogList[i]["image"]+'" onerror="this.onerror=null;this.src=`assets/img/product/product1.jpg`;"/>';
+				// if(catalogList[i]["image"]){
+				// 	catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="'+catalogList[i]["image"]+'" alt=""></a>'
+				// }else{
+				// 	catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product1.jpg" alt=""></a>'
+				// }
 				catalogHTML += '<a class="secondary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product11.jpg" alt=""></a>'
 				catalogHTML += '<div class="label_product">'
 				catalogHTML += '<span class="label_sale">'+catalogList[i]["productOffPercent"]+'</span>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="action_links">'
 				catalogHTML += '<ul>'
-				catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
+				// catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
 				catalogHTML += '</ul>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
@@ -250,16 +270,14 @@ return obj;
 
 var machineResultController = (function () {
 	 var obj = {};
+	 var itemsPerPage =20;
+	 var currentPage=1;
+	 var mainItemId;
 
-    obj.next =  function (catalogList) {
-    	alert("next");
-    }
-
-    obj.previous =  function (catalogList) {
-    	 alert("previous");
-    }
-
-    obj.loadResults =  function (mainItemId) {
+    obj.loadResults =  function (id) {
+    	if(id){
+    		mainItemId = id;
+    	}
     	 var loadingNotification = notifyInfo("Loading results");
 		  	var onResponse = function(response){
 		  	dismiss(loadingNotification);
@@ -279,9 +297,23 @@ var machineResultController = (function () {
 							};
 			  results.push(element);
 		    }
+
+
+		     if(currentPage==1){
+		      $('#pagination-container').pagination({
+			        items: response.data.item_parent_images.total,
+			        itemsOnPage: itemsPerPage,
+			        cssStyle: 'dark-theme',
+			        onPageClick: function(pageNo){
+			        	currentPage = pageNo;
+			        	obj.loadResults();
+			        }
+			    });
+			}
+
 		    obj.showResult(results); 
 		  };
-		  getItemParentImagesForMachineDropdown(mainItemId,onResponse);
+		  getItemParentImagesForMachineDropdown(currentPage,itemsPerPage, mainItemId,onResponse);
 
     	 }
 
@@ -298,18 +330,15 @@ var machineResultController = (function () {
 				catalogHTML += '<p class="manufacture_product"><a href="#">Accessories</a></p>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="product_thumb">'
-				if(catalogList[i]["image"]){
-					catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="'+catalogList[i]["image"]+'" alt=""></a>'
-				}else{
-					catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product1.jpg" alt=""></a>'
-				}
+				catalogHTML += '<img src="'+catalogList[i]["image"]+'" onerror="this.onerror=null;this.src=`assets/img/product/product1.jpg`;"/>';
+
 				catalogHTML += '<a class="secondary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product11.jpg" alt=""></a>'
 				catalogHTML += '<div class="label_product">'
 				catalogHTML += '<span class="label_sale">'+catalogList[i]["productOffPercent"]+'</span>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="action_links">'
 				catalogHTML += '<ul>'
-				catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
+				// catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
 				catalogHTML += '</ul>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
@@ -320,9 +349,9 @@ var machineResultController = (function () {
 				catalogHTML += '<span class="current_price">'+catalogList[i]["productOfferPrice"]+'</span>'
 				catalogHTML += '<span class="old_price">'+catalogList[i]["productActualPrice"]+'</span>'
 				catalogHTML += '</div>'
-				catalogHTML += '<div class="add_to_cart">'
-				catalogHTML += '<a onclick="addToCart()" title="add to cart"><span class="lnr lnr-cart"></span></a>'
-				catalogHTML += '</div>'
+				// catalogHTML += '<div class="add_to_cart">'
+				// catalogHTML += '<a onclick="addToCart()" title="add to cart"><span class="lnr lnr-cart"></span></a>'
+				// catalogHTML += '</div>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'

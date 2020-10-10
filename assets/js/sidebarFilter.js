@@ -193,9 +193,11 @@ async function showMachinesSideFilter(machineList){
 
 function refreshCatalog(){
 	resultController = basicResultController;
-	filterParentId = getCheckedParent();
-	filterGroupId = getCheckedGroup();
+	alert("grp=="+getCheckedGroup())
+	basicResultController.filterParentId = getCheckedParent();
+	basicResultController.filterGroupId = getCheckedGroup();
 	resultController.loadResults();
+	// $('input[type="checkbox"]').not(this).prop('checked', false);
 }
 
 function getCheckedMachine(){
@@ -290,9 +292,10 @@ async function showGroupSideFilter(groupList){
 
 	$("#sidebarGroupFilter").append(sidebarHTML);
 	$('#sidebarGroupFilter input[type="checkbox"]').on('change', function() {
-   		$('input[type="checkbox"]').not(this).prop('checked', false);
+   		$('#sidebarGroupFilter input[type="checkbox"]').not(this).prop('checked', false);
    		refreshCatalog();
 	});
+	
 }
 
 
@@ -334,12 +337,12 @@ async function showParentSideFilter(familyList){
 
 	}
 
+	$("#sidebarCatalogFilter").html("");
 	$("#sidebarCatalogFilter").append(sidebarHTML);
 	$('#sidebarCatalogFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = catalogResultController;
    		resultController.loadResults(getCheckedParent());
-
    		// showCatalogDropdownSelection(getCheckedParent());
 	});
 }
