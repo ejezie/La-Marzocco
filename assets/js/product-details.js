@@ -176,7 +176,7 @@
 
 			showProductDetails(element);
 			showProductInfo(element);
-			$("#inputQuantity").val(shoppingCart.getQty(itemId));
+			// $("#inputQuantity").val(shoppingCart.getQty(itemId));
 			
 		};
 

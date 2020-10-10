@@ -19,6 +19,8 @@ ul.simple-pagination {
 	list-style: none;
 	padding: 0;
 	margin: 0;
+	display: flex;
+	justify-content: center;
 }
 
 .simple-pagination li {
@@ -200,4 +202,10 @@ span.ellipse.clickable {
 	box-shadow: none;
 	font-weight: bold;
 	cursor: default;
+}
+
+
+.page-link:not(:disabled):not(.disabled){
+	background: #ccc
+	color: black;
 }

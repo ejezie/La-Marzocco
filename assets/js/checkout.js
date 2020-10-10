@@ -247,11 +247,11 @@ async function showCheckoutOrderSummary(orderSummary, orderDetails){
 	orderSummaryHTML += '<td>$'+orderDetails["sub_total"].toLocaleString("en-AU")+'</td>'
 	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '<tr>'
-	orderSummaryHTML += '<th>Shipping</th>'
+	orderSummaryHTML += '<th>Shipping (+)</th>'
 	orderSummaryHTML += '<td><strong>$'+orderDetails["shipping_cost"].toLocaleString("en-AU")+'</strong></td>'
 	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '<tr>'
-	orderSummaryHTML += '<th>Tax</th>'
+	orderSummaryHTML += '<th>Tax (+)</th>'
 	orderSummaryHTML += '<td><strong>$'+orderDetails["total_tax"].toLocaleString("en-AU")+'</strong></td>'
 	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '<tr class="order_total">'
@@ -273,6 +273,8 @@ function populateCountry(){
 
   var dropdown = $("#inputCountry");
 
+
+
   var onResponse = function(response){
     for(var i=0; i< response.data.countries.length; i++){
     	const item = response.data.countries[i];
@@ -283,6 +285,14 @@ function populateCountry(){
 		  populateState(this.value);
 	  });
 	   dropdown.prop("selectedIndex", -1);
+	  $("#inputCountry")
+	    .append('<option disabled selected value>Select Country</option>');
+      $("#inputState")
+	    .append('<option disabled selected value>Select State</option>');
+	   $("#inputCity")
+	    .append('<option disabled selected value>Select City</option>');
+	  $("#inputArea")
+	    .append('<option disabled selected value>Select Area</option>');
 
 
   };
@@ -302,6 +312,9 @@ function populateState(keyId){
          dropdown.append($("<option>").text(item.name).val(item.id));
       }
 
+      $("#inputState")
+	    .append('<option disabled selected value>Select State</option>');
+
       $('#inputState').change( function() {
 		  populateCities(keyId);
 	  });
@@ -318,6 +331,9 @@ function populateCities(keyId){
     const item = response.data.cities[i];
          dropdown.append($("<option>").text(item.name).val(item.id));
       }
+
+      $("#inputCity")
+	    .append('<option disabled selected value>Select City</option>');
   };
   getCities(keyId,onResponse);
 }
@@ -332,7 +348,20 @@ function populateAreas(postcode){
     const item = response.data.area_codes.data[i];
          dropdown.append($("<option>").text(item.name).val(item.id));
       }
+
+      $("#inputArea")
+	    .append('<option disabled selected value>Select Area</option>');
   };
   getAreas(postcode,onResponse);
 }
 
+
+
+
+$('#createAddressModal').on('hidden.bs.modal', async function (){
+	document.getElementById('inputName').value=''
+	document.getElementById('inputAddress').value=''
+	document.getElementById('inputAddress2').value=''
+	document.getElementById('inputPhone').value=''
+	document.getElementById('inputArea').value=''
+})

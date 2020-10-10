@@ -183,13 +183,12 @@ async function showSubTotal(cartSubTotal,quoteId){
 	subTotalHTML += '<p class="cart_amount">$'+cartSubTotal["subTotal"].toLocaleString("en-AU")+'</p>'
 	subTotalHTML += '</div>'
 	subTotalHTML += '<div class="cart_subtotal ">'
-	subTotalHTML += '<p>Shipping</p>'
+	subTotalHTML += '<p>Shipping (+)</p>'
 
-	console.log("cartSubTotal  >>>>>>> : ", cartSubTotal)
 	if(cartSubTotal["shipping"] == undefined){
 		subTotalHTML += '<p class="cart_amount"> $0</p>'
 	}else{
-		subTotalHTML += '<p class="cart_amount"> $'+cartSubTotal["shipping"].toLocaleString("en-AU")+'</p>'
+		subTotalHTML += '<p class="cart_amount">$'+cartSubTotal["shipping"].toLocaleString("en-AU")+'</p>'
 
 	}
 	subTotalHTML += '</div>'
@@ -197,8 +196,8 @@ async function showSubTotal(cartSubTotal,quoteId){
 
 
 	subTotalHTML += '<div class="cart_subtotal ">'
-	subTotalHTML += '<p>Tax</p>'
-	subTotalHTML += '<p class="cart_amount"> $'+cartSubTotal["tax"].toLocaleString("en-AU")+'</p>'
+	subTotalHTML += '<p>Tax (+)</p>'
+	subTotalHTML += '<p class="cart_amount">$'+cartSubTotal["tax"].toLocaleString("en-AU")+'</p>'
 	subTotalHTML += '</div>'
 
 	// subTotalHTML += '<a href="#">Calculate shipping</a>'

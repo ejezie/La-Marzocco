@@ -9425,7 +9425,8 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 .modal-content button.close:hover {
-  color: #414141;
+  color: #fff;
+  background: #000
 }
 
 .modal_add_to_cart.mb-15 {
