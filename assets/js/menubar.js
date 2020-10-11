@@ -152,7 +152,7 @@ var newsletterArr = [{
 
 
 function showMenubarCommercialMachine(data){
-	var category = "Commercial Machines";
+	var category = "Commercial";
 	var categoryArr = { Categories: data.mapping};
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
@@ -392,6 +392,7 @@ function showNewsletter(newsletterArr){
 
 $(document).ready(function(){
 	var onResponse = function(response){
+		// console.log(JSON.stringify(response,null,2))
 		showMenubarCommercialMachine(response.data);
 
 showMenubarGrinders()

@@ -168,7 +168,7 @@ async function showMachinesSideFilter(machineList){
 
 			// console.log(">>>>>>>>>>",machineList[i]["machines"]) 
 			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
-			sidebarHTML += '<li><form><p><input type="checkbox" id="machine"  /><label for="machine" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">'+machineList[i]["machines"][k]["code"]+'</label></p></form></li>'
+			sidebarHTML += '<li><form><p><input type="checkbox" value="'+machineList[i]["machines"][k]["id"]+'" id="machine"  /><label for="machine" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">'+machineList[i]["machines"][k]["code"]+'</label></p></form></li>'
 
 		}
 		
@@ -186,7 +186,7 @@ async function showMachinesSideFilter(machineList){
 	$('#sidebarMachineFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = machineResultController;
-		resultController.loadResults(289);
+		resultController.loadResults(getCheckedMachine());
 	});
 
 }
