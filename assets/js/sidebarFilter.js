@@ -193,7 +193,7 @@ async function showMachinesSideFilter(machineList){
 
 function refreshCatalog(){
 	resultController = basicResultController;
-	alert("grp=="+getCheckedGroup())
+	// alert("grp=="+getCheckedGroup())
 	basicResultController.filterParentId = getCheckedParent();
 	basicResultController.filterGroupId = getCheckedGroup();
 	resultController.loadResults();
