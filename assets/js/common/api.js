@@ -1374,10 +1374,10 @@ async function createPayment(order_id,amount,card_name,cart_number,cart_exp_mont
   data.append('order_id', order_id);
   data.append('amount', amount);
   data.append('card_name',card_name);
-  data.append('card_number', btoa(cart_number));
-  data.append('card_exp_month', btoa(cart_exp_month));
-  data.append('card_exp_year', btoa(cart_exp_year));
-  data.append('card_cvc', btoa(card_cvc));
+  data.append('card_number', (cart_number));
+  data.append('card_exp_month', (cart_exp_month));
+  data.append('card_exp_year', (cart_exp_year));
+  data.append('card_cvc', (card_cvc));
 
   var config = {
     method: 'post',

@@ -146,21 +146,29 @@ function confirmOrder(){
 
 	createOrder(quoteId,po,poName,shippingAddressId,billingAddressId,orderNotes,function(response){
 			// notifySuccess("Proceed to payment");
-			if(!response.data.payment){ //tofixkey
+			if(!response.data.status){
+				return;
+			}
+			if(response.data.data.payment){ 
 				$("#btConfirmOrder").hide();
 				$("#payment_method").css("display", "unset");
-
-				const partialPayment = safeAccess(["data","order","payment","partial"],response,0);
-				const fullPayment = safeAccess(["data","order","payment","full"],response,0);
+				const partialPayment = safeAccess(["data","data","payment","partial"],response,0);
+				const fullPayment = safeAccess(["data","data","payment","full"],response,0);
 				const paymentTypeDropdown =  $("#inputPaymentType");
 				paymentTypeDropdown.html("");
-		         paymentTypeDropdown.append($("<option>").text("Partial Payment $"+partialPayment).val(partialPayment));
-		         paymentTypeDropdown.append($("<option>").text("Full Payment $"+fullPayment).val(fullPayment));
+		        paymentTypeDropdown.append($("<option>").text("Full Payment $"+fullPayment).val(fullPayment));
+		        if(partialPayment!=fullPayment){
+		        	paymentTypeDropdown.append($("<option>").text("Partial Payment $"+partialPayment).val(partialPayment));
+				}
 				$("#btProceedToPayment").click(function(){
-				confirmPayment(response);
-			});
+					confirmPayment(response);
+				});
 			}else{
-				notifyOrderSuccess();
+				var orderId =  safeAccess(["data","data","order","payment","order_id"],response,null);
+				if(!orderId){
+					orderId = safeAccess(["data","data","order",0,"id"],response,-1);
+				}
+				notifyOrderSuccess(orderId);
 			}
 			
 	});
@@ -182,7 +190,10 @@ function notifyOrderSuccess(orderId){
 function confirmPayment(response){
 
 	const amount = $("#inputPaymentType").val();
-	const orderId = response.data.order[0].id;
+	var orderId =  safeAccess(["data","data","order","payment","order_id"],response,null);
+	if(!orderId){
+		orderId = safeAccess(["data","data","order",0,"id"],response,-1);
+	}
 	// const amount = response.data.order[0].total;
 	const inputCardName = $("#inputCardName").val();
 	const inputCardNumber = $("#inputCardNumber").val();
