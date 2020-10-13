@@ -158,7 +158,7 @@ async function showMachinesSideFilter(machineList){
 
 		sidebarHTML += '<li class="dropdown dropdown-large">'
 		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="white-space: nowrap;font-size:14px; font-weight:500;color:#333">'+machineList[i]["code"]+' </a>'
-		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
+		sidebarHTML += '<ul id="machine-menu" class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
 		sidebarHTML += '<li class="col-sm-3">'
 		sidebarHTML += '<ul>'
@@ -191,18 +191,21 @@ async function showMachinesSideFilter(machineList){
 
 }
 
-function refreshCatalog(){
+async function refreshCatalog(){
 	resultController = basicResultController;
-	// alert("grp=="+getCheckedGroup())
 	basicResultController.filterParentId = getCheckedParent();
-	basicResultController.filterGroupId = getCheckedGroup();
-	resultController.loadResults();
+	basicResultController.filterGroupId = await getCheckedGroup();
+	var group_id = await getCheckedGroup()
+	resultController.loadResults(group_id);
 	// $('input[type="checkbox"]').not(this).prop('checked', false);
 }
 
 function getCheckedMachine(){
 		var returnValue=null;
 	    $('#sidebarMachineFilter input:checked').each(function(){
+
+	    	$('#machine-menu').removeClass("show");
+
 	        returnValue = this.value;
 	    });        
 	return returnValue;
@@ -219,9 +222,12 @@ function getCheckedMachines(){
 
 
 
-function getCheckedGroup(){
+async function getCheckedGroup(){
 	var returnValue=null;
 	    $('#sidebarGroupFilter input:checked').each(function(){
+
+	    	$('#group-menu').removeClass("show");
+
 	        returnValue =  this.value;
 	    });        
 	return returnValue;
@@ -242,6 +248,9 @@ function getCheckedParent(){
 		var returnValue=null;
 
 	    $('#sidebarCatalogFilter input:checked').each(function(){
+
+		    $('#catalog-menu').removeClass("show");
+
 	        returnValue =  this.value;
 	    });        
 	return returnValue;
@@ -259,7 +268,7 @@ async function showGroupSideFilter(groupList){
 
 		sidebarHTML += '<li class="dropdown dropdown-large">'
 		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="font-size:14px; font-weight:500 ;color:#333">'+item["code"]+' </a>'
-		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
+		sidebarHTML += '<ul id="group-menu" class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
 		sidebarHTML += '<li class="col-sm-3">'
 		sidebarHTML += '<ul>'
@@ -276,7 +285,7 @@ async function showGroupSideFilter(groupList){
 
 				// console.log("innerMostitem >>>>>>> : ", innerMostitem)
 				// sidebarHTML += '<li><label class="custom-control"> <input  value="'+innerMostitem["id"]+'" type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
-				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="group"  /><label for="group" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
+				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="'+innerMostitem["id"]+'" /><label for="'+innerMostitem["id"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
 			}
 		}
 		
@@ -310,10 +319,10 @@ async function showParentSideFilter(familyList){
 
 		sidebarHTML += '<li class="dropdown dropdown-large">'
 		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="font-size:14px; font-weight:500;color:#333">'+item["code"]+' </a>'
-		sidebarHTML += '<ul class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
+		sidebarHTML += '<ul id="catalog-menu" class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
 		sidebarHTML += '<li class="col-sm-3">'
-		sidebarHTML += '<ul>'
+		sidebarHTML += '<ul id="catalog-menu_2" class="catalog-menu">'
 
 		for(j=0; j<item["machines"].length;j++){ 
 
@@ -340,6 +349,11 @@ async function showParentSideFilter(familyList){
 	$("#sidebarCatalogFilter").html("");
 	$("#sidebarCatalogFilter").append(sidebarHTML);
 	$('#sidebarCatalogFilter input[type="checkbox"]').on('change', function() {
+
+
+		$( ".dropdown-menu li " ).click(function() {
+		  $("ul.dropdown-menu").css("display", "none");
+		});
    		$('input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = catalogResultController;
    		resultController.loadResults(getCheckedParent());

@@ -141,10 +141,12 @@
 			dismiss(loadingNotification);
 			
 			i = response.data.item;
+
+			console.log("i : ", i)
 			const element = {
 				"name" : i.name,
 				"id" : i.id,
-				"price" : "$700.00",
+				"price" : "$"+i.price,
 				"description": i.desc,
 				"family" : safeAccess(['i', 'item_family', 0, 'code'],i,null),
 				"image" : safeAccess(['i', 'images', 0, 'main'],i,null),

@@ -41,7 +41,10 @@ async function showCarrouselParts(imageUrl,parts){
 
     for(i=0; i<parts.length;i++){
         // var parts = sortByKey(parts,part_ref_number)
+
+        console.log("parts : ", parts)
         const part = parts[i];
+        console.log("part >>>>>> : ", parts)
         carouselHTML += '<li class="playlist-item" onclick="toitemdetailpage('+safeAccess(["id"],part)+')">'
         carouselHTML += '<div class="thumb">'
         // carouselHTML += '<span style="  padding: 0 10px;border-radius: 2px;text-transform: capitalize;font-size: 16px;font-weight: 500;text-align: center;display: inline-block;" class="label_sale">'+parseInt(part.part_ref_number)+'</span>'
