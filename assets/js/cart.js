@@ -127,13 +127,14 @@ async function showCartFromQuote(quoteItems){
 		var text = "";
 		var qty = quoteItem["qty"];
 		var available = quoteItem["available_qty"];
-		if(qty==0){
+		console.log("qt "+qty+"  avaaqt="+available)
+		if(available==0){
 			color = "red";
 			text = "Limited Quantity";
-		}else if(qty<available){
+		}else if(available<qty){
 			color = "orange";
 			text = "Going out fast"
-		}else if(qty>=available){
+		}else if(available>qty){
 			color = "green";
 			text = "Available"
 		}

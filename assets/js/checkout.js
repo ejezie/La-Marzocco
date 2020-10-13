@@ -308,9 +308,15 @@ function populateCountry(){
 
   };
   getCountries(onResponse);
-  $('#inputZipCode').on("change paste keyup", function() {
-		  populateAreas($(this).val());
-   });
+  $("#searchAreas").click(function(){
+  	var querytext= $('#inputZipCode').val();
+	if( querytext && querytext.length>=3){
+  		  notifyInfo("Getting areas")
+		  populateAreas(querytext);
+		}
+  });
+  // $('#inputZipCode').on("change ", function() {
+  	
 }
 
 function populateState(keyId){
@@ -360,8 +366,7 @@ function populateAreas(postcode){
          dropdown.append($("<option>").text(item.name).val(item.id));
       }
 
-      $("#inputArea")
-	    .append('<option disabled selected value>Select Area</option>');
+      $("#inputArea").append('<option disabled selected value>Select Area</option>');
   };
   getAreas(postcode,onResponse);
 }

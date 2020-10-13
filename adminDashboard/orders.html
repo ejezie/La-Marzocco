@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>La Marzocco - checkout page</title>
+    <title>LaMarzocco - My Orders</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
     <!-- <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico"> -->
     <link rel="shortcut icon" type="image/x-icon" href="https://au.lamarzocco.com/wp-content/uploads/2016/11/cropped-SiteIcon-217x217.png">
 
-    <!-- CSS 
+     <!-- CSS 
     ========================= -->
      <!--bootstrap min css-->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -41,48 +41,15 @@
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
 
-    <style>
+    <!-- Datatable -->
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+  
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
 
-
-
-
-    .optionsecoptions 
-    {
-    width: 400px;
-    padding-left:10px;
-    height: auto;
-    background: #fff;
-    float: left;
-    font-size:20px;
-    cursor:pointer;
-    font-family: lafont
-    }
-/*.optionsecoptions:hover,
-    .optionsecoptions:active {
-        background-color: #fff;
-        transition: background-color 0.4s ease-in, border-color 0.4s ease-in;
-        color:#ffffff;
-    }*/
-
-
-.selected{
-        background-color: #226fa3;
-        transition: background-color 0.4s ease-in, border-color 0.4s ease-in;
-        color:#ffffff;    
-}
-
-
-
-/** {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
-*/
-
-
-
-
-
-
-</style>
 
 </head>
 
@@ -113,7 +80,7 @@ body {font-family: Verdana, sans-serif; margin:0}
                                         <ul class="dropdown_links">
                                             <li><a href="my-account.html">My Account </a></li>
                                             <li><a href="myOrders.html">My Orders </a></li>
-                                            <li><a href="getQuotation.html">Quotation</a></li>
+                                            <li><a href="getQuotation.html">Quotation </a></li>
                                             <li><a href="cart.html">Shopping Cart</a></li>
                                             <li><a href="login.html">Logout </a></li>
                                             <!-- <li><a href="wishlist.html">Wishlist</a></li> -->
@@ -159,22 +126,22 @@ body {font-family: Verdana, sans-serif; margin:0}
                             <div class="search-container">
                                 <form action="#">
                                     <div class="search_box">
-                                        <input placeholder="Search by Item Code, Item Name ..." type="text" id="inputSearch">
+                                        <input id="inputSearch" placeholder="Search by Item Code, Item Name ..." type="text">
                                         <button  id="itemSearchBtn"   type="submit"><i class="ion-ios-search-strong"></i></button>
                                     </div>
                                 </form>
                             </div>
-                         <!--    <div class="middel_right_info">
+                            <div class="middel_right_info">
 
-                                <div class="header_wishlist">
+                                <!-- <div class="header_wishlist">
                                     <a href="wishlist.html"><span class="lnr lnr-heart"></span> Wish list </a>
                                     <span class="wishlist_quantity">3</span>
-                                </div>
+                                </div> -->
                                 <div class="mini_cart_wrapper">
                                     <a href="javascript:void(0)" style="color: white"><span class="lnr lnr-cart"></span>My Cart </a>
-                                    
+                                    <!-- <span class="cart_quantity">2</span> -->
                                 </div>
-                            </div> -->
+                            </div>
 
                         </div>
                     </div>
@@ -551,8 +518,7 @@ body {font-family: Verdana, sans-serif; margin:0}
                     <div class="breadcrumb_content">
                         <ul>
                             <li><a href="index.html">home</a></li>
-                            <li><a href="cart.html">cart</a></li>
-                            <li>Checkout</li>
+                            <li>My Orders</li>
                         </ul>
                     </div>
                 </div>
@@ -561,368 +527,167 @@ body {font-family: Verdana, sans-serif; margin:0}
     </div>
     <!--breadcrumbs area end-->
 
-
-
-    <!--Checkout page section-->
-    <div class="Checkout_section mt-32">
+    <!--My Orders area start -->
+    <div class="my_orders_area mt-32">
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-12">
-                    <div class="user-actions">
-                        <h3>
-                            <i class="fa fa-file-o" aria-hidden="true"></i>
-                            Returning customer?
-                            <a class="Returning" href="#" data-toggle="collapse" data-target="#checkout_login" aria-expanded="true">Click here to login</a>
+            <form action="#">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table_desc">
+                            <div class="cart_page table-responsive" id="myOrders">
+                                <table id="tableOrders">
+                                        <thead>
+                                            <!-- <tr>
+                                                <th class="product_thumb">Product</th>
+                                                <th class="product_name">Name</th>
+                                                <th class="product-price">Price</th>
+                                                <th class="product_quantity">Quantity</th>
+                                                <th class="product_total">Total</th>
+                                                <th></th>
+                                            </tr> -->
+                                        </thead>
+                                        <tbody>
+                                          <!--   <tr>
+                                                <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>
+                                                <td class="product_name"><a href="#">Leva s</a></td>
+                                                <td class="product-price">$799.00</td>
+                                                <td class="product_quantity">1</td>
+                                                <td class="product_total">$799.00</td>
+                                                <td><a>Add to cart</a></td>
 
-                        </h3>
-                        <div id="checkout_login" class="collapse" data-parent="#accordion">
-                            <div class="checkout_info">
-                                <p>If you have shopped with us before, please enter your details in the boxes below. If you are a new customer please proceed to the Billing & Shipping section.</p>
-                                <form action="#">
-                                    <div class="form_group">
-                                        <label>Username or email <span>*</span></label>
-                                        <input type="text">
-                                    </div>
-                                    <div class="form_group">
-                                        <label>Password <span>*</span></label>
-                                        <input type="text">
-                                    </div>
-                                    <div class="form_group group_3 ">
-                                        <button type="submit">Login</button>
-                                        <label for="remember_box">
-                                            <input id="remember_box" type="checkbox">
-                                            <span> Remember me </span>
-                                        </label>
-                                    </div>
-                                    <a href="#">Lost your password?</a>
-                                </form>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a></td>
+                                                <td class="product_name"><a href="#">Modbar</a></td>
+                                                <td class="product-price">$990.00</td>
+                                                <td class="product_quantity">1</td>
+                                                <td class="product_total">$990.00</td>
+                                                <td>Add to cart</td>
+
+
+                                            </tr>
+                                            <tr>
+                                                <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product5.jpg" alt=""></a></td>
+                                                <td class="product_name"><a href="#">Linea Mini</a></td>
+                                                <td class="product-price">$880.00</td>
+                                                <td class="product_quantity">1</td>
+                                                <td class="product_total">$880.00</td>
+                                                <td>Add to cart</td>
+
+
+                                            </tr> -->
+
+                                        </tbody>
+                                    </table>
                             </div>
-                        </div>
-                    </div>
-                    <div class="user-actions">
-                        <h3>
-                            <i class="fa fa-file-o" aria-hidden="true"></i>
-                            Returning customer?
-                            <a class="Returning" href="#" data-toggle="collapse" data-target="#checkout_coupon" aria-expanded="true">Click here to enter your code</a>
-
-                        </h3>
-                        <div id="checkout_coupon" class="collapse" data-parent="#accordion">
-                            <div class="checkout_info">
-                                <form action="#">
-                                    <input placeholder="Coupon code" type="text">
-                                    <button type="submit">Apply coupon</button>
-                                </form>
+                            <div class="my_orders_submit">
+                                <!-- <button type="submit">update cart</button> -->
+                                <!-- <button type="submit">Get Quotation </button> -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> -->
-
-            <div class="checkout_form">
-            <!-- <button>Akasj</button> -->
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <!-- <form action="#"> -->
-                            <h3>Billing Details</h3>
-                            <div class="row">
-
-
-                                <div class="address_slider" style="margin-top:10px; height: 350px; overflow: auto; padding-left: 20px;
-                                        padding-right: 20px;" id="addressSlider">
-                                       <!--  <div class="optionsecoptions" style="border-style: solid ; width: 100%">
-                                            A1 1022, Arcade line, Aundh Road, Pune -20, Maharashtra.
-                                            <br>
-                                            <input type="checkbox" name="drone"><label style="font-size:15px">Billing Address</label>
-                                            <br>
-                                            <input type="checkbox" name="drone"><label style="font-size:15px">Shipping Address</label>
-                                        </div>
-                                        <div class="optionsecoptions" style="border-style: solid ; width: 100%">
-                                            B5 Block-4, Udaygiri Society, Dehu Road, Pune -19, Maharashtra.
-                                            <br>
-                                            <input type="checkbox" name="drone"><label style="font-size:15px">Billing Address</label>
-                                            <br>
-                                            <input type="checkbox" name="drone"><label style="font-size:15px">Shipping Address</label>
-                                        </div>
-                                        <div class="optionsecoptions" style="border-style: solid ; width: 100%">
-                                            C1 09, Citadel Enclave, Kalyani Nagar, Pune - 15, Maharashtra.
-                                            <br>
-                                            <input type="checkbox"><label style="font-size:15px">Billing Address</label>
-                                            <br>
-                                            <input type="checkbox"><label style="font-size:15px">Shipping Address</label>
-                                        </div> -->
-                                        
+                <!--coupon code area start-->
+                <div class="coupon_area">
+                    <div class="row" id="subTotal">
+                        <!-- <div class="col-lg-6 col-md-6">
+                            <div class="coupon_code left">
+                                <h3>Purchase Orders</h3>
+                                <div class="coupon_inner">
+                                    <p>Upload PO.</p>
+                                    <input placeholder="Upload" type="text">
+                                    <button type="submit">Upload Purchase orders</button>
                                 </div>
-
-
-                    <!-- <a href="#" id="confirmBtn"> Confirm </a> -->
-                               
-
-                                <!-- <div class="dot-container">
-                                  <span class="dot" onclick="currentSlide(1)"></span> 
-                                  <span class="dot" onclick="currentSlide(2)"></span> 
-                                  <span class="dot" onclick="currentSlide(3)"></span> 
-                                </div> -->
-
-                                <!-- <div class="col-lg-6 mb-20">
-                                    <label>Phone<span>*</span></label>
-                                    <input type="text">
-
-                                </div>
-                                <div class="col-lg-6 mb-20">
-                                    <label> Email Address <span>*</span></label>
-                                    <input type="text">
-
-                                </div> -->
-                                <!-- <div class="col-12 mb-20">
-                                    <input id="account" type="checkbox" data-target="createp_account" />
-                                    <label for="account" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">Create an account?</label>
-
-                                    <div id="collapseOne" class="collapse one" data-parent="#accordion">
-                                        <div class="card-body1">
-                                            <label> Account password <span>*</span></label>
-                                            <input placeholder="password" type="password">
-                                        </div>
-                                    </div>
-                                </div> -->
-
-
-                                <div class="order_button col-12 mb-20">
-                                    <button id="toggleModalAddAddress" data-toggle="modal" data-target="#createAddressModal">Add new Address</button>
-                                </div>
-
-
-
-                                <!-- <div class="col-12 mb-20">
-                                    <input id="address" type="checkbox" data-target="createp_account" />
-                                    <label class="righ_0" for="address" data-toggle="collapse" data-target="#collapsethree" aria-controls="collapseOne">Ship to a different address ?</label>
-
-                                    <div id="collapsethree" class="collapse one" data-parent="#accordion">
-                                        <div class="row">
-                                            <div class="col-lg-6 mb-20">
-                                                <label>First Name <span>*</span></label>
-                                                <input type="text" id="shippingAddFname">
-                                            </div>
-                                            <div class="col-lg-6 mb-20">
-                                                <label>Last Name <span>*</span></label>
-                                                <input type="text" id="shippingAddLname">
-                                            </div>
-                                            <div class="col-12 mb-20">
-                                                <label>Company Name</label>
-                                                <input type="text" id="shippingAddCompanyName">
-                                            </div>
-                                            <div class="col-12 mb-20">
-                                                <div class="select_form_select">
-                                                    <label for="countru_name">country <span>*</span></label>
-                                                    <select class="niceselect_option" name="cuntry" id="shippingAddCountry">
-                                                        <option value="2">Australia</option>
-                                                        <option value="3">Algeria</option>
-                                                        <option value="4">Afghanistan</option>
-                                                        <option value="5">Ghana</option>
-                                                        <option value="6">Albania</option>
-                                                        <option value="7">Bahrain</option>
-                                                        <option value="8">Colombia</option>
-                                                        <option value="9">Dominican Republic</option>
-
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 mb-20">
-                                                <label>Address Line 1 <span>*</span></label>
-                                                <input placeholder="" type="text" id="shippingAddAddLine1">
-                                            </div>
-                                            <div class="col-12 mb-20">
-                                                <label>Address Line 2 <span>*</span></label>
-                                                <input placeholder="" type="text" id="shippingAddAddLine2">
-                                            </div>
-                                            <div class="col-12 mb-20">
-                                                <input placeholder="Apartment, suite, unit etc. (optional)" type="text">
-                                            </div>
-                                            <div class="col-12 mb-20">
-                                                <label>Area Code <span>*</span></label>
-                                                <input type="text" id="shippingAddAreaCode">
-                                            </div>
-                                            <div class="col-12 mb-20">
-                                                <label>State  <span>*</span></label>
-                                                <input type="text" id="shippingAddState">
-                                            </div>
-                                            <div class="col-lg-6 mb-20">
-                                                <label>Phone<span>*</span></label>
-                                                <input type="text">
-
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <label> Email Address <span>*</span></label>
-                                                <input type="text">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
-
-
-
-                                <div class="col-12">
-                                    <div class="coupon_code left">
-                                    <h3>Purchase Orders</h3>
-                                    <div class="coupon_inner">
-<!--                                     <input placeholder="Upload" type="text">
- -->                                    
-
-                                    <label>PO Number </label>
-                                    <input id="inputPoName"  type="text">
-
-                                      <label>Attach PO </label>
-                                    <div style="white-space:nowrap">
-                                    <input type="file" id="pofile" class="btn upload-po" style="background:#eee; color:#333; text-align: initial;padding-top: 4px" id="po_excelfile"/>
-                                    <!-- <input type="button" class="btn upload-po"  value="Upload PO"> -->
-                                    </div>
-                                    <!-- <button type="submit">Upload Purchase orders</button> -->
-                                    </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="order-notes">
-                                        <label for="order_note">Order Notes</label>
-                                        <textarea id="inputOrderNotes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                    </div>
-                                </div>
-
-
                             </div>
-                        <!-- </form> -->
+                        </div> -->
+                        <!-- <div class="col-lg-6 col-md-6">
+                            <div class="coupon_code right">
+                                <h3>Cart Totals</h3>
+                                <div class="coupon_inner">
+                                    <div class="cart_subtotal">
+                                        <p>Subtotal</p>
+                                        <p class="cart_amount">£215.00</p>
+                                    </div>
+                                    <div class="cart_subtotal ">
+                                        <p>Shipping</p>
+                                        <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
+                                    </div>
+                                    <a href="#">Calculate shipping</a>
+
+                                    <div class="cart_subtotal">
+                                        <p>Total</p>
+                                        <p class="cart_amount">£215.00</p>
+                                    </div>
+                                    <div class="checkout_btn">
+                                        <a href="#">Proceed to Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
                     </div>
-                    <div class="col-lg-6 col-md-6">
-                        <form action="#">
-                            <h3>Your order</h3>
-                            <div class="order_table table-responsive" id="checkoutOrderSummary">
-                                <!-- <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td> Linea Mini <strong> × 2</strong></td>
-                                            <td> $1600.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Vulcano <strong> × 1</strong></td>
-                                            <td> $400.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Modbar <strong> × 2</strong></td>
-                                            <td> $1000.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td> Strada s <strong> × 1</strong></td>
-                                            <td> $1000.00</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Cart Subtotal</th>
-                                            <td>$4000.00</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Shipping</th>
-                                            <td><strong>$20.00</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tax</th>
-                                            <td><strong>$20.00</strong></td>
-                                        </tr>
-                                        <tr class="order_total">
-                                            <th>Order Total</th>
-                                            <td><strong>$4040.00</strong></td>
-                                        </tr>
-                                    </tfoot>
-                                </table> -->
+                </div>
+                <!--coupon code area end-->
+            </form>
+        </div>
+    </div>
+    <!--My Orders area end -->
+
+
+
+      <!-- modal area start-->
+    <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Order Details</strong></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="table_desc">     -->
+                                <div class="cart_page table-responsive" id="orderDetails">
+                               
+                                </div>
                             </div>
-    
-
-                             <div class="order_button col-12 mb-20">
-                                    <button id="btConfirmOrder" type="button">Confirm Order</button>
-                                </div>
-                            <div id="payment_method" style="display: none;" class="payment_method">
-                                <!-- <div class="panel-default">
-                                    <input id="payment" name="check_method" type="radio" data-target="createp_account" />
-                                    <label for="payment" data-toggle="collapse" data-target="#method" aria-controls="method">Create an account?</label>
-
-                                    <div id="method" class="collapse one" data-parent="#accordion">
-                                        <div class="card-body1">
-                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                        </div>
-                                    </div>
-                                </div> -->
-
-                                <div class="col-12 mb-20">
-                                    <h3>Payment</h3>
-                                </div>
-
-
-                                <div class="col-12 mb-20">
-                                    <label>Name on Card <span>*</span></label>
-                                    <input id="inputCardName" placeholder="" type="text">
-                                </div>
-
-                                <div class="col-12 mb-20">
-                                    <label>Card Number <span>*</span></label>
-                                    <input id="inputCardNumber" placeholder="" type="text">
-                                </div>
-
-
-                                <div class="col-12 mb-20">
-                                    <div class="row">
-                                        <div class="col-5 mb-8">
-                                            <label>Expiry Month<span>*</span></label>
-                                            <input  id="inputExpireyMonth" type="text">
-                                        </div>
-                                        <div class="col-5 mb-8">
-                                            <label>Expiry Year<span>*</span></label>
-                                            <input  id="inputExpireyYear" type="text">
-                                        </div>
-                                        <div class="col-5 mb-8">
-                                            <label>CVV <span>*</span></label>
-                                            <input  id="inputCvc" type="password">
-                                        </div>
-
-                                        <div class="col-12 mb-20">
-                                            <label>Payment Type<span>*</span></label>
-                                            <select class="form-control" id="inputPaymentType">
-                                                <option value="1">Full Payment</option>
-                                                <option value="2">Partial Payment</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order_button col-12 mb-20">
-                                    <button id="btProceedToPayment" type="button">Proceed to Payment</button>
-                                </div>
-                                </div>
-                                <!-- <div class="panel-default">
-                                    <input id="payment_defult" name="check_method" type="radio" data-target="createp_account" />
-                                    <label for="payment_defult" data-toggle="collapse" data-target="#collapsedefult" aria-controls="collapsedefult">PayPal <img src="assets/img/icon/papyel.png" alt=""></label>
-
-                                    <div id="collapsedefult" class="collapse one" data-parent="#accordion">
-                                        <div class="card-body1">
-                                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                
-                            </div>
-                        </form>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--Checkout page section end-->
+      <!-- modal area start-->
+    <div class="modal fade" id="modal_tracking" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Order Tracking</strong></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="table_desc">     -->
+                                <div class="cart_page table-responsive" id="orderTrackingDetails">
+                               
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal area end-->
+
+
+
 
     <!--call to action start-->
     <!-- <section class="call_to_action">
@@ -951,109 +716,6 @@ body {font-family: Verdana, sans-serif; margin:0}
         </div>
     </section> -->
     <!--call to action end-->
-
-
-
-
-      <!-- modal area start-->
-    <div class="modal fade" id="createAddressModal" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Add New Address</strong></span>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal_body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                            <!-- <div class="table_desc">     -->
-
-                                <form>
-                                <div class="modal-body">
-
-                                    <div class="form-group">
-                                    <label for="addressType">Address Type</label>
-                                    <select type="addressType" class="form-control" id="addressType">
-                                        <option value="1">Billing Address</option>
-                                        <option value="2">Shipping Address</option>
-                                        <option value="3">Common Billing & Shipping Address</option>
-                                  
-                                    </select>
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label >Name</label>
-                                    <input  class="form-control" id="inputName" aria-describedby="fnameHelp" placeholder="Enter Full Name">
-                                  </div>
-
-
-                                  <div class="form-group">
-                                    <label>Address Line 1</label>
-                                    <input  class="form-control" id="inputAddress" aria-describedby="companyNameHelp" placeholder="Enter Address Line 1">
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label>Address Line 2</label>
-                                    <input  class="form-control" id="inputAddress2" aria-describedby="companyNameHelp" placeholder="Enter Address Line 2">
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label>Landmark</label>
-                                    <input  class="form-control" id="inputLandmark" aria-describedby="companyNameHelp" placeholder="Enter Landmark">
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label>Phone</label>
-                                    <input  class="form-control" id="inputPhone" aria-describedby="companyNameHelp" placeholder="Enter Phone No.">
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label>Country</label>
-                                    <select class="form-control" id="inputCountry" placeholder="Select Country" ></select>
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label >State</label>
-                                    <select class="form-control"  id="inputState"placeholder="Select State"  ></select>
-                                  </div>
-
-                                  <div class="form-group">
-                                    <label >City</label>
-                                    <select class="form-control" id="inputCity" placeholder="Select City" ></select>
-                                  </div>
-
-
-                                  <div class="form-group">
-                                    <label>Area Code</label>
-                                    <input  class="form-control" id="inputZipCode" aria-describedby="companyNameHelp" placeholder="Enter Zip Code">
-                                  </div>
-                                      <!-- <div class="form-group">  -->
-                                    <button id="searchAreas" type="button" class="btn btn-success btn-sm float-right" > Search Areas  
-                                    </button> 
-                                    <br>
-                                <!-- </div>  -->
-                                  
-                                  <div class="form-group">
-                                    <label >Area</label>
-                                    <select class="form-control" id="inputArea" placeholder="Select Area" ></select>
-                                  </div>
-
-                                <div class="modal-footer border-top-0 d-flex justify-content-center">
-                                  <button type="button" id="submitAddAddress" class="btn btn-success">Submit</button>
-                                </div>
-
-                              </form>   
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 
     <!--footer area start-->
     <footer class="footer_widgets" style="background: #414141;color: #fff;" id="footer">
@@ -1140,7 +802,7 @@ body {font-family: Verdana, sans-serif; margin:0}
         </div> -->
     </footer>
     <!--footer area end-->
-    
+
 <!-- JS
 ============================================ -->
 <!--jquery min js-->
@@ -1171,16 +833,20 @@ body {font-family: Verdana, sans-serif; margin:0}
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 
-
 <!-- LMA Menubar JS -->
 <script src="assets/js/menubar.js"></script>
 
 <!-- Footer -->
 <script src="assets/js/footer.js"></script>
 
-<!-- Mini Cart JS -->
-<script src="assets/js/miniCart.js"></script>
+<!-- Sidebar browse product filter JS -->
+<!-- <script src="assets/js/sidebarFilter.js"></script> -->
+
+<!-- mini Cart JS -->
+<!-- <script src="assets/js/miniCart.js"></script> -->
 <script src="assets/js/common/cart.js"></script>
+
+<!--  Cart JS-->
 
 
 
@@ -1225,10 +891,8 @@ body {font-family: Verdana, sans-serif; margin:0}
           <!-- Main API -->
           <script src="../assets/js/common/api.js"></script>
           <script src="../assets/js/common/genericErrorHandler.js"></script>
-
-<!-- Checkout JS -->
-<script src="assets/js/checkout.js"></script>
-
+<!--  Cart JS-->
+<script src="assets/js/myOrders.js"></script>
 
 <!-- Header -->
 <script src="assets/js/header.js"></script>
@@ -1237,12 +901,3 @@ body {font-family: Verdana, sans-serif; margin:0}
 </body>
 
 </html>
-
-<script>
-
-
-
-
-
-
-</script>
