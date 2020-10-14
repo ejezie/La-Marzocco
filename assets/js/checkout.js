@@ -80,6 +80,33 @@ $(document).ready(function(){
 	$("#btConfirmOrder").click(function(){
 		confirmOrder();
 	});
+	$('#deliveryType').change( function() {
+		  if($('#deliveryType').val()!=3){
+		  	$('#deliveryDate').hide();
+		  }else{
+		 //  	var dtToday = new Date();
+			// var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
+			// var day = dtToday.getDate();
+			// var year = dtToday.getFullYear();
+			// if(month < 10)
+			//    month = '0' + month.toString();
+			// if(day < 10)
+			//    day = '0' + day.toString();
+
+			// var maxDate = year + '-' + month + '-' + day;
+			var someDate = new Date();
+				var numberOfDaysToAdd = 6;
+				someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+				var dd = someDate.getDate();
+				var mm = someDate.getMonth() + 1;
+				var y = someDate.getFullYear();
+
+				var someFormattedDate = y + '-'+ mm + '-'+dd; 
+			$('#deliveryDateInput').attr('min', someFormattedDate);
+		  	$('#deliveryDate').show();
+		  }
+	  });
+	
 	initAddresses();
 	initAddAddress();
 });
@@ -168,7 +195,7 @@ function confirmOrder(){
 				if(!orderId){
 					orderId = safeAccess(["data","data","order",0,"id"],response,-1);
 				}
-				notifyOrderSuccess(orderId);
+				notifyOrderSuccess(safeAccess(["data","data","order"],response,null));
 			}
 			
 	});
@@ -176,15 +203,35 @@ function confirmOrder(){
 
 
 
-function notifyOrderSuccess(orderId){
-			notifySuccess("Payment Successful");
-			shoppingCart.clearCart();
-			if(orderId){
-			alert("Order #"+orderId+" is placed successfully");
-		}else{
-			alert("Order  is placed successfully");
+function notifyOrderSuccess(orders){
+
+		// 	notifySuccess("Payment Successful");
+		// 	shoppingCart.clearCart();
+		// 	if(orderId){
+		// 	alert("Order #"+orderId+" is placed successfully");
+		// }else{
+		// 	alert("Order  is placed successfully");
+		// }
+		// 	window.location.href = "index.html";
+
+		var confirmedOrders = [];
+
+		for(o of orders){
+			confirmedOrders.push(
+					{
+						sapid : o.sap_order_id ,
+						itemCount : o.order_line.length ,
+						subTotal : o.sub_total,
+						shipping : o.shipping_cost,
+						tax : o.total_tax,
+						total : o.total
+					}
+				);
 		}
-			window.location.href = "index.html";
+
+			// alert(JSON.stringify(confirmedOrders));
+		localStorage.setItem("confirmedOrders",JSON.stringify(confirmedOrders));
+		window.location.href = "orderConfirmation.html";
 }
 
 function confirmPayment(response){
@@ -202,8 +249,8 @@ function confirmPayment(response){
 	const inputCvc = $("#inputCvc").val();
 
 	notifyInfo("Please wait");
-	createPayment(orderId,amount,inputCardName, inputCardNumber,inputExpireyMonth,inputExpireyYear,inputCvc,function(response){
-			notifyOrderSuccess(orderId);
+	createPayment(orderId,amount,inputCardName, inputCardNumber,inputExpireyMonth,inputExpireyYear,inputCvc,function(response2){
+				notifyOrderSuccess(safeAccess(["data","data","order"],response,null));
 	});
 }
 

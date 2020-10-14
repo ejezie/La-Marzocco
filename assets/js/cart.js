@@ -105,8 +105,8 @@ async function showCartFromQuote(quoteItems){
 	cartHTML += '<th class="product_thumb">Name</th>'
 	cartHTML += '<th class="product-price">Price</th>'
 	cartHTML += '<th class="product_quantity">Quantity</th>'
-	cartHTML += '<th >Status</th>'
-	// cartHTML += '<th class="product_remove">Delete</th>'
+	cartHTML += '<th>Status</th>'
+	cartHTML += '<th>Expected Delivery</th>'
 	cartHTML += '<th class="product_total">Total</th>'
 	cartHTML += '</tr>'
 	cartHTML += '</thead>'
@@ -134,12 +134,13 @@ async function showCartFromQuote(quoteItems){
 		}else if(available<qty){
 			color = "orange";
 			text = "Going out fast"
-		}else if(available>qty){
+		}else if(available>=qty){
 			color = "green";
 			text = "Available"
 		}
 
 		cartHTML += '<td ><p style="color:'+color+';">'+text+'</p></td>'
+		cartHTML += '<td ><p>'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</p></td>'
 		cartHTML += '<td class="product_total">$'+quoteItem["total"].toLocaleString("en-AU")+'</td>'
 		cartHTML += '</tr>'
 	}
