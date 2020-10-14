@@ -194,7 +194,7 @@ async function showMachinesSideFilter(machineList){
 async function refreshCatalog(){
 	resultController = basicResultController;
 	basicResultController.filterParentId = getCheckedParent();
-	basicResultController.filterGroupId = await getCheckedGroup();
+	// basicResultController.filterGroupId = await getCheckedGroup();
 	var group_id = await getCheckedGroup()
 	resultController.loadResults(group_id);
 	// $('input[type="checkbox"]').not(this).prop('checked', false);

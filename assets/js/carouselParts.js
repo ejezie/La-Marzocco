@@ -51,12 +51,16 @@ async function showCarrouselParts(imageUrl,parts){
         // carouselHTML += '<img class="img-responsive" src="https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg">'
 
         carouselHTML += '<div class="fluid-ratio-wrap">'
-        carouselHTML += '<div class="fluid-ratio-inner"><span style="background-color:#414141; color:#fff; padding:4px; font-weight:bold;">'+parseInt(part.part_ref_number)+'</span></div>'
+        // carouselHTML += '<div class="fluid-ratio-inner"><span style="background-color:#414141; color:#fff; padding:4px; font-weight:bold;">'+parseInt(part.part_ref_number)+'</span></div>'
+        carouselHTML += '<div class="fluid-ratio-inner" style="-webkit-border-radius:100px;"><span style="position:absolute; margin-left:20px; margin-right:10px ;color:#000; padding:4px; font-weight:bold;">'+safeAccess(["item","name"],part)+'</span></div>'
+        // carouselHTML += '<div class="fluid-ratio-inner"><span >'+safeAccess(["item","name"],part)+'</span></div>'
+
         console.log("part : ",part)
         console.log("part.part_ref_number : ",part.part_ref_number)
         carouselHTML += '</div>'
         carouselHTML += '</div>'
-        carouselHTML += '<div class="details">'+safeAccess(["item","name"],part)+'</div>'
+        // carouselHTML += '<div class="details">'+safeAccess(["item","name"],part)+'</div>'
+        carouselHTML += '<div class="details" style="text-align:center">'+parseInt(part.part_ref_number)+'</div>'
         carouselHTML += '</li>'
     }
     carouselHTML += ' <li class="playlist-item more">'
