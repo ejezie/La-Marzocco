@@ -765,30 +765,62 @@ body {font-family: Verdana, sans-serif; margin:0}
 
                                 <div class="col-12">
                                     <div class="coupon_code left">
-                                    <h3>Purchase Orders</h3>
-                                    <div class="coupon_inner">
-<!--                                     <input placeholder="Upload" type="text">
- -->                                    
+                                        <h3>Purchase Orders</h3>
+                                        <div class="coupon_inner">
+        <!--                                     <input placeholder="Upload" type="text">
+         -->                                    
 
-                                    <label>PO Number </label>
-                                    <input id="inputPoName"  type="text">
+                                            <label>PO Number </label>
+                                            <input id="inputPoName"  type="text">
 
-                                      <label>Attach PO </label>
-                                    <div style="white-space:nowrap">
-                                    <input type="file" id="pofile" class="btn upload-po" style="background:#eee; color:#333; text-align: initial;padding-top: 4px" id="po_excelfile"/>
-                                    <!-- <input type="button" class="btn upload-po"  value="Upload PO"> -->
+                                              <label>Attach PO </label>
+                                            <div style="white-space:nowrap">
+                                            <input type="file" id="pofile" class="btn upload-po" style="background:#eee; color:#333; text-align: initial;padding-top: 4px" id="po_excelfile"/>
+                                            <!-- <input type="button" class="btn upload-po"  value="Upload PO"> -->
+                                            </div>
+
+                                            <div class="order-notes">
+                                                <label for="order_note">Order Notes</label>
+                                                <textarea id="inputOrderNotes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                            </div>
+                                            <!-- <button type="submit">Upload Purchase orders</button> -->
+                                        </div>
                                     </div>
-                                    <!-- <button type="submit">Upload Purchase orders</button> -->
-                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="coupon_code left">
+                                        <h3>Delivery Options</h3>
+                                        <div class="coupon_inner">
+        <!--                                     <input placeholder="Upload" type="text">
+         -->                                    
+
+                                            <label>Delivery Type </label>
+                                            <div style="white-space:nowrap;">
+                                            <select id="deliveryType" style=" width: 100%">
+                                                <option value="1" disabled="disabled">Choose delivery type</option>
+                                                <option value="2">ASAP</option>
+                                                <option value="3">Schedule</option>
+                                            </select> 
+                                        </div>
+
+                                            <label>Delivery Dates </label>
+                                            <div style="white-space:nowrap">
+                                            <input type="date" id="deliveryDate" class="btn upload-po" style="background:#eee; color:#333; text-align: initial;padding-top: 4px" id="po_excelfile"/>
+                                            <!-- <input type="button" class="btn upload-po"  value="Upload PO"> -->
+                                            </div>
+
+                                            <!-- <button type="submit">Upload Purchase orders</button> -->
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div class="col-12">
+                                <!-- <div class="col-12">
                                     <div class="order-notes">
                                         <label for="order_note">Order Notes</label>
                                         <textarea id="inputOrderNotes" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                     </div>
-                                </div>
+                                </div> -->
 
 
                             </div>

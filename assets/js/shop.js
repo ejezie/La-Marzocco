@@ -32,6 +32,7 @@ var basicResultController = (function () {
 								"productOfferPrice" : "$999.00",
 								"productOffPercent" : "-20%",
 								"productQuantityInStock" : "50",
+								"productDescription" : item.desc,
 								"parentImages" : item.item_parent_images[0].image.thumbnail
 							};
 			  results.push(element);
@@ -105,13 +106,21 @@ var basicResultController = (function () {
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_content list_content">'
-				catalogHTML += '<div class="left_caption">'
+				catalogHTML += '<div class="left_caption" style="width:300px">'
 				catalogHTML += '<div class="product_name">'
 				catalogHTML += '<h3><a href="product-details.html">'+catalogList[i]["productName"]+'</a></h3>'
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_desc">'
-				catalogHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>'
+				// catalogHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>'
+				
+				if(catalogList[i]["productDescription"] == null){
+
+					catalogHTML += '<p></p>'
+				}else{
+
+					catalogHTML += '<p>'+catalogList[i]["productDescription"]+'</p>'
+				}
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="right_caption">'	
@@ -236,13 +245,14 @@ var catalogResultController = (function () {
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_content list_content">'
-				catalogHTML += '<div class="left_caption">'
+				catalogHTML += '<div class="left_caption" style="width:300px">'
 				catalogHTML += '<div class="product_name">'
 				catalogHTML += '<h3><a>'+catalogList[i]["productName"]+'</a></h3>'
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_desc">'
 				catalogHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>'
+				// catalogHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="right_caption">'	
@@ -301,6 +311,7 @@ var machineResultController = (function () {
 								"productOfferPrice" : "$999.00",
 								"productOffPercent" : "-20%",
 								"productQuantityInStock" : "50",
+								"productDescription" : item.desc,
 								"parentImages" : response.data.item_parent_images.data[i].image.thumbnail
 							};
 			  results.push(element);
@@ -329,7 +340,6 @@ var machineResultController = (function () {
     
 	    var catalogHTML = ""
 
-	alert("mac")
 		for(i=0; i<catalogList.length; i++){
 
 				catalogHTML += '<div class="col-lg-4 col-md-4 col-12 ">'
@@ -366,13 +376,21 @@ var machineResultController = (function () {
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_content list_content">'
-				catalogHTML += '<div class="left_caption">'
+				catalogHTML += '<div class="left_caption" style="width:300px">'
 				catalogHTML += '<div class="product_name">'
 				catalogHTML += '<h3><a href="product-details.html">'+catalogList[i]["productName"]+'</a></h3>'
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_desc">'
-				catalogHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>'
+				// catalogHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>'
+				if(catalogList[i]["productDescription"] == null){
+
+					catalogHTML += '<p></p>'
+				}else{
+
+					catalogHTML += '<p>'+catalogList[i]["productDescription"]+'</p>'
+				}
+
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="right_caption">'	
@@ -380,14 +398,14 @@ var machineResultController = (function () {
 				catalogHTML += '<span class="current_price">'+catalogList[i]["productActualPrice"]+'</span>'
 				// catalogHTML += '<span class="old_price">'+catalogList[i]["productActualPrice"]+'</span>'
 				catalogHTML += '</div>'
-				catalogHTML += '<div class="cart_links_btn">'
-				catalogHTML += '<a href="#" title="add to cart">add to cart</a>'
-				catalogHTML += '</div>'
+				// catalogHTML += '<div class="cart_links_btn">'
+				// catalogHTML += '<a href="#" title="add to cart">add to cart</a>'
+				// catalogHTML += '</div>'
 				catalogHTML += '<div class="action_links_btn">'
 				catalogHTML += '<ul>'
-				catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
-				catalogHTML += '<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>'
-				catalogHTML += '<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>'
+				// catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
+				// catalogHTML += '<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>'
+				// catalogHTML += '<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>'
 				catalogHTML += '</ul>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'

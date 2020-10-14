@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Orders</title>
+    <title>Customer Orders</title>
 
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -20,64 +20,18 @@
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Datatables -->
     
-    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet"> -->
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+
+      <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+  <!-- <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet"> -->
+
     <!-- Admin Dashboard Custom CSS -->
     <link href="css/adminDashboard.css" rel="stylesheet">
-
-
-    <style type="text/css">
-      
-      button.btn.add::before {
-        font-family: fontAwesome;
-        content: "\f067\00a0";
-      }
-
-
-      button.btn.upload::before {
-        font-family: fontAwesome;
-        content: "\f093\00a0";
-      }
-
-      /* Multi select*/
-      #droptxt {
-          padding: 8px;
-          width: 300px;
-          cursor: pointer;
-          box-sizing: border-box
-      }
-      .dropdown {
-          position: relative;
-          display: inline-block
-      }
-      .content {
-          display: none;
-          position: absolute;
-          background-color: #f1f1f1;
-          min-width: 200px;
-          overflow: auto;
-          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
-          z-index: 1
-      }
-      .quantity {
-          float: right;
-          width: 50px
-      }
-      .content div {
-          padding: 10px 15px
-      }
-      .content div:hover {
-          background-color: #ddd
-      }
-      .show {
-        display: block
-      }
-    </style>
-
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -108,16 +62,16 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Orders</h3>
+                <h3>Reports</h3>
               </div>
 
               <div class="title_right">
-                <!-- <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search"> -->
-                <div class="form-group pull-right top_search">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                   <div class="input-group">
-                    <!-- <button class="btn add btn-primary" data-toggle="modal" data-target="#addCustomerOrderModal">Place Customer Order</button></a> -->
-                    <a href="uploadCustomerOrder.html"><button class="btn add btn-primary">Place Customer Order</button></a>
-                    
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary" type="button">Go!</button>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -155,11 +109,12 @@
                     <p class="text-muted font-13 m-b-30">
                       Region wise sales report accross different dates.
                     </p>
-                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                    <!-- <table id="tableOrders" class="table table-striped table-bordered" style="width:100%"> -->
+                    <table id="tableOrders" class="table table-striped jambo_table" style="width:100%">
                   
 
                       <thead>
-                        <tr>
+                       <!--  <tr>
                           <th>Order ID</th>
                           <th>Order Date</th>
                           <th>Customer</th>
@@ -167,12 +122,12 @@
                           <th>Total Quantity</th>
                           <th>Total Amount</th>
                           <th>Details</th>
-                        </tr>
+                        </tr> -->
                       </thead>
 
 
                       <tbody>
-                        <tr>
+                      <!--   <tr>
                           <td>GG145</td>
                           <td>14/07/2020</td>
                           <td>Coffee Beans</td>
@@ -233,7 +188,7 @@
                         </tr>
 
                      
-                       
+                        -->
                       </tbody>
                     </table>
                   </div>
@@ -259,126 +214,109 @@
         </div>
         <!-- /page content -->
 
+        
 
+            <!--  Modal -- Order Tracking -->
+            <div class="modal fade" id="modal_tracking" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                           <h4 class="modal-title" id="myModalLabel">Order Tracking</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                          </button>
 
-        <!-- Modal for Place customer orders -->
-          <div class="modal fade bd-example-modal-l" id="addCustomerOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog modal-l" role="document" >
-              <div class="modal-content">
-                <!--Header-->
-                <div class="modal-header">
-                  <h4 class="modal-title" id="myModalLabel">Place Customer Orders</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                
-                            <div class="col-md-12 col-sm-12 ">
-                              <div class="x_panel">
-                                <div class="x_content">
-                                  <br />
-                                  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                                    
-
-                                    <div class="form-group row">
-                                      <label class="col-form-label col-md-3 col-sm-3 label-align ">Customer</label>
-                                      <div class="col-md-9 col-sm-9 ">
-                                        <select class="form-control">
-                                          <option>Choose Customer</option>
-                                          <option>Customer 1</option>
-                                          <option>Customer 2</option>
-                                          <option>Customer 3</option>
-                                          <option>Customer 4</option>
-                                          <option>Customer 5</option>
-                                        </select>
-                                      </div>
-                                    </div>
-
-
-                                    <div class="form-group row">
-                                      <label class="col-form-label col-md-3 col-sm-3 label-align ">Item</label>
-                                      <div class="dropdown col-md-6 col-sm-6">
-                                      <input type="text" id="droptxt" class="list" readonly>
-                                          <div id="content" class="content">
-                                              <div class="list">
-                                                  <input type="checkbox" id="apple" class="list" value="Item1" />
-                                                  <label for="item1" class="list">Item 1 </label>
-                                                  <input type="hidden" class="list quantity" min="1" value="1" />
-                                              </div>
-                                              <div class="list">
-                                                  <input type="checkbox" id="banana" class="list" value="Item2" />
-                                                  <label for="item2" class="list">Item 2 </label>
-                                                  <input type="hidden" class="list quantity" min="1" value="1" />
-                                              </div>
-                                              <div class="list">
-                                                  <input type="checkbox" id="pineapple" class="list" value="Item3" />
-                                                  <label for="item2" class="list">Item 3 </label>
-                                                  <input type="hidden" class="list quantity" min="1" value="1" />
-                                              </div>
-                                          </div>
-                                      </div>
-                                    </div>
-
-                                    
-
-
-                                    <div class="ln_solid"></div>
-                                    <div class="item form-group">
-                                      <div class="col-md-6 col-sm-6 offset-md-3">
-                                        <button class="btn btn-primary" type="button">Cancel</button>
-                                        <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-                                        <button type="submit" class="btn btn-success">Submit</button>
-                                      </div>
-                                    </div>
-
-                                  </form>
-                                </div>
-                              </div>
-                            </div>
-
+                      </div>
+                      <div class="modal-body" id="orderTrackingDetails">
+                          <!-- <table class="table table-bordered">
+                              <thead>
+                                  <tr>
+                                      <th>#</th>
+                                      <th>First Name</th>
+                                      <th>Last Name</th>
+                                      <th>Username</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <th scope="row">1</th>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@mdo</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row">2</th>
+                                      <td>Jacob</td>
+                                      <td>Thornton</td>
+                                      <td>@fat</td>
+                                  </tr>
+                                  <tr>
+                                      <th scope="row">3</th>
+                                      <td>Larry</td>
+                                      <td>the Bird</td>
+                                      <td>@twitter</td>
+                                  </tr>
+                              </tbody>
+                          </table> -->
+                      </div>
+                      <div class="modal-footer">
+                          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button> -->
+                      </div>
+                  </div>
               </div>
-            </div>
           </div>
 
 
-        <script >
-          var txt = document.getElementById( 'droptxt' ),
-              content = document.getElementById( 'content' ),
-              list = document.querySelectorAll( '.content input[type="checkbox"]' ),
-              quantity = document.querySelectorAll( '.quantity' );
 
-          txt.addEventListener( 'click', function() {
-              content.classList.toggle( 'show' )
-          } )
+          <!--  Modal -- Order Details -->
+          <div class="modal fade" id="modal_orderDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: -moz-max-content;">
+                    <div class="modal-header">
+                         <h4 class="modal-title" id="myModalLabel">Order Details</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
 
-          // Close the dropdown if the user clicks outside of it
-          window.onclick = function( e ) {
-              if ( !e.target.matches( '.list' ) ) {
-                  if ( content.classList.contains( 'show' ) ) content.classList.remove( 'show' )
-              }
-          }
-
-          list.forEach( function( item, index ) {
-              item.addEventListener( 'click', function() {
-                  quantity[ index ].type = ( item.checked ) ? 'number' : 'hidden';
-                  calc()
-              } )
-          } )
-
-          quantity.forEach( function( item ) {
-              item.addEventListener( 'input', calc )
-          } )
-
-          function calc() {
-              for ( var i = 0, arr = []; i < list.length; i++ ) {
-                  if ( list[ i ].checked ) arr.push( quantity[ i ].value + ' x ' + list[ i ].value )
-              }
-
-              txt.value = arr.join( ', ' )
-          }
-        </script>
-
+                    </div>
+                    <div class="modal-body" id="orderDetails">
+                        <!-- <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Larry</td>
+                                    <td>the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <!-- footer content -->
@@ -420,14 +358,33 @@
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
-    <script src="../build/js/dataTables.cellEdit.js"></script>
-<!-- <script src="../build/js/basic.js"></script> -->
-
     <!-- Side NavBar -->
     <script src="js/sideNavBar.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.js"></script>
+    <script src="../../build/js/custom.js"></script>
+
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+          
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+          <script src="../../assets/js/common/localstorage.js"></script>
+
+          <script src="../../assets/js/common/notification.js"></script>
+
+          <script src="../../assets/js/common/api.js"></script>
+          <script src="../../assets/js/common/genericErrorHandler.js"></script>
+
+<script src="assets/js/header.js"></script>
+    <script src="js/customerOrderReport.js"></script>
+
+
+
+
+
 
   </body>
 </html>

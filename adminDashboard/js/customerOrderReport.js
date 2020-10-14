@@ -57,6 +57,13 @@ async function showOrders(orderArr){
                 }
               },
               {
+                "title":"Order Id",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['sap_order_id'],row,"")
+                }
+              },
+              {
                 "title":"Items",
                 render: function(data, type, row){
                   return safeAccess(['order_line'],row,[]).length;
@@ -71,15 +78,21 @@ async function showOrders(orderArr){
 		       {
 		        "title":"Product Details",
 		        render: function(data, type, row){
-		           return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Products</span></button>"
+		           return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"fa fa-bars\"> Details</span></button>"
 		          }
 		        },
 		       {
 		        "title":"Track Order",
 		        render: function(data, type, row){
-		           return "<button type=\"button\" id='btnTrackOrder' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Track</span></button>"
+		           return "<button type=\"button\" id='btnTrackOrder' class=\"btn btn-default btn-sm\"><span class=\"fa fa-map-marker\"> Track</span></button>"
 		          }
-        }
+            },
+        //    {
+        //     "title":"Cancel Order",
+        //     render: function(data, type, row){
+        //        return "<button type=\"button\" id='btnCancelOrder' class=\"btn btn-default btn-sm\"><span class=\"fa fa-trash\"> Cancel</span></button>"
+        //       }
+        // }
         ]
       })
 
@@ -88,7 +101,7 @@ async function showOrders(orderArr){
 
 
 $(document).ready(function(){
-	alert("sdad")
+	// alert("sdad")
 	showOrders();
 
   $('#tableOrders').on('click', '#btnDetails', function () {
@@ -116,33 +129,34 @@ var orderDetailsHTML = ""
 	$("#orderTrackingDetails").empty()
 
 
-	orderDetailsHTML += '<table style="width:-moz-available">'
-	orderDetailsHTML += '<thead>'
-	orderDetailsHTML += '<tr>'
-	orderDetailsHTML += '<th class="product_thumb">Item Part No.</th>'
-	orderDetailsHTML += '<th class="product_name">Quantity</th>'
-	orderDetailsHTML += '<th class="product-price">Status</th>'
-	orderDetailsHTML += '<th></th>'
-	orderDetailsHTML += '</tr>'
-	orderDetailsHTML += '</thead>'
-	orderDetailsHTML += '<tbody>'
+
+    orderDetailsHTML += '<table class="table table-bordered">'
+    orderDetailsHTML += '<thead>'
+    orderDetailsHTML += '<tr>'
+    orderDetailsHTML += '<th>#</th>'
+    orderDetailsHTML += '<th>Item Part No.</th>'
+    orderDetailsHTML += '<th>Quantity</th>'
+    orderDetailsHTML += '<th>Status</th>'
+    orderDetailsHTML += '</tr>'
+    orderDetailsHTML += '</thead>'
+    orderDetailsHTML += '<tbody>'
+
+    for(i=0;i<items.length;i++){
+        const item = items[i];
+
+    orderDetailsHTML += '<tr>'
+    orderDetailsHTML += '<th scope="row">'+(i+1)+'</th>'
+    orderDetailsHTML += '<td>'+safeAccess(["item_part_number"],item,"-")+'</td>'
+    orderDetailsHTML += '<td>'+safeAccess(["quantity"],item,"-")+'</td>'
+    orderDetailsHTML += '<td>'+safeAccess(["status"],item,"-")+'</td>'
+    orderDetailsHTML += '</tr>'
+    }
 
 
-	for(i=0;i<items.length;i++){
-		const item = items[i];
-
-		orderDetailsHTML += '<tr>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item_part_number"],item,"-")+'</a></td>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["quantity"],item,"-")+'</a></td>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["status"],item,"-")+'</a></td>'
-		orderDetailsHTML += '</tr>'
-	}
+    orderDetailsHTML += '</tbody>'
+    orderDetailsHTML += '</table>'
 
 
-	orderDetailsHTML += '</tbody>'
-	orderDetailsHTML += '</table>'
-
-// 
     $("#orderTrackingDetails").append(orderDetailsHTML);
     $('#modal_tracking').modal('show');
 }
@@ -153,39 +167,75 @@ async function showOrderDetails(quoteLine){
 	$("#orderDetails").empty()
 
 
-	orderDetailsHTML += '<table>'
-	orderDetailsHTML += '<thead>'
-	orderDetailsHTML += '<tr>'
-	orderDetailsHTML += '<th class="product_thumb">Product</th>'
-	orderDetailsHTML += '<th class="product_name">Name</th>'
-	orderDetailsHTML += '<th class="product-price">Price</th>'
-	orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
-	orderDetailsHTML += '<th class="product_total">Total</th>'
-	orderDetailsHTML += '<th class="product_status">Expected Delivery</th>'
-	orderDetailsHTML += '<th></th>'
-	orderDetailsHTML += '</tr>'
-	orderDetailsHTML += '</thead>'
-	orderDetailsHTML += '<tbody>'
+
+orderDetailsHTML += '<table class="table table-bordered">'
+orderDetailsHTML += '<thead>'
+orderDetailsHTML += '<tr>'
+orderDetailsHTML += '<th>#</th>'
+orderDetailsHTML += '<th>Product</th>'
+orderDetailsHTML += '<th>Name</th>'
+orderDetailsHTML += '<th>Price</th>'
+orderDetailsHTML += '<th>Quantity</th>'
+orderDetailsHTML += '<th>Total</th>'
+orderDetailsHTML += '<th>Expected Deliver</th>'
+orderDetailsHTML += '</tr>'
+orderDetailsHTML += '</thead>'
+orderDetailsHTML += '<tbody>'
+
+for(i=0;i<quoteLine.length;i++){
+   const quoteItem = quoteLine[i];
+
+orderDetailsHTML += '<tr>'
+orderDetailsHTML += '<th scope="row">'+(i+1)+'</th>'
+orderDetailsHTML += '<td><img src="../assets/img/s-product/product.jpg" alt=""></td>'
+orderDetailsHTML += '<td>'+safeAccess(["item","name"],quoteItem,"-")+'</td>'
+orderDetailsHTML += '<td>$'+safeAccess(["price"],quoteItem,"-")+'</td>'
+orderDetailsHTML += '<td>'+safeAccess(["qty"],quoteItem,"-")+'</td>'
+orderDetailsHTML += '<td>$'+safeAccess(["total"],quoteItem,"-")+'</td>'
+orderDetailsHTML += '<td>'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
+}
+orderDetailsHTML += '</tr>'
+
+orderDetailsHTML += '</tbody>'
+orderDetailsHTML += '</table>'
+
+    // hbnjmk
 
 
-	for(i=0;i<quoteLine.length;i++){
-		const quoteItem = quoteLine[i];
+	// orderDetailsHTML += '<table lass="table table-bordered">'
+	// orderDetailsHTML += '<thead>'
+	// orderDetailsHTML += '<tr>'
+ //  orderDetailsHTML += '<th>#</th>'
+	// orderDetailsHTML += '<th >Product</th>'
+	// orderDetailsHTML += '<th >Name</th>'
+	// orderDetailsHTML += '<th price">Price</th>'
+	// orderDetailsHTML += '<th >Quantity</th>'
+	// orderDetailsHTML += '<th >Total</th>'
+	// orderDetailsHTML += '<th >Expected Delivery</th>'
+	// orderDetailsHTML += '<th></th>'
+	// orderDetailsHTML += '</tr>'
+	// orderDetailsHTML += '</thead>'
+	// orderDetailsHTML += '<tbody>'
 
-		orderDetailsHTML += '<tr>'
-		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
-		orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
-		orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'
-		orderDetailsHTML += '<td class="product_total">'+safeAccess(["total"],quoteItem,"-")+'</td>'
-		orderDetailsHTML += '<td class="product_total">'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
-		orderDetailsHTML += '</tr>'
-	}
+
+	// for(i=0;i<quoteLine.length;i++){
+	// 	const quoteItem = quoteLine[i];
+
+	// 	orderDetailsHTML += '<tr>'
+	// 	orderDetailsHTML += '<td ><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+	// 	orderDetailsHTML += '<td ><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
+	// 	orderDetailsHTML += '<td price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
+	// 	orderDetailsHTML += '<td >'+safeAccess(["qty"],quoteItem,"-")+'</td>'
+	// 	orderDetailsHTML += '<td >'+safeAccess(["total"],quoteItem,"-")+'</td>'
+	// 	orderDetailsHTML += '<td >'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
+	// 	orderDetailsHTML += '</tr>'
+	// }
 
 
-	orderDetailsHTML += '</tbody>'
-	orderDetailsHTML += '</table>'
+	// orderDetailsHTML += '</tbody>'
+	// orderDetailsHTML += '</table>'
 
 
     $("#orderDetails").append(orderDetailsHTML);
-    $('#modal_box').modal('show');
+    $('#modal_orderDetails').modal('show');
 }

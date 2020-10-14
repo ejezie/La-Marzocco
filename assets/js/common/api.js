@@ -1369,6 +1369,23 @@ async function createOrder(quoteId,po,poName,shippingAddrId,billingAddrId,desc,o
   };
   axios(config).then(onResponse).catch(onError);
 }
+
+
+async function cancelOrder(orderId,orderItemId,onResponse,onError){
+  
+  var config = {
+    method: 'post',
+    url: BASE_URL+'cart/'+itemId,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+
 async function createPayment(order_id,amount,card_name,cart_number,cart_exp_month,cart_exp_year,card_cvc,onResponse,onError){
   var data = new FormData();
   data.append('order_id', order_id);

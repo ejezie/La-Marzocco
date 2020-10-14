@@ -52,7 +52,8 @@ async function showCarrouselParts(imageUrl,parts){
 
         carouselHTML += '<div class="fluid-ratio-wrap">'
         // carouselHTML += '<div class="fluid-ratio-inner"><span style="background-color:#414141; color:#fff; padding:4px; font-weight:bold;">'+parseInt(part.part_ref_number)+'</span></div>'
-        carouselHTML += '<div class="fluid-ratio-inner" style="-webkit-border-radius:100px;"><span style="position:absolute; margin-left:20px; margin-right:10px ;color:#000; padding:4px; font-weight:bold;">'+safeAccess(["item","name"],part)+'</span></div>'
+        // carouselHTML += '<div class="fluid-ratio-inner" style="-webkit-border-radius:100px;"><span style="position:absolute; margin-left:20px; margin-right:10px ;color:#000; padding:4px; font-weight:bold;">'+safeAccess(["item","name"],part)+'</span></div>'
+        carouselHTML += '<div class="fluid-ratio-inner" style="background:white; border:1px solid #ccc;"><p style=" margin:10px auto ;color:#000; font-weight:bold;  text-align:center">'+safeAccess(["item","name"],part)+'</p></div>'
         // carouselHTML += '<div class="fluid-ratio-inner"><span >'+safeAccess(["item","name"],part)+'</span></div>'
 
         console.log("part : ",part)
