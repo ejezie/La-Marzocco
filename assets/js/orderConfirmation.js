@@ -50,12 +50,12 @@ function appendOrderDetails(confirmedOrders){
 
 
 		
-		html+= '</table>';
-		html+= '</td>';
-		html+= '</tr>';
-		html+= '</table>';
-		html+= '</td>';
-		html+= '</tr>';
+		// html+= '</table>';
+		// html+= '</td>';
+		// html+= '</tr>';
+		// html+= '</table>';
+		// html+= '</td>';
+		// html+= '</tr>';
 
 		// $('#orderDetail > tbody:last-child').append(html);
 		$('#orderDetail').html(html);

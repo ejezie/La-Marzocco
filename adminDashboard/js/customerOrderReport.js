@@ -44,8 +44,19 @@ async function showOrders(orderArr){
         },
        
         buttons : [
-            // 'selectAll',
-            // 'selectNone',
+            {
+          extend: 'csv',
+                // className: 'btn btn-sm btn-success',
+                titleAttr: 'CSV export.',
+                text: 'CSV',
+                // filename: 'attendance',
+                extension: '.csv'
+              }, {
+                extend: 'pdf',
+                // className: 'btn btn-sm btn-danger',
+                titleAttr: 'Copy table data.',
+                text: 'PDF'
+              }
               ],
               columns: [
             

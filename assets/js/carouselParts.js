@@ -45,7 +45,7 @@ async function showCarrouselParts(imageUrl,parts){
         console.log("parts : ", parts)
         const part = parts[i];
         console.log("part >>>>>> : ", parts)
-        carouselHTML += '<li class="playlist-item" onclick="toitemdetailpage('+safeAccess(["id"],part)+')">'
+        carouselHTML += '<li class="playlist-item" href="#" onclick="toitemdetailpage('+safeAccess(["id"],part)+')"><a href="#">'
         carouselHTML += '<div class="thumb">'
         // carouselHTML += '<span style="  padding: 0 10px;border-radius: 2px;text-transform: capitalize;font-size: 16px;font-weight: 500;text-align: center;display: inline-block;" class="label_sale">'+parseInt(part.part_ref_number)+'</span>'
         // carouselHTML += '<img class="img-responsive" src="https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg">'
@@ -53,7 +53,7 @@ async function showCarrouselParts(imageUrl,parts){
         carouselHTML += '<div class="fluid-ratio-wrap">'
         // carouselHTML += '<div class="fluid-ratio-inner"><span style="background-color:#414141; color:#fff; padding:4px; font-weight:bold;">'+parseInt(part.part_ref_number)+'</span></div>'
         // carouselHTML += '<div class="fluid-ratio-inner" style="-webkit-border-radius:100px;"><span style="position:absolute; margin-left:20px; margin-right:10px ;color:#000; padding:4px; font-weight:bold;">'+safeAccess(["item","name"],part)+'</span></div>'
-        carouselHTML += '<div class="fluid-ratio-inner" style="background:white; border:1px solid #ccc;"><p style=" margin:10px auto ;color:#000; font-weight:bold;  text-align:center">'+safeAccess(["item","name"],part)+'</p></div>'
+        carouselHTML += '<div class="fluid-ratio-inner" style="background:#414141; border:1px solid #ccc;"><p style=" margin:10px auto ;color:#fff; font-weight:bold;  text-align:center">'+safeAccess(["item","name"],part)+'</p></div>'
         // carouselHTML += '<div class="fluid-ratio-inner"><span >'+safeAccess(["item","name"],part)+'</span></div>'
 
         console.log("part : ",part)
@@ -62,7 +62,7 @@ async function showCarrouselParts(imageUrl,parts){
         carouselHTML += '</div>'
         // carouselHTML += '<div class="details">'+safeAccess(["item","name"],part)+'</div>'
         carouselHTML += '<div class="details" style="text-align:center">'+parseInt(part.part_ref_number)+'</div>'
-        carouselHTML += '</li>'
+        carouselHTML += '</a></li>'
     }
     carouselHTML += ' <li class="playlist-item more">'
     // carouselHTML += ' <a href="#">See More</a>'
