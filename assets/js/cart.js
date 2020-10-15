@@ -9,10 +9,10 @@ async function showCart(cartItems){
 	cartHTML += '<tr>'
 	cartHTML += '<th class="product_name">Product</th>'
 	cartHTML += '<th class="product_thumb">Name</th>'
-	cartHTML += '<th class="product-price">Price</th>'
+	cartHTML += '<th class="product-price">Unit Price</th>'
 	cartHTML += '<th class="product_quantity">Quantity</th>'
 	// cartHTML += '<th class="product_remove">Delete</th>'
-	cartHTML += '<th class="product_total">Total</th>'
+	cartHTML += '<th class="product_total">Total after discount</th>'
 	cartHTML += '</tr>'
 	cartHTML += '</thead>'
 	cartHTML += '<tbody>'
@@ -130,10 +130,10 @@ async function showCartFromQuote(quoteItems){
 		console.log("qt "+qty+"  avaaqt="+available)
 		if(available==0){
 			color = "red";
-			text = "Limited Quantity";
+			text = "Out of Stock";
 		}else if(available<qty){
 			color = "orange";
-			text = "Going out fast"
+			text = "Limited Quantity"
 		}else if(available>=qty){
 			color = "green";
 			text = "Available"

@@ -150,7 +150,26 @@
 				"description": i.desc,
 				"family" : safeAccess(['i', 'item_family', 0, 'code'],i,null),
 				"image" : safeAccess(['i', 'images', 0, 'main'],i,null),
-				"specification" : [
+			};    
+			if(i.type_id==2){
+				element["specification"] = [
+				{
+					"Name" : safeAccess(['name'],i,"-"),
+					"Code": safeAccess(['code'],i,"-"),
+					"Short Code" : safeAccess(['shortCode'],i,"-"),
+					"Group" : safeAccess(['item_group', 'name'],i,"") + " - " + safeAccess([ 'item_group', 'desc'],i,"") ,
+					"Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
+					"Type" :safeAccess(['type', 'name'],i,"") + " - " + safeAccess(['type', 'desc'],i,"") ,
+					// "Parent" : safeAccess(['parent', 'name'],i,"") + " - " + safeAccess([ 'parent', 'desc'],i,"") ,
+					// "Lenght" : safeAccess(['length'],i,"") + " - " + safeAccess(['lenght_uom'],i,"") ,
+					// "Height" : safeAccess(['height'],i,"") + " - " + safeAccess([ 'height_uom'],i,"") ,
+					// "Width" : safeAccess(['width'],i,"") + " - " + safeAccess([ 'width_uom'],i,"") ,
+					"Weight" : safeAccess(['weight'],i,"")  + safeAccess([ 'weight_uom'],i,"") ,
+					"Volume" : safeAccess(['volume'],i,"")  + safeAccess([ 'volume_uom'],i,"") ,
+				}
+				]
+			}else{
+				element["specification"] = [
 				{
 					"Name" : safeAccess(['name'],i,"-"),
 					"Code": safeAccess(['code'],i,"-"),
@@ -174,7 +193,7 @@
 					"Water Reservoir Capacity" : safeAccess(['water_reservoir_capacity'],i,"")  ,
 				}
 				]
-			};    
+			}
 
 			showProductDetails(element);
 			showProductInfo(element);
