@@ -274,6 +274,7 @@ var orderDetailsHTML = ""
 	orderDetailsHTML += '<thead>'
 	orderDetailsHTML += '<tr>'
 	orderDetailsHTML += '<th class="product_thumb">Item Part No.</th>'
+	// orderDetailsHTML += '<th class="product_thumb">Item Name</th>'
 	orderDetailsHTML += '<th class="product_name">Quantity</th>'
 	orderDetailsHTML += '<th class="product-price">Status</th>'
 	orderDetailsHTML += '<th></th>'
@@ -286,9 +287,10 @@ var orderDetailsHTML = ""
 		const item = items[i];
 
 		orderDetailsHTML += '<tr>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item_part_number"],item,"-")+'</a></td>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["quantity"],item,"-")+'</a></td>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["status"],item,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["item_part_number"],item,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["quantity"],item,"-")+'</a></td>'
+		// orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["name"],item,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["status"],item,"-")+'</a></td>'
 		orderDetailsHTML += '</tr>'
 	}
 
