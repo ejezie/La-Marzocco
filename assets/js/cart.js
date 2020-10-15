@@ -241,10 +241,10 @@ $(document).ready(function(){
 					showCartFromQuote(safeAccess(["data","quote","quote_line"],response));
 					$("#showQuote").hide();
 					var cartSubTotals = {
-										"subTotal" : safeAccess(["data","quote","sub_total"],response),
-										"total" :  safeAccess(["data","quote","total"],response),
-										"shipping" : (safeAccess(["data","quote","shipping_cost"],response)),
-										"tax" : (safeAccess(["data","quote","total_tax"],response))
+										"subTotal" : safeAccess(["data","quote","sub_total"],response,0),
+										"total" :  safeAccess(["data","quote","total"],response,0),
+										"shipping" : (safeAccess(["data","quote","shipping_cost"],response,0)),
+										"tax" : (safeAccess(["data","quote","total_tax"],response,0))
 									}
 					showSubTotal(cartSubTotals,safeAccess(["data","quote","id"],response));
 			});
