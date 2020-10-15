@@ -24,6 +24,8 @@ function loadMiniCart(){
 				// var cart = shoppingCart.listCart();
 				var cart = safeAccess(['data','carts','data'],response);
 				showMiniCart(cart,cartSubtotal);
+				$("#cart_quantity").html(cart.length);
+
 			}
 			cartList(onResponse);
 }
