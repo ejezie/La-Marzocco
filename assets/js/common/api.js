@@ -1426,16 +1426,21 @@ async function createOrder(quoteId,po,poName,shippingAddrId,billingAddrId,desc,o
 }
 
 
-async function cancelOrder(orderId,orderItemId,onResponse,onError){
-  
+async function deleteOrderItem(orderId,orderLineIds,onResponse,onError){
+  var data = new FormData();
+
+  data.append('order_id', orderId);
+  data.append('order_line_ids', orderLineIds);
+
   var config = {
     method: 'post',
-    url: BASE_URL+'cart/'+itemId,
+    url: BASE_URL+'order/order-line/cancel',
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
       'Accept': 'application/json'
-     }
+     },
+     data : data
   };
   axios(config).then(onResponse).catch(onError);
 }

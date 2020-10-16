@@ -149,7 +149,8 @@
 				"price" : "$"+i.price,
 				"description": i.desc,
 				"family" : safeAccess(['i', 'item_family', 0, 'code'],i,null),
-				"image" : safeAccess(['i', 'images', 0, 'main'],i,null),
+				// "image" : safeAccess(['i', 'images', 0, 'main'],i,null),
+				"image" : i.item_parent_images[0].image.image,
 			};    
 			if(i.type_id==2){
 				element["specification"] = [
