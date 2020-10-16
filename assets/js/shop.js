@@ -167,6 +167,7 @@ var catalogResultController = (function () {
 		  	var results = [];
 		    for(var i=0; i< response.data.machine_parent.data.length; i++){
 		      const item = response.data.machine_parent.data[i];
+		      console.log("item >>>>> ",item)
 		      const element = {
 								"productId" :safeAccess(["parents","id"],item),
 								"image": safeAccess(["image","thumbnail"],item),
@@ -221,27 +222,27 @@ var catalogResultController = (function () {
 				// 	catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product1.jpg" alt=""></a>'
 				// }
 				// catalogHTML += '<a class="secondary_img" ><img src="assets/img/product/product11.jpg" alt=""></a>'
-				catalogHTML += '<div class="label_product">'
+				// catalogHTML += '<div class="label_product">'
 				// catalogHTML += '<span class="label_sale">'+catalogList[i]["productOffPercent"]+'</span>'
-				catalogHTML += '</div>'
+				// catalogHTML += '</div>'
 				catalogHTML += '<div class="action_links">'
 				catalogHTML += '<ul>'
 				// catalogHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
 				catalogHTML += '</ul>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'
-				// catalogHTML += '<div class="product_content grid_content">'
-				// catalogHTML += '<div class="content_inner">'
-				// catalogHTML += '<div class="product_footer d-flex align-items-center">'
-				// catalogHTML += '<div class="price_box">'
+				catalogHTML += '<div class="product_content grid_content">'
+				catalogHTML += '<div class="content_inner">'
+				catalogHTML += '<div class="product_footer d-flex align-items-center">'
+				catalogHTML += '<div class="price_box">'
 				// catalogHTML += '<span class="current_price">'+catalogList[i]["productOfferPrice"]+'</span>'
 				// catalogHTML += '<span class="old_price">'+catalogList[i]["productActualPrice"]+'</span>'
-				// catalogHTML += '</div>'
+				catalogHTML += '</div>'
 				// catalogHTML += '<div class="add_to_cart">'
 				// catalogHTML += '<a onclick="addToCart()" title="add to cart"><span class="lnr lnr-cart"></span></a>'
 				// catalogHTML += '</div>'
-				// catalogHTML += '</div>'
-				// catalogHTML += '</div>'
+				catalogHTML += '</div>'
+				catalogHTML += '</div>'
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_content list_content">'
@@ -251,7 +252,7 @@ var catalogResultController = (function () {
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_desc">'
-				catalogHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>'
+				// catalogHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>'
 				// catalogHTML += '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores </p>'
 				catalogHTML += '</div>'
 				catalogHTML += '</div>'

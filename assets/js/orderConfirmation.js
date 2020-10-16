@@ -11,7 +11,7 @@ function appendOrderDetails(confirmedOrders){
           html+= ' </tr>';
           html+= ' <tr>';
           html+= '  <td align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 10px;">';
-          html+= '  <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;"> Order Details will be sent to the registered E-mail Id and Phone Number. </p>';
+          html+= '  <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;"> Order Details will be sent to the registered E-mail Id. </p>';
           html+= '    </td>';
           html+= ' </tr>';
 
@@ -19,40 +19,40 @@ function appendOrderDetails(confirmedOrders){
         for(order of confirmedOrders){
 				html+= '<tr>';
 				html+= '<td align="left" style="padding-top: 20px;">';
-				html+= '<table cellspacing="0" cellpadding="0" border="0" width="100%">';
-				html+= '<tr>';
-				html+= '<td width="75%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;"> Order Confirmation # </td>';
-				html+= '<td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;"> '+order.sapid+' </td>';
-				html+= '</tr>';
-				html+= '<tr>';
-				html+= '<td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> Purchased Items ('+order.itemCount+') </td>';
-				html+= '<td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> $'+order.subTotal+' </td>';
-				html+= '</tr>';
-				html+= '<tr>';
-				html+= '<td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Shipping  </td>';
-				html+= '<td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> $'+order.shipping+' </td>';
-				html+= '</tr>';
-				html+= '<tr>';
-				html+= '<td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Total Tax </td>';
-				html+= '<td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> $'+order.tax+' </td>';
-				html+= '</tr>';
-				html+= '</table>';
+					html+= '<table cellspacing="0" cellpadding="0" border="0" width="100%">';
+					html+= '<tr>';
+					html+= '<td width="75%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;"> Order Confirmation # </td>';
+					html+= '<td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;"> '+order.sapid+' </td>';
+					html+= '</tr>';
+					html+= '<tr>';
+					html+= '<td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> Purchased Items ('+order.itemCount+') </td>';
+					html+= '<td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;"> $'+order.subTotal+' </td>';
+					html+= '</tr>';
+					html+= '<tr>';
+					html+= '<td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Shipping  </td>';
+					html+= '<td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> $'+order.shipping+' </td>';
+					html+= '</tr>';
+					html+= '<tr>';
+					html+= '<td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> Total Tax </td>';
+					html+= '<td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 5px 10px;"> $'+order.tax+' </td>';
+					html+= '</tr>';
+					html+= '</table>';
 				html+= '</td>';
 				html+= '</tr>';
 				html+= '<tr>';
 				html+= '<td align="left" style="padding-top: 20px;">';
-				html+= '<table cellspacing="0" cellpadding="0" border="0" width="100%">';
-				html+= '<tr>';
-				html+= '<td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;"> Order Total </td>';
-				html+= '<td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;"> $'+order.total+' </td>';
+					html+= '<table cellspacing="0" cellpadding="0" border="0" width="100%">';
+					html+= '<tr>';
+					html+= '<td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;"> Order Total </td>';
+					html+= '<td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;"> $'+order.total+' </td>';
+					html+= '</tr>';
+					html+= '</table>';
+				html+= '</td>';
 				html+= '</tr>';
 	}
 
 
 		
-		// html+= '</table>';
-		// html+= '</td>';
-		// html+= '</tr>';
 		// html+= '</table>';
 		// html+= '</td>';
 		// html+= '</tr>';
