@@ -366,8 +366,63 @@ async function getItems(onResponse,onError,page,page_size){
   axios(config)
   .then(onResponse)
   .catch(onError);  
-
 }
+async function getRecommendedProducts(onResponse){
+
+  var data = new FormData();
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item?page_size=20&is_recommended=1',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+async function getTopSellingProducts(onResponse){
+
+  var data = new FormData();
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item?page_size=20&sort_by_ordered=1',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+async function getMostViewedProducts(onResponse){
+
+  var data = new FormData();
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item?page_size=20&sort_by_viewed=1',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+
 async function getQuotationList(onResponse,onError,page,page_size){
 
   var data = new FormData();

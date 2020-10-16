@@ -106,6 +106,8 @@ var shoppingCart = (function () {
                   cart = cart.filter(function(el) { return el != existing });
                             saveCart();
                             callback(); 
+                $("#cart_quantity").val(cart.length);
+
               }
                     cartDeleteItem(existing.id,onResponse);
             } else {
@@ -123,6 +125,8 @@ var shoppingCart = (function () {
                     // }   
                     //     saveCart();
                         callback();
+                        $("#cart_quantity").val(cart.length);
+
                   };
                     cartUpdateItem(cartItemId,quantity,null,null,onResponse);
             }  
@@ -136,6 +140,7 @@ var shoppingCart = (function () {
                         saveCart();
                         reloadMiniCart()
                         callback();
+                        $("#cart_quantity").val(cart.length);
                     }else{
                         console.log("nocartid")
                     }
