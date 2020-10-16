@@ -115,7 +115,7 @@ async function showQuotation(orderArr){
                 "title":"Date",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['created_at',],row,"");
+                  return safeAccess(['created_at',],row,"").match(/([^T]+)/)[0].split("-").reverse().join("/");
                 }
               },
               {
@@ -180,7 +180,7 @@ async function showOrderDetails(quoteLine){
 
 		orderDetailsHTML += '<tr>'
 		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
 		orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'
 		orderDetailsHTML += '<td class="product_total">'+safeAccess(["total"],quoteItem,"-")+'</td>'
@@ -211,10 +211,11 @@ $(document).ready(function(){
   $('#tableQuoteList').on('click', '#btnAddToCart',async function () {
   		var RowIndex = $(this).closest('tr');
     	var data = $('#tableQuoteList').dataTable().api().row(RowIndex).data();
-    	notifyInfo("Adding items to cart");
-    	for(var item of data.quote_line){
-    		await shoppingCart.addItemToCart(item.item.id,item.item.name,item.price,item.qty);
-    	}
+  		window.location.href = ("checkout.html?quote="+data.id);
+    	// notifyInfo("Adding items to cart");
+    	// for(var item of data.quote_line){
+    	// 	await shoppingCart.addItemToCart(item.item.id,item.item.name,item.price,item.qty);
+    	// }
     	// window.location.href  ="cart.html";
   });
 

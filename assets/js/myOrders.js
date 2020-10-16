@@ -210,6 +210,12 @@ async function showOrders(orderArr){
                   // console.log(JSON.stringify(row,null,2))
                   return safeAccess(['sap_order_id'],row,"");;
                 }
+              },{
+                "title":"Status",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['status'],row,"-");;
+                }
               },
               {
                 "title":"Items",

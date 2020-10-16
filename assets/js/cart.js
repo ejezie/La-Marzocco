@@ -96,6 +96,7 @@ async function showCartFromQuote(quoteItems){
 		notifyError("Failed to get quote");
 		return;
 	}
+
 	var cartHTML = ""
 
 	cartHTML += '<table>'
@@ -107,6 +108,7 @@ async function showCartFromQuote(quoteItems){
 	cartHTML += '<th class="product_quantity">Quantity</th>'
 	cartHTML += '<th>Status</th>'
 	cartHTML += '<th>Expected Delivery</th>'
+	cartHTML += '<th>Discount(%)</th>'
 	cartHTML += '<th class="product_total">Total</th>'
 	cartHTML += '</tr>'
 	cartHTML += '</thead>'
@@ -141,6 +143,7 @@ async function showCartFromQuote(quoteItems){
 
 		cartHTML += '<td ><p style="color:'+color+';">'+text+'</p></td>'
 		cartHTML += '<td ><p>'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</p></td>'
+		cartHTML += '<td ><p>'+safeAccess(["discount"],quoteItem,"-")+'</p></td>'
 		cartHTML += '<td class="product_total">$'+quoteItem["total"].toLocaleString("en-AU")+'</td>'
 		cartHTML += '</tr>'
 	}
@@ -238,7 +241,7 @@ $(document).ready(function(){
 		$("#showQuote").click(function(){
 			notifyInfo("Requesting quote")
 			getQuote(null,null,function(response){
-					showCartFromQuote(safeAccess(["data","quote","quote_line"],response));
+					showCartFromQuote(safeAccess(["data","quote","quote_line"],response,[]));
 					$("#showQuote").hide();
 					var cartSubTotals = {
 										"subTotal" : safeAccess(["data","quote","sub_total"],response,0),
@@ -247,6 +250,21 @@ $(document).ready(function(){
 										"tax" : (safeAccess(["data","quote","total_tax"],response,0))
 									}
 					showSubTotal(cartSubTotals,safeAccess(["data","quote","id"],response));
+			
+
+					var p = 0;
+					for(item of safeAccess(["data","quote","quote_line"],response,[])){
+						p += item.price * item.qty;	
+					}
+					const subTotal = cartSubTotals["subTotal"];	
+
+					var discountPercentage = 0;
+					try{
+						discountPercentage = (p - subTotal / p)*100;
+						$("#discountAlert").html("Congratulations! You have an opportunity to save "+discountPercentage+"% on this order");
+						$("#discountAlert").toggle();
+					}catch(e){console.log(e);}
+
 			});
 		});
 	});
