@@ -102,9 +102,9 @@
                     <p class="text-muted font-13 m-b-30">
                       Period wise sales report accross all regions.
                     </p>
-                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                    <table id="tablePeriodicReport" class="table table-striped table-bordered" style="width:100%">
                 
-
+<!-- 
                       <thead>
                         <tr>
                           <th>Month</th>
@@ -176,7 +176,7 @@
                         
                         
                        
-                      </tbody>
+                      </tbody> -->
                     </table>
                   </div>
                   </div>
@@ -239,6 +239,141 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+          <script src="../assets/js/common/localstorage.js"></script>
+
+          <script src="../assets/js/common/notification.js"></script>
+
+          <script src="../assets/js/common/api.js"></script>
+
+      <script src="assets/js/cart.js"></script>
+
+      <script>
+        $(document).ready(function(){
+
+     itemMasterTable = $('#tablePeriodicReport').DataTable( {
+     dom: 'Blfrtip',
+     processing: true,
+     serverSide: true,
+     pageLength: 10,
+     bSort : false,
+     lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
+          columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ,
+        {
+             targets: '_all',
+             defaultContent: '-'
+            },],
+        select: {
+            style:    'multi',
+            selector: 'td:first-child'
+        },
+    ajax: function(data, callback, settings) {
+    const loadingId = notifyInfo("Please wait");
+    var onResponse = function(res){
+              dismiss(loadingId);
+              callback({
+                draw:data.draw,
+                recordsTotal: res.data.report.length,
+                recordsFiltered: res.data.report.length,
+                data: res.data.report
+              });
+
+            };
+            var onError =function(error){
+              console.log(error);
+              dismiss(loadingId);
+            };
+              // var pageIndex = data.start / data.length + 1 ;
+          getPeriodicReport(onResponse);
+        },
+       
+        buttons : [
+            {
+          extend: 'csv',
+                // className: 'btn btn-sm btn-success',
+                titleAttr: 'CSV export.',
+                text: 'CSV',
+                // filename: 'attendance',
+                extension: '.csv'
+              }, {
+                extend: 'pdf',
+                // className: 'btn btn-sm btn-danger',
+                titleAttr: 'Copy table data.',
+                text: 'PDF'
+              }
+              ],
+              columns: [
+            
+              {
+                "title":"Month",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['month'],row,"-")+" "+safeAccess(['year'],row,"-");
+                }
+              },
+              {
+                "title":"Orders",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['orders'],row,"-")
+                }
+              },
+              {
+                "title":"Quotation",
+                render: function(data, type, row){
+                  return safeAccess(['quotes'],row,"-");
+                }
+              },
+              {
+                "title":"Order Quantity",
+                render: function(data, type, row){
+                  return  safeAccess(['order_qty'],row,"-");
+                }
+              },
+              {
+                "title":"Cart Quantity",
+                render: function(data, type, row){
+                  return  safeAccess(['cart_qty'],row,"-");
+                }
+              }
+        ]
+      })
+
+
+      // $('#datatable').on('click', '#btnDetails', function () {
+      //   var RowIndex = $(this).closest('tr');
+      //   var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+
+      //   showOrderDetails(data.id, data.order_line);
+      // });
+
+
+      // $('#datatable').on('click', '#btnTrackOrder',async function () {
+      //     var RowIndex = $(this).closest('tr');
+      //     var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+      //     notifyInfo("Please wait");
+      //     trackOrder(data.id,function(res){
+      //        showOrderTrackingDetails(res.data.track_items);
+      //     })
+
+      // });
+
+
+        });
+      </script>
+
 
   </body>
 </html>

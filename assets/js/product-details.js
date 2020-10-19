@@ -152,7 +152,7 @@
 				// "image" : safeAccess(['i', 'images', 0, 'main'],i,null),
 				"image" : i.item_parent_images[0].image.image,
 			};    
-			if(i.type_id==2){
+			if(!safeAccess(['type', 'name'],i,"").includes("Machine")){
 				element["specification"] = [
 				{
 					"Name" : safeAccess(['name'],i,"-"),
