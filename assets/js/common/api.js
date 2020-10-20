@@ -1558,3 +1558,89 @@ async function trackOrder(id,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+
+
+async function getNewsletter(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'newsletter',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function uploadNewsletter(onResponse,onError,file){
+
+  var data = new FormData();
+  data.append("newsletter",file);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'newsletter',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+async function deactivateNewsletter(id,onResponse,onError){
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'newsletter/deactivate/'+id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+
+async function getPromotion(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'promotional-image',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function uploadPromotion(onResponse,onError,file){
+
+  var data = new FormData();
+  data.append("file",file);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'promotional-image',
+    headers: { 
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+  
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}

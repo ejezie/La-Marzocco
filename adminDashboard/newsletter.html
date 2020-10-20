@@ -123,9 +123,12 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
+                  <div class="x_content" id="newsletterds">
+
+                    <table id="newsletter" class="table table-striped jambo_table bulk_action" style="width:100%">
+                    </table>
                     
-                    <article class="media event">
+                    <!-- <article class="media event">
                       <a class="pull-left date">
                         <p class="month">Jan</p>
                         <p class="month">2020</p>
@@ -178,7 +181,7 @@
                         <p>Newsletter : May 2020 Update</p>
                         <a class="title" href="#">PDF</a>
                       </div>
-                    </article>
+                    </article> -->
                   </div>
                 </div>
               </div>
@@ -275,8 +278,8 @@
                               <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Upload PDF </label>
                               <div class="col-md-6 col-sm-6 ">
                                 <div>
-                                  <input type="file" class="btn btn-info" accept=".pdf" multiple="multiple" id="excelfile"/>  
-                                  <input type="button" class="btn btn-primary" id="viewfile" value="Upload" onclick="#"/>  
+                                  <input type="file" class="btn btn-info" accept=".pdf" multiple="multiple" id="pdffile"/>  
+                                  <input type="button" class="btn btn-primary" id="uploadNewsletter" value="Upload" />  
                                   <table id="exceltable" ></table>
                                 </div>
                               </div>
@@ -299,9 +302,9 @@
                             <div class="ln_solid"></div>
                             <div class="form-group">
                               <div class="col-md-9 col-sm-9  offset-md-3">
-                                <button type="button" class="btn btn-primary">Cancel</button>
+                                <!-- <button type="button" class="btn btn-primary">Cancel</button> -->
                                 <!-- <button type="reset" class="btn btn-primary">Reset</button> -->
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <!-- <button type="submit" class="btn btn-success">Submit</button> -->
                               </div>
                             </div>
 
@@ -384,8 +387,28 @@
     <!-- Side NavBar -->
     <script src="js/sideNavBar.js"></script>
 
+        <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+          <script src="../assets/js/common/localstorage.js"></script>
+
+          <script src="../assets/js/common/notification.js"></script>
+
+          <!-- Main API -->
+          <script src="../assets/js/common/api.js"></script>
+          <script src="../assets/js/common/genericErrorHandler.js"></script>
+
+          
+          <script src="js/newsletter.js"></script>
 
   </body>
 </html>

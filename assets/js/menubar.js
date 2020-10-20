@@ -341,16 +341,20 @@ function showMenubarLMHome(){
 
 
 
-function showNewsletter(newsletterArr){
+function showNewsletter(newsletterData){
+	var newsletter = newsletterData.newsletters.data
+	console.log("newsletter ", newsletter)
+
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
 
 				menuBarHTML += '<li><a href="#">Newsletter</a>'
 				menuBarHTML += '<ul>'
-	for(i=0; i< newsletterArr.length; i++){
+	for(i=0; i< newsletter.length; i++){
 
 
-				menuBarHTML += '<li><a href="'+newsletterArr[i]["pdfURL"]+'">'+newsletterArr[i]["newsletterName"]+'</a></li>'
+				// menuBarHTML += '<li><a href="'+newsletterArr[i]["pdfURL"]+'">'+newsletterArr[i]["newsletterName"]+'</a></li>'
+				menuBarHTML += '<li><a href="'+newsletter[i]["name"]+'"> Newsletter '+(i+1)+'</a></li>'
 
 	}
 				menuBarHTML += '</ul>'
@@ -394,12 +398,12 @@ $(document).ready(function(){
 	var onResponse = function(response){
 		// console.log(JSON.stringify(response,null,2))
 		showMenubarCommercialMachine(response.data);
+// showNewsletter(newsletterArr)
 
 showMenubarGrinders()
 showMenubarModbar()
 showMenubarGS3()
 showMenubarLMHome()
-showNewsletter(newsletterArr)
 
 
 	};
@@ -408,6 +412,13 @@ showNewsletter(newsletterArr)
 	};
 
 	getMappingsMain(onResponse,onError);
+
+
+
+
+	getNewsletter(function(response){
+		showNewsletter(response.data)
+	},onError);
 
 
 

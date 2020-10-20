@@ -133,7 +133,51 @@ async function showSpecialOffersProducts(items){
 
 }
 
+
+
+
+async function showPromotion(promotionData) {
+
+	console.log("promotionData :   >>> ", promotionData)
+
+	var promotionImages = promotionData.images.data
+
+	var promotionHTML = ''
+
+	for(i=0; i<2;i++){
+
+
+		promotionHTML += '<div class="single_banner">'
+		promotionHTML += '<div class="banner_thumb">'
+		promotionHTML += '<a href="#"><img src="'+promotionImages[i]["image"]["name"]+'" alt=""></a>'
+		promotionHTML += '<div class="banner_text">'
+		// promotionHTML += '<!-- <h3>Coffee Machine</h3>'
+		// promotionHTML += '<h2>Best in Quality</h2> -->'
+		// promotionHTML += '<!-- <a href="shop.html">Shop Now</a> -->'
+		promotionHTML += '</div>'
+		promotionHTML += '</div>'
+		promotionHTML += '</div>'
+	}
+
+
+	$("#promotion").append(promotionHTML)
+
+}
+
+
+
+
 $(document).ready(function(){
+
+	var onError =function(error){
+		// notifyError("Failed to");
+	};
+
+
+	getPromotion(function(response){
+		showPromotion(response.data)
+	},onError);
+
 
 	getRecommendedProducts(function(res){
 		showRecommendedProducts(safeAccess(["data","items","data"],res));
@@ -144,6 +188,9 @@ $(document).ready(function(){
 	getMostViewedProducts(function(res){
 		showSpecialOffersProducts(safeAccess(["data","items","data"],res));
 	})
+
+
+	
 	
 });
 
@@ -198,3 +245,6 @@ $('.dropdown-hover-all').on('mouseleave', '.dropdown', function() {
     $('>[data-toggle="dropdown"]', this).dropdown('toggle');
   }
 });
+
+
+
