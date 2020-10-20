@@ -211,7 +211,13 @@ $(document).ready(function(){
   $('#tableQuoteList').on('click', '#btnAddToCart',async function () {
   		var RowIndex = $(this).closest('tr');
     	var data = $('#tableQuoteList').dataTable().api().row(RowIndex).data();
-  		window.location.href = ("checkout.html?quote="+data.id);
+    	if(data.is_archived==0){
+    		if(confirm("This quotation has expired.Please create a new one")){
+    		window.location.href = ("cart.html");
+    	}
+    	}else{
+  			window.location.href = ("checkout.html?quote="+data.id);
+  	}
     	// notifyInfo("Adding items to cart");
     	// for(var item of data.quote_line){
     	// 	await shoppingCart.addItemToCart(item.item.id,item.item.name,item.price,item.qty);
