@@ -127,7 +127,7 @@ async function showQuotation(orderArr){
               {
                 "title":"Price",
                 render: function(data, type, row){
-                  return  safeAccess(['total'],row,"-");
+                  return  "$"+safeAccess(['total'],row,"-").toLocaleString("en-AU");
                 }
               },
 		       {

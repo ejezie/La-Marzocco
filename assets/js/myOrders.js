@@ -210,12 +210,6 @@ async function showOrders(orderArr){
                   // console.log(JSON.stringify(row,null,2))
                   return safeAccess(['sap_order_id'],row,"");;
                 }
-              },{
-                "title":"Status",
-                render: function(data, type, row, meta){
-                  // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['status'],row,"-");;
-                }
               },
               {
                 "title":"Items",
@@ -226,7 +220,7 @@ async function showOrders(orderArr){
               {
                 "title":"Price",
                 render: function(data, type, row){
-                  return  "$"+safeAccess(['total'],row,"-");
+                  return  "$"+safeAccess(['total'],row,"-").toLocaleString("en-AU");
                 }
               },
 		       {
@@ -240,7 +234,14 @@ async function showOrders(orderArr){
 		        render: function(data, type, row){
 		           return "<button type=\"button\" id='btnTrackOrder' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Track</span></button>"
 		          }
-        }
+        },
+        {
+                "title":"Status",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['status'],row,"-");;
+                }
+              },
         ]
       })
 
