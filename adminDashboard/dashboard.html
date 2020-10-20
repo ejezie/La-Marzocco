@@ -72,27 +72,27 @@
           <div class="tile_count">
             <div class="col-md-2 col-sm-4  tile_stats_count" style="width: 500px;">
               <span class="count_top"><i class="fa fa-user"></i> Total Customer</span>
-              <div class="count">100</div>
+              <div class="count" id="totalCustomerCount">-</div>
               <!-- <span class="count_bottom"><i class="green">4% </i> From last Week</span> -->
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
               <span class="count_top"><i class="fa fa-clock-o"></i> Total Orders</span>
-              <div class="count">80</div>
+              <div class="count" id="totalOrderCount">-</div>
               <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span> -->
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Quotations</span>
-              <div class="count green">10</div>
+              <div class="count green" id="totalQuoteCount">-</div>
               <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Item Quantity</span>
-              <div class="count">90</div>
+              <div class="count" id="totalItemCount">-</div>
               <!-- <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span> -->
             </div>
             <div class="col-md-2 col-sm-4  tile_stats_count">
               <span class="count_top"><i class="fa fa-user"></i> Total Order Amount</span>
-              <div class="count">$ 2,315</div>
+              <div class="count" id="totalOrderAmountCount">-</div>
               <!-- <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span> -->
             </div>
           </div>
@@ -105,13 +105,13 @@
 
                 <div class="row x_title">
                   <div class="col-md-6">
-                    <h3>Monthly Sales <small>Jan 2020</small></h3>
+                    <h3>Report <small></small></h3>
                   </div>
                   <div class="col-md-6">
                     <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                       <!-- <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
                       <i class="fa fa-calendar"></i>
-                      <span>December 30, 2019 - January 28, 2021</span> <b class="caret"></b>
+                      <span></span> <b class="caret"></b>
                     </div>
                   </div>
                 </div>
@@ -149,9 +149,10 @@
                   </ul>
                   <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
+                <div class="x_content" id="tableTopProducts">
                   <h4>Top 5 Product sale</h4>
-                  <div class="widget_summary">
+
+                <!--   <div class="widget_summary">
                     <div class="w_left w_25">
                       <span>Leva x</span>
                     </div>
@@ -231,7 +232,7 @@
                       <span>20</span>
                     </div>
                     <div class="clearfix"></div>
-                  </div>
+                  </div> -->
 
                 </div>
               </div>
@@ -257,7 +258,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <table class="" style="width:100%">
+                  <table  style="width:100%">
                     <tr>
                       <th style="width:37%;">
                         <p>Top 5</p>
@@ -273,40 +274,11 @@
                     </tr>
                     <tr>
                       <td>
-                        <canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                        <canvas id="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
                       </td>
                       <td>
-                        <table class="tile_info">
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square blue"></i>Cust 1 </p>
-                            </td>
-                            <td>$ 1000</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square green"></i>Cust 2 </p>
-                            </td>
-                            <td>$ 200</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square purple"></i>Cust 3 </p>
-                            </td>
-                            <td>$ 500</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square aero"></i>Cust 4 </p>
-                            </td>
-                            <td>$ 300</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><i class="fa fa-square red"></i>Cust 5 </p>
-                            </td>
-                            <td>$ 1000</td>
-                          </tr>
+                        <table id="tableTopCustomers" class="tile_info">
+                          
                         </table>
                       </td>
                     </tr>
@@ -378,6 +350,313 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+          <script src="../assets/js/common/localstorage.js"></script>
+
+          <script src="../assets/js/common/notification.js"></script>
+
+          <script src="../assets/js/common/api.js"></script>
+
+      <script src="assets/js/cart.js"></script>
+
+      <script>
+
+        function initDatePicker(start_date,end_date){
+             var cb = function (start, end, label) {
+                  console.log(start.toISOString(), end.toISOString(), label);
+                  $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+              };
+
+              var optionSet1 = {
+                  startDate: moment().subtract(29, 'days'),
+                  endDate: moment(),
+                  // minDate: '01/01/2012',
+                  // maxDate: '12/31/2015',
+                  dateLimit: {
+                      days: 60
+                  },
+                  showDropdowns: true,
+                  showWeekNumbers: true,
+                  timePicker: false,
+                  timePickerIncrement: 1,
+                  timePicker12Hour: true,
+                  ranges: {
+                      'Today': [moment(), moment()],
+                      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                      'This Month': [moment().startOf('month'), moment().endOf('month')],
+                      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                  },
+                  opens: 'left',
+                  buttonClasses: ['btn btn-default'],
+                  applyClass: 'btn-small btn-primary',
+                  cancelClass: 'btn-small',
+                  format: 'MM/DD/YYYY',
+                  separator: ' to ',
+                  locale: {
+                      applyLabel: 'Submit',
+                      cancelLabel: 'Clear',
+                      fromLabel: 'From',
+                      toLabel: 'To',
+                      customRangeLabel: 'Custom',
+                      daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                      monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                      firstDay: 1
+                  }
+              };
+
+              if(start_date&&end_date){
+                $('#reportrange span').html(start_date+ ' to ' + end_date);
+              }else{
+                $('#reportrange span').html("Last 30 days")
+              }
+
+              $('#reportrange').daterangepicker(optionSet1, cb);
+              $('#reportrange').on('show.daterangepicker', function () {
+                  console.log("show event fired");
+              });
+              $('#reportrange').on('hide.daterangepicker', function () {
+                  console.log("hide event fired");
+              });
+              $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                  console.log("apply event fired, start/end dates are " + picker.startDate.format('YYYY-MM-DD') + " to " + picker.endDate.format('YYYY-MM-DD'));
+                  var start_date = picker.startDate.format('YYYY-MM-DD');
+                  var end_date =  picker.endDate.format('YYYY-MM-DD');
+                  window.location.href = '../adminDashboard/dashboard.html?start_date='+start_date+'&end_date='+end_date;
+              });
+              $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                  console.log("cancel event fired");
+              });
+              $('#options1').click(function () {
+                  $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+              });
+              $('#options2').click(function () {
+                  $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+              });
+              $('#destroy').click(function () {
+                  $('#reportrange').data('daterangepicker').remove();
+              });
+        }
+
+        function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+        $(document).ready(function(){
+          
+          var start_date = findGetParameter("start_date");
+          var end_date = findGetParameter("end_date");
+          initDatePicker(start_date,end_date);
+
+          var onResponse = function(response){
+
+          var graph = safeAccess(["data","report","graph"],response);
+          if(graph){
+            var customerCurve = [];
+            var orderCurve = [];
+            for(datapoint of graph){
+              var a = new Date(Date.parse(datapoint.date));            
+              year = a.getFullYear()
+              month = a.getMonth()+1;
+              date = a.getDate()
+              customers = parseInt(datapoint.customers);
+              orders = parseInt(datapoint.orders);
+              customerElement = [];
+              customerElement.push(gd(year,month,date))
+              customerElement.push(customers)
+              orderElement = [];
+              orderElement.push(gd(year,month,date))
+              orderElement.push(orders)
+              customerCurve.push(customerElement);
+              orderCurve.push(orderElement);
+              // console.log("y="+year+" d="+date+" m="+month);
+            }
+
+    
+        var chart_plot_01_settings = {
+            series: {
+                lines: {
+                    show: false,
+                    fill: true
+                },
+                splines: {
+                    show: true,
+                    tension: 0.4,
+                    lineWidth: 1,
+                    fill: 0.4
+                },
+                points: {
+                    radius: 0,
+                    show: true
+                },
+                shadowSize: 2
+            },
+            grid: {
+                verticalLines: true,
+                hoverable: true,
+                clickable: true,
+                tickColor: "#d5d5d5",
+                borderWidth: 1,
+                color: '#fff'
+            },
+            colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+            xaxis: {
+                tickColor: "rgba(51, 51, 51, 0.06)",
+                mode: "time",
+                tickSize: [1, "day"],
+                //tickLength: 10,
+                axisLabel: "Date",
+                axisLabelUseCanvas: true,
+                axisLabelFontSizePixels: 12,
+                axisLabelFontFamily: 'Verdana, Arial',
+                axisLabelPadding: 10
+            },
+            yaxis: {
+                ticks: 8,
+                tickColor: "rgba(51, 51, 51, 0.06)",
+            },
+            tooltip: false
+        }
+
+          if ($("#chart_plot_01").length) {
+              console.log('Plot1');
+
+              $.plot($("#chart_plot_01"), [customerCurve, orderCurve], chart_plot_01_settings);
+          }
+
+          }
+
+            var totals = safeAccess(["data","report","total_count"],response);
+            if(totals){
+                $("#totalItemCount").html(totals.quantity);
+                $("#totalQuoteCount").html(totals.quotes);
+                $("#totalOrderCount").html(totals.orders);
+                $("#totalCustomerCount").html(totals.customers);
+                $("#totalOrderAmountCount").html(totals.sales);
+            }
+
+            var topProducts = safeAccess(["data","report","top_items"],response);
+            if(topProducts){
+              var htmlContent ="";
+
+              for(product of topProducts){
+                  htmlContent+='<div class="widget_summary">'
+                  htmlContent+=  '<div class="w_left w_25">'
+                   htmlContent+=  ' <span>'+product.value+'</span>'
+                   htmlContent+= '</div>'
+                   htmlContent+= '<div class="w_center w_55">'
+                   htmlContent+=   '<div class="progress">'
+                    htmlContent+=    '<div class="progress-bar bg-green" role="progressbar" aria-valuenow="'+product.value+'" aria-valuemin="0" aria-valuemax="'+product.max+'" style="width: 45%;">'
+                  htmlContent+=       ' <span class="sr-only">x_x</span>'
+                  htmlContent+=     ' </div>'
+                   htmlContent+=  ' </div>'
+                   htmlContent+= '</div>'
+                   htmlContent+= '<div class="w_right w_20">'
+                   htmlContent+=  '<span>'+safeAccess(["name"],product,"-")+'</span>'
+                   htmlContent+= '</div>'
+                   htmlContent+= '<div class="clearfix"></div>'
+                 htmlContent+= '</div>'
+            }
+            $("#tableTopProducts").append(htmlContent);
+
+          }
+
+            var topCustomers = safeAccess(["data","report","top_customers"],response);
+            if(topCustomers){
+
+                  
+
+              var htmlContent = "";
+              var backgroundColors;
+              var labels;
+              var values;
+              // <tr>
+              //               <td>
+              //                 <p><i class="fa fa-square blue"></i>Cust 1 </p>
+              //               </td>
+              //               <td>$ 1000</td>
+              //             </tr>
+              //             <tr>
+              //               <td>
+              //                 <p><i class="fa fa-square green"></i>Cust 2 </p>
+              //               </td>
+              //               <td>$ 200</td>
+              //             </tr>
+              //             <tr>
+              //               <td>
+              //                 <p><i class="fa fa-square purple"></i>Cust 3 </p>
+              //               </td>
+              //               <td>$ 500</td>
+              //             </tr>
+              //             <tr>
+              //               <td>
+              //                 <p><i class="fa fa-square aero"></i>Cust 4 </p>
+              //               </td>
+              //               <td>$ 300</td>
+              //             </tr>
+              for(topCustomer of topCustomers){
+                var color = getRandomColor();
+                var customerName = safeAccess(["name"],topCustomer,"-");
+                var unit = safeAccess(["total"],topCustomer,"-")
+                values.push(unit);
+                labels.push(customerName);
+                backgroundColors.push(color);
+                html+= '<tr><td><p><i  style="background-color:'+color+'" class="fa fa-square red"></i>'+customerName+'</p></td><td>$'+unit+'</td></tr>';
+              }
+              $("#tableTopCustomers").append(htmlContent);
+
+                var chart_doughnut_settings = {
+                        type: 'doughnut',
+                        tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                data:values,
+                                backgroundColor:backgroundColors
+                                // ,
+                                // hoverBackgroundColor: [
+                                //     "#CFD4D8",
+                                //     "#B370CF",
+                                //     "#E95E4F",
+                                //     "#36CAAB",
+                                //     "#49A9EA"
+                                // ]
+                            }]
+                        },
+                        options: {
+                            legend: false,
+                            responsive: false
+                        }
+                      }
+                    
+
+                        new Chart($('#canvasDoughnut'), chart_doughnut_settings);
+
+
+            }
+
+          }
+
+
+        getDashboardReport(onResponse,start_date,end_date);
+
+        });
+
+      </script>
+
+
 
 	
   </body>

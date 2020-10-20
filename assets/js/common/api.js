@@ -1,9 +1,48 @@
+
+
 // const BASE_URL = "http://54.252.24.196/v1/api/";
 // const BASE_URL = "http://3.106.30.129/v1/api/";
 const BASE_URL = "http://54.252.24.196/v1/api/";
 
 const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) => (prefix && prefix[val]) ? prefix[val] : defaultValue, object);
 
+function updateUrlParameter(uri, key, value) {
+    // remove the hash part before operating on the uri
+    var i = uri.indexOf('#');
+    var hash = i === -1 ? ''  : uri.substr(i);
+    uri = i === -1 ? uri : uri.substr(0, i);
+
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+
+    if (value === null) {
+        // remove key-value pair if value is specifically null
+        uri = uri.replace(new RegExp("([?&]?)" + key + "=[^&]*", "i"), '');
+        if (uri.slice(-1) === '?') {
+            uri = uri.slice(0, -1);
+        }
+        // replace first occurrence of & by ? if no ? is present
+        if (uri.indexOf('?') === -1) uri = uri.replace(/&/, '?');
+    } else if (uri.match(re)) {
+        uri = uri.replace(re, '$1' + key + "=" + value + '$2');
+    } else {
+        uri = uri + separator + key + "=" + value;
+    }
+    return uri + hash;
+}
+
+function findGetParameter(parameterName) {
+        var result = null,
+        tmp = [];
+        location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+        return result;
+    }
 
 function errorResponseHandler(error) {
   console.log(error);
@@ -114,10 +153,10 @@ async function updateItem(
   var config = {
     method: 'post',
     url:BASE_URL+'item/'+item_id,
-    headers: { 
-      'Authorization': getAPIToken(), 
-      'Accept': 'application/json', 
-      'Content-Type': 'multipart/form-data' 
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
     },
     data : data
   };
@@ -159,9 +198,9 @@ async function updateCustomer(
     method: 'post',
     url:BASE_URL+'customer-master/'+id,
     headers: {
-      'Authorization': getAPIToken(), 
-      'Accept': 'application/json', 
-      'Content-Type': 'multipart/form-data' 
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
     },
     data : data
   };
@@ -233,10 +272,10 @@ async function createItem(
   var config = {
     method: 'post',
     url:BASE_URL+'item',
-    headers: { 
-      'Authorization': getAPIToken(), 
-      'Accept': 'application/json', 
-      'Content-Type': 'multipart/form-data' 
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
     },
     data : data
   };
@@ -271,10 +310,10 @@ async function createCustomer(
   var config = {
     method: 'post',
     url:BASE_URL+'customer-master',
-    headers: { 
-      'Authorization': getAPIToken(), 
-      'Accept': 'application/json', 
-      'Content-Type': 'multipart/form-data' 
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
     },
     data : data
   };
@@ -316,10 +355,10 @@ async function createAddress(
   var config = {
     method: 'post',
     url:BASE_URL+'address',
-    headers: { 
-      'Authorization': getAPIToken(), 
-      'Accept': 'application/json', 
-      'Content-Type': 'multipart/form-data' 
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
     },
     data : data
   };
@@ -336,8 +375,8 @@ function getItemDetail(onResponse,onError,item_id){
 var config = {
   method: 'get',
   url: BASE_URL + "item/"+item_id,
-  headers: { 
-      'Authorization': getAPIToken(), 
+  headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
   data : data
@@ -356,13 +395,13 @@ async function getItems(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'item?page='+page+'&page_size='+page_size,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -374,13 +413,13 @@ async function getRecommendedProducts(onResponse){
   var config = {
     method: 'get',
     url: BASE_URL+'item?page_size=20&is_recommended=1',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -392,13 +431,13 @@ async function getTopSellingProducts(onResponse){
   var config = {
     method: 'get',
     url: BASE_URL+'item?page_size=20&sort_by_ordered=1',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -410,13 +449,13 @@ async function getMostViewedProducts(onResponse){
   var config = {
     method: 'get',
     url: BASE_URL+'item?page_size=20&sort_by_viewed=1',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -430,13 +469,13 @@ async function getQuotationList(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'quotation/list?page='+page+'&page_size='+page_size,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -449,13 +488,13 @@ async function getOrderList(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'order/list?page='+page+'&page_size='+page_size+'&sort_by_creation=0',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -468,13 +507,13 @@ async function getCustomerList(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'customer-master?page='+page+'&page_size='+page_size,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -490,13 +529,13 @@ async function bulkUploadItems(onResponse,onError,file){
   var config = {
     method: 'post',
     url: BASE_URL+'upload/inventory',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -511,13 +550,13 @@ async function bulkUploadCustomers(onResponse,onError,file){
   var config = {
     method: 'post',
     url: BASE_URL+'upload/customers',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -532,13 +571,13 @@ async function bulkUploadEmployees(onResponse,onError,file){
   var config = {
     method: 'post',
     url: BASE_URL+'upload/employees',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -550,8 +589,8 @@ async function getGroupsWithPaging(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'group?page='+page+'&page_size='+page_size,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -565,8 +604,8 @@ async function getFamilyDescWithPaging(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'family-desc?page='+page+'&page_size='+page_size,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -581,8 +620,8 @@ async function getParentsWithPaging(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'parent?page='+page+'&page_size='+page_size,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -597,8 +636,8 @@ async function getTypesWithPaging(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'type?page='+page+'&page_size='+page_size,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -612,8 +651,8 @@ async function getFamiliesWithPaging(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
     url: BASE_URL+'family?page='+page+'&page_size='+page_size,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -629,8 +668,8 @@ async function deleteCustomer(onResponse,onError,id){
   var config = {
     method: 'delete',
     url: BASE_URL+'customer-master/'+id,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -644,8 +683,8 @@ async function deleteGroup(onResponse,onError,groupid){
   var config = {
     method: 'delete',
     url: BASE_URL+'group/'+groupid,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -659,8 +698,8 @@ async function deleteFamily(onResponse,onError,familyid){
   var config = {
     method: 'delete',
     url: BASE_URL+'family/'+familyid,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -674,8 +713,8 @@ async function deleteFamilyDesc(onResponse,onError,familyDescId){
   var config = {
     method: 'delete',
     url: BASE_URL+'family-desc/'+familyDescId,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -690,8 +729,8 @@ async function deleteType(onResponse,onError,typeid){
   var config = {
     method: 'delete',
     url: BASE_URL+'type/'+typeid,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -705,8 +744,8 @@ async function deleteParent(onResponse,onError,parentid){
   var config = {
     method: 'delete',
     url: BASE_URL+'parent/'+parentid,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -721,8 +760,8 @@ async function getGroups(onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'group',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -737,8 +776,8 @@ async function getIndustryList(onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'industry',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
@@ -761,8 +800,8 @@ async function updateGroup(onResponse,onError,groupid,newGroupName,newGroupDesc)
   var config = {
     method: 'post',
     url: BASE_URL+'group/'+groupid,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -787,8 +826,8 @@ async function addGroup(onResponse,onError,newGroupName,newGroupDesc){
   var config = {
     method: 'post',
     url: BASE_URL+'group',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -812,8 +851,8 @@ async function addType(onResponse,onError,name,desc){
   var config = {
     method: 'post',
     url: BASE_URL+'type',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -836,8 +875,8 @@ async function addParent(onResponse,onError,name,desc){
   var config = {
     method: 'post',
     url: BASE_URL+'parent',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -860,8 +899,8 @@ async function addFamily(onResponse,onError,code,desc){
   var config = {
     method: 'post',
     url: BASE_URL+'family',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -885,8 +924,8 @@ async function addFamilyDesc(onResponse,onError,code,desc){
   var config = {
     method: 'post',
     url: BASE_URL+'family-desc',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -902,12 +941,12 @@ async function getFamilies(onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'family',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -927,8 +966,8 @@ async function updateFamily(onResponse,onError,id,name,desc){
   var config = {
     method: 'post',
     url: BASE_URL+'family/'+id,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -953,8 +992,8 @@ async function updateFamilyDesc(onResponse,onError,id,name,desc){
   var config = {
     method: 'post',
     url: BASE_URL+'family-desc/'+id,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -971,12 +1010,12 @@ async function getTypes(onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'type',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -996,8 +1035,8 @@ async function updateType(onResponse,onError,id,name,desc){
   var config = {
     method: 'post',
     url: BASE_URL+'type/'+id,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -1016,12 +1055,12 @@ async function getParents(onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'parent',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     }
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -1041,8 +1080,8 @@ async function updateParent(onResponse,onError,id,name,desc){
   var config = {
     method: 'post',
     url: BASE_URL+'parent/'+id,
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
@@ -1111,7 +1150,7 @@ async function getSearchResults(currentPage,pageSize,searchQuery,filterParentId,
   if(filterParentId){
     url+='&parent_id='+filterParentId;
   }
-  
+ 
   if(searchQuery){
     url+='&search_text='+searchQuery;
   }
@@ -1121,7 +1160,7 @@ async function getSearchResults(currentPage,pageSize,searchQuery,filterParentId,
     url:url,
     headers: {
       'Content-Type': 'multipart/form-data',
-    'Authorization': getAPIToken(), 
+    'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
     //  ,
@@ -1137,7 +1176,7 @@ async function logout(){
     url: BASE_URL+'auth/logout',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json',
        errorHandle: false
      },
@@ -1151,7 +1190,7 @@ async function getMappingsMain(onResponse,onError){
     url: BASE_URL+'mapping/main',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
   };
@@ -1163,7 +1202,7 @@ async function getMappingGroup(onResponse,onError){
     url: BASE_URL+'mapping/group',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
   };
@@ -1176,7 +1215,7 @@ async function getMappingParent(onResponse,onError){
     url: BASE_URL+'mapping/parent',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
   };
@@ -1189,7 +1228,7 @@ async function getMappingsMachine(onResponse,onError){
     url: BASE_URL+'mapping/machine',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
   };
@@ -1213,7 +1252,7 @@ async function cartAddItem(itemId,qty,userId,desc,onResponse,onError){
     url: BASE_URL+'cart',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
      data :data
@@ -1233,7 +1272,7 @@ async function cartUpdateItem(itemId,qty,userId,desc,onResponse,onError){
     url: BASE_URL+'cart/update/'+itemId,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
      data :data
@@ -1242,13 +1281,13 @@ async function cartUpdateItem(itemId,qty,userId,desc,onResponse,onError){
 }
 
 async function cartDeleteItem(itemId,onResponse,onError){
-  
+ 
   var config = {
     method: 'delete',
     url: BASE_URL+'cart/'+itemId,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1256,13 +1295,13 @@ async function cartDeleteItem(itemId,onResponse,onError){
 }
 
 async function cartList(onResponse,onError){
-  
+ 
   var config = {
     method: 'get',
     url: BASE_URL+'cart?page_size=10000',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1270,26 +1309,26 @@ async function cartList(onResponse,onError){
 }
 
 async function getQuote(user_id,desc,onResponse,onError){
-  
+ 
   var config = {
     method: 'get',
     url: BASE_URL+'quotation/create',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
   axios(config).then(onResponse).catch(onError);
 }
 async function getQuoteDetails(quoteId,onResponse,onError){
-  
+ 
   var config = {
     method: 'get',
     url: BASE_URL+'quotation/get/'+quoteId,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1297,13 +1336,13 @@ async function getQuoteDetails(quoteId,onResponse,onError){
 }
 
 async function getMachineParentMapping(itemId,onResponse,onError){
-  
+ 
   var config = {
     method: 'get',
     url: BASE_URL+'machine-parent/'+itemId,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1316,7 +1355,7 @@ async function getItemParentImages(parent_id,main_item_id,onResponse,onError){
     url: BASE_URL+'item-parent-image?parent_id='+parent_id+"&main_item_id="+main_item_id,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1328,7 +1367,7 @@ async function getItemParentImagesForMachineDropdown(currentPage,pageSize,main_i
     url: BASE_URL+'item-parent-image?main_item_id='+main_item_id+'&page='+currentPage+ '&page_size='+pageSize,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1341,7 +1380,7 @@ async function getMachineParentMapping(itemParentId,onResponse,onError){
     url: BASE_URL+'machine-parent/'+itemParentId,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1354,7 +1393,7 @@ async function getMachineParentList(currentPage,pageSize,onResponse,onError,mach
     url: BASE_URL+'machine-parent?item_id='+machineId+'&page='+currentPage+ '&page_size='+pageSize,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1362,13 +1401,13 @@ async function getMachineParentList(currentPage,pageSize,onResponse,onError,mach
 }
 
 async function getQuoteList(itemId,onResponse,onError){
-  
+ 
   var config = {
     method: 'get',
     url: BASE_URL+'quotation/list',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1376,13 +1415,13 @@ async function getQuoteList(itemId,onResponse,onError){
 }
 
 async function getQuoteList(itemId,onResponse,onError){
-  
+ 
   var config = {
     method: 'get',
     url: BASE_URL+'quotation/list',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1390,13 +1429,13 @@ async function getQuoteList(itemId,onResponse,onError){
 }
 
 async function getAddressesList(onResponse,onError){
-  
+ 
   var config = {
     method: 'get',
     url: BASE_URL+'address',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1417,7 +1456,7 @@ async function createOrder(quoteId,po,poName,shippingAddrId,billingAddrId,desc,o
     url: BASE_URL+'order/create',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
      data :data
@@ -1437,7 +1476,7 @@ async function deleteOrderItem(orderId,orderLineIds,onResponse,onError){
     url: BASE_URL+'order/order-line/cancel',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
      data : data
@@ -1451,17 +1490,17 @@ async function createPayment(order_id,amount,card_name,cart_number,cart_exp_mont
   data.append('order_id', order_id);
   data.append('amount', amount);
   data.append('card_name',card_name);
-  data.append('card_number', (cart_number));
-  data.append('card_exp_month', (cart_exp_month));
-  data.append('card_exp_year', (cart_exp_year));
-  data.append('card_cvc', (card_cvc));
+  data.append('card_number', btoa(cart_number));
+  data.append('card_exp_month', btoa(cart_exp_month));
+  data.append('card_exp_year', btoa(cart_exp_year));
+  data.append('card_cvc', btoa(card_cvc));
 
   var config = {
     method: 'post',
     url: BASE_URL+'order/order-payment',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
      data :data
@@ -1470,13 +1509,13 @@ async function createPayment(order_id,amount,card_name,cart_number,cart_exp_mont
 }
 
 async function getCountries(onResponse,onError){
-  
+ 
   var config = {
     method: 'get',
     url: BASE_URL+'countries',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1484,13 +1523,13 @@ async function getCountries(onResponse,onError){
 }
 
 async function getStates(countryId,onResponse,onError){
-  
+ 
   var config = {
     method: 'get',
     url: BASE_URL+'states/'+countryId,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1503,7 +1542,7 @@ async function getCities(keyid,onResponse,onError){
     url: BASE_URL+'cities/'+keyid,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -1519,7 +1558,7 @@ async function getAreas(postcode,onResponse,onError){
     url: BASE_URL+'area-codes?postcode='+postcode+"&page_size=9999",
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
      data:data
@@ -1537,7 +1576,7 @@ async function updateCartItemSpec(itemId,qty,specs_file,onResponse,onError){
     url: BASE_URL+'cart/update/'+itemId,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
      data:data
@@ -1552,7 +1591,81 @@ async function trackOrder(id,onResponse,onError){
     url: BASE_URL+'order/track/'+id,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+async function getPeriodicReport(onResponse,start_date,end_date,download_format,onError){
+
+  var url = BASE_URL+'report/periodic';
+  if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  if(download_format){updateUrlParameter(url,"download_format",download_format)}
+  var config = {
+    method: 'get',
+    url: url,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+async function getRegionwiseReport(onResponse,start_date,end_date,download_format,onError){
+
+  var url = BASE_URL+'report/region-wise';
+  if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  if(download_format){updateUrlParameter(url,"download_format",download_format)}
+  var config = {
+    method: 'get',
+    url: url,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+async function getProductwiseReport(onResponse,start_date,end_date,download_format,onError){
+
+  var url = BASE_URL+'report/product-wise';
+  if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  if(download_format){updateUrlParameter(url,"download_format",download_format)}
+  var config = {
+    method: 'get',
+    url: url,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+
+async function getDashboardReport(onResponse,start_date,end_date,download_format,onError){
+
+  var url = BASE_URL+'report/dashboard';
+  // {updateUrlParameter(url,"start_date",start_date)}
+  // {updateUrlParameter(url,"end_date",end_date)}
+  // {updateUrlParameter(url,"download_format",download_format)}
+  if(start_date && end_date){
+    url += "?start_date="+start_date;
+    url += "&end_date="+end_date;
+  }
+  var config = {
+    method: 'get',
+    url: url,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
