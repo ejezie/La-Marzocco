@@ -4,6 +4,30 @@ const BASE_URL = "http://54.252.24.196/v1/api/";
 
 const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) => (prefix && prefix[val]) ? prefix[val] : defaultValue, object);
 
+function updateUrlParameter(uri, key, value) {
+    // remove the hash part before operating on the uri
+    var i = uri.indexOf('#');
+    var hash = i === -1 ? ''  : uri.substr(i);
+    uri = i === -1 ? uri : uri.substr(0, i);
+
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+
+    if (value === null) {
+        // remove key-value pair if value is specifically null
+        uri = uri.replace(new RegExp("([?&]?)" + key + "=[^&]*", "i"), '');
+        if (uri.slice(-1) === '?') {
+            uri = uri.slice(0, -1);
+        }
+        // replace first occurrence of & by ? if no ? is present
+        if (uri.indexOf('?') === -1) uri = uri.replace(/&/, '?');
+    } else if (uri.match(re)) {
+        uri = uri.replace(re, '$1' + key + "=" + value + '$2');
+    } else {
+        uri = uri + separator + key + "=" + value;
+    }
+    return uri + hash;
+}
 
 function errorResponseHandler(error) {
   console.log(error);
@@ -1451,10 +1475,10 @@ async function createPayment(order_id,amount,card_name,cart_number,cart_exp_mont
   data.append('order_id', order_id);
   data.append('amount', amount);
   data.append('card_name',card_name);
-  data.append('card_number', (cart_number));
-  data.append('card_exp_month', (cart_exp_month));
-  data.append('card_exp_year', (cart_exp_year));
-  data.append('card_cvc', (card_cvc));
+  data.append('card_number', btoa(cart_number));
+  data.append('card_exp_month', btoa(cart_exp_month));
+  data.append('card_exp_year', btoa(cart_exp_year));
+  data.append('card_cvc', btoa(card_cvc));
 
   var config = {
     method: 'post',
@@ -1558,12 +1582,24 @@ async function trackOrder(id,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+<<<<<<< HEAD
 
 
 async function getNewsletter(onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'newsletter',
+=======
+async function getPeriodicReport(onResponse,start_date,end_date,download_format,onError){
+
+  var url = BASE_URL+'report/periodic';
+  if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  if(download_format){updateUrlParameter(url,"download_format",download_format)}
+  var config = {
+    method: 'get',
+    url: url,
+>>>>>>> 2e38b69cbfc01ecaa551f0078a7e5e937a706c69
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
@@ -1572,6 +1608,7 @@ async function getNewsletter(onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+<<<<<<< HEAD
 
 async function uploadNewsletter(onResponse,onError,file){
 
@@ -1600,6 +1637,17 @@ async function deactivateNewsletter(id,onResponse,onError){
   var config = {
     method: 'post',
     url: BASE_URL+'newsletter/deactivate/'+id,
+=======
+async function getRegionwiseReport(onResponse,start_date,end_date,download_format,onError){
+
+  var url = BASE_URL+'report/region-wise';
+  if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  if(download_format){updateUrlParameter(url,"download_format",download_format)}
+  var config = {
+    method: 'get',
+    url: url,
+>>>>>>> 2e38b69cbfc01ecaa551f0078a7e5e937a706c69
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
@@ -1608,12 +1656,24 @@ async function deactivateNewsletter(id,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+<<<<<<< HEAD
 
 
 async function getPromotion(onResponse,onError){
   var config = {
     method: 'get',
     url: BASE_URL+'promotional-image',
+=======
+async function getProductwiseReport(onResponse,start_date,end_date,download_format,onError){
+
+  var url = BASE_URL+'report/product-wise';
+  if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  if(download_format){updateUrlParameter(url,"download_format",download_format)}
+  var config = {
+    method: 'get',
+    url: url,
+>>>>>>> 2e38b69cbfc01ecaa551f0078a7e5e937a706c69
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(), 
@@ -1621,6 +1681,7 @@ async function getPromotion(onResponse,onError){
      }
   };
   axios(config).then(onResponse).catch(onError);
+<<<<<<< HEAD
 }
 
 async function uploadPromotion(onResponse,onError,file){
@@ -1643,4 +1704,6 @@ async function uploadPromotion(onResponse,onError,file){
   .then(onResponse)
   .catch(onError);  
 
+=======
+>>>>>>> 2e38b69cbfc01ecaa551f0078a7e5e937a706c69
 }

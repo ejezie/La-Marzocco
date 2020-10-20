@@ -260,7 +260,7 @@ $(document).ready(function(){
 
 					var discountPercentage = 0;
 					try{
-						discountPercentage = (p - subTotal / p)*100;
+						discountPercentage = ((p - subTotal) / p)*100;
 						$("#discountAlert").html("Congratulations! You have an opportunity to save "+discountPercentage+"% on this order");
 						$("#discountAlert").toggle();
 					}catch(e){console.log(e);}
