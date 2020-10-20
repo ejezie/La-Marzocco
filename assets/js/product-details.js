@@ -43,6 +43,9 @@
 		detailsHTML += '</form>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
+		detailsHTML += '<p>'+safeAccess(["desc"],item,"")+'</p>'
+		detailsHTML += '</div>'
+		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 

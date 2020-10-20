@@ -416,9 +416,9 @@ showMenubarLMHome()
 
 
 
-	getNewsletter(function(response){
-		showNewsletter(response.data)
-	},onError);
+	// getNewsletter(function(response){
+	// 	showNewsletter(response.data)
+	// },onError);
 
 
 

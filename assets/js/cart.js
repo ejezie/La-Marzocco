@@ -129,7 +129,6 @@ async function showCartFromQuote(quoteItems){
 		var text = "";
 		var qty = quoteItem["qty"];
 		var available = quoteItem["available_qty"];
-		console.log("qt "+qty+"  avaaqt="+available)
 		if(available==0){
 			color = "red";
 			text = "Out of Stock";
