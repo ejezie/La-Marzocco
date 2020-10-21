@@ -211,10 +211,10 @@ $(document).ready(function(){
   $('#tableQuoteList').on('click', '#btnAddToCart',async function () {
   		var RowIndex = $(this).closest('tr');
     	var data = $('#tableQuoteList').dataTable().api().row(RowIndex).data();
-    	if(data.is_archived==0){
+    	if(data.is_archived==1){
     		if(confirm("This quotation has expired.Please create a new one")){
-    		window.location.href = ("cart.html");
-    	}
+    			window.location.href = ("cart.html");
+    		}
     	}else{
   			window.location.href = ("checkout.html?quote="+data.id);
   	}

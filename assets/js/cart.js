@@ -106,7 +106,7 @@ async function showCartFromQuote(quoteItems){
 	cartHTML += '<th class="product_thumb">Name</th>'
 	cartHTML += '<th class="product-price">Price</th>'
 	cartHTML += '<th class="product_quantity">Quantity</th>'
-	cartHTML += '<th>Status</th>'
+	cartHTML += '<th>Availibility</th>'
 	cartHTML += '<th>Expected Delivery</th>'
 	cartHTML += '<th>Discount(%)</th>'
 	cartHTML += '<th class="product_total">Total</th>'
@@ -260,7 +260,7 @@ $(document).ready(function(){
 					var discountPercentage = 0;
 					try{
 						discountPercentage = ((p - subTotal) / p)*100;
-						$("#discountAlert").html("Congratulations! You have an opportunity to save "+discountPercentage+"% on this order");
+						$("#discountAlert").html("Congratulations! You have an opportunity to save "+parseInt(discountPercentage)+"% on this order");
 						$("#discountAlert").toggle();
 					}catch(e){console.log(e);}
 
