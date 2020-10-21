@@ -2,7 +2,7 @@ $(document).ready(function(){
 	shoppingCart.sync();
 })
 
-async function showRecommendedProducts(items){
+ function showRecommendedProducts(items){
 
 	var recommendedProductsHTML = ""
 
@@ -37,120 +37,18 @@ async function showRecommendedProducts(items){
 	}
 
 
-	$("#recommendedProducts").append(recommendedProductsHTML)
-}
-
-
-async function showTopSellingProducts(topSellingItemList){
-
-	var topSellingProductsHTML = ""
-
-	for(i=0 ; i<topSellingItemList.length; i++){
-
-		topSellingProductsHTML += '<div class="single_product">'
-		topSellingProductsHTML += '<div class="product_content">'
-		topSellingProductsHTML += '<h3><a href="product-details.html?item='+item.id+'" style="text-transform: lowercase;"><strong>'+item["name"]+'</strong></a></h3>'
-		// topSellingProductsHTML += '<div class="product_ratings">'
-		// topSellingProductsHTML += '<ul>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '</ul>'
-		// topSellingProductsHTML += '</div>'
-		// topSellingProductsHTML += '<div class="price_box">'
-		// topSellingProductsHTML += '<span class="regular_price">'+topSellingItemList[i]["productPrice"]+'</span>'
-		// topSellingProductsHTML += '</div>'
-		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_group","name"],item)+'</a></h5>'
-		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
-		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
-		topSellingProductsHTML += '</div>'
-		topSellingProductsHTML += '<div class="product_thumb">'
-		topSellingProductsHTML += '<a class="primary_img" href="product-details.html"><img src="assets/img/product/product2.jpg" alt=""></a>'
-		topSellingProductsHTML += '</div>'
-		topSellingProductsHTML += '</div>'
-	}
-
-
-	$("#topSellingProducts").append(topSellingProductsHTML)
-}
-
-
-
-function slickCarousel() {
-  $('.owl-carousel').slick({
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1
-  });
-}
-function destroyCarousel() {
-  if ($('.owl-carousel').hasClass('slick-initialized')) {
-    $('.owl-carousel').slick('destroy');
-  }      
-}
-
-
-async function showSpecialOffersProducts(items){
-
-	var specialOffersProductsHTML = ""
-
-	for(item of items){
-
-		specialOffersProductsHTML += '<div class="single_product">'
-		specialOffersProductsHTML += '<div class="product_name">'
-		specialOffersProductsHTML += '<h3><a href="product-details.html" style="text-transform: lowercase;"><strong>'+item["name"]+'</strong></a></h3>'
-		specialOffersProductsHTML += '<p class="manufacture_product"><a href="#" >'+safeAccess(["item_group","name"],item)+'</a></h5>'
-		specialOffersProductsHTML += '<p class="manufacture_product"><a href="#" >'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
-		specialOffersProductsHTML += '<p class="manufacture_product"><a href="#" >'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
-		specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += '<div class="product_thumb">'
-		specialOffersProductsHTML += '<a class="primary_img" href="product-details.html"><img src="assets/img/product/product19.jpg" alt=""></a>'
-		specialOffersProductsHTML += '<a class="secondary_img" href="product-details.html"><img src="assets/img/product/product11.jpg" alt=""></a>'
-		specialOffersProductsHTML += '<div class="label_product">'
-		// specialOffersProductsHTML += '<span class="label_sale">'+specialOffersItemList[i]["productOffPercent"]+'</span>'
-		specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += ''
-		specialOffersProductsHTML += '<div class="action_links">'
-		specialOffersProductsHTML += '<ul>'
-		// specialOffersProductsHTML += '<li class="quick_button"><a href="#" data-toggle="modal" data-target="#modal_box" title="quick view"> <span class="lnr lnr-magnifier"></span></a></li>'
-		// specialOffersProductsHTML += '<li class="wishlist"><a href="wishlist.html" title="Add to Wishlist"><span class="lnr lnr-heart"></span></a></li>'
-		// specialOffersProductsHTML += '<li class="compare"><a href="compare.html" title="compare"><span class="lnr lnr-sync"></span></a></li>'
-		specialOffersProductsHTML += '</ul>'
-		specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += '<div class="product_content">'
-		// specialOffersProductsHTML += '<div class="product_ratings">'
-		// specialOffersProductsHTML += '<ul>'
-		// specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// specialOffersProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// specialOffersProductsHTML += '</ul>'
-		// specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += '<div class="product_footer d-flex align-items-center">'
-		// specialOffersProductsHTML += '<div class="price_box">'
-		// specialOffersProductsHTML += '<span class="current_price">'+specialOffersItemList[i]["productOfferPrice"]+'</span>'
-	 //    specialOffersProductsHTML += '<span class="old_price">'+specialOffersItemList[i]["productActualPrice"]+'</span>'
-		// specialOffersProductsHTML += '</div>'
-		// specialOffersProductsHTML += '<div class="add_to_cart">'
-		// specialOffersProductsHTML += '<a href="cart.html" title="add to cart"><span class="lnr lnr-cart"></span></a>'
-		// specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += '</div>'
-	}
-
-
-
-	var owl1 = $('.product_column3');
-	owl1.trigger('destroy.owl.carousel');
+	// 	var owl1 = $('.product_column3');
+	// owl1.trigger('destroy.owl.carousel');
 	// owl.owlCarousel({
 	//    items: 5,
 	// });
 
+
+	// carouselLib()
+	$("#recommendedProducts").append(recommendedProductsHTML)
+
+	var owl1 = $('.product_column3');
+	owl1.trigger('destroy.owl.carousel');
 
 
 
@@ -180,16 +78,63 @@ async function showSpecialOffersProducts(items){
 		  }
     });
 
+    $('.product_column3 .owl-stage').css('transform','translate3d(-4440px, 0px, 0px)');
 
-    $('.product_column5').on('changed.owl.carousel initialized.owl.carousel', function (event) {
-        $(event.target).find('.owl-item').removeClass('last').eq(event.item.index + event.page.size - 1).addClass('last')}).owlCarousel({
+
+
+}
+
+
+ function showTopSellingProducts(items){
+
+
+	var topSellingProductsHTML = ""
+
+	// for(i=0 ; i<topSellingItemList.length; i++){
+	for(item of items){
+
+		topSellingProductsHTML += '<div class="single_product">'
+		topSellingProductsHTML += '<div class="product_content">'
+		topSellingProductsHTML += '<h3><a href="product-details.html?item='+item.id+'" style="text-transform: lowercase;"><strong>'+item["name"]+'</strong></a></h3>'
+		// topSellingProductsHTML += '<div class="product_ratings">'
+		// topSellingProductsHTML += '<ul>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '</ul>'
+		// topSellingProductsHTML += '</div>'
+		// topSellingProductsHTML += '<div class="price_box">'
+		// topSellingProductsHTML += '<span class="regular_price">'+topSellingItemList[i]["productPrice"]+'</span>'
+		// topSellingProductsHTML += '</div>'
+		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_group","name"],item)+'</a></h5>'
+		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
+		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
+		topSellingProductsHTML += '</div>'
+		topSellingProductsHTML += '<div class="product_thumb">'
+		topSellingProductsHTML += '<a class="primary_img" href="product-details.html"><img src="assets/img/product/product2.jpg" alt=""></a>'
+		topSellingProductsHTML += '</div>'
+		topSellingProductsHTML += '</div>'
+	}
+
+
+	$("#topSellingProducts").append(topSellingProductsHTML)
+
+
+
+	var owl1 = $('.product_column3');
+	owl1.trigger('destroy.owl.carousel');
+
+
+	$('.product_column3').owlCarousel({
         autoplay: true,
 		loop: true,
         nav: true,
         autoplay: false,
         autoplayTimeout: 8000,
         items: 5,
-        margin:20,
+        // margin:20,
         dots:false,
         navText: ['<i class="ion-ios-arrow-thin-left"></i>','<i class="ion-ios-arrow-thin-right"></i>'],
         responsiveClass:true,
@@ -197,62 +142,105 @@ async function showSpecialOffersProducts(items){
 				0:{
 				items:1,
 			},
-            576:{
+            200:{
 				items:2,
 			},
-            768:{
+            992:{
 				items:3,
 			},
-            992:{
-				items:4,
-			},
-            1200:{
-				items:5,
-			},
-
+			
 
 		  }
     });
 
-	$("#specialOffersProducts").append(specialOffersProductsHTML)
-
-    // $('.small_product').slick({
-    //     centerMode: true,
-    //     centerPadding: '0',
-    //     slidesToShow: 1,
-    //     arrows:false,
-    //     rows: 3,
-    //     responsive:[
-    //         {
-    //           breakpoint: 480,
-    //           settings: {
-    //             slidesToShow: 1,
-    //               slidesToScroll: 1,
-    //           }
-    //         },
-    //         {
-    //           breakpoint: 768,
-    //           settings: {
-    //             slidesToShow: 1,
-    //               slidesToScroll: 1,
-    //           }
-    //         },
-    //         {
-    //           breakpoint: 991,
-    //           settings: {
-    //             slidesToShow: 2,
-    //               slidesToScroll: 2,
-    //           }
-    //         },
-    //     ]
-    // });
-	// destroyCarousel()
-    // slickCarousel();
+    $('.product_column3 .owl-stage').css('transform','translate3d(-4440px, 0px, 0px)');
+    $('.product_column3 .owl-item .active').css('width','300px');
 }
 
 
 
 
+
+async function showSpecialOffersProducts(items){
+
+
+	var specialOffersProductsHTML = ""
+
+	for(item of items){
+
+
+		specialOffersProductsHTML += '<div class="single_product">'
+		specialOffersProductsHTML += '<div class="product_content">'
+		specialOffersProductsHTML += '<h3><a href="product-details.html?item='+item.id+'" style="text-transform: lowercase;"><strong>'+item["name"]+'</strong></a></h3>'
+		// topSellingProductsHTML += '<div class="product_ratings">'
+		// topSellingProductsHTML += '<ul>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
+		// topSellingProductsHTML += '</ul>'
+		// topSellingProductsHTML += '</div>'
+		// topSellingProductsHTML += '<div class="price_box">'
+		// topSellingProductsHTML += '<span class="regular_price">'+topSellingItemList[i]["productPrice"]+'</span>'
+		// topSellingProductsHTML += '</div>'
+		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_group","name"],item)+'</a></h5>'
+		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
+		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
+		specialOffersProductsHTML += '</div>'
+		specialOffersProductsHTML += '<div class="product_thumb">'
+		specialOffersProductsHTML += '<a class="primary_img" href="product-details.html"><img src="assets/img/product/product2.jpg" alt=""></a>'
+		specialOffersProductsHTML += '</div>'
+		specialOffersProductsHTML += '</div>'
+	}
+
+
+
+
+
+
+
+	$("#specialOffersProducts").append(specialOffersProductsHTML)
+
+
+	var owl1 = $('.product_column3');
+	owl1.trigger('destroy.owl.carousel');
+
+
+	$('.product_column3').owlCarousel({
+        autoplay: true,
+		loop: true,
+        nav: true,
+        autoplay: false,
+        autoplayTimeout: 8000,
+        items: 5,
+        // margin:20,
+        dots:false,
+        navText: ['<i class="ion-ios-arrow-thin-left"></i>','<i class="ion-ios-arrow-thin-right"></i>'],
+        responsiveClass:true,
+		responsive:{
+				0:{
+				items:1,
+			},
+            200:{
+				items:2,
+			},
+            992:{
+				items:3,
+			},
+			
+
+		  }
+    });
+
+
+	$('.product_column3 .owl-stage').css('transform','translate3d(-4440px, 0px, 0px)');
+
+}
+
+
+
+// carouselLib()
 
 
 
@@ -280,33 +268,98 @@ async function showPromotion(promotionData) {
 		// promotionHTML += '</div>'
 
 
-
-
-
-
-promotionHTML += '<div class="single_slider d-flex align-items-center" data-bgimg="https://au.lamarzocco.com/wp-content/uploads/2016/12/linea-mini-1.jpg">'
-promotionHTML += '<div class="slider_content">'
-promotionHTML += '<!--                 <h2 style="color: white">Linea Mini </h2>'
-promotionHTML += '<h1 style="color: white">The Coffee Specialist</h1> -->'
-promotionHTML += '<a class="button" href="shop.html">shopping now</a>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
 promotionHTML += '</div>'
-promotionHTML += ''
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
 promotionHTML += '</div>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
+promotionHTML += '</div>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
+promotionHTML += '</div>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
+promotionHTML += '</div>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
+promotionHTML += '</div>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
+promotionHTML += '</div>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
+promotionHTML += '</div>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
+promotionHTML += '</div>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
+promotionHTML += '</div>'
+
+
+
+// promotionHTML += '<div class="single_slider d-flex align-items-center" data-bgimg="https://au.lamarzocco.com/wp-content/uploads/2016/12/linea-mini-1.jpg">'
+// promotionHTML += '<div class="slider_content">'
+// promotionHTML += '<!--                 <h2 style="color: white">Linea Mini </h2>'
+// promotionHTML += '<h1 style="color: white">The Coffee Specialist</h1> -->'
+// promotionHTML += '<a class="button" href="shop.html">shopping now</a>'
+// promotionHTML += '</div>'
+// promotionHTML += ''
+// promotionHTML += '</div>'
 	}
 
 
-	$("#promotion").append(promotionHTML)
-
-
-	var owl = $('.owl-carousel');
-	owl.trigger('destroy.owl.carousel');
-	owl.owlCarousel({
-	   items: 1,
-	});
+	// $("#promotion").append(promotionHTML)
+	$("#carousel").append(promotionHTML)
 
 }
 
+async function carouselLib() {
+	// body...
 
+
+		var owl1 = $('.product_column3');
+	owl1.trigger('destroy.owl.carousel');
+	// owl.owlCarousel({
+	//    items: 5,
+	// });
+
+$('.product_column3').data('owlCarousel').reinit();
+
+
+	$('.product_column3').owlCarousel({
+        autoplay: true,
+		loop: true,
+        nav: true,
+        autoplay: false,
+        autoplayTimeout: 8000,
+        // items: 5,
+        // margin:20,
+        dots:false,
+        navText: ['<i class="ion-ios-arrow-thin-left"></i>','<i class="ion-ios-arrow-thin-right"></i>'],
+        responsiveClass:true,
+		responsive: {
+    0: {
+      items: 1
+    },
+
+    600: {
+      items: 3
+    },
+
+    1024: {
+      items: 4
+    },
+
+    1366: {
+      items: 4
+    }
+  }
+    });
+}
 
 
 $(document).ready(function(){
@@ -316,23 +369,21 @@ $(document).ready(function(){
 	};
 
 
-	getPromotion(function(response){
-		showPromotion(response.data)
-	},onError);
-
 
 	getRecommendedProducts(function(res){
 		showRecommendedProducts(safeAccess(["data","items","data"],res));
-	})
+	},onError)
 	getTopSellingProducts(function(res){
 		showTopSellingProducts(safeAccess(["data","items","data"],res));
-	})
+	},onError)
 	getMostViewedProducts(function(res){
 		showSpecialOffersProducts(safeAccess(["data","items","data"],res));
-	})
+	},onError)
 
 
-	
+	getPromotion(function(response){
+		showPromotion(response.data)
+	},onError);
 	
 });
 
@@ -390,3 +441,39 @@ $('.dropdown-hover-all').on('mouseleave', '.dropdown', function() {
 
 
 
+
+
+
+$("#carousel").owlCarousel({
+  autoplay: true,
+  lazyLoad: true,
+  rewind: true,
+  margin: 20,
+   /*
+  animateOut: 'fadeOut',
+  animateIn: 'fadeIn',
+  */
+  responsiveClass: true,
+  navText: [],
+  autoHeight: true,
+  autoplayTimeout: 7000,
+  smartSpeed: 800,
+  nav: true,
+  responsive: {
+    0: {
+      items: 1
+    },
+
+    600: {
+      items: 3
+    },
+
+    1024: {
+      items: 4
+    },
+
+    1366: {
+      items: 4
+    }
+  }
+});
