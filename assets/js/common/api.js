@@ -406,7 +406,7 @@ async function getItems(onResponse,onError,page,page_size){
   .then(onResponse)
   .catch(onError);  
 }
-async function getRecommendedProducts(onResponse){
+async function getRecommendedProducts(onResponse,onError){
 
   var data = new FormData();
 
@@ -424,7 +424,7 @@ async function getRecommendedProducts(onResponse){
   .then(onResponse)
   .catch(onError);  
 }
-async function getTopSellingProducts(onResponse){
+async function getTopSellingProducts(onResponse,onError){
 
   var data = new FormData();
 
@@ -442,7 +442,7 @@ async function getTopSellingProducts(onResponse){
   .then(onResponse)
   .catch(onError);  
 }
-async function getMostViewedProducts(onResponse){
+async function getMostViewedProducts(onResponse,onError){
 
   var data = new FormData();
 
