@@ -22,7 +22,7 @@ function ExportToTable(action) {
     /*Checks whether the file is a valid excel file*/  
     if (regex.test($("#excelfile").val().toLowerCase())) {
         var xlsxflag = false; /*Flag for checking whether excel is .xls format or .xlsx format*/  
-        if ($("#excelfile").val().toLowerCase().indexOf(".xlsx") > 0) {  
+        if ($("#excelfile").val().toLowerCase().indexOf(".xls") > 0) {  
             xlsxflag = true;  
         }  
          /*Checks whether the browser supports HTML5*/  
@@ -151,8 +151,26 @@ async function showBulkOrders(bulkOrderData){
     bulkOrdersHTML += '</div>'
     bulkOrdersHTML += '<div class="cart_submit">'
     bulkOrdersHTML += '<!-- <button type="submit">update cart</button> -->'
-    bulkOrdersHTML += '<button type="submit">Add to Cart </button>'
+    bulkOrdersHTML += '<button id="uploadFile" onclick="uploadCart()">Add to Cart </button>'
     bulkOrdersHTML += '</div>'
 
     $("#bulkOrders").append(bulkOrdersHTML)
+}
+
+
+$(document).ready(function(){
+
+});
+
+    function uploadCart() {
+      var xlsx = document.querySelector('#excelfile');
+      var onResponse = function(response){
+        if(response.status === 200){
+            notifySuccess("File uploaded!");
+        }
+      };
+      var onError =function(error){
+        notifyError("Failed to upload items");
+      };
+      bulkUploadCartItems(null,xlsx.files[0],onResponse,onError);
 }
