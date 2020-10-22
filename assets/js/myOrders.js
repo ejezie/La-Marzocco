@@ -153,6 +153,7 @@ async function showOrders(orderArr){
    itemMasterTable = $('#tableOrders').DataTable( {
    dom: 'Blfrtip',
    processing: true,
+   autoWidth: true,
    serverSide: true,
    pageLength: 10,
    bSort : false,
@@ -191,11 +192,11 @@ async function showOrders(orderArr){
               var pageIndex = data.start / data.length + 1 ;
 			getOrderList(onResponse,onError,pageIndex,data.length);
         },
-       
         buttons : [
             // 'selectAll',
             // 'selectNone',
               ],
+
               columns: [
             
               {

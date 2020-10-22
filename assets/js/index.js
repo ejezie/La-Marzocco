@@ -154,7 +154,7 @@ $(document).ready(function(){
     });
 
     $('.product_column3 .owl-stage').css('transform','translate3d(-4440px, 0px, 0px)');
-    $('.product_column3 .owl-item .active').css('width','300px');
+    $('.product_column3 .owl-stage .owl-item .active').css('width','300px');
 }
 
 
@@ -208,29 +208,37 @@ async function showSpecialOffersProducts(items){
 
 
 	$('.product_column3').owlCarousel({
-        autoplay: true,
-		loop: true,
-        nav: true,
-        autoplay: false,
-        autoplayTimeout: 8000,
-        items: 5,
-        // margin:20,
-        dots:false,
-        navText: ['<i class="ion-ios-arrow-thin-left"></i>','<i class="ion-ios-arrow-thin-right"></i>'],
-        responsiveClass:true,
-		responsive:{
-				0:{
-				items:1,
-			},
-            200:{
-				items:2,
-			},
-            992:{
-				items:3,
-			},
-			
+       autoplay: true,
+  lazyLoad: true,
+  rewind: true,
+  margin: 20,
+   /*
+  animateOut: 'fadeOut',
+  animateIn: 'fadeIn',
+  */
+  responsiveClass: true,
+  navText: [],
+  autoHeight: true,
+  autoplayTimeout: 7000,
+  smartSpeed: 800,
+  nav: true,
+  responsive: {
+    0: {
+      items: 1
+    },
 
-		  }
+    992: {
+      items: 3
+    },
+
+    // 1024: {
+    //   items: 4
+    // },
+
+    // 1366: {
+    //   items: 4
+    // }
+  }
     });
 
 
@@ -268,52 +276,77 @@ async function showPromotion(promotionData) {
 		// promotionHTML += '</div>'
 
 
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-promotionHTML += '</div>'
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
-promotionHTML += '</div>'
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-promotionHTML += '</div>'
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
-promotionHTML += '</div>'
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-promotionHTML += '</div>'
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
-promotionHTML += '</div>'
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-promotionHTML += '</div>'
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
-promotionHTML += '</div>'
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-promotionHTML += '</div>'
-promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
-promotionHTML += '</div>'
-
-
-
-// promotionHTML += '<div class="single_slider d-flex align-items-center" data-bgimg="https://au.lamarzocco.com/wp-content/uploads/2016/12/linea-mini-1.jpg">'
-// promotionHTML += '<div class="slider_content">'
-// promotionHTML += '<!--                 <h2 style="color: white">Linea Mini </h2>'
-// promotionHTML += '<h1 style="color: white">The Coffee Specialist</h1> -->'
-// promotionHTML += '<a class="button" href="shop.html">shopping now</a>'
+// promotionHTML += '<div class="item">'
+// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
 // promotionHTML += '</div>'
-// promotionHTML += ''
+// promotionHTML += '<div class="item">'
+// promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
 // promotionHTML += '</div>'
+// promotionHTML += '<div class="item">'
+// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
+// promotionHTML += '</div>'
+// promotionHTML += '<div class="item">'
+// promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
+// promotionHTML += '</div>'
+// promotionHTML += '<div class="item">'
+// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
+// promotionHTML += '</div>'
+// promotionHTML += '<div class="item">'
+// promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
+// promotionHTML += '</div>'
+// promotionHTML += '<div class="item">'
+// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
+// promotionHTML += '</div>'
+// promotionHTML += '<div class="item">'
+// promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
+// promotionHTML += '</div>'
+// promotionHTML += '<div class="item">'
+// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
+// promotionHTML += '</div>'
+promotionHTML += '<div class="item">'
+promotionHTML += '<img class="owl-lazy" data-src="'+promotionImages[i]["image"]["name"]+'" alt="">'
+promotionHTML += '</div>'
+
+
 	}
 
 
 	// $("#promotion").append(promotionHTML)
 	$("#carousel").append(promotionHTML)
+
+	$("#carousel").owlCarousel({
+  autoplay: true,
+  lazyLoad: true,
+  rewind: true,
+  margin: 20,
+   /*
+  animateOut: 'fadeOut',
+  animateIn: 'fadeIn',
+  */
+  responsiveClass: true,
+  navText: [],
+  autoHeight: true,
+  autoplayTimeout: 7000,
+  smartSpeed: 800,
+  nav: true,
+  responsive: {
+    0: {
+      items: 1
+    },
+
+    992: {
+      items: 3
+    },
+
+    // 1024: {
+    //   items: 4
+    // },
+
+    // 1366: {
+    //   items: 4
+    // }
+  }
+});
 
 }
 
@@ -444,36 +477,3 @@ $('.dropdown-hover-all').on('mouseleave', '.dropdown', function() {
 
 
 
-$("#carousel").owlCarousel({
-  autoplay: true,
-  lazyLoad: true,
-  rewind: true,
-  margin: 20,
-   /*
-  animateOut: 'fadeOut',
-  animateIn: 'fadeIn',
-  */
-  responsiveClass: true,
-  navText: [],
-  autoHeight: true,
-  autoplayTimeout: 7000,
-  smartSpeed: 800,
-  nav: true,
-  responsive: {
-    0: {
-      items: 1
-    },
-
-    600: {
-      items: 3
-    },
-
-    1024: {
-      items: 4
-    },
-
-    1366: {
-      items: 4
-    }
-  }
-});

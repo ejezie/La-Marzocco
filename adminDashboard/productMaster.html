@@ -617,16 +617,25 @@
                           <th></th>
                           <th></th>
                           <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
                           
                         </tr>
                         <tr>
-                          <th></th>
+                          <th>Model # </th>
                           <th>Itemcode</th>
                           <th>ItemName</th>
                           <th>ShortCode</th>
-                          <th>Itemtype</th>
+                          <th>Itemtype (Machine/SpareParts/Merchandise)</th>
                           <th>FamilyCode</th>
-                          <th>FamilyDesc</th>
+                          <th>FamilyDesc (Commercial / LM Home / Grinder / Modbar / Water Filter / GS3)</th>
                           <th>ParentItemName</th>
                           <th>Isactive</th>
                           <th>Length</th>  
@@ -648,10 +657,20 @@
                           <th>GroupDescription</th>
                           <th>ImageName</th>
                           <th>PartRefNum</th>
+
+                          <th>Boiler Type</th>
+                          <th>PID Temperature Controller</th>
+                          <th>Pump Type</th>
+                          <th>Indicator Lights</th>
+                          <th>Voltage</th>
+                          <th>Steam Boiler</th>
+                          <th>Water Reservoir capacity</th>
+                          <th>price</th>
+                          <th>currency</th>
                           
                         </tr>
                         <tr>
-                          <td></td>
+                          <td>2GPBAVSC</td>
                           <td>1GAV</td>
                           <td>La Marzocco 1 Group AV Linea</td>
                           <td>6.112.112</td>
@@ -679,6 +698,16 @@
                           <td>screws, nuts, bolts, washers…</td>
                           <td></td>
                           <td></td>
+
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>113</td>
+                          <td>AUD</td>
                         </tr>
                       </table>
                     </div>
@@ -693,7 +722,7 @@
                     <h5>Upload Product Master Excel:</h5>
                     <div>
                       <input type="file" class="btn btn-info" accept=".xls, .xlsx" id="excelfile"/>  
-                      <input type="button" class="btn btn-primary" id="uploadFile" value="Upload" onclick="ExportToTable('Upload')"/>  
+                      <input type="button" class="btn btn-primary" id="uploadFile" value="Upload" />  
                       <table id="exceltable" ></table>
                     </div>
                     <br>
