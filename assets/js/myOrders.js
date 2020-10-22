@@ -196,7 +196,6 @@ async function showOrders(orderArr){
             // 'selectAll',
             // 'selectNone',
               ],
-
               columns: [
             
               {
@@ -278,13 +277,14 @@ var orderDetailsHTML = ""
 	$("#orderTrackingDetails").empty()
 
 
-	orderDetailsHTML += '<table style="width:-moz-available">'
+	orderDetailsHTML += '<table style="width:inherit">'
 	orderDetailsHTML += '<thead>'
 	orderDetailsHTML += '<tr>'
 	orderDetailsHTML += '<th class="product_thumb">Item Part No.</th>'
 	// orderDetailsHTML += '<th class="product_thumb">Item Name</th>'
 	orderDetailsHTML += '<th class="product_name">Quantity</th>'
 	orderDetailsHTML += '<th class="product-price">Status</th>'
+	orderDetailsHTML += '<th class="product-price">AWB</th>'
 	orderDetailsHTML += '<th></th>'
 	orderDetailsHTML += '</tr>'
 	orderDetailsHTML += '</thead>'
@@ -299,6 +299,7 @@ var orderDetailsHTML = ""
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["quantity"],item,"-")+'</a></td>'
 		// orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["name"],item,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["status"],item,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["awb"],item,"-")+'</a></td>'
 		orderDetailsHTML += '</tr>'
 	}
 
@@ -317,16 +318,15 @@ async function showOrderDetails(quoteLine){
 	$("#orderDetails").empty()
 
 
-	orderDetailsHTML += '<table>'
+	orderDetailsHTML += '<table style="width:inherit">'
 	orderDetailsHTML += '<thead>'
 	orderDetailsHTML += '<tr>'
 	orderDetailsHTML += '<th class="product_thumb">Product</th>'
 	orderDetailsHTML += '<th class="product_name">Name</th>'
-	orderDetailsHTML += '<th class="product_name">AWB No.</th>'
 	orderDetailsHTML += '<th class="product-price">Price</th>'
 	orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
 	orderDetailsHTML += '<th class="product_total">Total</th>'
-	orderDetailsHTML += '<th class="product_status">Expected Delivery</th>'
+	orderDetailsHTML += '<th class="product_status">Expected Dispatch</th>'
 	orderDetailsHTML += '<th></th>'
 	orderDetailsHTML += '</tr>'
 	orderDetailsHTML += '</thead>'
@@ -339,7 +339,6 @@ async function showOrderDetails(quoteLine){
 		orderDetailsHTML += '<tr>'
 		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
 		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
-		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["awb"],quoteItem,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
 		orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'
 		orderDetailsHTML += '<td class="product_total">'+safeAccess(["total"],quoteItem,"-")+'</td>'

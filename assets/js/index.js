@@ -304,7 +304,7 @@ async function showPromotion(promotionData) {
 // promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
 // promotionHTML += '</div>'
 promotionHTML += '<div class="item">'
-promotionHTML += '<img class="owl-lazy" data-src="'+promotionImages[i]["image"]["name"]+'" alt="">'
+promotionHTML += '<a href="shop.html"><img class="owl-lazy" data-src="'+promotionImages[i]["image"]["name"]+'" alt=""></a>'
 promotionHTML += '</div>'
 
 

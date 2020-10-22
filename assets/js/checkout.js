@@ -33,16 +33,33 @@ async function showAddressSlider(addArr){
 		addSliderHTML += ''+ address.address+''
 			addSliderHTML += '<br>'
 		if(address.is_billable != 0){
-			addSliderHTML += '<input id="billingAddrCheckbox" type="checkbox" value="'+address.id+'" ><label style="font-size:13px">Billing Address</label>'
+			addSliderHTML += '<input id="billingAddrCheckbox" type="checkbox" class="billingChk" value="'+address.id+'" ><label style="font-size:13px">Billing Address</label>'
 		}
 			addSliderHTML += '<br>'
 		if(address.is_shippable != 0){
-			addSliderHTML += '<input id="shippingAddrCheckbox" type="checkbox" value="'+address.id+'"  ><label style="font-size:13px">Shipping Address</label>'
+			addSliderHTML += '<input id="shippingAddrCheckbox" type="checkbox" class="shippingChk" value="'+address.id+'"  ><label style="font-size:13px">Shipping Address</label>'
 		}
 		addSliderHTML += '</div>'
 	}
 
 	$("#addressSlider").append(addSliderHTML)
+
+
+
+	$(".billingChk").change(function()
+      	{
+          	$(".billingChk").prop('checked',false);
+          	$(this).prop('checked',true);
+      	}
+    );
+
+
+    $(".shippingChk").change(function()
+      	{
+          	$(".shippingChk").prop('checked',false);
+          	$(this).prop('checked',true);
+      	}
+    );
 }
 
 $(".select_add").click(function() {

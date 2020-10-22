@@ -107,7 +107,7 @@ async function showCartFromQuote(quoteItems){
 	cartHTML += '<th class="product-price">Price</th>'
 	cartHTML += '<th class="product_quantity">Quantity</th>'
 	cartHTML += '<th>Availibility</th>'
-	cartHTML += '<th>Dispatch</th>'
+	cartHTML += '<th>Expected Dispatch</th>'
 	cartHTML += '<th>Discount(%)</th>'
 	cartHTML += '<th class="product_total">Total</th>'
 	cartHTML += '</tr>'
