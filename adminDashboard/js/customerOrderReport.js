@@ -75,6 +75,20 @@ async function showOrders(orderArr){
                 }
               },
               {
+                "title":"PO",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['po_number'],row,"")+" \n "+safeAccess(['po'],row,"")
+                }
+              },
+              {
+                "title":"Notes",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['desc'],row,"-")
+                }
+              },
+              {
                 "title":"Items",
                 render: function(data, type, row){
                   return safeAccess(['order_line'],row,[]).length;
