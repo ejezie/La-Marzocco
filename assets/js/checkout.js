@@ -144,7 +144,7 @@ function initAddAddress(){
 	  var landmark = $("#inputLandmark").val();
 	  var phone = $("#inputPhone").val();
 	  var area_code_id = $("#inputArea").val();
-	  var city_id = $("#inputCity").val();
+	  // var city_id = $("#inputCity").val();
 	  var state_id = $("#inputState").val();
 	  var country_id = $("#inputCountry").val();
 
@@ -161,7 +161,7 @@ function initAddAddress(){
 	    landmark,
 	    phone,
 	    area_code_id,
-	    city_id,
+	    // city_id,
 	    state_id,
 	    country_id,
 	    onResponse);
@@ -182,13 +182,14 @@ function confirmOrder(){
 	const po = document.querySelector('#pofile').files[0];
 	const billingAddressId = getBillingAddressId();
 	const shippingAddressId = getShippingAddressId();
+	const sched_delivery_date = $("#deliveryDateInput").val();
 	if(!billingAddressId || !shippingAddressId){
 		notifyError("Please select shipping and billing address")
 		return;
 	}
 	notifyInfo("Please wait");
 
-	createOrder(quoteId,po,poName,shippingAddressId,billingAddressId,orderNotes,function(response){
+	createOrder(quoteId,po,poName,shippingAddressId,billingAddressId,orderNotes,sched_delivery_date,function(response){
 			// notifySuccess("Proceed to payment");
 			if(!response.data.status){
 				return;
@@ -364,8 +365,8 @@ function populateCountry(){
 	    .append('<option disabled selected value>Select Country</option>');
       $("#inputState")
 	    .append('<option disabled selected value>Select State</option>');
-	   $("#inputCity")
-	    .append('<option disabled selected value>Select City</option>');
+	   // $("#inputCity")
+	   //  .append('<option disabled selected value>Select City</option>');
 	  $("#inputArea")
 	    .append('<option disabled selected value>Select Area</option>');
 
@@ -396,9 +397,9 @@ function populateState(keyId){
       $("#inputState")
 	    .append('<option disabled selected value>Select State</option>');
 
-      $('#inputState').change( function() {
-		  populateCities(keyId);
-	  });
+   //    $('#inputState').change( function() {
+		 //  populateCities(keyId);
+	  // });
   };
   getStates(keyId,onResponse);
 }
