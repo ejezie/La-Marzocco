@@ -16,11 +16,12 @@ async function showNewsletter(newsletterData){
 	newsletterHTML += '<tbody>'
 
 	for(i=0; i< newsletter.length; i++){
+
 		newsletterHTML += '<tr>'
 		newsletterHTML += '<td><article class="media event"><a class="pull-left date"><p class="month">Jan</p><p class="month">2020</p></a>'
 		newsletterHTML += '<div class="media-body"><p>Newsletter : Jan 2020 Update</p><a class="title" href="'+newsletter[i]["name"]+'">PDF</a></div></article></td>'
-		newsletterHTML += '<td><button type="button" class="btn btn-default btn-sm" id="deactivateBtn"><span class="glyphicon glyphicon-edit"></span></button></td>'
-		newsletterHTML += '<td><button type="button" class="btn btn-default btn-sm" id="archiveBtn"><span class="glyphicon glyphicon-trash"></span></button></td>'
+		newsletterHTML += '<td><button type="button" class="btn btn-default btn-sm deactivateBtn" id="'+newsletter[i]["id"]+'"><span class="fa fa-times-circle"></span></button></td>'
+		newsletterHTML += '<td><button type="button" class="btn btn-default btn-sm deleteBtn" id="'+newsletter[i]["id"]+'"><span class="glyphicon glyphicon-trash"></span></button></td>'
 
 		newsletterHTML += '</tr>'
 	}
@@ -43,6 +44,45 @@ async function showNewsletter(newsletterData){
 	// }
 
 	$("#newsletter").append(newsletterHTML)
+
+
+
+
+	$('.deactivateBtn').click(function () {
+		var id = this.id	
+
+      	var onResponse = function(response){
+        	if(response.data.newsletter){
+            	notifySuccess("Success!");
+        	}else{
+            	notifyError(response.data.message);
+        	}
+      	};
+      	var onError =function(error){
+        	notifyError("Failed to upload file");
+      	};
+
+      	deactivateNewsletter(id,onResponse,onError)
+	});
+
+
+
+	$('.deleteBtn').click(function () {
+		var id = this.id	
+
+      	var onResponse = function(response){
+        	if(response.data.newsletter){
+            	notifySuccess("Success!");
+        	}else{
+            	notifyError(response.data.message);
+        	}
+      	};
+      	var onError =function(error){
+        	notifyError("Failed to upload file");
+      	};
+
+      	deleteNewsletter(id,onResponse,onError)
+	});
 }
 
 
@@ -85,19 +125,3 @@ $('#uploadNewsletter').click(function () {
 });
 
 
-$('#deactivateBtn').click(function () {
-
-	alert("thi")
-      // var onResponse = function(response){
-      //   if(response.data.newsletter){
-      //       notifySuccess("Success!");
-      //   }else{
-      //       notifyError(response.data.message);
-      //   }
-      // };
-      // var onError =function(error){
-      //   notifyError("Failed to upload file");
-      // };
-
-      // deactivateNewsletter(id,onResponse,onError)
-});

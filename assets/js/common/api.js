@@ -1776,6 +1776,20 @@ async function deactivateNewsletter(id,onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
+async function deleteNewsletter(id,onResponse,onError){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'newsletter/'+id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
 
 async function getPromotion(onResponse,onError){
   var config = {
@@ -1810,4 +1824,33 @@ async function uploadPromotion(onResponse,onError,file){
   .then(onResponse)
   .catch(onError);  
 
+}
+
+
+async function deactivatePromotion(id,onResponse,onError){
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'promotional-image/deactivate/'+id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function deletePromotion(id,onResponse,onError){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'promotional-image/'+id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(), 
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
 }
