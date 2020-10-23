@@ -148,6 +148,21 @@ async function showCart(orderArr){
 
 // }
 
+
+
+
+function capitalize(str) {
+  strVal = '';
+  str = str.split(' ');
+  for (var chr = 0; chr < str.length; chr++) {
+    strVal += str[chr].substring(0, 1).toUpperCase() + str[chr].substring(1, str[chr].length) + ' '
+  }
+  return strVal
+}
+
+
+
+
 var itemMasterTable;
 async function showOrders(orderArr){
    itemMasterTable = $('#tableOrders').DataTable( {
@@ -239,8 +254,8 @@ async function showOrders(orderArr){
                 "title":"Status",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['status'],row,"-");;
-                }
+                  return capitalize(safeAccess(['status'],row,"-"));
+                },
               },
         ]
       })
@@ -283,8 +298,8 @@ var orderDetailsHTML = ""
 	orderDetailsHTML += '<th class="product_thumb">Item Part No.</th>'
 	// orderDetailsHTML += '<th class="product_thumb">Item Name</th>'
 	orderDetailsHTML += '<th class="product_name">Quantity</th>'
-	orderDetailsHTML += '<th class="product-price">Status</th>'
-	orderDetailsHTML += '<th class="product-price">AWB</th>'
+	orderDetailsHTML += '<th class="product-status">Status</th>'
+	orderDetailsHTML += '<th class="product-awb">AWB</th>'
 	orderDetailsHTML += '<th></th>'
 	orderDetailsHTML += '</tr>'
 	orderDetailsHTML += '</thead>'

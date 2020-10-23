@@ -327,7 +327,6 @@ async function showParentSideFilter(familyList){
 		for(j=0; j<item["machines"].length;j++){ 
 
 			const inneritem = familyList[i]["machines"][j];
-			console.log("inneritem : ", inneritem)
 			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
 			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
 			sidebarHTML += '<li><form><p><input type="checkbox" value="'+inneritem["id"]+'" id="catalog"  /><label for="catalog" style="white-space: nowrap;font-size:14px; font-weight:500;">'+inneritem["name"]+'</label></p></form></li>'

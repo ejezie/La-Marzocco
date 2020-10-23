@@ -12,7 +12,7 @@ async function showPromotion(promotionData){
 	promotionHTML += '<tr class="headings">'
 	promotionHTML += ''
 	promotionHTML += '<th class="column-title">Promotion </th>'
-	promotionHTML += '<th class="column-title">Activate </th>'
+	promotionHTML += '<th class="column-title">Deactivate </th>'
 	promotionHTML += '<th class="column-title">Delete </th>'
 	promotionHTML += ''
 	promotionHTML += '</th>'
@@ -27,17 +27,59 @@ async function showPromotion(promotionData){
 		promotionHTML += '<tr class="even pointer">'
 		promotionHTML += ''
 		promotionHTML += '<td class=" "><img src="'+promotionImages[i]["image"]["name"]+'"></td>'
-		promotionHTML += '<td class=" "><label class="switch">'
-		promotionHTML += '<input type="checkbox" checked>'
-		promotionHTML += '<span class="slider round"></span>'
-		promotionHTML += '</label></td>'
-		promotionHTML += '<td class=" last"><a href="">Click</a>'
+		promotionHTML += '<td><button type="button" class="btn btn-default btn-sm deactivateBtn" id="'+promotionImages[i]["id"]+'"><span class="fa fa-times-circle"></span></button></td>'
+		promotionHTML += '<td><button type="button" class="btn btn-default btn-sm deleteBtn" id="'+promotionImages[i]["id"]+'"><span class="glyphicon glyphicon-trash"></span></button></td>'
 		promotionHTML += '</td>'
 		promotionHTML += '</tr>'
 	}
 	promotionHTML += '</tbody>'
 
 	$("#promotions_master").append(promotionHTML)
+
+
+
+	$('.deactivateBtn').click(async function () {
+		var id = this.id	
+
+      	var onResponse = function(response){
+      		console.log("response : ", response)
+        	if(response.data.image){
+            	notifySuccess("Promotion Image Deactivated Successfully");
+        	}else{
+            	notifyError(response.data.message);
+        	}
+      	};
+      	var onError =function(error){
+        	notifyError("Failed to upload file");
+      	};
+
+      	deactivatePromotion(id,onResponse,onError)
+
+	});
+
+
+
+	$('.deleteBtn').click(async function () {
+		var id = this.id	
+
+      	var onResponse = function(response){
+      		console.log("response : ",response)
+        	if(response.data.status == true){
+            	notifySuccess(response.data.message);
+        	}else{
+            	notifyError(response.data.message);
+        	}
+      	};
+      	var onError =function(error){
+        	notifyError("Failed to upload file");
+      	};
+
+      	deletePromotion(id,onResponse,onError)
+
+      	getPromotion(function(response){
+			showPromotion(response.data)
+		},onError);
+	});
 
 }
 
