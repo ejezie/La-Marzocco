@@ -102,7 +102,25 @@ function ExportToTable(action) {
 } 
 
 
+$(document).ready(function(){
 
+    var customerDropdown = $("#targetCustomer");
+    customerDropdown.empty();
+
+      var onResponse = function(response){
+        for(var i=0; i< response.data.customer_masters.data.length; i++){
+          const customer = response.data.customer_masters.data[i];
+          customerDropdown.append($("<option>").text(safeAccess(["first_name"],customer,"") + safeAccess(["last_name"],customer,"") ).val(customer.id));
+        }
+
+        // customerDropdown.val(currentVal);
+
+      };
+      var onError =function(error){
+        notifyError("Failed to load customers.Please reload page");
+      };
+    getCustomerList(onResponse,onError,1,9999999999)
+})
 
 
 async function showBulkOrders(bulkOrderData){
@@ -151,8 +169,21 @@ async function showBulkOrders(bulkOrderData){
     bulkOrdersHTML += '</div>'
     bulkOrdersHTML += '<div class="cart_submit">'
     bulkOrdersHTML += '<!-- <button type="submit">update cart</button> -->'
-    bulkOrdersHTML += '<button type="submit">Add to Cart </button>'
+    bulkOrdersHTML += '<button type="button" onclick="uploadCart()">Add to Cart </button>'
     bulkOrdersHTML += '</div>'
 
     $("#bulkOrders").append(bulkOrdersHTML)
+}
+
+ function uploadCart() {
+      var xlsx = document.querySelector('#excelfile');
+      var onResponse = function(response){
+        if(response.status === 200){
+            notifySuccess("File uploaded!");
+        }
+      };
+      var onError =function(error){
+        notifyError("Failed to upload items");
+      };
+      bulkUploadCartItems($("#targetCustomer").val(),xlsx.files[0],onResponse,onError);
 }

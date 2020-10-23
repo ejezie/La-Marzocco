@@ -500,6 +500,8 @@ async function getOrderList(onResponse,onError,page,page_size){
   .catch(onError);  
 
 }
+
+
 async function getCustomerList(onResponse,onError,page,page_size){
 
   var data = new FormData();
@@ -541,6 +543,31 @@ async function bulkUploadItems(onResponse,onError,file){
   .catch(onError);  
 
 }
+
+
+async function bulkUploadCartItems(user_id,file,onResponse,onError){
+
+  var data = new FormData();
+  appendIfNotNull(data,"user_id",user_id)
+  data.append("file",file);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'cart/upload',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
 async function bulkUploadCustomers(onResponse,onError,file){
 
   var data = new FormData();
