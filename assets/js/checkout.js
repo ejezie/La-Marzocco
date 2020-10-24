@@ -195,7 +195,8 @@ function confirmOrder(){
 	const po = document.querySelector('#pofile').files[0];
 	const billingAddressId = getBillingAddressId();
 	const shippingAddressId = getShippingAddressId();
-	const sched_delivery_date = $("#deliveryDateInput").val();
+	const sched_delivery_date = ($('#deliveryType').val()==3)? $("#deliveryDateInput").val() : null;
+
 	if(!billingAddressId || !shippingAddressId){
 		notifyError("Please select shipping and billing address")
 		return;
