@@ -249,8 +249,6 @@ function getCheckedParent(){
 
 	    $('#sidebarCatalogFilter input:checked').each(function(){
 
-	    	alert("1")
-
 		    $('#catalog-menu').removeClass("show");
 
 	        returnValue =  this.value;
@@ -302,10 +300,10 @@ async function showGroupSideFilter(groupList){
 
 
 	$("#sidebarGroupFilter").append(sidebarHTML);
-	// $('#sidebarGroupFilter input[type="checkbox"]').on('change', function() {
- //   		$('#sidebarGroupFilter input[type="checkbox"]').not(this).prop('checked', false);
- //   		refreshCatalog();
-	// });
+	$('#sidebarGroupFilter input[type="checkbox"]').on('change', function() {
+   		$('#sidebarGroupFilter input[type="checkbox"]').not(this).prop('checked', false);
+   		refreshCatalog();
+	});
 	
 }
 
@@ -325,18 +323,21 @@ async function showParentSideFilter(familyList){
 		sidebarHTML += '<ul>'
 		// sidebarHTML += '<ul id="catalog-menu_2" class="catalog-menu">'
 
+
 		for(j=0; j<item["machines"].length;j++){ 
 
 			const inneritem = familyList[i]["machines"][j];
+
+			console.log("njsjdnc : ", inneritem)
 			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
 			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
-			sidebarHTML += '<li><form><p><input type="checkbox" value="'+inneritem["id"]+'" id="catalog"  /><label for="catalog" style="white-space: nowrap;font-size:14px; font-weight:500;">'+inneritem["name"]+'</label></p></form></li>'
-			// for(k=0; k<inneritem["parents"].length;k++){
-			// 	const innerMostitem = inneritem["parents"][k];
-			// 	sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
-			// }
+			sidebarHTML += '<li><form><p><input type="checkbox" value="'+inneritem["id"]+'" id="'+inneritem["name"]+'"  /><label for="'+inneritem["name"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+inneritem["name"]+'</label></p></form></li>'
+		// 	for(k=0; k<inneritem["parents"].length;k++){
+		// 		const innerMostitem = inneritem["parents"][k];
+		// 		sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
+		// 	}
 		}
-		
+	
 
 		sidebarHTML += '</ul>'
 		sidebarHTML += '</li>'
@@ -354,7 +355,7 @@ async function showParentSideFilter(familyList){
 		// $( ".dropdown-menu li " ).click(function() {
 		//   $("ul.dropdown-menu").css("display", "none");
 		// });
-   		$('input[type="checkbox"]').not(this).prop('checked', false);
+   		$('#sidebarCatalogFilter input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = catalogResultController;
    		resultController.loadResults(getCheckedParent());
    		// showCatalogDropdownSelection(getCheckedParent());
