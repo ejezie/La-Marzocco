@@ -1469,11 +1469,11 @@ async function getAddressesList(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function createOrder(quoteId,po,poName,shippingAddrId,billingAddrId,desc,sched_delivery_date,onResponse,onError){
+async function createOrder(quoteId,po,po_number,shippingAddrId,billingAddrId,desc,sched_delivery_date,onResponse,onError){
   var data = new FormData();
   data.append('quote_id', quoteId);
   appendIfNotNull(data,"po",po)
-  appendIfNotNull(data,"poName",poName)
+  appendIfNotNull(data,"po_number",po_number)
   appendIfNotNull(data,"sched_delivery_date",sched_delivery_date)
   data.append('shipping_address_id', shippingAddrId);
   data.append('billing_address_id', billingAddrId);

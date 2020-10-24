@@ -7,7 +7,7 @@ async function showOrders(orderArr){
    serverSide: true,
    pageLength: 10,
    bSort : false,
-   lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
+   lengthMenu: [[10, 20, 500, 1000], [10, 20, 500, 1000]],
           columnDefs: [ {
             orderable: false,
             className: 'select-checkbox',
@@ -58,6 +58,7 @@ async function showOrders(orderArr){
                 text: 'PDF'
               }
               ],
+              searching: false,
               columns: [
             
               {
@@ -78,14 +79,20 @@ async function showOrders(orderArr){
                 "title":"PO",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['po_number'],row,"")+" \n "+safeAccess(['po'],row,"")
+                  return safeAccess(['po_number'],row,"")+" \n\n"
+                  +((safeAccess(['po'],row)==undefined)?"":'<button type="button" id="btnDownloadPO" class="btn btn-default btn-sm"><span class="fa fa-cloud-download">Download</span></button>');
                 }
               },
               {
                 "title":"Notes",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['desc'],row,"-")
+                  if(safeAccess(['desc'],row)){
+                   return "<button type=\"button\" id='btnNotes' class=\"btn btn-default btn-sm\"><span class=\"fa fa-sticky-note\">View</span></button>"; 
+                  }else{
+                    return "-";
+                  }
+
                 }
               },
               {
@@ -103,7 +110,7 @@ async function showOrders(orderArr){
               {
                 "title":"Status",
                 render: function(data, type, row){
-                  return  safeAccess(['status'],row,"-");
+                  return  safeAccess(['status'],row,"-").toUpperCase();
                 }
               },
 		       {
@@ -145,6 +152,21 @@ $(document).ready(function(){
     var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
 
   	showOrderDetails(data.id, data.order_line);
+  });
+
+  $('#tableOrders').on('click', '#btnDownloadPO', function () {
+    var RowIndex = $(this).closest('tr');
+    var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+    window.location.href = safeAccess(['po'],data,"")
+  });
+
+
+  $('#tableOrders').on('click', '#btnNotes', function () {
+    var RowIndex = $(this).closest('tr');
+    var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+    $("#orderNotes").html(safeAccess(['desc'],data,"-"));
+    $("#modalNotes").modal().show();
+
   });
 
 
@@ -214,7 +236,7 @@ orderDetailsHTML += '<th>Name</th>'
 orderDetailsHTML += '<th>Price</th>'
 orderDetailsHTML += '<th>Quantity</th>'
 orderDetailsHTML += '<th>Total</th>'
-orderDetailsHTML += '<th>Expected Deliver</th>'
+orderDetailsHTML += '<th>Expected Delivery</th>'
 orderDetailsHTML += '<th>Cancel</th>'
 orderDetailsHTML += '</tr>'
 orderDetailsHTML += '</thead>'

@@ -97,32 +97,7 @@ $(document).ready(function(){
 	$("#btConfirmOrder").click(function(){
 		confirmOrder();
 	});
-	$('#deliveryType').change( function() {
-		  if($('#deliveryType').val()!=3){
-		  	$('#deliveryDate').hide();
-		  }else{
-		 //  	var dtToday = new Date();
-			// var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
-			// var day = dtToday.getDate();
-			// var year = dtToday.getFullYear();
-			// if(month < 10)
-			//    month = '0' + month.toString();
-			// if(day < 10)
-			//    day = '0' + day.toString();
 
-			// var maxDate = year + '-' + month + '-' + day;
-			var someDate = new Date();
-				var numberOfDaysToAdd = 6;
-				someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-				var dd = someDate.getDate();
-				var mm = someDate.getMonth() + 1;
-				var y = someDate.getFullYear();
-
-				var someFormattedDate = y + '-'+ mm + '-'+dd; 
-			$('#deliveryDateInput').attr('min', someFormattedDate);
-		  	$('#deliveryDate').show();
-		  }
-	  });
 	
 	initAddresses();
 	initAddAddress();
@@ -149,7 +124,6 @@ function initAddAddress(){
 	  var country_id = $("#inputCountry").val();
 
 	  var onResponse = function(response){
-	    notifySuccess("Updated");
 	    location.reload(true);
 	    // window.location.href = 'productMaster.html';
 	  };
@@ -173,12 +147,51 @@ function initProductDetails(){
 	//need html work
 	getQuoteDetails(quoteId,function(response){
 		showCheckoutOrderSummary(response.data.quote.quote_line,response.data.quote );
+		$('#deliveryType').change( function() {
+		  if($('#deliveryType').val()!=3){
+		  	$('#deliveryDate').hide();
+		  }else{
+		 //  	var dtToday = new Date();
+			// var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
+			// var day = dtToday.getDate();
+			// var year = dtToday.getFullYear();
+			// if(month < 10)
+			//    month = '0' + month.toString();
+			// if(day < 10)
+			//    day = '0' + day.toString();
+
+			// var maxDate = year + '-' + month + '-' + day;
+			var someDate = new Date();
+
+				var sparePartOnly = true;
+
+				for(quoteItem of response.data.quote.quote_line){
+						if(quoteItem.type_id!=1){
+							sparePartOnly = false;
+							break;
+						}
+				}
+
+				var numberOfDaysToAdd = sparePartOnly?2:8;
+				//spare art only > 1 day
+				//if machine included > 7 days
+				//Machine + kit > 21 days
+				someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+				var dd = someDate.getDate();
+				var mm = someDate.getMonth() + 1;
+				var y = someDate.getFullYear();
+
+				var someFormattedDate = y + '-'+ mm + '-'+dd; 
+			$('#deliveryDateInput').attr('min', someFormattedDate);
+		  	$('#deliveryDate').show();
+		  }
+	  });
 	});
 }
 
 function confirmOrder(){
 	const orderNotes = $("#inputOrderNotes").val();
-	const poName = $("#inputPoName").val();
+	const poNumber = $("#inputPoName").val();
 	const po = document.querySelector('#pofile').files[0];
 	const billingAddressId = getBillingAddressId();
 	const shippingAddressId = getShippingAddressId();
@@ -189,7 +202,7 @@ function confirmOrder(){
 	}
 	notifyInfo("Please wait");
 
-	createOrder(quoteId,po,poName,shippingAddressId,billingAddressId,orderNotes,sched_delivery_date,function(response){
+	createOrder(quoteId,po,poNumber,shippingAddressId,billingAddressId,orderNotes,sched_delivery_date,function(response){
 			// notifySuccess("Proceed to payment");
 			if(!response.data.status){
 				return;
