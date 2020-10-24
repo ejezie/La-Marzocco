@@ -203,7 +203,7 @@ function loadProducts(beatdata) {
                 "title":"Group",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['item_group','name'],row,"");
+                  return safeAccess(['item_group','desc'],row,"");
                 }
               },
               {
