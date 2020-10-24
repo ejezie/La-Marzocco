@@ -97,32 +97,7 @@ $(document).ready(function(){
 	$("#btConfirmOrder").click(function(){
 		confirmOrder();
 	});
-	$('#deliveryType').change( function() {
-		  if($('#deliveryType').val()!=3){
-		  	$('#deliveryDate').hide();
-		  }else{
-		 //  	var dtToday = new Date();
-			// var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
-			// var day = dtToday.getDate();
-			// var year = dtToday.getFullYear();
-			// if(month < 10)
-			//    month = '0' + month.toString();
-			// if(day < 10)
-			//    day = '0' + day.toString();
 
-			// var maxDate = year + '-' + month + '-' + day;
-			var someDate = new Date();
-				var numberOfDaysToAdd = 6;
-				someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-				var dd = someDate.getDate();
-				var mm = someDate.getMonth() + 1;
-				var y = someDate.getFullYear();
-
-				var someFormattedDate = y + '-'+ mm + '-'+dd; 
-			$('#deliveryDateInput').attr('min', someFormattedDate);
-		  	$('#deliveryDate').show();
-		  }
-	  });
 	
 	initAddresses();
 	initAddAddress();
@@ -144,12 +119,11 @@ function initAddAddress(){
 	  var landmark = $("#inputLandmark").val();
 	  var phone = $("#inputPhone").val();
 	  var area_code_id = $("#inputArea").val();
-	  var city_id = $("#inputCity").val();
+	  // var city_id = $("#inputCity").val();
 	  var state_id = $("#inputState").val();
 	  var country_id = $("#inputCountry").val();
 
 	  var onResponse = function(response){
-	    notifySuccess("Updated");
 	    location.reload(true);
 	    // window.location.href = 'productMaster.html';
 	  };
@@ -161,7 +135,7 @@ function initAddAddress(){
 	    landmark,
 	    phone,
 	    area_code_id,
-	    city_id,
+	    // city_id,
 	    state_id,
 	    country_id,
 	    onResponse);
@@ -173,22 +147,62 @@ function initProductDetails(){
 	//need html work
 	getQuoteDetails(quoteId,function(response){
 		showCheckoutOrderSummary(response.data.quote.quote_line,response.data.quote );
+		$('#deliveryType').change( function() {
+		  if($('#deliveryType').val()!=3){
+		  	$('#deliveryDate').hide();
+		  }else{
+		 //  	var dtToday = new Date();
+			// var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
+			// var day = dtToday.getDate();
+			// var year = dtToday.getFullYear();
+			// if(month < 10)
+			//    month = '0' + month.toString();
+			// if(day < 10)
+			//    day = '0' + day.toString();
+
+			// var maxDate = year + '-' + month + '-' + day;
+			var someDate = new Date();
+
+				var sparePartOnly = true;
+
+				for(quoteItem of response.data.quote.quote_line){
+						if(quoteItem.type_id!=1){
+							sparePartOnly = false;
+							break;
+						}
+				}
+
+				var numberOfDaysToAdd = sparePartOnly?2:8;
+				//spare art only > 1 day
+				//if machine included > 7 days
+				//Machine + kit > 21 days
+				someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+				var dd = someDate.getDate();
+				var mm = someDate.getMonth() + 1;
+				var y = someDate.getFullYear();
+
+				var someFormattedDate = y + '-'+ mm + '-'+dd; 
+			$('#deliveryDateInput').attr('min', someFormattedDate);
+		  	$('#deliveryDate').show();
+		  }
+	  });
 	});
 }
 
 function confirmOrder(){
 	const orderNotes = $("#inputOrderNotes").val();
-	const poName = $("#inputPoName").val();
+	const poNumber = $("#inputPoName").val();
 	const po = document.querySelector('#pofile').files[0];
 	const billingAddressId = getBillingAddressId();
 	const shippingAddressId = getShippingAddressId();
+	const sched_delivery_date = $("#deliveryDateInput").val();
 	if(!billingAddressId || !shippingAddressId){
 		notifyError("Please select shipping and billing address")
 		return;
 	}
 	notifyInfo("Please wait");
 
-	createOrder(quoteId,po,poName,shippingAddressId,billingAddressId,orderNotes,function(response){
+	createOrder(quoteId,po,poNumber,shippingAddressId,billingAddressId,orderNotes,sched_delivery_date,function(response){
 			// notifySuccess("Proceed to payment");
 			if(!response.data.status){
 				return;
@@ -364,8 +378,8 @@ function populateCountry(){
 	    .append('<option disabled selected value>Select Country</option>');
       $("#inputState")
 	    .append('<option disabled selected value>Select State</option>');
-	   $("#inputCity")
-	    .append('<option disabled selected value>Select City</option>');
+	   // $("#inputCity")
+	   //  .append('<option disabled selected value>Select City</option>');
 	  $("#inputArea")
 	    .append('<option disabled selected value>Select Area</option>');
 
@@ -396,9 +410,9 @@ function populateState(keyId){
       $("#inputState")
 	    .append('<option disabled selected value>Select State</option>');
 
-      $('#inputState').change( function() {
-		  populateCities(keyId);
-	  });
+   //    $('#inputState').change( function() {
+		 //  populateCities(keyId);
+	  // });
   };
   getStates(keyId,onResponse);
 }

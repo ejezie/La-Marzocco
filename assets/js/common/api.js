@@ -331,7 +331,7 @@ async function createAddress(
     landmark,
     phone,
     area_code_id,
-    city_id,
+    // city_id,
     state_id,
     country_id,
     onResponse){
@@ -348,7 +348,7 @@ async function createAddress(
   data.append('phone',phone);
 
   data.append('area_code_id',area_code_id);
-  data.append('city_id',city_id);
+  // data.append('city_id',city_id);
   data.append('state_id',state_id);
   data.append('country_id',country_id);
 
@@ -1469,11 +1469,12 @@ async function getAddressesList(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function createOrder(quoteId,po,poName,shippingAddrId,billingAddrId,desc,onResponse,onError){
+async function createOrder(quoteId,po,po_number,shippingAddrId,billingAddrId,desc,sched_delivery_date,onResponse,onError){
   var data = new FormData();
   data.append('quote_id', quoteId);
   appendIfNotNull(data,"po",po)
-  appendIfNotNull(data,"poName",poName)
+  appendIfNotNull(data,"po_number",po_number)
+  appendIfNotNull(data,"sched_delivery_date",sched_delivery_date)
   data.append('shipping_address_id', shippingAddrId);
   data.append('billing_address_id', billingAddrId);
   data.append('desc', desc);
