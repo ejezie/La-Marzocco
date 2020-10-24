@@ -3702,6 +3702,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 /*small product area css here*/
 .small_product .single_product {
   display: flex;
+  height: 200px
 }
 .small_product .product_content {
   width: 55%;

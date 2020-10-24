@@ -75,26 +75,7 @@ async function showOrders(orderArr){
                   return safeAccess(['sap_order_id'],row,"")
                 }
               },
-              {
-                "title":"PO",
-                render: function(data, type, row, meta){
-                  // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['po_number'],row,"")+" \n\n"
-                  +((safeAccess(['po'],row)==undefined)?"":'<button type="button" id="btnDownloadPO" class="btn btn-default btn-sm"><span class="fa fa-cloud-download">Download</span></button>');
-                }
-              },
-              {
-                "title":"Notes",
-                render: function(data, type, row, meta){
-                  // console.log(JSON.stringify(row,null,2))
-                  if(safeAccess(['desc'],row)){
-                   return "<button type=\"button\" id='btnNotes' class=\"btn btn-default btn-sm\"><span class=\"fa fa-sticky-note\">View</span></button>"; 
-                  }else{
-                    return "-";
-                  }
-
-                }
-              },
+              
               {
                 "title":"Items",
                 render: function(data, type, row){
@@ -130,6 +111,33 @@ async function showOrders(orderArr){
               }
 		          }
             },
+            {
+                "title":"PO",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['po_number'],row,"");
+                }
+              },
+
+              {
+                "title":"PO Document",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return ((safeAccess(['po'],row)==undefined)?"":'<button type="button" id="btnDownloadPO" class="btn btn-default btn-sm"><span class="fa fa-cloud-download">Download</span></button>');
+                }
+              },
+              {
+                "title":"Notes",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  if(safeAccess(['desc'],row)){
+                   return "<button type=\"button\" id='btnNotes' class=\"btn btn-default btn-sm\"><span class=\"fa fa-sticky-note\">View</span></button>"; 
+                  }else{
+                    return "-";
+                  }
+
+                }
+              },
         //    {
         //     "title":"Cancel Order",
         //     render: function(data, type, row){
@@ -196,6 +204,7 @@ var orderDetailsHTML = ""
     orderDetailsHTML += '<th>Item Part No.</th>'
     orderDetailsHTML += '<th>Quantity</th>'
     orderDetailsHTML += '<th>Status</th>'
+    orderDetailsHTML += '<th>AWB</th>'
     orderDetailsHTML += '</tr>'
     orderDetailsHTML += '</thead>'
     orderDetailsHTML += '<tbody>'
@@ -208,6 +217,7 @@ var orderDetailsHTML = ""
     orderDetailsHTML += '<td>'+safeAccess(["item_part_number"],item,"-")+'</td>'
     orderDetailsHTML += '<td>'+safeAccess(["quantity"],item,"-")+'</td>'
     orderDetailsHTML += '<td>'+safeAccess(["status"],item,"-")+'</td>'
+    orderDetailsHTML += '<td>'+safeAccess(["awb"],item,"-")+'</td>'
     orderDetailsHTML += '</tr>'
     }
 

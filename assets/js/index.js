@@ -113,7 +113,7 @@ $(document).ready(function(){
 		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
 		topSellingProductsHTML += '</div>'
 		topSellingProductsHTML += '<div class="product_thumb">'
-		topSellingProductsHTML += '<a class="primary_img" href="product-details.html"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+		topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
 		topSellingProductsHTML += '</div>'
 		topSellingProductsHTML += '</div>'
 	}
@@ -189,7 +189,7 @@ async function showSpecialOffersProducts(items){
 		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
 		specialOffersProductsHTML += '</div>'
 		specialOffersProductsHTML += '<div class="product_thumb">'
-		specialOffersProductsHTML += '<a class="primary_img" href="product-details.html"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+		specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
 		specialOffersProductsHTML += '</div>'
 		specialOffersProductsHTML += '</div>'
 	}
