@@ -190,8 +190,8 @@ function initProductDetails(){
 }
 
 function confirmOrder(){
-	const orderNotes = $("#inputOrderNotes").val();
-	const poNumber = $("#inputPoName").val();
+	const orderNotes = $("#inputOrderNotes").val().length>0 ? $("#inputOrderNotes").val() : null;
+	const poNumber = $("#inputPoName").val().length>0 ? $("#inputPoName").val() : null;
 	const po = document.querySelector('#pofile').files[0];
 	const billingAddressId = getBillingAddressId();
 	const shippingAddressId = getShippingAddressId();
