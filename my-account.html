@@ -579,7 +579,7 @@ body {font-family: Verdana, sans-serif; margin:0}
                         <div class="dashboard_tab_button">
                             <ul role="tablist" class="nav flex-column dashboard-list">
                                 <!-- <li><a href="#dashboard" data-toggle="tab" class="nav-link active">Dashboard</a></li> -->
-                                <li> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li>
+                                <!-- <li> <a href="#orders" data-toggle="tab" class="nav-link">Orders</a></li> -->
                                 <!-- <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li> -->
                                 <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
                                 <li><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
@@ -594,13 +594,13 @@ body {font-family: Verdana, sans-serif; margin:0}
                                 <h3>Dashboard </h3>
                                 <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a href="#">Edit your password and account details.</a></p>
                             </div> -->
-                            <div class="tab-pane fade show active" id="orders">
+                            <!-- <div class="tab-pane fade show active" id="orders">
                                 <div class="checkout_form">
                                     <h3>Orders</h3>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table" id="tableOrders">
-                                       <!--  <thead>
+                                        <thead>
                                             <tr>
                                                 <th>Order</th>
                                                 <th>Date</th>
@@ -624,10 +624,10 @@ body {font-family: Verdana, sans-serif; margin:0}
                                                 <td>$17.00 for 1 item </td>
                                                 <td><a href="cart.html" class="view">view</a></td>
                                             </tr>
-                                        </tbody> -->
+                                        </tbody>
                                     </table>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="tab-pane fade" id="downloads">
                                 <h3>Downloads</h3>
                                 <div class="table-responsive">
@@ -657,7 +657,7 @@ body {font-family: Verdana, sans-serif; margin:0}
                                     </table>
                                 </div>
                             </div> -->
-                            <div class="tab-pane" id="address">
+                            <div class="tab-pane show active" id="address">
                                 <!-- <p>The following addresses will be used on the checkout page by default.</p> -->
 
                                 <div class="checkout_form">
@@ -690,6 +690,9 @@ body {font-family: Verdana, sans-serif; margin:0}
                                                             <input type="checkbox"><label style="font-size:15px">Shipping Address</label>
                                                         </div> -->
                                                         
+                                                </div>
+                                                <div class="order_button col-12 mb-20">
+                                                    <button id="toggleModalAddAddress" data-toggle="modal" data-target="#createAddressModal">Add new Address</button>
                                                 </div>
                                         </div>
                                     </div>
@@ -809,6 +812,105 @@ body {font-family: Verdana, sans-serif; margin:0}
 
 
 
+      <!-- modal area start-->
+    <div class="modal fade" id="createAddressModal" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Add New Address</strong></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="table_desc">     -->
+
+                                <form>
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                    <label for="addressType">Address Type</label>
+                                    <select type="addressType" class="form-control" id="addressType">
+                                        <option value="1">Billing Address</option>
+                                        <option value="2">Shipping Address</option>
+                                        <option value="3">Common Billing & Shipping Address</option>
+                                  
+                                    </select>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label >Name</label>
+                                    <input  class="form-control" id="inputName" aria-describedby="fnameHelp" placeholder="Enter Full Name">
+                                  </div>
+
+
+                                  <div class="form-group">
+                                    <label>Address Line 1</label>
+                                    <input  class="form-control" id="inputAddress" aria-describedby="companyNameHelp" placeholder="Enter Address Line 1">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label>Address Line 2</label>
+                                    <input  class="form-control" id="inputAddress2" aria-describedby="companyNameHelp" placeholder="Enter Address Line 2">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label>Landmark</label>
+                                    <input  class="form-control" id="inputLandmark" aria-describedby="companyNameHelp" placeholder="Enter Landmark">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label>Phone</label>
+                                    <input  class="form-control" id="inputPhone" aria-describedby="companyNameHelp" placeholder="Enter Phone No.">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label>Country</label>
+                                    <select class="form-control" id="inputCountry" placeholder="Select Country" ></select>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label >State</label>
+                                    <select class="form-control"  id="inputState"placeholder="Select State"  ></select>
+                                  </div>
+
+                             <!--      <div class="form-group">
+                                    <label >City</label>
+                                    <select class="form-control" id="inputCity" placeholder="Select City" ></select>
+                                  </div>
+ -->
+
+                                  <div class="form-group">
+                                    <label>Area Code</label>
+                                    <input  class="form-control" id="inputZipCode" aria-describedby="companyNameHelp" placeholder="Enter Zip Code">
+                                  </div>
+                                      <!-- <div class="form-group">  -->
+                                    <button id="searchAreas" type="button" class="btn btn-success btn-sm float-right" > Search Areas  
+                                    </button> 
+                                    <br>
+                                <!-- </div>  -->
+                                  
+                                  <div class="form-group">
+                                    <label >Area</label>
+                                    <select class="form-control" id="inputArea" placeholder="Select Area" ></select>
+                                  </div>
+
+                                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                  <button type="button" id="submitAddAddress" class="btn btn-success">Submit</button>
+                                </div>
+
+                              </form>   
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
 
   <!-- Show Order Details modal area start-->
     <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
@@ -995,7 +1097,7 @@ body {font-family: Verdana, sans-serif; margin:0}
 <!-- <script src="assets/js/sidebarFilter.js"></script> -->
 
 <!-- mini Cart JS -->
-<!-- <script src="assets/js/miniCart.js"></script> -->
+<script src="assets/js/miniCart.js"></script>
 <script src="assets/js/common/cart.js"></script>
 
 <!--  Cart JS-->

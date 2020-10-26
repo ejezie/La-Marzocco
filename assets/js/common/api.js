@@ -1768,10 +1768,12 @@ async function getNewsletter(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function uploadNewsletter(onResponse,onError,file){
+async function uploadNewsletter(onResponse,onError,month, year, file){
 
   var data = new FormData();
   data.append("newsletter",file);
+  data.append("month",month);
+  data.append("year",year);
 
 
   var config = {

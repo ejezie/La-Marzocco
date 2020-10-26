@@ -1,6 +1,7 @@
 async function showNewsletter(newsletterData){
 
 	var newsletterHTML = ''
+	$("#newsletter").empty()
 
 	var newsletter = newsletterData.newsletters.data
 
@@ -109,19 +110,93 @@ $(document).ready(function(){
 
 $('#uploadNewsletter').click(function () {
       var pdf = document.querySelector('#pdffile');
+
+      console.log("pdf : ",pdf.files[0])
+      var onError =function(error){
+        notifyError("Failed to upload file");
+      };
       var onResponse = function(response){
         $('#UploadNewsletterModal').modal('hide');
         if(response.data.newsletter){
 
             notifySuccess("File uploaded!");
+
+            getNewsletter(function(response){
+				showNewsletter(response.data)
+			},onError);
         }else{
             notifyError(response.data.message);
         }
       };
-      var onError =function(error){
-        notifyError("Failed to upload file");
-      };
-      uploadNewsletter(onResponse,onError, pdf.files[0]);
+
+
+    var months = {
+		'January' : 1,
+		'February' : 2,
+		'March' : 3,
+		'April' : 4,
+		'May' : 5,
+		'June' : 6,
+		'July' : 7,
+		'August' : 8,
+		'September' : 9,
+		'October' : 10,
+		'November' : 11,
+		'December' : 12
+	}
+
+	var selectedMonth = $('#month').val()
+	var selectedMonthNo = months[selectedMonth]
+	var currentYear = $('#currentYear').val()
+
+	if(selectedMonthNo > 0){
+		if(pdf.files[0] != undefined){
+
+      		uploadNewsletter(onResponse,onError,selectedMonthNo,currentYear, pdf.files[0]);
+		}else{
+			alert("Upload valid File")
+			return false
+		}	
+
+	}else{
+		alert("Select valid month")
+		return false
+	}
+
+
+
 });
+
+
+
+$('#addNewsletter').click(function () {
+	var d = new Date();
+  	var n = d.getFullYear();
+	$("#currentYear").val(n);
+
+
+	var onResponse = function(response){
+		var newsletterList = response.data.newsletters.data
+
+		var assignedMonth = []
+		var monthList = [1,2,3,4,5,6,7,8,9,10,11,12]
+
+		for(i=0;i<newsletterList.length;i++){
+			assignedMonth.push(newsletterList[i]["month"])
+			var filtered = monthList.filter(function(value, index, arr){ return value != newsletterList[i]["month"];})
+		}
+
+		
+  	};
+
+  	var onError =function(error){
+        notifyError("Failed to upload file");
+  	};
+
+	getNewsletter(onResponse,onError)
+
+	// console.log("listOfNewsletter : ", listOfNewsletter)
+
+})
 
 

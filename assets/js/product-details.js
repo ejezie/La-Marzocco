@@ -24,6 +24,9 @@
 		// detailsHTML += '<li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>'
 		// detailsHTML += '</ul>'
 		// detailsHTML += '</div>'
+		if(item["description"]){
+			detailsHTML += '<p>'+item["description"]+'</p>'
+		}
 		detailsHTML += '<div class="price_box">'
 		detailsHTML += '<span class="current_price">'+item["price"]+'</span>'
 		detailsHTML += ''
