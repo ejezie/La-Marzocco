@@ -1473,11 +1473,11 @@ async function createOrder(quoteId,po,po_number,shippingAddrId,billingAddrId,des
   var data = new FormData();
   data.append('quote_id', quoteId);
   appendIfNotNull(data,"po",po)
+  appendIfNotNull(data,"desc",desc)
   appendIfNotNull(data,"po_number",po_number)
   appendIfNotNull(data,"sched_delivery_date",sched_delivery_date)
   data.append('shipping_address_id', shippingAddrId);
   data.append('billing_address_id', billingAddrId);
-  data.append('desc', desc);
 
   var config = {
     method: 'post',
