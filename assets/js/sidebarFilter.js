@@ -168,7 +168,7 @@ async function showMachinesSideFilter(machineList){
 
 			// console.log(">>>>>>>>>>",machineList[i]["machines"]) 
 			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
-			sidebarHTML += '<li><form><p><input type="checkbox" value="'+machineList[i]["machines"][k]["id"]+'" id="machine"  /><label for="machine" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">'+machineList[i]["machines"][k]["code"]+'</label></p></form></li>'
+			sidebarHTML += '<li><form><p><input type="checkbox" value="'+machineList[i]["machines"][k]["id"]+'" id="'+machineList[i]["machines"][k]["id"]+'"  /><label for="'+machineList[i]["machines"][k]["id"]+'" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">'+machineList[i]["machines"][k]["code"]+'</label></p></form></li>'
 
 		}
 		
@@ -311,8 +311,6 @@ async function showGroupSideFilter(groupList){
 async function showParentSideFilter(familyList){
 	var sidebarHTML = ""
 
-
-
 	for(i=0; i<familyList.length ;i++){
 
 		const item = familyList[i];
@@ -322,20 +320,24 @@ async function showParentSideFilter(familyList){
 		sidebarHTML += '<ul id="catalog-menu" class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
 		sidebarHTML += '<li class="col-sm-3">'
-		sidebarHTML += '<ul id="catalog-menu_2" class="catalog-menu">'
+		sidebarHTML += '<ul>'
+		// sidebarHTML += '<ul id="catalog-menu_2" class="catalog-menu">'
+
 
 		for(j=0; j<item["machines"].length;j++){ 
 
 			const inneritem = familyList[i]["machines"][j];
+
+			console.log("njsjdnc : ", inneritem)
 			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
 			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
-			sidebarHTML += '<li><form><p><input type="checkbox" value="'+inneritem["id"]+'" id="catalog"  /><label for="catalog" style="white-space: nowrap;font-size:14px; font-weight:500;">'+inneritem["name"]+'</label></p></form></li>'
-			// for(k=0; k<inneritem["parents"].length;k++){
-			// 	const innerMostitem = inneritem["parents"][k];
-			// 	sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
-			// }
+			sidebarHTML += '<li><form><p><input type="checkbox" value="'+inneritem["id"]+'" id="'+inneritem["name"]+'"  /><label for="'+inneritem["name"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+inneritem["name"]+'</label></p></form></li>'
+		// 	for(k=0; k<inneritem["parents"].length;k++){
+		// 		const innerMostitem = inneritem["parents"][k];
+		// 		sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
+		// 	}
 		}
-		
+	
 
 		sidebarHTML += '</ul>'
 		sidebarHTML += '</li>'
@@ -345,15 +347,15 @@ async function showParentSideFilter(familyList){
 
 	}
 
-	$("#sidebarCatalogFilter").html("");
+	// $("#sidebarCatalogFilter").html("");
 	$("#sidebarCatalogFilter").append(sidebarHTML);
 	$('#sidebarCatalogFilter input[type="checkbox"]').on('change', function() {
 
 
-		$( ".dropdown-menu li " ).click(function() {
-		  $("ul.dropdown-menu").css("display", "none");
-		});
-   		$('input[type="checkbox"]').not(this).prop('checked', false);
+		// $( ".dropdown-menu li " ).click(function() {
+		//   $("ul.dropdown-menu").css("display", "none");
+		// });
+   		$('#sidebarCatalogFilter input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = catalogResultController;
    		resultController.loadResults(getCheckedParent());
    		// showCatalogDropdownSelection(getCheckedParent());

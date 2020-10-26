@@ -44,8 +44,8 @@ async function showCarrouselParts(imageUrl,parts){
 
         console.log("parts : ", parts)
         const part = parts[i];
-        console.log("part >>>>>> : ", parts)
-        carouselHTML += '<li class="playlist-item" href="#" onclick="toitemdetailpage('+safeAccess(["id"],part)+')"><a href="#">'
+        // console.log("part >>>>>> : ", part)
+        carouselHTML += '<li class="playlist-item" href="#" onclick="toitemdetailpage('+safeAccess(["item_id"],part)+')"><a href="#">'
         carouselHTML += '<div class="thumb">'
         // carouselHTML += '<span style="  padding: 0 10px;border-radius: 2px;text-transform: capitalize;font-size: 16px;font-weight: 500;text-align: center;display: inline-block;" class="label_sale">'+parseInt(part.part_ref_number)+'</span>'
         // carouselHTML += '<img class="img-responsive" src="https://d1ekp87k3th824.cloudfront.net/media/wysiwyg/Diagrams/la-marzocco-linea-steam-valve.jpg">'
