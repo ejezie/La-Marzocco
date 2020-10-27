@@ -68,6 +68,20 @@ async function showOrders(orderArr){
                 }
               },
               {
+                "title":"Customer Id",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['short_code'],row['user'],"")
+                }
+              },
+              {
+                "title":"Customer Name",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['first_name'],row['user'],"")
+                }
+              },
+              {
                 "title":"Order Id",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
@@ -84,13 +98,19 @@ async function showOrders(orderArr){
               {
                 "title":"Price",
                 render: function(data, type, row){
-                  return  "$"+safeAccess(['total'],row,"-");
+                  return  "$"+safeAccess(['total'],row,"-").toLocaleString("en-AU");
                 }
               },
               {
                 "title":"Status",
                 render: function(data, type, row){
                   return  safeAccess(['status'],row,"-");
+                }
+              },
+              {
+                "title":"Paid Amount",
+                render: function(data, type, row){
+                  return  "$"+safeAccess(['amount_paid'],row,"-").toLocaleString("en-AU");
                 }
               },
 		       {
@@ -201,7 +221,7 @@ var orderDetailsHTML = ""
     orderDetailsHTML += '<th>Item Part No.</th>'
     orderDetailsHTML += '<th>Quantity</th>'
     orderDetailsHTML += '<th>Status</th>'
-    orderDetailsHTML += '<th>AWB</th>'
+    orderDetailsHTML += '<th>Tracking Id</th>'
     orderDetailsHTML += '</tr>'
     orderDetailsHTML += '</thead>'
     orderDetailsHTML += '<tbody>'
@@ -239,11 +259,12 @@ orderDetailsHTML += '<thead>'
 orderDetailsHTML += '<tr>'
 orderDetailsHTML += '<th>#</th>'
 orderDetailsHTML += '<th>Product</th>'
+orderDetailsHTML += '<th>Code</th>'
 orderDetailsHTML += '<th>Name</th>'
 orderDetailsHTML += '<th>Price</th>'
 orderDetailsHTML += '<th>Quantity</th>'
 orderDetailsHTML += '<th>Total</th>'
-orderDetailsHTML += '<th>Expected Deliver</th>'
+orderDetailsHTML += '<th>Expected Dispatch</th>'
 orderDetailsHTML += '<th>Cancel</th>'
 orderDetailsHTML += '</tr>'
 orderDetailsHTML += '</thead>'
@@ -255,6 +276,7 @@ for(i=0;i<quoteLine.length;i++){
   orderDetailsHTML += '<tr>'
   orderDetailsHTML += '<th scope="row">'+(i+1)+'</th>'
   orderDetailsHTML += '<td><img src="../assets/img/s-product/product.jpg" alt=""></td>'
+  orderDetailsHTML += '<td>'+safeAccess(["item","code"],quoteItem,"-")+'</td>'
   orderDetailsHTML += '<td>'+safeAccess(["item","name"],quoteItem,"-")+'</td>'
   orderDetailsHTML += '<td>$'+safeAccess(["price"],quoteItem,"-")+'</td>'
   orderDetailsHTML += '<td>'+safeAccess(["qty"],quoteItem,"-")+'</td>'
