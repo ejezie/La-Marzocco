@@ -1,7 +1,6 @@
 async function showPromotion(promotionData){
 
 
-	console.log("promotionHTML : ", promotionData)
 	var promotionImages = promotionData.images.data
 
 	$("#promotions_master").empty()
@@ -39,18 +38,25 @@ async function showPromotion(promotionData){
 
 
 	$('.deactivateBtn').click(async function () {
+		notifyInfo("Please wait");
 		var id = this.id	
 
-      	var onResponse = function(response){
-      		console.log("response : ", response)
-        	if(response.data.image){
-            	notifySuccess("Promotion Image Deactivated Successfully");
-        	}else{
-            	notifyError(response.data.message);
-        	}
-      	};
       	var onError =function(error){
         	notifyError("Failed to upload file");
+      	};
+
+      	var onResponse = function(response){
+        	if(response.data.image){
+            	notifySuccess("Promotion Image Deactivated Successfully");
+            	
+            	getPromotion(function(response){
+					showPromotion(response.data)
+				},onError);
+
+        	}else{
+            	notifyError(response.data.message);
+
+        	}
       	};
 
       	deactivatePromotion(id,onResponse,onError)
@@ -60,25 +66,28 @@ async function showPromotion(promotionData){
 
 
 	$('.deleteBtn').click(async function () {
+		notifyInfo("Please wait");
 		var id = this.id	
 
-      	var onResponse = function(response){
-      		console.log("response : ",response)
-        	if(response.data.status == true){
-            	notifySuccess(response.data.message);
-        	}else{
-            	notifyError(response.data.message);
-        	}
-      	};
       	var onError =function(error){
         	notifyError("Failed to upload file");
       	};
 
+      	var onResponse = function(response){
+        	if(response.data.status == true){
+            	notifySuccess(response.data.message);
+
+            	getPromotion(function(response){
+					showPromotion(response.data)
+				},onError);
+
+        	}else{
+            	notifyError(response.data.message);
+        	}
+      	};
+
       	deletePromotion(id,onResponse,onError)
 
-      	getPromotion(function(response){
-			showPromotion(response.data)
-		},onError);
 	});
 
 }
@@ -101,10 +110,10 @@ $(document).ready(function(){
 
 
 $('#uploadPromotion').click(async function () {
+	notifyInfo("Please wait");
       var pdf = document.querySelector('#promotions_file');
       var onResponse = function(response){
         $('#UploadPromotionModal').modal('hide');
-        console.log("response : ", response)
         if(response.data.image){
 
             notifySuccess("File uploaded!");
