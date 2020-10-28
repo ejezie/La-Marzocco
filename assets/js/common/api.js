@@ -166,6 +166,28 @@ async function updateItem(
   .catch(onError);
 
 }
+async function updateItemImages(
+  item_id,
+  formData,
+  onResponse,
+  onError){
+
+  var config = {
+    method: 'post',
+    url:BASE_URL+'item/'+item_id,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    },
+    data : formData
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);
+
+}
 
 function appendIfNotNull(data,key,val){
   if(val || val == false){
