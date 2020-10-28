@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Product Master</title>
+  <title>Product Description</title>
 
   <!-- Bootstrap -->
   <!-- <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
@@ -28,7 +28,7 @@
   
 
   <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet">
+  <!-- <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet"> -->
 
   <!-- Admin Dashboard Custom CSS -->
     <link href="css/adminDashboard.css" rel="stylesheet">
@@ -39,7 +39,7 @@
   <!-- <link href="https://gyrocode.github.io/jquery-datatables-checkboxes/1.1.0/css/dataTables.checkboxes.css" rel="stylesheet"> -->
 
 
-  <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
+  <!-- <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" /> -->
 
 
 
@@ -79,16 +79,9 @@
       content: "\f093\00a0";
     }
 
-<<<<<<< HEAD
-=======
-    /* Current Page sidebar color*/
-    li.current-page, li.active {
-      border-right: 10px solid #ae0000;
-      /*background: #ae0000;*/
-      }*
+   
 
 
->>>>>>> b2fb466b04ac2cf550439463d5d0ebca0c078da2
 
     </style>
 
@@ -125,7 +118,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Product Master</h3>
+                <h3>Product Description</h3>
               </div>
 
               <div class="title_right">
@@ -133,8 +126,8 @@
                   <div class="form-group pull-right top_search">
                     <div class="input-group">
                       <!-- <button class="btn add btn-primary" data-toggle="modal" data-target="#singleUploadModal">Add Product</button> -->
-                      <a href="uploadSingleProduct.html"><button class="btn add btn-primary">Add Product</button></a>
-                      <button class="btn upload btn-primary" data-toggle="modal" data-target="#bulkUploadModal">Bulk Upload</button>
+                      <!-- <a href="uploadSingleProduct.html"><button class="btn add btn-primary">Add Product</button></a> -->
+                      <button class="btn upload btn-primary" data-toggle="modal" data-target="#bulkUploadModal">Upload Product Description</button>
                     </div>
                   </div>
                 </div>
@@ -154,7 +147,7 @@
                 <div class="col-md-12 col-sm-12 ">
                   <div class="x_panel">
                     <div class="x_title">
-                      <h2>Product Master Data</h2>
+                      <h2>Product Description Data</h2>
                     <!-- <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -178,18 +171,7 @@
 <<<<<<< HEAD
 </select> -->
 
-                    <select style="position: absolute;right: 40px" id="selectBulkUpdate">
-                      <!-- <option value="3" selected="selected"> 3 </option> -->
-                      <option selected="selected" disabled="true" >Bulk Update</option>
-                      <option>Recommended</option>
-                      <option>Not Recommended</option>
-                      <option>Active</option>
-                      <option>Inactive</option>
-                      <option>Is Consumable</option>
-                      <option>Not Consumable</option>
-                      <option>Slow Moving</option>
-                      <option>Price</option>
-                    </select>
+              
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -197,7 +179,7 @@
                       <div class="col-sm-12">
                         <div class="card-box table-responsive">
                           <p class="text-muted font-13 m-b-30">
-                            Below table consists of the complete inventory with options to add and update product.
+                            Below table consists of the complete inventory with their description.
                           </p>
                           <table id="items_master" class="table table-striped table-bordered" style="width:100%">
                           <!-- <table id="items_master" class="table table-striped jambo_table bulk_action" style="width:100%"> -->
@@ -1073,7 +1055,7 @@
             <!-- <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> -->
             <!-- <script src="../build/js/basic.js"></script> -->
 
-            <script src="js/productMaster.js"></script>
+            <script src="js/productDescription.js"></script>
             <!-- Side NavBar -->
             <script src="js/sideNavBar.js"></script>
 

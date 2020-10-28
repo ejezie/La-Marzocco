@@ -2,6 +2,7 @@ var employeeMasterTable;
 function loadCustomers() {
 
  employeeMasterTable = $('#employee_master').dataTable( {
+   searching: false,
    processing: true,
    serverSide: true,
    pageLength: 10,

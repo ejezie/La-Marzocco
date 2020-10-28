@@ -3,6 +3,7 @@ var itemMasterTable;
 async function showOrders(orderArr){
    itemMasterTable = $('#tableOrders').DataTable( {
    dom: 'Blfrtip',
+   searching: false,
    processing: true,
    serverSide: true,
    pageLength: 10,

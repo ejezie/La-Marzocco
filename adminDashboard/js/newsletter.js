@@ -1,4 +1,31 @@
+var months = {
+		'January' : 1,
+		'February' : 2,
+		'March' : 3,
+		'April' : 4,
+		'May' : 5,
+		'June' : 6,
+		'July' : 7,
+		'August' : 8,
+		'September' : 9,
+		'October' : 10,
+		'November' : 11,
+		'December' : 12
+	}
+
+
+function val2key(val,array){
+    for (var key in array) {
+        if(array[key] == val){
+            return key;
+        }
+    }
+ return false;
+}
+
 async function showNewsletter(newsletterData){
+
+	console.log(" Month name : ",val2key(2,months))
 
 	var newsletterHTML = ''
 	$("#newsletter").empty()
@@ -18,9 +45,11 @@ async function showNewsletter(newsletterData){
 
 	for(i=0; i< newsletter.length; i++){
 
+
+		console.log("newsletter : ", newsletter)
 		newsletterHTML += '<tr>'
-		newsletterHTML += '<td><article class="media event"><a class="pull-left date"><p class="month">Jan</p><p class="month">2020</p></a>'
-		newsletterHTML += '<div class="media-body"><p>Newsletter : Jan 2020 Update</p><a class="title" href="'+newsletter[i]["name"]+'">PDF</a></div></article></td>'
+		newsletterHTML += '<td><article class="media event"><a class="pull-left date"><p class="month">'+(val2key(newsletter[i]["month"],months)).substring(0,3)+'</p><p class="month">'+newsletter[i]["year"]+'</p></a>'
+		newsletterHTML += '<div class="media-body"><p>Newsletter : '+val2key(newsletter[i]["month"],months)+' '+newsletter[i]["year"]+' Update</p><a class="title" href="'+newsletter[i]["name"]+'">PDF</a></div></article></td>'
 		newsletterHTML += '<td><button type="button" class="btn btn-default btn-sm deactivateBtn" id="'+newsletter[i]["id"]+'"><span class="fa fa-times-circle"></span></button></td>'
 		newsletterHTML += '<td><button type="button" class="btn btn-default btn-sm deleteBtn" id="'+newsletter[i]["id"]+'"><span class="glyphicon glyphicon-trash"></span></button></td>'
 
