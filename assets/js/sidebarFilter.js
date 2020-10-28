@@ -187,6 +187,17 @@ async function showMachinesSideFilter(machineList){
    		$('input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = machineResultController;
 		resultController.loadResults(getCheckedMachine());
+
+		// Get selected labe; as heading  (Start)
+		var label=$(this).prop("labels"),
+        text = $(label).text()
+        $("#shopTitle").empty()
+        var shopTitleHTML = ''
+        shopTitleHTML += '<h1>Product Catalog : Machine - '+text+'</h1>'
+        $("#shopTitle").append(shopTitleHTML)
+		// Get selected labe; as heading  (End)
+
+
 	});
 
 }
@@ -261,6 +272,7 @@ async function showGroupSideFilter(groupList){
 	var sidebarHTML = ""
 
 	
+		console.log("groupList >>>>>>>>>>------------- ", groupList)
 
 	for(i=0; i<groupList.length ;i++){
 
@@ -273,21 +285,20 @@ async function showGroupSideFilter(groupList){
 		sidebarHTML += '<li class="col-sm-3">'
 		sidebarHTML += '<ul>'
 
-		for(j=0; j<item["machines"].length;j++){ 
+		console.log("Items >>>>>>>>>>------------- ", item)
 
-			const inneritem = groupList[i]["machines"][j];
-			// console.log("inneritem : ", inneritem)
-			// sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
+		// for(j=0; j<item["machines"].length;j++){ 
+
+			// const inneritem = groupList[i]["machines"][j];
+			const inneritem = groupList[i]["machines"][0];
 
 			for(k=0; k<inneritem["groups"].length;k++){
 
 				const innerMostitem = inneritem["groups"][k];
 
-				// console.log("innerMostitem >>>>>>> : ", innerMostitem)
-				// sidebarHTML += '<li><label class="custom-control"> <input  value="'+innerMostitem["id"]+'" type="checkbox"  class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
 				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="'+innerMostitem["id"]+'" /><label for="'+innerMostitem["id"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
 			}
-		}
+		// }
 		
 
 		sidebarHTML += '</ul>'
@@ -303,6 +314,16 @@ async function showGroupSideFilter(groupList){
 	$('#sidebarGroupFilter input[type="checkbox"]').on('change', function() {
    		$('#sidebarGroupFilter input[type="checkbox"]').not(this).prop('checked', false);
    		refreshCatalog();
+
+   		// Get selected labe; as heading  (Start)
+		var label=$(this).prop("labels"),
+        text = $(label).text()
+        $("#shopTitle").empty()
+        var shopTitleHTML = ''
+        shopTitleHTML += '<h1>Product Catalog : Group - '+text+'</h1>'
+        $("#shopTitle").append(shopTitleHTML)
+		// Get selected labe; as heading  (End)
+   		
 	});
 	
 }
@@ -359,6 +380,15 @@ async function showParentSideFilter(familyList){
    		resultController = catalogResultController;
    		resultController.loadResults(getCheckedParent());
    		// showCatalogDropdownSelection(getCheckedParent());
+
+   		// Get selected labe; as heading  (Start)
+		var label=$(this).prop("labels"),
+        text = $(label).text()
+        $("#shopTitle").empty()
+        var shopTitleHTML = ''
+        shopTitleHTML += '<h1>Product Catalog : Catalog - '+text+'</h1>'
+        $("#shopTitle").append(shopTitleHTML)
+		// Get selected labe; as heading  (End)
 	});
 }
 

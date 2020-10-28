@@ -123,6 +123,17 @@
 
 
  <script>
+        // Login utton click on Enter (start)
+        var input = document.getElementById("password");
+        input.addEventListener("keyup", function(event) {
+          if (event.keyCode === 13) {
+           event.preventDefault();
+           document.getElementById("login").click();
+          }
+        });
+        // Login utton click on Enter (End)
+
+        
         $(document).ready(function(){
           alert("login")
         $("#forgotPassword").click(async function(){
@@ -137,6 +148,7 @@
                 });
             }
         });
+
 
         $("#login").click(async function(){
             var email = $("#email").val();

@@ -567,6 +567,29 @@ async function bulkUploadItems(onResponse,onError,file){
 }
 
 
+async function bulkUploadItemDescription(onResponse,onError,file){
+
+  var data = new FormData();
+  data.append("file",file);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'upload/item-desc',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+
 async function bulkUploadCartItems(user_id,file,onResponse,onError){
 
   var data = new FormData();
@@ -1790,10 +1813,12 @@ async function getNewsletter(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function uploadNewsletter(onResponse,onError,file){
+async function uploadNewsletter(onResponse,onError,month, year, file){
 
   var data = new FormData();
   data.append("newsletter",file);
+  data.append("month",month);
+  data.append("year",year);
 
 
   var config = {

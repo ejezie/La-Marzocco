@@ -337,6 +337,7 @@ async function showOrderDetails(quoteLine){
 	orderDetailsHTML += '<thead>'
 	orderDetailsHTML += '<tr>'
 	orderDetailsHTML += '<th class="product_thumb">Product</th>'
+	orderDetailsHTML += '<th class="product_code">Code</th>'
 	orderDetailsHTML += '<th class="product_name">Name</th>'
 	orderDetailsHTML += '<th class="product-price">Price</th>'
 	orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
@@ -351,8 +352,11 @@ async function showOrderDetails(quoteLine){
 	for(i=0;i<quoteLine.length;i++){
 		const quoteItem = quoteLine[i];
 
+		console.log("quoteItem : ", quoteItem)
+
 		orderDetailsHTML += '<tr>'
 		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","code"],quoteItem,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
 		orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'

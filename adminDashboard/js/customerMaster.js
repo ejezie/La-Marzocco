@@ -2,6 +2,7 @@ var customerMasterTable;
 function loadCustomers() {
 
  customerMasterTable = $('#customer_master').dataTable( {
+   searching: false,
    processing: true,
    serverSide: true,
    pageLength: 10,
@@ -50,33 +51,34 @@ function loadCustomers() {
               }],
               columns: [
               {
-                "title":"Short Code",
+                "title":"Customer Code",
                 render: function(data, type, row, meta){
                   return row.short_code;
                 }
               },
               {
-                "title":"First Name",
+                "title":"Name",
                 render: function(data, type, row){
                   return row.first_name;
                 }
               },
-              {
-                "title":"Middle Name",
-                render: function(data, type, row){
-                  return row.middle_name;
-                }
-              },
-              {
-                "title":"Last Name",
-                render: function(data, type, row){
-                  return row.last_name;
-                }
-              },
+              
               {
                 "title":"Company Name",
                 render: function(data, type, row){
                   return row.company_name;
+                }
+              },
+              {
+                "title":"Deposit Required",
+                render: function(data, type, row){
+                  if(row.deposit_required== 1){
+                    return "Yes"
+                  }else if(row.deposit_required== 0){
+                    return "No";
+                  }else if(row.deposit_required== 0){
+                    return "-";
+                  }
                 }
               },
          {

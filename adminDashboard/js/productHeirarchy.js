@@ -1,6 +1,6 @@
 function populateGroup(){
 	var productGroupTable = $('#productGroup').dataTable( {
-
+		searching: false,
 		processing: true,
 		serverSide: true,
 		pageLength: 10,
@@ -9,7 +9,7 @@ function populateGroup(){
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
 			// const loadingId = notifyInfo("Loading groups");
-			console.log(JSON.stringify(data,null,2));
+			// console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
 				// dismiss(loadingId);
@@ -151,7 +151,7 @@ function populateGroup(){
 
 function populateFamilyDesc(){
 	var productGroupTable = $('#productFamilyDesc').dataTable( {
-
+		searching: false,
 		processing: true,
 		serverSide: true,
 		pageLength: 10,
@@ -160,15 +160,15 @@ function populateFamilyDesc(){
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
 			// const loadingId = notifyInfo("Loading groups");
-			console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
 				// dismiss(loadingId);
+
 				callback({
 					draw:data.draw,
-					recordsTotal: res.data.groups.total,
-					recordsFiltered: res.data.groups.total,
-					data: res.data.groups.data
+					recordsTotal: res.data.families.total,
+					recordsFiltered: res.data.families.total,
+					data: res.data.families.data
 				});
 			};
 			var onError =function(error){
@@ -189,6 +189,7 @@ function populateFamilyDesc(){
 		{
 			"title":"Code",
 			render: function(data, type, row){
+			console.log("family Desc",row);
 				return row.id ;
 			}
 		},
@@ -296,7 +297,7 @@ function populateFamilyDesc(){
 
 function populateFamily(){
 	const tableFamily = $('#productFamily').dataTable( {
-
+		searching: false,
 		processing: true,
 		serverSide: true,
 		autoWidth: false,
@@ -305,7 +306,7 @@ function populateFamily(){
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
 			// const loadingId = notifyInfo("Loading family");
-			console.log(JSON.stringify(data,null,2));
+			// console.log("Family", JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
 				// dismiss(loadingId);
@@ -443,7 +444,7 @@ function populateFamily(){
 function populateType(){
 
 	const typeTable = $('#productType').dataTable( {
-
+		searching: false,
 		processing: true,
 		serverSide: true,
 		autoWidth: false,
@@ -452,7 +453,7 @@ function populateType(){
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
 			// const loadingId = notifyInfo("Loading types");
-			console.log(JSON.stringify(data,null,2));
+			// console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
 				// dismiss(loadingId);
@@ -588,7 +589,7 @@ function populateType(){
 function populateParent(){
 
 	const tableParent = $('#productParent').dataTable( {
-
+		searching: false,
 		processing: true,
 		serverSide: true,
 		autoWidth: false,
@@ -597,7 +598,7 @@ function populateParent(){
 		lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
 		ajax: function(data, callback, settings) {
 			// const loadingId = notifyInfo("Loading parents");
-			console.log(JSON.stringify(data,null,2));
+			// console.log(JSON.stringify(data,null,2));
 
 			var onResponse = function(res){
 				// dismiss(loadingId);
