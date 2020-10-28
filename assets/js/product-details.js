@@ -8,7 +8,7 @@
 		detailsHTML += ''
 		detailsHTML += '<div id="img-1" class="zoomWrapper single-zoom">'
 		detailsHTML += '<a href="#">'
-		detailsHTML += '<img id="zoom1" src="'+item["image"]+'" data-zoom-image="'+item["image"]+'" alt="big-1">'
+		detailsHTML += '<img id="productImage" alt="No image" />'
 		detailsHTML += '</a>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
@@ -43,16 +43,32 @@
 		detailsHTML += '</form>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
+		detailsHTML += '<div>'
+		if(item.item_images){
+			for(color of item.item_images){
+				detailsHTML += '<button onclick="showImage(`'+color.image.image+'`)" class="button btn-sm" type="button">'+color.color+'</button>'
+			}
+		}
+		detailsHTML += ''
+		detailsHTML += '</div>'
 		detailsHTML += '<p>'+safeAccess(["desc"],item,"")+'</p>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 
-		$("#productDetails").append(detailsHTML)
+		$("#productDetails").append(detailsHTML);
+		if(item.item_images && item.item_images.length>0){
+			showImage(item.item_images[0].image.image);
+		}else if(item.parent_image){
+			showImage(item.parent_image);
+		}
 	}
 
 
+	function showImage(url){
+		 $('#productImage').attr('src',url);
+	}
 	async function showProductInfo(item){
 
 		var infoHTML = ""
@@ -149,11 +165,12 @@
 			const element = {
 				"name" : i.name,
 				"id" : i.id,
-				"price" : "$"+i.price,
+				"price" : "$"+ safeAccess(['price'],i,"-"),
 				"description": i.desc,
 				"family" : safeAccess(['i', 'item_family', 0, 'code'],i,null),
 				// "image" : safeAccess(['i', 'images', 0, 'main'],i,null),
-				"image" : i.item_parent_images[0].image.image,
+				"item_images" : i.item_images,
+				"parent_image" : safeAccess(["item_parent_images",0,"image","image"],i),
 			};    
 			if(!safeAccess(['type', 'name'],i,"").includes("Machine")){
 				element["specification"] = [

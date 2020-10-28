@@ -33,7 +33,7 @@ var basicResultController = (function () {
 								"productOffPercent" : "-20%",
 								"productQuantityInStock" : "50",
 								"productDescription" : item.desc,
-								"parentImages" : item.item_parent_images[0].image.thumbnail
+								"parentImages" : safeAccess(["item_parent_images",0,"image","thumbnail"],item)
 							};
 			  results.push(element);
 		    }

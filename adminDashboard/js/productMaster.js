@@ -259,6 +259,12 @@ function loadProducts(beatdata) {
          }
        },
        {
+        "title":"Images",
+        render: function(data, type, row){
+           return row.type_id == 2 ? ("<button id=\"btnImages\" type=\"button\" class=\"btn\">Images</button>") : "-";
+         }
+       },
+       {
         "title":"Edit",
         render: function(data, type, row){
            // console.log("row.salesperson.fullname",row.salesPerson.fullName)
@@ -486,7 +492,156 @@ $(document).ready(function(){
 
 
 
-    $('#items_master').on('click', '.btn', function () {
+    $('#items_master ').on('click', '#btnImages', function () {
+      var RowIndex = $(this).closest('tr');
+      var data = $('#items_master').dataTable().api().row(RowIndex).data();
+      var images = data.item_images;
+
+      // images = [
+      //       {
+      //           "id": 448,
+      //           "item_id": 361,
+      //           "parent_id": null,
+      //           "image_id": 50,
+      //           "is_active": 1,
+      //           "image": {
+      //               "id": 50,
+      //               "name": "IMG_20191005_140040.jpg",
+      //               "type": "image/jpeg",
+      //               "is_active": 1,
+      //               "main": "https://b2becommbucket.s3-ap-southeast-2.amazonaws.com/image/IMG_20191005_140040.jpg",
+      //               "thumbnail": "https://b2becommbucket.s3-ap-southeast-2.amazonaws.com/image/thumb_IMG_20191005_140040.jpg"
+      //           }
+      //       }
+      //   ]
+
+            var manageImagesTable = $('#manageImagesTable').DataTable( {
+       dom: 'Blfrtip',
+      processing: true,
+      pageLength: 10,
+        searching: false, 
+    paging: false,
+      data : images,
+      bSort : false,
+          columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ,
+        {
+             targets: '_all',
+             defaultContent: '-'
+            },],
+        order: [[ 1, 'asc' ]],
+       
+        buttons : [
+              ],
+              columns: [
+              {
+               
+              },
+              {
+                "title":"Name",
+                render: function(data, type, row, meta){
+                  return safeAccess(['image','name'],row,"");
+                }
+              },
+              {
+                "title":"Color",
+                render: function(data, type, row, meta){
+                  return safeAccess(['color'],row,0);
+                }
+              },
+              {
+                "title":"Active",
+                render: function(data, type, row, meta){
+                  return safeAccess(['image','is_active'],row,0)==0?"No":"Yes";
+                }
+              },
+              {
+                "title":"Main",
+                render: function(data, type, row){
+                   return row.image.image?"<button type=\"button\" id=\"btViewMainImage\" class=\"btn btn-default btn-sm\">View</span></button>":"-";
+                }
+              },
+              {
+                "title":"Thumb",
+                render: function(data, type, row){
+                    return  row.image.thumbnail?"<button type=\"button\" id=\"btViewThumbImage\" class=\"btn btn-default btn-sm\">View</span></button>":"-";
+                }
+              }
+              //,
+               // {
+               //  "title":"Edit",
+               //  render: function(data, type, row){
+               //     return "<button type=\"button\" class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\"></span></button>"
+               //    }
+               //  }
+        ]
+      })
+
+
+        $("#saveImageChanges").click(function(){
+
+          notifyInfo("Please wait");
+          var formData = new FormData();
+
+          var i = 0;
+          for(image of images){
+            if(image.file){
+               formData.append('images['+i+'][color]',image.color);
+               formData.append('images['+i+'][image]',image.file);
+            }
+            i++;
+          }
+          updateItemImages(data.id,formData,function(){
+            location.reload(); 
+          })
+        })
+
+        $("#addImage").click(function(){
+            var name = $("#newImageColor").val();
+            var file = $("#newImageFile").prop('files')[0];
+            if(name.length>0&&file){
+              images.push({
+                image:{
+                  name:file.name,
+                  is_active:1
+                },
+                color : name,
+                file : file
+              });
+              $('#manageImagesTable').dataTable().fnClearTable(); 
+              $('#manageImagesTable').dataTable().fnAddData(images);
+              refreshImagesTable(images);
+            }else{
+              notifyError("Invalid data");
+            }
+
+        });
+
+
+          $('#manageImagesTable').on('click', '#btViewMainImage', function () {
+             var RowIndex = $(this).closest('tr');
+              var data = $('#manageImagesTable').dataTable().api().row(RowIndex).data();
+            window.location.href = data.image.image;
+
+          })
+          $('#manageImagesTable').on('click', '#btViewThumbImage', function () {
+             var RowIndex = $(this).closest('tr');
+            var data = $('#manageImagesTable').dataTable().api().row(RowIndex).data();
+            window.location.href = data.image.thumbnail;
+          })
+
+      $("#manageImagesModal").modal().show();
+
+    })
+
+    function refreshImagesTable(images){
+      
+    }
+
+    $('#items_master').on('click', '#btnEdit', function () {
 
       var RowIndex = $(this).closest('tr');
       var data = $('#items_master').dataTable().api().row(RowIndex).data();
