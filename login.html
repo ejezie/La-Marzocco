@@ -405,7 +405,7 @@
                     }
                 });
 
-                $("#login").click(async function(){
+                $("#login").click( function(){
                     var email = $("#email").val();
                     var password = $("#password").val();
                     const id = notifyInfo("Please wait");
@@ -416,19 +416,20 @@
                                 notifySuccess('Login Success');
                                 updateAPIToken(response.data.access_token);
                               
-                                if(safeAccess(["data","user_type"],response,0)==1){
-                                    window.location.href  ="index.html";
-                                }else{
-                                    window.location.href  ="adminDashboard/dashboard.html";
-                                }
-
-
-                                // Store User Role 
+                                // Store User Role (start)
                                 userProfile(
-                                    function(response){
-                                        console.log("response : >>>>>>>> ",response)
-                                      if(response.data.user){
-                                        localStorage.setItem("user_role",response.data.user.role_level_id);
+                                    function(resp){
+                                        console.log("response : >>>>>>>> ",resp)
+                                        
+                                      if(resp.data.user){
+                                        localStorage.setItem("user_role",resp.data.user.role_level_id);
+
+                                        if(safeAccess(["data","user_type"],response,0)==1){
+                                            window.location.href  ="index.html";
+                                        }else{
+                                            window.location.href  ="adminDashboard/dashboard.html";
+                                        }
+
                                       }
                                     },
                                     function(error){
@@ -436,7 +437,13 @@
                                         // notifyError("Please check your connection!");
                                       }
                                     }
-                                )                                                                                                       
+                                ) 
+                                // Store User Role (end)
+
+
+
+
+
 
                             }else{
                                 notifyError(response.data.message);
