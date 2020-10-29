@@ -25,7 +25,7 @@ function val2key(val,array){
 
 async function showNewsletter(newsletterData){
 
-	console.log(" Month name : ",val2key(2,months))
+	// console.log(" Month name : ",val2key(2,months))
 
 	var newsletterHTML = ''
 	$("#newsletter").empty()
@@ -46,7 +46,7 @@ async function showNewsletter(newsletterData){
 	for(i=0; i< newsletter.length; i++){
 
 
-		console.log("newsletter : ", newsletter)
+		// console.log("newsletter : ", newsletter)
 		newsletterHTML += '<tr>'
 		newsletterHTML += '<td><article class="media event"><a class="pull-left date"><p class="month">'+(val2key(newsletter[i]["month"],months)).substring(0,3)+'</p><p class="month">'+newsletter[i]["year"]+'</p></a>'
 		newsletterHTML += '<div class="media-body"><p>Newsletter : '+val2key(newsletter[i]["month"],months)+' '+newsletter[i]["year"]+' Update</p><a class="title" href="'+newsletter[i]["name"]+'">PDF</a></div></article></td>'
@@ -79,38 +79,50 @@ async function showNewsletter(newsletterData){
 
 
 	$('.deactivateBtn').click(function () {
+      	notifyInfo("Please wait");
 		var id = this.id	
 
-      	var onResponse = function(response){
-        	if(response.data.newsletter){
-            	notifySuccess("Success!");
-        	}else{
-            	notifyError(response.data.message);
-        	}
-      	};
       	var onError =function(error){
         	notifyError("Failed to upload file");
       	};
 
+      	var onResponse = function(response){
+        	if(response.data.newsletter){
+            	notifySuccess("Success!");
+
+            	getNewsletter(function(response){
+					showNewsletter(response.data)
+				},onError);
+        	}else{
+            	notifyError(response.data.message);
+        	}
+      	};
       	deactivateNewsletter(id,onResponse,onError)
 	});
 
 
 
 	$('.deleteBtn').click(function () {
+      	notifyInfo("Please wait");
 		var id = this.id	
 
+		var onError =function(error){
+        	notifyError("Failed to upload file");
+      	};
+
       	var onResponse = function(response){
-        	if(response.data.newsletter){
-            	notifySuccess("Success!");
+
+        	if(response.data.status==true){
+            	notifySuccess(response.data.message);
+
+            	getNewsletter(function(response){
+					showNewsletter(response.data)
+				},onError);
         	}else{
             	notifyError(response.data.message);
         	}
       	};
-      	var onError =function(error){
-        	notifyError("Failed to upload file");
-      	};
-
+      	
       	deleteNewsletter(id,onResponse,onError)
 	});
 }
@@ -138,9 +150,10 @@ $(document).ready(function(){
 
 
 $('#uploadNewsletter').click(function () {
+	notifyInfo("Please wait");
       var pdf = document.querySelector('#pdffile');
 
-      console.log("pdf : ",pdf.files[0])
+      // console.log("pdf : ",pdf.files[0])
       var onError =function(error){
         notifyError("Failed to upload file");
       };

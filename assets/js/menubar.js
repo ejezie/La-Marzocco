@@ -339,33 +339,58 @@ function showMenubarLMHome(){
 }
 
 
+function val2key(val,array){
+    for (var key in array) {
+        if(array[key] == val){
+            return key;
+        }
+    }
+ return false;
+}
 
 
 function showNewsletter(newsletterData){
+
+	var months = {
+		'January' : 1,
+		'February' : 2,
+		'March' : 3,
+		'April' : 4,
+		'May' : 5,
+		'June' : 6,
+		'July' : 7,
+		'August' : 8,
+		'September' : 9,
+		'October' : 10,
+		'November' : 11,
+		'December' : 12
+	}
+
+
 	var newsletter = newsletterData.newsletters.data
 	console.log("newsletter ", newsletter)
 
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
 
-				menuBarHTML += '<li><a href="#">Newsletter</a>'
-				menuBarHTML += '<ul>'
+	menuBarHTML += '<li><a href="#">Newsletter</a>'
+	menuBarHTML += '<ul>'
 	for(i=0; i< newsletter.length; i++){
 
 
 				// menuBarHTML += '<li><a href="'+newsletterArr[i]["pdfURL"]+'">'+newsletterArr[i]["newsletterName"]+'</a></li>'
-				menuBarHTML += '<li><a href="'+newsletter[i]["name"]+'"> Newsletter '+(i+1)+'</a></li>'
+				menuBarHTML += '<li><a href="'+newsletter[i]["name"]+'"> Newsletter: '+val2key(newsletter[i]["month"],months)+' '+newsletter[i]["year"]+'</a></li>'
 
 	}
-				menuBarHTML += '</ul>'
-				menuBarHTML += '</li>'
+	menuBarHTML += '</ul>'
+	menuBarHTML += '</li>'
 
 
 	menuBarHTML += '</ul>';
 	// Image
-	menuBarHTML += '<div class="banner_static_menu">'
-	menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
-	menuBarHTML += '</div>'
+	// menuBarHTML += '<div class="banner_static_menu">'
+	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
+	// menuBarHTML += '</div>'
 
 	$("#newsletter").append(menuBarHTML)
 }
@@ -416,9 +441,9 @@ showMenubarLMHome()
 
 
 
-	// getNewsletter(function(response){
-	// 	showNewsletter(response.data)
-	// },onError);
+	getNewsletter(function(response){
+		showNewsletter(response.data)
+	},onError);
 
 
 

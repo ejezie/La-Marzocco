@@ -410,41 +410,60 @@
                     var password = $("#password").val();
                     const id = notifyInfo("Please wait");
                     login(email,password,
-                      function(response){
-                       dismiss(id);
-                       if(response.data.status){
-                          notifySuccess('Login Success');
-                          updateAPIToken(response.data.access_token);
-                          
-                          if(safeAccess(["data","user_type"],response,0)==1){
-                            window.location.href  ="index.html";
-                        }else{
-                            window.location.href  ="adminDashboard/dashboard.html";
-                        }
+                        function(response){
+                           dismiss(id);
+                           if(response.data.status){
+                                notifySuccess('Login Success');
+                                updateAPIToken(response.data.access_token);
+                              
+                                if(safeAccess(["data","user_type"],response,0)==1){
+                                    window.location.href  ="index.html";
+                                }else{
+                                    window.location.href  ="adminDashboard/dashboard.html";
+                                }
 
-                    }else{
-                      notifyError(response.data.message);
-                  }
-              },
-              function(error){
-                 dismiss(id);
-                 console.log(error)
-                 if (error.response) {
-                     if(error.response.data.message){
-                        if(typeof error.response.data.message === 'string' || error.response.data.message instanceof String){
-                           notifyError(error.response.data.message);
-                       }else if(typeof error.response.data.message === 'object'){
-                        for (var key of Object.keys(error.response.data.message)) {
-                            notifyError(error.response.data.message[key][0]);
+
+                                // Store User Role 
+                                userProfile(
+                                    function(response){
+                                        console.log("response : >>>>>>>> ",response)
+                                      if(response.data.user){
+                                        localStorage.setItem("user_role",response.data.user.role_level_id);
+                                      }
+                                    },
+                                    function(error){
+                                      if (error.response) {
+                                        // notifyError("Please check your connection!");
+                                      }
+                                    }
+                                )                                                                                                       
+
+                            }else{
+                                notifyError(response.data.message);
+                            }
+                        },
+                        function(error){
+                                    dismiss(id);
+                                    console.log(error)
+                                    if (error.response) {
+                                         if(error.response.data.message){
+                                            if(typeof error.response.data.message === 'string' || error.response.data.message instanceof String){
+                                               notifyError(error.response.data.message);
+                                           }else if(typeof error.response.data.message === 'object'){
+                                            for (var key of Object.keys(error.response.data.message)) {
+                                                notifyError(error.response.data.message[key][0]);
+                                            }
+                                        }
+                                    }else{
+                                       notifyError("Something went wrong...");
+                                   }
+                               }else{
+                                notifyError("Please check your connection!");
+                            }
                         }
-                    }
-                }else{
-                   notifyError("Something went wrong...");
-               }
-           }else{
-            notifyError("Please check your connection!");
-        }
-    })
+                    )
+
+
 
                 });
             });

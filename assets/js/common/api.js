@@ -1231,6 +1231,19 @@ async function login(email,pass,onResponse,onError){
 
 }
 
+async function userProfile(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'user/profile',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     },
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
 
 async function getSearchResults(currentPage,pageSize,searchQuery,filterParentId,filterGroupId,onResponse,onError){
   console.log("url  "+url,"  parent_id  "+filterParentId+"  grp "+filterGroupId +" searchQuery: "+searchQuery)
