@@ -409,14 +409,40 @@ var config = {
   .catch(onError);  
 
 }
+function deleteItemImage(item_id,image_id,onResponse,onError){
+  var data = new FormData();
 
-async function getItems(onResponse,onError,page,page_size){
+var config = {
+  method: 'delete',
+  url: BASE_URL + "item/"+item_id+"/image/"+image_id,
+  headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+  data : data
+};
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key){
 
   var data = new FormData();
+   var url = BASE_URL+'item?page='+page+'&page_size='+page_size;
+   if(searchQuery){
+    url+='&search_text='+searchQuery;
+  }
+  if(sort_key){
+
+    url+="&"+sort_key+"=1";
+  }
 
   var config = {
     method: 'get',
-    url: BASE_URL+'item?page='+page+'&page_size='+page_size,
+    url: url,
     headers: {
       'Authorization': getAPIToken(),
       'Accept': 'application/json'

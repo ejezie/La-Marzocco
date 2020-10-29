@@ -92,13 +92,17 @@
       processing: true,
       serverSide: true,
       pageLength: 10,
-      bSort : false,
+      // order: [[ 1, 'desc' ],[ 2, 'desc' ],[ 7, 'desc' ],[4 , 'desc' ],[ 5, 'desc' ]],
       lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
       columnDefs: [ {
         orderable: false,
         className: 'select-checkbox',
         targets:   0
       } ,
+      {
+        'targets': [3,6,8,,9,10], // column index (start from 0)
+        'orderable': false, // set orderable false for selected columns
+     },
       {
        targets: '_all',
        defaultContent: '-'
@@ -128,9 +132,10 @@
         const loadingId = notifyInfo("Please wait");
         // console.log(JSON.stringify(data,null,2));
 
-        var onResponse = function(res){
-          dismiss(loadingId);
-          console.log("recordsTotal "+res.data.items.data.length)
+
+                var onResponse = function(res){
+                  dismiss(loadingId);
+                  console.log("recordsTotal "+res.data.items.data.length)
                   // notifySuccess("sucess");
                   callback({
                     draw:data.draw,
@@ -140,6 +145,7 @@
                   });
 
                 };
+
                 var onError =function(error){
                   console.log(error);
                   dismiss(loadingId);
@@ -147,9 +153,38 @@
 
                   // var info = table.page.info();
                   // var pageIndex = (data.start+10)/10;
+                  var sort_key;
+                  if(data.order && data.order.length>0){
+                      columnIndex = data.order[0].column;//alert(columnIndex)
+                      if(columnIndex == 1){
+                        sort_key = "sort_by_code";
+                      }else
+                      if(columnIndex == 2){
+                        sort_key = "sort_by_name";
+                      }else
+                      if(columnIndex == 7){
+                        sort_key = "sort_by_price";
+                      }else
+                      if(columnIndex == 4){
+                        sort_key = "sort_by_family_code";
+                      }else
+                      if(columnIndex == 5){
+                        sort_key = "sort_by_group_name";
+                      }
+                      // else
+                      // if(columnIndex == 0){
+                      //   sort_key = "sort_by_code";
+                      // }
+
+                  }
+                  const searchQuery = data.search.value;
+                  if(searchQuery && searchQuery.length<3){
+                    notifyError("The search text must be at least 3 characters");
+                    return;
+                  }
                   var pageIndex = data.start / data.length + 1 ;
-                  // console.log("apgedinnnnnnnnnnndex  " +pageIndex)
-                  getItems(onResponse,onError,pageIndex,data.length);
+                  console.log("apgedinnnnnnnnnnndex  " +JSON.stringify(data,null,2))
+                  getItems(onResponse,onError,pageIndex,data.length,searchQuery,sort_key);
               // var sort_column_name = data.columns[data.order[0].column].data.replace(/\./g,"__");
               // var direction = "";
 
@@ -582,13 +617,13 @@
           return  row.image.thumbnail?"<button type=\"button\" id=\"btViewThumbImage\" class=\"btn btn-default btn-sm\">View</span></button>":"-";
         }
       }
-                  //,
-                   // {
-                   //  "title":"Edit",
-                   //  render: function(data, type, row){
-                   //     return "<button type=\"button\" class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\"></span></button>"
-                   //    }
-                   //  }
+                  ,
+                   {
+                    "title":"Delete",
+                    render: function(data, type, row){
+                       return "<button type=\"button\" id=\"btDeleteImage\" class=\"btn btn-default\"><span class=\"glyphicon glyphicon-trash\"></span></button>"
+                      }
+                    }
                    ]
                  })
 
@@ -637,6 +672,18 @@
            var RowIndex = $(this).closest('tr');
            var data = $('#manageImagesTable').dataTable().api().row(RowIndex).data();
            window.location.href = data.image.image;
+
+         })
+
+          $('#manageImagesTable').on('click', '#btDeleteImage', function () {
+           var RowIndex = $(this).closest('tr');
+           var row = $('#manageImagesTable').dataTable().api().row(RowIndex).data();
+           if(confirm("Delete this image?")){
+            deleteItemImage(data.id,row.image.id,function(){
+              notifySuccess("Image Deleted")
+              location.reload();
+            })
+           }
 
          })
           $('#manageImagesTable').on('click', '#btViewThumbImage', function () {
