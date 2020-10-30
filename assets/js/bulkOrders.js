@@ -1,15 +1,15 @@
-var itemArr = [
-                    {
-                        "ItemCode" : "levas123",
-                        "productName" : "Leva s",
-                        "productPrice" : "$1000"
-                    },
-                    {
-                        "ItemCode" : "lineamini123",
-                        "productName" : "Linea Mini",
-                        "productPrice" : "$980"
-                    }
-                ]
+// var itemArr = [
+//                     {
+//                         "ItemCode" : "levas123",
+//                         "productName" : "Leva s",
+//                         "productPrice" : "$1000"
+//                     },
+//                     {
+//                         "ItemCode" : "lineamini123",
+//                         "productName" : "Linea Mini",
+//                         "productPrice" : "$980"
+//                     }
+//                 ]
 
 
 
@@ -75,7 +75,21 @@ function ExportToTable(action) {
                     if (action == 'Preview'){
                         console.log("exceljson :  ",exceljson)
                         var excelDataWithQty = exceljson.filter(function(item){return parseInt(item.Quantity) > 0;});
-                        showBulkOrders(excelDataWithQty)
+                        // showBulkOrders(excelDataWithQty)
+                        var xlsx = document.querySelector('#excelfile');
+                          var onResponse = function(response){
+                            $('#bulkUploadModal').modal('hide');
+                            if(response.status == 200){
+                              notifySuccess("File uploaded!");
+                              window.location.href = "cart.html";
+                            }else{
+                              notifyError(response.data.message);
+                            }
+                          };
+                          var onError =function(error){
+                            notifyError("Failed to upload file");
+                          };
+                          bulkUploadCartItems(null, xlsx.files[0],onResponse,onError);
                     } 
                 }else {
                     alert("Enter Valid Data ")
@@ -130,7 +144,7 @@ async function showBulkOrders(bulkOrderData){
     for(i=0; i<bulkOrderData.length;i++){
 
         var ItemCode = bulkOrderData[i]["ItemCode"]
-        var orderItem = itemArr.filter(function(item){return item.ItemCode == ItemCode;});
+        var orderItem = bulkOrderData.filter(function(item){return item.ItemCode == ItemCode;});
 
         bulkOrdersHTML += '<tr>'
         bulkOrdersHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'

@@ -1199,7 +1199,36 @@ async function forgotPassword(email,onResponse,onError){
   var config = {
     method: 'post',
     url: BASE_URL+'user/forgot-password',
-    headers: {'Content-Type': 'multipart/form-data' },
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);
+
+}
+
+
+
+async function updatePassword(old_password,new_password,new_password_confirmation,onResponse,onError){
+  var data = new FormData();
+  data.append('old_password', old_password);
+  data.append('new_password', new_password);
+  data.append('new_password_confirmation', new_password_confirmation);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'user/update-password',
+   headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    },
     data : data
   };
 

@@ -257,12 +257,12 @@
                       return safeAccess(['item_family',0,'code'],row,"");
                     }
                   },
-                   {
-                    "title":"Group",
-                    render: function(data, type, row){
-                      return  safeAccess(['item_group','name'],row,"");
-                    }
-                  }, 
+                  //  {
+                  //   "title":"Group",
+                  //   render: function(data, type, row){
+                  //     return  safeAccess(['item_group','name'],row,"");
+                  //   }
+                  // }, 
                   // {
                   //   "title":"Catalog Reference",
                   //   render: function(data, type, row){
@@ -270,10 +270,10 @@
                   //   }
                   // },
            {
-            "title":"Group",
+            "title":"Group Description",
             render: function(data, type, row, meta){
                       // console.log(JSON.stringify(row,null,2))
-                      return safeAccess(['item_group','desc'],row,"");
+                      return safeAccess(['item_group','desc'],row,"-");
                     }
                   },
              {
@@ -565,6 +565,7 @@
           var manageImagesTable = $('#manageImagesTable').DataTable( {
            dom: 'Blfrtip',
            processing: true,
+           bDestroy : true,
            pageLength: 10,
            searching: false, 
            paging: false,
