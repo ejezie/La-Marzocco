@@ -1,5 +1,9 @@
 
 	async function showProductDetails(item){
+
+		console.log("ITEM   ++======= "+JSON.stringify(item,null,2));
+
+
 		var detailsHTML = ""
 		detailsHTML += '<div class="container">'
 		detailsHTML += '<div class="row">'
@@ -74,24 +78,63 @@
 
 		 var colorDropdown = $("#input_color");
      	 colorDropdown.empty();
-        for(color of item.item_images){
-          colorDropdown.append($("<option>").text(color.color).val(color.image.image));
-        }
+     	 
+     	 var colors = _.groupBy(item.item_images, function(val){ return val.color });
+     	 		console.log("COLORS   ++======= "+JSON.stringify(colors,null,2));
 
-        $('#btNextImage').unbind();
-        $('#btNextImage').click(function(){
-        	$('#input_color').val();
-        });
+     	 for (var prop in colors) {
+		    if (Object.prototype.hasOwnProperty.call(colors, prop)) {
+		    	(console.log(colors[prop]))
+		         colorDropdown.append($("<option>").text(prop).val(prop));
+		         		  // console.log(JSON.stringify(colors[prop]));
+		    }
+		}
+
+     	 // Object.keys(obj).forEach(e => {console.log(`key=${e}  value=${obj[e]}`);
+     	 // 		 colorDropdown.append($("<option>").text(`${e}`).val(`${obj[e]})`);
+     	 // 	});
+
+        // for(color of colors){
+        //   colorDropdown.append($("<option>").text(color.color).val(color.image.image));
+        // }
+
+      
 
         $('#input_color').change(function(){
-		  var data= $(this).val();
+		  var data= colors[($(this).val())];
 		  if(data.length>0){
-		  $('#productImage').data('imageIndex',data[0]);
-		   $('#productImage').attr('src',data[0]);
+		  $('#productImage').data('imageIndex',0);
+		   $('#productImage').attr('src',data[0].image.image);
 		}else{
 			notifyInfo("No images found");
 		}
 		});
+
+		  $('#btPrevImage').unbind();
+        $('#btPrevImage').click(function(){
+        	var arr = colors[$('#input_color').val()];
+        	var currentIndex = $('#productImage').data('imageIndex');
+
+        	if(currentIndex<(arr.length-1)){
+        		$('#productImage').data('imageIndex',currentIndex+1);
+		   		$('#productImage').attr('src',arr[currentIndex+1].image.image);
+        	}else{
+        		notifyInfo("No more images")
+        	}
+        });
+
+          $('#btNextImage').unbind();
+        $('#btNextImage').click(function(){
+        	var arr = colors[$('#input_color').val()];
+        	var currentIndex = $('#productImage').data('imageIndex');
+
+        	if(currentIndex>0){
+        		$('#productImage').data('imageIndex',currentIndex-1);
+		   		$('#productImage').attr('src',arr[currentIndex-1].image.image);
+        	}else{
+        		notifyInfo("No more images")
+        	}
+        });
 
 
 		if(item.item_images && item.item_images.length>0){

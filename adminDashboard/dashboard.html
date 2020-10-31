@@ -120,6 +120,10 @@
                   <div id="chart_plot_01" class="demo-placeholder"></div>
                 </div>
 
+                <div class="col-md-12 col-sm-12 ">
+                  <div id="legendHolder" ></div>
+                </div>
+
                 <div class="clearfix"></div>
               </div>
             </div>
@@ -137,15 +141,7 @@
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Settings 1</a>
-                          <a class="dropdown-item" href="#">Settings 2</a>
-                        </div>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
+                   
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -245,15 +241,7 @@
                   <ul class="nav navbar-right panel_toolbox">
                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Settings 1</a>
-                          <a class="dropdown-item" href="#">Settings 2</a>
-                        </div>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
+                
                   </ul>
                   <div class="clearfix"></div>
                 </div>
@@ -274,7 +262,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <canvas id="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
+                        <canvas id="canvasCustomers" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
                       </td>
                       <td>
                         <table id="tableTopCustomers" class="tile_info">
@@ -483,7 +471,11 @@
               orderCurve.push(orderElement);
               // console.log("y="+year+" d="+date+" m="+month);
             }
-
+function legendFormatter(label, series) {
+    return '<div ' + 
+           'style="font-size:8pt;color:black;padding:2px;">' +
+           label+'</div>';
+};
     
         var chart_plot_01_settings = {
             series: {
@@ -527,13 +519,14 @@
                 ticks: 8,
                 tickColor: "rgba(51, 51, 51, 0.06)",
             },
-            tooltip: false
+            tooltip: false,
+            legend: { show: true, container: '#legendHolder',  labelFormatter: legendFormatter}
         }
 
           if ($("#chart_plot_01").length) {
               console.log('Plot1');
 
-              $.plot($("#chart_plot_01"), [customerCurve, orderCurve], chart_plot_01_settings);
+              $.plot($("#chart_plot_01"), [  {label: "Customers", data: customerCurve},   {label: "Orders", data: orderCurve}], chart_plot_01_settings);
           }
 
           }
@@ -544,27 +537,34 @@
                 $("#totalQuoteCount").html(totals.quotes);
                 $("#totalOrderCount").html(totals.orders);
                 $("#totalCustomerCount").html(totals.customers);
-                $("#totalOrderAmountCount").html(totals.sales);
+                $("#totalOrderAmountCount").html("$"+totals.sales.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
             }
 
             var topProducts = safeAccess(["data","report","top_items"],response);
             if(topProducts){
               var htmlContent ="";
+              var productSalesmax = 0;
+              for(product of topProducts){
+                if(product.sales>productSalesmax){
+                  productSalesmax = product.sales;
+                }
+              }
+
 
               for(product of topProducts){
                   htmlContent+='<div class="widget_summary">'
                   htmlContent+=  '<div class="w_left w_25">'
-                   htmlContent+=  ' <span>'+product.value+'</span>'
+                   htmlContent+=  ' <span>$'+product.sales.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'); +'</span>'
                    htmlContent+= '</div>'
                    htmlContent+= '<div class="w_center w_55">'
                    htmlContent+=   '<div class="progress">'
-                    htmlContent+=    '<div class="progress-bar bg-green" role="progressbar" aria-valuenow="'+product.value+'" aria-valuemin="0" aria-valuemax="'+product.max+'" style="width: 45%;">'
+                    htmlContent+=    '<div class="progress-bar bg-green" role="progressbar" aria-valuenow="'+product.sales+'"style="width: '+(product.sales/productSalesmax)*100+'%;">'
                   htmlContent+=       ' <span class="sr-only">x_x</span>'
                   htmlContent+=     ' </div>'
                    htmlContent+=  ' </div>'
                    htmlContent+= '</div>'
                    htmlContent+= '<div class="w_right w_20">'
-                   htmlContent+=  '<span>'+safeAccess(["name"],product,"-")+'</span>'
+                   htmlContent+=  '<span>'+safeAccess(["item_code"],product,"-")+'</span>'
                    htmlContent+= '</div>'
                    htmlContent+= '<div class="clearfix"></div>'
                  htmlContent+= '</div>'
@@ -579,9 +579,9 @@
                   
 
               var htmlContent = "";
-              var backgroundColors;
-              var labels;
-              var values;
+              var backgroundColors=[];
+              var labels=[];
+              var values=[];
               // <tr>
               //               <td>
               //                 <p><i class="fa fa-square blue"></i>Cust 1 </p>
@@ -608,18 +608,26 @@
               //             </tr>
               for(topCustomer of topCustomers){
                 var color = getRandomColor();
-                var customerName = safeAccess(["name"],topCustomer,"-");
-                var unit = safeAccess(["total"],topCustomer,"-")
+                var customerName = safeAccess(["first_name"],topCustomer,"-");
+                var unit = safeAccess(["sales"],topCustomer,"-")
                 values.push(unit);
                 labels.push(customerName);
                 backgroundColors.push(color);
-                html+= '<tr><td><p><i  style="background-color:'+color+'" class="fa fa-square red"></i>'+customerName+'</p></td><td>$'+unit+'</td></tr>';
+                htmlContent+= '<tr><td><p><i  style="color:'+color+'" class="fa fa-square"></i>'+customerName+'</p></td><td>$'+unit+'</td></tr>';
               }
               $("#tableTopCustomers").append(htmlContent);
 
                 var chart_doughnut_settings = {
                         type: 'doughnut',
                         tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+                        options: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    fontColor: 'rgb(255, 99, 132)'
+                                }
+                            }
+                        },
                         data: {
                             labels: labels,
                             datasets: [{
@@ -642,7 +650,7 @@
                       }
                     
 
-                        new Chart($('#canvasDoughnut'), chart_doughnut_settings);
+                        new Chart($('#canvasCustomers'), chart_doughnut_settings);
 
 
             }

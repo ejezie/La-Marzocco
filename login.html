@@ -415,7 +415,12 @@
                            if(response.data.status){
                                 notifySuccess('Login Success');
                                 updateAPIToken(response.data.access_token);
-                              
+                                
+                                
+                                if(safeAccess(["data","update_password"],response,0)==1){
+                                    window.location.href  ="my-account.html#change-pass";
+                                    return;
+                                }
                                 if(safeAccess(["data","user_type"],response,0)==1){
                                     window.location.href  ="index.html";
                                 }else{

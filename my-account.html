@@ -583,6 +583,7 @@ body {font-family: Verdana, sans-serif; margin:0}
                                 <!-- <li><a href="#downloads" data-toggle="tab" class="nav-link">Downloads</a></li> -->
                                 <li><a href="#address" data-toggle="tab" class="nav-link">Addresses</a></li>
                                 <li><a href="#account-details" data-toggle="tab" class="nav-link">Account details</a></li>
+                                <li><a href="#change-pass" data-toggle="tab" class="nav-link">Change Password</a></li>
                                 <li><a href="login.html" class="nav-link">logout</a></li>
                             </ul>
                         </div>
@@ -701,7 +702,8 @@ body {font-family: Verdana, sans-serif; margin:0}
                             </div>
                             <div class="tab-pane fade" id="account-details">
                                 <div class="checkout_form">
-                                    <h3>Account details </h3>
+                                   
+                                                     <h3>Account details </h3>
                                     <div class="login">
                                         <div class="login_form_container">
                                             <div class="account_login_form">
@@ -712,16 +714,50 @@ body {font-family: Verdana, sans-serif; margin:0}
                                                         <span class="custom-radio"><input type="radio" value="1" name="id_gender"> Mrs.</span>
                                                     </div> <br> -->
                                                     <label>First Name</label>
-                                                    <input type="text" name="first-name" disabled="disabled">
+                                                    <input id="firstName" type="text" name="first-name" >
                                                     <label>Last Name</label>
-                                                    <input type="text" name="last-name" disabled="disabled">
+                                                    <input id="lastName" type="text" name="last-name" >
                                                     <label>Email</label>
-                                                    <input type="text" name="email-name" disabled="disabled">
+                                                    <input id="email" type="text" name="email-name" >
+                                                      <div class="order_button col-12 mb-20">
+                                                    <button type="button" id="btSaveProfile" >Save Changes</button>
+                                                </div>
                                                     <!-- Change Password -->
-                                                    <div class="col-12 mb-20">
-                                                        <label class="righ_0" for="address" data-toggle="collapse" data-target="#collapsethree" aria-controls="collapseOne">Change Password</label>
+                                                  
+                                                    <!-- <label>Password</label>
+                                                    <input type="password" name="user-password" disabled="disabled">
+                                                    <label>Birthdate</label>
+                                                    <input type="text" placeholder="MM/DD/YYYY" value="" name="birthday">
+                                                    <span class="example">
+                                                      (E.g.: 05/31/1970)
+                                                    </span>
+                                                    <br>
+                                                    <span class="custom_checkbox">
+                                                        <input type="checkbox" value="1" name="optin">
+                                                        <label>Receive offers from our partners</label>
+                                                    </span>
+                                                    <br>
+                                                    <span class="custom_checkbox">
+                                                        <input type="checkbox" value="1" name="newsletter">
+                                                        <label>Sign up for our newsletter<br><em>You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.</em></label>
+                                                    </span>
+                                                    <div class="save_button primary_btn default_button">
+                                                        <button type="submit">Save</button>
+                                                    </div> -->
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                                        <div id="collapsethree" class="collapse one" data-parent="#accordion">
+                                                    </div>
+                                                    </div>
+
+                            <div class="tab-pane fade" id="change-pass">
+                                <div class="checkout_form">
+                                    <h3>Change Password </h3>
+                                      <div class="col-12 mb-20">
+                                                   
+                                                        <div id="collapsethree" >
                                                             <div class="row">
                                                                 <div class="col-lg-12 mb-20">
                                                                     <label>Current Password <span>*</span></label>
@@ -747,30 +783,8 @@ body {font-family: Verdana, sans-serif; margin:0}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!-- <label>Password</label>
-                                                    <input type="password" name="user-password" disabled="disabled">
-                                                    <label>Birthdate</label>
-                                                    <input type="text" placeholder="MM/DD/YYYY" value="" name="birthday">
-                                                    <span class="example">
-                                                      (E.g.: 05/31/1970)
-                                                    </span>
-                                                    <br>
-                                                    <span class="custom_checkbox">
-                                                        <input type="checkbox" value="1" name="optin">
-                                                        <label>Receive offers from our partners</label>
-                                                    </span>
-                                                    <br>
-                                                    <span class="custom_checkbox">
-                                                        <input type="checkbox" value="1" name="newsletter">
-                                                        <label>Sign up for our newsletter<br><em>You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.</em></label>
-                                                    </span>
-                                                    <div class="save_button primary_btn default_button">
-                                                        <button type="submit">Save</button>
-                                                    </div> -->
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -1148,13 +1162,12 @@ body {font-family: Verdana, sans-serif; margin:0}
 
 <!--  Cart JS-->
 <script src="assets/js/myOrders.js"></script>
-<script src="assets/js/my-account.js"></script>
 
-<!--  Cart JS-->
-<script src="assets/js/checkout.js"></script>
 
 <!-- Header -->
 <script src="assets/js/header.js"></script>
+<script src="assets/js/my-account.js"></script>
+
 
 
 </body>
