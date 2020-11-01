@@ -1,5 +1,9 @@
 
 	async function showProductDetails(item){
+
+		console.log("ITEM   ++======= "+JSON.stringify(item,null,2));
+
+
 		var detailsHTML = ""
 		detailsHTML += '<div class="container">'
 		detailsHTML += '<div class="row">'
@@ -9,8 +13,12 @@
 		detailsHTML += '<div id="img-1" class="zoomWrapper single-zoom">'
 		detailsHTML += '<a href="#">'
 		detailsHTML += '<img id="productImage" alt="No image" />'
+
 		detailsHTML += '</a>'
 		detailsHTML += '</div>'
+
+		detailsHTML += '<button class="button fa fa-arrow-left" id="btNextImage" type="button"></button>'
+		detailsHTML += '<button class="button fa fa-arrow-right" id="btPrevImage" type="button"></button>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 		detailsHTML += '<div class="col-lg-6 col-md-6">'
@@ -24,9 +32,7 @@
 		// detailsHTML += '<li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>'
 		// detailsHTML += '</ul>'
 		// detailsHTML += '</div>'
-		if(item["description"]){
-			detailsHTML += '<p>'+item["description"]+'</p>'
-		}
+		
 		detailsHTML += '<div class="price_box">'
 		detailsHTML += '<span class="current_price">'+item["price"]+'</span>'
 		detailsHTML += ''
@@ -46,12 +52,17 @@
 		detailsHTML += '</form>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
+
 		detailsHTML += '<div>'
-		if(item.item_images){
-			for(color of item.item_images){
-				detailsHTML += '<button onclick="showImage(`'+color.image.image+'`)" class="button btn-sm" type="button">'+color.color+'</button>'
-			}
+		detailsHTML += ' <select id="input_color" class="form-control">'
+		if(item["description"]){
+			detailsHTML += '<p>'+item["description"]+'</p>'
 		}
+		// if(item.item_images){
+		// 	for(color of item.item_images){
+		// 		detailsHTML += '<button onclick="showImage(`'+color.image.image+'`)" class="button btn-sm" type="button">'+color.color+'</button>'
+		// 	}
+		// }
 		detailsHTML += ''
 		detailsHTML += '</div>'
 		detailsHTML += '<p>'+safeAccess(["desc"],item,"")+'</p>'
@@ -60,7 +71,72 @@
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 
+
+
+
 		$("#productDetails").append(detailsHTML);
+
+		 var colorDropdown = $("#input_color");
+     	 colorDropdown.empty();
+     	 
+     	 var colors = _.groupBy(item.item_images, function(val){ return val.color });
+     	 		console.log("COLORS   ++======= "+JSON.stringify(colors,null,2));
+
+     	 for (var prop in colors) {
+		    if (Object.prototype.hasOwnProperty.call(colors, prop)) {
+		    	(console.log(colors[prop]))
+		         colorDropdown.append($("<option>").text(prop).val(prop));
+		         		  // console.log(JSON.stringify(colors[prop]));
+		    }
+		}
+
+     	 // Object.keys(obj).forEach(e => {console.log(`key=${e}  value=${obj[e]}`);
+     	 // 		 colorDropdown.append($("<option>").text(`${e}`).val(`${obj[e]})`);
+     	 // 	});
+
+        // for(color of colors){
+        //   colorDropdown.append($("<option>").text(color.color).val(color.image.image));
+        // }
+
+      
+
+        $('#input_color').change(function(){
+		  var data= colors[($(this).val())];
+		  if(data.length>0){
+		  $('#productImage').data('imageIndex',0);
+		   $('#productImage').attr('src',data[0].image.image);
+		}else{
+			notifyInfo("No images found");
+		}
+		});
+
+		  $('#btPrevImage').unbind();
+        $('#btPrevImage').click(function(){
+        	var arr = colors[$('#input_color').val()];
+        	var currentIndex = $('#productImage').data('imageIndex');
+
+        	if(currentIndex<(arr.length-1)){
+        		$('#productImage').data('imageIndex',currentIndex+1);
+		   		$('#productImage').attr('src',arr[currentIndex+1].image.image);
+        	}else{
+        		notifyInfo("No more images")
+        	}
+        });
+
+          $('#btNextImage').unbind();
+        $('#btNextImage').click(function(){
+        	var arr = colors[$('#input_color').val()];
+        	var currentIndex = $('#productImage').data('imageIndex');
+
+        	if(currentIndex>0){
+        		$('#productImage').data('imageIndex',currentIndex-1);
+		   		$('#productImage').attr('src',arr[currentIndex-1].image.image);
+        	}else{
+        		notifyInfo("No more images")
+        	}
+        });
+
+
 		if(item.item_images && item.item_images.length>0){
 			showImage(item.item_images[0].image.image);
 		}else if(item.parent_image){

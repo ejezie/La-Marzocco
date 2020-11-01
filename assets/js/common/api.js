@@ -1164,6 +1164,24 @@ async function getParents(onResponse,onError){
   .catch(onError);  
 }
 
+async function getUserProfile(onResponse,onError){
+
+  var data = new FormData();
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'user/profile',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    }
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
 
 async function updateParent(onResponse,onError,id,name,desc){
 
@@ -1191,6 +1209,50 @@ async function updateParent(onResponse,onError,id,name,desc){
 }
 
 
+async function updateProfile(first_name,last_name, onResponse,onError){
+
+  var data = new FormData();
+  appendIfNotNull(data,"first_name",first_name);
+  appendIfNotNull(data,"last_name",last_name);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'user/profile',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+
+async function updateMail(newMail, onResponse,onError){
+
+  var data = new FormData();
+  appendIfNotNull(data,"email",newMail);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'user/update-email',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+
 
 async function forgotPassword(email,onResponse,onError){
   var data = new FormData();
@@ -1199,7 +1261,36 @@ async function forgotPassword(email,onResponse,onError){
   var config = {
     method: 'post',
     url: BASE_URL+'user/forgot-password',
-    headers: {'Content-Type': 'multipart/form-data' },
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    },
+    data : data
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);
+
+}
+
+
+
+async function updatePassword(old_password,new_password,new_password_confirmation,onResponse,onError){
+  var data = new FormData();
+  data.append('old_password', old_password);
+  data.append('new_password', new_password);
+  data.append('new_password_confirmation', new_password_confirmation);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'user/update-password',
+   headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    },
     data : data
   };
 

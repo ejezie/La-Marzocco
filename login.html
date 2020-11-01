@@ -415,8 +415,25 @@
                            if(response.data.status){
                                 notifySuccess('Login Success');
                                 updateAPIToken(response.data.access_token);
+<<<<<<< HEAD
                               
                                 // Store User Role (start)
+=======
+                                
+                                
+                                if(safeAccess(["data","update_password"],response,0)==1){
+                                    window.location.href  ="my-account.html#change-pass";
+                                    return;
+                                }
+                                if(safeAccess(["data","user_type"],response,0)==1){
+                                    window.location.href  ="index.html";
+                                }else{
+                                    window.location.href  ="adminDashboard/dashboard.html";
+                                }
+
+
+                                // Store User Role 
+>>>>>>> 64da6fcdab1b3e25b54c87a3ddcb1648ded1a459
                                 userProfile(
                                     function(resp){
                                         // console.log("response : >>>>>>>> ",resp)
