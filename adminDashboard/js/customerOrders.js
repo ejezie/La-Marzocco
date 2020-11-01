@@ -117,9 +117,9 @@ async function showOrders(orderArr){
 		       {
 		        "title":"Product Details",
 		        render: function(data, type, row){
-              if(row.status != "cancelled"){
-		           return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"fa fa-bars\"> Details</span></button>"
-              }
+              // if(row.status != "cancelled"){
+		           return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"fa fa-bars\" style=\"white-space: nowrap;\"> Details</span></button>"
+              // }
 		          }
 		        },
 		       {
@@ -127,7 +127,7 @@ async function showOrders(orderArr){
 		        render: function(data, type, row){
               if(row.status != "cancelled"){
 
-		           return "<button type=\"button\" id='btnTrackOrder' class=\"btn btn-default btn-sm\"><span class=\"fa fa-map-marker\"> Track</span></button>"
+		           return "<button type=\"button\" id='btnTrackOrder' class=\"btn btn-default btn-sm\"><span class=\"fa fa-map-marker\" style=\"white-space: nowrap;\"> Track</span></button>"
               }
 		          }
             },
@@ -143,7 +143,7 @@ async function showOrders(orderArr){
                 "title":"PO Document",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return ((safeAccess(['po'],row)==undefined)?"":'<button type="button" id="btnDownloadPO" class="btn btn-default btn-sm"><span class="fa fa-cloud-download">Download</span></button>');
+                  return ((safeAccess(['po'],row)==undefined)?"":'<button type="button" id="btnDownloadPO" class="btn btn-default btn-sm"><span class="fa fa-cloud-download"  style="white-space: nowrap;">Download</span></button>');
                 }
               },
               {
@@ -151,19 +151,23 @@ async function showOrders(orderArr){
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
                   if(safeAccess(['desc'],row)){
-                   return "<button type=\"button\" id='btnNotes' class=\"btn btn-default btn-sm\"><span class=\"fa fa-sticky-note\">View</span></button>"; 
+                   return "<button type=\"button\" id='btnNotes' class=\"btn btn-default btn-sm\"><span class=\"fa fa-sticky-note\"  style=\"white-space: nowrap;\">View</span></button>"; 
                   }else{
                     return "-";
                   }
 
                 }
               },
-          //  {
-          //   "title":"Cancel Order",
-          //   render: function(data, type, row){
-          //      return "<button type=\"button\" id='btnCancelOrder' class=\"btn btn-default btn-sm\"><span class=\"fa fa-trash\"> Cancel</span></button>"
-          //   }
-          // }
+             {
+              "title":"Cancel Order",
+              render: function(data, type, row){
+                if(row.status != "cancelled"){
+                 return "<button type=\"button\" id='btnCancelOrder' class=\"btn btn-default btn-sm\"><span class=\"fa fa-trash\"> Cancel</span></button>"
+                }else{
+                  return "Cancelled"
+                }
+              }
+            }
         ]
       })
 
@@ -200,10 +204,20 @@ $(document).ready(function(){
       console.log("this id data  : ", data)
 
       // notifyInfo("Please wait");
+
+      var order_item_arr = []
+      for(i=0; i<data["order_line"].length;i++){
+        order_item_arr.push(data["order_line"][i]["id"])
+      }
+
+      var orderId = data["id"]
+      var orderLineIds = order_item_arr.toString()
+
+      deleteOrderLineItem(orderId, orderLineIds)
       // trackOrder(data.id,function(res){
       //    showOrderTrackingDetails(res.data.track_items);
       // })
-
+      // value1.replace(/,/g,'')
   });
 });
 
@@ -339,7 +353,9 @@ orderDetailsHTML += '</table>'
 
 
 
-async function deleteOrderLineItem(orderId, orderLineIds, quoteLine) {
+async function deleteOrderLineItem(orderId, orderLineIds) {
+
+  notifyInfo("Please wait");
     // var RowIndex = $(this).closest('tr');
     // var data = customerMasterTable.api().row(RowIndex).data();
     var onResponse = function(response){

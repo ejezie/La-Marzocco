@@ -419,10 +419,15 @@
                                 // Store User Role (start)
                                 userProfile(
                                     function(resp){
-                                        console.log("response : >>>>>>>> ",resp)
+                                        // console.log("response : >>>>>>>> ",resp)
                                         
                                       if(resp.data.user){
-                                        localStorage.setItem("user_role",resp.data.user.role_level_id);
+                                        var user_profile = {}
+                                        user_profile.user_role = resp.data.user.role_level_id
+                                        user_profile.user_name = resp.data.user.first_name
+                                        user_profile.user_image = resp.data.user.profileImage
+                                        // console.log(">>>user : ", user_profile)
+                                        localStorage.setItem("user_profile",JSON.stringify(user_profile));
 
                                         if(safeAccess(["data","user_type"],response,0)==1){
                                             window.location.href  ="index.html";

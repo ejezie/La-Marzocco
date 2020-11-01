@@ -18,6 +18,11 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+
     <!-- Datatables -->
     
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
@@ -60,7 +65,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Product Wise Report</h3>
+                <h3>Report</h3>
               </div>
 
               <!-- <div class="title_right">
@@ -81,7 +86,13 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data</h2>
+                    <h2>Product Wise Report</h2>
+
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <!-- <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
+                        <i class="fa fa-calendar"></i>
+                        <span></span> <b class="caret"></b>
+                      </div>
                     <!-- <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -240,6 +251,11 @@
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+
     <!-- Side NavBar -->
     <script src="js/sideNavBar.js"></script>
 
@@ -261,21 +277,110 @@
       <script src="assets/js/cart.js"></script>
 
       <script>
-        $(document).ready(function(){
+      function initDatePicker(start_date,end_date){
+             var cb = function (start, end, label) {
+                  console.log(start.toISOString(), end.toISOString(), label);
+                  $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+              };
+
+              var optionSet1 = {
+                  startDate: moment().subtract(29, 'days'),
+                  endDate: moment(),
+                  // minDate: '01/01/2012',
+                  // maxDate: '12/31/2015',
+                  dateLimit: {
+                      days: 60
+                  },
+                  showDropdowns: true,
+                  showWeekNumbers: true,
+                  timePicker: false,
+                  timePickerIncrement: 1,
+                  timePicker12Hour: true,
+                  // ranges: {
+                  //     'Today': [moment(), moment()],
+                  //     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                  //     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                  //     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                  //     'This Month': [moment().startOf('month'), moment().endOf('month')],
+                  //     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                  // },
+                  opens: 'left',
+                  buttonClasses: ['btn btn-default'],
+                  applyClass: 'btn-small btn-primary',
+                  cancelClass: 'btn-small',
+                  format: 'MM/DD/YYYY',
+                  separator: ' to ',
+                  locale: {
+                      applyLabel: 'Submit',
+                      cancelLabel: 'Clear',
+                      fromLabel: 'From',
+                      toLabel: 'To',
+                      customRangeLabel: 'Custom',
+                      daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                      monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                      firstDay: 1
+                  }
+              };
+
+              if(start_date&&end_date){
+                $('#reportrange span').html(start_date+ ' to ' + end_date);
+              }else{
+                // $('#reportrange span').html("Last 30 days")
+                $('#reportrange span').html("Apply Date Filter")
+              }
+
+              $('#reportrange').daterangepicker(optionSet1, cb);
+              $('#reportrange').on('show.daterangepicker', function () {
+                  console.log("show event fired");
+              });
+              $('#reportrange').on('hide.daterangepicker', function () {
+                  console.log("hide event fired");
+              });
+              $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                  console.log("apply event fired, start/end dates are " + picker.startDate.format('YYYY-MM-DD') + " to " + picker.endDate.format('YYYY-MM-DD'));
+                  var start_date = picker.startDate.format('YYYY-MM-DD');
+                  var end_date =  picker.endDate.format('YYYY-MM-DD');
+                  // window.location.href = '../adminDashboard/dashboard.html?start_date='+start_date+'&end_date='+end_date;
+
+                  
+                  showTable(start_date, end_date)
+              });
+              $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                  console.log("cancel event fired");
+              });
+              $('#options1').click(function () {
+                  $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+              });
+              $('#options2').click(function () {
+                  $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+              });
+              $('#destroy').click(function () {
+                  $('#reportrange').data('daterangepicker').remove();
+              });
+        }
+
+
+
+    async function showTable(startDate, endDate){
 
      itemMasterTable = $('#tableProductReport').DataTable( {
      dom: 'Blfrtip',
-     searching : false,
+     "bDestroy": true,
+     searching : true,
      processing: true,
      serverSide: true,
      pageLength: 10,
-     bSort : false,
+     // bSort : false,
      lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
           columnDefs: [ {
             orderable: false,
             className: 'select-checkbox',
             targets:   0
         } ,
+        {
+        'targets': [1,2,3,4], // column index (start from 0)
+        'orderable': false, // set orderable false for selected columns
+        },
         {
              targets: '_all',
              defaultContent: '-'
@@ -284,15 +389,16 @@
             style:    'multi',
             selector: 'td:first-child'
         },
+        order: [[ 0, 'asc' ]],
     ajax: function(data, callback, settings) {
     const loadingId = notifyInfo("Please wait");
     var onResponse = function(res){
               dismiss(loadingId);
               callback({
                 draw:data.draw,
-                recordsTotal: res.data.report.length,
-                recordsFiltered: res.data.report.length,
-                data: res.data.report
+                recordsTotal: res.data.report.data.length,
+                recordsFiltered: res.data.report.data.length,
+                data: res.data.report.data
               });
 
             };
@@ -301,60 +407,156 @@
               dismiss(loadingId);
             };
               // var pageIndex = data.start / data.length + 1 ;
-          getPeriodicReport(onResponse);
+
+          var sort_key;
+          if(data.order && data.order.length>0){
+              columnIndex = data.order[0].column;//alert(columnIndex)
+              if(columnIndex == 0){
+                sort_key = "sort_by_code";
+              }else
+              if(columnIndex == 5){
+                sort_key = "sort_by_orders";
+              }else
+              if(columnIndex == 6){
+                sort_key = "sort_by_sales";
+              }
+          }
+
+          const searchQuery = data.search.value;
+          if(searchQuery && searchQuery.length<3){
+            // notifyError("The search text must be at least 3 characters");
+            // return;
+          }
+          var pageIndex = data.start / data.length + 1 ;
+          console.log("apgedinnnnnnnnnnndex  " +JSON.stringify(data,null,2))
+          if(startDate && endDate){
+            getProductwiseReport(onResponse,startDate,endDate,null,pageIndex,data.length,searchQuery,sort_key,onError);
+          }else{
+            getProductwiseReport(onResponse,null,null,null,pageIndex,data.length,searchQuery,sort_key,onError);
+
+          }
         },
        
         buttons : [
-            {
-          extend: 'csv',
-                // className: 'btn btn-sm btn-success',
-                titleAttr: 'CSV export.',
-                text: 'CSV',
-                // filename: 'attendance',
-                extension: '.csv'
-              }, {
-                extend: 'pdf',
-                // className: 'btn btn-sm btn-danger',
-                titleAttr: 'Copy table data.',
-                text: 'PDF'
-              }
+             // {  
+                // extend: 'csv',
+                //       // className: 'btn btn-sm btn-success',
+                //       titleAttr: 'CSV export.',
+                //       text: 'CSV',
+                //       // filename: 'attendance',
+                //       extension: '.csv'
+                //     }, {
+                //       extend: 'pdf',
+                //       // className: 'btn btn-sm btn-danger',
+                //       titleAttr: 'Copy table data.',
+                //       text: 'PDF'
+                //     },
+
+
+                        {
+                          text: 'PDF',
+                          action: async function () {
+
+
+                              var onResponse = function(res){
+                                  console.log("resssssss : ",res)    
+                                  if(res.data.report){
+                                    window.location.href=res.data.report
+                                  }                
+
+                            };
+                            var onError =function(error){
+                              console.log(error);
+                              dismiss(loadingId);
+                            };
+                              // var pageIndex = data.start / data.length + 1 ;
+                              var download_format = 2
+                              if(startDate && endDate){
+                                getProductwiseReport(onResponse, startDate, endDate ,download_format);
+                              }else{
+                                getProductwiseReport(onResponse, null, null ,download_format);
+                              }
+                          }
+                          
+                      },
+                      {
+                          text: 'CSV',
+                          action: async function () {
+
+
+                            var onResponse = function(res){
+                                console.log("resssssss : ",res)    
+                                if(res.data.report){
+                                  window.location.href=res.data.report
+                                  // window.location.href='https://file-examples-com.github.io/uploads/2017/02/file_example_XLS_10.xls'
+                                }                
+
+                            };
+                            var onError =function(error){
+                              console.log(error);
+                              dismiss(loadingId);
+                            };
+                              // var pageIndex = data.start / data.length + 1 ;
+                              var download_format = 1
+                              if(startDate && endDate){
+                                getProductwiseReport(onResponse, startDate, endDate ,download_format);
+                              }else{
+                                getProductwiseReport(onResponse, null, null ,download_format);
+                              }
+                          }
+                          
+                      },
               ],
               columns: [ 
             
               {
-                "title":"Item Name",
+                "title":"Item Code",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['month'],row,"-")+" "+safeAccess(['year'],row,"-");
+                  return safeAccess(['code'],row,"-");
                 }
               },
               {
-                "title":"Category",
+                "title":"Item Name",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['orders'],row,"-")
+                  return safeAccess(['name'],row,"-")
                 }
               },
               {
                 "title":"Type",
                 render: function(data, type, row){
-                  return safeAccess(['quotes'],row,"-");
+                  return safeAccess(['type'],row,"-");
                 }
               },
               {
-                "title":"SKU",
+                "title":"Family",
                 render: function(data, type, row){
-                  return  safeAccess(['order_qty'],row,"-");
+                  return  safeAccess(['family'],row,"-");
                 }
               },
               {
-                "title":"Weight",
+                "title":"Family Description",
                 render: function(data, type, row){
-                  return  safeAccess(['cart_qty'],row,"-");
+                  return  safeAccess(['family_desc'],row,"-");
+                }
+              },
+              {
+                "title":"Orders",
+                render: function(data, type, row){
+                  return  safeAccess(['orders'],row,"-");
+                }
+              },
+              {
+                "title":"Sales",
+                render: function(data, type, row){
+                  return  "$"+safeAccess(['sales'],row,"-").toLocaleString("en-AU")
                 }
               }
         ]
       })
+
+   }
 
 
       // $('#datatable').on('click', '#btnDetails', function () {
@@ -374,7 +576,13 @@
       //     })
 
       // });
+        $(document).ready(function(){
 
+          var start_date = findGetParameter("start_date");
+          var end_date = findGetParameter("end_date");
+          initDatePicker(start_date,end_date);
+
+          showTable()
 
         });
       </script>
