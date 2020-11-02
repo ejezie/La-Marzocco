@@ -1933,7 +1933,7 @@ async function getRegionwiseReport(onResponse,start_date,end_date,download_forma
   axios(config).then(onResponse).catch(onError);
 }
 
-async function getProductwiseReport(onResponse,start_date,end_date,download_format,page,page_size,searchQuery,sort_key,onError){
+async function getProductwiseReport(onResponse,start_date,end_date,download_format,page,page_size,searchQuery,sort_key,sort_value,onError){
 
   var url = BASE_URL+'report/product-wise?page='+page+'&page_size='+page_size;
   // if(start_date){updateUrlParameter(url,"start_date",start_date)}
@@ -1946,7 +1946,7 @@ async function getProductwiseReport(onResponse,start_date,end_date,download_form
   }
   if(sort_key){
 
-    url+="&"+sort_key+"=1";
+    url+="&"+sort_key+"="+sort_value;
   }
 
 
@@ -1973,7 +1973,7 @@ async function getProductwiseReport(onResponse,start_date,end_date,download_form
   axios(config).then(onResponse).catch(onError);
 }
 
-async function getCustomerOrderReport(onResponse,start_date,end_date,download_format,page,page_size,searchQuery,sort_key,onError){
+async function getCustomerOrderReport(onResponse,start_date,end_date,download_format,page,page_size,searchQuery,sort_key,sort_value,onError){
 
   var url = BASE_URL+'report/customer-order?page='+page+'&page_size='+page_size;
   // if(start_date){updateUrlParameter(url,"start_date",start_date)}
@@ -1985,7 +1985,7 @@ async function getCustomerOrderReport(onResponse,start_date,end_date,download_fo
   }
   if(sort_key){
 
-    url+="&"+sort_key+"=1";
+    url+="&"+sort_key+"="+sort_value;
   }
 
 

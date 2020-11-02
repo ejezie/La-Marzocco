@@ -4,9 +4,12 @@ $(document).ready(function(){
 
  function showRecommendedProducts(items){
 
+
+
 	var recommendedProductsHTML = ""
 
 	for(item of items){
+ 	console.log("items  <>>>>  >>>>>> : ", item)
 
 		// recommendedProductsHTML += '<a >'
 		recommendedProductsHTML += '<div class="single_product">'

@@ -416,6 +416,7 @@
     ajax: function(data, callback, settings) {
     const loadingId = notifyInfo("Please wait");
     var onResponse = function(res){
+
               dismiss(loadingId);
               callback({
                 draw:data.draw,
