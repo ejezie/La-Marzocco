@@ -36,6 +36,28 @@ var shoppingCart = (function () {
 
 
 
+    obj.syncCart =  function (callback) {
+        cartList(function(response){
+        shoppingCart.clearCart();
+        var cart = safeAccess(['data','carts','data'],response,[]);
+          for(cartItem of cart){
+            var item  =new Item(
+                     cartItem.id,
+                    cartItem.item_id,
+                   safeAccess(["item","name"],cartItem,"-"),
+                    safeAccess(["price"],cartItem,"-"),
+                    cartItem.qty
+                )
+
+            cart.push(item);
+          }
+           saveCart();
+            // reloadMiniCart();
+            callback();
+  })
+    }
+
+
     obj.getItem =  function (productId) {
         console.log("getItem "+productId);
            for (var i in cart) {
