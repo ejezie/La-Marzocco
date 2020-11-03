@@ -213,9 +213,12 @@ async function refreshCatalog(){
 
 function getCheckedMachine(){
 		var returnValue=null;
+
 	    $('#sidebarMachineFilter input:checked').each(function(){
 
-	    	$('#machine-menu').removeClass("show");
+	    	// $('#machine-menu').removeClass("show");
+	    	$('.dropdown-menu').removeClass("show");
+	    	console.log(">>>>>>>>>>>>>>>> :this.value  ", this.value)
 
 	        returnValue = this.value;
 	    });        
@@ -237,7 +240,8 @@ async function getCheckedGroup(){
 	var returnValue=null;
 	    $('#sidebarGroupFilter input:checked').each(function(){
 
-	    	$('#group-menu').removeClass("show");
+	    	// $('#group-menu').removeClass("show");
+	    	$('.dropdown-menu').removeClass("show");
 
 	        returnValue =  this.value;
 	    });        
@@ -260,7 +264,8 @@ function getCheckedParent(){
 
 	    $('#sidebarCatalogFilter input:checked').each(function(){
 
-		    $('#catalog-menu').removeClass("show");
+		    // $('#catalog-menu').removeClass("show");
+		    $('.dropdown-menu').removeClass("show");
 
 	        returnValue =  this.value;
 	    });        
