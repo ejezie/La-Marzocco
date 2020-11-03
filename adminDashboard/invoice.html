@@ -22,7 +22,7 @@
 
   <body class="nav-md">
     <div class="container body">
-      <div class="main_container">
+      <div id="invoiceContainer" class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
@@ -483,7 +483,95 @@
     <!-- NProgress -->
     <script src="../vendors/nprogress/nprogress.js"></script>
 
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+       <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+          
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+          <script src="../assets/js/common/localstorage.js"></script>
+
+          <script src="../assets/js/common/notification.js"></script>
+
+          <!-- Main API -->
+          <script src="../assets/js/common/api.js"></script>
+          <script src="../assets/js/common/genericErrorHandler.js"></script>
+
   </body>
+  <script>
+    function CreatePDFfromHTML(){
+        var HTML_Width = $("#invoiceContainer").width();
+        var HTML_Height = $("#invoiceContainer").height();
+        var top_left_margin = 15;
+        var PDF_Width = HTML_Width + (top_left_margin * 2);
+        var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+        html2canvas($("#invoiceContainer")[0]).then(function (canvas) {
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+            pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+            for (var i = 1; i <= totalPDFPages; i++) { 
+                pdf.addPage(PDF_Width, PDF_Height);
+                pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+            }
+            pdf.save("Invoice.pdf");
+            // $("#invoiceContainer").hide();
+        });
+    }
+    CreatePDFfromHTML();
+
+
+  function showOrderDetails(quoteLine){
+
+      var orderDetailsHTML = ""
+      $("#orderDetails").empty()
+
+
+      orderDetailsHTML += '<table style="width:inherit">'
+      orderDetailsHTML += '<thead>'
+      orderDetailsHTML += '<tr>'
+      orderDetailsHTML += '<th class="product_thumb">Product</th>'
+      orderDetailsHTML += '<th class="product_code">Code</th>'
+      orderDetailsHTML += '<th class="product_name">Name</th>'
+      orderDetailsHTML += '<th class="product-price">Price</th>'
+      orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
+      orderDetailsHTML += '<th class="product_total">Total</th>'
+      orderDetailsHTML += '<th class="product_status">Expected Dispatch</th>'
+      orderDetailsHTML += '<th></th>'
+      orderDetailsHTML += '</tr>'
+      orderDetailsHTML += '</thead>'
+      orderDetailsHTML += '<tbody>'
+
+
+      for(i=0;i<quoteLine.length;i++){
+      const quoteItem = quoteLine[i];
+      orderDetailsHTML += '<tr>'
+      orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+      orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","code"],quoteItem,"-")+'</a></td>'
+      orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
+      orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
+      orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'
+      orderDetailsHTML += '<td class="product_total">'+safeAccess(["total"],quoteItem,"-")+'</td>'
+      orderDetailsHTML += '<td class="product_total">'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
+      orderDetailsHTML += '</tr>'
+    }
+
+
+    orderDetailsHTML += '</tbody>'
+    orderDetailsHTML += '</table>'
+
+
+      $("#orderDetails").append(orderDetailsHTML);
+      $('#modal_box').modal('show');
+  }
+
+     // $("#invoiceContainer").hide();
+  </script>
 </html>

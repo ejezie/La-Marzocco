@@ -210,10 +210,8 @@ function confirmOrder(){
 			}
 			if(response.data.data.payment){ 
 				$("#btConfirmOrder").hide();
-				$("#inputPaymentMode").change(function(){
-					if($("#inputPaymentMode").val()==2){
-						$("#payment_method").css("display", "unset");
-						const partialPayment = safeAccess(["data","data","payment","partial"],response,0);
+				$("#payment_method").show();
+				const partialPayment = safeAccess(["data","data","payment","partial"],response,0);
 						const fullPayment = safeAccess(["data","data","payment","full"],response,0);
 						const paymentTypeDropdown =  $("#inputPaymentType");
 						paymentTypeDropdown.html("");
@@ -221,14 +219,20 @@ function confirmOrder(){
 				        if(partialPayment!=fullPayment){
 				        	paymentTypeDropdown.append($("<option>").text("Partial Payment $"+partialPayment).val(partialPayment));
 						}
-						$("#btProceedToPayment").click(function(){
-							confirmPayment(response);
-						});
+						$("#inputPaymentMode").change(function(){
+					if($("#inputPaymentMode").val()==2){
+						$("#creditCardPayment").css("display", "unset");
 					}else{
-						alert("Done")
-						notifyOrderSuccess(safeAccess(["data","data","order"],response,null));
+						$("#creditCardPayment").css("display", "none");
 					}
 				});
+				$("#btProceedToPayment").click(function(){
+					if($("#inputPaymentMode").val()==2){
+							confirmPayment(response);
+						}else{
+							notifyOrderSuccess(safeAccess(["data","data","order"],response,null));
+						}
+						});
 				
 			}else{
 				var orderId =  safeAccess(["data","data","order","payment","order_id"],response,null);

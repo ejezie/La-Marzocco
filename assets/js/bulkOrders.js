@@ -79,13 +79,10 @@ function ExportToTable(action) {
                         var xlsx = document.querySelector('#excelfile');
                           var onResponse = function(response){
                             $('#bulkUploadModal').modal('hide');
-                            if(response.status == 200){
                               notifySuccess("Processing...");
                               syncCart();
                               // window.location.href = "cart.html";
-                            }else{
-                              notifyError(response.data.message);
-                            }
+                            
                           };
                           var onError =function(error){
                             notifyError("Failed to upload file");
@@ -119,7 +116,7 @@ function ExportToTable(action) {
 
 function syncCart(){
   shoppingCart.syncCart(function(){
-    notifySuccess("Cart synced")
+    window.location.href = "cart.html";
   });
  
 }
