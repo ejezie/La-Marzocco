@@ -168,7 +168,7 @@ async function showMachinesSideFilter(machineList){
 
 			// console.log(">>>>>>>>>>",machineList[i]["machines"]) 
 			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
-			sidebarHTML += '<li><form><p><input type="checkbox" value="'+machineList[i]["machines"][k]["id"]+'" id="'+machineList[i]["machines"][k]["id"]+'"  /><label for="'+machineList[i]["machines"][k]["id"]+'" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">'+machineList[i]["machines"][k]["code"]+'</label></p></form></li>'
+			sidebarHTML += '<li><form><p><input type="checkbox" value="'+machineList[i]["machines"][k]["id"]+'" id="'+machineList[i]["machines"][k]["id"]+'"  /><label for="'+machineList[i]["machines"][k]["id"]+'" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">'+machineList[i]["machines"][k]["name"]+'</label></p></form></li>'
 
 		}
 		

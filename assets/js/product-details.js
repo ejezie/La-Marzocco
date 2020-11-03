@@ -239,6 +239,13 @@
 			dismiss(loadingNotification);
 			
 			i = response.data.item;
+			var itemFamilyObj = response.data.item.item_family
+			var itemFamilyArr = []
+			for(k=0;k<itemFamilyObj.length;k++){
+				itemFamilyArr.push(itemFamilyObj[k]["code"])
+
+			}
+			var itemFamily = itemFamilyArr.toString()
 
 			console.log("i : ", i)
 			const element = {
@@ -258,7 +265,8 @@
 					"Code": safeAccess(['code'],i,"-"),
 					"Short Code" : safeAccess(['shortCode'],i,"-"),
 					"Group" : safeAccess(['item_group', 'name'],i,"") + " - " + safeAccess([ 'item_group', 'desc'],i,"") ,
-					"Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
+					// "Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
+					"Family" : itemFamily ,
 					"Type" :safeAccess(['type', 'name'],i,"") + " - " + safeAccess(['type', 'desc'],i,"") ,
 					// "Parent" : safeAccess(['parent', 'name'],i,"") + " - " + safeAccess([ 'parent', 'desc'],i,"") ,
 					// "Lenght" : safeAccess(['length'],i,"") + " - " + safeAccess(['lenght_uom'],i,"") ,
@@ -275,7 +283,8 @@
 					"Code": safeAccess(['code'],i,"-"),
 					"Short Code" : safeAccess(['shortCode'],i,"-"),
 					"Group" : safeAccess(['item_group', 'name'],i,"") + " - " + safeAccess([ 'item_group', 'desc'],i,"") ,
-					"Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
+					// "Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
+					"Family" : safeAccess(['item_family'],i,"") ,
 					"Type" :safeAccess(['type', 'name'],i,"") + " - " + safeAccess(['type', 'desc'],i,"") ,
 					// "Parent" : safeAccess(['parent', 'name'],i,"") + " - " + safeAccess([ 'parent', 'desc'],i,"") ,
 					// "Lenght" : safeAccess(['length'],i,"") + " - " + safeAccess(['lenght_uom'],i,"") ,

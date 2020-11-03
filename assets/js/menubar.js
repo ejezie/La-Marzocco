@@ -162,12 +162,12 @@ function showMenubarCommercialMachine(data){
 		if(categoryName == category){
 			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
-				menuBarHTML += '<li>'+family+'</a>'
+				menuBarHTML += '<li><strong>'+family+'</strong></a>'
 				menuBarHTML += '<ul>'
 
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
-					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
 					menuBarHTML += '<li><a href="product-details.html?item='+categoryArr["Categories"][i]["families"][j]["machines"][k]["id"]+'">'+type+'</a></li>'
 				}
 
