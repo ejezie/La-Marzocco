@@ -49,15 +49,16 @@
 		detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
 		detailsHTML += ''
 		detailsHTML += '</div>'
+		if(item["description"]){
+			detailsHTML += '<p>'+item["description"]+'</p>'
+		}
 		detailsHTML += '</form>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 
 		detailsHTML += '<div>'
 		detailsHTML += ' <select id="input_color" class="form-control">'
-		if(item["description"]){
-			detailsHTML += '<p>'+item["description"]+'</p>'
-		}
+		
 		// if(item.item_images){
 		// 	for(color of item.item_images){
 		// 		detailsHTML += '<button onclick="showImage(`'+color.image.image+'`)" class="button btn-sm" type="button">'+color.color+'</button>'
@@ -66,6 +67,7 @@
 		detailsHTML += ''
 		detailsHTML += '</div>'
 		detailsHTML += '<p>'+safeAccess(["desc"],item,"")+'</p>'
+
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
@@ -254,7 +256,7 @@
 				"name" : i.name,
 				"id" : i.id,
 				"price" : "$"+ safeAccess(['price'],i,"-"),
-				"description": i.desc,
+				"description": splitSentences(i.desc),
 				"family" : safeAccess(['i', 'item_family', 0, 'code'],i,null),
 				// "image" : safeAccess(['i', 'images', 0, 'main'],i,null),
 				"item_images" : i.item_images,
@@ -351,7 +353,19 @@
 		}
 	});
 
+	function splitSentences(str){
+		var htmlContent = "";
+		if(str){
+			var sentences = str.replace(/([.?!])\s*(?=[A-Z])/g, "$1|").split("|");
+			for(sentence of sentences){
+				htmlContent += sentence;
+				htmlContent+= "<br>"
+			}
+		}
+			return htmlContent;
+		
 
+	}
 
 
 

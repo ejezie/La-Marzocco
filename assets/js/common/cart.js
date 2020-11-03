@@ -38,9 +38,12 @@ var shoppingCart = (function () {
 
     obj.syncCart =  function (callback) {
         cartList(function(response){
+                    // console.log("cart list resp")
+
         shoppingCart.clearCart();
-        var cart = safeAccess(['data','carts','data'],response,[]);
-          for(cartItem of cart){
+        // console.log("cart cleared")
+        var serverCart = safeAccess(['data','carts','data'],response,[]);
+          for(cartItem of serverCart){
             var item  =new Item(
                      cartItem.id,
                     cartItem.item_id,
@@ -50,8 +53,14 @@ var shoppingCart = (function () {
                 )
 
             cart.push(item);
+                    // console.log("cart item push "+item.id)
+
           }
+                  // console.log("cart saving")
+
            saveCart();
+                   // console.log("cart saved")
+
             // reloadMiniCart();
             callback();
   })
