@@ -18,8 +18,12 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- bootstrap-daterangepicker -->
+    <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+
     <!-- Datatables -->
-    
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
@@ -27,6 +31,7 @@
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
      <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+
 
     <!-- Admin Dashboard Custom CSS -->
     <link href="css/adminDashboard.css" rel="stylesheet">
@@ -60,8 +65,9 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Period Wise Report</h3>
+                <h3>Report</h3>
               </div>
+              
 
               <!-- <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
@@ -81,8 +87,16 @@
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Data</h2>
-                    <!-- <ul class="nav navbar-right panel_toolbox">
+                    <h2>Period Wise Report</h2>
+
+                    <!-- <div class="col-md-6"> -->
+                      <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                        <!-- <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
+                        <i class="fa fa-calendar"></i>
+                        <span></span> <b class="caret"></b>
+                      </div>
+                    <!-- </div> -->
+<!--                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li class="dropdown">
@@ -235,6 +249,9 @@
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
     <!-- Side NavBar -->
     <script src="js/sideNavBar.js"></script>
@@ -259,100 +276,291 @@
       <script src="assets/js/cart.js"></script>
 
       <script>
+
+        function initDatePicker(start_date,end_date){
+             var cb = function (start, end, label) {
+                  console.log(start.toISOString(), end.toISOString(), label);
+                  $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+              };
+
+              var optionSet1 = {
+                  startDate: moment().subtract(29, 'days'),
+                  endDate: moment(),
+                  // minDate: '01/01/2012',
+                  // maxDate: '12/31/2015',
+                  dateLimit: {
+                      days: 60
+                  },
+                  showDropdowns: true,
+                  showWeekNumbers: true,
+                  timePicker: false,
+                  timePickerIncrement: 1,
+                  timePicker12Hour: true,
+                  // ranges: {
+                  //     'Today': [moment(), moment()],
+                  //     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                  //     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                  //     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                  //     'This Month': [moment().startOf('month'), moment().endOf('month')],
+                  //     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                  // },
+                  opens: 'left',
+                  buttonClasses: ['btn btn-default'],
+                  applyClass: 'btn-small btn-primary',
+                  cancelClass: 'btn-small',
+                  format: 'MM/DD/YYYY',
+                  separator: ' to ',
+                  locale: {
+                      applyLabel: 'Submit',
+                      cancelLabel: 'Clear',
+                      fromLabel: 'From',
+                      toLabel: 'To',
+                      customRangeLabel: 'Custom',
+                      daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                      monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                      firstDay: 1
+                  }
+              };
+
+              if(start_date&&end_date){
+                $('#reportrange span').html(start_date+ ' to ' + end_date);
+              }else{
+                // $('#reportrange span').html("Last 30 days")
+                $('#reportrange span').html("Apply Date Filter")
+              }
+
+              $('#reportrange').daterangepicker(optionSet1, cb);
+              $('#reportrange').on('show.daterangepicker', function () {
+                  console.log("show event fired");
+              });
+              $('#reportrange').on('hide.daterangepicker', function () {
+                  console.log("hide event fired");
+              });
+              $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                  console.log("apply event fired, start/end dates are " + picker.startDate.format('YYYY-MM-DD') + " to " + picker.endDate.format('YYYY-MM-DD'));
+                  var start_date = picker.startDate.format('YYYY-MM-DD');
+                  var end_date =  picker.endDate.format('YYYY-MM-DD');
+                  // window.location.href = '../adminDashboard/dashboard.html?start_date='+start_date+'&end_date='+end_date;
+
+                  
+                  showTable(start_date, end_date)
+              });
+              $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                  console.log("cancel event fired");
+              });
+              $('#options1').click(function () {
+                  $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+              });
+              $('#options2').click(function () {
+                  $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+              });
+              $('#destroy').click(function () {
+                  $('#reportrange').data('daterangepicker').remove();
+              });
+        }
+
+
+
+        async function showTable(startDate, endDate){
+
+          itemMasterTable = $('#tablePeriodicReport').DataTable( {
+           dom: 'Blfrtip',
+           "bDestroy": true,
+           searching : false,
+           processing: true,
+           serverSide: true,
+           pageLength: 15,
+           bSort : false,
+           "order" : [[ 1, 'desc' ]],
+           lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
+                columnDefs: [ {
+                  orderable: false,
+                  className: 'select-checkbox',
+                  targets:   0
+              } ,
+              {
+                   targets: '_all',
+                   defaultContent: '-'
+                  },],
+              select: {
+                  style:    'multi',
+                  selector: 'td:first-child'
+              },
+          ajax: function(data, callback, settings) {
+          const loadingId = notifyInfo("Please wait");
+          var onResponse = function(res){
+
+                    dismiss(loadingId);
+                    callback({
+                      draw:data.draw,
+                      recordsTotal: res.data.report.length,
+                      recordsFiltered: res.data.report.length,
+                      data: res.data.report
+                    });
+
+                  };
+                  var onError =function(error){
+                    console.log(error);
+                    dismiss(loadingId);
+                  };
+                    // var pageIndex = data.start / data.length + 1 ;
+                    if(startDate && endDate){
+                      getPeriodicReport(onResponse,startDate,endDate);
+                    }else{
+                      getPeriodicReport(onResponse);
+
+                    }
+
+              },
+             
+              buttons : [
+                //   {  
+                // extend: 'csv',
+                //       // className: 'btn btn-sm btn-success',
+                //       titleAttr: 'CSV export.',
+                //       text: 'CSV',
+                //       // filename: 'attendance',
+                //       extension: '.csv'
+                //     }, {
+                //       extend: 'pdf',
+                //       // className: 'btn btn-sm btn-danger',
+                //       titleAttr: 'Copy table data.',
+                //       text: 'PDF'
+                //     },
+
+
+                        {
+                          text: 'PDF',
+                          action: async function () {
+
+
+                              var onResponse = function(res){
+                                  console.log("resssssss : ",res)    
+                                  if(res.data.report){
+                                    window.location.href=res.data.report
+                                  }                
+
+                            };
+                            var onError =function(error){
+                              console.log(error);
+                              dismiss(loadingId);
+                            };
+                              // var pageIndex = data.start / data.length + 1 ;
+                              var download_format = 2
+                              if(startDate && endDate){
+                                getPeriodicReport(onResponse, startDate, endDate ,download_format);
+                              }else{
+                                getPeriodicReport(onResponse, null, null ,download_format);
+                              }
+                          }
+                          
+                      },
+                      {
+                          text: 'CSV',
+                          action: async function () {
+
+
+                            var onResponse = function(res){
+                                console.log("resssssss : ",res)    
+                                if(res.data.report){
+                                  window.location.href=res.data.report
+                                  // window.location.href='https://file-examples-com.github.io/uploads/2017/02/file_example_XLS_10.xls'
+                                }                
+
+                            };
+                            var onError =function(error){
+                              console.log(error);
+                              dismiss(loadingId);
+                            };
+                              // var pageIndex = data.start / data.length + 1 ;
+                              var download_format = 1
+                              if(startDate && endDate){
+                                getPeriodicReport(onResponse, startDate, endDate ,download_format);
+                              }else{
+                                getPeriodicReport(onResponse, null, null ,download_format);
+                              }
+                          }
+                          
+                      },
+                    ],
+                    columns: [
+                  
+                    {
+                      "title":"Month",
+                      render: function(data, type, row, meta){
+                        // console.log(JSON.stringify(row,null,2))
+                        return safeAccess(['month'],row,"-")+" "+safeAccess(['year'],row,"-");
+                      }
+                    },
+                    {
+                      "title":"Orders",
+                      render: function(data, type, row, meta){
+                        // console.log(JSON.stringify(row,null,2))
+                        return safeAccess(['orders'],row,"-")
+                      }
+                    },
+                    {
+                      "title":"Order Quantity",
+                      render: function(data, type, row){
+                        return  safeAccess(['order_qty'],row,"-");
+                      }
+                    },
+                    {
+                      "title":"Order Sales",
+                      render: function(data, type, row){
+                        return  "$"+safeAccess(['order_sale'],row,"-").toLocaleString("en-AU")
+                      }
+                    },
+                    {
+                      "title":"Quotation",
+                      render: function(data, type, row){
+                        return safeAccess(['quotes'],row,"-");
+                      }
+                    },
+                    {
+                      "title":"Quotation Quantity",
+                      render: function(data, type, row){
+                        return safeAccess(['quote_qty'],row,"-");
+                      }
+                    },
+                    {
+                      "title":"Quotation Sales",
+                      render: function(data, type, row){
+                        return "$"+safeAccess(['quote_sale'],row,"-").toLocaleString("en-AU")
+                      }
+                    },
+                    {
+                      "title":"Cart",
+                      render: function(data, type, row){
+                        return  safeAccess(['carts'],row,"-");
+                      }
+                    },
+                    {
+                      "title":"Cart Quantity",
+                      render: function(data, type, row){
+                        return  safeAccess(['cart_qty'],row,"-");
+                      }
+                    },
+                    {
+                      "title":"Cart Sales",
+                      render: function(data, type, row){
+                        return  "$"+safeAccess(['cart_sale'],row,"-").toLocaleString("en-AU")
+                      }
+                    }
+              ]
+            })
+        }
+
+
         $(document).ready(function(){
 
-     itemMasterTable = $('#tablePeriodicReport').DataTable( {
-     dom: 'Blfrtip',
-     searching : false,
-     processing: true,
-     serverSide: true,
-     pageLength: 10,
-     bSort : false,
-     lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
-          columnDefs: [ {
-            orderable: false,
-            className: 'select-checkbox',
-            targets:   0
-        } ,
-        {
-             targets: '_all',
-             defaultContent: '-'
-            },],
-        select: {
-            style:    'multi',
-            selector: 'td:first-child'
-        },
-    ajax: function(data, callback, settings) {
-    const loadingId = notifyInfo("Please wait");
-    var onResponse = function(res){
-              dismiss(loadingId);
-              callback({
-                draw:data.draw,
-                recordsTotal: res.data.report.length,
-                recordsFiltered: res.data.report.length,
-                data: res.data.report
-              });
+          var start_date = findGetParameter("start_date");
+          var end_date = findGetParameter("end_date");
+          initDatePicker(start_date,end_date);
 
-            };
-            var onError =function(error){
-              console.log(error);
-              dismiss(loadingId);
-            };
-              // var pageIndex = data.start / data.length + 1 ;
-          getPeriodicReport(onResponse);
-        },
-       
-        buttons : [
-            {
-          extend: 'csv',
-                // className: 'btn btn-sm btn-success',
-                titleAttr: 'CSV export.',
-                text: 'CSV',
-                // filename: 'attendance',
-                extension: '.csv'
-              }, {
-                extend: 'pdf',
-                // className: 'btn btn-sm btn-danger',
-                titleAttr: 'Copy table data.',
-                text: 'PDF'
-              }
-              ],
-              columns: [
-            
-              {
-                "title":"Month",
-                render: function(data, type, row, meta){
-                  // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['month'],row,"-")+" "+safeAccess(['year'],row,"-");
-                }
-              },
-              {
-                "title":"Orders",
-                render: function(data, type, row, meta){
-                  // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['orders'],row,"-")
-                }
-              },
-              {
-                "title":"Quotation",
-                render: function(data, type, row){
-                  return safeAccess(['quotes'],row,"-");
-                }
-              },
-              {
-                "title":"Order Quantity",
-                render: function(data, type, row){
-                  return  safeAccess(['order_qty'],row,"-");
-                }
-              },
-              {
-                "title":"Cart Quantity",
-                render: function(data, type, row){
-                  return  safeAccess(['cart_qty'],row,"-");
-                }
-              }
-        ]
-      })
+          showTable()
+
+     
 
 
       // $('#datatable').on('click', '#btnDetails', function () {

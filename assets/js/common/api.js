@@ -1800,57 +1800,57 @@ async function trackOrder(id,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
-async function getPeriodicReport(onResponse,start_date,end_date,download_format,onError){
+// async function getPeriodicReport(onResponse,start_date,end_date,download_format,onError){
 
-  var url = BASE_URL+'report/periodic';
-  if(start_date){updateUrlParameter(url,"start_date",start_date)}
-  if(end_date){updateUrlParameter(url,"end_date",end_date)}
-  if(download_format){updateUrlParameter(url,"download_format",download_format)}
-  var config = {
-    method: 'get',
-    url: url,
-     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(),
-      'Accept': 'application/json'
-     }
-  };
-  axios(config).then(onResponse).catch(onError);
-}
-async function getRegionwiseReport(onResponse,start_date,end_date,download_format,onError){
+//   var url = BASE_URL+'report/periodic';
+//   if(start_date){updateUrlParameter(url,"start_date",start_date)}
+//   if(end_date){updateUrlParameter(url,"end_date",end_date)}
+//   if(download_format){updateUrlParameter(url,"download_format",download_format)}
+//   var config = {
+//     method: 'get',
+//     url: url,
+//      headers: {
+//       'Content-Type': 'multipart/form-data',
+//       'Authorization': getAPIToken(),
+//       'Accept': 'application/json'
+//      }
+//   };
+//   axios(config).then(onResponse).catch(onError);
+// }
+// async function getRegionwiseReport(onResponse,start_date,end_date,download_format,onError){
 
-  var url = BASE_URL+'report/region-wise';
-  if(start_date){updateUrlParameter(url,"start_date",start_date)}
-  if(end_date){updateUrlParameter(url,"end_date",end_date)}
-  if(download_format){updateUrlParameter(url,"download_format",download_format)}
-  var config = {
-    method: 'get',
-    url: url,
-     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(),
-      'Accept': 'application/json'
-     }
-  };
-  axios(config).then(onResponse).catch(onError);
-}
-async function getProductwiseReport(onResponse,start_date,end_date,download_format,onError){
+//   var url = BASE_URL+'report/region-wise';
+//   if(start_date){updateUrlParameter(url,"start_date",start_date)}
+//   if(end_date){updateUrlParameter(url,"end_date",end_date)}
+//   if(download_format){updateUrlParameter(url,"download_format",download_format)}
+//   var config = {
+//     method: 'get',
+//     url: url,
+//      headers: {
+//       'Content-Type': 'multipart/form-data',
+//       'Authorization': getAPIToken(),
+//       'Accept': 'application/json'
+//      }
+//   };
+//   axios(config).then(onResponse).catch(onError);
+// }
+// async function getProductwiseReport(onResponse,start_date,end_date,download_format,onError){
 
-  var url = BASE_URL+'report/product-wise';
-  if(start_date){updateUrlParameter(url,"start_date",start_date)}
-  if(end_date){updateUrlParameter(url,"end_date",end_date)}
-  if(download_format){updateUrlParameter(url,"download_format",download_format)}
-  var config = {
-    method: 'get',
-    url: url,
-     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(),
-      'Accept': 'application/json'
-     }
-  };
-  axios(config).then(onResponse).catch(onError);
-}
+//   var url = BASE_URL+'report/product-wise';
+//   if(start_date){updateUrlParameter(url,"start_date",start_date)}
+//   if(end_date){updateUrlParameter(url,"end_date",end_date)}
+//   if(download_format){updateUrlParameter(url,"download_format",download_format)}
+//   var config = {
+//     method: 'get',
+//     url: url,
+//      headers: {
+//       'Content-Type': 'multipart/form-data',
+//       'Authorization': getAPIToken(),
+//       'Accept': 'application/json'
+//      }
+//   };
+//   axios(config).then(onResponse).catch(onError);
+// }
 
 
 async function getDashboardReport(onResponse,start_date,end_date,download_format,onError){
@@ -1880,9 +1880,20 @@ async function getDashboardReport(onResponse,start_date,end_date,download_format
 async function getPeriodicReport(onResponse,start_date,end_date,download_format,onError){
 
   var url = BASE_URL+'report/periodic';
-  if(start_date){updateUrlParameter(url,"start_date",start_date)}
-  if(end_date){updateUrlParameter(url,"end_date",end_date)}
-  if(download_format){updateUrlParameter(url,"download_format",download_format)}
+  // if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  // if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  // if(download_format){updateUrlParameter(url,"download_format",download_format)}
+
+  if(start_date && end_date && download_format){
+    url += "?start_date="+start_date;
+    url += "&end_date="+end_date;
+    url += "&download_format="+download_format;
+  }else if(start_date && end_date){
+    url += "?start_date="+start_date;
+    url += "&end_date="+end_date;
+  }else if(download_format){
+    url += "?download_format="+download_format;
+  }
   var config = {
     method: 'get',
     url: url,
@@ -1897,26 +1908,19 @@ async function getPeriodicReport(onResponse,start_date,end_date,download_format,
 async function getRegionwiseReport(onResponse,start_date,end_date,download_format,onError){
 
   var url = BASE_URL+'report/region-wise';
-  if(start_date){updateUrlParameter(url,"start_date",start_date)}
-  if(end_date){updateUrlParameter(url,"end_date",end_date)}
-  if(download_format){updateUrlParameter(url,"download_format",download_format)}
-  var config = {
-    method: 'get',
-    url: url,
-     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(),
-      'Accept': 'application/json'
-     }
-  };
-  axios(config).then(onResponse).catch(onError);
-}
-async function getProductwiseReport(onResponse,start_date,end_date,download_format,onError){
-
-  var url = BASE_URL+'report/product-wise';
-  if(start_date){updateUrlParameter(url,"start_date",start_date)}
-  if(end_date){updateUrlParameter(url,"end_date",end_date)}
-  if(download_format){updateUrlParameter(url,"download_format",download_format)}
+  // if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  // if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  // if(download_format){updateUrlParameter(url,"download_format",download_format)}
+  if(start_date && end_date && download_format){
+    url += "?start_date="+start_date;
+    url += "&end_date="+end_date;
+    url += "&download_format="+download_format;
+  }else if(start_date && end_date){
+    url += "?start_date="+start_date;
+    url += "&end_date="+end_date;
+  }else if(download_format){
+    url += "?download_format="+download_format;
+  }
   var config = {
     method: 'get',
     url: url,
@@ -1929,6 +1933,84 @@ async function getProductwiseReport(onResponse,start_date,end_date,download_form
   axios(config).then(onResponse).catch(onError);
 }
 
+async function getProductwiseReport(onResponse,start_date,end_date,download_format,page,page_size,searchQuery,sort_key,sort_value,onError){
+
+  var url = BASE_URL+'report/product-wise?page='+page+'&page_size='+page_size;
+  // if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  // if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  // if(download_format){updateUrlParameter(url,"download_format",download_format)}
+
+
+  if(searchQuery){
+    url+='&search_text='+searchQuery;
+  }
+  if(sort_key){
+
+    url+="&"+sort_key+"="+sort_value;
+  }
+
+
+  if(start_date && end_date && download_format){
+    url += "&start_date="+start_date;
+    url += "&end_date="+end_date;
+    url += "&download_format="+download_format;
+  }else if(start_date && end_date){
+    url += "&start_date="+start_date;
+    url += "&end_date="+end_date;
+  }else if(download_format){
+    url += "&download_format="+download_format;
+  }
+
+  var config = {
+    method: 'get',
+    url: url,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getCustomerOrderReport(onResponse,start_date,end_date,download_format,page,page_size,searchQuery,sort_key,sort_value,onError){
+
+  var url = BASE_URL+'report/customer-order?page='+page+'&page_size='+page_size;
+  // if(start_date){updateUrlParameter(url,"start_date",start_date)}
+  // if(end_date){updateUrlParameter(url,"end_date",end_date)}
+  // if(download_format){updateUrlParameter(url,"download_format",download_format)}
+
+  if(searchQuery){
+    url+='&search_text='+searchQuery;
+  }
+  if(sort_key){
+
+    url+="&"+sort_key+"="+sort_value;
+  }
+
+
+  if(start_date && end_date && download_format){
+    url += "&start_date="+start_date;
+    url += "&end_date="+end_date;
+    url += "&download_format="+download_format;
+  }else if(start_date && end_date){
+    url += "&start_date="+start_date;
+    url += "&end_date="+end_date;
+  }else if(download_format){
+    url += "&download_format="+download_format;
+  }
+  
+  var config = {
+    method: 'get',
+    url: url,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
 
 async function getNewsletter(onResponse,onError){
   var config = {

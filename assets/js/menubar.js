@@ -368,7 +368,7 @@ function showNewsletter(newsletterData){
 
 
 	var newsletter = newsletterData.newsletters.data
-	console.log("newsletter ", newsletter)
+	// console.log("newsletter ", newsletter)
 
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'

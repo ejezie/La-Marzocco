@@ -405,7 +405,7 @@
                     }
                 });
 
-                $("#login").click(async function(){
+                $("#login").click( function(){
                     var email = $("#email").val();
                     var password = $("#password").val();
                     const id = notifyInfo("Please wait");
@@ -415,25 +415,31 @@
                            if(response.data.status){
                                 notifySuccess('Login Success');
                                 updateAPIToken(response.data.access_token);
-                                
-                                
-                                if(safeAccess(["data","update_password"],response,0)==1){
-                                    window.location.href  ="my-account.html#change-pass";
-                                    return;
-                                }
-                                if(safeAccess(["data","user_type"],response,0)==1){
-                                    window.location.href  ="index.html";
-                                }else{
-                                    window.location.href  ="adminDashboard/dashboard.html";
-                                }
 
 
                                 // Store User Role 
                                 userProfile(
-                                    function(response){
-                                        console.log("response : >>>>>>>> ",response)
-                                      if(response.data.user){
-                                        localStorage.setItem("user_role",response.data.user.role_level_id);
+                                    function(resp){
+                                        // console.log("response : >>>>>>>> ",resp)
+                                        
+                                      if(resp.data.user){
+                                        var user_profile = {}
+                                        user_profile.user_role = resp.data.user.role_level_id
+                                        user_profile.user_name = resp.data.user.first_name
+                                        user_profile.user_image = resp.data.user.profileImage
+                                        // console.log(">>>user : ", user_profile)
+                                        localStorage.setItem("user_profile",JSON.stringify(user_profile));
+
+                                        if(safeAccess(["data","update_password"],response,0)==1){
+                                            window.location.href  ="my-account.html#change-pass";
+                                            return;
+                                        }
+                                        if(safeAccess(["data","user_type"],response,0)==1){
+                                            window.location.href  ="index.html";
+                                        }else{
+                                            window.location.href  ="adminDashboard/dashboard.html";
+                                        }
+
                                       }
                                     },
                                     function(error){
@@ -441,7 +447,13 @@
                                         // notifyError("Please check your connection!");
                                       }
                                     }
-                                )                                                                                                       
+                                ) 
+                                // Store User Role (end)
+
+
+
+
+
 
                             }else{
                                 notifyError(response.data.message);

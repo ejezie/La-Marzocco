@@ -5,10 +5,15 @@ function sideNavBar(){
 
 	// var role = findCurrentLoggedUserRole()
 	// var role = "Super Admin"
-	var role = localStorage.getItem("user_role")
-	// console.log("role : ", role)
+	var user_profile = JSON.parse(localStorage.getItem("user_profile"))
+
+	var role = user_profile["user_role"]
+	var userName = user_profile["user_name"]
+	var profileImage = user_profile["user_image"]
+	console.log("role : ", user_profile)
 	sideNavBarHTML += '</div>'
 	if (role == 5){
+
 		sideNavBarHTML +=  '<div class="navbar nav_title" style="border: 0;">'
 		sideNavBarHTML +=  '<a href="dashboard.html" class="site_title"> <img src="images/logo.png" width="200" height="60"></a>'
 		sideNavBarHTML +=  '</div>'
@@ -17,11 +22,16 @@ function sideNavBar(){
 		sideNavBarHTML +=  '<div class="profile clearfix">'
 		sideNavBarHTML +=  '<div class="profile_pic">'
 		// sideNavBarHTML +=  '<!-- <img src="images/img.jpg" alt="..." class="img-circle profile_img"> -->'
-		sideNavBarHTML +=  '<img src="images/user.png" alt="..." class="img-circle profile_img">'
+
+		if(profileImage){
+			sideNavBarHTML +=  '<img src="'+profileImage+'" alt="..." class="img-circle profile_img">'
+		}else {
+			sideNavBarHTML +=  '<img src="images/user.png" alt="..." class="img-circle profile_img">'
+		}
 		sideNavBarHTML +=  '</div>'
 		sideNavBarHTML +=  '<div class="profile_info">'
 		sideNavBarHTML +=  '<span>WELCOME,</span>'
-		sideNavBarHTML +=  '<h2>User</h2>'
+		sideNavBarHTML +=  '<h2>'+userName+'</h2>'
 		sideNavBarHTML +=  '</div>'
 		sideNavBarHTML +=  '</div>'
 		// sideNavBarHTML +=  '<!-- /menu profile quick info -->'
@@ -47,11 +57,11 @@ function sideNavBar(){
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '<li><a><i class="fa fa-table"></i> MASTER DATA <span class="fa fa-chevron-down"></span></a>'
 		sideNavBarHTML +=  '<ul class="nav child_menu">'
-		// sideNavBarHTML +=  '<li><a href="employeeMaster.html">EMPLOYEE MASTER</a></li>'
+		sideNavBarHTML +=  '<li><a href="employeeMaster.html">EMPLOYEE MASTER</a></li>'
 		// sideNavBarHTML +=  '<li><a href="customerMaster.html">CUSTOMER MASTER</a></li>'
 		sideNavBarHTML +=  '<li><a href="productMaster.html">PRODUCT MASTER</a></li>'
 		sideNavBarHTML +=  '<li><a href="productDescription.html">PRODUCT DESCRIPTION</a></li>'
-		sideNavBarHTML +=  '<li><a href="productHierarchy.html">PRODUCT HIERARCHY</a></li>'
+		sideNavBarHTML +=  '<li><a href="productHierarchy.html">PRODUCT METADATA</a></li>'
 		sideNavBarHTML +=  '<li><a href="promotion.html">PROMOTIONS</a></li>'
 		sideNavBarHTML +=  '<li><a href="newsletter.html">NEWSLETTER</a></li>'
 		sideNavBarHTML +=  '</ul>'
@@ -59,6 +69,7 @@ function sideNavBar(){
 		// sideNavBarHTML +=  '<li><a href="#"><i class="fa fa-user"></i>PROFILE </a>'
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '</li>'
+		sideNavBarHTML +=  '<li><a href="changePassword.html"><i class="fa fa-key"></i>CHANGE PASSWORD </a>'
 		sideNavBarHTML +=  '<li><a href="../login.html"><i class="fa fa-sign-out"></i>LOGOUT </a>'
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '</ul>'
@@ -91,11 +102,15 @@ function sideNavBar(){
 		sideNavBarHTML +=  '<div class="profile clearfix">'
 		sideNavBarHTML +=  '<div class="profile_pic">'
 		// sideNavBarHTML +=  '<!-- <img src="images/img.jpg" alt="..." class="img-circle profile_img"> -->'
-		sideNavBarHTML +=  '<img src="images/user.png" alt="..." class="img-circle profile_img">'
+		if(profileImage){
+			sideNavBarHTML +=  '<img src="'+profileImage+'" alt="..." class="img-circle profile_img">'
+		}else {
+			sideNavBarHTML +=  '<img src="images/user.png" alt="..." class="img-circle profile_img">'
+		}
 		sideNavBarHTML +=  '</div>'
 		sideNavBarHTML +=  '<div class="profile_info">'
 		sideNavBarHTML +=  '<span>WELCOME,</span>'
-		sideNavBarHTML +=  '<h2>User</h2>'
+		sideNavBarHTML +=  '<h2>'+userName+'</h2>'
 		sideNavBarHTML +=  '</div>'
 		sideNavBarHTML +=  '</div>'
 		// sideNavBarHTML +=  '<!-- /menu profile quick info -->'
@@ -121,7 +136,7 @@ function sideNavBar(){
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '<li><a><i class="fa fa-table"></i> MASTER DATA <span class="fa fa-chevron-down"></span></a>'
 		sideNavBarHTML +=  '<ul class="nav child_menu">'
-		sideNavBarHTML +=  '<li><a href="employeeMaster.html">EMPLOYEE MASTER</a></li>'
+		// sideNavBarHTML +=  '<li><a href="employeeMaster.html">EMPLOYEE MASTER</a></li>'
 		sideNavBarHTML +=  '<li><a href="customerMaster.html">CUSTOMER MASTER</a></li>'
 		// sideNavBarHTML +=  '<li><a href="productMaster.html">PRODUCT MASTER</a></li>'
 		// sideNavBarHTML +=  '<li><a href="productDescription.html">PRODUCT DESCRIPTION</a></li>'
@@ -133,6 +148,7 @@ function sideNavBar(){
 		// sideNavBarHTML +=  '<li><a href="#"><i class="fa fa-user"></i>PROFILE </a>'
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '</li>'
+		sideNavBarHTML +=  '<li><a href="changePassword.html"><i class="fa fa-key"></i>CHANGE PASSWORD </a>'
 		sideNavBarHTML +=  '<li><a href="../login.html"><i class="fa fa-sign-out"></i>LOGOUT </a>'
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '</ul>'
