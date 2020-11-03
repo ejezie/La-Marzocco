@@ -270,6 +270,7 @@
 					"Short Code" : safeAccess(['shortCode'],i,"-"),
 					"Group" : safeAccess(['item_group', 'name'],i,"") + " - " + safeAccess([ 'item_group', 'desc'],i,"") ,
 					// "Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
+					// "Family" : itemFamily ,
 					"Family" : itemFamily ,
 					"Type" :safeAccess(['type', 'name'],i,"") + " - " + safeAccess(['type', 'desc'],i,"") ,
 					// "Parent" : safeAccess(['parent', 'name'],i,"") + " - " + safeAccess([ 'parent', 'desc'],i,"") ,
@@ -281,6 +282,7 @@
 				}
 				]
 			}else{
+			console.log("itemFamily  >>>>>>>>>> ", itemFamily)
 
 
 				element["specification"] = [
@@ -290,7 +292,7 @@
 					"Short Code" : safeAccess(['shortCode'],i,"-"),
 					"Group" : safeAccess(['item_group', 'name'],i,"") + " - " + safeAccess([ 'item_group', 'desc'],i,"") ,
 					// "Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
-					"Family" : safeAccess(['item_family'],i,"") ,
+					"Family" : itemFamily ,
 					"Type" :safeAccess(['type', 'name'],i,"") + " - " + safeAccess(['type', 'desc'],i,"") ,
 					// "Parent" : safeAccess(['parent', 'name'],i,"") + " - " + safeAccess([ 'parent', 'desc'],i,"") ,
 					// "Lenght" : safeAccess(['length'],i,"") + " - " + safeAccess(['lenght_uom'],i,"") ,
