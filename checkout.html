@@ -881,6 +881,18 @@ body {font-family: Verdana, sans-serif; margin:0}
 
                              <div class="order_button col-12 mb-20">
                                     <button id="btConfirmOrder" type="button">Confirm Order</button>
+                                    <div class="col-12 mb-20">
+                                            <label>Payment Mode<span></span></label>
+                                            <select class="form-control" id="inputPaymentMode">
+                                                <option value="1">EFT Transfer</option>
+                                                <option value="2">Credit Card</option>
+                                            </select>
+
+                                             <div class="order_button col-12 mb-20">
+                                    <button id="btProceedToPayment" type="button">Proceed to Payment</button>
+                                </div>
+                                        </div>
+
                                 </div>
                             <div id="payment_method" style="display: none;" class="payment_method">
                                 <!-- <div class="panel-default">
@@ -934,9 +946,7 @@ body {font-family: Verdana, sans-serif; margin:0}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="order_button col-12 mb-20">
-                                    <button id="btProceedToPayment" type="button">Proceed to Payment</button>
-                                </div>
+                               
                                 </div>
                                 <!-- <div class="panel-default">
                                     <input id="payment_defult" name="check_method" type="radio" data-target="createp_account" />

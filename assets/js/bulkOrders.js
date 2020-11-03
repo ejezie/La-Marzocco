@@ -80,8 +80,9 @@ function ExportToTable(action) {
                           var onResponse = function(response){
                             $('#bulkUploadModal').modal('hide');
                             if(response.status == 200){
-                              notifySuccess("File uploaded!");
-                              window.location.href = "cart.html";
+                              notifySuccess("Processing...");
+                              syncCart();
+                              // window.location.href = "cart.html";
                             }else{
                               notifyError(response.data.message);
                             }
@@ -116,8 +117,12 @@ function ExportToTable(action) {
 } 
 
 
-
-
+function syncCart(){
+  shoppingCart.syncCart(function(){
+    notifySuccess("Cart synced")
+  });
+ 
+}
 
 async function showBulkOrders(bulkOrderData){
 

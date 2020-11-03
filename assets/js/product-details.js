@@ -141,6 +141,8 @@
 			showImage(item.item_images[0].image.image);
 		}else if(item.parent_image){
 			showImage(item.parent_image);
+		}else if(item.parent_images&&item.parent_images.lenght>0){
+			showImage(item.parent_images[0].image.image);
 		}
 	}
 
@@ -269,6 +271,8 @@
 				}
 				]
 			}else{
+
+
 				element["specification"] = [
 				{
 					"Name" : safeAccess(['name'],i,"-"),
@@ -297,6 +301,12 @@
 
 			showProductDetails(element);
 			showProductInfo(element);
+			if(!safeAccess(['type', 'name'],i,"").includes("Machine")){
+
+				$('#input_color').hide();
+				$('#btPrevImage').hide();
+				$('#btNextImage').hide();
+			}
 			// $("#inputQuantity").val(shoppingCart.getQty(itemId));
 			
 		};
