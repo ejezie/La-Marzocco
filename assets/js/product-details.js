@@ -1,4 +1,4 @@
-
+	var currentImageIndex = 0;
 	async function showProductDetails(item){
 
 		console.log("ITEM   ++======= "+JSON.stringify(item,null,2));
@@ -7,18 +7,23 @@
 		var detailsHTML = ""
 		detailsHTML += '<div class="container">'
 		detailsHTML += '<div class="row">'
+		detailsHTML += '<div class="col">'
+				if(item["description"]){detailsHTML += '<div class="">'+item["description"]+'</div>'}
+
+				detailsHTML += '</div>'
+				detailsHTML += '</div>'
+
+		detailsHTML += '<div class="row">'
 		detailsHTML += '<div class="col-lg-6 col-md-6">'
 		detailsHTML += '<div class="product-details-tab">'
 		detailsHTML += ''
 		detailsHTML += '<div id="img-1" class="zoomWrapper single-zoom">'
 		detailsHTML += '<a href="#">'
 		detailsHTML += '<img id="productImage" alt="No image" />'
-
 		detailsHTML += '</a>'
 		detailsHTML += '</div>'
-
-		detailsHTML += '<button class="button fa fa-arrow-left" id="btNextImage" type="button"></button>'
-		detailsHTML += '<button class="button fa fa-arrow-right" id="btPrevImage" type="button"></button>'
+		detailsHTML += '<button class="button fa fa-arrow-left" id="btPrevImage" type="button"></button>'
+		detailsHTML += '<button class="button fa fa-arrow-right" id="btNextImage" type="button"></button>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 		detailsHTML += '<div class="col-lg-6 col-md-6">'
@@ -26,36 +31,19 @@
 		detailsHTML += '<form action="#">'
 		detailsHTML += ''
 		detailsHTML += '<h1>'+item["name"]+'</h1>'
-		// detailsHTML += '<div class="product_nav">'
-		// detailsHTML += '<ul>'
-		// detailsHTML += '<li class="prev"><a href="product-details.html"><i class="fa fa-angle-left"></i></a></li>'
-		// detailsHTML += '<li class="next"><a href="variable-product.html"><i class="fa fa-angle-right"></i></a></li>'
-		// detailsHTML += '</ul>'
-		// detailsHTML += '</div>'
-		
 		detailsHTML += '<div class="price_box">'
 		detailsHTML += '<span class="current_price">'+item["price"]+'</span>'
 		detailsHTML += ''
-		// detailsHTML += '</div>'
-		// detailsHTML += '<div class="product_desc">'
-		// // detailsHTML += '<p>'+item["description"]+'</p>'
-		// detailsHTML += '</div>'
-		// detailsHTML += '<div class="product_meta">'
-		// detailsHTML += '<span>Family : <a href="#">'+item["family"]+'</a></span>'
-		// detailsHTML += '</div>'	
 		detailsHTML += '<div class="product_variant quantity">'
 		detailsHTML += '<label>quantity</label>'
 		detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
 		detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
 		detailsHTML += ''
 		detailsHTML += '</div>'
-		if(item["description"]){
-			detailsHTML += '<p>'+item["description"]+'</p>'
-		}
+		
 		detailsHTML += '</form>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
-
 		detailsHTML += '<div>'
 		detailsHTML += ' <select id="input_color" class="form-control">'
 		
@@ -64,17 +52,22 @@
 		// 		detailsHTML += '<button onclick="showImage(`'+color.image.image+'`)" class="button btn-sm" type="button">'+color.color+'</button>'
 		// 	}
 		// }
+
 		detailsHTML += ''
 		detailsHTML += '</div>'
 		detailsHTML += '<p>'+safeAccess(["desc"],item,"")+'</p>'
 
 		detailsHTML += '</div>'
+
 		detailsHTML += '</div>'
+
+		if(item["description"]){detailsHTML += '<div class="col-lg-6 col-md-6">xxxxxxxxxxxxxxxxxxxxxxxx</div>'}
 		detailsHTML += '</div>'
+
 		detailsHTML += '</div>'
 
 
-
+		// if(item["description"]){detailsHTML += '<div><p>'+item["description"]+'</p></div>'}
 
 		$("#productDetails").append(detailsHTML);
 
@@ -104,8 +97,8 @@
 
         $('#input_color').change(function(){
 		  var data= colors[($(this).val())];
+		  currentImageIndex = 0;
 		  if(data.length>0){
-		  $('#productImage').data('imageIndex',0);
 		   $('#productImage').attr('src',data[0].image.image);
 		}else{
 			notifyInfo("No images found");
@@ -115,26 +108,32 @@
 		  $('#btPrevImage').unbind();
         $('#btPrevImage').click(function(){
         	var arr = colors[$('#input_color').val()];
-        	var currentIndex = $('#productImage').data('imageIndex');
-
-        	if(currentIndex<(arr.length-1)){
-        		$('#productImage').data('imageIndex',currentIndex+1);
-		   		$('#productImage').attr('src',arr[currentIndex+1].image.image);
-        	}else{
+        	var checkIndex = currentImageIndex-1;
+        	if(typeof arr[checkIndex] === 'undefined'){
         		notifyInfo("No more images")
+        	}else{
+				currentImageIndex = checkIndex;
+        		$('#productImage').attr('src',arr[checkIndex].image.image);
         	}
+       //  	if(currentIndex<(arr.length-1)){
+       //  		$('#productImage').data('imageIndex',currentIndex+1);
+		   		// $('#productImage').attr('src',arr[currentIndex+1].image.image);
+       //  	}else{
+       //  		notifyInfo("No more images")
+       //  	}
         });
 
           $('#btNextImage').unbind();
         $('#btNextImage').click(function(){
         	var arr = colors[$('#input_color').val()];
-        	var currentIndex = $('#productImage').data('imageIndex');
-
-        	if(currentIndex>0){
-        		$('#productImage').data('imageIndex',currentIndex-1);
-		   		$('#productImage').attr('src',arr[currentIndex-1].image.image);
-        	}else{
+        	console.log(arr);
+        	var checkIndex = currentImageIndex+1;
+        	console.log("chkidx "+checkIndex)
+        	if(typeof arr[checkIndex] === 'undefined'){
         		notifyInfo("No more images")
+        	}else{
+        		currentImageIndex = checkIndex;
+        		$('#productImage').attr('src',arr[checkIndex].image.image);
         	}
         });
 
@@ -267,7 +266,7 @@
 				{
 					"Name" : safeAccess(['name'],i,"-"),
 					"Code": safeAccess(['code'],i,"-"),
-					"Short Code" : safeAccess(['shortCode'],i,"-"),
+					"Short Code" : safeAccess(['short_code'],i,"-"),
 					"Group" : safeAccess(['item_group', 'name'],i,"") + " - " + safeAccess([ 'item_group', 'desc'],i,"") ,
 					// "Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
 					// "Family" : itemFamily ,
@@ -282,8 +281,6 @@
 				}
 				]
 			}else{
-			console.log("itemFamily  >>>>>>>>>> ", itemFamily)
-
 
 				element["specification"] = [
 				{

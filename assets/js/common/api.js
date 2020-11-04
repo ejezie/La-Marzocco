@@ -1644,6 +1644,20 @@ async function getAddressesList(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
+async function getBillableAddressesList(onResponse,onError){
+ 
+  var config = {
+    method: 'get',
+    url: BASE_URL+'address?page=1&is_billable=1',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
 async function createOrder(quoteId,po,po_number,shippingAddrId,billingAddrId,desc,sched_delivery_date,onResponse,onError){
   var data = new FormData();
   data.append('quote_id', quoteId);
