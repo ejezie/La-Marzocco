@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
 	shoppingCart.sync();
 })
 
@@ -391,6 +392,13 @@ $('.product_column3').data('owlCarousel').reinit();
 
 
 $(document).ready(function(){
+
+
+	var user_profile = JSON.parse(localStorage.getItem("user_profile"))
+	var role = user_profile["user_role"]
+	if (role != 1){
+		logout()
+	}
 
 	var onError =function(error){
 		// notifyError("Failed to");

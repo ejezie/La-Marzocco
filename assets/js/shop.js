@@ -17,11 +17,11 @@ var basicResultController = (function () {
 		  	var onResponse = function(response){
 		  	dismiss(loadingNotification);
 		  	var results = [];
-		  	console.log("Data "+JSON.stringify(response.data,null,2))
+		  	// console.log("Data "+JSON.stringify(response.data,null,2))
 		    for(var i=0; i< response.data.items.data.length; i++){
 		      const item = response.data.items.data[i];
 
-		      console.log("_____________item_________ :", item)
+		      // console.log("_____________item_________ :", item)
 		      const element = {
 								"productId" : item.id,
 								"href": "product-details.html?item="+item["id"],

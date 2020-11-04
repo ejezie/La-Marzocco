@@ -154,7 +154,8 @@ async function showMachinesSideFilter(machineList){
 
 	var sidebarHTML = ""
 
-	for(i=0; i<machineList.length ;i++){
+	// for(i=0; i<machineList.length ;i++){
+	for(i=machineList.length-1; i>=0 ;i--){
 
 		sidebarHTML += '<li class="dropdown dropdown-large">'
 		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="white-space: nowrap;font-size:14px; font-weight:500;color:#333">'+machineList[i]["code"]+' </a>'
@@ -277,9 +278,9 @@ async function showGroupSideFilter(groupList){
 	var sidebarHTML = ""
 
 	
-		// console.log("groupList >>>>>>>>>>------------- ", groupList)
+		console.log("groupList >>>>>>>>>>------------- ", groupList)
 
-	for(i=0; i<groupList.length ;i++){
+	for(i=groupList.length-1; i>=0 ;i--){
 
 		const item = groupList[i];
 
@@ -301,7 +302,8 @@ async function showGroupSideFilter(groupList){
 
 				const innerMostitem = inneritem["groups"][k];
 
-				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="'+innerMostitem["id"]+'" /><label for="'+innerMostitem["id"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
+				// sidebarHTML += '<li><form><p><input type="checkbox" value="akash" id="nair" /><label for="nair" style="white-space: nowrap;font-size:14px; font-weight:500;">akash</label></p></form></li>'
+				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="'+innerMostitem["desc"]+'" /><label for="'+innerMostitem["desc"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
 			}
 		// }
 		
@@ -337,7 +339,8 @@ async function showGroupSideFilter(groupList){
 async function showParentSideFilter(familyList){
 	var sidebarHTML = ""
 
-	for(i=0; i<familyList.length ;i++){
+	// for(i=0; i<familyList.length ;i++){
+	for(i=familyList.length-1; i>=0 ;i--){
 
 		const item = familyList[i];
 
