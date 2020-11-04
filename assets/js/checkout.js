@@ -341,7 +341,6 @@ async function showCheckoutOrderSummary(orderSummary, orderDetails){
 		orderSummaryHTML += '<td> $'+ orderSummary[i]["total"].toLocaleString("en-AU")+'</td>'
 		orderSummaryHTML += '</tr>'
 	}
-	console.log("orderDetails -------", orderDetails)
 	orderSummaryHTML += '</tbody>'
 	orderSummaryHTML += '<tfoot>'
 	orderSummaryHTML += '<tr>'
