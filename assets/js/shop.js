@@ -11,7 +11,7 @@ var basicResultController = (function () {
 	 // var filterGroupId;
 	
 
-    obj.loadResults =  function (filterGroupId) {
+    obj.loadResults =  function (filterGroupId,filterFamilyId) {
 
     	 var loadingNotification = notifyInfo("Loading results");
 		  	var onResponse = function(response){
@@ -59,7 +59,7 @@ var basicResultController = (function () {
 		  	console.log(error);
 		    notifyError("Failed to load results");
 		  };
-		  getSearchResults(currentPage,itemsPerPage,searchQuery,filterParentId,filterGroupId,onResponse,onError);
+		  getSearchResults(currentPage,itemsPerPage,searchQuery,filterParentId,filterGroupId,filterFamilyId,onResponse,onError);
     }
 
     obj.showResult =  function (catalogList) {

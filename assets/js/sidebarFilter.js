@@ -207,8 +207,9 @@ async function refreshCatalog(){
 	resultController = basicResultController;
 	basicResultController.filterParentId = getCheckedParent();
 	// basicResultController.filterGroupId = await getCheckedGroup();
-	var group_id = await getCheckedGroup()
-	resultController.loadResults(group_id);
+	var group_id = await getCheckedGroup();
+	var groupFamily = await getCheckedGroupFamily();
+	resultController.loadResults(group_id,groupFamily);
 	// $('input[type="checkbox"]').not(this).prop('checked', false);
 }
 
@@ -243,8 +244,16 @@ async function getCheckedGroup(){
 
 	    	// $('#group-menu').removeClass("show");
 	    	$('.dropdown-menu').removeClass("show");
-
+	    	alert($(this).data("family"))
 	        returnValue =  this.value;
+	    });        
+	return returnValue;
+}
+
+async function getCheckedGroupFamily(){
+	var returnValue=null;
+	    $('#sidebarGroupFilter input:checked').each(function(){
+	    	returnValue = ($(this).data("family"))
 	    });        
 	return returnValue;
 }
@@ -303,7 +312,7 @@ async function showGroupSideFilter(groupList){
 				const innerMostitem = inneritem["groups"][k];
 
 				// sidebarHTML += '<li><form><p><input type="checkbox" value="akash" id="nair" /><label for="nair" style="white-space: nowrap;font-size:14px; font-weight:500;">akash</label></p></form></li>'
-				sidebarHTML += '<li><form><p><input type="checkbox" value="'+innerMostitem["id"]+'" id="'+innerMostitem["desc"]+'" /><label for="'+innerMostitem["desc"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
+				sidebarHTML += '<li><form><p><input type="checkbox" data-family="'+groupList[i].id+'" value="'+innerMostitem["id"]+'" id="'+innerMostitem["desc"]+'" /><label for="'+innerMostitem["desc"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
 			}
 		// }
 		

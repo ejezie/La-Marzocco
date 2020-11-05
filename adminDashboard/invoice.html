@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Invoice</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    
+    <!-- Custom styling plus plugins -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div id="invoiceContainer" class="main_container">
+        
+
+        <!-- page content -->
+        <div  role="main">
+          <div class="">
+          
+             
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                 
+                  <div class="x_content">
+
+                    <section class="content invoice">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="  invoice-header">
+                          <h1>
+                                          <i class="fa fa-globe"></i> Invoice.
+                                          <small class="pull-right">Date: 16/08/2016</small>
+                                      </h1>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- info row -->
+                      <div class="row invoice-info">
+                        <div class="col-sm-9 invoice-col">
+                          Invoice To:
+                          <address id="address">
+                                          
+                                      </address>
+                        </div>
+                        
+                        <div class="col-sm-3 invoice-col">
+                          <b>Date</b> <p style="margin:0px;padding:0px;" id="date"></p>
+                          <b>ORDER Ref</b> <p style="margin:0px;padding:0px;" id="orderRef"></p>
+                          <b>CUSTOMER Ref</b> <p style="margin:0px;padding:0px;" id="customerRef"></p>
+                          <b>SALES QUOTATION</b> <p  id="salesQuotation"></p>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- Table row -->
+                      <div class="row">
+                        <div class="  table">
+                          <table style="width:100%;" id="tableQuoteLine" class="table">
+                          </table>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-md-6">
+                          <p class="  ">QUOTE IS VALID FOR  1 MONTH FROM ISSUE DATE.ORDER IS CONFIRMED ON RECEIPT OF DEPOSIT.DISPATCH DATE WILL BE ADVISED WITH ORDER CONFIRMATION</p>
+                        <!--   <img src="images/visa.png" alt="Visa">
+                          <img src="images/mastercard.png" alt="Mastercard">
+                          <img src="images/american-express.png" alt="American Express">
+                          <img src="images/paypal.png" alt="Paypal"> -->
+                          <p class=" " style="margin-top: 10px;">
+                            Price includes 24 months warranty on non-consumable parts for the Linea range and 12 months warranty on non-consumable parts for all other equipment.  Warranty does not include labour or installation.30% deposit required to confirm & secure an order with the balance payable 14 Days from invoice date.Price is subject to the conditions of the warranty agreeme
+                          </p>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-6">
+                         
+                          <div class="table-responsive">
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <th style="width:50%">SUB TOTAL:</th>
+                                  <td id="subTotal"></td>
+                                </tr>
+                                
+                                <tr>
+                                  <th style="width:50%">Shipping</th>
+                                  <td id="shipping"></td>
+                                </tr>
+                                <tr>
+                                  <th>TAX</th>
+                                  <td id="tax"></td>
+                                </tr>
+                                
+                                <tr>
+                                  <th>TOTAL</th>
+                                  <td id="total"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->                     
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     <div class="row no-print container-fluid">
+                        <div class="col-sm-12 text-center ">
+                          <button id="btGeneratePDF" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
+                        </div>
+                      </div>
+
+  <script src="../vendors/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap -->
+            <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- FastClick -->
+            <script src="../vendors/fastclick/lib/fastclick.js"></script>
+            <!-- NProgress -->
+            <script src="../vendors/nprogress/nprogress.js"></script>
+            <!-- iCheck -->
+            <script src="../vendors/iCheck/icheck.min.js"></script>
+
+
+          <!-- Datatables -->
+          <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+          <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>=
+          <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+          <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+          <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+          <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+          <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+          <script src="../vendors/jszip/dist/jszip.min.js"></script>
+          <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+          <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+          <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+          <!-- <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> -->
+
+
+
+          <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+          <script src="../build/js/dataTables.cellEdit.js"></script>
+          <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script> -->
+          <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.1.0/js/dataTables.checkboxes.min.js"></script> -->
+          <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+          <!-- <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> -->
+          <!-- <script src="../build/js/basic.js"></script> -->
+
+          <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+          
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+          <script src="../assets/js/common/localstorage.js"></script>
+
+          <script src="../assets/js/common/notification.js"></script>
+
+          <!-- Main API -->
+          <script src="../assets/js/common/api.js"></script>
+          <script src="../assets/js/common/genericErrorHandler.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+      
+
+  </body>
+  <script>
+    $(document).ready(function(){
+      var quoteId = findGetParameter("quote");
+      if(!quoteId){
+        alert("Invalid Quote.Please try again!");
+        window.location.href = "dashboard.html"
+      }
+
+      $("#btGeneratePDF").click(function(){
+         CreatePDFfromHTML();
+      })
+
+      getQuoteDetails(quoteId,function(response){
+
+          var orderSummary = response.data.quote.quote_line;
+          console.log(orderSummary);
+          var orderDetails = response.data.quote;
+          console.log(orderDetails);
+          var orderSummaryHTML = ''
+
+          itemMasterTable = $('#tableQuoteLine').DataTable( {
+                 dom: 'Blfrtip',
+                  "bInfo" : false,
+                  "bPaginate": false,
+                 searching: false,
+                 data : orderSummary,
+                 pageLength: 10,
+                 bSort : false,
+                  columnDefs: [ {
+                    orderable: false,
+                    className: 'select-checkbox',
+                    targets:   0
+                } ,
+                {
+                     targets: '_all',
+                     defaultContent: '-'
+                    },],
+                select: {
+                    style:    'multi',
+                    selector: 'td:first-child'
+                },
+                      searching: false,
+                      columns: [
+                    
+                      {
+                        "title":"Code",
+                        render: function(data, type, row, meta){
+                          return safeAccess(["item","code"],row,"-");
+                        }
+                      },
+                      {
+                        "title":"Name",
+                        render: function(data, type, row, meta){
+                          return safeAccess(["item","name"],row,"-");
+                        }
+                      },
+                      
+                      {
+                        "title":"Price",
+                        render: function(data, type, row, meta){
+                          // console.log(JSON.stringify(row,null,2))
+                          return "$"+safeAccess(["price"],row,"-");
+                        }
+                      },
+                      {
+                        "title":"Quantity",
+                        render: function(data, type, row, meta){
+                          return safeAccess(["qty"],row,"-");
+                        }
+                      },
+                      {
+                        "title":"Availibility",
+                        render: function(data, type, row, meta){
+                          var color= "black";
+                          var text = "";
+                          var qty = row["qty"];
+                          var available = row["available_qty"];
+                          if(available==0){
+                            color = "red";
+                            text = "Out of Stock";
+                          }else if(available<qty){
+                            color = "orange";
+                            text = "Limited Quantity"
+                          }else if(available>=qty){
+                            color = "green";
+                            text = "Available"
+                          }
+
+                          return '<td ><p style="color:'+color+';">'+text+'</p></td>'
+                        }
+                      },
+                      {
+                        "title":"Expected Dispatch",
+                        render: function(data, type, row, meta){
+                          return safeAccess(["expected_delivery_date"],row,"Unavailable").match(/([^T]+)/)[0].split("-").reverse().join("/");
+                        }
+                      },
+                      {
+                        "title":"Discount",
+                        render: function(data, type, row){
+                          return safeAccess(["discount"],row,"-")+"%";
+                        }
+                      },
+                      {
+                        "title":"Net Total",
+                        render: function(data, type, row){
+                          return  "$"+safeAccess(["total"],row,"-").toLocaleString("en-AU");
+                        }
+                      }
+                ]
+              })
+
+      $("#subTotal").html("$"+safeAccess(["sub_total"],orderDetails,"-").toLocaleString("en-AU"));
+      $("#shipping").html("$"+safeAccess(["shipping_cost"],orderDetails,0).toString().toLocaleString("en-AU"));
+      $("#total").html("$"+safeAccess(["total"],orderDetails,"-").toLocaleString("en-AU"));
+      $("#tax").html("$"+safeAccess(["total_tax"],orderDetails,"-").toLocaleString("en-AU"));
+   
+      $("#date").html(safeAccess(["created_at"],orderDetails,"-").match(/([^T]+)/)[0].split("-").reverse().join("/"));
+      $("#orderRef").html(safeAccess(["id"],orderDetails,"-"));
+      $("#customerRef").html(safeAccess(["user","id"],orderDetails,"-"));
+      $("#salesQuotation").html("$"+safeAccess(["total"],orderDetails,"-").toLocaleString("en-AU"));
+
+      getAddressesList(function(response){
+         $("#address").html('<strong>'+safeAccess(["user","first_name"],orderDetails," ")+ " " +safeAccess(["user","last_name"],orderDetails," ")+'<br>'+(safeAccess(["data","addresses","data",0,"address"],response))+'</strong><br>Email: '+safeAccess(["user","email"],orderDetails," "));
+      });
+     
+      
+      })
+
+
+    })
+
+
+    function CreatePDFfromHTML(){
+        var HTML_Width = $("#invoiceContainer").width();
+        var HTML_Height = $("#invoiceContainer").height();
+        var top_left_margin = 15;
+        var PDF_Width = HTML_Width + (top_left_margin * 2);
+        var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+        var canvas_image_width = HTML_Width;
+        var canvas_image_height = HTML_Height;
+
+        var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+        html2canvas($("#invoiceContainer")[0]).then(function (canvas) {
+            var imgData = canvas.toDataURL("image/jpeg", 1.0);
+            var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+            pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+            for (var i = 1; i <= totalPDFPages; i++) { 
+                pdf.addPage(PDF_Width, PDF_Height);
+                pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+            }
+            pdf.save("Invoice.pdf");
+            // $("#invoiceContainer").hide();
+        });
+    }
+   
+
+
+  function showQuoteDetails(quoteLine){
+
+
+      var orderDetailsHTML = ""
+      $("#orderDetails").empty()
+
+
+      orderDetailsHTML += '<table style="width:inherit">'
+      orderDetailsHTML += '<thead>'
+      orderDetailsHTML += '<tr>'
+      orderDetailsHTML += '<th class="product_thumb">Product</th>'
+      orderDetailsHTML += '<th class="product_code">Code</th>'
+      orderDetailsHTML += '<th class="product_name">Name</th>'
+      orderDetailsHTML += '<th class="product-price">Price</th>'
+      orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
+      orderDetailsHTML += '<th class="product_total">Total</th>'
+      orderDetailsHTML += '<th class="product_status">Expected Dispatch</th>'
+      orderDetailsHTML += '<th></th>'
+      orderDetailsHTML += '</tr>'
+      orderDetailsHTML += '</thead>'
+      orderDetailsHTML += '<tbody>'
+
+
+      for(i=0;i<quoteLine.length;i++){
+      const quoteItem = quoteLine[i];
+      orderDetailsHTML += '<tr>'
+      orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+      orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","code"],quoteItem,"-")+'</a></td>'
+      orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
+      orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
+      orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'
+      orderDetailsHTML += '<td class="product_total">'+safeAccess(["total"],quoteItem,"-")+'</td>'
+      orderDetailsHTML += '<td class="product_total">'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
+      orderDetailsHTML += '</tr>'
+    }
+
+
+    orderDetailsHTML += '</tbody>'
+    orderDetailsHTML += '</table>'
+
+
+      $("#orderDetails").append(orderDetailsHTML);
+      $('#modal_box').modal('show');
+  }
+
+     // $("#invoiceContainer").hide();
+  </script>
+</html>
