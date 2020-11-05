@@ -1336,7 +1336,7 @@ async function userProfile(onResponse,onError){
 }
 
 
-async function getSearchResults(currentPage,pageSize,searchQuery,filterParentId,filterGroupId,onResponse,onError){
+async function getSearchResults(currentPage,pageSize,searchQuery,filterParentId,filterGroupId,filterFamilyId,onResponse,onError){
   console.log("url  "+url,"  parent_id  "+filterParentId+"  grp "+filterGroupId +" searchQuery: "+searchQuery)
   // var data = new FormData();
   // appendIfNotNull(data,"search_text ",searchQuery);
@@ -1351,6 +1351,9 @@ async function getSearchResults(currentPage,pageSize,searchQuery,filterParentId,
 
   if(filterParentId){
     url+='&parent_id='+filterParentId;
+  }
+  if(filterFamilyId){
+    url+='&family_id='+filterFamilyId;
   }
  
   if(searchQuery){
