@@ -286,7 +286,7 @@
 				{
 					"Name" : safeAccess(['name'],i,"-"),
 					"Code": safeAccess(['code'],i,"-"),
-					"Short Code" : safeAccess(['shortCode'],i,"-"),
+					"Short Code" : safeAccess(['short_code'],i,"-"),
 					"Group" : safeAccess(['item_group', 'name'],i,"") + " - " + safeAccess([ 'item_group', 'desc'],i,"") ,
 					// "Family" : safeAccess(['item_family', 'code'],i,"") + " - " + safeAccess([ 'item_family', 'desc'],i,"") ,
 					"Family" : itemFamily ,
