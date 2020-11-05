@@ -141,6 +141,13 @@ async function showQuotation(orderArr){
 		        render: function(data, type, row){
 		           return "<button type=\"button\" id='btnAddToCart' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Submit</span></button>"
 		          }
+		      },
+		       {
+		        "title":"PDF",
+		        render: function(data, type, row){
+		           return "<button type=\"button\" id='btGeneratePDF' href='invoice.html?quote="+row.id+"' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Generate</span></button>"
+		          }
+
         }
         ]
       })
@@ -207,6 +214,11 @@ $(document).ready(function(){
   	var RowIndex = $(this).closest('tr');
     var data = $('#tableQuoteList').dataTable().api().row(RowIndex).data();
   	showOrderDetails(data.quote_line);
+  });
+  $('#tableQuoteList').on('click', '#btGeneratePDF', function () {
+  	var RowIndex = $(this).closest('tr');
+    var data = $('#tableQuoteList').dataTable().api().row(RowIndex).data();
+  	window.location.href = "invoice.html?quote="+data.id;
   });
 
 

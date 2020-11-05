@@ -72,7 +72,7 @@ var basicResultController = (function () {
 				catalogHTML += '<div class="single_product">'
 				catalogHTML += '<div class="product_name grid_name">'
 				catalogHTML += '<h3><strong><a href="' +catalogList[i]["href"] +'" style="text-transform: lowercase;">'+catalogList[i]["productName"]+'</a></strong></h3>'
-				catalogHTML += '<p class="manufacture_product"><a>'+catalogList[i]["productCode"]+'</a></p>'
+				catalogHTML += '<p style="opacity:1;">'+catalogList[i]["productCode"]+'</p>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="product_thumb">'
 
@@ -212,7 +212,7 @@ var catalogResultController = (function () {
 				catalogHTML += '<div class="single_product">'
 				catalogHTML += '<div class="product_name grid_name">'
 				catalogHTML += '<h3><strong><a href="' +catalogList[i]["href"] +'" style="text-transform: lowercase;">'+catalogList[i]["productName"]+'</a></strong></h3>'
-				catalogHTML += '<p class="manufacture_product"><a>Catalog Parts</a></p>'
+				catalogHTML += '<p style="opacity:1;">Catalog Parts</p>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="product_thumb">'
 				catalogHTML += '<img src="'+catalogList[i]["image"]+'" onerror="this.onerror=null;this.src=`assets/img/product/product1.jpg`;"/>';
@@ -347,7 +347,7 @@ var machineResultController = (function () {
 				catalogHTML += '<div class="single_product">'
 				catalogHTML += '<div class="product_name grid_name">'
 				catalogHTML += '<h3><strong><a href="' +catalogList[i]["href"] +'" style="text-transform: lowercase;">'+catalogList[i]["productName"]+'</a></strong></h3>'
-				catalogHTML += '<p class="manufacture_product"><a href="#">Accessories</a></p>'
+				catalogHTML += '<p style="opacity:1;">'+catalogList[i]["productCode"]+'</p>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="product_thumb">'
 				catalogHTML += '<img src="'+catalogList[i]["image"]+'" onerror="this.onerror=null;this.src=`'+catalogList[i]["parentImages"]+'`;"/>';
