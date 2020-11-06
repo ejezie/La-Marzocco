@@ -68,6 +68,8 @@ var basicResultController = (function () {
 
 		for(i=0; i<catalogList.length; i++){
 
+				console.log("catalogList : catalogList ", catalogList)
+
 				catalogHTML += '<div class="col-lg-4 col-md-4 col-12 ">'
 				catalogHTML += '<div class="single_product">'
 				catalogHTML += '<div class="product_name grid_name">'
@@ -109,6 +111,7 @@ var basicResultController = (function () {
 				catalogHTML += '<div class="left_caption" style="width:300px">'
 				catalogHTML += '<div class="product_name">'
 				catalogHTML += '<h3><a href="product-details.html">'+catalogList[i]["productName"]+'</a></h3>'
+				catalogHTML += '<h3><a href="product-details.html">'+catalogList[i]["productCode"]+'</a></h3>'
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_desc">'
@@ -249,6 +252,7 @@ var catalogResultController = (function () {
 				catalogHTML += '<div class="left_caption" style="width:300px">'
 				catalogHTML += '<div class="product_name">'
 				catalogHTML += '<h3><a>'+catalogList[i]["productName"]+'</a></h3>'
+				catalogHTML += '<h3><a>'+catalogList[i]["productCode"]+'</a></h3>'
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_desc">'
@@ -380,6 +384,7 @@ var machineResultController = (function () {
 				catalogHTML += '<div class="left_caption" style="width:300px">'
 				catalogHTML += '<div class="product_name">'
 				catalogHTML += '<h3><a href="product-details.html">'+catalogList[i]["productName"]+'</a></h3>'
+				catalogHTML += '<h3><a href="product-details.html">'+catalogList[i]["productCode"]+'</a></h3>'
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_desc">'

@@ -3,6 +3,7 @@ $(document).ready(function(){
 	shoppingCart.sync();
 })
 
+
  function showRecommendedProducts(items){
 
 
@@ -25,6 +26,7 @@ $(document).ready(function(){
 		// recommendedProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
 		// recommendedProductsHTML += '</ul>'
 		// recommendedProductsHTML += '</div>'
+		recommendedProductsHTML += '<h5><a>'+safeAccess(["code"],item)+'</a></h5>'
 		recommendedProductsHTML += '<h5><a>'+safeAccess(["item_group","desc"],item)+'</a></h5>'
 		recommendedProductsHTML += '<h5><a>'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
 		recommendedProductsHTML += '<h5><a>'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
@@ -112,6 +114,7 @@ $(document).ready(function(){
 		// topSellingProductsHTML += '<div class="price_box">'
 		// topSellingProductsHTML += '<span class="regular_price">'+topSellingItemList[i]["productPrice"]+'</span>'
 		// topSellingProductsHTML += '</div>'
+		topSellingProductsHTML += '<h5><a>'+safeAccess(["code"],item)+'</a></h5>'
 		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_group","desc"],item)+'</a></h5>'
 		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
 		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
@@ -188,6 +191,7 @@ async function showSpecialOffersProducts(items){
 		// topSellingProductsHTML += '<div class="price_box">'
 		// topSellingProductsHTML += '<span class="regular_price">'+topSellingItemList[i]["productPrice"]+'</span>'
 		// topSellingProductsHTML += '</div>'
+		specialOffersProductsHTML += '<h5><a>'+safeAccess(["code"],item)+'</a></h5>'
 		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_group","desc"],item)+'</a></h5>'
 		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
 		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'

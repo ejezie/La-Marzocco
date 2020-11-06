@@ -8,10 +8,10 @@
 		detailsHTML += '<div class="container">'
 		detailsHTML += '<div class="row">'
 		detailsHTML += '<div class="col">'
-				if(item["description"]){detailsHTML += '<div class="">'+item["description"]+'</div>'}
+				// if(item["description"]){detailsHTML += '<div class="">'+item["description"]+'</div>'}
 
-				detailsHTML += '</div>'
-				detailsHTML += '</div>'
+				// detailsHTML += '</div>'
+				// detailsHTML += '</div>'
 
 		detailsHTML += '<div class="row">'
 		detailsHTML += '<div class="col-lg-6 col-md-6">'
@@ -164,9 +164,9 @@
 		infoHTML += '<li>'
 		infoHTML += '<a class="active" data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Specification</a>'
 		infoHTML += '</li>'
-		// infoHTML += '<li>'
-		// infoHTML += '<a data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>'
-		// infoHTML += '</li>'
+		infoHTML += '<li>'
+		infoHTML += '<a data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>'
+		infoHTML += '</li>'
 		infoHTML += ''
 		infoHTML += '</ul>'
 		infoHTML += '</div>'
