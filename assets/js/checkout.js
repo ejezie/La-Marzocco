@@ -193,6 +193,10 @@ function confirmOrder(){
 	const orderNotes = $("#inputOrderNotes").val().length>0 ? $("#inputOrderNotes").val() : null;
 	const poNumber = $("#inputPoName").val().length>0 ? $("#inputPoName").val() : null;
 	const po = document.querySelector('#pofile').files[0];
+	if(!poNumber){
+		notifyError("Please enter valid PO Number")
+		return;
+	}
 	const billingAddressId = getBillingAddressId();
 	const shippingAddressId = getShippingAddressId();
 	const sched_delivery_date = ($('#deliveryType').val()==3)? $("#deliveryDateInput").val() : null;
