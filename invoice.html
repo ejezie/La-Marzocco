@@ -42,10 +42,11 @@
                     <section class="content invoice">
                       <!-- title row -->
                       <div class="row">
-                        <div class="  invoice-header">
+                        <div class="  invoice-header" style="margin: auto;">
                           <h1>
-                                          <i class="fa fa-globe"></i> Invoice.
-                                          <small class="pull-right">Date: 16/08/2016</small>
+                                          <!-- <i class="fa fa-globe"></i> Invoice.
+                                          <small class="pull-right">Date: 16/08/2016</small> -->
+                                          <img src="assets/img/quotation_logo.png" style="width: 300px">
                                       </h1>
                         </div>
                         <!-- /.col -->
@@ -53,17 +54,15 @@
                       <!-- info row -->
                       <div class="row invoice-info">
                         <div class="col-sm-9 invoice-col">
-                          Invoice To:
-                          <address id="address">
-                                          
-                                      </address>
+                          <strong>Invoice To : </strong>
+                          <address id="address"></address>
                         </div>
                         
                         <div class="col-sm-3 invoice-col">
-                          <b>Date</b> <p style="margin:0px;padding:0px;" id="date"></p>
-                          <b>ORDER Ref</b> <p style="margin:0px;padding:0px;" id="orderRef"></p>
-                          <b>CUSTOMER Ref</b> <p style="margin:0px;padding:0px;" id="customerRef"></p>
-                          <b>SALES QUOTATION</b> <p  id="salesQuotation"></p>
+                          <div style="display: block ruby"><b>Date : </b> <p style="margin:0px;padding:0px;" id="date"></p></div>
+                          <div style="display: block ruby"><b>ORDER Ref :</b> <p style="margin:0px;padding:0px;" id="orderRef"></p></div>
+                          <div style="display: block ruby"><b>CUSTOMER Ref :</b> <p style="margin:0px;padding:0px;" id="customerRef"></p></div>
+                          <div style="display: block ruby;"><b>SALES QUOTATION : <p  id="salesQuotation"></p> </b> </div>
                         </div>
                         <!-- /.col -->
                       </div>
@@ -119,6 +118,7 @@
                             </table>
                           </div>
                         </div>
+                          <img src="assets/img/quotation_footer.png" style="width: 100%">
                         <!-- /.col -->
                       </div>
                       <!-- /.row -->                     
@@ -314,7 +314,7 @@
       $("#salesQuotation").html("$"+safeAccess(["total"],orderDetails,"-").toLocaleString("en-AU"));
 
       getAddressesList(function(response){
-         $("#address").html('<strong>'+safeAccess(["user","first_name"],orderDetails," ")+ " " +safeAccess(["user","last_name"],orderDetails," ")+'<br>'+(safeAccess(["data","addresses","data",0,"address"],response))+'</strong><br>Email: '+safeAccess(["user","email"],orderDetails," "));
+         $("#address").html(safeAccess(["user","first_name"],orderDetails," ")+ " " +safeAccess(["user","last_name"],orderDetails," ")+'<br>'+(safeAccess(["data","addresses","data",0,"address"],response))+'</strong><br><strong>Email: </strong>'+safeAccess(["user","email"],orderDetails," "));
       });
      
       
