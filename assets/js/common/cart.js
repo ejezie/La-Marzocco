@@ -113,7 +113,7 @@ var shoppingCart = (function () {
         })
     }
 
-    obj.modify =  function (productId,quantity,callback) {
+    obj.modify = function (productId,quantity,callback) {
          var existing = obj.getItem(productId);
 
          if(!existing && quantity == 0){
@@ -136,7 +136,7 @@ var shoppingCart = (function () {
                   // }
                   cart = cart.filter(function(el) { return el != existing });
                             saveCart();
-                            callback(); 
+                            if(callback){callback();} 
                 $("#cart_quantity").val(cart.length);
 
               }

@@ -478,7 +478,7 @@ async function getTopSellingProducts(onResponse,onError){
 
   var config = {
     method: 'get',
-    url: BASE_URL+'item?page_size=20&sort_by_ordered=1',
+    url: BASE_URL+'item?page_size=20&sort_by_ordered=0',
     headers: {
       'Authorization': getAPIToken(),
       'Accept': 'application/json'
@@ -496,7 +496,7 @@ async function getMostViewedProducts(onResponse,onError){
 
   var config = {
     method: 'get',
-    url: BASE_URL+'item?page_size=20&sort_by_viewed=1',
+    url: BASE_URL+'item?page_size=20&sort_by_viewed=0',
     headers: {
       'Authorization': getAPIToken(),
       'Accept': 'application/json'
