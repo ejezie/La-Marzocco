@@ -18,9 +18,22 @@
     
     <!-- Custom styling plus plugins -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+    <style media="print">
+     @page {
+      size: auto;
+      margin: 0;
+           }
+    </style>
+
   </head>
 
   <body class="nav-md">
+       <div class="row no-print container-fluid">
+                        <div class="col-sm-12 text-center ">
+                          <button id="btGeneratePDF" onclick="CreatePDFfromHTML()" class="btn btn-primary pull-right" style="margin: 25px;"><i class="fa fa-download" ></i> Generate PDF</button>
+                        </div>
+                      </div>
+
     <div class="container body">
       <div id="invoiceContainer" class="main_container">
         
@@ -97,7 +110,7 @@
                             <table class="table">
                               <tbody>
                                 <tr>
-                                  <th style="width:50%">SUB TOTAL:</th>
+                                  <th style="width:50%">SUB TOTAL</th>
                                   <td id="subTotal"></td>
                                 </tr>
                                 
@@ -131,11 +144,7 @@
         </div>
       </div>
     </div>
-     <div class="row no-print container-fluid">
-                        <div class="col-sm-12 text-center ">
-                          <button id="btGeneratePDF" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
-                        </div>
-                      </div>
+  
 
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
             <!-- Bootstrap -->
@@ -322,30 +331,67 @@
 
 
     })
+function makePDF() {
 
+    var quotes = document.getElementById('invoiceContainer');
+
+    html2canvas(quotes).then(function(canvas) {
+
+        //! MAKE YOUR PDF
+        var pdf = new jsPDF('p', 'pt', 'letter');
+
+        for (var i = 0; i <= quotes.clientHeight/980; i++) {
+            //! This is all just html2canvas stuff
+            var srcImg  = canvas;
+            var sX      = 0;
+            var sY      = 980*i; // start 980 pixels down for every new page
+            var sWidth  = 900;
+            var sHeight = 980;
+            var dX      = 0;
+            var dY      = 0;
+            var dWidth  = 900;
+            var dHeight = 980;
+
+            window.onePageCanvas = document.createElement("canvas");
+            onePageCanvas.setAttribute('width', 900);
+            onePageCanvas.setAttribute('height', 980);
+            var ctx = onePageCanvas.getContext('2d');
+            // details on this usage of this function: 
+            // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images#Slicing
+            ctx.drawImage(srcImg,sX,sY,sWidth,sHeight,dX,dY,dWidth,dHeight);
+
+            // document.body.appendChild(canvas);
+            var canvasDataURL = onePageCanvas.toDataURL("image/png", 1.0);
+
+            var width         = onePageCanvas.width;
+            var height        = onePageCanvas.clientHeight;
+
+            //! If we're on anything other than the first page,
+            // add another page
+            if (i > 0) {
+                pdf.addPage(612, 791); //8.5" x 11" in pts (in*72)
+            }
+            //! now we declare that we're working on that page
+            pdf.setPage(i+1);
+            //! now we add content to that page!
+            pdf.addImage(canvasDataURL, 'PNG', 20, 40, (width*.62), (height*.62));
+
+        }
+        //! after the for loop is finished running, we save the pdf.
+        pdf.save('test.pdf');
+    })
+}
 
     function CreatePDFfromHTML(){
-        var HTML_Width = $("#invoiceContainer").width();
-        var HTML_Height = $("#invoiceContainer").height();
-        var top_left_margin = 15;
-        var PDF_Width = HTML_Width + (top_left_margin * 2);
-        var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
-        var canvas_image_width = HTML_Width;
-        var canvas_image_height = HTML_Height;
+       var printContents = document.getElementById("invoiceContainer").innerHTML;
+       var originalContents = document.body.innerHTML;
 
-        var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+       document.body.innerHTML = printContents;
 
-        html2canvas($("#invoiceContainer")[0]).then(function (canvas) {
-            var imgData = canvas.toDataURL("image/jpeg", 1.0);
-            var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
-            pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
-            for (var i = 1; i <= totalPDFPages; i++) { 
-                pdf.addPage(PDF_Width, PDF_Height);
-                pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
-            }
-            pdf.save("Invoice.pdf");
-            // $("#invoiceContainer").hide();
-        });
+       window.print();
+
+       document.body.innerHTML = originalContents;        // window.print();
+       
     }
    
 

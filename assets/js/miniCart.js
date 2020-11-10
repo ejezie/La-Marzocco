@@ -33,10 +33,16 @@ function loadMiniCart(){
 async function showMiniCart(cartItems,cartSubtotal){
 	var miniCartHTML = ''
 
+	miniCartHTML += '<div class="mini_cart_footer">'
+	miniCartHTML += '<div class="cart_button">'
+	miniCartHTML += '<a class="active" href="cart.html">GO TO CART</a>'
+	miniCartHTML += '</div>'
+	miniCartHTML += '</div>'
 
 	for(i=0; i<cartItems.length;i++){
 
 		const item  = cartItems[i];
+
 		miniCartHTML += '<div class="cart_item">'
 		miniCartHTML += '<div class="cart_img">'
 		miniCartHTML += '<a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a>'
@@ -63,24 +69,44 @@ async function showMiniCart(cartItems,cartSubtotal){
 	// miniCartHTML += '<span class="price">'+cartSubtotal["total"]+'</span>'
 	// miniCartHTML += '</div>'
 	// miniCartHTML += '</div>'
+	if(cartItems.length>0){
+		miniCartHTML += '<div class="mini_cart_footer">'
+		miniCartHTML += '<div class="cart_button">'
+		miniCartHTML += '<a class="active" id="btClearCart">EMPTY CART</a>'
+		miniCartHTML += '</div>'
+		miniCartHTML += '</div>'
+	}
 
-	miniCartHTML += '<div class="mini_cart_footer">'
-	// miniCartHTML += '<div class="cart_button">'
-	// miniCartHTML += '<a href="cart.html">View cart</a>'
-	// miniCartHTML += '</div>'
-	miniCartHTML += '<div class="cart_button">'
-	miniCartHTML += '<a class="active" href="cart.html">View cart</a>'
-	miniCartHTML += '</div>'
-	// miniCartHTML += '<a href="cart.html">View cart</a>'
-	miniCartHTML += '</div>'
 	// miniCartHTML += '<div class="cart_button">'
 	// miniCartHTML += '<a class="active" href="checkout.html">Checkout</a>'
 	// miniCartHTML += '</div>'
 	miniCartHTML += ''
 	miniCartHTML += '</div>'
 	$("#miniCart").html("")
-	$("#miniCart").append(miniCartHTML)
+	$("#miniCart").append(miniCartHTML);
+	$("#btClearCart").click(function(){
+		emptyCart(cartItems);
+	});
+
 }
+
+
+function emptyCart(cartItems){
+	if(confirm("Delete all items from cart?")){
+		var count = 0;
+		for(cartitem of cartItems){
+			shoppingCart.modify(cartitem.item_id,0,function(){
+				count++;
+				if(count==cartItems.length){
+					location.reload()
+				}
+				notifySuccess("Item "+cartitem.item.name+" deleted")
+			});
+		}
+		
+	}
+}
+
 
 function removeItem(id){
 	if(confirm("Remove this item from cart?")){
