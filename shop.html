@@ -527,8 +527,8 @@ label:hover:before {
 
 
     <!--Offcanvas menu area start-->
-    <!-- <div class="off_canvars_overlay"></div>
-    <div class="Offcanvas_menu canvas_padding">
+    <div class="off_canvars_overlay"></div>
+    <div class="Offcanvas_menu" id="offCanvass">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -547,30 +547,31 @@ label:hover:before {
                             <ul>
                                 <li class="top_links"><a href="#"><i class="ion-android-person"></i> My Account<i class="ion-ios-arrow-down"></i></a>
                                     <ul class="dropdown_links">
-                                        <li><a href="checkout.html">Checkout </a></li>
                                         <li><a href="my-account.html">My Account </a></li>
+                                        <li><a href="myOrders.html">My Orders </a></li>
+                                        <li><a href="getQuotation.html">Quotation </a></li>
                                         <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
+                                        <li><a href="login.html">Logout </a></li>
                                     </ul>
                                 </li>
-                                <li class="language"><a href="#"><img src="assets/img/logo/language.png" alt="">en-gb<i class="ion-ios-arrow-down"></i></a>
-                                    <ul class="dropdown_language">
+                                <li class="language"><a href="#" style="color: white"><img src="assets/img/logo/aus_language.png" alt="" style="width: 30px">Aus</a> 
+                                   <!--  <ul class="dropdown_language">
                                         <li><a href="#"><img src="assets/img/logo/language.png" alt=""> English</a></li>
                                         <li><a href="#"><img src="assets/img/logo/language2.png" alt=""> Germany</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
-                                <li class="currency"><a href="#">$ USD<i class="ion-ios-arrow-down"></i></a>
-                                    <ul class="dropdown_currency">
+                                <li class="currency"><a href="#" style="color: white">$ AUD</a>
+                                    <!-- <ul class="dropdown_currency">
                                         <li><a href="#">EUR – Euro</a></li>
                                         <li><a href="#">GBP – British Pound</a></li>
                                         <li><a href="#">INR – India Rupee</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
 
 
                             </ul>
                         </div>
-                        <div class="Offcanvas_follow">
+                     <!--    <div class="Offcanvas_follow">
                             <label>Follow Us:</label>
                             <ul class="follow_link">
                                 <li><a href="#"><i class="ion-social-facebook"></i></a></li>
@@ -578,20 +579,21 @@ label:hover:before {
                                 <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
                                 <li><a href="#"><i class="ion-social-youtube"></i></a></li>
                             </ul>
-                        </div>
+                        </div> -->
                         <div class="search-container">
                             <form action="#">
                                 <div class="search_box">
-                                    <input placeholder="Search entire store here ..." type="text">
-                                    <button type="submit"><i class="ion-ios-search-strong"></i></button>
+                                    <input id="canvasInputSearch" placeholder="Search by Item Code, Item Name ..." type="text">
+                                    <button  id="canvasItemSearchBtn"   type="submit"><i class="ion-ios-search-strong"></i></button>
                                 </div>
                             </form>
                         </div>
                         <div id="menu" class="text-left ">
                             <ul class="offcanvas_main_menu">
                                 <li class="menu-item-has-children">
-                                    <a href="#">Home</a>
-                                    <ul class="sub-menu">
+                                  
+                                    <a href="index.html">Home</a>
+                                  <!--   <ul class="sub-menu">
                                         <li><a href="index.html">Home 1</a></li>
                                         <li><a href="index-2.html">Home 2</a></li>
                                         <li><a href="index-3.html">Home 3</a></li>
@@ -599,11 +601,12 @@ label:hover:before {
                                         <li><a href="index-5.html">Home 5</a></li>
                                         <li><a href="index-6.html">Home 6</a></li>
                                         <li><a href="index-7.html">Home 7</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Shop</a>
-                                    <ul class="sub-menu">
+                                <li class="menu-item-has-children" id="canvasCommercialMachineMenu">
+                                  <span class="menu-expand"><i class="fa fa-angle-up"></i></span>
+                                    <a href="#">Commercial Machine</a>
+                                    <!-- <ul class="sub-menu" >
                                         <li class="menu-item-has-children">
                                             <a href="#">Shop Layouts</a>
                                             <ul class="sub-menu">
@@ -634,9 +637,9 @@ label:hover:before {
                                                 <li><a href="variable-product.html">product variable</a></li>
                                             </ul>
                                         </li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
-                                <li class="menu-item-has-children">
+                            <!--     <li class="menu-item-has-children">
                                     <a href="#">blog</a>
                                     <ul class="sub-menu">
                                         <li><a href="blog.html">blog</a></li>
@@ -657,13 +660,13 @@ label:hover:before {
                                         <li><a href="privacy-policy.html">privacy policy</a></li>
                                         <li><a href="coming-soon.html">Coming Soon</a></li>
                                     </ul>
-                                </li>
-                                <li class="menu-item-has-children">
+                                </li> -->
+                                <!-- <li class="menu-item-has-children">
                                     <a href="my-account.html">my account</a>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href="about.html">About Us</a>
-                                </li>
+                                </li> -->
                                 <li class="menu-item-has-children">
                                     <a href="contact.html"> Contact Us</a>
                                 </li>
@@ -674,7 +677,7 @@ label:hover:before {
             </div>
         </div>
 
-    </div> -->
+    </div>
     <!--Offcanvas menu area end-->
 
     <!--breadcrumbs area start-->
