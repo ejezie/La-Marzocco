@@ -120,6 +120,10 @@ $(document).ready(function(){
         notifyError("Failed to load customers.Please reload page");
       };
     getCustomerList(onResponse,onError,1,9999999999)
+
+        $("#uploadFile").click(function(){
+            uploadCart();
+        })
 })
 
 
@@ -175,6 +179,26 @@ async function showBulkOrders(bulkOrderData){
     $("#bulkOrders").append(bulkOrdersHTML)
 }
 
+
+
+
+$(document).ready(function(){
+  $("#downloadCatalog").click(function(){
+    exportCatalog(function(res){
+       var fileUrl = safeAccess(["data","file"],res);
+       if(fileUrl){
+        var a = document.createElement('A');
+        a.href = fileUrl;
+        a.download = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+       }else{
+        notifyError("Something went wrong")
+       }
+    })
+  })
+});
  function uploadCart() {
       var xlsx = document.querySelector('#excelfile');
       var onResponse = function(response){
@@ -185,5 +209,6 @@ async function showBulkOrders(bulkOrderData){
       var onError =function(error){
         notifyError("Failed to upload items");
       };
+      alert($("#targetCustomer").val())
       bulkUploadCartItems($("#targetCustomer").val(),xlsx.files[0],onResponse,onError);
 }

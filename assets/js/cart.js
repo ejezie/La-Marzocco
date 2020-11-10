@@ -23,7 +23,7 @@ async function showCart(cartItems){
 		cartHTML += '<tr>'
 		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
 		cartHTML += '<td class="product_name"><a href="#">'+cartItems[i]["productName"]+'<br></a>';
-		if(!cartItems[i]["specs"]){cartHTML+= '<a onclick="showSpec('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+","+cartItems[i]["documentUrl"]+')">Specs</a>';}
+		if(!cartItems[i]["specs"]){cartHTML+= '<a onclick="showSpec('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+",`"+cartItems[i]["documentUrl"]+'`)">Specs</a>';}
 		cartHTML+= '</td>'
 
 		// 	if(cartItems[i]["documentUrl"]){

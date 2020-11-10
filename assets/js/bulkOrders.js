@@ -175,7 +175,21 @@ async function showBulkOrders(bulkOrderData){
 
 
 $(document).ready(function(){
-
+  $("#downloadCatalog").click(function(){
+    exportCatalog(function(res){
+       var fileUrl = safeAccess(["data","file"],res);
+       if(fileUrl){
+        var a = document.createElement('A');
+        a.href = fileUrl;
+        a.download = fileUrl.substr(fileUrl.lastIndexOf('/') + 1);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+       }else{
+        notifyError("Something went wrong")
+       }
+    })
+  })
 });
 
     function uploadCart() {

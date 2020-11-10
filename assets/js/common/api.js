@@ -1335,6 +1335,19 @@ async function userProfile(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
+async function exportCatalog(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item/export-for-cart',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     },
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
 
 async function getSearchResults(currentPage,pageSize,searchQuery,filterParentId,filterGroupId,filterFamilyId,onResponse,onError){
   console.log("url  "+url,"  parent_id  "+filterParentId+"  grp "+filterGroupId +" searchQuery: "+searchQuery)
@@ -1705,15 +1718,19 @@ async function deleteOrderItem(orderId,orderLineIds,onResponse,onError){
 }
 
 
-async function createPayment(order_id,amount,card_name,cart_number,cart_exp_month,cart_exp_year,card_cvc,onResponse,onError){
+async function createPayment(order_id,isEFT,onResponse,onError,amount,card_name,cart_number,cart_exp_month,cart_exp_year,card_cvc){
   var data = new FormData();
   data.append('order_id', order_id);
-  data.append('amount', amount);
-  data.append('card_name',card_name);
-  data.append('card_number', btoa(cart_number));
-  data.append('card_exp_month', btoa(cart_exp_month));
-  data.append('card_exp_year', btoa(cart_exp_year));
-  data.append('card_cvc', btoa(card_cvc));
+  if(isEFT){
+    data.append('is_eft', 1);
+  }else{
+    data.append('amount', amount);
+    data.append('card_name',card_name);
+    data.append('card_number', btoa(cart_number));
+    data.append('card_exp_month', btoa(cart_exp_month));
+    data.append('card_exp_year', btoa(cart_exp_year));
+    data.append('card_cvc', btoa(card_cvc));
+  }
 
   var config = {
     method: 'post',

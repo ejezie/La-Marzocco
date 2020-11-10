@@ -282,13 +282,19 @@ function notifyOrderSuccess(orders){
 		window.location.href = "orderConfirmation.html";
 }
 
-function confirmPayment(response){
-
-	const amount = $("#inputPaymentType").val();
+function confirmPayment(response,isEFT){
 	var orderId =  safeAccess(["data","data","order","payment","order_id"],response,null);
 	if(!orderId){
 		orderId = safeAccess(["data","data","order",0,"id"],response,-1);
 	}
+	notifyInfo("Please wait");
+	if(isEFT){
+		createPayment(orderId,true,function(response2){
+				notifyOrderSuccess(safeAccess(["data","data","order"],response,null));
+		});
+		return;
+	}
+	const amount = $("#inputPaymentType").val();
 	// const amount = response.data.order[0].total;
 	const inputCardName = $("#inputCardName").val();
 	const inputCardNumber = $("#inputCardNumber").val();
@@ -296,10 +302,9 @@ function confirmPayment(response){
 	const inputExpireyYear = $("#inputExpireyYear").val();
 	const inputCvc = $("#inputCvc").val();
 
-	notifyInfo("Please wait");
-	createPayment(orderId,amount,inputCardName, inputCardNumber,inputExpireyMonth,inputExpireyYear,inputCvc,function(response2){
+	createPayment(orderId,false,function(response2){
 				notifyOrderSuccess(safeAccess(["data","data","order"],response,null));
-	});
+	},null,amount,inputCardName, inputCardNumber,inputExpireyMonth,inputExpireyYear,inputCvc);
 }
 
 function getBillingAddressId(){
