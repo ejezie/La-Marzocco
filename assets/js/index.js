@@ -11,7 +11,7 @@ $(document).ready(function(){
 	var recommendedProductsHTML = ""
 
 	for(item of items){
- 	console.log("items  <>>>>  >>>>>> : ", item)
+ 	// console.log("items  <>>>>  >>>>>> : ", item)
 
 		// recommendedProductsHTML += '<a >'
 		recommendedProductsHTML += '<div class="single_product">'
@@ -91,10 +91,15 @@ $(document).ready(function(){
 }
 
 
- function showTopSellingProducts(items){
+async function showTopSellingProducts(items){
+
+
+
+ 	console.log(" top selling items : ",items )
 
 
 	var topSellingProductsHTML = ""
+	$("#topSellingProducts").empty(topSellingProductsHTML)
 
 	// for(i=0 ; i<topSellingItemList.length; i++){
 	for(item of items){
@@ -120,7 +125,10 @@ $(document).ready(function(){
 		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
 		topSellingProductsHTML += '</div>'
 		topSellingProductsHTML += '<div class="product_thumb">'
-		topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+		if(item.item_parent_images[0] != undefined){
+
+			topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+		}
 		topSellingProductsHTML += '</div>'
 		topSellingProductsHTML += '</div>'
 	}
@@ -197,7 +205,9 @@ async function showSpecialOffersProducts(items){
 		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
 		specialOffersProductsHTML += '</div>'
 		specialOffersProductsHTML += '<div class="product_thumb">'
-		specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+		if(item.item_parent_images[0] != undefined){
+			specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+		}
 		specialOffersProductsHTML += '</div>'
 		specialOffersProductsHTML += '</div>'
 	}
