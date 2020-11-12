@@ -108,9 +108,9 @@ $(document).ready(function(){
     customerDropdown.empty();
 
       var onResponse = function(response){
-        for(var i=0; i< response.data.customer_masters.data.length; i++){
-          const customer = response.data.customer_masters.data[i];
-          customerDropdown.append($("<option>").text(safeAccess(["first_name"],customer,"") + safeAccess(["last_name"],customer,"") ).val(customer.id));
+        for(var i=0; i< response.data.customers.data.length; i++){
+          const customer = response.data.customers.data[i];
+          customerDropdown.append($("<option>").text(safeAccess(["first_name"],customer,"") +" "+ safeAccess(["last_name"],customer,"") ).val(customer.id));
         }
 
         // customerDropdown.val(currentVal);
@@ -119,7 +119,7 @@ $(document).ready(function(){
       var onError =function(error){
         notifyError("Failed to load customers.Please reload page");
       };
-    getCustomerList(onResponse,onError,1,9999999999)
+    getConnectedCustomers(onResponse,onError)
 
         $("#uploadFile").click(function(){
             uploadCart();
@@ -198,17 +198,21 @@ $(document).ready(function(){
        }
     })
   })
+  $("#targetCustomer").change(function(){
+    setCurrentManagedUser($("#targetCustomer").val());
+  })
+
 });
  function uploadCart() {
+    notifyInfo("Please wait")
       var xlsx = document.querySelector('#excelfile');
       var onResponse = function(response){
-        if(response.status === 200){
             notifySuccess("File uploaded!");
-        }
+            window.location.href = "cart.html"
+    
       };
       var onError =function(error){
-        notifyError("Failed to upload items");
+        notifyError(safeAccess(["response","data","message"],error,"Failed to upload"));
       };
-      alert($("#targetCustomer").val())
-      bulkUploadCartItems($("#targetCustomer").val(),xlsx.files[0],onResponse,onError);
+            bulkUploadCartItems($("#targetCustomer").val(),xlsx.files[0],onResponse,onError);
 }

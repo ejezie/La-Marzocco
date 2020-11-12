@@ -116,7 +116,7 @@ function ExportToTable(action) {
 
 function syncCart(){
   shoppingCart.syncCart(function(){
-    window.location.href = "cart.html";
+    window.location.href = "cart.html#bulkOrderConfirmation";
   });
  
 }
