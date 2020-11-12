@@ -2,8 +2,6 @@
 async function showCart(cartItems){
 
 	var cartHTML = ""
-
-
 	cartHTML += '<table>'
 	cartHTML += '<thead>'
 	cartHTML += '<tr>'
@@ -283,7 +281,7 @@ function refreshCart(){
 function generateQuote(){
 
 			notifyInfo("Requesting quote")
-			getQuote(null,null,function(response){
+			getQuote(getManagedUser(),null,function(response){
 					showCartFromQuote(safeAccess(["data","quote","quote_line"],response,[]));
 					$("#showQuote").hide();
 					var cartSubTotals = {

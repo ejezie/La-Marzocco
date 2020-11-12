@@ -234,12 +234,11 @@ $(document).ready(function(){
         if(!parentId || !mainitemid){
             notifyError("This item is not available");
         }else{
-           getMachineParentMapping(parentId,function(response1){
+           // getMachineParentMapping(parentId,function(response1){
                 getItemParentImages(parentId,mainitemid,function(response2){
-                   const imageUrl = safeAccess(["data","machine_parent","image","image"],response1);
+                   const imageUrl = safeAccess(["data","item_parent_images","data",0,"image","image"],response2);
+                   alert(imageUrl)
                    showCarrouselParts(imageUrl,safeAccess(["data","item_parent_images","data"],response2));
-
-
 
                     
                 $('.video-playlist-wrap.two-col .scroll-wrap').perfectScrollbar();
@@ -258,7 +257,7 @@ $(document).ready(function(){
                     settings: {
                       slidesToShow: 2 } }] });
                });
-           });
+           // });
            
     }
 });

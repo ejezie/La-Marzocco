@@ -7,6 +7,7 @@ const BASE_URL = "http://54.252.24.196/v1/api/";
 const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) => (prefix && prefix[val]) ? prefix[val] : defaultValue, object);
 
 function updateUrlParameter(uri, key, value) {
+  if(!value){return;}
     // remove the hash part before operating on the uri
     var i = uri.indexOf('#');
     var hash = i === -1 ? ''  : uri.substr(i);
@@ -1527,10 +1528,18 @@ async function cartList(onResponse,onError){
 }
 
 async function getQuote(user_id,desc,onResponse,onError){
- 
+  var url = BASE_URL+'quotation/create';
+  alert(user_id)
+
+  if(user_id){
+    url += "?user_id="+user_id
+  }
+  // updateUrlParameter(url,"user_id",user_id);
+  // updateUrlParameter(url,"desc",desc);
+
   var config = {
     method: 'get',
-    url: BASE_URL+'quotation/create',
+    url: url,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(),
@@ -1570,7 +1579,7 @@ async function getMachineParentMapping(itemId,onResponse,onError){
 async function getItemParentImages(parent_id,main_item_id,onResponse,onError){
   var config = {
     method: 'get',
-    url: BASE_URL+'item-parent-image?parent_id='+parent_id+"&main_item_id="+main_item_id,
+    url: BASE_URL+'item-parent-image?parent_id='+parent_id+"&main_item_id="+main_item_id+"&page_size=9999",
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(),
@@ -1741,6 +1750,20 @@ async function createPayment(order_id,isEFT,onResponse,onError,amount,card_name,
       'Accept': 'application/json'
      },
      data :data
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getConnectedCustomers(onResponse,onError){
+ 
+  var config = {
+    method: 'get',
+    url: BASE_URL+'connected-customer?page_size=999999',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
   };
   axios(config).then(onResponse).catch(onError);
 }
