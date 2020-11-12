@@ -160,7 +160,7 @@ async function showOrderDetails(quoteLine){
 	// var orderDetails = orderArr.filter(function(order){return order.orderId == orderId;});
 
 
-	// console.log("orderDetails : ",orderDetails[0]["orderDetails"])
+	console.log("orderDetails : ",quoteLine)
 
 
 	var orderDetailsHTML = ""
@@ -187,7 +187,13 @@ async function showOrderDetails(quoteLine){
 		const quoteItem = quoteLine[i];
 
 		orderDetailsHTML += '<tr>'
-		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+		if(quoteItem.item.item_images[0]){
+
+		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="'+quoteItem.item.item_images[0]["image"]["image"]+'" alt=""></a></td>'
+		}else{
+
+		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/lma_catalog_img.png" alt=""></a></td>'
+		}
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["item","code"],quoteItem,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'

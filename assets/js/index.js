@@ -128,6 +128,8 @@ async function showTopSellingProducts(items){
 		if(item.item_parent_images[0] != undefined){
 
 			topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+		}else{
+			topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
 		}
 		topSellingProductsHTML += '</div>'
 		topSellingProductsHTML += '</div>'
@@ -206,7 +208,9 @@ async function showSpecialOffersProducts(items){
 		specialOffersProductsHTML += '</div>'
 		specialOffersProductsHTML += '<div class="product_thumb">'
 		if(item.item_parent_images[0] != undefined){
-			specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+			specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+		}else{
+			specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
 		}
 		specialOffersProductsHTML += '</div>'
 		specialOffersProductsHTML += '</div>'

@@ -19,7 +19,7 @@
 		detailsHTML += ''
 		detailsHTML += '<div id="img-1" class="zoomWrapper single-zoom">'
 		detailsHTML += '<a href="#">'
-		detailsHTML += '<img id="productImage" alt="No image" />'
+		detailsHTML += '<img id="productImage" alt="No image" onerror="this.src=`assets/img/lma_catalog_img.png`;" />'
 		detailsHTML += '</a>'
 		detailsHTML += '</div>'
 		detailsHTML += '<button class="button fa fa-arrow-left" id="btPrevImage" type="button"></button>'
