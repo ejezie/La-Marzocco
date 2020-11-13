@@ -639,6 +639,22 @@ async function bulkUploadCartItems(user_id,file,onResponse,onError){
   .catch(onError);  
 
 }
+async function clearCart(user_id,file,onResponse,onError){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'cart/clear',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    }
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
 
 async function bulkUploadCustomers(onResponse,onError,file){
 
@@ -1655,11 +1671,14 @@ async function getQuoteList(itemId,onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function getAddressesList(onResponse,onError){
- 
+async function getAddressesList(onResponse,onError,user_id){
+ var url = BASE_URL+'address';
+ if(user_id){
+  url+= ("?user_id="+user_id);
+ }
   var config = {
     method: 'get',
-    url: BASE_URL+'address',
+    url: url,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(),

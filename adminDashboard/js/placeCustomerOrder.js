@@ -212,7 +212,16 @@ $(document).ready(function(){
     
       };
       var onError =function(error){
-        notifyError(safeAccess(["response","data","message"],error,"Failed to upload"));
+        var errorMessage = safeAccess(["response","data","message"],error,"Failed to upload");
+        if(!errorMessage.includes("Please remove your old cart entries")){
+          notifyError(errorMessage);
+        }else{
+          if(confirm("Cart must be emptied first")){
+            clearCart(function(res){
+              uploadCart();
+            })
+          }
+        }
       };
             bulkUploadCartItems($("#targetCustomer").val(),xlsx.files[0],onResponse,onError);
 }

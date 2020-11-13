@@ -106,7 +106,7 @@ $(document).ready(function(){
 function initAddresses(){
 	getAddressesList(function(response){
 			showAddressSlider(safeAccess(["data","addresses","data"],response));
-	});
+	},null,getManagedUser());
 }
 
 function initAddAddress(){
