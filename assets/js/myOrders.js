@@ -362,7 +362,13 @@ async function showOrderDetails(quoteLine){
 		console.log("quoteItem : ", quoteItem)
 
 		orderDetailsHTML += '<tr>'
-		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+		if(quoteItem.item.item_images[0]){
+
+		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="'+quoteItem.item.item_images[0]["image"]["image"]+'" alt=""></a></td>'
+		}else{
+
+		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/lma_catalog_img.png" alt=""></a></td>'
+		}
 		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","code"],quoteItem,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'

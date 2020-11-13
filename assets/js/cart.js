@@ -19,9 +19,9 @@ async function showCart(cartItems){
 
 	for(i=0;i<cartItems.length;i++){
 		// alert(JSON.stringify(cartItems[i],null,2);
-		// console.log(cartItems[i]);
+		console.log("goooooo",cartItems[i]);
 		cartHTML += '<tr>'
-		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a></td>'
 		cartHTML += '<td class="product_name"><a href="#">'+cartItems[i]["productName"]+'<br></a>';
 		if(!cartItems[i]["specs"]){cartHTML+= '<a onclick="showSpec('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+",`"+cartItems[i]["documentUrl"]+'`)">Specs</a>';}
 		cartHTML+= '</td>'
@@ -120,7 +120,7 @@ async function showCartFromQuote(quoteItems){
 		var quoteItem = quoteItems[i];
  
 		cartHTML += '<tr>'
-		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/lma_catalog_img.png" alt=""></a></td>'
 		cartHTML += '<td class="product_name"><a href="#">'+quoteItemProduct["name"]+'</a></td>'
 		cartHTML += '<td class="product-price">$'+quoteItem["price"].toLocaleString("en-AU")+'</td>'
 		cartHTML += '<td class="product_quantity"><a>'+quoteItem["qty"]+'</a></td>'
