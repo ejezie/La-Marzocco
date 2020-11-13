@@ -21,7 +21,6 @@ async function showCart(cartItems){
 		cartHTML += '<tr>'
 		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
 		cartHTML += '<td class="product_name"><a href="#">'+cartItems[i]["productName"]+'<br></a>';
-		if(!cartItems[i]["specs"]){cartHTML+= '<a onclick="showSpec('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+",`"+cartItems[i]["documentUrl"]+'`)">Specs</a>';}
 		cartHTML+= '</td>'
 
 		// 	if(cartItems[i]["documentUrl"]){
@@ -38,7 +37,7 @@ async function showCart(cartItems){
 
 
 		cartHTML += '<td class="product-price">'+cartItems[i]["productPrice"].toLocaleString("en-AU")+'</td>'
-		cartHTML += '<td class="product_quantity"><label>Quantity</label> <input onchange="editQuantity('+cartItems[i]["productItemId"]+',this)" min="1" max="100" value="'+cartItems[i]["productQuantity"]+'" type="number"><a ><i onclick="deleteItem('+cartItems[i]["productItemId"]+')" class="fa fa-trash-o" style="width: 30px;font-size:17px"></i></a></td>'
+		cartHTML += '<td class="product_quantity"><a>'+cartItems[i]["productQuantity"]+'</a></td>'
 		// cartHTML += '<td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>'
 		cartHTML += '<td class="product_total">'+cartItems[i]["productPrice"]+'</td>'
 		cartHTML += '</tr>'

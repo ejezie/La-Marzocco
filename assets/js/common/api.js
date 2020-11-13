@@ -357,7 +357,7 @@ async function createAddress(
     // city_id,
     state_id,
     country_id,
-    onResponse){
+    onResponse,user_id){
 
   var data = new FormData();
 
@@ -368,6 +368,7 @@ async function createAddress(
   data.append('zip_code',zip_code);
   data.append('address',address);
   appendIfNotNull(data,"landmark",landmark);
+  appendIfNotNull(data,"user_id",user_id);
   data.append('phone',phone);
 
   data.append('area_code_id',area_code_id);
@@ -1475,7 +1476,6 @@ async function cartAddItem(itemId,qty,userId,desc,onResponse,onError){
   console.log("id "+itemId +" qty "+qty);
   // data.append('item_id', itemId);
   // data.append('qty', qty);
-  // alert(data.)
   console.log("data=" + JSON.stringify(data));
   appendIfNotNull(data,'item_id',itemId);
   appendIfNotNull(data,'qty',qty);
@@ -1545,7 +1545,6 @@ async function cartList(onResponse,onError){
 
 async function getQuote(user_id,desc,onResponse,onError){
   var url = BASE_URL+'quotation/create';
-  alert(user_id)
 
   if(user_id){
     url += "?user_id="+user_id

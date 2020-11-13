@@ -138,7 +138,8 @@ function initAddAddress(){
 	    // city_id,
 	    state_id,
 	    country_id,
-	    onResponse);
+	    onResponse,
+	    getManagedUser());
   });
   populateCountry();
 }
