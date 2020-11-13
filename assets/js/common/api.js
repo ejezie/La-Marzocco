@@ -81,7 +81,9 @@ function errorResponseHandler(error) {
              notifyError("Something went wrong...");
             }
         }else{
+          if(error.code && error.code != "ECONNABORTED"){
             notifyError("Please check your connection!");
+          }
       }
 
         return Promise.reject(error);
