@@ -112,8 +112,7 @@ $(document).ready(function(){
           const customer = response.data.customers.data[i];
           customerDropdown.append($("<option>").text(safeAccess(["first_name"],customer,"") +" "+ safeAccess(["last_name"],customer,"") ).val(customer.id));
         }
-
-        // customerDropdown.val(currentVal);
+        setCurrentManagedUser($("#targetCustomer").val());
 
       };
       var onError =function(error){
@@ -209,10 +208,18 @@ $(document).ready(function(){
       var onResponse = function(response){
             notifySuccess("File uploaded!");
             window.location.href = "cart.html"
-    
       };
       var onError =function(error){
-        notifyError(safeAccess(["response","data","message"],error,"Failed to upload"));
+        var errorMessage = safeAccess(["response","data","message"],error,"Failed to upload");
+        if(!errorMessage.includes("Please remove your old cart entries")){
+          notifyError(errorMessage);
+        }else{
+          if(confirm("Cart must be emptied first")){
+            clearCart(function(res){
+              notifyError("Cart Cleared!")
+            })
+          }
+        }
       };
             bulkUploadCartItems($("#targetCustomer").val(),xlsx.files[0],onResponse,onError);
 }

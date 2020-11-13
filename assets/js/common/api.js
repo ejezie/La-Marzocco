@@ -357,7 +357,7 @@ async function createAddress(
     // city_id,
     state_id,
     country_id,
-    onResponse){
+    onResponse,user_id){
 
   var data = new FormData();
 
@@ -368,6 +368,7 @@ async function createAddress(
   data.append('zip_code',zip_code);
   data.append('address',address);
   appendIfNotNull(data,"landmark",landmark);
+  appendIfNotNull(data,"user_id",user_id);
   data.append('phone',phone);
 
   data.append('area_code_id',area_code_id);
@@ -632,6 +633,22 @@ async function bulkUploadCartItems(user_id,file,onResponse,onError){
       'Accept': 'application/json'
     },
     data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+async function clearCart(user_id,file,onResponse,onError){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'cart/clear',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    }
   };
  
   axios(config)
@@ -1459,7 +1476,6 @@ async function cartAddItem(itemId,qty,userId,desc,onResponse,onError){
   console.log("id "+itemId +" qty "+qty);
   // data.append('item_id', itemId);
   // data.append('qty', qty);
-  // alert(data.)
   console.log("data=" + JSON.stringify(data));
   appendIfNotNull(data,'item_id',itemId);
   appendIfNotNull(data,'qty',qty);
@@ -1529,7 +1545,6 @@ async function cartList(onResponse,onError){
 
 async function getQuote(user_id,desc,onResponse,onError){
   var url = BASE_URL+'quotation/create';
-  alert(user_id)
 
   if(user_id){
     url += "?user_id="+user_id
@@ -1655,11 +1670,14 @@ async function getQuoteList(itemId,onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function getAddressesList(onResponse,onError){
- 
+async function getAddressesList(onResponse,onError,user_id){
+ var url = BASE_URL+'address';
+ if(user_id){
+  url+= ("?user_id="+user_id);
+ }
   var config = {
     method: 'get',
-    url: BASE_URL+'address',
+    url: url,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(),
