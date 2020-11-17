@@ -298,35 +298,40 @@ function showMenubarGrinders(){
 }
 
 
-function showMenubarModbar(){
+function showMenubarModbar(data){
+
+	var category = "Modbar";
+	var categoryArr = { Categories: data.mapping};
 	var menuBarHTML = ""
-	menuBarHTML += '<ul class="mega_menu_inner">'
+
+	console.log("categoryArr : categoryArr : " ,categoryArr)
+
+
+	menuBarHTML += '<ul class="sub-menu" >'
 
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
-		if(categoryName == "Modbar"){
+		if(categoryName == category){
 			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
-				// menuBarHTML += '<li><a href="#">'+family+'</a>'
-				menuBarHTML += '<li><a>'+family+'</a>'
-				menuBarHTML += '<ul>'
 
 
+				menuBarHTML += '<li class="menu-item-has-children menuopen">'
+				menuBarHTML += '<span class="menu-expand"><i class="fa fa-angle-down"></i></span>'
+				menuBarHTML += '<a href="#">'+family+'</a>'
+				menuBarHTML += '<ul class="sub-menu" style="display: none;">'
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
 
-					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
-					// menuBarHTML += '<li><a href="#">'+type+'</a></li>'
-					menuBarHTML += '<li><a>'+type+'</a></li>'
+					menuBarHTML += '<li><a href="product-details.html?item='+categoryArr["Categories"][i]["families"][j]["machines"][k]["id"]+'">'+type+'</a></li>'
 				}
-
 				menuBarHTML += '</ul>'
 				menuBarHTML += '</li>'
-
 			}
 		}
 	}
 
-	menuBarHTML += '</ul>';
+	menuBarHTML += '</ul>'
 	// Image
 	menuBarHTML += '<div class="banner_static_menu">'
 	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
@@ -495,12 +500,12 @@ $(document).ready(function(){
 	var onResponse = function(response){
 		// console.log(JSON.stringify(response,null,2))
 		showMenubarCommercialMachine(response.data);
+		showMenubarModbar(response.data)
 		// showCanvasMenubarCommercialMachine(response.data);
 		showCanvasMenubarCommercialMachine(response.data);
 // showNewsletter(newsletterArr)
 
 showMenubarGrinders()
-showMenubarModbar()
 showMenubarGS3()
 showMenubarLMHome()
 
