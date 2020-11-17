@@ -260,25 +260,25 @@ function showCanvasMenubarCommercialMachine(data){
 }
 
 
-function showMenubarGrinders(){
+function showMenubarGrinders(data){
+
+	var category = "Grinder";
+	var categoryArr = { Categories: data.mapping};
 	var menuBarHTML = ""
 	menuBarHTML += '<ul class="mega_menu_inner">'
 
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
-		if(categoryName == "Grinders"){
+		if(categoryName == category){
 			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
-				// menuBarHTML += '<li><a href="#">'+family+'</a>'
-				menuBarHTML += '<li><a>'+family+'</a>'
+				menuBarHTML += '<li><strong>'+family+'</strong></a>'
 				menuBarHTML += '<ul>'
 
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
-
-					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
-					// menuBarHTML += '<li><a href="#">'+type+'</a></li>'
-					menuBarHTML += '<li><a>'+type+'</a></li>'
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
+					menuBarHTML += '<li><a href="product-details.html?item='+categoryArr["Categories"][i]["families"][j]["machines"][k]["id"]+'">'+type+'</a></li>'
 				}
 
 				menuBarHTML += '</ul>'
@@ -289,10 +289,6 @@ function showMenubarGrinders(){
 	}
 
 	menuBarHTML += '</ul>';
-	// Image
-	menuBarHTML += '<div class="banner_static_menu">'
-	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
-	menuBarHTML += '</div>'
 
 	$("#grinders_menu").append(menuBarHTML)
 }
@@ -304,7 +300,7 @@ function showMenubarModbar(data){
 	var categoryArr = { Categories: data.mapping};
 	var menuBarHTML = ""
 
-	console.log("categoryArr : categoryArr : " ,categoryArr)
+	// console.log("categoryArr : categoryArr : " ,categoryArr)
 
 
 	menuBarHTML += '<ul class="sub-menu" >'
@@ -340,80 +336,10 @@ function showMenubarModbar(data){
 	$("#modbar_menu").append(menuBarHTML)
 }
 
-function showMenubarGS3(){
-	var menuBarHTML = ""
-	menuBarHTML += '<ul class="mega_menu_inner">'
-
-	for(i=0; i< categoryArr["Categories"].length; i++){
-		categoryName = categoryArr["Categories"][i]["name"]
-		if(categoryName == "GS3"){
-			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
-				var family = categoryArr["Categories"][i]["families"][j]["code"]
-				// menuBarHTML += '<li><a href="#">'+family+'</a>'
-				menuBarHTML += '<li><a>'+family+'</a>'
-				menuBarHTML += '<ul>'
 
 
-				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
-
-					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
-					// menuBarHTML += '<li><a href="#">'+type+'</a></li>'
-					menuBarHTML += '<li><a >'+type+'</a></li>'
-				}
-
-				menuBarHTML += '</ul>'
-				menuBarHTML += '</li>'
-
-			}
-		}
-	}
-
-	menuBarHTML += '</ul>';
-	// Image
-	menuBarHTML += '<div class="banner_static_menu">'
-	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
-	menuBarHTML += '</div>'
-
-	$("#gs3_menu").append(menuBarHTML)
-}
 
 
-function showMenubarLMHome(){
-	var menuBarHTML = ""
-	menuBarHTML += '<ul class="mega_menu_inner">'
-
-	for(i=0; i< categoryArr["Categories"].length; i++){
-		categoryName = categoryArr["Categories"][i]["name"]
-		if(categoryName == "LM Home"){
-			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
-				var family = categoryArr["Categories"][i]["families"][j]["code"]
-				// menuBarHTML += '<li><a href="#">'+family+'</a>'
-				menuBarHTML += '<li><a >'+family+'</a>'
-				menuBarHTML += '<ul>'
-
-
-				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
-
-					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["code"]
-					// menuBarHTML += '<li><a href="#">'+type+'</a></li>'
-					menuBarHTML += '<li><a>'+type+'</a></li>'
-				}
-
-				menuBarHTML += '</ul>'
-				menuBarHTML += '</li>'
-
-			}
-		}
-	}
-
-	menuBarHTML += '</ul>';
-	// Image
-	menuBarHTML += '<div class="banner_static_menu">'
-	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
-	menuBarHTML += '</div>'
-
-	$("#lmHome_menu").append(menuBarHTML)
-}
 
 
 function val2key(val,array){
@@ -501,6 +427,7 @@ $(document).ready(function(){
 		// console.log(JSON.stringify(response,null,2))
 		showMenubarCommercialMachine(response.data);
 		showMenubarModbar(response.data)
+		showMenubarGrinders(response.data)
 		// showCanvasMenubarCommercialMachine(response.data);
 		showCanvasMenubarCommercialMachine(response.data);
 // showNewsletter(newsletterArr)
