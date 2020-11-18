@@ -33,7 +33,7 @@ var basicResultController = (function () {
 								"productOffPercent" : "-20%",
 								"productQuantityInStock" : "50",
 								"productDescription" : item.desc,
-								"parentImages" : safeAccess(["item_parent_images",0,"image","thumbnail"],item)
+								"parentImages" : safeAccess(["item_images",0,"image","thumbnail"],item,safeAccess(["item_parent_images",0,"image","thumbnail"],item,"assets/img/lma_catalog_img.png"))
 							};
 			  results.push(element);
 		    }
@@ -79,9 +79,9 @@ var basicResultController = (function () {
 				catalogHTML += '<div class="product_thumb">'
 
 				if(catalogList[i]["parentImages"]){
-					catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="'+catalogList[i]["parentImages"]+'" alt=""></a>'
+					catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img   onerror="this.onerror=null;this.src=`assets/img/lma_catalog_img.png`;" src="'+catalogList[i]["parentImages"]+'" alt=""></a>'
 				}else{
-					catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product1.jpg" alt=""></a>'
+					catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img  src="assets/img/lma_catalog_img.png" alt=""></a>'
 				}
 				// catalogHTML += '<a class="secondary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="assets/img/product/product11.jpg" alt=""></a>'
 				// catalogHTML += '<div class="label_product">'
@@ -218,7 +218,7 @@ var catalogResultController = (function () {
 				catalogHTML += '<p style="opacity:1;">Catalog Parts</p>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="product_thumb">'
-				catalogHTML += '<img src="'+catalogList[i]["image"]+'" onerror="this.onerror=null;this.src=`assets/img/product/product1.jpg`;"/>';
+				catalogHTML += '<img onerror="this.onerror=null;this.src=`assets/img/lma_catalog_img.png`;" src="'+catalogList[i]["image"]+'" onerror="this.onerror=null;this.src=`assets/img/lma_catalog_img.png`;"/>';
 				// if(catalogList[i]["image"]){
 				// 	catalogHTML += '<a class="primary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="'+catalogList[i]["image"]+'" alt=""></a>'
 				// }else{
@@ -317,8 +317,12 @@ var machineResultController = (function () {
 								"productOffPercent" : "-20%",
 								"productQuantityInStock" : "50",
 								"productDescription" : item.desc,
-								"parentImages" : response.data.item_parent_images.data[i].image.thumbnail
+								"parentImages" : safeAccess(["image","thumbnail"],response.data.item_parent_images.data[i],"assets/img/lma_catalog_img.png")
+								// "parentImages" : response.data.item_parent_images.data[i].image.thumbnail
 							};
+							console.log("<><><<>><><><><> "+response.data.item_parent_images.data[i].image.thumbnail)
+							console.log("<><><<>><><><><> "+safeAccess(["image","thumbnail"],response.data.item_parent_images.data[i],"assets/img/lma_catalog_img.png"))
+
 			  results.push(element);
 		    }
 
@@ -354,8 +358,7 @@ var machineResultController = (function () {
 				catalogHTML += '<p style="opacity:1;">'+catalogList[i]["productCode"]+'</p>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="product_thumb">'
-				catalogHTML += '<img src="'+catalogList[i]["image"]+'" onerror="this.onerror=null;this.src=`'+catalogList[i]["parentImages"]+'`;"/>';
-
+				catalogHTML += '<img onerror="this.onerror=null;this.src=`assets/img/lma_catalog_img.png`;" src="'+catalogList[i]["parentImages"]+'"/>';
 				// catalogHTML += '<a class="secondary_img" href="product-details.html?item='+catalogList[i]["productId"]+'"><img src="'+catalogList[i]["parentImages"]+'" alt=""></a>'
 				catalogHTML += '<div class="label_product">'
 				// catalogHTML += '<span class="label_sale">'+catalogList[i]["productOffPercent"]+'</span>'
