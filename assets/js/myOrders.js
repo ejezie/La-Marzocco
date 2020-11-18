@@ -371,9 +371,9 @@ async function showOrderDetails(quoteLine){
 		}
 		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","code"],quoteItem,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
-		orderDetailsHTML += '<td class="product-price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
+		orderDetailsHTML += '<td class="product-price">$'+safeAccess(["price"],quoteItem,"-").toLocaleString("en-AU")+'</td>'
 		orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'
-		orderDetailsHTML += '<td class="product_total">'+safeAccess(["total"],quoteItem,"-")+'</td>'
+		orderDetailsHTML += '<td class="product_total">$'+safeAccess(["total"],quoteItem,"-").toLocaleString("en-AU")+'</td>'
 		orderDetailsHTML += '<td class="product_total">'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
 		orderDetailsHTML += '</tr>'
 	}
