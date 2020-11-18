@@ -244,7 +244,7 @@ async function getCheckedGroup(){
 
 	    	// $('#group-menu').removeClass("show");
 	    	$('.dropdown-menu').removeClass("show");
-	    	alert($(this).data("family"))
+	    	// alert($(this).data("family"))
 	        returnValue =  this.value;
 	    });        
 	return returnValue;
@@ -334,10 +334,10 @@ async function showGroupSideFilter(groupList){
    		// Get selected labe; as heading  (Start)
 		var label=$(this).prop("labels"),
         text = $(label).text()
-        $("#shopTitle").empty()
-        var shopTitleHTML = ''
-        shopTitleHTML += '<h1>Product Catalog : Group - '+text+'</h1>'
-        $("#shopTitle").append(shopTitleHTML)
+        // $("#shopTitle").empty()
+        // var shopTitleHTML = ''
+        // shopTitleHTML += '<h1>Product Catalog : Group - '+text+'</h1>'
+        // $("#shopTitle").append(shopTitleHTML)
 		// Get selected labe; as heading  (End)
    		
 	});

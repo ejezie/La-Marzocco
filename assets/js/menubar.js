@@ -299,39 +299,30 @@ function showMenubarModbar(data){
 	var category = "Modbar";
 	var categoryArr = { Categories: data.mapping};
 	var menuBarHTML = ""
-
-	// console.log("categoryArr : categoryArr : " ,categoryArr)
-
-
-	menuBarHTML += '<ul class="sub-menu" >'
+	menuBarHTML += '<ul class="mega_menu_inner">'
 
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
 		if(categoryName == category){
 			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
+				menuBarHTML += '<li><strong>'+family+'</strong></a>'
+				menuBarHTML += '<ul>'
 
 
-				menuBarHTML += '<li class="menu-item-has-children menuopen">'
-				menuBarHTML += '<span class="menu-expand"><i class="fa fa-angle-down"></i></span>'
-				menuBarHTML += '<a href="#">'+family+'</a>'
-				menuBarHTML += '<ul class="sub-menu" style="display: none;">'
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
-
 					menuBarHTML += '<li><a href="product-details.html?item='+categoryArr["Categories"][i]["families"][j]["machines"][k]["id"]+'">'+type+'</a></li>'
 				}
+
 				menuBarHTML += '</ul>'
 				menuBarHTML += '</li>'
+
 			}
 		}
 	}
 
-	menuBarHTML += '</ul>'
-	// Image
-	menuBarHTML += '<div class="banner_static_menu">'
-	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
-	menuBarHTML += '</div>'
+	menuBarHTML += '</ul>';
 
 	$("#modbar_menu").append(menuBarHTML)
 }
