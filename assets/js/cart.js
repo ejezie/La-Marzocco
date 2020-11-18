@@ -302,11 +302,13 @@ function generateQuote(){
 					const subTotal = cartSubTotals["subTotal"];	
 
 					var discountPercentage = 0;
+					if(p>0 && subTotal >0){
 					try{
 						discountPercentage = ((p - subTotal) / p)*100;
-						$("#discountAlert").html("Total discount: "+Math.round(discountPercentage)+"%");
+						$("#discountAlert").html("Total discount: "+Math.round(parseFloat(discountPercentage))+"%");
 						$("#discountAlert").toggle();
 					}catch(e){console.log(e);}
+				}
 
 			});
 }
