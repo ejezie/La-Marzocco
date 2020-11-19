@@ -559,7 +559,7 @@
                     <div class="contact_message form">
                         <h3>Enquiry</h3>
                         <form id="contact-form" method="POST" action="assets/mail.php">
-                            <p>
+                            <!-- <p>
                                 <label> Your Name (required)</label>
                                 <input name="name" placeholder="Name *" type="text">
                             </p>
@@ -578,12 +578,12 @@
                             <p>
                                 <label> Subject</label>
                                 <input name="subject" placeholder="Subject *" type="text">
-                            </p>
+                            </p> -->
                             <div class="contact_textarea">
                                 <label> Specifically, what can we help you with?</label>
-                                <textarea placeholder="" name="enquiryDetails" class="form-control2"></textarea>
+                                <textarea id="enquiryMessage" placeholder="" name="enquiryDetails" class="form-control2"></textarea>
                             </div>
-                            <button type="submit"> Send</button>
+                            <button id ="submitEnquiry"> Send</button>
                             <p class="form-messege"></p>
                         </form>
 
@@ -794,17 +794,18 @@
           
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
-          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
 
 
-          <!-- Main API -->
-          <script src="../assets/js/common/api.js"></script>
-          <script src="../assets/js/common/genericErrorHandler.js"></script>
+    <!-- Main API -->
+    <script src="../assets/js/contact.js"></script>
+    <script src="../assets/js/common/api.js"></script>
+    <script src="../assets/js/common/genericErrorHandler.js"></script>
 
-          <script src="../assets/js/common/localstorage.js"></script>
+    <script src="../assets/js/common/localstorage.js"></script>
 
-          <script src="../assets/js/common/notification.js"></script>
+    <script src="../assets/js/common/notification.js"></script>
 
 
 

@@ -2219,3 +2219,22 @@ async function deletePromotion(id,onResponse,onError){
   };
   axios(config).then(onResponse).catch(onError);
 }
+
+
+async function sendEnquiryMail(message,onResponse,onError){
+  var data = new FormData();
+
+  data.append('message', message);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'connected-customer/enquiry-mail',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     },
+     data : data
+  };
+  axios(config).then(onResponse).catch(onError);
+}
