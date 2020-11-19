@@ -60,6 +60,7 @@ function errorResponseHandler(error) {
             window.location = '/login.html', true;
              // window.location.pathname   = "/login.html";
         }else if(error.response.data.message){
+          if(error.response.status == 429){return;}
                 if(typeof error.response.data.message === 'string' || error.response.data.message instanceof String){
                     notifyError(error.response.data.message);
                 }else if(typeof error.response.data.message === 'object'){
