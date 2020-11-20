@@ -2,8 +2,33 @@
 
 // const BASE_URL = "http://54.252.24.196/v1/api/";
 // const BASE_URL = "http://3.106.30.129/v1/api/";
-// const BASE_URL = "http://54.252.24.196/v1/api/";
-const BASE_URL = "http://13.236.41.154/v1/api/";
+var BASE_URL;// = "http://54.252.24.196/v1/api/";
+// const BASE_URL = "http://13.236.41.154/v1/api/";
+
+
+async function loadBaseUrl(){
+   const url = window.location.origin +'/config.json';
+   var config = {
+    method: 'get',
+    url: url,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+  };
+ 
+  var response = await axios(config);
+  if(response){
+    BASE_URL = response.data.API_BASE_URL;
+    alert(BASE_URL)
+  }
+  
+}
+
+loadBaseUrl();
+
+
+
 
 const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) => (prefix && prefix[val]) ? prefix[val] : defaultValue, object);
 
@@ -460,6 +485,7 @@ async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key){
   .then(onResponse)
   .catch(onError);  
 }
+
 async function getRecommendedProducts(onResponse,onError){
 
   var data = new FormData();
@@ -478,6 +504,7 @@ async function getRecommendedProducts(onResponse,onError){
   .then(onResponse)
   .catch(onError);  
 }
+
 async function getTopSellingProducts(onResponse,onError){
 
   var data = new FormData();
@@ -597,7 +624,6 @@ async function bulkUploadItems(onResponse,onError,file){
   .catch(onError);  
 
 }
-
 
 async function bulkUploadItemDescription(onResponse,onError,file){
 
@@ -2217,25 +2243,6 @@ async function deletePromotion(id,onResponse,onError){
       'Authorization': getAPIToken(), 
       'Accept': 'application/json'
      }
-  };
-  axios(config).then(onResponse).catch(onError);
-}
-
-
-async function sendEnquiryMail(message,onResponse,onError){
-  var data = new FormData();
-
-  data.append('message', message);
-
-  var config = {
-    method: 'post',
-    url: BASE_URL+'connected-customer/enquiry-mail',
-     headers: {
-      'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(),
-      'Accept': 'application/json'
-     },
-     data : data
   };
   axios(config).then(onResponse).catch(onError);
 }

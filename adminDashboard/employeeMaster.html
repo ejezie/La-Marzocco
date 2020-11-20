@@ -447,7 +447,7 @@
                   <h5>Upload Employee Master Excel:</h5>
                   <div>
                     <input type="file" class="btn btn-info" accept=".xls, .xlsx" id="excelfile"/>  
-                    <input type="button" class="btn btn-primary" id="viewfile" value="Upload" onclick="ExportToTable('Upload')"/>  
+                    <input type="button" class="btn btn-primary" id="uploadFile" value="Upload"/>  
                     <table id="exceltable" ></table>
                   </div>
                   <br>
@@ -640,11 +640,28 @@
     <!-- Side NavBar -->
     <script src="js/sideNavBar.js"></script>
 
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
 
-    <!-- Custom Theme Scripts -->
-    <!-- <script src="../build/js/custom.js"></script> -->
+            <!-- Custom Theme Scripts -->
+            <!-- <script src="../build/js/custom.js"></script> -->
+            <script src="../build/js/custom.min.js"></script>
+
+            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+            
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+            <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+            <script src="../assets/js/common/localstorage.js"></script>
+
+            <script src="../assets/js/common/notification.js"></script>
+
+            <!-- Main API -->
+            <script src="../assets/js/common/api.js"></script>
+            <script src="../assets/js/common/genericErrorHandler.js"></script>
+    <script src="js/employeeMaster.js"></script>
+
+            
 
   </body>
 </html>
