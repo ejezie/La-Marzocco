@@ -1,11 +1,5 @@
-
-
 // const BASE_URL = "http://54.252.24.196/v1/api/";
 // const BASE_URL = "http://3.106.30.129/v1/api/";
-<<<<<<< HEAD
-const BASE_URL = "http://54.252.24.196/v1/api/";
-// const BASE_URL = "http://13.236.41.154/v1/api/";
-=======
 // var BASE_URL;// = "http://54.252.24.196/v1/api/";
 // const BASE_URL = "http://13.236.41.154/v1/api/";
 
@@ -26,7 +20,7 @@ const BASE_URL = "http://54.252.24.196/v1/api/";
 //     BASE_URL = response.data.API_BASE_URL;
 //     alert(BASE_URL)
 //   }
-  
+ 
 // }
 
 // loadBaseUrl();
@@ -37,7 +31,6 @@ if(typeof BASE_URL == 'undefined' || BASE_URL == null){
 }
 
 
->>>>>>> d3832d6f855e661d5301996998d88a48eb38c7b3
 
 const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) => (prefix && prefix[val]) ? prefix[val] : defaultValue, object);
 
@@ -462,6 +455,26 @@ var config = {
   data : data
 };
 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key){
+
+  const kit_type_id = 3
+   var url = BASE_URL+'item?page_size=99999&parent_id='+parent_id+'&type_id='+kit_type_id;
+
+  var config = {
+    method: 'get',
+    url: url,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+  };
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -2113,7 +2126,7 @@ async function getCustomerOrderReport(onResponse,start_date,end_date,download_fo
   }else if(download_format){
     url += "&download_format="+download_format;
   }
-  
+ 
   var config = {
     method: 'get',
     url: url,
@@ -2132,7 +2145,7 @@ async function getNewsletter(onResponse,onError){
     url: BASE_URL+'newsletter',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -2150,13 +2163,13 @@ async function uploadNewsletter(onResponse,onError,month, year, file){
   var config = {
     method: 'post',
     url: BASE_URL+'newsletter',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -2170,7 +2183,7 @@ async function deactivateNewsletter(id,onResponse,onError){
     url: BASE_URL+'newsletter/deactivate/'+id,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -2184,7 +2197,7 @@ async function deleteNewsletter(id,onResponse,onError){
     url: BASE_URL+'newsletter/'+id,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -2198,7 +2211,7 @@ async function getPromotion(onResponse,onError){
     url: BASE_URL+'promotional-image',
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -2214,13 +2227,13 @@ async function uploadPromotion(onResponse,onError,file){
   var config = {
     method: 'post',
     url: BASE_URL+'promotional-image',
-    headers: { 
-      'Authorization': getAPIToken(), 
+    headers: {
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
     },
     data : data
   };
-  
+ 
   axios(config)
   .then(onResponse)
   .catch(onError);  
@@ -2235,7 +2248,7 @@ async function deactivatePromotion(id,onResponse,onError){
     url: BASE_URL+'promotional-image/deactivate/'+id,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
@@ -2249,9 +2262,32 @@ async function deletePromotion(id,onResponse,onError){
     url: BASE_URL+'promotional-image/'+id,
      headers: {
       'Content-Type': 'multipart/form-data',
-      'Authorization': getAPIToken(), 
+      'Authorization': getAPIToken(),
       'Accept': 'application/json'
      }
   };
   axios(config).then(onResponse).catch(onError);
+}
+
+
+async function sendEnquiryMail(message,onResponse,onError){
+
+  var data = new FormData();
+  data.append("message",message);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'connected-customer/enquiry-mail',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
 }

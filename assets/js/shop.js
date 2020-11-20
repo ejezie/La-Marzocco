@@ -28,7 +28,7 @@ var basicResultController = (function () {
 								"productCode" : item.code,
 								"productName" : item.name,
 								"productFamily" : item.item_family[0].code,
-								"productActualPrice" : "$"+item.price,
+								"productActualPrice" : "$"+safeAccess(["price"],item,"-"),
 								"productOfferPrice" : "$999.00",
 								"productOffPercent" : "-20%",
 								"productQuantityInStock" : "50",
