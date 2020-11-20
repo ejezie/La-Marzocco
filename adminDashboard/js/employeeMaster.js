@@ -1,4 +1,22 @@
 var employeeMasterTable;
+$(document).ready(function(){
+   $('#uploadFile').click(function () {
+      var xlsx = document.querySelector('#excelfile');
+      var onResponse = function(response){
+        $('#bulkUploadModal').modal('hide');
+        if(response.data.is_valid){
+            notifySuccess("File uploaded!");
+        }else{
+            notifyError(response.data.message);
+        }
+      };
+      var onError =function(error){
+        notifyError("Failed to upload file");
+      };
+      bulkUploadEmployees(onResponse,onError, xlsx.files[0]);
+    });
+})
+
 function loadCustomers() {
 
  employeeMasterTable = $('#employee_master').dataTable( {
@@ -145,6 +163,7 @@ function populateIndustry(){
 
 
 $(document).ready(function(){
+  return;//test purposes,api not available yet
 
   $.fn.extend({
     trackChanges: function() {
@@ -291,21 +310,7 @@ $(document).ready(function(){
 
 
     
-    $('#uploadFile').click(function () {
-      var xlsx = document.querySelector('#excelfile');
-      var onResponse = function(response){
-        $('#bulkUploadModal').modal('hide');
-        if(response.data.is_valid){
-            notifySuccess("File uploaded!");
-        }else{
-            notifyError(response.data.message);
-        }
-      };
-      var onError =function(error){
-        notifyError("Failed to upload file");
-      };
-      bulkUploadEmployees(onResponse,onError, xlsx.files[0]);
-    });
+   
            });
 
 
