@@ -150,7 +150,6 @@ var specialOffersItemList = [{
 
 
 async function showSpecialOffersProducts(specialOffersItemList){
-    alert("Yes")
 
     var specialOffersProductsHTML = ""
 
@@ -237,7 +236,6 @@ $(document).ready(function(){
            // getMachineParentMapping(parentId,function(response1){
                 getItemParentImages(parentId,mainitemid,function(response2){
                    const imageUrl = safeAccess(["data","item_parent_images","data",0,"image","image"],response2);
-                   alert(imageUrl)
                    showCarrouselParts(imageUrl,safeAccess(["data","item_parent_images","data"],response2));
 
                     

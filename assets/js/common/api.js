@@ -2,8 +2,8 @@
 
 // const BASE_URL = "http://54.252.24.196/v1/api/";
 // const BASE_URL = "http://3.106.30.129/v1/api/";
-// const BASE_URL = "http://54.252.24.196/v1/api/";
-const BASE_URL = "http://13.236.41.154/v1/api/";
+const BASE_URL = "http://54.252.24.196/v1/api/";
+// const BASE_URL = "http://13.236.41.154/v1/api/";
 
 const safeAccess =  (props, object,defaultValue) => props.reduce((prefix, val) => (prefix && prefix[val]) ? prefix[val] : defaultValue, object);
 
