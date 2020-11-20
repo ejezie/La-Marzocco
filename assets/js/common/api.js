@@ -2,31 +2,35 @@
 
 // const BASE_URL = "http://54.252.24.196/v1/api/";
 // const BASE_URL = "http://3.106.30.129/v1/api/";
-var BASE_URL;// = "http://54.252.24.196/v1/api/";
+// var BASE_URL;// = "http://54.252.24.196/v1/api/";
 // const BASE_URL = "http://13.236.41.154/v1/api/";
 
 
-async function loadBaseUrl(){
-   const url = window.location.origin +'/config.json';
-   var config = {
-    method: 'get',
-    url: url,
-    headers: {
-      'Authorization': getAPIToken(),
-      'Accept': 'application/json'
-    },
-  };
+// async function loadBaseUrl(){
+//    const url = window.location.origin +'/config.json';
+//    var config = {
+//     method: 'get',
+//     url: url,
+//     headers: {
+//       'Authorization': getAPIToken(),
+//       'Accept': 'application/json'
+//     },
+//   };
  
-  var response = await axios(config);
-  if(response){
-    BASE_URL = response.data.API_BASE_URL;
-    alert(BASE_URL)
-  }
+//   var response = await axios(config);
+//   if(response){
+//     BASE_URL = response.data.API_BASE_URL;
+//     alert(BASE_URL)
+//   }
   
+// }
+
+// loadBaseUrl();
+
+
+if(typeof BASE_URL == 'undefined' || BASE_URL == null){
+  alert("Please reload the page")
 }
-
-loadBaseUrl();
-
 
 
 
