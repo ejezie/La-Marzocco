@@ -35,7 +35,9 @@ async function showMiniCart(cartItems,cartSubtotal){
 
 	miniCartHTML += '<div class="mini_cart_footer">'
 	miniCartHTML += '<div class="cart_button">'
-	miniCartHTML += '<a class="active" href="cart.html">GO TO CART</a>'
+	if(cartItems.length > 0){
+		miniCartHTML += '<a class="active" href="cart.html">GO TO CART</a>'
+	}
 	miniCartHTML += '</div>'
 	miniCartHTML += '</div>'
 
