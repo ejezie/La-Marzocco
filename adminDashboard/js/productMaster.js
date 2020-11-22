@@ -445,7 +445,7 @@
       console.log(selectedIds)
 
       selectedIds.forEach(function(selectedId) {
-        alert(selectedId);
+        // alert(selectedId);
       });
     }
 

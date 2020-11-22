@@ -158,7 +158,7 @@ async function showMachinesSideFilter(machineList){
 	for(i=machineList.length-1; i>=0 ;i--){
 
 		sidebarHTML += '<li class="dropdown dropdown-large">'
-		sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="white-space: nowrap;font-size:14px; font-weight:500;color:#333">'+machineList[i]["code"]+' </a>'
+		sidebarHTML += '<a class="dropdown-toggle dropdown1" data-toggle="dropdown" style="white-space: nowrap;font-size:14px; font-weight:500;color:#333">'+machineList[i]["code"]+' </a>'
 		sidebarHTML += '<ul id="machine-menu" class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
 		sidebarHTML += '<li class="col-sm-3">'
@@ -169,7 +169,7 @@ async function showMachinesSideFilter(machineList){
 
 			// console.log(">>>>>>>>>>",machineList[i]["machines"]) 
 			// sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
-			sidebarHTML += '<li><form><p><input type="checkbox" value="'+machineList[i]["machines"][k]["id"]+'" id="'+machineList[i]["machines"][k]["id"]+'"  /><label for="'+machineList[i]["machines"][k]["id"]+'" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">'+machineList[i]["machines"][k]["name"]+'</label></p></form></li>'
+			sidebarHTML += '<li><form><p><input class="example" type="checkbox" value="'+machineList[i]["machines"][k]["id"]+'" id="'+machineList[i]["machines"][k]["id"]+'"  /><label for="'+machineList[i]["machines"][k]["id"]+'" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">'+machineList[i]["machines"][k]["name"]+'</label></p></form></li>'
 
 		}
 		
@@ -186,6 +186,8 @@ async function showMachinesSideFilter(machineList){
 	$("#sidebarMachineFilter").append(sidebarHTML);
 	$('#sidebarMachineFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
+   		$('#sidebarGroupFilter input[type="checkbox"]').not(this).prop('checked', false);
+   		$('#sidebarCatalogFilter input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = machineResultController;
    		machineResultController.currentPage = 1;
 		resultController.loadResults(getCheckedMachine());
@@ -203,6 +205,31 @@ async function showMachinesSideFilter(machineList){
 	});
 
 }
+
+// Collapse all on clicking one- start
+$("#more-btn-machines").on( "click", function() {
+    $('.catalog-collapse').removeClass("show");
+    $('.group-collapse').removeClass("show");
+});
+
+$("#more-btn-catalogs").on( "click", function() {
+    $('.machine-collapse').removeClass("show");
+    $('.group-collapse').removeClass("show");
+});
+
+$("#more-btn-groups").on( "click", function() {
+    $('.catalog-collapse').removeClass("show");
+    $('.machine-collapse').removeClass("show");
+});
+// Collapse all on clicking one- end
+
+
+
+$('input.example').on('change', function() {
+    $('input.example').not(this).prop('checked', false);  
+});
+
+
 
 async function refreshCatalog(){
 	resultController = basicResultController;
@@ -315,7 +342,7 @@ async function showGroupSideFilter(groupList){
 				const innerMostitem = inneritem["groups"][k];
 
 				// sidebarHTML += '<li><form><p><input type="checkbox" value="akash" id="nair" /><label for="nair" style="white-space: nowrap;font-size:14px; font-weight:500;">akash</label></p></form></li>'
-				sidebarHTML += '<li><form><p><input type="checkbox" data-family="'+groupList[i].id+'" value="'+innerMostitem["id"]+'" id="'+innerMostitem["desc"]+'" /><label for="'+innerMostitem["desc"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
+				sidebarHTML += '<li><form><p><input class="example" type="checkbox" data-family="'+groupList[i].id+'" value="'+innerMostitem["id"]+'" id="'+innerMostitem["desc"]+'" /><label for="'+innerMostitem["desc"]+'" style="white-space: nowrap;font-size:14px; font-weight:500;">'+innerMostitem["desc"]+'</label></p></form></li>'
 			}
 		// }
 		
@@ -332,15 +359,17 @@ async function showGroupSideFilter(groupList){
 	$("#sidebarGroupFilter").append(sidebarHTML);
 	$('#sidebarGroupFilter input[type="checkbox"]').on('change', function() {
    		$('#sidebarGroupFilter input[type="checkbox"]').not(this).prop('checked', false);
+   		$('#sidebarMachineFilter input[type="checkbox"]').not(this).prop('checked', false);
+   		$('#sidebarCatalogFilter input[type="checkbox"]').not(this).prop('checked', false);
    		refreshCatalog();
 
    		// Get selected labe; as heading  (Start)
-		var label=$(this).prop("labels"),
-        text = $(label).text()
-        // $("#shopTitle").empty()
-        // var shopTitleHTML = ''
-        // shopTitleHTML += '<h1>Product Catalog : Group - '+text+'</h1>'
-        // $("#shopTitle").append(shopTitleHTML)
+		var selectedOption = this.id
+        $("#shopTitle").empty()
+        var shopTitleHTML = ''
+        shopTitleHTML += '<h1>Product Catalog : Group - '+selectedOption+'</h1>'
+        // shopTitleHTML += '<h1>Product Catalog : Group </h1>'
+        $("#shopTitle").append(shopTitleHTML)
 		// Get selected labe; as heading  (End)
    		
 	});
@@ -396,6 +425,8 @@ async function showParentSideFilter(familyList){
 		// $( ".dropdown-menu li " ).click(function() {
 		//   $("ul.dropdown-menu").css("display", "none");
 		// });
+   		$('#sidebarGroupFilter input[type="checkbox"]').not(this).prop('checked', false);
+   		$('#sidebarMachineFilter input[type="checkbox"]').not(this).prop('checked', false);
    		$('#sidebarCatalogFilter input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = catalogResultController;
    		catalogResultController.currentPage = 1;

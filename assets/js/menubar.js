@@ -194,7 +194,7 @@ function showCanvasMenubarCommercialMachine(data){
 	var menuBarHTML = ""
 
 
-	menuBarHTML += '<ul class="sub-menu" >'
+	menuBarHTML += '<ul class="sub-menu" style="display:none">'
 
 	for(i=0; i< categoryArr["Categories"].length; i++){
 		categoryName = categoryArr["Categories"][i]["name"]
@@ -219,42 +219,6 @@ function showCanvasMenubarCommercialMachine(data){
 
 	menuBarHTML += '</ul>'
 
-
-
-
-
-
-
-	// menuBarHTML += '<ul class="sub_menu">'
-
-	// for(i=0; i< categoryArr["Categories"].length; i++){
-	// 	categoryName = categoryArr["Categories"][i]["name"]
-	// 	if(categoryName == category){
-	// 		for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
-	// 			var family = categoryArr["Categories"][i]["families"][j]["code"]
-	// 			// menuBarHTML += '<li><strong>'+family+'</strong></a>'
-	// 			console.log("faaaamilllyyy = : ", family )
-	// 			// menuBarHTML += '<li class="menu-item-has-children">'+family+'</l>'
-	// 			menuBarHTML += '<li class="menu-item-has-children"><a href="#">'+family+'</a>'
-	// 			menuBarHTML += '<ul class="sub-menu">'
-
-
-	// 			for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
-	// 				var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
-	// 			}
-
-	// 			menuBarHTML += '</ul>'
-	// 			menuBarHTML += '</li>'
-
-	// 		}
-	// 	}
-	// }
-
-	// menuBarHTML += '</ul>';
-	// Image
-	// menuBarHTML += '<div class="banner_static_menu">'
-	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
-	// menuBarHTML += '</div>'
 
 	$("#canvasCommercialMachineMenu").append(menuBarHTML)
 }
@@ -293,6 +257,41 @@ function showMenubarGrinders(data){
 	$("#grinders_menu").append(menuBarHTML)
 }
 
+function showCanvasMenubarGrinders(data){
+
+	var category = "Grinder";
+	var categoryArr = { Categories: data.mapping};
+	var menuBarHTML = ""
+	menuBarHTML += '<ul class="sub-menu" style="display:none">'
+
+	for(i=0; i< categoryArr["Categories"].length; i++){
+		categoryName = categoryArr["Categories"][i]["name"]
+		if(categoryName == category){
+			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
+				var family = categoryArr["Categories"][i]["families"][j]["code"]
+				menuBarHTML += '<li class="menu-item-has-children menuopen">'
+				menuBarHTML += '<span class="menu-expand"><i class="fa fa-angle-down"></i></span>'
+				menuBarHTML += '<a href="#">'+family+'</a>'
+				menuBarHTML += '<ul class="sub-menu" style="display: none;">'
+
+
+				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
+					menuBarHTML += '<li><a href="product-details.html?item='+categoryArr["Categories"][i]["families"][j]["machines"][k]["id"]+'">'+type+'</a></li>'
+				}
+
+				menuBarHTML += '</ul>'
+				menuBarHTML += '</li>'
+
+			}
+		}
+	}
+
+	menuBarHTML += '</ul>';
+
+	$("#canvasGrinderMenu").append(menuBarHTML)
+}
+
 
 function showMenubarModbar(data){
 
@@ -325,6 +324,42 @@ function showMenubarModbar(data){
 	menuBarHTML += '</ul>';
 
 	$("#modbar_menu").append(menuBarHTML)
+}
+
+
+function showCanvasMenubarModbar(data){
+
+	var category = "Modbar";
+	var categoryArr = { Categories: data.mapping};
+	var menuBarHTML = ""
+	menuBarHTML += '<ul class="sub-menu" style="display: none;">'
+
+	for(i=0; i< categoryArr["Categories"].length; i++){
+		categoryName = categoryArr["Categories"][i]["name"]
+		if(categoryName == category){
+			for(j=0; j < categoryArr["Categories"][i]["families"].length; j++){
+				var family = categoryArr["Categories"][i]["families"][j]["code"]
+				menuBarHTML += '<li class="menu-item-has-children menuopen">'
+				menuBarHTML += '<span class="menu-expand"><i class="fa fa-angle-down"></i></span>'
+				menuBarHTML += '<a href="#">'+family+'</a>'
+				menuBarHTML += '<ul class="sub-menu" style="display: none;">'
+
+
+				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
+					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
+					menuBarHTML += '<li><a href="product-details.html?item='+categoryArr["Categories"][i]["families"][j]["machines"][k]["id"]+'">'+type+'</a></li>'
+				}
+
+				menuBarHTML += '</ul>'
+				menuBarHTML += '</li>'
+
+			}
+		}
+	}
+
+	menuBarHTML += '</ul>';
+
+	$("#canvasModbarMenu").append(menuBarHTML)
 }
 
 
@@ -391,6 +426,54 @@ function showNewsletter(newsletterData){
 
 
 
+function showCanvasNewsletter(newsletterData){
+
+	var months = {
+		'January' : 1,
+		'February' : 2,
+		'March' : 3,
+		'April' : 4,
+		'May' : 5,
+		'June' : 6,
+		'July' : 7,
+		'August' : 8,
+		'September' : 9,
+		'October' : 10,
+		'November' : 11,
+		'December' : 12
+	}
+
+
+	var newsletter = newsletterData.newsletters.data
+
+	var menuBarHTML = ""
+	menuBarHTML += '<ul class="sub-menu" style="display: none;">'
+
+	menuBarHTML += '<li class="menu-item-has-children menuopen">'
+	// menuBarHTML += '<span class="menu-expand"><i class="fa fa-angle-down"></i></span>'
+	// menuBarHTML += '<a href="#">Newsletter</a>'
+	// menuBarHTML += '<ul class="sub-menu" style="display: none;">'
+	for(i=0; i< newsletter.length; i++){
+
+
+				// menuBarHTML += '<li><a href="'+newsletterArr[i]["pdfURL"]+'">'+newsletterArr[i]["newsletterName"]+'</a></li>'
+				menuBarHTML += '<li><a href="'+newsletter[i]["name"]+'"> Newsletter: '+val2key(newsletter[i]["month"],months)+' '+newsletter[i]["year"]+'</a></li>'
+
+	}
+	// menuBarHTML += '</ul>'
+	menuBarHTML += '</li>'
+
+
+	menuBarHTML += '</ul>';
+	// Image
+	// menuBarHTML += '<div class="banner_static_menu">'
+	// menuBarHTML += '<a href="shop.html"><img src="https://au.lamarzocco.com/wp-content/uploads/2018/06/Leva-X-1.jpg" alt="" style="height: 400px ; width: 100%"></a>'
+	// menuBarHTML += '</div>'
+
+	$("#canvasNewsletterMenu").append(menuBarHTML)
+}
+
+
 
 // function showNewsletter(newsletterArr){
 // 	var newsletterHTML = ""
@@ -421,11 +504,13 @@ $(document).ready(function(){
 		showMenubarGrinders(response.data)
 		// showCanvasMenubarCommercialMachine(response.data);
 		showCanvasMenubarCommercialMachine(response.data);
+		showCanvasMenubarGrinders(response.data);
+		showCanvasMenubarModbar(response.data);
 // showNewsletter(newsletterArr)
 
-showMenubarGrinders()
-showMenubarGS3()
-showMenubarLMHome()
+		showMenubarGrinders()
+		showMenubarGS3()
+		showMenubarLMHome()
 
 
 	};
@@ -440,6 +525,7 @@ showMenubarLMHome()
 
 	getNewsletter(function(response){
 		showNewsletter(response.data)
+		showCanvasNewsletter(response.data)
 	},onError);
 
 
