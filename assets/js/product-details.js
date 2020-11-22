@@ -40,6 +40,7 @@
 		detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
 		detailsHTML += ''
 		detailsHTML += '</div>'
+		detailsHTML += '<button class="button" style="display:none;" id="btCustomize" type="button">CUSTOMIZE</button>'
 		
 		detailsHTML += '</form>'
 		detailsHTML += '</div>'
@@ -222,7 +223,56 @@
 
 		});
 
+		getKitsForItem(item["description"],function(res){
+			var kits = safeAccess(["data","items","data"],res,[]);
+			if(kits.length>0){
+				$("#btCustomize").toggle();
+				$("#btCustomize").click(function(){
+					alert(kits.length)
+					showKits(kits);
+				});
+			}
+		})
+		
+
 	}
+
+
+
+async function showKits(kits){
+
+	var html = ""
+	$("#modalKits").empty()
+
+
+	html += '<table style="width:inherit">'
+	html += '<thead>'
+	html += '<tr>'
+	html += '<th class="product_name">Name</th>'
+	html += '<th class="product-namee">Details</th>'
+	html += '<th></th>'
+	html += '</tr>'
+	html += '</thead>'
+	html += '<tbody>'
+
+
+	for(i=0;i<kits.length;i++){
+		const kit = kits[i];
+		html += '<tr>'
+		html += '<td class="product_name"><a >'+safeAccess(["name"],kit,"-")+'</a></td>'
+		html += '<td class="product_name"><a href=product-details.html?item="'+kit.id+'">Details</a></td>'
+		html += '</tr>'
+	}
+
+
+	html += '</tbody>'
+	html += '</table>'
+
+
+    $("#kits").append(html);
+    $('#modalKits').modal('show');
+}
+
 
 	function changeQuantity(id,quantity){
 		// if(shoppingCart.getItemFromCart(id)!=null){

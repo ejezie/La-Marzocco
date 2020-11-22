@@ -187,6 +187,7 @@ async function showMachinesSideFilter(machineList){
 	$('#sidebarMachineFilter input[type="checkbox"]').on('change', function() {
    		$('input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = machineResultController;
+   		machineResultController.currentPage = 1;
 		resultController.loadResults(getCheckedMachine());
 
 		// Get selected labe; as heading  (Start)
@@ -205,6 +206,8 @@ async function showMachinesSideFilter(machineList){
 
 async function refreshCatalog(){
 	resultController = basicResultController;
+	basicResultController.currentPage = 1;
+
 	basicResultController.filterParentId = getCheckedParent();
 	// basicResultController.filterGroupId = await getCheckedGroup();
 	var group_id = await getCheckedGroup();
@@ -395,6 +398,8 @@ async function showParentSideFilter(familyList){
 		// });
    		$('#sidebarCatalogFilter input[type="checkbox"]').not(this).prop('checked', false);
    		resultController = catalogResultController;
+   		catalogResultController.currentPage = 1;
+
    		resultController.loadResults(getCheckedParent());
    		// showCatalogDropdownSelection(getCheckedParent());
 

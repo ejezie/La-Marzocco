@@ -51,6 +51,7 @@ var basicResultController = (function () {
 			}
 
 		    obj.showResult(results);
+		    window.scroll({top: 0,left: 0});
 
 		  };
 
@@ -195,6 +196,8 @@ var catalogResultController = (function () {
 			}
 
 		    obj.showResult(results);
+		    		    window.scroll({top: 0,left: 0});
+
 		  };
 
 		  var onError =function(error){
@@ -340,6 +343,8 @@ var machineResultController = (function () {
 			}
 
 		    obj.showResult(results); 
+		    		    window.scroll({top: 0,left: 0});
+
 		  };
 		  getItemParentImagesForMachineDropdown(currentPage,itemsPerPage, mainItemId,onResponse);
 

@@ -465,6 +465,26 @@ var config = {
 
 async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key){
 
+  const kit_type_id = 3
+   var url = BASE_URL+'item?page_size=99999&parent_id='+parent_id+'&type_id='+kit_type_id;
+
+  var config = {
+    method: 'get',
+    url: url,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key){
+
   var data = new FormData();
    var url = BASE_URL+'item?page='+page+'&page_size='+page_size;
    if(searchQuery){
