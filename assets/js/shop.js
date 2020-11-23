@@ -38,6 +38,8 @@ var basicResultController = (function () {
 			  results.push(element);
 		    }
 		    if(currentPage==1){
+		    			     	history.replaceState(null, null, ' ');
+
 		      $('#pagination-container').pagination({
 			        items: response.data.items.total,
 			        itemsOnPage: itemsPerPage,
@@ -58,7 +60,6 @@ var basicResultController = (function () {
 		  var onError =function(error){
 		  	dismiss(loadingNotification);
 		  	console.log(error);
-		    notifyError("Failed to load results");
 		  };
 		  getSearchResults(currentPage,itemsPerPage,searchQuery,filterParentId,filterGroupId,filterFamilyId,onResponse,onError);
     }
@@ -164,6 +165,8 @@ var catalogResultController = (function () {
 		    obj.loadResults =  function (id) {
 		    if(id){
 		    	machineId = id;
+		    	currentPage = 1;
+
 		    }
 		    var loadingNotification = notifyInfo("Loading results");
 		  	var onResponse = function(response){
@@ -184,6 +187,8 @@ var catalogResultController = (function () {
 		    }
 
 		     if(currentPage==1){
+		     			     	history.replaceState(null, null, ' ');
+
 		      $('#pagination-container').pagination({
 			        items: response.data.machine_parent.total,
 			        itemsOnPage: itemsPerPage,
@@ -203,7 +208,6 @@ var catalogResultController = (function () {
 		  var onError =function(error){
 		  	dismiss(loadingNotification);
 		  	console.log(error);
-		    notifyError("Failed to load results");
 		  };
 		  getMachineParentList(currentPage,itemsPerPage, onResponse,onError,machineId);
     	  }
@@ -301,6 +305,7 @@ var machineResultController = (function () {
     obj.loadResults =  function (id) {
     	if(id){
     		mainItemId = id;
+    		currentPage = 1;
     	}
     	 var loadingNotification = notifyInfo("Loading results");
 		  	var onResponse = function(response){
@@ -329,17 +334,19 @@ var machineResultController = (function () {
 			  results.push(element);
 		    }
 
-
 		     if(currentPage==1){
+		     	history.replaceState(null, null, ' ');
 		      $('#pagination-container').pagination({
 			        items: response.data.item_parent_images.total,
 			        itemsOnPage: itemsPerPage,
+			        currentPage:1,
 			        cssStyle: 'dark-theme',
 			        onPageClick: function(pageNo){
 			        	currentPage = pageNo;
 			        	obj.loadResults();
 			        }
 			    });
+		      // $('#pagination-container').pagination('drawPage', 1);
 			}
 
 		    obj.showResult(results); 
