@@ -184,7 +184,7 @@
                   }
                   var pageIndex = data.start / data.length + 1 ;
                   console.log("apgedinnnnnnnnnnndex  " +JSON.stringify(data,null,2))
-                  getItems(onResponse,onError,pageIndex,data.length,searchQuery,sort_key);
+                  getItems(onResponse,onError,pageIndex,data.length,searchQuery,sort_key,safeAccess(["order",0,"dir"],data,""));
               // var sort_column_name = data.columns[data.order[0].column].data.replace(/\./g,"__");
               // var direction = "";
 
