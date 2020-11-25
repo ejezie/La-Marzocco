@@ -311,9 +311,11 @@ var machineResultController = (function () {
 		  	var onResponse = function(response){
 		  	dismiss(loadingNotification);
 		  	var results = [];
-		    for(var i=0; i< response.data.item_parent_images.data.length; i++){
-		      const item = response.data.item_parent_images.data[i].item;
-		      console.log("response.data.item_parent_images >>>>>>>>>>> 0000000 ",response.data.item_parent_images)
+
+		  	console.log("response : ", response)
+		    for(var i=0; i< response.data.items.data.length; i++){
+		      const item = response.data.items.data[i];
+		      // console.log("response.data.item_parent_images >>>>>>>>>>> 0000000 ",response.data.item_parent_images)
 		      const element = {
 								"productId" : item.id,
 								"href": "product-details.html?item="+item["id"],
@@ -325,11 +327,11 @@ var machineResultController = (function () {
 								"productOffPercent" : "-20%",
 								"productQuantityInStock" : "50",
 								"productDescription" : item.desc,
-								"parentImages" : safeAccess(["image","thumbnail"],response.data.item_parent_images.data[i],"assets/img/lma_catalog_img.png")
+								"parentImages" : safeAccess(["image","thumbnail"],item.item_parent_images[0],"assets/img/lma_catalog_img.png")
 								// "parentImages" : response.data.item_parent_images.data[i].image.thumbnail
 							};
-							console.log("<><><<>><><><><> "+response.data.item_parent_images.data[i].image.thumbnail)
-							console.log("<><><<>><><><><> "+safeAccess(["image","thumbnail"],response.data.item_parent_images.data[i],"assets/img/lma_catalog_img.png"))
+							// console.log("<><><<>><><><><> "+response.data.item_parent_images.data[i].image.thumbnail)
+							// console.log("<><><<>><><><><> "+safeAccess(["image","thumbnail"],response.data.item_parent_images.data[i],"assets/img/lma_catalog_img.png"))
 
 			  results.push(element);
 		    }
@@ -337,7 +339,7 @@ var machineResultController = (function () {
 		     if(currentPage==1){
 		     	history.replaceState(null, null, ' ');
 		      $('#pagination-container').pagination({
-			        items: response.data.item_parent_images.total,
+			        items: response.data.items.total,
 			        itemsOnPage: itemsPerPage,
 			        currentPage:1,
 			        cssStyle: 'dark-theme',
