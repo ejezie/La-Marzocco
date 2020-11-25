@@ -1,25 +1,7 @@
-var employeeMasterTable;
-$(document).ready(function(){
-   $('#uploadFile').click(function () {
-      var xlsx = document.querySelector('#excelfile');
-      var onResponse = function(response){
-        $('#bulkUploadModal').modal('hide');
-        if(response.data.is_valid){
-            notifySuccess("File uploaded!");
-        }else{
-            notifyError(response.data.message);
-        }
-      };
-      var onError =function(error){
-        notifyError("Failed to upload file");
-      };
-      bulkUploadEmployees(onResponse,onError, xlsx.files[0]);
-    });
-})
-
+var customerMasterTable;
 function loadCustomers() {
 
- employeeMasterTable = $('#employee_master').dataTable( {
+ customerMasterTable = $('#employee_master').dataTable( {
    searching: false,
    processing: true,
    serverSide: true,
@@ -32,13 +14,13 @@ function loadCustomers() {
 
     var onResponse = function(res){
               dismiss(loadingId);
-              console.log("recordsTotal "+res.data.employee_masters.data.length)
+              console.log("recordsTotal "+res.data.customer_masters.data.length)
               // notifySuccess("sucess");
               callback({
                 draw:data.draw,
-                recordsTotal: res.data.employee_masters.total,
-                recordsFiltered: res.data.employee_masters.total,
-                data: res.data.employee_masters.data
+                recordsTotal: res.data.customer_masters.total,
+                recordsFiltered: res.data.customer_masters.total,
+                data: res.data.customer_masters.data
               });
 
             };
@@ -69,33 +51,34 @@ function loadCustomers() {
               }],
               columns: [
               {
-                "title":"Short Code",
+                "title":"Customer Code",
                 render: function(data, type, row, meta){
                   return row.short_code;
                 }
               },
               {
-                "title":"First Name",
+                "title":"Name",
                 render: function(data, type, row){
                   return row.first_name;
                 }
               },
-              {
-                "title":"Middle Name",
-                render: function(data, type, row){
-                  return row.middle_name;
-                }
-              },
-              {
-                "title":"Last Name",
-                render: function(data, type, row){
-                  return row.last_name;
-                }
-              },
+              
               {
                 "title":"Company Name",
                 render: function(data, type, row){
                   return row.company_name;
+                }
+              },
+              {
+                "title":"Deposit Required",
+                render: function(data, type, row){
+                  if(row.deposit_required== 1){
+                    return "Yes"
+                  }else if(row.deposit_required== 0){
+                    return "No";
+                  }else if(row.deposit_required== 0){
+                    return "-";
+                  }
                 }
               },
          {
@@ -163,12 +146,13 @@ function populateIndustry(){
 
 
 $(document).ready(function(){
-  return;//test purposes,api not available yet
 
   $.fn.extend({
     trackChanges: function() {
+      //this.off('change');
       this.removeData("changed");
       this.change(function() {
+        // alert($(this).val())
         $(this).data("changed", $(this).val());
       });
     }
@@ -178,12 +162,12 @@ $(document).ready(function(){
     }
   });
   loadCustomers();
-  populateIndustry();
+  // populateIndustry();
 
 
-  $('#employee_master').on('click', '#btnEdit', function () {
+  $('#customer_master').on('click', '#btnEdit', function () {
     var RowIndex = $(this).closest('tr');
-    var data = employeeMasterTable.api().row(RowIndex).data();
+    var data = customerMasterTable.api().row(RowIndex).data();
     console.log(data);
      $("#inputShortCode").val(data.short_code);
      $("#inputIndustry").val(data.industry_id);
@@ -243,9 +227,9 @@ $(document).ready(function(){
 
 
 
-  $('#employee_master').on('click', '#btnDelete', function () {
+  $('#customer_master').on('click', '#btnDelete', function () {
     var RowIndex = $(this).closest('tr');
-    var data = employeeMasterTable.api().row(RowIndex).data();
+    var data = customerMasterTable.api().row(RowIndex).data();
     var onResponse = function(response){
         notifySuccess("Deleted successfully");
         window.location.reload();
@@ -260,10 +244,10 @@ $(document).ready(function(){
 });
 
 
-    $('#employee_master').on('click', '#btnEditss', function () {
+    $('#customer_master').on('click', '#btnEditss', function () {
 
       var RowIndex = $(this).closest('tr');
-      var data = employeeMasterTable.api().row(RowIndex).data();
+      var data = customerMasterTable.api().row(RowIndex).data();
       populateGroup(data.group.id);
       populateFamily(data.family.id);
       populateType(data.type.id);
@@ -310,7 +294,21 @@ $(document).ready(function(){
 
 
     
-   
+    $('#uploadFile').click(function () {
+      var xlsx = document.querySelector('#excelfile');
+      var onResponse = function(response){
+        $('#bulkUploadModal').modal('hide');
+        if(response.data.is_valid){
+            notifySuccess("File uploaded!");
+        }else{
+            notifyError(response.data.message);
+        }
+      };
+      var onError =function(error){
+        notifyError("Failed to upload file");
+      };
+      bulkUploadCustomers(onResponse,onError, xlsx.files[0]);
+    });
            });
 
 

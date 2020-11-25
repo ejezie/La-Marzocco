@@ -27,12 +27,12 @@ async function showOrders(orderArr){
     const loadingId = notifyInfo("Please wait");
     var onResponse = function(res){
               dismiss(loadingId);
-              console.log("recordsTotal "+res.data.order.data.length)
+              console.log("recordsTotal "+res.data.quotes.data.length)
               callback({
                 draw:data.draw,
-                recordsTotal: res.data.order.total,
-                recordsFiltered: res.data.order.total,
-                data: res.data.order.data
+                recordsTotal: res.data.quotes.total,
+                recordsFiltered: res.data.quotes.total,
+                data: res.data.quotes.data
               });
 
             };
@@ -69,6 +69,21 @@ async function showOrders(orderArr){
                 }
               },
               {
+                "title":"Customer Name",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['first_name'],row['user'],"")
+                }
+              },
+              {
+                "title":"Quote Id",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['id'],row,"")
+                }
+              },
+             
+              {
                 "title":"Items",
                 render: function(data, type, row){
                   return safeAccess(['quote_line',],row,[]).length;
@@ -83,15 +98,11 @@ async function showOrders(orderArr){
            {
             "title":"Product Details",
             render: function(data, type, row){
-               return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Products</span></button>"
+              // if(row.status != "cancelled"){
+               return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"fa fa-bars\" style=\"white-space: nowrap;\"> Details</span></button>"
+              // }
               }
             },
-           {
-            "title":"Order",
-            render: function(data, type, row){
-               return "<button type=\"button\" id='btnAddToCart' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Submit</span></button>"
-              }
-        }
         ]
       })
 
@@ -107,7 +118,7 @@ $(document).ready(function(){
   	var RowIndex = $(this).closest('tr');
     var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
 
-  	showOrderDetails(data.id, data.order_line);
+  	showQuoteDetails(data.id, data.quote_line);
   });
 
 
@@ -186,7 +197,7 @@ var orderDetailsHTML = ""
     $('#modal_tracking').modal('show');
 }
 
-async function showOrderDetails(orderId, quoteLine){
+async function showQuoteDetails(orderId, quoteLine){
 
 	var orderDetailsHTML = ""
 	$("#orderDetails").empty()
@@ -211,6 +222,8 @@ orderDetailsHTML += '<tbody>'
 
 for(i=0;i<quoteLine.length;i++){
    const quoteItem = quoteLine[i];
+
+   console.log("quoteItem : ", quoteItem)
 
   orderDetailsHTML += '<tr>'
   orderDetailsHTML += '<th scope="row">'+(i+1)+'</th>'
