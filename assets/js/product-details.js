@@ -39,7 +39,7 @@
 		detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
 		detailsHTML += ''
 		detailsHTML += '</div>'
-		detailsHTML += '<button class="button" style="display:none;" id="btCustomize" type="button">CUSTOMIZE</button>'
+		// detailsHTML += '<button class="button" style="display:none;" id="btCustomize" type="button">CUSTOMIZE</button>'
 		
 		detailsHTML += '</form>'
 		detailsHTML += '</div>'
@@ -167,6 +167,9 @@
 		infoHTML += '<li>'
 		infoHTML += '<a data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Description</a>'
 		infoHTML += '</li>'
+		infoHTML += '<li>'
+		infoHTML += '<a data-toggle="tab" style="display:none;" id="customizationTab" href="#customization" role="tab" aria-controls="info" aria-selected="false">Customization</a>'
+		infoHTML += '</li>'
 		infoHTML += ''
 		infoHTML += '</ul>'
 		infoHTML += '</div>'
@@ -194,6 +197,11 @@
 		infoHTML += '<div class="tab-pane fade " id="info" role="tabpanel">'
 		infoHTML += '<div class="product_info_content">'
 		infoHTML += '<p>'+item["description"]+' </p>'
+		infoHTML += '</div>'
+		infoHTML += '</div>'
+		infoHTML += '<div class="tab-pane fade " id="customization" role="tabpanel">'
+		infoHTML += '<div id="customizationTable" class="product_info_content">'
+		// infoHTML += '<p>'+item["description"]+' </p>'
 		infoHTML += '</div>'
 		infoHTML += '</div>'
 		infoHTML += '</div>'
@@ -224,16 +232,12 @@
 
 		getKitsForItem(item["id"],function(res){
 			var kits = safeAccess(["data","items","data"],res,[]);
-							alert("Unable to "+kits.length)
 
 			if(kits.length>0){
-				$("#btCustomize").toggle();
-				$("#btCustomize").click(function(){
-					alert(kits.length)
-					showKits(kits);
-				});
+				$("#customizationTab").toggle();
+					showOrderDetails(kits)
 			}else{
-				alert("Unable to ")
+				notifyError("No customizations available")
 			}
 		})
 		
@@ -242,10 +246,60 @@
 
 
 
+async function showOrderDetails(quoteLine){
+
+	var orderDetailsHTML = ""
+
+
+	orderDetailsHTML += '<table style="width:inherit">'
+	orderDetailsHTML += '<thead>'
+	orderDetailsHTML += '<tr>'
+	orderDetailsHTML += '<th class="product_thumb">Product</th>'
+	orderDetailsHTML += '<th class="product_code">Code</th>'
+	orderDetailsHTML += '<th class="product_name">Name</th>'
+	orderDetailsHTML += '<th class="product-name">Details</th>'
+	orderDetailsHTML += '<th></th>'
+	orderDetailsHTML += '</tr>'
+	orderDetailsHTML += '</thead>'
+	orderDetailsHTML += '<tbody>'
+
+
+	for(i=0;i<quoteLine.length;i++){
+		const item = quoteLine[i];
+
+
+		orderDetailsHTML += '<tr>'
+		if(item.item_images[0]){
+		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="'+item.item_images[0]["image"]["image"]+'" alt=""></a></td>'
+		}else{
+
+		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/lma_catalog_img.png" alt=""></a></td>'
+		}
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["code"],item,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["name"],item,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a href=product-details.html?item='+item.id+'>Go To Details</a></td>'
+
+		// orderDetailsHTML += '<td class="product-price">$'+safeAccess(["price"],quoteItem,"-").toLocaleString("en-AU")+'</td>'
+		// orderDetailsHTML += '<td class="product_quantity">'+safeAccess(["qty"],quoteItem,"-")+'</td>'
+		// orderDetailsHTML += '<td class="product_total">$'+safeAccess(["total"],quoteItem,"-").toLocaleString("en-AU")+'</td>'
+		// orderDetailsHTML += '<td class="product_total">'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
+		orderDetailsHTML += '</tr>'
+	}
+
+
+	orderDetailsHTML += '</tbody>'
+	orderDetailsHTML += '</table>'
+
+	$("#customizationTable").html(orderDetailsHTML);
+
+}
+
+
+
 async function showKits(kits){
 
 	var html = ""
-	$("#modalKits").empty()
+	// $("#modalKits").empty()
 
 
 	html += '<table style="width:inherit">'
@@ -263,7 +317,7 @@ async function showKits(kits){
 		const kit = kits[i];
 		html += '<tr>'
 		html += '<td class="product_name"><a >'+safeAccess(["name"],kit,"-")+'</a></td>'
-		html += '<td class="product_name"><a href=product-details.html?item="'+kit.id+'">Details</a></td>'
+		html += '<td class="product_name"><a href=product-details.html?item='+kit.id+'>Go To Details</a></td>'
 		html += '</tr>'
 	}
 
@@ -272,8 +326,8 @@ async function showKits(kits){
 	html += '</table>'
 
 
-    $("#kits").append(html);
-    $('#modalKits').modal('show');
+    $("#customizationTable").html(html);
+    // $('#modalKits').modal('show');
 }
 
 

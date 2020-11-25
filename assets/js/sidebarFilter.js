@@ -235,7 +235,7 @@ async function refreshCatalog(){
 	resultController = basicResultController;
 	basicResultController.currentPage = 1;
 
-	basicResultController.filterParentId = getCheckedParent();
+	basicResultController.filterParentId = null;//getCheckedParent();
 	// basicResultController.filterGroupId = await getCheckedGroup();
 	var group_id = await getCheckedGroup();
 	var groupFamily = await getCheckedGroupFamily();

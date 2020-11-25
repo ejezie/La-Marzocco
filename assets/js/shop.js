@@ -38,7 +38,7 @@ var basicResultController = (function () {
 			  results.push(element);
 		    }
 		    if(currentPage==1){
-		    			     	history.replaceState(null, null, ' ');
+		    	history.replaceState(null, null, ' ');
 
 		      $('#pagination-container').pagination({
 			        items: response.data.items.total,
@@ -187,7 +187,7 @@ var catalogResultController = (function () {
 		    }
 
 		     if(currentPage==1){
-		     			     	history.replaceState(null, null, ' ');
+		       history.replaceState(null, null, ' ');
 
 		      $('#pagination-container').pagination({
 			        items: response.data.machine_parent.total,
@@ -353,7 +353,8 @@ var machineResultController = (function () {
 		    		    window.scroll({top: 0,left: 0});
 
 		  };
-		  getItemParentImagesForMachineDropdown(currentPage,itemsPerPage, mainItemId,onResponse);
+		  getMachineItems(onResponse,null,currentPage, itemsPerPage,mainItemId)
+		  // getItemParentImagesForMachineDropdown(currentPage,itemsPerPage, mainItemId,onResponse);
 
     	 }
 

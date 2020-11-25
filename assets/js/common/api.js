@@ -461,14 +461,15 @@ var config = {
 
 }
 
-async function getKitsForItem(parent_id,onResponse,onError){
+async function getKitsForItem(main_item_id,onResponse,onError){
 
-  const kit_type_id = 3
-   var url = BASE_URL+'item?page_size=99999&parent_id='+parent_id+'&type_id='+kit_type_id;
+  const kit_type_id = 4;
+   var url = BASE_URL+'item?page_size=99999&main_item_id='+main_item_id+'&type_id='+kit_type_id;
 
   var config = {
     method: 'get',
     url: url,
+    errorHandle: false,
     headers: {
       'Authorization': getAPIToken(),
       'Accept': 'application/json'
@@ -494,6 +495,25 @@ async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key,s
     var sortorder = (sort_dir === "asc") ? 0 : 1;
     url += "&"+sort_key+"="+ sortorder; 
   }
+
+  var config = {
+    method: 'get',
+    url: url,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+async function getMachineItems(onResponse,onError,page,page_size,main_item_id){
+
+  var data = new FormData();
+   var url = BASE_URL+'item?page='+page+'&page_size='+page_size+'&main_item_id='+main_item_id;
 
   var config = {
     method: 'get',

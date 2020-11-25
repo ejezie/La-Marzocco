@@ -33,13 +33,13 @@ function loadMiniCart(){
 async function showMiniCart(cartItems,cartSubtotal){
 	var miniCartHTML = ''
 
-	miniCartHTML += '<div class="mini_cart_footer">'
-	miniCartHTML += '<div class="cart_button">'
-	if(cartItems.length > 0){
-		miniCartHTML += '<a class="active" href="cart.html">GO TO CART</a>'
-	}
-	miniCartHTML += '</div>'
-	miniCartHTML += '</div>'
+	// miniCartHTML += '<div class="mini_cart_footer">'
+	// miniCartHTML += '<div class="cart_button">'
+	// if(cartItems.length > 0){
+	// 	miniCartHTML += '<a class="active" href="cart.html">GO TO CART</a>'
+	// }
+	// miniCartHTML += '</div>'
+	// miniCartHTML += '</div>'
 
 	for(i=0; i<cartItems.length;i++){
 
@@ -71,13 +71,57 @@ async function showMiniCart(cartItems,cartSubtotal){
 	// miniCartHTML += '<span class="price">'+cartSubtotal["total"]+'</span>'
 	// miniCartHTML += '</div>'
 	// miniCartHTML += '</div>'
+
+
+
+		// miniCartHTML +='<div class="btn-group">'
+		// miniCartHTML += '<a class="active" id="btClearCart">EMPTY CART</a>'
+		// if(cartItems.length>0){
+
+		// miniCartHTML += '<div class="mini_cart_footer">'
+		// miniCartHTML += '<div class="cart_button">'
+		// miniCartHTML += '<a class="active" href="cart.html">GO TO CART</a>'
+
+		// miniCartHTML += '</div>'
+		// miniCartHTML += '</div>'
+		// }
+		// miniCartHTML += '</div>'
+
+	
+		miniCartHTML += '<div align="center">';
+   		miniCartHTML += '<div class="row">';
+
 	if(cartItems.length>0){
+
+     	miniCartHTML += '<div class="col-md-6">';
 		miniCartHTML += '<div class="mini_cart_footer">'
 		miniCartHTML += '<div class="cart_button">'
 		miniCartHTML += '<a class="active" id="btClearCart">EMPTY CART</a>'
 		miniCartHTML += '</div>'
 		miniCartHTML += '</div>'
-	}
+     	miniCartHTML += '</div>';
+     }
+
+
+    	miniCartHTML += '<div class="col-md-6">';
+
+
+		miniCartHTML += '<div class="mini_cart_footer">'
+		miniCartHTML += '<div class="cart_button">'
+  		miniCartHTML += '<a class="active" href="cart.html">GO TO CART</a>'
+		miniCartHTML += '</div>'
+		miniCartHTML += '</div>'
+
+     	miniCartHTML += '</div>';
+		miniCartHTML += '</div>';
+
+	// if(cartItems.length>0){
+		// miniCartHTML += '<div class="mini_cart_footer">'
+		// miniCartHTML += '<div class="cart_button">'
+  // 		miniCartHTML += '<a class="active" href="cart.html">GO TO CART</a>'
+		// miniCartHTML += '</div>'
+		// miniCartHTML += '</div>'
+	// }
 
 	// miniCartHTML += '<div class="cart_button">'
 	// miniCartHTML += '<a class="active" href="checkout.html">Checkout</a>'
