@@ -222,7 +222,7 @@ var catalogResultController = (function () {
 				catalogHTML += '<div class="single_product">'
 				catalogHTML += '<div class="product_name grid_name">'
 				catalogHTML += '<h3><strong><a href="' +catalogList[i]["href"] +'" style="text-transform: lowercase;">'+catalogList[i]["productName"]+'</a></strong></h3>'
-				catalogHTML += '<p style="opacity:1;">Catalog Parts</p>'
+				catalogHTML += '<p style="opacity:1;">Catalogue Parts</p>'
 				catalogHTML += '</div>'
 				catalogHTML += '<div class="product_thumb">'
 				catalogHTML += '<img onerror="this.onerror=null;this.src=`assets/img/lma_catalog_img.png`;" src="'+catalogList[i]["image"]+'" onerror="this.onerror=null;this.src=`assets/img/lma_catalog_img.png`;"/>';

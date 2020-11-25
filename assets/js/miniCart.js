@@ -47,7 +47,13 @@ async function showMiniCart(cartItems,cartSubtotal){
 
 		miniCartHTML += '<div class="cart_item">'
 		miniCartHTML += '<div class="cart_img">'
-		miniCartHTML += '<a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a>'
+		if(item.item["item_images"].length > 0){
+
+			miniCartHTML += '<a href="#"><img src="'+item.item["item_images"][0]["image"]["image"]+'" alt=""></a>'
+		}else{
+
+			miniCartHTML += '<a href="#"><img src="assets/img/lma_catalog_img.png" alt=""></a>'
+		}
 		miniCartHTML += '</div>'
 		miniCartHTML += '<div class="cart_info">'
 		miniCartHTML += '<a href="#">'+item.item["name"]+'</a>'

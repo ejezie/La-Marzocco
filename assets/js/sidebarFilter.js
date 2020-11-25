@@ -197,7 +197,7 @@ async function showMachinesSideFilter(machineList){
         text = $(label).text()
         $("#shopTitle").empty()
         var shopTitleHTML = ''
-        shopTitleHTML += '<h1>Product Catalog : Machine - '+text+'</h1>'
+        shopTitleHTML += '<h1>Product Details : Machine - '+text+'</h1>'
         $("#shopTitle").append(shopTitleHTML)
 		// Get selected labe; as heading  (End)
 
@@ -367,7 +367,7 @@ async function showGroupSideFilter(groupList){
 		var selectedOption = this.id
         $("#shopTitle").empty()
         var shopTitleHTML = ''
-        shopTitleHTML += '<h1>Product Catalog : Group - '+selectedOption+'</h1>'
+        shopTitleHTML += '<h1>Product Details : Group - '+selectedOption+'</h1>'
         // shopTitleHTML += '<h1>Product Catalog : Group </h1>'
         $("#shopTitle").append(shopTitleHTML)
 		// Get selected labe; as heading  (End)
@@ -439,7 +439,7 @@ async function showParentSideFilter(familyList){
         text = $(label).text()
         $("#shopTitle").empty()
         var shopTitleHTML = ''
-        shopTitleHTML += '<h1>Product Catalog : Catalog - '+text+'</h1>'
+        shopTitleHTML += '<h1>Product Details : Catalogue - '+text+'</h1>'
         $("#shopTitle").append(shopTitleHTML)
 		// Get selected labe; as heading  (End)
 	});

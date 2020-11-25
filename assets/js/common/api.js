@@ -647,6 +647,45 @@ async function getCustomerList(onResponse,onError,page,page_size){
 
 }
 
+
+async function getEmployeeList(onResponse,onError,page,page_size){
+
+  var data = new FormData();
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'employee?page='+page+'&page_size='+page_size,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+
+async function deleteEmployee(onResponse,onError,id){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'employee/'+id,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+
 async function bulkUploadItems(onResponse,onError,file){
 
   var data = new FormData();

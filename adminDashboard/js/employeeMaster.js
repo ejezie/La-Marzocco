@@ -1,25 +1,7 @@
 var employeeMasterTable;
-$(document).ready(function(){
-   $('#uploadFile').click(function () {
-      var xlsx = document.querySelector('#excelfile');
-      var onResponse = function(response){
-        $('#bulkUploadModal').modal('hide');
-        if(response.data.is_valid){
-            notifySuccess("File uploaded!");
-        }else{
-            notifyError(response.data.message);
-        }
-      };
-      var onError =function(error){
-        notifyError("Failed to upload file");
-      };
-      bulkUploadEmployees(onResponse,onError, xlsx.files[0]);
-    });
-})
-
 function loadCustomers() {
 
- employeeMasterTable = $('#employee_master').dataTable( {
+  employeeMasterTable = $('#employee_master').dataTable( {
    searching: false,
    processing: true,
    serverSide: true,
@@ -32,13 +14,13 @@ function loadCustomers() {
 
     var onResponse = function(res){
               dismiss(loadingId);
-              console.log("recordsTotal "+res.data.employee_masters.data.length)
+              console.log("recordsTotal "+res.data.data.data.length)
               // notifySuccess("sucess");
               callback({
                 draw:data.draw,
-                recordsTotal: res.data.employee_masters.total,
-                recordsFiltered: res.data.employee_masters.total,
-                data: res.data.employee_masters.data
+                recordsTotal: res.data.data.total,
+                recordsFiltered: res.data.data.total,
+                data: res.data.data.data
               });
 
             };
@@ -51,7 +33,7 @@ function loadCustomers() {
 
               var pageIndex = data.start / data.length + 1 ;
               console.log("apgedinnnnnnnnnnndex  " +pageIndex)
-              getCustomerList(onResponse,onError,pageIndex,data.length);
+              getEmployeeList(onResponse,onError,pageIndex,data.length);
         
         },
         buttons : [{
@@ -69,47 +51,39 @@ function loadCustomers() {
               }],
               columns: [
               {
-                "title":"Short Code",
-                render: function(data, type, row, meta){
-                  return row.short_code;
-                }
-              },
-              {
                 "title":"First Name",
-                render: function(data, type, row){
-                  return row.first_name;
-                }
-              },
-              {
-                "title":"Middle Name",
-                render: function(data, type, row){
-                  return row.middle_name;
+                render: function(data, type, row, meta){
+
+                  console.log("row : ", row)
+                  return row.user.first_name;
                 }
               },
               {
                 "title":"Last Name",
                 render: function(data, type, row){
-                  return row.last_name;
+                  return row.user.last_name;
+                }
+              },
+              
+              {
+                "title":"Email",
+                render: function(data, type, row){
+                  return row.user.email;
                 }
               },
               {
-                "title":"Company Name",
+                "title":"Role",
                 render: function(data, type, row){
-                  return row.company_name;
+                    return row.role
                 }
               },
-         {
-        "title":"Edit",
-        render: function(data, type, row){
-           return "<button type='button' id='btnEdit' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\"></span></button>"
-          }
-        },
-       {
-        "title":"Delete",
-        render: function(data, type, row){
-           return "<button type='button' id='btnDelete'  class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-trash\"></span></button>"
-          }
-        }
+        
+             {
+              "title":"Delete",
+              render: function(data, type, row){
+                 return "<button type='button' id='btnDelete'  class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-trash\"></span></button>"
+                }
+              }
         ]
       })
 }
@@ -163,12 +137,13 @@ function populateIndustry(){
 
 
 $(document).ready(function(){
-  return;//test purposes,api not available yet
 
   $.fn.extend({
     trackChanges: function() {
+      //this.off('change');
       this.removeData("changed");
       this.change(function() {
+        // alert($(this).val())
         $(this).data("changed", $(this).val());
       });
     }
@@ -178,10 +153,10 @@ $(document).ready(function(){
     }
   });
   loadCustomers();
-  populateIndustry();
+  // populateIndustry();
 
 
-  $('#employee_master').on('click', '#btnEdit', function () {
+  $('#customer_master').on('click', '#btnEdit', function () {
     var RowIndex = $(this).closest('tr');
     var data = employeeMasterTable.api().row(RowIndex).data();
     console.log(data);
@@ -254,13 +229,13 @@ $(document).ready(function(){
         notifyError("Failed to delete!");
       };
     if(confirm("Delete this item?")){
-      deleteCustomer(onResponse,onError, data.id);
+      deleteEmployee(onResponse,onError, data.id);
     }
 
 });
 
 
-    $('#employee_master').on('click', '#btnEditss', function () {
+    $('#customer_master').on('click', '#btnEditss', function () {
 
       var RowIndex = $(this).closest('tr');
       var data = employeeMasterTable.api().row(RowIndex).data();
@@ -310,7 +285,21 @@ $(document).ready(function(){
 
 
     
-   
+    $('#uploadFile').click(function () {
+      var xlsx = document.querySelector('#excelfile');
+      var onResponse = function(response){
+        $('#bulkUploadModal').modal('hide');
+        if(response.data.is_valid){
+            notifySuccess("File uploaded!");
+        }else{
+            notifyError(response.data.message);
+        }
+      };
+      var onError =function(error){
+        notifyError("Failed to upload file");
+      };
+      bulkUploadCustomers(onResponse,onError, xlsx.files[0]);
+    });
            });
 
 
