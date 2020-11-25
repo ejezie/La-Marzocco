@@ -83,6 +83,13 @@ async function showOrders(orderArr){
                 }
               },
               {
+                "title":"Company Name",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['company_name'],row['user']['customer']['customer_master'],"")
+                }
+              },
+              {
                 "title":"Order Id",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))

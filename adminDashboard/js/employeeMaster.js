@@ -1,7 +1,7 @@
-var customerMasterTable;
+var employeeMasterTable;
 function loadCustomers() {
 
- customerMasterTable = $('#employee_master').dataTable( {
+  employeeMasterTable = $('#employee_master').dataTable( {
    searching: false,
    processing: true,
    serverSide: true,
@@ -14,13 +14,13 @@ function loadCustomers() {
 
     var onResponse = function(res){
               dismiss(loadingId);
-              console.log("recordsTotal "+res.data.customer_masters.data.length)
+              console.log("recordsTotal "+res.data.data.data.length)
               // notifySuccess("sucess");
               callback({
                 draw:data.draw,
-                recordsTotal: res.data.customer_masters.total,
-                recordsFiltered: res.data.customer_masters.total,
-                data: res.data.customer_masters.data
+                recordsTotal: res.data.data.total,
+                recordsFiltered: res.data.data.total,
+                data: res.data.data.data
               });
 
             };
@@ -33,7 +33,7 @@ function loadCustomers() {
 
               var pageIndex = data.start / data.length + 1 ;
               console.log("apgedinnnnnnnnnnndex  " +pageIndex)
-              getCustomerList(onResponse,onError,pageIndex,data.length);
+              getEmployeeList(onResponse,onError,pageIndex,data.length);
         
         },
         buttons : [{
@@ -51,48 +51,39 @@ function loadCustomers() {
               }],
               columns: [
               {
-                "title":"Customer Code",
+                "title":"First Name",
                 render: function(data, type, row, meta){
-                  return row.short_code;
+
+                  console.log("row : ", row)
+                  return row.user.first_name;
                 }
               },
               {
-                "title":"Name",
+                "title":"Last Name",
                 render: function(data, type, row){
-                  return row.first_name;
+                  return row.user.last_name;
                 }
               },
               
               {
-                "title":"Company Name",
+                "title":"Email",
                 render: function(data, type, row){
-                  return row.company_name;
+                  return row.user.email;
                 }
               },
               {
-                "title":"Deposit Required",
+                "title":"Role",
                 render: function(data, type, row){
-                  if(row.deposit_required== 1){
-                    return "Yes"
-                  }else if(row.deposit_required== 0){
-                    return "No";
-                  }else if(row.deposit_required== 0){
-                    return "-";
-                  }
+                    return row.role
                 }
               },
-         {
-        "title":"Edit",
-        render: function(data, type, row){
-           return "<button type='button' id='btnEdit' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\"></span></button>"
-          }
-        },
-       {
-        "title":"Delete",
-        render: function(data, type, row){
-           return "<button type='button' id='btnDelete'  class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-trash\"></span></button>"
-          }
-        }
+        
+             {
+              "title":"Delete",
+              render: function(data, type, row){
+                 return "<button type='button' id='btnDelete'  class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-trash\"></span></button>"
+                }
+              }
         ]
       })
 }
@@ -167,7 +158,7 @@ $(document).ready(function(){
 
   $('#customer_master').on('click', '#btnEdit', function () {
     var RowIndex = $(this).closest('tr');
-    var data = customerMasterTable.api().row(RowIndex).data();
+    var data = employeeMasterTable.api().row(RowIndex).data();
     console.log(data);
      $("#inputShortCode").val(data.short_code);
      $("#inputIndustry").val(data.industry_id);
@@ -227,9 +218,9 @@ $(document).ready(function(){
 
 
 
-  $('#customer_master').on('click', '#btnDelete', function () {
+  $('#employee_master').on('click', '#btnDelete', function () {
     var RowIndex = $(this).closest('tr');
-    var data = customerMasterTable.api().row(RowIndex).data();
+    var data = employeeMasterTable.api().row(RowIndex).data();
     var onResponse = function(response){
         notifySuccess("Deleted successfully");
         window.location.reload();
@@ -238,7 +229,7 @@ $(document).ready(function(){
         notifyError("Failed to delete!");
       };
     if(confirm("Delete this item?")){
-      deleteCustomer(onResponse,onError, data.id);
+      deleteEmployee(onResponse,onError, data.id);
     }
 
 });
@@ -247,7 +238,7 @@ $(document).ready(function(){
     $('#customer_master').on('click', '#btnEditss', function () {
 
       var RowIndex = $(this).closest('tr');
-      var data = customerMasterTable.api().row(RowIndex).data();
+      var data = employeeMasterTable.api().row(RowIndex).data();
       populateGroup(data.group.id);
       populateFamily(data.family.id);
       populateType(data.type.id);

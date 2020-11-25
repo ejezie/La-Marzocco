@@ -648,6 +648,24 @@ async function getEmployeeList(onResponse,onError,page,page_size){
 
 }
 
+
+async function deleteEmployee(onResponse,onError,id){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'employee/'+id,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    }
+  };
+
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+
 async function bulkUploadItems(onResponse,onError,file){
 
   var data = new FormData();

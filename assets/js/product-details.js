@@ -224,16 +224,16 @@
 
 		getKitsForItem(item["id"],function(res){
 			var kits = safeAccess(["data","items","data"],res,[]);
-							alert("Unable to "+kits.length)
+							// alert("Unable to "+kits.length)
 
 			if(kits.length>0){
 				$("#btCustomize").toggle();
 				$("#btCustomize").click(function(){
-					alert(kits.length)
+					// alert(kits.length)
 					showKits(kits);
 				});
 			}else{
-				alert("Unable to ")
+				// alert("Unable to ")
 			}
 		})
 		
@@ -307,7 +307,7 @@ async function showKits(kits){
 			const element = {
 				"name" : i.name,
 				"id" : i.id,
-				"price" : "$"+ safeAccess(['price'],i,"-"),
+				"price" : "$"+ safeAccess(['price'],i,"-").toLocaleString("en-AU"),
 				"description": splitSentences(i.desc),
 				"family" : safeAccess(['i', 'item_family', 0, 'code'],i,null),
 				// "image" : safeAccess(['i', 'images', 0, 'main'],i,null),

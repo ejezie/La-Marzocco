@@ -161,8 +161,22 @@ $(document).ready(function(){
       return this.data("changed"); 
     }
   });
-  loadCustomers();
-  populateIndustry();
+
+
+  var user_profile = JSON.parse(localStorage.getItem("user_profile"))
+
+  var role = user_profile["user_role"]
+  var userName = user_profile["user_name"]
+  var profileImage = user_profile["user_image"]
+  console.log("role : ", user_profile)
+  sideNavBarHTML += '</div>'
+  if (role == 5){
+    $("#customerMasterBody").empty()
+  }else{
+    loadCustomers();
+    populateIndustry();
+    
+  }
 
 
   $('#customer_master').on('click', '#btnEdit', function () {
