@@ -461,7 +461,7 @@ var config = {
 
 }
 
-async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key){
+async function getKitsForItem(parent_id,onResponse,onError){
 
   const kit_type_id = 3
    var url = BASE_URL+'item?page_size=99999&parent_id='+parent_id+'&type_id='+kit_type_id;
@@ -481,16 +481,18 @@ async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key){
 
 }
 
-async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key){
+async function getItems(onResponse,onError,page,page_size,searchQuery,sort_key,sort_dir){
 
   var data = new FormData();
    var url = BASE_URL+'item?page='+page+'&page_size='+page_size;
    if(searchQuery){
     url+='&search_text='+searchQuery;
   }
-  if(sort_key){
 
-    url+="&"+sort_key+"=1";
+
+  if(sort_key){
+    var sortorder = (sort_dir === "asc") ? 0 : 1;
+    url += "&"+sort_key+"="+ sortorder; 
   }
 
   var config = {
@@ -2093,7 +2095,6 @@ async function getProductwiseReport(onResponse,start_date,end_date,download_form
     url+='&search_text='+searchQuery;
   }
   if(sort_key){
-
     url+="&"+sort_key+"="+sort_value;
   }
 

@@ -9,7 +9,6 @@
 		detailsHTML += '<div class="row">'
 		detailsHTML += '<div class="col">'
 				// if(item["description"]){detailsHTML += '<div class="">'+item["description"]+'</div>'}
-
 				// detailsHTML += '</div>'
 				// detailsHTML += '</div>'
 
@@ -223,14 +222,18 @@
 
 		});
 
-		getKitsForItem(item["description"],function(res){
+		getKitsForItem(item["id"],function(res){
 			var kits = safeAccess(["data","items","data"],res,[]);
+							alert("Unable to "+kits.length)
+
 			if(kits.length>0){
 				$("#btCustomize").toggle();
 				$("#btCustomize").click(function(){
 					alert(kits.length)
 					showKits(kits);
 				});
+			}else{
+				alert("Unable to ")
 			}
 		})
 		
