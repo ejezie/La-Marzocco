@@ -163,19 +163,19 @@ $(document).ready(function(){
   });
 
 
+  // Login check - Show table to operations manager
   var user_profile = JSON.parse(localStorage.getItem("user_profile"))
 
   var role = user_profile["user_role"]
   var userName = user_profile["user_name"]
   var profileImage = user_profile["user_image"]
   console.log("role : ", user_profile)
-  sideNavBarHTML += '</div>'
   if (role == 5){
     $("#customerMasterBody").empty()
   }else{
     loadCustomers();
     populateIndustry();
-    
+
   }
 
 
