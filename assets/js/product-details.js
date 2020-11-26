@@ -251,7 +251,12 @@ async function showOrderDetails(quoteLine){
 	var orderDetailsHTML = ""
 
 
-	orderDetailsHTML += '<table style="width:inherit">'
+
+                            
+                            
+	orderDetailsHTML += '<div class="table_desc">'
+	orderDetailsHTML += '<div class="cart_page " >'
+	orderDetailsHTML += '<table >'
 	orderDetailsHTML += '<thead>'
 	orderDetailsHTML += '<tr>'
 	orderDetailsHTML += '<th class="product_thumb">Product</th>'
@@ -289,6 +294,8 @@ async function showOrderDetails(quoteLine){
 
 	orderDetailsHTML += '</tbody>'
 	orderDetailsHTML += '</table>'
+	orderDetailsHTML += '</div>'
+	orderDetailsHTML += '</div>'
 
 	$("#customizationTable").html(orderDetailsHTML);
 
@@ -361,7 +368,7 @@ async function showKits(kits){
 			const element = {
 				"name" : i.name,
 				"id" : i.id,
-				"price" : "$"+ safeAccess(['price'],i,"-"),
+				"price" : "$"+ safeAccess(['price'],i,"-").toLocaleString("en-AU"),
 				"description": splitSentences(i.desc),
 				"family" : safeAccess(['i', 'item_family', 0, 'code'],i,null),
 				// "image" : safeAccess(['i', 'images', 0, 'main'],i,null),
