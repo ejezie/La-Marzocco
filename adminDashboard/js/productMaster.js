@@ -642,9 +642,17 @@
              }
              i++;
            }
+
            updateItemImages(data.id,formData,function(){
-            location.reload(); 
+            notifySuccess("Item updated")
+            $('#items_master').DataTable().draw(false);
           })
+           
+              $("#manageImagesModal").modal().hide();
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
+
+
          })
 
           $("#addImage").click(function(){
@@ -682,7 +690,13 @@
            if(confirm("Delete this image?")){
             deleteItemImage(data.id,row.image.id,function(){
               notifySuccess("Image Deleted")
-              location.reload();
+              // alert("Image Deleted")
+              // location.reload();
+              // $('#items_master').DataTable().draw($('#items_master').DataTable().page.info().page);
+              $('#items_master').DataTable().draw(false);
+              $("#manageImagesModal").modal().hide();
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
             })
            }
 
