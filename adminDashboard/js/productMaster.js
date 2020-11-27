@@ -497,6 +497,7 @@
       var item_type_id = $("#input_item_type").val();
       var item_family_id = $("#input_item_family").val();
       var parent_item_id = $("#input_item_parent").val();
+      alert(parent_item_id)
 
 
       var code = $("#input_code").val();
@@ -507,15 +508,15 @@
       var manage_serial_number = $("#input_manage_serial_no").val();
 
 
-      var length = $("#input_length").val();
+      // var length = $("#input_length").val();
       // var length_uom = $("input_length_uom").val();
-      var width = $("#input_width").val();
+      // var width = $("#input_width").val();
       // var width_uom = $("input_width_uom").val();
-      var height = $("#input_height").val();
+      // var height = $("#input_height").val();
       // var height_uom = $("input_height_uom").val();
       var weight = $("#input_weight").val();
       // var weight_uom = $("input_weight_uom").val();
-      var volume = $("#input_volume").val();
+      // var volume = $("#input_volume").val();
       // var volume_uom = $("#input_volume_uom").val();
       var is_consumable = $("#input_is_consumable").val();
       var is_recommended = $("#input_is_recommended").val();
@@ -543,16 +544,16 @@
         item_group_id,
         item_type_id,
         item_family_id,
-        length,
-        "cm",
-        width,
-        "cm",
-        height,
-        "cm",
+        // length,
+        // "cm",
+        // width,
+        // "cm",
+        // height,
+        // "cm",
         weight,
         "grams",
-        volume,
-        "ml",
+        // volume,
+        // "ml",
         is_consumable,
         is_recommended,
         is_slow_moving,
@@ -762,8 +763,8 @@
 
       console.log("data :",data)
       populateGroup(data.item_group.id);
-      populateFamily(data.item_family.id);
-          // populateType(data.type.id);
+      populateFamily(data.item_family[0].id);
+          populateType(data.type.id);
           // populateParent(data.parent.id);
 
           $("#input_code").val(data.code);
