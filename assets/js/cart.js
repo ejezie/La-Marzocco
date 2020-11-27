@@ -1,4 +1,5 @@
 
+
 async function showCart(cartItems){
 
 	var cartHTML = ""
@@ -218,6 +219,8 @@ async function showSubTotal(cartSubTotal,quoteId){
 	// 	subTotalHTML += '</div>'
 
 	subTotalHTML += '<a style="color:white" id="btCheckout" >Proceed to Checkout</a>'
+	subTotalHTML += '<a style="background:white">  </a>'
+	subTotalHTML += '<a style="color:white" style="margin-left:10px;" href="invoice.html?quote='+quoteId+'" >PDF</a>'
 	subTotalHTML += '</div>'
 	subTotalHTML += '</div>'
 	subTotalHTML += '</div>'
