@@ -89,6 +89,7 @@
     function loadProducts(beatdata) {
      itemMasterTable = $('#items_master').DataTable( {
       dom: 'Blfrtip',
+      destroy : true,
       processing: true,
       serverSide: true,
       pageLength: 10,
@@ -385,43 +386,77 @@
         console.log(" idArray ___",idArray);
       }); 
 
+      if(!idArray.length >0){
+        notifyError("No items selected")
+        $('#selectBulkUpdate').prop('selectedIndex',0);
+        return false
+      }
+      var ids = idArray.toString()
 
       var bulkUpdateAction = this.value
 
       var bulkUpdateObj = {}
 
+      var onResponse = function(response){
+        notifySuccess("Item updated");
+        // window.location.href = 'productMaster.html';
+        loadProducts();
+        $('#selectBulkUpdate').prop('selectedIndex',0);
+      };
+      var onError =function(error){
+        notifyError("Failed to update item")
+      };
+
       if(bulkUpdateAction == "Price"){
 
         $('#bulkUpdatePrice').modal('toggle');
       } else if(bulkUpdateAction == "Recommended"){
-        bulkUpdateObj["is_recommended"] = "1"
+        // bulkUpdateObj["is_recommended"] = "1"
+        // bulkUpdateItems(onResponse,onError,ids,is_consumable,is_recommended,is_slow_moving,is_active,price)
+        bulkUpdateItems(onResponse,onError,ids,null,is_recommended="1",null,null,null)
       }
       else if(bulkUpdateAction == "Not Recommended"){
-        bulkUpdateObj["is_recommended"] = "0"
+        // bulkUpdateObj["is_recommended"] = "0"
+        bulkUpdateItems(onResponse,onError,ids,null,is_recommended="0",null,null,null)
       }
       else if(bulkUpdateAction == "Is Consumable"){
-        bulkUpdateObj["is_consumable"] = "1"
+        // bulkUpdateObj["is_consumable"] = "1"
+        bulkUpdateItems(onResponse,onError,ids,is_consumable="1",null,null,null,null)
       }
       else if(bulkUpdateAction == "Not Consumable"){
-        bulkUpdateObj["is_consumable"] = "0"
+        // bulkUpdateObj["is_consumable"] = "0"
+        bulkUpdateItems(onResponse,onError,ids,is_consumable="0",null,null,null,null)
       }
       else if(bulkUpdateAction == "Slow Moving"){
-        bulkUpdateObj["is_slow_moving"] = "1"
+        // bulkUpdateObj["is_slow_moving"] = "1"
+        bulkUpdateItems(onResponse,onError,ids,null,null,is_slow_moving="1",null,null)
       } 
       else if(bulkUpdateAction == "Fast Moving"){
-        bulkUpdateObj["is_slow_moving"] = "0"
+        // bulkUpdateObj["is_slow_moving"] = "0"
+        bulkUpdateItems(onResponse,onError,ids,null,null,is_slow_moving="0",null,null)
       } 
       else if(bulkUpdateAction == "Active"){
-        bulkUpdateObj["is_active"] = "1"
+        // bulkUpdateObj["is_active"] = "1"
+        bulkUpdateItems(onResponse,onError,ids,null,null,null,is_active="1",null)
       }
       else if(bulkUpdateAction == "Inactive"){
-        bulkUpdateObj["is_active"] = "0"
+        // bulkUpdateObj["is_active"] = "0"
+        bulkUpdateItems(onResponse,onError,ids,null,null,null,is_active="0",null)
       }
 
 
-      bulkUpdateObj["ids"] = idArray
 
-      console.log("bulkUpdateObj : ",bulkUpdateObj)
+      $("#submitBulkPrice").click(function(){
+
+        var price = $("#bulk_update_price").val();
+
+        if(price > 0){
+          bulkUpdateItems(onResponse,onError,ids,null,null,null,null,price=price)
+          $('#bulkUpdatePrice').modal('toggle');
+        }else{
+          notifyError("Enter valid price")
+        }
+       })
 
 
     });
@@ -456,12 +491,13 @@
       $('#editItemModal').modal('show');
     }
 
-    function submitEditItemModal(data){
+    async function submitEditItemModal(data){
 
       var item_group_id = $("#input_item_group").val();
       var item_type_id = $("#input_item_type").val();
       var item_family_id = $("#input_item_family").val();
       var parent_item_id = $("#input_item_parent").val();
+      alert(parent_item_id)
 
 
       var code = $("#input_code").val();
@@ -472,23 +508,26 @@
       var manage_serial_number = $("#input_manage_serial_no").val();
 
 
-      var length = $("#input_length").val();
+      // var length = $("#input_length").val();
       // var length_uom = $("input_length_uom").val();
-      var width = $("#input_width").val();
+      // var width = $("#input_width").val();
       // var width_uom = $("input_width_uom").val();
-      var height = $("#input_height").val();
+      // var height = $("#input_height").val();
       // var height_uom = $("input_height_uom").val();
       var weight = $("#input_weight").val();
       // var weight_uom = $("input_weight_uom").val();
-      var volume = $("#input_volume").val();
+      // var volume = $("#input_volume").val();
       // var volume_uom = $("#input_volume_uom").val();
       var is_consumable = $("#input_is_consumable").val();
       var is_recommended = $("#input_is_recommended").val();
       var is_slow_moving = $("#input_is_slow_moving").val();
       var is_active = $("#input_is_active").val();
+      var price = $("#input_price").val();
       var onResponse = function(response){
         notifySuccess("Item updated");
         // window.location.href = 'productMaster.html';
+        loadProducts();
+        $('#editItemModal').modal('hide');
       };
       var onError =function(error){
         notifyError("Failed to update item")
@@ -505,23 +544,25 @@
         item_group_id,
         item_type_id,
         item_family_id,
-        length,
-        "cm",
-        width,
-        "cm",
-        height,
-        "cm",
+        // length,
+        // "cm",
+        // width,
+        // "cm",
+        // height,
+        // "cm",
         weight,
         "grams",
-        volume,
-        "ml",
+        // volume,
+        // "ml",
         is_consumable,
         is_recommended,
         is_slow_moving,
         is_active,
+        price,
         onResponse,
         onError
         );
+      
     }
 
     $(document).ready(function(){
@@ -722,8 +763,8 @@
 
       console.log("data :",data)
       populateGroup(data.item_group.id);
-      populateFamily(data.item_family.id);
-          // populateType(data.type.id);
+      populateFamily(data.item_family[0].id);
+          populateType(data.type.id);
           // populateParent(data.parent.id);
 
           $("#input_code").val(data.code);
@@ -748,6 +789,7 @@
                 $("#input_is_recommended").val(data.is_recommended);
                 $("#input_is_slow_moving").val(data.is_slow_moving);
                 $("#input_is_active").val(data.is_active);
+                $("#input_price").val(data.price);
 
 
                 $('#cancelEditItemModal').click(function () {

@@ -136,20 +136,21 @@ async function updateItem(
   item_group_id,
   item_type_id,
   item_family_id,
-  length,
-  length_uom,
-  width,
-  width_uom,
-  height,
-  height_uom,
+  // length,
+  // length_uom,
+  // width,
+  // width_uom,
+  // height,
+  // height_uom,
   weight,
   weight_uom,
-  volume,
-  volume_uom,
+  // volume,
+  // volume_uom,
   is_consumable,
   is_recommended,
   is_slow_moving,
   is_active,
+  price,
   onResponse,
   onError){
 
@@ -167,20 +168,21 @@ async function updateItem(
   data.append('super_session_item_id',super_session_item_id);
   data.append('manage_serial_number',manage_serial_number);
 
-  data.append('length',length);
-  data.append('length_uom',length_uom);
-  data.append('width',width);
-  data.append('width_uom',width_uom);
-  data.append('height',height);
-  data.append('height_uom',height_uom);
+  // data.append('length',length);
+  // data.append('length_uom',length_uom);
+  // data.append('width',width);
+  // data.append('width_uom',width_uom);
+  // data.append('height',height);
+  // data.append('height_uom',height_uom);
   data.append('weight',weight);
   data.append('weight_uom',weight_uom);
-  data.append('volume',volume);
-  data.append('volume_uom',volume_uom);
+  // data.append('volume',volume);
+  // data.append('volume_uom',volume_uom);
   data.append('is_consumable',is_consumable);
   data.append('is_recommended',is_recommended);
   data.append('is_slow_moving',is_slow_moving);
   data.append('is_active',is_active);
+  data.append('price',price);
 
   var config = {
     method: 'post',
@@ -717,6 +719,40 @@ async function bulkUploadItemDescription(onResponse,onError,file){
   var config = {
     method: 'post',
     url: BASE_URL+'upload/item-desc',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+
+async function bulkUpdateItems(onResponse,onError,ids,is_consumable,is_recommended,is_slow_moving,is_active,price){
+
+  var data = new FormData();
+
+  data.append("ids",ids);
+  if(is_consumable){
+    data.append("is_consumable",is_consumable);
+  } else if(is_recommended){
+    data.append("is_recommended",is_recommended);
+  } else if(is_slow_moving){
+    data.append("is_slow_moving",is_slow_moving);
+  } else if(is_active){
+    data.append("is_active",is_active);
+  } else if(price){
+    data.append("price",price);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'item/bulk/update',
     headers: {
       'Authorization': getAPIToken(),
       'Accept': 'application/json'
