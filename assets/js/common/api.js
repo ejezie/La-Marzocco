@@ -150,6 +150,7 @@ async function updateItem(
   is_recommended,
   is_slow_moving,
   is_active,
+  price,
   onResponse,
   onError){
 
@@ -181,6 +182,7 @@ async function updateItem(
   data.append('is_recommended',is_recommended);
   data.append('is_slow_moving',is_slow_moving);
   data.append('is_active',is_active);
+  data.append('price',price);
 
   var config = {
     method: 'post',
@@ -717,6 +719,40 @@ async function bulkUploadItemDescription(onResponse,onError,file){
   var config = {
     method: 'post',
     url: BASE_URL+'upload/item-desc',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+
+async function bulkUpdateItems(onResponse,onError,ids,is_consumable,is_recommended,is_slow_moving,is_active,price){
+
+  var data = new FormData();
+
+  data.append("ids",ids);
+  if(is_consumable){
+    data.append("is_consumable",is_consumable);
+  } else if(is_recommended){
+    data.append("is_recommended",is_recommended);
+  } else if(is_slow_moving){
+    data.append("is_slow_moving",is_slow_moving);
+  } else if(is_active){
+    data.append("is_active",is_active);
+  } else if(price){
+    data.append("price",price);
+  }
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'item/bulk/update',
     headers: {
       'Authorization': getAPIToken(),
       'Accept': 'application/json'

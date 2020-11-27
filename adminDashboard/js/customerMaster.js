@@ -312,8 +312,11 @@ $(document).ready(function(){
       var xlsx = document.querySelector('#excelfile');
       var onResponse = function(response){
         $('#bulkUploadModal').modal('hide');
-        if(response.data.is_valid){
-            notifySuccess("File uploaded!");
+
+        console.log("response uploaded : ", response)
+        if(response.data.status == true){
+            // notifySuccess("File uploaded!");
+            notifySuccess(response.data.users);
         }else{
             notifyError(response.data.message);
         }
