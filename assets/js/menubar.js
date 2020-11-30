@@ -165,6 +165,12 @@ function showMenubarCommercialMachine(data){
 				menuBarHTML += '<li><strong>'+family+'</strong></a>'
 				menuBarHTML += '<ul>'
 
+				categoryArr["Categories"][i]["families"][j]["machines"].sort(function(a, b) {
+			   	 var textA = a.name;
+			   	 var textB = b.name;
+			   	 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+				});
+
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
@@ -206,6 +212,13 @@ function showCanvasMenubarCommercialMachine(data){
 				menuBarHTML += '<span class="menu-expand"><i class="fa fa-angle-down"></i></span>'
 				menuBarHTML += '<a href="#">'+family+'</a>'
 				menuBarHTML += '<ul class="sub-menu" style="display: none;">'
+
+				categoryArr["Categories"][i]["families"][j]["machines"].sort(function(a, b) {
+			   	 var textA = a.name;
+			   	 var textB = b.name;
+			   	 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+				});
+
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
 
@@ -238,6 +251,12 @@ function showMenubarGrinders(data){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
 				menuBarHTML += '<li><strong>'+family+'</strong></a>'
 				menuBarHTML += '<ul>'
+
+				categoryArr["Categories"][i]["families"][j]["machines"].sort(function(a, b) {
+			   	 var textA = a.name;
+			   	 var textB = b.name;
+			   	 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+				});
 
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
@@ -274,6 +293,12 @@ function showCanvasMenubarGrinders(data){
 				menuBarHTML += '<a href="#">'+family+'</a>'
 				menuBarHTML += '<ul class="sub-menu" style="display: none;">'
 
+				categoryArr["Categories"][i]["families"][j]["machines"].sort(function(a, b) {
+			   	 var textA = a.name;
+			   	 var textB = b.name;
+			   	 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+				});
+
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
 					var type = categoryArr["Categories"][i]["families"][j]["machines"][k]["name"]
@@ -307,6 +332,13 @@ function showMenubarModbar(data){
 				var family = categoryArr["Categories"][i]["families"][j]["code"]
 				menuBarHTML += '<li><strong>'+family+'</strong></a>'
 				menuBarHTML += '<ul>'
+
+				categoryArr["Categories"][i]["families"][j]["machines"].sort(function(a, b) {
+			   	 var textA = a.name;
+			   	 var textB = b.name;
+			   	 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+				});
+
 
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){
@@ -343,6 +375,12 @@ function showCanvasMenubarModbar(data){
 				menuBarHTML += '<span class="menu-expand"><i class="fa fa-angle-down"></i></span>'
 				menuBarHTML += '<a href="#">'+family+'</a>'
 				menuBarHTML += '<ul class="sub-menu" style="display: none;">'
+
+				categoryArr["Categories"][i]["families"][j]["machines"].sort(function(a, b) {
+			   	 var textA = a.name;
+			   	 var textB = b.name;
+			   	 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+				});
 
 
 				for(k=0; k< categoryArr["Categories"][i]["families"][j]["machines"].length ; k++){

@@ -327,7 +327,7 @@ var machineResultController = (function () {
 								"productOffPercent" : "-20%",
 								"productQuantityInStock" : "50",
 								"productDescription" : item.desc,
-								"parentImages" : safeAccess(["image","thumbnail"],item.item_parent_images[0],"assets/img/lma_catalog_img.png")
+								"parentImages" : safeAccess(["item_parent_images",0,"image","thumbnail"],item,"assets/img/lma_catalog_img.png")
 								// "parentImages" : response.data.item_parent_images.data[i].image.thumbnail
 							};
 							// console.log("<><><<>><><><><> "+response.data.item_parent_images.data[i].image.thumbnail)
