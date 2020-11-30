@@ -609,7 +609,7 @@ function legendFormatter(label, series) {
               //             </tr>
               for(topCustomer of topCustomers){
                 var color = getRandomColor();
-                var customerName = safeAccess(["first_name"],topCustomer,"-");
+                var customerName = safeAccess(["company_name"],topCustomer,"-");
                 var unit = safeAccess(["sales"],topCustomer,"-")
                 values.push(unit);
                 labels.push(customerName);

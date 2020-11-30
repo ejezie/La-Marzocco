@@ -497,7 +497,6 @@
       var item_type_id = $("#input_item_type").val();
       var item_family_id = $("#input_item_family").val();
       var parent_item_id = $("#input_item_parent").val();
-      alert(parent_item_id)
 
 
       var code = $("#input_code").val();

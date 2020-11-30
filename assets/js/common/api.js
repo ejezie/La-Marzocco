@@ -629,6 +629,29 @@ async function getOrderList(onResponse,onError,page,page_size){
 }
 
 
+async function updateOrderStatus(onResponse,onError,order_ids){
+
+  var data = new FormData();
+  data.append("order_ids",order_ids);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'order/status-update',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+
 async function getCustomerList(onResponse,onError,page,page_size){
 
   var data = new FormData();

@@ -538,16 +538,18 @@
                   return safeAccess(['sap_order_id'],row,"-")
                 }
               },
+              
               {
-                "title":"Name",
-                render: function(data, type, row){
-                  return safeAccess(['full_name'],row,"-");
-                }
-              },
-              {
-                "title":"Company",
+                "title":"Company Name",
                 render: function(data, type, row){
                   return  safeAccess(['company_name'],row,"-");
+                }
+              },
+
+              {
+                "title":"Customer Name",
+                render: function(data, type, row){
+                  return safeAccess(['full_name'],row,"-");
                 }
               },
               {

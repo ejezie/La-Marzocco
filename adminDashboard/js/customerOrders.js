@@ -4,6 +4,7 @@ async function showOrders(orderArr){
    itemMasterTable = $('#tableOrders').DataTable( {
    dom: 'Blfrtip',
    searching: false,
+   destroy : true,
    processing: true,
    serverSide: true,
    pageLength: 10,
@@ -60,6 +61,9 @@ async function showOrders(orderArr){
               }
               ],
               columns: [
+              {
+
+              },
             
               {
                 "title":"Date",
@@ -76,17 +80,17 @@ async function showOrders(orderArr){
                 }
               },
               {
-                "title":"Customer Name",
-                render: function(data, type, row, meta){
-                  // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['first_name'],row['user'],"")
-                }
-              },
-              {
                 "title":"Company Name",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
                   return safeAccess(['company_name'],row['user']['customer']['customer_master'],"")
+                }
+              },
+               {
+                "title":"Customer Name",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['first_name'],row['user'],"")
                 }
               },
               {
@@ -185,6 +189,17 @@ async function showOrders(orderArr){
 $(document).ready(function(){
 	// alert("sdad")
 	showOrders();
+
+
+    // Login check - Show table to operations manager
+  var user_profile = JSON.parse(localStorage.getItem("user_profile"))
+
+  var role = user_profile["user_role"]
+  if (role == 5){
+    $("#updatePaymentBtn").empty()
+  }
+
+
 
   $('#tableOrders').on('click', '#btnDetails', function () {
   	var RowIndex = $(this).closest('tr');
@@ -386,3 +401,40 @@ async function deleteOrderLineItem(orderId, orderLineIds) {
 async function cancelOrder(order){
   console.log("this is order : ". order)
 }
+
+
+
+
+$('#updatePaymentStatus').on('click', function() {
+      // alert( this.value );
+
+      var tblData = itemMasterTable.rows('.selected').data();
+      var tmpData;
+      var idArray = []
+      $.each(tblData, function(i, val) {
+        tmpData = tblData[i];
+        idArray.push(tmpData.id)
+        console.log(" >>>>>>>>> ___",tmpData);
+        console.log(" idArray ___",idArray);
+      }); 
+
+      if(!idArray.length >0){
+        notifyError("No orders selected")
+        return false
+      }
+      var order_ids = idArray.toString()
+
+
+      var onResponse = function(response){
+        notifySuccess("Payment status updated");
+        // window.location.href = 'productMaster.html';
+        showOrders();
+      };
+      var onError =function(error){
+        notifyError("Failed to update item")
+      };
+
+      updateOrderStatus(onResponse,onError,order_ids)
+
+
+    });
