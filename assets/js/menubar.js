@@ -442,12 +442,22 @@ function showNewsletter(newsletterData){
 
 	menuBarHTML += '<li><a href="#">Newsletter</a>'
 	menuBarHTML += '<ul>'
+
+	for(item of newsletter){
+		item.timestamp = item.year.toString() + "" + item.month.toString().padStart(2, "0");
+	}
+
+	newsletter.sort(function(a, b) {
+			   	 var textA = a.timestamp;
+			   	 var textB = b.timestamp;
+			   	 return (textA < textB) ? 1 : (textA > textB) ? -1 : 0;
+				});
+
+
+
 	for(i=0; i< newsletter.length; i++){
-
-
 				// menuBarHTML += '<li><a href="'+newsletterArr[i]["pdfURL"]+'">'+newsletterArr[i]["newsletterName"]+'</a></li>'
 				menuBarHTML += '<li><a href="'+newsletter[i]["name"]+'"> Newsletter: '+val2key(newsletter[i]["month"],months)+' '+newsletter[i]["year"]+'</a></li>'
-
 	}
 	menuBarHTML += '</ul>'
 	menuBarHTML += '</li>'

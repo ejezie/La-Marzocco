@@ -272,33 +272,6 @@
                         }
                       },
                       {
-                        "title":"Availibility",
-                        render: function(data, type, row, meta){
-                          var color= "black";
-                          var text = "";
-                          var qty = row["qty"];
-                          var available = row["available_qty"];
-                          if(available==0){
-                            color = "red";
-                            text = "Out of Stock";
-                          }else if(available<qty){
-                            color = "orange";
-                            text = "Limited Quantity"
-                          }else if(available>=qty){
-                            color = "green";
-                            text = "Available"
-                          }
-
-                          return '<td ><p style="color:'+color+';">'+text+'</p></td>'
-                        }
-                      },
-                      {
-                        "title":"Expected Dispatch",
-                        render: function(data, type, row, meta){
-                          return safeAccess(["expected_delivery_date"],row,"Unavailable").match(/([^T]+)/)[0].split("-").reverse().join("/");
-                        }
-                      },
-                      {
                         "title":"Discount",
                         render: function(data, type, row){
                           return safeAccess(["discount"],row,"-")+"%";
