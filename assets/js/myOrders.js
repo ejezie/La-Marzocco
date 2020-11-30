@@ -317,7 +317,7 @@ var orderDetailsHTML = ""
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["status"],item,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["awb"],item,"-")+'</a></td>'
 		if(safeAccess(["awb"],item)){
-			orderDetailsHTML += '<td class="product_name"><a href="https://trackingtool.efmlogistics.com.au/?id=">'+safeAccess(["awb"],item)+'</a></td>'
+			orderDetailsHTML += '<td class="product_name"><a target="_blank" rel="noopener noreferrer" href="https://trackingtool.efmlogistics.com.au/?id=">'+safeAccess(["awb"],item)+'</a></td>'
 		}else{
 			orderDetailsHTML += '<td class="product_name"><a>-</a></td>'
 

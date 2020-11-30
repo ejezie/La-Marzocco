@@ -236,8 +236,6 @@
 			if(kits.length>0){
 				$("#customizationTab").toggle();
 					showOrderDetails(kits)
-			}else{
-				notifyError("No customizations available")
 			}
 		})
 		
