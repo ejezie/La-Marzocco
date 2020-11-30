@@ -36,7 +36,12 @@ $(document).ready(function(){
 		// recommendedProductsHTML += '</div>'
 		recommendedProductsHTML += '</div>'
 		recommendedProductsHTML += '<div class="product_thumb">'
-		recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+		if(item.item_parent_images[0] != undefined){
+
+			recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
+		}else{
+			recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+		}
 		recommendedProductsHTML += '</div>'
 		recommendedProductsHTML += '</div>'
 		// recommendedProductsHTML += '</a>'
