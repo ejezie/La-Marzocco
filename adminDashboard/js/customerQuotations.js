@@ -69,19 +69,28 @@ async function showOrders(orderArr){
                 }
               },
               {
-                "title":"Customer Name",
-                render: function(data, type, row, meta){
-                  // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['first_name'],row['user'],"")
-                }
-              },
-              {
                 "title":"Quote Id",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
                   return safeAccess(['id'],row,"")
                 }
               },
+
+              {
+                "title":"Company Name",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['company_name'],row['user']['customer']['customer_master'],"")
+                }
+              },
+              {
+                "title":"Customer Name",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return safeAccess(['first_name'],row['user'],"")
+                }
+              },
+              
              
               {
                 "title":"Items",

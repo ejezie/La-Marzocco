@@ -111,7 +111,7 @@ $(document).ready(function(){
         for(var i=0; i< response.data.customers.data.length; i++){
           const customer = response.data.customers.data[i];
           // customerDropdown.append($("<option>").text(safeAccess(["first_name"],customer,"") +" "+ safeAccess(["last_name"],customer,"") ).val(customer.id));
-          customerDropdown.append($("<option>").text(safeAccess(["company_name"],customer,"")).val(customer.id));
+          customerDropdown.append($("<option>").text(safeAccess(["company_name"],customer,"")+" ("+safeAccess(["email"],customer,"")+")").val(customer.id));
         }
         setCurrentManagedUser($("#targetCustomer").val());
 
