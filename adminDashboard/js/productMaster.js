@@ -496,7 +496,7 @@
       var item_group_id = $("#input_item_group").val();
       var item_type_id = $("#input_item_type").val();
       var item_family_id = $("#input_item_family").val();
-      var parent_item_id = $("#input_item_parent").val();
+      // var parent_item_id = $("#input_item_parent").val();
 
 
       var code = $("#input_code").val();
@@ -537,7 +537,7 @@
         name,
         short_code,
         desc,
-        parent_item_id,
+        // parent_item_id,
         super_session_item_id,
         manage_serial_number,
         item_group_id,

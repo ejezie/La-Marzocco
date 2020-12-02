@@ -130,7 +130,7 @@ async function updateItem(
   name,
   short_code,
   desc,
-  parent_item_id,
+  // parent_item_id,
   super_session_item_id,
   manage_serial_number,
   item_group_id,
@@ -156,10 +156,10 @@ async function updateItem(
 
   var data = new FormData();
 
-  data.append('item_parent_id',parent_item_id);
-  data.append('item_group_id',item_group_id);
-  data.append('item_family_id',item_family_id);
-  data.append('item_type_id',item_type_id);
+  // data.append('parent_id',parent_item_id);
+  data.append('group_id',item_group_id);
+  data.append('family_id',item_family_id);
+  data.append('type_id',item_type_id);
 
   data.append('code',code);
   data.append('name',name);
