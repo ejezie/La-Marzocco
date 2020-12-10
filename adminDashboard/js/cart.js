@@ -214,7 +214,12 @@ async function showSubTotal(cartSubTotal,quoteId){
 	// subTotalHTML += '<input type="file" class="btn btn-info" accept=".xls, .xlsx" id="excelfile"/>'
 	// 	subTotalHTML += '</div>'
 
+
+
+	subTotalHTML += '<a style="color:white" style="margin-left:10px;" href="invoice.html?quote='+quoteId+'" >Save Quotation</a>'
+	subTotalHTML += '<a style="background:white">  </a>'
 	subTotalHTML += '<a style="color:white" id="btCheckout" >Proceed to Checkout</a>'
+
 	subTotalHTML += '</div>'
 	subTotalHTML += '</div>'
 	subTotalHTML += '</div>'
@@ -299,11 +304,13 @@ function generateQuote(){
 					const subTotal = cartSubTotals["subTotal"];	
 
 					var discountPercentage = 0;
+					if(p>0 && subTotal >0){
 					try{
 						discountPercentage = ((p - subTotal) / p)*100;
-						$("#discountAlert").html("Total discount: "+Math.round(discountPercentage)+"%");
+						$("#discountAlert").html("Total discount: "+Math.round(parseFloat(discountPercentage))+"%");
 						$("#discountAlert").toggle();
 					}catch(e){console.log(e);}
+				}
 
 			});
 }
