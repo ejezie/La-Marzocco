@@ -561,13 +561,7 @@
               {
                 "title":"Sales",
                 render: function(data, type, row){
-                  // return  "$"+safeAccess(['sales'],row,"-").toLocaleString("en-AU")
-                  var sales = parseFloat(row.sales.replace(/,/g, ''))
-                  if(sales>0 && row.quantity>0){
-                    return  "$"+(sales/safeAccess(['quantity'],row,"-")).toLocaleString("en-AU")
-                  } else{
-                    return "-"
-                  }
+                  return  "$"+safeAccess(['sales'],row,"-").toLocaleString("en-AU")
                 }
               },
         ]
