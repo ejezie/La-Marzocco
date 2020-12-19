@@ -251,6 +251,12 @@ async function showOrders(orderArr){
 		          }
         },
         {
+		        "title":"PO",
+		        render: function(data, type, row){
+		           return safeAccess(['po_number'],row,"");
+		          }
+        },
+        {
                 "title":"Status",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
