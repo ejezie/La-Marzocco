@@ -258,7 +258,9 @@ var orderDetailsHTML = ""
     orderDetailsHTML += '<th>Item Part No.</th>'
     orderDetailsHTML += '<th>Quantity</th>'
     orderDetailsHTML += '<th>Status</th>'
-    orderDetailsHTML += '<th>Tracking Id</th>'
+    orderDetailsHTML += '<th>AWB</th>'
+    orderDetailsHTML += '<th class="product-awb">Track</th>'
+
     orderDetailsHTML += '</tr>'
     orderDetailsHTML += '</thead>'
     orderDetailsHTML += '<tbody>'
@@ -272,6 +274,12 @@ var orderDetailsHTML = ""
     orderDetailsHTML += '<td>'+safeAccess(["quantity"],item,"-")+'</td>'
     orderDetailsHTML += '<td>'+safeAccess(["status"],item,"-")+'</td>'
     orderDetailsHTML += '<td>'+safeAccess(["awb"],item,"-")+'</td>'
+    if(safeAccess(["awb"],item)){
+      orderDetailsHTML += '<td class="product_name"><a target="_blank" rel="noopener noreferrer" href="https://trackingtool.efmlogistics.com.au/?id=">'+safeAccess(["awb"],item)+'</a></td>'
+    }else{
+      orderDetailsHTML += '<td class="product_name"><a>-</a></td>'
+
+    }
     orderDetailsHTML += '</tr>'
     }
 
