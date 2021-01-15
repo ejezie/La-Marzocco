@@ -1,5 +1,7 @@
 	var currentImageIndex = 0;
-	async function showProductDetails(item){
+	async function showProductDetails(item, cart){
+
+		console.log("cart ", cart)
 
 		console.log("ITEM   ++======= "+JSON.stringify(item,null,2));
 
@@ -35,8 +37,22 @@
 		detailsHTML += ''
 		detailsHTML += '<div class="product_variant quantity">'
 		detailsHTML += '<label>quantity</label>'
-		detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
-		detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
+		if(cart.length > 0){
+
+			var cartItem = cart.filter(function(cartItem){return cartItem.item_id == item.id;});
+            // console.log("cartItem : ", cartItem)
+            // console.log("test : ", cart , item)
+            if(cartItem.length > 0){
+                detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="'+cartItem[0].qty+'" type="number">'
+				detailsHTML += '<button class="button"  id="btAddToCart" type="button">added to cart</button>'
+            }else {
+            	detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
+				detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
+            }
+		}else{
+			detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
+			detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
+		}
 		detailsHTML += ''
 		detailsHTML += '</div>'
 		// detailsHTML += '<button class="button" style="display:none;" id="btCustomize" type="button">CUSTOMIZE</button>'
@@ -212,6 +228,8 @@
 
 		$("#productInfo").append(infoHTML);
 		$("#btAddToCart").click(async function(){
+
+			// alert("1")
 
 			const newQty = $("#inputQuantity").val();
 			if(newQty>0){
@@ -420,9 +438,15 @@ async function showKits(kits){
 				}
 				]
 			}
+			var onResp = function(resp){
+                // var cart = shoppingCart.listCart();
+                var cart = safeAccess(['data','carts','data'],resp);
+				showProductDetails(element, cart);
+				showProductInfo(element);
+                
 
-			showProductDetails(element);
-			showProductInfo(element);
+            }
+            cartList(onResp);
 			if(!safeAccess(['type', 'name'],i,"").includes("Machine")){
 
 				$('#input_color').hide();

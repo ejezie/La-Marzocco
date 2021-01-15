@@ -378,6 +378,8 @@ body {font-family: Verdana, sans-serif; margin:0}
                                    <!--      </ul>
                                     </li> -->
                                     <!-- <li><a href="about.html">about Us</a></li> -->
+                                    <li><a href="https://au.lamarzocco.com/parts/">Catalogue</a></li>
+                                    <li><a href="enquiry.html"> Enquiry</a></li>
                                     <li><a href="contact.html"> Contact Us</a></li>
                                 </ul>
                             </nav>
@@ -869,6 +871,8 @@ body {font-family: Verdana, sans-serif; margin:0}
     
 
                              <div class="order_button col-12 mb-20">
+                                    <input type="checkbox" id="agreeTerms">
+                                    <a href="https://au.lamarzocco.com/terms-conditions/"><label >Agree Terms & Condition  </label></a>
                                     <button id="btConfirmOrder" type="button">Confirm Order</button>
                                     <div class="col-12 mb-20">
                                           
@@ -1013,13 +1017,23 @@ body {font-family: Verdana, sans-serif; margin:0}
 
                                     <div class="form-group">
                                     <label for="addressType">Address Type</label>
-                                    <select type="addressType" class="form-control" id="addressType">
+                                    <select type="addressType" class="form-control" id="addressType" disabled="disabled">
                                         <!-- <option value="1">Billing Address</option> -->
-                                        <option value="2">Shipping Address</option>
+                                        <option value="2" >Shipping Address</option>
                                         <!-- <option value="3">Common Billing & Shipping Address</option> -->
                                   
                                     </select>
                                   </div>
+
+                                  <div class="form-group">
+                                        <!-- <label >Address Type</label><br> -->
+                                        <form id="address_type">
+                                            <label for="radioName">Business:</label>
+                                            <input type="radio" name="radioName" value="1" /> 
+                                            <label for="radioName">Residential:</label>
+                                            <input type="radio" name="radioName" value="2" /> 
+                                        </form>
+                                    </div>
 
                                   <div class="form-group">
                                     <label >Name</label>
@@ -1077,6 +1091,14 @@ body {font-family: Verdana, sans-serif; margin:0}
                                     <label >Area</label>
                                     <select class="form-control" id="inputArea" placeholder="Select Area" ></select>
                                   </div>
+
+                                    <!-- <div class="form-group">
+                                        <label >Address Type</label><br>
+                                        <form id="address_type">
+                                            <input type="radio" name="radioName" value="12" /> Business <br />
+                                            <input type="radio" name="radioName" value="23" /> Residential <br />
+                                        </form>
+                                    </div> -->
 
                                 <div class="modal-footer border-top-0 d-flex justify-content-center">
                                   <button type="button" id="submitAddAddress" class="btn btn-success">Submit</button>

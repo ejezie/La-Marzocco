@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>La Marzocco!</title>
+
+    <!-- Bootstrap -->
+    <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- Admin Dashboard Custom CSS -->
+    <link href="css/adminDashboard.css" rel="stylesheet">
+
+    <script async src="//jsfiddle.net/sonusindhu/Tn9WM/embed/"></script>
+
+    <style type="text/css">
+      
+      button.btn.add::before {
+        font-family: fontAwesome;
+        content: "\f067\00a0";
+      }
+
+
+      button.btn.upload::before {
+        font-family: fontAwesome;
+        content: "\f093\00a0";
+      }
+    </style>
+
+    
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view" id="accordionSidebar">
+ 
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+            <div class="nav_menu">
+                <div class="nav toggle">
+                  <a id="menu_toggle" style="padding-bottom: 15px;"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+          </div>
+        <!-- /top navigation -->
+
+
+
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Enquiry</h3>
+              </div>
+
+              <div class="title_right">
+                <!-- <div class="col-md-6 col-sm-6 col-xs-12 form-group pull-right top_search"> -->
+                <div class="form-group pull-right top_search">
+                  <div class="input-group">
+                      <!-- <button class="btn add btn-primary" id="addNewsletter" data-toggle="modal" data-target="#UploadNewsletterModal">Add Newsletter</button> -->
+                      <!-- <a href="uploadSingleNewsletter.html"><button class="btn add btn-primary">Add Newsletter</button></a> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h6>List of all Training and Aftersales Enquiries</h6>
+                    <!-- <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Settings 1</a>
+                            <a class="dropdown-item" href="#">Settings 2</a>
+                          </div>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul> -->
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content" id="newsletterds">
+
+                    <section id="tabs" class="project-tab">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <nav>
+                                                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                                                        <a class="nav-item nav-link active" id="nav-training-tab" data-toggle="tab" href="#nav-training" role="tab" aria-controls="nav-training" aria-selected="true">Training Enquiry </a>
+                                                        <a class="nav-item nav-link" id="nav-aftersales-tab" data-toggle="tab" href="#nav-aftersales" role="tab" aria-controls="nav-aftersales" aria-selected="false">Aftersales Enquiry</a>
+                                                        
+                                                    </div>
+                                                </nav>
+                                                <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade show active" id="nav-training" role="tabpanel" aria-labelledby="nav-training-tab">
+                                                        <table class="table table-striped table-bordered" cellspacing="0" id="trainingTable">
+                                                            <!-- <thead>
+                                                                <tr>
+                                                                    <th>Sr. No.</th>
+                                                                    <th>Code</th>
+                                                                    <th>Type</th>
+                                                                    <th>Description</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>MCLINEA</td>
+                                                                    <td>Machines - LINEA</td>
+                                                                    <td>Machines - LINEA</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2</td>
+                                                                    <td>SPARTS</td>
+                                                                    <td>Spare Parts</td>
+                                                                    <td>Spare Parts</td>
+                                                                </tr>
+                                                                <tr> -->
+                                                               <!--      <td>3</td>
+                                                                    <td>Dooley</td>
+                                                                    <td>july@example.com</td>
+                                                                </tr>
+                                                            </tbody> -->
+                                                        </table>
+                                                        <!-- <div class="row">
+                                                          <div class="col-sm-6">
+                                                            <button type="button" value="Add New" id="btnAddType" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductTypeModal">Add Type</button>
+                                                            
+                                                          </div>
+                                                          <div class="col-sm-6">
+                                                            
+                                                            <button type="button" value="Add New" id="" class="btn upload btn-primary btn-block" data-toggle="modal" data-target="#bulkUploadTypeModal">Bulk Upload</button>
+                                                          </div>
+                                                        </div> -->
+                                                    </div>
+                                                    <div class="tab-pane fade" id="nav-aftersales" role="tabpanel" aria-labelledby="nav-aftersales-tab">
+                                                        <table class="table table-striped table-bordered" cellspacing="0" id="aftersalesTable">
+                                                            <!-- <thead>
+                                                                <tr>
+                                                                    <th>Sr. No.</th>
+                                                                    <th>Code</th>
+                                                                    <th>Parent</th>
+                                                                    <th>Description</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>BDASMBLY</td>
+                                                                    <td>Body Panel Assembly</td>
+                                                                    <td>Body Panel Assembly</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2</td>
+                                                                    <td>MNMCHNE</td>
+                                                                    <td>Main Machine</td>
+                                                                    <td>Main Machine</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3</td>
+                                                                    <td>PRITEM</td>
+                                                                    <td>Parent Item</td>
+                                                                    <td>Parent Item</td>
+                                                                </tr>
+                                                            </tbody> -->
+                                                        </table>
+                                                       <!--  <div class="row">
+                                                          <div class="col-sm-6">
+                                                            <button type="button" value="Add New" id="btnAddParent" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductParentModal">Add Parent</button>
+                                                            
+                                                          </div>
+                                                          <div class="col-sm-6">
+                                                            
+                                                            <button type="button" value="Add New" id="" class="btn upload btn-primary btn-block" data-toggle="modal" data-target="#bulkUploadParentModal">Bulk Upload</button>
+                                                          </div>
+                                                        </div> -->
+                                                    </div>
+                                                    <div class="tab-pane fade" id="nav-family" role="tabpanel" aria-labelledby="nav-family-tab">
+                                                        <table class="table table-striped table-bordered" cellspacing="0" id="productFamily">
+                                                            <!-- <thead>
+                                                                <tr>
+                                                                    <th>Sr. No.</th>
+                                                                    <th>Code</th>
+                                                                    <th>Family</th>
+                                                                    <th>Description</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>LINEA</td>
+                                                                    <td>Linea</td>
+                                                                    <td>Linea</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2</td>
+                                                                    <td>ESPRESSO</td>
+                                                                    <td>Espresso Machine</td>
+                                                                    <td>Espresso Machine</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3</td>
+                                                                    <td>MODBAR</td>
+                                                                    <td>Modbar</td>
+                                                                    <td>Modbar</td>
+                                                                </tr>
+                                                            </tbody> -->
+                                                        </table>
+                                                      <!--   <div class="row">
+                                                          <div class="col-sm-6">
+                                                            <button type="button" value="Add New" id="btnAddFamily" class="btn add btn-primary btn-block" data-toggle="modal" data-target="#addProductFamilyModal">Add Family</button>
+                                                            
+                                                          </div>
+                                                          <div class="col-sm-6">
+                                                            
+                                                            <button type="button" value="Add New" id="" class="btn upload btn-primary btn-block" data-toggle="modal" data-target="#bulkUploadFamilyModal">Bulk Upload</button>
+                                                          </div>
+                                                        </div> -->
+                                                    </div>
+                                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                    <!-- <table id="newsletter" class="table table-striped table-bordered" style="width:100%">
+                    <table id="newsletter" class="table table-striped jambo_table bulk_action" style="width:100%">
+
+                      
+                    </table> -->
+                    
+                    <!-- <article class="media event">
+                      <a class="pull-left date">
+                        <p class="month">Jan</p>
+                        <p class="month">2020</p>
+                      </a>
+                      <div class="media-body">
+                        <p>Newsletter : Jan 2020 Update</p>
+                        <a class="title" href="https://www.careerpower.in/2020/The-Hindu-Review-June-2020.pdf">PDF</a>
+                      </div>
+                    </article>
+                    <br/ >
+                    <article class="media event">
+                      <a class="pull-left date">
+                        <p class="month">Feb</p>
+                        <p class="month">2020</p>
+                      </a>
+                      <div class="media-body">
+                        <p>Newsletter : Feb 2020 Update</p>
+                        <a class="title" href="#">PDF</a>
+                      </div>
+                    </article>
+                    <br/ >
+                    <article class="media event">
+                      <a class="pull-left date">
+                        <p class="month">Mar</p>
+                        <p class="month">2020</p>
+                      </a>
+                      <div class="media-body">
+                        <p>Newsletter : Mar 2020 Update</p>
+                        <a class="title" href="#">PDF</a>
+                      </div>
+                    </article>
+                    <br/ >
+                    <article class="media event">
+                      <a class="pull-left date">
+                        <p class="month">Apr</p>
+                        <p class="month">2020</p>
+                      </a>
+                      <div class="media-body">
+                        <p>Newsletter : Apr 2020 Update</p>
+                        <a class="title" href="#">PDF</a>
+                      </div>
+                    </article>
+                    <br/ >
+                    <article class="media event">
+                      <a class="pull-left date">
+                        <p class="month">May</p>
+                        <p class="month">2020</p>
+                      </a>
+                      <div class="media-body">
+                        <p>Newsletter : May 2020 Update</p>
+                        <a class="title" href="#">PDF</a>
+                      </div>
+                    </article> -->
+                  </div>
+                </div>
+              </div>
+          
+            </div>
+
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+
+
+
+        <!-- Modal -->
+
+
+          <!-- Modal for adding Single Product data -->
+          <div class="modal fade bd-example-modal-lg" id="UploadNewsletterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog modal-lg" role="document" >
+              <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                  <h4 class="modal-title" id="myModalLabel">Add Newsletter</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                
+                <div class="modal-body">
+                  <!-- Sample Table -->
+                  <div class="table-responsive">
+                    <!-- <table class="table table-striped table-bordered table-sm"> -->
+                    <div class="col-md-12 ">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>Upload Details Form<small></small></h2>
+                          <!-- <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Settings 1</a>
+                                <a class="dropdown-item" href="#">Settings 2</a>
+                              </div>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                          </ul> -->
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                          <br>
+                          <form class="form-horizontal form-label-left">
+
+                           
+                            
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align ">Month</label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <select class="form-control" id="month">
+                                  <option>Choose option</option>
+                                  <option>January</option>
+                                  <option>February</option>
+                                  <option>March</option>
+                                  <option>April</option>
+                                  <option>May</option>
+                                  <option>June</option>
+                                  <option>July</option>
+                                  <option>August</option>
+                                  <option>September</option>
+                                  <option>October</option>
+                                  <option>November</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Year </label>
+                            <div class="col-md-6 col-sm-6 ">
+                              <input type="text" id="currentYear" disabled="disabled" class="form-control" value="2020">
+                            </div>
+                          </div>
+
+                            <!-- <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align ">Descirptiom</label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <input  class="form-control" value="">
+                              </div>
+                            </div> -->
+
+
+                            <div class="form-group row">
+                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Upload PDF </label>
+                              <div class="col-md-6 col-sm-6 ">
+                                <div>
+                                  <input type="file" class="btn btn-info" accept=".pdf" multiple="multiple" id="pdffile"/>  
+                                  <input type="button" class="btn btn-primary" id="uploadNewsletter" value="Upload" />  
+                                  <table id="exceltable" ></table>
+                                </div>
+                              </div>
+                            </div>
+
+
+
+        
+
+
+
+                            
+                            
+                            
+
+                            
+                            
+
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                              <div class="col-md-9 col-sm-9  offset-md-3">
+                                <!-- <button type="button" class="btn btn-primary">Cancel</button> -->
+                                <!-- <button type="reset" class="btn btn-primary">Reset</button> -->
+                                <!-- <button type="submit" class="btn btn-success">Submit</button> -->
+                              </div>
+                            </div>
+
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="table-responsive">
+                          <table class="table table-striped table-bordered table-sm" id="tab3">
+                            <thead><tr></tr></thead>
+                            <tbody></tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <table class="table table-hover" id="tab2">
+                    <thead><tr></tr></thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+            <p>  &copy; 2020 <a href="#">La Marzocco enabled by PCPL</a></p>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+
+    <!--  Modal -- Order Details -->
+    <div class="modal fade" id="enquiryReplyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+          <!-- <div class="modal-content" style="width: -moz-max-content;right: 50%"> -->
+          <div class="modal-content" style="overflow: auto;">
+              <div class="modal-header">
+                   <h4 class="modal-title" id="myModalLabel">Order Details</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                  </button>
+
+              </div>
+              <div class="modal-body" id="orderDetails">
+                  <!-- <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th>#</th>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Username</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <th scope="row">1</th>
+                              <td>Mark</td>
+                              <td>Otto</td>
+                              <td>@mdo</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">2</th>
+                              <td>Jacob</td>
+                              <td>Thornton</td>
+                              <td>@fat</td>
+                          </tr>
+                          <tr>
+                              <th scope="row">3</th>
+                              <td>Larry</td>
+                              <td>the Bird</td>
+                              <td>@twitter</td>
+                          </tr>
+                      </tbody>
+                  </table> -->
+              </div>
+              <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button> -->
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+   <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
+
+    <script src="../build/js/dataTables.cellEdit.js"></script>
+    <!-- <script src="../build/js/basic.js"></script> -->
+
+    <!-- Side NavBar -->
+    <script src="js/sideNavBar.js"></script>
+
+        <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.js"></script>
+<script src="../config.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+          <script src="../assets/js/common/localstorage.js"></script>
+
+          <script src="../assets/js/common/notification.js"></script>
+
+          <!-- Main API -->
+          <script src="../assets/js/common/api.js"></script>
+          <script src="../assets/js/common/genericErrorHandler.js"></script>
+
+          
+          <script src="js/enquiry.js"></script>
+
+  </body>
+</html>

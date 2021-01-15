@@ -390,6 +390,7 @@ async function createAddress(
     // city_id,
     state_id,
     country_id,
+    address_type,
     onResponse,user_id){
 
   var data = new FormData();
@@ -408,6 +409,7 @@ async function createAddress(
   // data.append('city_id',city_id);
   data.append('state_id',state_id);
   data.append('country_id',country_id);
+  data.append('address_type',address_type);
 
   var config = {
     method: 'post',
@@ -2409,4 +2411,84 @@ async function sendEnquiryMail(message,onResponse,onError){
   .then(onResponse)
   .catch(onError);  
 
+}
+
+
+async function sendTrainingAftersalesEnquiry(request_type,details,address_id,onResponse,onError){
+
+  var data = new FormData();
+  data.append("request_type",request_type);
+  data.append("details",details);
+  data.append("address_id",address_id);
+
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'enquiry',
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+
+
+async function getTrainingAftersalesEnquiryList(onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'enquiry',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function updateTrainingAftersalesEnquiryStatus(status,enquiry_id,onResponse,onError){
+
+  var data = new FormData();
+  data.append("status",status);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'enquiry/'+enquiry_id,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+}
+
+async function replyTrainingAftersalesEnquiry(details,enquiry_id,onResponse,onError){
+
+  var data = new FormData();
+  data.append("details",details);
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'enquiry/reply/'+enquiry_id,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
 }

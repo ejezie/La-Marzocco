@@ -115,3 +115,8 @@ $(".select_add").click(function() {
     });
    $(this).css("background-color", "#ae0000"); 
 });
+
+
+$( "#toggleModalAddAddress" ).click(function() {
+	initAddAddress()
+})

@@ -159,7 +159,36 @@ var shoppingCart = (function () {
                         $("#cart_quantity").val(cart.length);
 
                   };
-                    cartUpdateItem(cartItemId,quantity,null,null,onResponse);
+                    // var onResponse = function(response){
+                    //     // var cart = shoppingCart.listCart();
+                    //     var cart = safeAccess(['data','carts','data'],response);
+                    //     for (i in cart){
+                    //         console.log("test : ", cart[i].item_id , cartItemId)
+                    //         if(cart[i].id == cartItemId){
+                    //             var current_qty = cart[i].qty
+                    //             var new_qty = Number(current_qty) + Number(quantity)
+                                var onResponse = function(response){ 
+                                   
+                                    // for (var i in cart) {
+                                    //     if (cart[i].id === id) {
+                                    //         cart[i].count = count;
+                                    //         break;
+                                    //     }
+                                    // }   
+                                    //     saveCart();
+                                        callback();
+                                        $("#cart_quantity").val(cart.length);
+
+                                  };
+                                // cartUpdateItem(cartItemId,new_qty,null,null,onResponse);
+                                cartUpdateItem(cartItemId,quantity,null,null,onResponse);
+                    //         }
+                    //     }
+
+                    // }
+                    // cartList(onResponse);
+
+
             }  
         } else {
             notifyInfo("Adding item");
@@ -213,8 +242,9 @@ var shoppingCart = (function () {
 
 	obj.itemExists = function (id) {
 			for (var i in cart) {
-	            if (cart[i].id === id) {
-	                return true;
+	            if (cart[i].productId === Number(id)) {
+	                alert("true")
+                    return true;
 	            }
 	        }
 	        return false;

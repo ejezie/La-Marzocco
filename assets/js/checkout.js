@@ -24,7 +24,7 @@ var orderSummary = [{
 async function showAddressSlider(addArr){
 
 	var addSliderHTML = ""
-
+	var billing_add_count = 0
 	for(i=0; i<addArr.length;i++){
 
 		const address = addArr[i];
@@ -32,10 +32,13 @@ async function showAddressSlider(addArr){
 		addSliderHTML += '<div class="optionsecoptions" style="border:1px solid #ccc; ; width: initial;;font-size: 14px;width: 100%;">'
 		addSliderHTML += ''+ address.address+''
 			addSliderHTML += '<br>'
-		if(address.is_billable != 0){
+		if(address.is_billable != 0 && billing_add_count==0){
+			addSliderHTML += '<input id="billingAddrCheckbox" type="checkbox" checked="checked" class="billingChk" value="'+address.id+'" ><label style="font-size:13px">Billing Address</label>'
+			billing_add_count += 1
+		}else if(address.is_billable != 0 && billing_add_count > 0){
 			addSliderHTML += '<input id="billingAddrCheckbox" type="checkbox" class="billingChk" value="'+address.id+'" ><label style="font-size:13px">Billing Address</label>'
 		}
-			addSliderHTML += '<br>'
+		addSliderHTML += '<br>'
 		if(address.is_shippable != 0){
 			addSliderHTML += '<input id="shippingAddrCheckbox" type="checkbox" class="shippingChk" value="'+address.id+'"  ><label style="font-size:13px">Shipping Address</label>'
 		}
@@ -95,7 +98,12 @@ $(document).ready(function(){
 		}
 
 	$("#btConfirmOrder").click(function(){
-		confirmOrder();
+
+		if($('#agreeTerms').is(':checked')){
+			confirmOrder();
+		} else{
+			notifyInfo("Agree Terms and Condition");
+		}
 	});
 
 	
@@ -122,6 +130,12 @@ function initAddAddress(){
 	  // var city_id = $("#inputCity").val();
 	  var state_id = $("#inputState").val();
 	  var country_id = $("#inputCountry").val();
+	  var address_type = $("input[name='radioName']:checked").val();
+
+	  if(!address_type){
+	      notifyError("Select Address Type")
+	      return false
+	   }
 
 	  var onResponse = function(response){
 	    location.reload(true);
@@ -138,6 +152,7 @@ function initAddAddress(){
 	    // city_id,
 	    state_id,
 	    country_id,
+	    address_type,
 	    onResponse);
   });
   populateCountry();
@@ -479,4 +494,5 @@ $('#createAddressModal').on('hidden.bs.modal', async function (){
 	document.getElementById('inputAddress2').value=''
 	document.getElementById('inputPhone').value=''
 	document.getElementById('inputArea').value=''
+	$('input[name="radioName"]').attr('checked', false);
 })

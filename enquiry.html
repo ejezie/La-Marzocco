@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>LaMarzocco - Cart</title>
+    <title>La Marzocco - contact page</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
     <!-- <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico"> -->
     <link rel="shortcut icon" type="image/x-icon" href="https://au.lamarzocco.com/wp-content/uploads/2016/11/cropped-SiteIcon-217x217.png">
+
 
      <!-- CSS 
     ========================= -->
@@ -40,22 +41,6 @@
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
-    <style type="text/css">
-
-
-      .upload-spec{
-        background: #414141
-        /*color : white;*/
-      }
-
-      .upload-file{
-        background: #ccc
-        /*color : white;*/
-      }
-
-
-    </style>
-
 </head>
 
 <body>
@@ -85,8 +70,8 @@
                                         <ul class="dropdown_links">
                                             <li><a href="my-account.html">My Account </a></li>
                                             <li><a href="myOrders.html">My Orders </a></li>
+                                            <li><a href="getQuotation.html">Quotation </a></li>
                                             <li><a href="cart.html">Shopping Cart</a></li>
-                                            <li><a href="getQuotation.html">Quotation</a></li>
                                             <li><a href="login.html">Logout </a></li>
                                             <!-- <li><a href="wishlist.html">Wishlist</a></li> -->
                                         </ul>
@@ -131,22 +116,24 @@
                             <div class="search-container">
                                 <form action="#">
                                     <div class="search_box">
-                                        <input placeholder="Search by Item Code, Item Name ..." type="text" id="inputSearch">
+                                        <input id="inputSearch" placeholder="Search by Item Code, Item Name ..." type="text">
+                                        <!-- <button  onclick="location.href='shop.html?q=' + document.getElementById('inputSearch').value"  type="submit"><i class="ion-ios-search-strong"></i></button> -->
                                         <button  id="itemSearchBtn"   type="submit"><i class="ion-ios-search-strong"></i></button>
                                     </div>
                                 </form>
                             </div>
-                         <!--    <div class="middel_right_info">
+                            <div class="middel_right_info">
 
-                                <div class="header_wishlist">
+                                <!-- <div class="header_wishlist">
                                     <a href="wishlist.html"><span class="lnr lnr-heart"></span> Wish list </a>
                                     <span class="wishlist_quantity">3</span>
-                                </div>
+                                </div> -->
                                 <div class="mini_cart_wrapper">
                                     <a href="javascript:void(0)" style="color: white"><span class="lnr lnr-cart"></span>My Cart </a>
-                                    
+                                    <!-- <span class="cart_quantity">2</span> -->
+                                    <span id="cart_quantity" class="cart_quantity" style="font-weight: bold;"></span>
                                 </div>
-                            </div> -->
+                            </div>
 
                         </div>
                     </div>
@@ -321,13 +308,13 @@
                                     </li>
 
                                     <!-- LM Home Menu -->
-                                    <!-- <li class="mega_items"><a href="shop.html">LM Home<i class="fa fa-angle-down"></i></a>
+                                  <!--   <li class="mega_items"><a href="shop.html">LM Home<i class="fa fa-angle-down"></i></a>
                                         <div class="mega_menu" id="lmHome_menu">
                                         </div>
                                     </li> -->
 
                                     <!-- LM Home Menu -->
-                                    <!-- <li class="mega_items"><a href="shop.html">GS3<i class="fa fa-angle-down"></i></a>
+                                   <!--  <li class="mega_items"><a href="shop.html">GS3<i class="fa fa-angle-down"></i></a>
                                         <div class="mega_menu" id="gs3_menu">
                                         </div>
                                     </li> -->
@@ -446,7 +433,7 @@
                                 <li class="menu-item-has-children" id="canvasCommercialMachineMenu">
                                   <span class="menu-expand"><i class="fa fa-angle-up"></i></span>
                                     <a href="#">Commercial Machine</a>
-                            
+                                   
                                 </li>
                                 <li class="menu-item-has-children" id="canvasGrinderMenu">
                                   <span class="menu-expand"><i class="fa fa-angle-up"></i></span>
@@ -514,8 +501,7 @@
                     <div class="breadcrumb_content">
                         <ul>
                             <li><a href="home.html">home</a></li>
-                            <li><a href="shop.html">Shop</a></li>
-                            <li>Shopping Cart</li>
+                            <li>Enquiry</li>
                         </ul>
                     </div>
                 </div>
@@ -524,147 +510,74 @@
     </div>
     <!--breadcrumbs area end-->
 
-    <!--shopping cart area start -->
-
-    <div id="discountAlert" style="color:green; display: none;" class="breadcrumbs_area container" ></div>
-    <!-- <div id="discountAlert" style="margin-left:100px;margin-right:100px; display: none;" class="alert alert-success" role="alert"></div> -->
-    <div class="shopping_cart_area mt-32">
+    <!--contact map start-->
+<!--     <div class="contact_map mt-30">
         <div class="container">
-            <form action="#">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table_desc">
-                            <div class="cart_page table-responsive" id="cart">
-                                <!-- <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="product_remove">Delete</th>
-                                            <th class="product_thumb">Image</th>
-                                            <th class="product_name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product_quantity">Quantity</th>
-                                            <th class="product_total">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                            <td class="product-price">£65.00</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                            <td class="product_total">£130.00</td>
-
-
-                                        </tr>
-
-                                        <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbags justo</a></td>
-                                            <td class="product-price">£90.00</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                            <td class="product_total">£180.00</td>
-
-
-                                        </tr>
-                                        <tr>
-                                            <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
-                                            <td class="product_thumb"><a href="#"><img src="assets/img/s-product/product5.jpg" alt=""></a></td>
-                                            <td class="product_name"><a href="#">Handbag elit</a></td>
-                                            <td class="product-price">£80.00</td>
-                                            <td class="product_quantity"><label>Quantity</label> <input min="1" max="100" value="1" type="number"></td>
-                                            <td class="product_total">£160.00</td>
-
-
-                                        </tr>
-
-                                    </tbody>
-                                </table> -->
-                            </div>
-                            <div class="cart_submit">
-                                <!-- <button type="submit">update cart</button> -->
-                                <button id="showQuote" type="button">Get Quotation </button>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="map-area">
+                        <div id="googleMap"></div>
                     </div>
                 </div>
-                <!--coupon code area start-->
-                <div class="coupon_area">
-                    <div class="row" id="subTotal">
-                        <!-- <div class="col-lg-6 col-md-6">
-                            <div class="coupon_code left">
-                                <h3>Purchase Orders</h3>
-                                <div class="coupon_inner">
-                                    <p>Upload PO.</p>
-                                    <input placeholder="Upload" type="text">
-                                    <button type="submit">Upload Purchase orders</button>
-                                </div>
-                                
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-lg-6 col-md-6">
-                            <div class="coupon_code right">
-                                <h3>Cart Totals</h3>
-                                <div class="coupon_inner">
-                                    <div class="cart_subtotal">
-                                        <p>Subtotal</p>
-                                        <p class="cart_amount">£215.00</p>
-                                    </div>
-                                    <div class="cart_subtotal ">
-                                        <p>Shipping</p>
-                                        <p class="cart_amount"><span>Flat Rate:</span> £255.00</p>
-                                    </div>
-                                    <a href="#">Calculate shipping</a>
-
-                                    <div class="cart_subtotal">
-                                        <p>Total</p>
-                                        <p class="cart_amount">£215.00</p>
-                                    </div>
-                                    <div class="checkout_btn">
-                                        <a href="#">Proceed to Checkout</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                    </div>
-                </div>
-                <!--coupon code area end-->
-            </form>
+            </div>
         </div>
-    </div>
+    </div> -->
+    <!--contact map end-->
 
-      <div class="modal fade" id="specModal" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Item Specs</strong></span>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal_body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="cart_page table-responsive" >
-                                    <input type="button" id="btDownloadSpec" class="btn btn-success" style="color:white; background:#414141" value="Download"  >'
-                                    <div id="divUploadSpec">
-                                <input type="file" class="btn upload-spec"  id="inputProductSpecFile"/>'
-                                <input type="button" id="btUploadSpec" class="btn upload-spec" value="Update">'
-                                </div>
-                                </div>
-                            </div>
-                            
-                        </div>
+    <!--contact area start-->
+    <div class="contact_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="contact_message content">
+                        <h3>Training Enquiry</h3>
+                        <p>Did you know that our team provides a range of training support? From usability to technical functions, our experienced team is more than happy to answer any enquiries you may have.
+                        </p>
+                        <p>To place a training enquiry, please complete the form below. Our team will be sure to respond to your enquiry.</p>
+                        <br>
+                        <br>
+                        <ul>
+                            <li>
+                                <!-- <label>Name : </label><input disabled="disabled" id="firstName" type="text" name="">
+                                <label>Email : </label><input disabled="disabled" id="email" type="text" name=""> -->
+                                <label>Address : </label>
+                                <select class="autoDrop" name="dropdown" id="trainingEnqAdd" onchange="addNewAddress()" style="width: -moz-available;">
+                                    <option></option>
+                                </select>
+                                <label>Enquiry : </label><textarea id="trainingEnquiryDetails" placeholder="" name="enquiryDetails" class="form-control2"></textarea>
+                            </li>
+                        </ul>
+                        <button id ="submitTrainingEnquiry"> Send</button>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="contact_message content">
+                        <h3>Aftersales Enquiry</h3>
+                        <p>Every La Marzocco machine sold in Australia is hand crafted in Florence, before bench-tested with care in our Melbourne showroom.
+                        </p>
+                        <p>Our team of trained technicians also provide aftersales support, machine servicing and maintenance to our customers across the country. If you have any concerns relating to your machine, please complete the form below and one of our team members will reach out to you directly for support.</p>
+                        <ul>
+                            <li>
+                                <!-- <label>Name : </label><input disabled="disabled" type="text" name="kjnckj">
+                                <label>Email : </label><input disabled="disabled" type="text" name="kjnckj"> -->
+                                <label>Address : </label><select id="aftersalesEnqAdd" onchange="addNewAddress()" style="width: -moz-available;">
+                                    <option></option>
+                                </select>
+                                <label>Enquiry : </label><textarea id="aftersalesEnquiryDetails" placeholder="" name="enquiryDetails" class="form-control2"></textarea>
+                            </li>
+                        </ul>
+                        <button id ="submitAftersalesEnquiry"> Send</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!--contact area end-->
 
 
     <!--call to action start-->
-    <!-- <section class="call_to_action">
+   <!--  <section class="call_to_action">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -777,8 +690,125 @@
     </footer>
     <!--footer area end-->
 
-<!-- JS
+
+
+    <!-- Add New Address modal area start-->
+    <div class="modal fade" id="createAddressModal" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Add New Address</strong></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="table_desc">     -->
+
+                                <form>
+                                <div class="modal-body">
+
+                                    <div class="form-group">
+                                    <label for="addressType">Address Type</label>
+                                    <select type="addressType" class="form-control" id="addressType" disabled="disabled">
+                                        <!-- <option value="1">Billing Address</option> -->
+                                        <option value="2">Shipping Address</option>
+                                        <!-- <option value="3">Common Billing & Shipping Address</option> -->
+                                  
+                                    </select>
+                                  </div>
+
+                                  <div class="form-group">
+                                        <!-- <label >Address Type</label><br> -->
+                                        <form id="address_type">
+                                            <label for="radioName">Business:</label>
+                                            <input type="radio" name="radioName" value="1" /> 
+                                            <label for="radioName">Residential:</label>
+                                            <input type="radio" name="radioName" value="2" /> 
+                                        </form>
+                                    </div>
+
+                                  <div class="form-group">
+                                    <label >Name</label>
+                                    <input  class="form-control" id="inputName" aria-describedby="fnameHelp" placeholder="Enter Full Name">
+                                  </div>
+
+
+                                  <div class="form-group">
+                                    <label>Address Line 1</label>
+                                    <input  class="form-control" id="inputAddress" aria-describedby="companyNameHelp" placeholder="Enter Address Line 1">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label>Address Line 2</label>
+                                    <input  class="form-control" id="inputAddress2" aria-describedby="companyNameHelp" placeholder="Enter Address Line 2">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label>Suburb</label>
+                                    <input  class="form-control" id="inputLandmark" aria-describedby="companyNameHelp" placeholder="Enter Suburb">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label>Phone</label>
+                                    <input  class="form-control" id="inputPhone" aria-describedby="companyNameHelp" placeholder="Enter Phone No.">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label>Country</label>
+                                    <select class="form-control" id="inputCountry" placeholder="Select Country" ></select>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label >State</label>
+                                    <select class="form-control"  id="inputState"placeholder="Select State"  ></select>
+                                  </div>
+
+                             <!--      <div class="form-group">
+                                    <label >City</label>
+                                    <select class="form-control" id="inputCity" placeholder="Select City" ></select>
+                                  </div>
+ -->
+
+                                  <div class="form-group">
+                                    <label>Area Code</label>
+                                    <input  class="form-control" id="inputZipCode" aria-describedby="companyNameHelp" placeholder="Enter Zip Code">
+                                  </div>
+                                      <!-- <div class="form-group">  -->
+                                    <button id="searchAreas" type="button" class="btn btn-success btn-sm float-right" > Search Areas  
+                                    </button> 
+                                    <br>
+                                <!-- </div>  -->
+                                  
+                                  <div class="form-group">
+                                    <label >Area</label>
+                                    <select class="form-control" id="inputArea" placeholder="Select Area" ></select>
+                                  </div>
+
+                                <div class="modal-footer border-top-0 d-flex justify-content-center">
+                                  <button type="button" id="submitAddAddress" class="btn btn-success">Submit</button>
+                                </div>
+
+                              </form>   
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS
 ============================================ -->
+
+
+    <!--map js code here-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdWLY_Y6FL7QGW5vcO3zajUEsrKfQPNzI"></script>
+    <script src="https://www.google.com/jsapi"></script>
+    <script src="assets/js/map.js"></script>
+
 <!--jquery min js-->
 <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
 <!--popper min js-->
@@ -807,47 +837,67 @@
 <!-- Main JS -->
 <script src="assets/js/main.js"></script>
 
+
 <!-- LMA Menubar JS -->
 <script src="assets/js/menubar.js"></script>
 
 <!-- Footer -->
 <script src="assets/js/footer.js"></script>
 
-<!-- Sidebar browse product filter JS -->
-<script src="assets/js/sidebarFilter.js"></script>
-
-<!-- mini Cart JS -->
+<!-- Mini Cart JS -->
 <script src="assets/js/miniCart.js"></script>
+<script src="assets/js/common/cart.js"></script>
 
-
-
-<!-- Header JS -->
+<!-- Header -->
 <script src="assets/js/header.js"></script>
 
 
-<!--  Cart JS-->
+  <!-- Datatables -->
+  <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+  <script src="../vendors/jszip/dist/jszip.min.js"></script>
+  <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+  <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 
-<script src="config.js"></script>
 
-          <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+  <script src="../build/js/dataTables.cellEdit.js"></script>
+  <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script> -->
+  <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.1.0/js/dataTables.checkboxes.min.js"></script> -->
+  <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+  <!-- <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> -->
+  <!-- <script src="../build/js/basic.js"></script> -->
+  <script src="config.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-<!-- 
-<script src="https://unpkg.com/cart-localstorage@1.1.2/dist/cart-localstorage.min.js" type="text/javascript"></script> -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<script src="assets/js/common/cart.js"></script>
+          
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
-          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
-          <script src="../assets/js/common/localstorage.js"></script>
 
-          <script src="../assets/js/common/notification.js"></script>
 
-          <!-- Main API -->
-          <script src="../assets/js/common/genericErrorHandler.js"></script>
-          <script src="../assets/js/common/api.js"></script>
+    <!-- Main API -->
+    <script src="../assets/js/enquiry.js"></script>
+    <!-- <script src="../assets/js/checkout.js"></script> -->
+    <script src="../assets/js/common/api.js"></script>
+    <script src="../assets/js/common/genericErrorHandler.js"></script>
 
-<script src="assets/js/cart.js"></script>
+    <script src="../assets/js/common/localstorage.js"></script>
+
+    <script src="../assets/js/common/notification.js"></script>
 
 
 
