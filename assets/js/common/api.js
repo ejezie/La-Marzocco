@@ -2440,10 +2440,10 @@ async function sendTrainingAftersalesEnquiry(request_type,details,address_id,onR
 
 
 
-async function getTrainingAftersalesEnquiryList(onResponse,onError){
+async function getTrainingAftersalesEnquiryList(onResponse,onError,page,page_size){
   var config = {
     method: 'get',
-    url: BASE_URL+'enquiry',
+    url: BASE_URL+'enquiry?page='+page+'&page_size='+page_size,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(),

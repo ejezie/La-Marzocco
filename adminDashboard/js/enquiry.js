@@ -1,9 +1,9 @@
 
 async function showTrainingEnquiry(enquiryList){
 
-	var enquiryList = enquiryList.filter(function(enquiry){return enquiry.request_type == 1;});
+	// var enquiryList = enquiryList.filter(function(enquiry){return enquiry.request_type == 1;});
 
-	console.log(" enquiryList : ",enquiryList)
+	// console.log(" enquiryList : ",enquiryList)
 
 
 
@@ -12,10 +12,33 @@ async function showTrainingEnquiry(enquiryList){
       autoWidth: false,
       buttons: [
           ],
-      destroy: true,
-      pageLength: 200,
-      lengthMenu: [[100, 200, 500, 1000, -1], [100, 200, 500, 1000, "All"]],
-      aaData: enquiryList,
+      destroy : true,
+       processing: true,
+       serverSide: true,
+       pageLength: 10,
+       bSort : false,
+       lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
+      // aaData: enquiryList,
+      ajax: function(data, callback, settings) {
+    const loadingId = notifyInfo("Please wait");
+    var onResponse = function(res){
+              dismiss(loadingId);
+              console.log("recordsTotal "+res.data.enquiries.data.length)
+              callback({
+                draw:data.draw,
+                recordsTotal: res.data.enquiries.total,
+                recordsFiltered: res.data.enquiries.total,
+                data: res.data.enquiries.data
+              });
+
+            };
+            var onError =function(error){
+              console.log(error);
+              dismiss(loadingId);
+            };
+              var pageIndex = data.start / data.length + 1 ;
+      getTrainingAftersalesEnquiryList(onResponse,onError,pageIndex,data.length);
+        },
       columns: [
   
   
@@ -23,6 +46,24 @@ async function showTrainingEnquiry(enquiryList){
         "title":"Date",
           render: function(data, type, row){
               return moment(row["created_at"]).format("DD/MM/YYYY");
+          }
+        },
+        {
+        "title":"ID",
+          render: function(data, type, row){
+              return row["id"]
+          }
+        },
+
+        {
+        "title":"Enquiry Type",
+          render: function(data, type, row){
+
+              if(row["request_type"] == 1){
+                return "Training Enquiry" 
+              } else if(row["request_type"] ==2){
+                return "After Sales Enquiry"
+              }
           }
         },
          
@@ -244,12 +285,12 @@ $(document).ready(function(){
 	var onError =function(error){
 		// notifyError("Failed to");
 	};
+showTrainingEnquiry()
 
-
-	getTrainingAftersalesEnquiryList(function(response){
-		showTrainingEnquiry(response.data.enquiries.data)
-		showAftersalesEnquiry(response.data.enquiries.data)
-	},onError);
+	// getTrainingAftersalesEnquiryList(function(response){
+	// 	showTrainingEnquiry(response.data.enquiries.data)
+	// 	showAftersalesEnquiry(response.data.enquiries.data)
+	// },onError);
 
 });
 
@@ -269,10 +310,10 @@ async function updateEnquiryStatus(updatedStatus,enquiry_id) {
     	if(response.data.status==true){
         	notifySuccess("Status is Update");
 
-        	getTrainingAftersalesEnquiryList(function(response){
-				showTrainingEnquiry(response.data.enquiries.data)
-				showAftersalesEnquiry(response.data.enquiries.data)
-			},onError);
+   //      	getTrainingAftersalesEnquiryList(function(response){
+			// 	showTrainingEnquiry(response.data.enquiries.data)
+			// 	showAftersalesEnquiry(response.data.enquiries.data)
+			// },onError);
 
     	}else{
         	notifyError("Something went wrong");
