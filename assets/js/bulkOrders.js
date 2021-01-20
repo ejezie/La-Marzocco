@@ -74,6 +74,12 @@ function ExportToTable(action) {
                     // For preview of the uploaded data
                     if (action == 'Preview'){
                         console.log("exceljson :  ",exceljson)
+
+                        // if(confirm("Cart must be emptied first")){
+                          clearCart(function(res){
+                            notifyError("Cart Cleared!")
+                          })
+                        // }
                         var excelDataWithQty = exceljson.filter(function(item){return parseInt(item.Quantity) > 0;});
                         // showBulkOrders(excelDataWithQty)
                         var xlsx = document.querySelector('#excelfile');

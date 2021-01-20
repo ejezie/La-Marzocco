@@ -110,6 +110,7 @@ $(document).ready(function(){
 
 
 $('#uploadPromotion').click(async function () {
+	$("#uploadPromotion").prop('disabled', true);
 	notifyInfo("Please wait");
       var pdf = document.querySelector('#promotions_file');
       var onResponse = function(response){

@@ -150,6 +150,7 @@ $(document).ready(function(){
 
 
 $('#uploadNewsletter').click(function () {
+	$("#uploadNewsletter").prop('disabled', true);
 	notifyInfo("Please wait");
       var pdf = document.querySelector('#pdffile');
 

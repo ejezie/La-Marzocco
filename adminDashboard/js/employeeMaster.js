@@ -286,6 +286,7 @@ $(document).ready(function(){
 
     
     $('#uploadFile').click(function () {
+      $("#uploadFile").prop('disabled', true);
       var xlsx = document.querySelector('#excelfile');
       var onResponse = function(response){
         $('#bulkUploadModal').modal('hide');

@@ -242,7 +242,9 @@ $(document).ready(function(){
 		refreshCart();
 
 		$("#showQuote").click(function(){
+			$("#showQuote").prop('disabled', true);
 			generateQuote();
+			
 		});
 	});
 
@@ -285,35 +287,38 @@ function refreshCart(){
 
 function generateQuote(){
 
-			notifyInfo("Requesting quote")
-			getQuote(null,null,function(response){
-					showCartFromQuote(safeAccess(["data","quote","quote_line"],response,[]));
-					$("#showQuote").hide();
-					var cartSubTotals = {
-										"subTotal" : safeAccess(["data","quote","sub_total"],response,0),
-										"total" :  safeAccess(["data","quote","total"],response,0),
-										"shipping" : (safeAccess(["data","quote","shipping_cost"],response,0)),
-										"tax" : (safeAccess(["data","quote","total_tax"],response,0))
-									}
-					showSubTotal(cartSubTotals,safeAccess(["data","quote","id"],response));
-			
 
-					var p = 0;
-					for(item of safeAccess(["data","quote","quote_line"],response,[])){
-						p += item.price * item.qty;	
-					}
-					const subTotal = cartSubTotals["subTotal"];	
 
-					var discountPercentage = 0;
-					if(p>0 && subTotal >0){
-					try{
-						discountPercentage = ((p - subTotal) / p)*100;
-						$("#discountAlert").html("Total discount: "+Math.round(parseFloat(discountPercentage))+"%");
-						$("#discountAlert").toggle();
-					}catch(e){console.log(e);}
+		notifyInfo("Requesting quote")
+		getQuote(null,null,function(response){
+				showCartFromQuote(safeAccess(["data","quote","quote_line"],response,[]));
+				$("#showQuote").hide();
+				var cartSubTotals = {
+									"subTotal" : safeAccess(["data","quote","sub_total"],response,0),
+									"total" :  safeAccess(["data","quote","total"],response,0),
+									"shipping" : (safeAccess(["data","quote","shipping_cost"],response,0)),
+									"tax" : (safeAccess(["data","quote","total_tax"],response,0))
+								}
+				showSubTotal(cartSubTotals,safeAccess(["data","quote","id"],response));
+		
+
+				var p = 0;
+				for(item of safeAccess(["data","quote","quote_line"],response,[])){
+					p += item.price * item.qty;	
 				}
+				const subTotal = cartSubTotals["subTotal"];	
 
-			});
+				var discountPercentage = 0;
+				if(p>0 && subTotal >0){
+				try{
+					discountPercentage = ((p - subTotal) / p)*100;
+					$("#discountAlert").html("Total discount: "+Math.round(parseFloat(discountPercentage))+"%");
+					$("#discountAlert").toggle();
+				}catch(e){console.log(e);}
+			}
+
+		});
+
 }
 
 
