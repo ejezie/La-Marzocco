@@ -99,9 +99,11 @@ $(document).ready(function(){
 
 	$("#btConfirmOrder").click(function(){
 
+		$("#btConfirmOrder").prop('disabled', true);
 		if($('#agreeTerms').is(':checked')){
 			confirmOrder();
 		} else{
+			$("#btConfirmOrder").prop('disabled', false);
 			notifyInfo("Agree Terms and Condition");
 		}
 	});
@@ -246,6 +248,7 @@ function confirmOrder(){
 					}
 				});
 				$("#btProceedToPayment").click(function(){
+					$("#btProceedToPayment").prop('disabled', true);
 					if($("#inputPaymentMode").val()==2){
 							confirmPayment(response);
 						}else{
@@ -269,7 +272,7 @@ function confirmOrder(){
 function notifyOrderSuccess(orders){
 
 		// 	notifySuccess("Payment Successful");
-		// 	shoppingCart.clearCart();
+		//	shoppingCart.clearCart();
 		// 	if(orderId){
 		// 	alert("Order #"+orderId+" is placed successfully");
 		// }else{
@@ -291,10 +294,13 @@ function notifyOrderSuccess(orders){
 					}
 				);
 		}
-
-			// alert(JSON.stringify(confirmedOrders));
-		localStorage.setItem("confirmedOrders",JSON.stringify(confirmedOrders));
-		window.location.href = "orderConfirmation.html";
+		var onResponse = function(response){
+		    
+				// alert(JSON.stringify(confirmedOrders));
+			localStorage.setItem("confirmedOrders",JSON.stringify(confirmedOrders));
+			window.location.href = "orderConfirmation.html";
+		};
+		clearCart(onResponse)
 }
 
 function confirmPayment(response,isEFT){
@@ -496,3 +502,9 @@ $('#createAddressModal').on('hidden.bs.modal', async function (){
 	document.getElementById('inputArea').value=''
 	$('input[name="radioName"]').attr('checked', false);
 })
+
+
+
+// async function viewTermsCond(){
+// 	$("#test").modal('show');
+// }

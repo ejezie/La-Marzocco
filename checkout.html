@@ -43,7 +43,9 @@
 
     <style>
 
-
+        #createAddressModal {
+            overflow-y: scroll;
+        }
 
 
     .optionsecoptions 
@@ -378,7 +380,7 @@ body {font-family: Verdana, sans-serif; margin:0}
                                    <!--      </ul>
                                     </li> -->
                                     <!-- <li><a href="about.html">about Us</a></li> -->
-                                    <li><a href="https://au.lamarzocco.com/parts/">Catalogue</a></li>
+                                    <li><a target="_blank" href="https://au.lamarzocco.com/parts/">Catalogue</a></li>
                                     <li><a href="enquiry.html"> Enquiry</a></li>
                                     <li><a href="contact.html"> Contact Us</a></li>
                                 </ul>
@@ -872,7 +874,8 @@ body {font-family: Verdana, sans-serif; margin:0}
 
                              <div class="order_button col-12 mb-20">
                                     <input type="checkbox" id="agreeTerms">
-                                    <a href="https://au.lamarzocco.com/terms-conditions/"><label >Agree Terms & Condition  </label></a>
+                                    
+                                    <a data-dismiss="modal" data-toggle="modal" data-target="#viewTermsAndCondModal" > Agree Delivery Terms and Condition</a>
                                     <button id="btConfirmOrder" type="button">Confirm Order</button>
                                     <div class="col-12 mb-20">
                                           
@@ -997,8 +1000,38 @@ body {font-family: Verdana, sans-serif; margin:0}
 
 
 
+  <!-- modal - View Terms and Cond - start-->
+    <div class="modal fade" id="viewTermsAndCondModal" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Delivery Term and Condition</strong></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="table_desc">     -->
 
-      <!-- modal area start-->
+                                <form>
+                              <ul>
+                                  <li>a. Forklift available at the receiver address to ensure machinery is unloaded safely</li>
+                                  <li>b. Ensure that the consignment is thoroughly checked prior to signing the proof of delivery (POD)</li>
+                                  <li>c. Shipping address is a business address and no PO Box is accepted</li>
+                              </ul>
+
+                              </form>   
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <!-- modal - Add address - start-->
     <div class="modal fade" id="createAddressModal" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -1114,6 +1147,48 @@ body {font-family: Verdana, sans-serif; margin:0}
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+      <!-- modal -Terms and Condition start-->
+    <div class="modal fade" id="sdcsd" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Delivery Terms and Condition</strong></span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal_body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                            <!-- <div class="table_desc">     -->
+
+                                <form>
+                                    <div class="modal-body">
+
+                                        <div class="form-group">
+                                            <ul>
+                                              <li>Forklift available at the receiver address to ensure machinery is unloaded safely</li>
+                                              <li>Ensure that the consignment is thoroughly checked prior to signing the proof of delivery (POD)</li>
+                                              <li>Shipping address is a business address and no PO Box is accepted</li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </form> 
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!--footer area start-->

@@ -563,6 +563,13 @@
                     <input type="button" class="btn btn-primary" id="uploadFile" value="Upload" />  
                     <table id="exceltable" ></table>
                   </div>
+<!-- Addree update start -->
+                  <br>
+                  <div>
+                    <input type="file" class="btn btn-info" accept=".xls, .xlsx" id="excelfileAddAddress"/>  
+                    <input type="button" class="btn btn-primary" id="addAddress" onclick="ExportToTable('Preview')" value="Upload" />  
+                  </div>
+<!-- Addree update end -->
                   <br>
                   <div class="container">
                     <div class="row">
@@ -727,6 +734,10 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
+
+    <!-- XLSX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.7.7/xlsx.core.min.js"></script>
 
 
     <script src="../build/js/dataTables.cellEdit.js"></script>

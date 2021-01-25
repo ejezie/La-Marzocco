@@ -46,7 +46,7 @@ function sideNavBar(){
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '<li><a href="customerOrders.html"><i class="fa fa-shopping-cart"></i>ORDERS </a>'
 		sideNavBarHTML +=  '</li>'
-		sideNavBarHTML +=  '<li><a href="enquiry.html"><i class="fa fa-info-circle"></i>Enquiry </a>'
+		sideNavBarHTML +=  '<li><a href="enquiry.html"><i class="fa fa-info-circle"></i>ENQUIRY </a>'
 		sideNavBarHTML +=  '</li>'
 		
 		// sideNavBarHTML +=  '<li><a href="customerQuotations.html"><i class="fa fa-shopping-cart"></i>QUOTATIONS </a>'
@@ -134,7 +134,7 @@ function sideNavBar(){
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '<li><a href="placeCustomerOrder.html"><i class="fa fa-cart-plus"></i>PLACE CUSTOMER ORDER </a>'
 		sideNavBarHTML +=  '</li>'
-		sideNavBarHTML +=  '<li><a href="enquiry.html"><i class="fa fa-info-circle"></i>Enquiry </a>'
+		sideNavBarHTML +=  '<li><a href="enquiry.html"><i class="fa fa-info-circle"></i>ENQUIRY </a>'
 		sideNavBarHTML +=  '</li>'
 		sideNavBarHTML +=  '<li><a><i class="fa fa-bar-chart-o"></i> REPORTS <span class="fa fa-chevron-down"></span></a>'
 		sideNavBarHTML +=  '<ul class="nav child_menu">'

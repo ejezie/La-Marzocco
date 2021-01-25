@@ -675,6 +675,27 @@ async function getCustomerList(onResponse,onError,page,page_size){
 }
 
 
+async function getCustomer(onResponse,onError,customer_id){
+
+  var data = new FormData();
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'customer-master/'+customer_id,
+    headers: {
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+    },
+    data : data
+  };
+ 
+  axios(config)
+  .then(onResponse)
+  .catch(onError);  
+
+}
+
+
 async function getEmployeeList(onResponse,onError,page,page_size){
 
   var data = new FormData();
@@ -814,7 +835,7 @@ async function bulkUploadCartItems(user_id,file,onResponse,onError){
   .catch(onError);  
 
 }
-async function clearCart(user_id,file,onResponse,onError){
+async function clearCart(onResponse,onError){
 
   var config = {
     method: 'delete',
@@ -1845,7 +1866,7 @@ async function getQuoteList(itemId,onResponse,onError){
 }
 
 async function getAddressesList(onResponse,onError,user_id){
- var url = BASE_URL+'address';
+ var url = BASE_URL+'address?page=1&page_size=1000';
  if(user_id){
   url+= ("?user_id="+user_id);
  }
