@@ -309,7 +309,7 @@
            {
             "title":"Images",
             render: function(data, type, row){
-             return row.type_id == 2 ? ("<button id=\"btnImages\" type=\"button\" class=\"btn\">Images</button>") : "-";
+             return ("<button id=\"btnImages\" type=\"button\" class=\"btn\">Images</button>") ;
            }
          },
          {
