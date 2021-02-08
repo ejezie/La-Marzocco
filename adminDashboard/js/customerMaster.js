@@ -401,16 +401,39 @@ function ExportToTable(action) {
                             const connected_customers = response.data.customers.data;
                             var counter = 0
                             var new_user_arr = []
-                            for(var i=0; i< exceljson.length; i++){
-                            // for(var i=0; i< 2; i++){
+                            // for(var i=0; i< exceljson.length; i++){
+                            for(var i=0; i< 2; i++){
                                 var new_user_obj = {}
                                 var filtered_conn_cust = connected_customers.filter(function(cust){return cust.email == exceljson[i]["EmailID"];});
                                 // console.log("filtered_conn_cust : ", filtered_conn_cust)
                                 if(filtered_conn_cust.length > 0){
-                                  new_user_obj.short_code = exceljson[i]["ID"]
-                                  new_user_obj.user_id = filtered_conn_cust[0]["id"]
+                                  var user_id = filtered_conn_cust[0]["id"]
+                                  var type = 3
+                                  var name = exceljson[i]["CompanyName"]
+                                  var zip_code = exceljson[i]["AreaCode"]
+                                  if(exceljson[i]["Address Line 2"]){
 
-                                  new_user_arr.push(new_user_obj)
+                                    var address = exceljson[i]["Address Line 1"]+" "+exceljson[i]["Address Line 2"]
+                                  }else {
+                                    var address = exceljson[i]["Address Line 1"]
+
+                                  }
+                                  var landmark = exceljson[i]["SubUrb (Landmark)"]
+                                  var phone = 123456789
+
+                                  console.log("user_id : ",user_id)
+                                  console.log("type : ",type)
+                                  console.log("name : ",name)
+                                  console.log("zip_code : ",zip_code)
+                                  console.log("address : ",address)
+                                  console.log("landmark : ",landmark)
+                                  console.log("phone : ",phone)
+
+
+
+                                  // alert(user_id)
+
+
 
 
                                   
@@ -420,7 +443,7 @@ function ExportToTable(action) {
                                   // return false
                                 }
                             }
-                            getAdd(new_user_arr)
+                            // getAdd(new_user_arr)
                             console.log("new_user_arr : ",new_user_arr)
                             console.log("counter : ",counter)
 
@@ -493,3 +516,17 @@ async function getAdd(userArr){
 }
 
 
+function populateAreas(postcode){
+
+  var dropdown = $("#inputArea");
+  dropdown.html("");
+  var onResponse = function(response){
+    for(var i=0; i< response.data.area_codes.data.length; i++){
+    const item = response.data.area_codes.data[i];
+         dropdown.append($("<option>").text(item.name).val(item.id));
+      }
+
+      $("#inputArea").append('<option disabled selected value>Select Area</option>');
+  };
+  getAreas(postcode,onResponse);
+}
