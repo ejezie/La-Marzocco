@@ -1882,6 +1882,23 @@ async function getAddressesList(onResponse,onError,user_id){
   axios(config).then(onResponse).catch(onError);
 }
 
+
+async function getPickupAddressesList(onResponse,onError){
+ // var url = BASE_URL+'address?page=1&page_size=1000';
+ var url = BASE_URL+'pickup-address';
+
+  var config = {
+    method: 'get',
+    url: url,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
 async function getBillableAddressesList(onResponse,onError){
  
   var config = {
@@ -1896,7 +1913,7 @@ async function getBillableAddressesList(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
-async function createOrder(quoteId,po,po_number,shippingAddrId,billingAddrId,desc,sched_delivery_date,onResponse,onError){
+async function createOrder(quoteId,po,po_number,shippingAddrId,billingAddrId,desc,sched_delivery_date,is_pickup,onResponse,onError){
   var data = new FormData();
   data.append('quote_id', quoteId);
   appendIfNotNull(data,"po",po)
@@ -1905,6 +1922,7 @@ async function createOrder(quoteId,po,po_number,shippingAddrId,billingAddrId,des
   appendIfNotNull(data,"sched_delivery_date",sched_delivery_date)
   data.append('shipping_address_id', shippingAddrId);
   data.append('billing_address_id', billingAddrId);
+  data.append('is_pickup', is_pickup);
 
   var config = {
     method: 'post',
