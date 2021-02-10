@@ -220,6 +220,22 @@ $(document).ready(function(){
   });
 
 
+  $('#tableOrders').on('click', '#btnDownloadPO', function () {
+    var RowIndex = $(this).closest('tr');
+    var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+    window.location.href = safeAccess(['po'],data,"")
+  });
+
+
+  $('#tableOrders').on('click', '#btnNotes', function () {
+    var RowIndex = $(this).closest('tr');
+    var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+    $("#orderNotes").html(safeAccess(['desc'],data,"-"));
+    $("#modalNotes").modal().show();
+
+  });
+
+
   $('#tableOrders').on('click', '#btnCancelOrder',async function () {
       var RowIndex = $(this).closest('tr');
       var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
