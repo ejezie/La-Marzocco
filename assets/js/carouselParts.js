@@ -159,9 +159,12 @@ async function showCarouselPartsProducts(parts, cart){
 
     for(i=0 ; i<parts.length ;i++){
 
+   
+
         recommendedProductsHTML += '<div class="single_product" style="height:auto">'
         recommendedProductsHTML += '<div class="product_content">'
-        recommendedProductsHTML += '<h5><a> Part '+parseInt(parts[i].part_ref_number)+'</a></h5>'
+        recommendedProductsHTML += '<h5><a style="font-size:small"> Part '+parseInt(parts[i].part_ref_number)+'</a></h5>'
+        recommendedProductsHTML += '<h3 style="height:10px"><a href="product-details.html?item='+parts[i].item_id+'" style="text-transform: lowercase;"><i>'+parts[i]["item"]["code"]+'</i></a></h3>'
         recommendedProductsHTML += '<h3 style="height:40px"><a href="product-details.html?item='+parts[i].item_id+'" style="text-transform: lowercase;"><strong>'+parts[i]["item"]["name"]+'</strong></a></h3>'
         // recommendedProductsHTML += '<div class="product_ratings">'
         // recommendedProductsHTML += '<ul>'
@@ -218,13 +221,14 @@ async function showCarouselPartsProducts(parts, cart){
 
 
     $('.product_column3').owlCarousel({
-        autoplay: true,
-        loop: true,
-        nav: true,
         autoplay: false,
+        loop: false,
+        nav: true,
+        // autoplay: false,
         autoplayTimeout: 8000,
-        items: 1,
-        // margin:20,
+        items: 3,
+        // margin:0,
+        margin:20,
         dots:false,
         navText: ['<i class="ion-ios-arrow-thin-left"></i>','<i class="ion-ios-arrow-thin-right"></i>'],
         responsiveClass:true,
@@ -243,7 +247,7 @@ async function showCarouselPartsProducts(parts, cart){
           }
     });
 
-    $('.product_column3 .owl-stage').css('transform','translate3d(-4440px, 0px, 0px)');
+    $('.owl-stage-outer .owl-stage').css('transform','translate3d(-375px, 0px, 0px)');
 
 }
 
