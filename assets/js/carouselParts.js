@@ -247,7 +247,8 @@ async function showCarouselPartsProducts(parts, cart){
           }
     });
 
-    $('.owl-stage-outer .owl-stage').css('transform','translate3d(-375px, 0px, 0px)');
+    // $('.owl-stage-outer .owl-stage').css('transform','translate3d(-375px, 0px, 0px)');
+    $('.owl-stage-outer .owl-stage').css('transform','translate3d(-11%, 0px, 0px)');
 
 }
 
