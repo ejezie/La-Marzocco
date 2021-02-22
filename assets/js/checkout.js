@@ -67,7 +67,8 @@ async function showAddressSlider(addArr){
 				if(pickupAddrList[j]["id"]==3){
 
 					addSliderHTML += '<div class="optionsecoptions" style="border:1px solid #ccc; ; width: initial;;font-size: 14px;width: 100%;">'
-					addSliderHTML += ''+ pickupAddrList[j]["address"]+', '+pickupAddrList[j]["area_code"]["sa4_name"]+', '+pickupAddrList[j]["state"]["name"]+''
+					// addSliderHTML += ''+ pickupAddrList[j]["address"]+', '+pickupAddrList[j]["area_code"]["sa4_name"]+', '+pickupAddrList[j]["state"]["name"]+''
+					addSliderHTML += 'La Marzocco Australia - 88 Nicholson St, Abbotsford'
 						addSliderHTML += '<br>'
 					// if(address.is_billable != 0){
 						addSliderHTML += '<input id="shippingAddrCheckbox" type="checkbox" checked="checked" class="billingChk" value="'+pickupAddrList[j]["id"]+'" ><label style="font-size:13px">Pickup Address</label>'
