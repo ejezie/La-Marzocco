@@ -315,7 +315,6 @@ var orderDetailsHTML = ""
 
 	for(i=0;i<items.length;i++){
 		const item = items[i];
-
 		orderDetailsHTML += '<tr>'
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["item_part_number"],item,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["quantity"],item,"-")+'</a></td>'
@@ -323,8 +322,9 @@ var orderDetailsHTML = ""
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["status"],item,"-")+'</a></td>'
 		orderDetailsHTML += '<td class="product_name"><a>'+safeAccess(["awb"],item,"-")+'</a></td>'
 		if(safeAccess(["awb"],item)){
-			orderDetailsHTML += '<td class="product_name"><a target="_blank" rel="noopener noreferrer" href="https://trackingtool.efmlogistics.com.au/?id=">'+safeAccess(["awb"],item)+'</a></td>'
-		}else{
+      const awb = safeAccess(["awb"],item);
+      orderDetailsHTML += '<td class="product_name"><a target="_blank" rel="noopener noreferrer" href="https://trackingtool.efmlogistics.com.au/?id='+awb+'">'+awb+'</a></td>'
+    }else{
 			orderDetailsHTML += '<td class="product_name"><a>-</a></td>'
 
 		}
