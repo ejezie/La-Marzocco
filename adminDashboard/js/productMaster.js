@@ -524,7 +524,7 @@
       var price = $("#input_price").val();
       var onResponse = function(response){
         notifySuccess("Item updated");
-        // window.location.href = 'productMaster.html';
+        window.location.href = 'productMaster.html';
         loadProducts();
         $('#editItemModal').modal('hide');
       };
