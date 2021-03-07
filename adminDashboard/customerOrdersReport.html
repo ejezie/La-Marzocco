@@ -528,7 +528,13 @@
                 "title":"Date",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['date'],row,"-");
+                  // return safeAccess(['date'],row,"-");
+
+                  var date = new Date(row["date"])
+                  // date = new Date(date.getTime() - date.getTimezoneOffset()*60*1000).toISOString().match(/([^T]+)/)[0].split("-").reverse().join("/");;;;
+                  date = new Date(date.getTime() - date.getTimezoneOffset()*60*1000).toDateString().split(' ').slice(1).join('-')
+
+                  return date
                 }
               },
               {
