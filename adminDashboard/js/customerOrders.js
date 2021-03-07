@@ -80,7 +80,8 @@ async function showOrders(orderArr){
                   // return safeAccess(['created_at'],row,"").match(/([^T]+)/)[0].split("-").reverse().join("/");;
                   // return row["created_at"].toString();
                   var date = new Date(row["created_at"])
-                  date = new Date(date.getTime() - date.getTimezoneOffset()*60*1000).toISOString().match(/([^T]+)/)[0].split("-").reverse().join("/");;;;
+                  // date = new Date(date.getTime() - date.getTimezoneOffset()*60*1000).toISOString().match(/([^T]+)/)[0].split("-").reverse().join("/");;;;
+                  date = new Date(date.getTime() - date.getTimezoneOffset()*60*1000).toDateString().split(' ').slice(1).join('-')
 
                   return date
                 }

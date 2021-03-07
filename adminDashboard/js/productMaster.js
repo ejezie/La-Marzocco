@@ -493,6 +493,7 @@
 
     async function submitEditItemModal(data){
 
+
       var item_group_id = $("#input_item_group").val();
       var item_type_id = $("#input_item_type").val();
       var item_family_id = $("#input_item_family").val();
@@ -523,10 +524,12 @@
       var is_active = $("#input_is_active").val();
       var price = $("#input_price").val();
       var onResponse = function(response){
+        data = ''
         notifySuccess("Item updated");
-        window.location.href = 'productMaster.html';
-        loadProducts();
-        $('#editItemModal').modal('hide');
+        // window.location.href = 'productMaster.html';
+        // $('#editItemModal').modal('hide');
+        location.reload(); 
+        // loadProducts();
       };
       var onError =function(error){
         notifyError("Failed to update item")
