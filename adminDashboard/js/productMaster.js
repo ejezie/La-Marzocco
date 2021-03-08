@@ -12,6 +12,7 @@
         }
 
         groupDropdown.val(currentVal);
+        groupDropdown.trackChanges()
 
       };
       var onError =function(error){
@@ -31,6 +32,7 @@
           familyDropdown.append($("<option>").text(group.code +"   "+((group.desc != null)? group.desc : "")).val(group.id));
         }
         familyDropdown.val(currentVal);
+        familyDropdown.trackChanges()
 
       };
       var onError =function(error){
@@ -51,6 +53,7 @@
           typeDropdown.append($("<option>").text(group.name +"   "+((group.desc != null)? group.desc : "")).val(group.id));
         }
         typeDropdown.val(currentVal);
+        typeDropdown.trackChanges()
 
       };
       var onError =function(error){
@@ -72,6 +75,7 @@
           parentDropdown.append($("<option>").text(group.name +"   "+ ((group.desc != null)? group.desc : "")).val(group.id));
         }
         parentDropdown.val(currentVal);
+        parentDropdown.trackChanges()
 
       };
       var onError =function(error){
@@ -494,35 +498,22 @@
     async function submitEditItemModal(data){
 
 
-      var item_group_id = $("#input_item_group").val();
-      var item_type_id = $("#input_item_type").val();
-      var item_family_id = $("#input_item_family").val();
-      // var parent_item_id = $("#input_item_parent").val();
+      var item_group_id = $("#input_item_group").getChanged()
+      var item_type_id = $("#input_item_type").getChanged()
+      var item_family_id = $("#input_item_family").getChanged()
+      var code = $("#input_code").getChanged()
+      var name = $("#input_name").getChanged()
+      var short_code = $("#input_short_code").getChanged()
+      var desc = $("#input_desc").getChanged()
+      var super_session_item_id = $("#input_super_session_item_id").getChanged()
+      var manage_serial_number = $("#input_manage_serial_no").getChanged()
+      var weight = $("#input_weight").getChanged()
+      var is_consumable = $("#input_is_consumable").getChanged()
+      var is_recommended = $("#input_is_recommended").getChanged()
+      var is_slow_moving = $("#input_is_slow_moving").getChanged()
+      var is_active = $("#input_is_active").getChanged()
+      var price = $("#input_price").getChanged()
 
-
-      var code = $("#input_code").val();
-      var name = $("#input_name").val();
-      var short_code = $("#input_short_code").val();
-      var desc = $("#input_desc").val();
-      var super_session_item_id = $("#input_super_session_item_id").val();
-      var manage_serial_number = $("#input_manage_serial_no").val();
-
-
-      // var length = $("#input_length").val();
-      // var length_uom = $("input_length_uom").val();
-      // var width = $("#input_width").val();
-      // var width_uom = $("input_width_uom").val();
-      // var height = $("#input_height").val();
-      // var height_uom = $("input_height_uom").val();
-      var weight = $("#input_weight").val();
-      // var weight_uom = $("input_weight_uom").val();
-      // var volume = $("#input_volume").val();
-      // var volume_uom = $("#input_volume_uom").val();
-      var is_consumable = $("#input_is_consumable").val();
-      var is_recommended = $("#input_is_recommended").val();
-      var is_slow_moving = $("#input_is_slow_moving").val();
-      var is_active = $("#input_is_active").val();
-      var price = $("#input_price").val();
       var onResponse = function(response){
         data = ''
         notifySuccess("Item updated");
@@ -568,6 +559,23 @@
     }
 
     $(document).ready(function(){
+
+
+
+      $.fn.extend({
+        trackChanges: function() {
+          //this.off('change');
+          this.removeData("changed");
+          this.change(function() {
+            // alert($(this).val())
+            $(this).data("changed", $(this).val());
+          });
+        }
+        ,
+        getChanged: function() { 
+          return this.data("changed"); 
+        }
+      });
       loadProducts();
         // $('#items_master tbody').on( 'click', 'button', function () {
         //   var data = $('#items_master').dataTable().row( $(this).parents('tr') ).data();
@@ -775,23 +783,35 @@
           $("#input_desc").val(data.desc);
           $("#input_super_session_item_id").val(data.super_session_item_id);
           $("#input_manage_serial_no").val(data.manage_serial_number);
-
-
           $("#input_length").val(data.length);
-                // var length_uom = $("input_length_uom").val();
-                $("#input_width").val(data.width);
-                // var width_uom = $("input_width_uom").val();
-                $("#input_height").val(data.height);
-                // var height_uom = $("input_height_uom").val();
-                $("#input_weight").val(data.weight);
-                // var weight_uom = $("input_weight_uom").val();
-                $("#input_volume").val(data.volume);
-                // var volume_uom = $("#input_volume_uom").val();
-                $("#input_is_consumable").val(data.is_consumable);
-                $("#input_is_recommended").val(data.is_recommended);
-                $("#input_is_slow_moving").val(data.is_slow_moving);
-                $("#input_is_active").val(data.is_active);
-                $("#input_price").val(data.price);
+          $("#input_width").val(data.width);
+          $("#input_height").val(data.height);
+          $("#input_weight").val(data.weight);
+          $("#input_volume").val(data.volume);
+          $("#input_is_consumable").val(data.is_consumable);
+          $("#input_is_recommended").val(data.is_recommended);
+          $("#input_is_slow_moving").val(data.is_slow_moving);
+          $("#input_is_active").val(data.is_active);
+          $("#input_price").val(data.price);
+
+
+
+          $("#input_code").trackChanges()
+          $("#input_name").trackChanges()
+          $("#input_short_code").trackChanges()
+          $("#input_desc").trackChanges()
+          $("#input_super_session_item_id").trackChanges()
+          $("#input_manage_serial_no").trackChanges()
+          $("#input_length").trackChanges()
+          $("#input_width").trackChanges()
+          $("#input_height").trackChanges()
+          $("#input_weight").trackChanges()
+          $("#input_volume").trackChanges()
+          $("#input_is_consumable").trackChanges()
+          $("#input_is_recommended").trackChanges()
+          $("#input_is_slow_moving").trackChanges()
+          $("#input_is_active").trackChanges()
+          $("#input_price").trackChanges()
 
 
                 $('#cancelEditItemModal').click(function () {

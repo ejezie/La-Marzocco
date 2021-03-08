@@ -155,18 +155,16 @@ async function updateItem(
   onError){
 
   var data = new FormData();
-
   // data.append('parent_id',parent_item_id);
-  data.append('group_id',item_group_id);
-  data.append('family_id',item_family_id);
-  data.append('type_id',item_type_id);
-
-  data.append('code',code);
-  data.append('name',name);
-  data.append('short_code',short_code);
-  data.append('desc',desc);
-  data.append('super_session_item_id',super_session_item_id);
-  data.append('manage_serial_number',manage_serial_number);
+  appendIfNotNull(data,'group_id',item_group_id);
+  appendIfNotNull(data,'family_id',item_family_id);
+  appendIfNotNull(data,'type_id',item_type_id);
+  appendIfNotNull(data,'code',code);
+  appendIfNotNull(data,'name',name);
+  appendIfNotNull(data,'short_code',short_code);
+  appendIfNotNull(data,'desc',desc);
+  appendIfNotNull(data,'super_session_item_id',super_session_item_id);
+  appendIfNotNull(data,'manage_serial_number',manage_serial_number);
 
   // data.append('length',length);
   // data.append('length_uom',length_uom);
@@ -174,15 +172,15 @@ async function updateItem(
   // data.append('width_uom',width_uom);
   // data.append('height',height);
   // data.append('height_uom',height_uom);
-  data.append('weight',weight);
-  data.append('weight_uom',weight_uom);
+  appendIfNotNull(data,'weight',weight);
+  appendIfNotNull(data,'weight_uom',weight_uom);
   // data.append('volume',volume);
   // data.append('volume_uom',volume_uom);
-  data.append('is_consumable',is_consumable);
-  data.append('is_recommended',is_recommended);
-  data.append('is_slow_moving',is_slow_moving);
-  data.append('is_active',is_active);
-  data.append('price',price);
+  appendIfNotNull(data,'is_consumable',is_consumable);
+  appendIfNotNull(data,'is_recommended',is_recommended);
+  appendIfNotNull(data,'is_slow_moving',is_slow_moving);
+  appendIfNotNull(data,'is_active',is_active);
+  appendIfNotNull(data,'price',price);
 
   var config = {
     method: 'post',
