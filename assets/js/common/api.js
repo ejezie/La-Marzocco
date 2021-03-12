@@ -1068,7 +1068,7 @@ async function getGroups(onResponse,onError){
 
   var config = {
     method: 'get',
-    url: BASE_URL+'group',
+    url: BASE_URL+'group?page=1&page_size=1000',
     headers: {
       'Authorization': getAPIToken(),
       'Accept': 'application/json'

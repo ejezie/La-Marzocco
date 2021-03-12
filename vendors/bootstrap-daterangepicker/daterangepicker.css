@@ -176,6 +176,7 @@
   background-color: #eee;
   border-color: transparent;
   color: inherit;
+  padding-left: 10px
 }
 
 .daterangepicker td.week, .daterangepicker th.week {
@@ -238,7 +239,7 @@
 }
 
 .daterangepicker select.yearselect {
-  width: 40%;
+  width: 44%;
 }
 
 .daterangepicker select.hourselect, .daterangepicker select.minuteselect, .daterangepicker select.secondselect, .daterangepicker select.ampmselect {

@@ -356,233 +356,242 @@
 
       <script>
 
-        function initDatePicker(start_date,end_date){
-             var cb = function (start, end, label) {
-                  console.log(start.toISOString(), end.toISOString(), label);
-                  $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-              };
+function initDatePicker(start_date,end_date){
+    var cb = function (start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    };
 
-              var optionSet1 = {
-                  startDate: moment().subtract(29, 'days'),
-                  endDate: moment(),
-                  // minDate: '01/01/2012',
-                  // maxDate: '12/31/2015',
-                  dateLimit: {
-                      days: 365
-                  },
-                  showDropdowns: true,
-                  showWeekNumbers: true,
-                  timePicker: false,
-                  timePickerIncrement: 1,
-                  timePicker12Hour: true,
-                  ranges: {
-                      'Today': [moment(), moment()],
-                      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                      'This Month': [moment().startOf('month'), moment().endOf('month')],
-                      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                  },
-                  opens: 'left',
-                  buttonClasses: ['btn btn-default'],
-                  applyClass: 'btn-small btn-primary',
-                  cancelClass: 'btn-small',
-                  format: 'MM/DD/YYYY',
-                  separator: ' to ',
-                  locale: {
-                      applyLabel: 'Submit',
-                      cancelLabel: 'Clear',
-                      fromLabel: 'From',
-                      toLabel: 'To',
-                      customRangeLabel: 'Custom',
-                      daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                      monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                      firstDay: 1
-                  }
-              };
-
-              if(start_date&&end_date){
-                $('#reportrange span').html(start_date+ ' to ' + end_date);
-              }else{
-                $('#reportrange span').html("Last 30 days")
-              }
-
-              $('#reportrange').daterangepicker(optionSet1, cb);
-              $('#reportrange').on('show.daterangepicker', function () {
-                  console.log("show event fired");
-              });
-              $('#reportrange').on('hide.daterangepicker', function () {
-                  console.log("hide event fired");
-              });
-              $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-                  console.log("apply event fired, start/end dates are " + picker.startDate.format('YYYY-MM-DD') + " to " + picker.endDate.format('YYYY-MM-DD'));
-                  var start_date = picker.startDate.format('YYYY-MM-DD');
-                  var end_date =  picker.endDate.format('YYYY-MM-DD');
-                  window.location.href = '../adminDashboard/dashboard.html?start_date='+start_date+'&end_date='+end_date;
-              });
-              $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
-                  console.log("cancel event fired");
-              });
-              $('#options1').click(function () {
-                  $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-              });
-              $('#options2').click(function () {
-                  $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-              });
-              $('#destroy').click(function () {
-                  $('#reportrange').data('daterangepicker').remove();
-              });
+    var optionSet1 = {
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment(),
+        // minDate: '01/01/2012',
+        // maxDate: '12/31/2015',
+        dateLimit: {
+            days: 365
+        },
+        showDropdowns: true,
+        showWeekNumbers: true,
+        timePicker: false,
+        timePickerIncrement: 1,
+        timePicker12Hour: true,
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            // 'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'This Month': [moment().startOf('month'), moment()],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        opens: 'left',
+        buttonClasses: ['btn btn-default'],
+        applyClass: 'btn-small btn-primary',
+        cancelClass: 'btn-small',
+        format: 'MM/DD/YYYY',
+        separator: ' to ',
+        locale: {
+            applyLabel: 'Submit',
+            cancelLabel: 'Clear',
+            fromLabel: 'From',
+            toLabel: 'To',
+            customRangeLabel: 'Custom',
+            daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            firstDay: 1
         }
+    };
 
-        function getRandomColor() {
-        var letters = '0123456789ABCDEF';
-        var color = '#';
-        for (var i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
+    if(start_date&&end_date){
+        $('#reportrange span').html(start_date+ ' to ' + end_date);
+    }else{
+        $('#reportrange span').html("Last 30 days")
+    }
+
+    $('#reportrange').daterangepicker(optionSet1, cb);
+    $('#reportrange').on('show.daterangepicker', function () {
+        console.log("show event fired");
+    });
+    $('#reportrange').on('hide.daterangepicker', function () {
+        console.log("hide event fired");
+    });
+    $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+
+        console.log("ev , picker : ", picker.chosenLabel)
+        console.log("apply event fired, start/end dates are " + picker.startDate.format('YYYY-MM-DD') + " to " + picker.endDate.format('YYYY-MM-DD'));
+        var start_date = picker.startDate.format('YYYY-MM-DD');
+        var end_date =  picker.endDate.format('YYYY-MM-DD');
+
+        if(picker.chosenLabel == "Today" || picker.chosenLabel == "Yesterday"){
+
+            window.location.href = '../adminDashboard/dashboard.html?start_date='+start_date
+        }else {
+
+            window.location.href = '../adminDashboard/dashboard.html?start_date='+start_date+'&end_date='+end_date;
         }
-        return color;
-      }
+    });
+    $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+        console.log("cancel event fired");
+    });
+    $('#options1').click(function () {
+        $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+    });
+    $('#options2').click(function () {
+        $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+    });
+    $('#destroy').click(function () {
+        $('#reportrange').data('daterangepicker').remove();
+    });
+}
 
-        $(document).ready(function(){
-          
-          var start_date = findGetParameter("start_date");
-          var end_date = findGetParameter("end_date");
-          initDatePicker(start_date,end_date);
 
-          var onResponse = function(response){
 
-          var graph = safeAccess(["data","report","graph"],response);
-          if(graph){
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+        
+
+$(document).ready(function(){
+    var start_date = findGetParameter("start_date");
+    var end_date = findGetParameter("end_date");
+    initDatePicker(start_date,end_date);
+
+    var onResponse = function(response){
+
+        var graph = safeAccess(["data","report","graph"],response);
+        if(graph){
             var customerCurve = [];
             var orderCurve = [];
             for(datapoint of graph){
-              var a = new Date(Date.parse(datapoint.date));            
-              year = a.getFullYear()
-              month = a.getMonth()+1;
-              date = a.getDate()
-              customers = parseInt(datapoint.customers);
-              orders = parseInt(datapoint.orders);
-              customerElement = [];
-              customerElement.push(gd(year,month,date))
-              customerElement.push(customers)
-              orderElement = [];
-              orderElement.push(gd(year,month,date))
-              orderElement.push(orders)
-              customerCurve.push(customerElement);
-              orderCurve.push(orderElement);
+                var a = new Date(Date.parse(datapoint.date));            
+                year = a.getFullYear()
+                month = a.getMonth()+1;
+                date = a.getDate()
+                customers = parseInt(datapoint.customers);
+                orders = parseInt(datapoint.orders);
+                customerElement = [];
+                customerElement.push(gd(year,month,date))
+                customerElement.push(customers)
+                orderElement = [];
+                orderElement.push(gd(year,month,date))
+                orderElement.push(orders)
+                customerCurve.push(customerElement);
+                orderCurve.push(orderElement);
               // console.log("y="+year+" d="+date+" m="+month);
             }
-function legendFormatter(label, series) {
-    return '<div ' + 
-           'style="font-size:8pt;color:black;padding:2px;">' +
-           label+'</div>';
-};
+
+
+            function legendFormatter(label, series) {
+                return '<div ' + 
+                   'style="font-size:8pt;color:black;padding:2px;">' +
+                   label+'</div>';
+            };
     
-        var chart_plot_01_settings = {
-            series: {
-                lines: {
-                    show: false,
-                    fill: true
+            var chart_plot_01_settings = {
+                series: {
+                    lines: {
+                        show: false,
+                        fill: true
+                    },
+                    splines: {
+                        show: true,
+                        tension: 0.4,
+                        lineWidth: 1,
+                        fill: 0.4
+                    },
+                    points: {
+                        radius: 0,
+                        show: true
+                    },
+                    shadowSize: 2
                 },
-                splines: {
-                    show: true,
-                    tension: 0.4,
-                    lineWidth: 1,
-                    fill: 0.4
+                grid: {
+                    verticalLines: true,
+                    hoverable: true,
+                    clickable: true,
+                    tickColor: "#d5d5d5",
+                    borderWidth: 1,
+                    color: '#fff'
                 },
-                points: {
-                    radius: 0,
-                    show: true
+                colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+                xaxis: {
+                    tickColor: "rgba(51, 51, 51, 0.06)",
+                    mode: "time",
+                    tickSize: [1, "day"],
+                    //tickLength: 10,
+                    axisLabel: "Date",
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: 'Verdana, Arial',
+                    axisLabelPadding: 10
                 },
-                shadowSize: 2
-            },
-            grid: {
-                verticalLines: true,
-                hoverable: true,
-                clickable: true,
-                tickColor: "#d5d5d5",
-                borderWidth: 1,
-                color: '#fff'
-            },
-            colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
-            xaxis: {
-                tickColor: "rgba(51, 51, 51, 0.06)",
-                mode: "time",
-                tickSize: [1, "day"],
-                //tickLength: 10,
-                axisLabel: "Date",
-                axisLabelUseCanvas: true,
-                axisLabelFontSizePixels: 12,
-                axisLabelFontFamily: 'Verdana, Arial',
-                axisLabelPadding: 10
-            },
-            yaxis: {
-                ticks: 8,
-                tickColor: "rgba(51, 51, 51, 0.06)",
-            },
-            tooltip: false,
-            legend: { show: true, container: '#legendHolder',  labelFormatter: legendFormatter}
+                yaxis: {
+                    ticks: 8,
+                    tickColor: "rgba(51, 51, 51, 0.06)",
+                },
+                tooltip: false,
+                legend: { show: true, container: '#legendHolder',  labelFormatter: legendFormatter}
+            }
+
+            if ($("#chart_plot_01").length) {
+                console.log('Plot1');
+
+                $.plot($("#chart_plot_01"), [  {label: "Customers", data: customerCurve},   {label: "Orders", data: orderCurve}], chart_plot_01_settings);
+            }
+        } 
+
+        var totals = safeAccess(["data","report","total_count"],response);
+        if(totals){
+            $("#totalItemCount").html(totals.quantity);
+            $("#totalQuoteCount").html(totals.quotes);
+            $("#totalOrderCount").html(totals.orders);
+            $("#totalCustomerCount").html(totals.customers);
+            $("#totalOrderAmountCount").html("$"+totals.sales.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
         }
 
-          if ($("#chart_plot_01").length) {
-              console.log('Plot1');
-
-              $.plot($("#chart_plot_01"), [  {label: "Customers", data: customerCurve},   {label: "Orders", data: orderCurve}], chart_plot_01_settings);
-          }
-
-          }
-
-            var totals = safeAccess(["data","report","total_count"],response);
-            if(totals){
-                $("#totalItemCount").html(totals.quantity);
-                $("#totalQuoteCount").html(totals.quotes);
-                $("#totalOrderCount").html(totals.orders);
-                $("#totalCustomerCount").html(totals.customers);
-                $("#totalOrderAmountCount").html("$"+totals.sales.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'));
+        var topProducts = safeAccess(["data","report","top_items"],response);
+        if(topProducts){
+            var htmlContent ="";
+            var productSalesmax = 0;
+            for(product of topProducts){
+                if(product.sales>productSalesmax){
+                    productSalesmax = product.sales;
+                }
             }
 
-            var topProducts = safeAccess(["data","report","top_items"],response);
-            if(topProducts){
-              var htmlContent ="";
-              var productSalesmax = 0;
-              for(product of topProducts){
-                if(product.sales>productSalesmax){
-                  productSalesmax = product.sales;
-                }
-              }
-
-
-              for(product of topProducts){
-                  htmlContent+='<div class="widget_summary">'
-                  htmlContent+=  '<div class="w_left w_25">'
-                   htmlContent+=  ' <span>$'+product.sales.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'); +'</span>'
-                   htmlContent+= '</div>'
-                   htmlContent+= '<div class="w_center w_55">'
-                   htmlContent+=   '<div class="progress">'
-                    htmlContent+=    '<div class="progress-bar bg-green" role="progressbar" aria-valuenow="'+product.sales+'"style="width: '+(product.sales/productSalesmax)*100+'%;">'
-                  htmlContent+=       ' <span class="sr-only">x_x</span>'
-                  htmlContent+=     ' </div>'
-                   htmlContent+=  ' </div>'
-                   htmlContent+= '</div>'
-                   htmlContent+= '<div class="w_right w_20">'
-                   htmlContent+=  '<span>'+safeAccess(["item_code"],product,"-")+'</span>'
-                   htmlContent+= '</div>'
-                   htmlContent+= '<div class="clearfix"></div>'
-                 htmlContent+= '</div>'
+            for(product of topProducts){
+                htmlContent+='<div class="widget_summary">'
+                htmlContent+=  '<div class="w_left w_25">'
+                htmlContent+=  ' <span>$'+product.sales.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'); +'</span>'
+                htmlContent+= '</div>'
+                htmlContent+= '<div class="w_center w_55">'
+                htmlContent+=   '<div class="progress">'
+                htmlContent+=    '<div class="progress-bar bg-green" role="progressbar" aria-valuenow="'+product.sales+'"style="width: '+(product.sales/productSalesmax)*100+'%;">'
+                htmlContent+=       ' <span class="sr-only">x_x</span>'
+                htmlContent+=     ' </div>'
+                htmlContent+=  ' </div>'
+                htmlContent+= '</div>'
+                htmlContent+= '<div class="w_right w_20">'
+                htmlContent+=  '<span>'+safeAccess(["item_code"],product,"-")+'</span>'
+                htmlContent+= '</div>'
+                htmlContent+= '<div class="clearfix"></div>'
+                htmlContent+= '</div>'
             }
             $("#tableTopProducts").append(htmlContent);
+        }
 
-          }
-
-            var topCustomers = safeAccess(["data","report","top_customers"],response);
-            if(topCustomers){
-
-                  
-
-              var htmlContent = "";
-              var backgroundColors=[];
-              var labels=[];
-              var values=[];
+        var topCustomers = safeAccess(["data","report","top_customers"],response);
+        if(topCustomers){
+            var htmlContent = "";
+            var backgroundColors=[];
+            var labels=[];
+            var values=[];
               // <tr>
               //               <td>
               //                 <p><i class="fa fa-square blue"></i>Cust 1 </p>
@@ -607,7 +616,7 @@ function legendFormatter(label, series) {
               //               </td>
               //               <td>$ 300</td>
               //             </tr>
-              for(topCustomer of topCustomers){
+            for(topCustomer of topCustomers){
                 var color = getRandomColor();
                 var customerName = safeAccess(["company_name"],topCustomer,"-");
                 var unit = safeAccess(["sales"],topCustomer,"-")
@@ -615,53 +624,46 @@ function legendFormatter(label, series) {
                 labels.push(customerName);
                 backgroundColors.push(color);
                 htmlContent+= '<tr><td><p><i  style="color:'+color+'" class="fa fa-square"></i>'+customerName+'</p></td><td>$'+unit+'</td></tr>';
-              }
-              $("#tableTopCustomers").append(htmlContent);
-
-                var chart_doughnut_settings = {
-                        type: 'doughnut',
-                        tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-                        options: {
-                            legend: {
-                                display: true,
-                                labels: {
-                                    fontColor: 'rgb(255, 99, 132)'
-                                }
-                            }
-                        },
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                data:values,
-                                backgroundColor:backgroundColors
-                                // ,
-                                // hoverBackgroundColor: [
-                                //     "#CFD4D8",
-                                //     "#B370CF",
-                                //     "#E95E4F",
-                                //     "#36CAAB",
-                                //     "#49A9EA"
-                                // ]
-                            }]
-                        },
-                        options: {
-                            legend: false,
-                            responsive: false
-                        }
-                      }
-                    
-
-                        new Chart($('#canvasCustomers'), chart_doughnut_settings);
-
-
             }
+            $("#tableTopCustomers").append(htmlContent);
 
-          }
+            var chart_doughnut_settings = {
+                type: 'doughnut',
+                tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+                options: {
+                    legend: {
+                        display: true,
+                        labels: {
+                            fontColor: 'rgb(255, 99, 132)'
+                        }
+                    }
+                },
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data:values,
+                        backgroundColor:backgroundColors
+                        // ,
+                        // hoverBackgroundColor: [
+                        //     "#CFD4D8",
+                        //     "#B370CF",
+                        //     "#E95E4F",
+                        //     "#36CAAB",
+                        //     "#49A9EA"
+                        // ]
+                    }]
+                },
+                options: {
+                    legend: false,
+                    responsive: false
+                }
+            }
+            new Chart($('#canvasCustomers'), chart_doughnut_settings);
+        }
+    }
+    getDashboardReport(onResponse,start_date,end_date);
 
-
-        getDashboardReport(onResponse,start_date,end_date);
-
-        });
+});
 
       </script>
 
