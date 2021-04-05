@@ -680,6 +680,7 @@
                  })
 
 
+          $("#saveImageChanges").unbind('click');
           $("#saveImageChanges").click(function(){
 
             notifyInfo("Please wait");
@@ -706,6 +707,8 @@
 
          })
 
+
+          $("#addImage").unbind('click');
           $("#addImage").click(function(){
             var name = $("#newImageColor").val();
             var file = $("#newImageFile").prop('files')[0];
@@ -726,8 +729,8 @@
             }
 
           });
-
-
+          
+          $("#manageImagesTable").unbind('click');
           $('#manageImagesTable').on('click', '#btViewMainImage', function () {
            var RowIndex = $(this).closest('tr');
            var data = $('#manageImagesTable').dataTable().api().row(RowIndex).data();
