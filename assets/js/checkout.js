@@ -159,7 +159,6 @@ $(document).ready(function(){
 	$("#btConfirmOrder").click(function(){
 
 		if($('#agreeTerms').is(':checked') && $("#inputPoName").val().length>0) {
-			$("#btConfirmOrder").prop('disabled', true);
 			confirmOrder();
 		} else if(!($('#agreeTerms').is(':checked'))){
 
@@ -312,6 +311,8 @@ function confirmOrder(){
 	}else if ($('#deliveryOption').val()==3){
 		var is_pickup = 1
 	}
+	$("#btConfirmOrder").prop('disabled', true);
+
 	notifyInfo("Please wait");
 
 	createOrder(quoteId,po,poNumber,shippingAddressId,billingAddressId,orderNotes,sched_delivery_date,is_pickup,function(response){
