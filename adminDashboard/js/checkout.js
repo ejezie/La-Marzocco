@@ -21,28 +21,92 @@ var orderSummary = [{
 				]		
 
 
+
+
 async function showAddressSlider(addArr){
 
-	var addSliderHTML = ""
+	var billing_add_count = 0
+	if($('#deliveryOption').val()==2){
+		var addSliderHTML = ""
+		$("#addressSlider").empty(addSliderHTML)
+		for(i=0; i<addArr.length;i++){
 
-	for(i=0; i<addArr.length;i++){
+			const address = addArr[i];
 
-		const address = addArr[i];
+				addSliderHTML += '<div class="optionsecoptions" style="border:1px solid #ccc; ; width: initial;;font-size: 14px;width: 100%;">'
+				addSliderHTML += ''+ address.address+''
+					addSliderHTML += '<br>'
+				if(address.is_billable != 0 && billing_add_count==0){
+					addSliderHTML += '<input id="billingAddrCheckbox" type="checkbox" checked="checked" class="billingChk" value="'+address.id+'" ><label style="font-size:13px">Billing Address</label>'
+					billing_add_count += 1
+				}else if(address.is_billable != 0 && billing_add_count > 0){
+					addSliderHTML += '<input id="billingAddrCheckbox" type="checkbox" class="billingChk" value="'+address.id+'" ><label style="font-size:13px">Billing Address</label>'
+				}
+				addSliderHTML += '<br>'
+				if(address.is_shippable != 0){
+					addSliderHTML += '<input id="shippingAddrCheckbox" type="checkbox" class="shippingChk" value="'+address.id+'"  ><label style="font-size:13px">Shipping Address</label>'
+				}
+				addSliderHTML += '</div>'
 
-		addSliderHTML += '<div class="optionsecoptions" style="border:1px solid #ccc; ; width: initial;;font-size: 14px;width: 100%;">'
-		addSliderHTML += ''+ address.address+''
-			addSliderHTML += '<br>'
-		if(address.is_billable != 0){
-			addSliderHTML += '<input id="billingAddrCheckbox" type="checkbox" class="billingChk" value="'+address.id+'" ><label style="font-size:13px">Billing Address</label>'
 		}
-			addSliderHTML += '<br>'
-		if(address.is_shippable != 0){
-			addSliderHTML += '<input id="shippingAddrCheckbox" type="checkbox" class="shippingChk" value="'+address.id+'"  ><label style="font-size:13px">Shipping Address</label>'
+		$("#addressSlider").append(addSliderHTML)
+		$("#toggleModalAddAddress").show()
+	}else if($('#deliveryOption').val()==3){
+		var onResponse = function(response){
+			var addSliderHTML = ""
+			$("#addressSlider").empty(addSliderHTML)
+		    // location.reload(true);
+		    // window.location.href = 'productMaster.html';
+		    console.log("Pickup addr : ",response)
+		    var pickupAddrList = response.data.addresses
+
+
+
+			for(j=0; j<pickupAddrList.length;j++){
+
+				// const address = addArr[i];
+				console.log(">>>>>>>>>>>>>>>>>>>>>>")
+				if(pickupAddrList[j]["id"]==3){
+
+					addSliderHTML += '<div class="optionsecoptions" style="border:1px solid #ccc; ; width: initial;;font-size: 14px;width: 100%;">'
+					// addSliderHTML += ''+ pickupAddrList[j]["address"]+', '+pickupAddrList[j]["area_code"]["sa4_name"]+', '+pickupAddrList[j]["state"]["name"]+''
+					addSliderHTML += 'La Marzocco Australia - 88 Nicholson St, Abbotsford'
+						addSliderHTML += '<br>'
+					// if(address.is_billable != 0){
+						addSliderHTML += '<input id="shippingAddrCheckbox" type="checkbox" checked="checked" class="billingChk" value="'+pickupAddrList[j]["id"]+'" ><label style="font-size:13px">Pickup Address</label>'
+						// break;
+					// }
+					
+					addSliderHTML += '</div>'
+				}
+
+			};
+			for(i=0; i<addArr.length;i++){
+
+				const address = addArr[i];
+				console.log(">>>>>>>>>>>>>>>>>>>>>>")
+
+
+				if(address.is_billable != 0 && billing_add_count==0){
+					addSliderHTML += '<div class="optionsecoptions" style="border:1px solid #ccc; ; width: initial;;font-size: 14px;width: 100%;">'
+					addSliderHTML += ''+ address.address+''
+					addSliderHTML += '<br>'
+					addSliderHTML += '<input id="billingAddrCheckbox" type="checkbox" checked="checked" class="billingChk" value="'+address.id+'" ><label style="font-size:13px">Billing Address</label>'
+					// break;
+					billing_add_count += 1
+					addSliderHTML += '</div>'
+					addSliderHTML += '<br>'
+				}
+				
+
+			};
+			$("#addressSlider").append(addSliderHTML)
+			$("#toggleModalAddAddress").hide()
+
 		}
-		addSliderHTML += '</div>'
+		getPickupAddressesList(onResponse)
 	}
 
-	$("#addressSlider").append(addSliderHTML)
 
 
 
@@ -101,6 +165,19 @@ $(document).ready(function(){
 	
 	initAddresses();
 	initAddAddress();
+
+
+	$('#deliveryOption').change( function() {
+		  // if($('#deliveryType').val()!=3){
+		  // 	$('#deliveryDate').hide();
+		  // }else{}
+		initAddresses();
+		initAddAddress();
+
+		getQuoteDetails(quoteId,function(response){
+			showCheckoutOrderSummary(response.data.quote.quote_line,response.data.quote );
+		})
+	})
 });
 
 function initAddresses(){
@@ -206,9 +283,16 @@ function confirmOrder(){
 		notifyError("Please select shipping and billing address")
 		return;
 	}
+
+	if($('#deliveryOption').val()==2){
+		var is_pickup = 0
+	}else if ($('#deliveryOption').val()==3){
+		var is_pickup = 1
+	}
+
 	notifyInfo("Please wait");
 
-	createOrder(quoteId,po,poNumber,shippingAddressId,billingAddressId,orderNotes,sched_delivery_date,function(response){
+	createOrder(quoteId,po,poNumber,shippingAddressId,billingAddressId,orderNotes,sched_delivery_date,is_pickup,function(response){
 			// notifySuccess("Proceed to payment");
 			if(!response.data.status){
 				return;
@@ -359,16 +443,25 @@ async function showCheckoutOrderSummary(orderSummary, orderDetails){
 	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '<tr>'
 	orderSummaryHTML += '<th>Shipping (+)</th>'
-	orderSummaryHTML += '<td><strong>$'+orderDetails["shipping_cost"].toLocaleString("en-AU")+'</strong></td>'
-	orderSummaryHTML += '</tr>'
+	if($('#deliveryOption').val()==2){
+		orderSummaryHTML += '<td><strong>$'+orderDetails["shipping_cost"].toLocaleString("en-AU")+'</strong></td>'
+	} else if($('#deliveryOption').val()==3){
+		orderSummaryHTML += '<td><strong>$0</strong></td>'
+	}	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '<tr>'
 	orderSummaryHTML += '<th>Tax (+)</th>'
 	orderSummaryHTML += '<td><strong>$'+orderDetails["total_tax"].toLocaleString("en-AU")+'</strong></td>'
 	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '<tr class="order_total">'
 	orderSummaryHTML += '<th>Order Total</th>'
-	orderSummaryHTML += '<td><strong>$'+orderDetails["total"].toLocaleString("en-AU")+'</strong></td>'
-	orderSummaryHTML += '</tr>'
+
+	if($('#deliveryOption').val()==2){
+
+		orderSummaryHTML += '<td><strong>$'+orderDetails["total"].toLocaleString("en-AU")+'</strong></td>'
+	} else if($('#deliveryOption').val()==3){
+		orderSummaryHTML += '<td><strong>$'+(orderDetails["total"]-orderDetails["shipping_cost"]).toLocaleString("en-AU")+'</strong></td>'
+
+	}	orderSummaryHTML += '</tr>'
 	orderSummaryHTML += '</tfoot>'
 	orderSummaryHTML += '</table>'
 

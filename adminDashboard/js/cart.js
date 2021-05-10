@@ -15,11 +15,12 @@ async function showCart(cartItems){
 	cartHTML += '</thead>'
 	cartHTML += '<tbody>'
 
+
 	for(i=0;i<cartItems.length;i++){
 		// alert(JSON.stringify(cartItems[i],null,2);
 		// console.log(cartItems[i]);
 		cartHTML += '<tr>'
-		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+		cartHTML += '<td class="product_thumb"><a href="#"><img src="../assets/img/lma_catalog_img.png" alt=""></a></td>'
 		cartHTML += '<td class="product_name"><a href="#">'+cartItems[i]["productName"]+'<br></a>';
 		cartHTML+= '</td>'
 
@@ -117,7 +118,7 @@ async function showCartFromQuote(quoteItems){
 		var quoteItem = quoteItems[i];
  
 		cartHTML += '<tr>'
-		cartHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+		cartHTML += '<td class="product_thumb"><a href="#"><img src="../assets/img/lma_catalog_img.png" alt=""></a></td>'
 		cartHTML += '<td class="product_name"><a href="#">'+quoteItemProduct["name"]+'</a></td>'
 		cartHTML += '<td class="product-price">$'+quoteItem["price"].toLocaleString("en-AU")+'</td>'
 		cartHTML += '<td class="product_quantity"><a>'+quoteItem["qty"]+'</a></td>'

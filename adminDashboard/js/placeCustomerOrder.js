@@ -183,6 +183,10 @@ async function showBulkOrders(bulkOrderData){
 
 
 $(document).ready(function(){
+  
+   clearCart(function(res){
+              notifySuccess("Cart Cleared")
+            })
   $("#downloadCatalog").click(function(){
     exportCatalog(function(res){
        var fileUrl = safeAccess(["data","file"],res);
@@ -217,7 +221,7 @@ $(document).ready(function(){
         }else{
           if(confirm("Cart must be emptied first")){
             clearCart(function(res){
-              notifyError("Cart Cleared!")
+              notifySuccess("Cart Cleared!")
             })
           }
         }
