@@ -1866,7 +1866,7 @@ async function getQuoteList(itemId,onResponse,onError){
 async function getAddressesList(onResponse,onError,user_id){
  var url = BASE_URL+'address?page=1&page_size=1000';
  if(user_id){
-  url+= ("?user_id="+user_id);
+  url+= ("&user_id="+user_id);
  }
   var config = {
     method: 'get',
