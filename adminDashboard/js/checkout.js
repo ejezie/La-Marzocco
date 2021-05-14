@@ -267,7 +267,14 @@ function initProductDetails(){
 	});
 }
 
+var confirmingOrder = false;
+
+
 function confirmOrder(){
+	if(confirmingOrder){
+		   notifyInfo("Confirmation is already in progress");
+		   return;
+		}
 	const orderNotes = $("#inputOrderNotes").val().length>0 ? $("#inputOrderNotes").val() : null;
 	const poNumber = $("#inputPoName").val().length>0 ? $("#inputPoName").val() : null;
 	const po = document.querySelector('#pofile').files[0];
@@ -291,8 +298,12 @@ function confirmOrder(){
 	}
 
 	notifyInfo("Please wait");
+		confirmingOrder = true;
+
 
 	createOrder(quoteId,po,poNumber,shippingAddressId,billingAddressId,orderNotes,sched_delivery_date,is_pickup,function(response){
+				confirmingOrder = false;
+
 			// notifySuccess("Proceed to payment");
 			if(!response.data.status){
 				return;
@@ -337,6 +348,8 @@ function confirmOrder(){
 
 
 function notifyOrderSuccess(orders){
+		window.location.href = "customerOrders.html";
+		return;
 
 		// 	notifySuccess("Payment Successful");
 		// 	shoppingCart.clearCart();

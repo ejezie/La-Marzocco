@@ -157,12 +157,16 @@ $(document).ready(function(){
 		}
 
 	$("#btConfirmOrder").click(function(){
+		if(confirmingOrder){
+		   notifyInfo("Confirmation is already in progress");
+		   return;
+		}
 
 		if($('#agreeTerms').is(':checked') && $("#inputPoName").val().length>0) {
 			confirmOrder();
 		} else if(!($('#agreeTerms').is(':checked'))){
 
-			notifyInfo("Agree Terms and Condition");
+			notifyInfo("Please agree terms and conditions");
 		} else if($("#inputPoName").val().length==0){
 			notifyError("Please enter valid PO Number")
 			// $("#btConfirmOrder").prop('disabled', false);
@@ -289,6 +293,8 @@ function initProductDetails(){
 	});
 }
 
+var confirmingOrder = false;
+
 function confirmOrder(){
 	const orderNotes = $("#inputOrderNotes").val().length>0 ? $("#inputOrderNotes").val() : null;
 	const poNumber = $("#inputPoName").val().length>0 ? $("#inputPoName").val() : null;
@@ -311,11 +317,12 @@ function confirmOrder(){
 	}else if ($('#deliveryOption').val()==3){
 		var is_pickup = 1
 	}
-	$("#btConfirmOrder").prop('disabled', true);
 
+	confirmingOrder = true;
 	notifyInfo("Please wait");
 
 	createOrder(quoteId,po,poNumber,shippingAddressId,billingAddressId,orderNotes,sched_delivery_date,is_pickup,function(response){
+			confirmingOrder = false;
 			// notifySuccess("Proceed to payment");
 			if(!response.data.status){
 				return;
