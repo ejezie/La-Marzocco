@@ -1,1120 +1,769 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- Meta, title, CSS, favicons, etc. -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Product Master</title>
-
-  <!-- Bootstrap -->
-  <!-- <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
-  <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- NProgress -->
-  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-  <!-- iCheck -->
-  <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-  <!-- Datatables -->
-  
-  <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-  <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-  
-
-  <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
-  <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet">
-
-  <!-- Admin Dashboard Custom CSS -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Master</title>
+    <!-- Bootstrap -->
+    <!-- <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css" rel="stylesheet">
     <link href="css/adminDashboard.css" rel="stylesheet">
-  
-
-  <!-- <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet"> -->
-  <!-- <link href="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/css/dataTables.checkboxes.css" rel="stylesheet"> -->
-  <!-- <link href="https://gyrocode.github.io/jquery-datatables-checkboxes/1.1.0/css/dataTables.checkboxes.css" rel="stylesheet"> -->
-
-
-  <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
-
-
-
-  <style type="text/css">
+    <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
+    <style type="text/css">
     table.dataTable tr th.select-checkbox.selected::after {
-      content: "✔";
-      margin-top: -11px;
-      margin-left: -4px;
-      text-align: center;
-      text-shadow: rgb(176, 190, 217) 1px 1px, rgb(176, 190, 217) -1px -1px, rgb(176, 190, 217) 1px -1px, rgb(176, 190, 217) -1px 1px;
+        content: "✔";
+        margin-top: -11px;
+        margin-left: -4px;
+        text-align: center;
+        text-shadow: rgb(176, 190, 217) 1px 1px, rgb(176, 190, 217) -1px -1px, rgb(176, 190, 217) 1px -1px, rgb(176, 190, 217) -1px 1px;
     }
-
-  </style>
-  <!-- <script async src="//jsfiddle.net/sonusindhu/Tn9WM/embed/"></script> -->
-
-  <!-- Admin Dashboard Custom CSS -->
-  <link rel="stylesheet" href="css/adminDashboard.css">
-
-  <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
-
-  <style type="text/css">
-
+    </style>
+    <link rel="stylesheet" href="css/adminDashboard.css">
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <style type="text/css">
     div.dataTables_wrapper div.dataTables_length select {
-      width: 120px;
-      display: inline-block;
+        width: 120px;
+        display: inline-block;
     }
-    
+
     button.btn.add::before {
-      font-family: fontAwesome;
-      content: "\f067\00a0";
+        font-family: fontAwesome;
+        content: "\f067\00a0";
     }
 
 
     button.btn.upload::before {
-      font-family: fontAwesome;
-      content: "\f093\00a0";
+        font-family: fontAwesome;
+        content: "\f093\00a0";
     }
-
-
-  
-
-
-
     </style>
+</head>
 
-    
-
-    
-  </head>
-
-  <body class="nav-md">
+<body class="nav-md">
     <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view" id="accordionSidebar">
-            
-            <!-- /menu footer buttons -->
-          </div>
-        </div>
-
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <div class="nav toggle">
-              <a id="menu_toggle" style="padding-bottom: 15px;"><i class="fa fa-bars"></i></a>
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view" id="accordionSidebar">
+                    <!-- /menu footer buttons -->
+                </div>
             </div>
-          </div>
-        </div>
-        <!-- /top navigation -->
-
-
-
-
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Product Master</h3>
-              </div>
-
-              <div class="title_right">
-                <!-- <div class="col-md-6 col-sm-6 col-xs-12 form-group pull-right top_search"> -->
-                  <div class="form-group pull-right top_search">
-                    <div class="input-group">
-                      <!-- <button class="btn add btn-primary" data-toggle="modal" data-target="#singleUploadModal">Add Product</button> -->
-                      <!-- <a href="uploadSingleProduct.html"><button class="btn add btn-primary">Add Product</button></a> -->
-                      <button class="btn upload btn-primary" data-toggle="modal" data-target="#bulkUploadModal">Excel Upload</button>
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle" style="padding-bottom: 15px;"><i class="fa fa-bars"></i></a>
                     </div>
-                  </div>
                 </div>
-              </div>
-
-
-
-
-
-
-
-
-
-              <div class="clearfix"></div>
-
-              <div class="row">
-                <div class="col-md-12 col-sm-12 ">
-                  <div class="x_panel">
-                    <div class="x_title">
-                      <h2>Product Master Data</h2>
-                    <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Settings 1</a>
-                          <a class="dropdown-item" href="#">Settings 2</a>
-                        </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul> -->
-<!-- <select>
-   <option selected hidden>Choose here</option>
-   <option value="1">One</option>
-   <option value="2">Two</option>
-   <option value="3">Three</option>
-   <option value="4">Four</option>
-   <option value="5">Five</option>
-<<<<<<< HEAD
-</select> -->
-
-                    <select style="position: absolute;right: 40px" id="selectBulkUpdate"  autocomplete="off">
-                      <!-- <option value="3" selected="selected"> 3 </option> -->
-                      <option selected="selected" disabled="true">Bulk Update</option>
-                      <option>Recommended</option>
-                      <option>Not Recommended</option>
-                      <option>Active</option>
-                      <option>Inactive</option>
-                      <option>Is Consumable</option>
-                      <option>Not Consumable</option>
-                      <option>Slow Moving</option>
-                      <option>Fast Moving</option>
-                      <option>Price</option>
-                    </select>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <div class="card-box table-responsive">
-                          <p class="text-muted font-13 m-b-30">
-                            Below table consists of the complete inventory with options to add and update product.
-                          </p>
-                          <table id="items_master" class="table table-striped table-bordered" style="width:100%">
-                          <!-- <table id="items_master" class="table table-striped jambo_table bulk_action" style="width:100%"> -->
-                            
-
-            
-                           <!--  <thead>
-                          <tr class="headings">
-                            <th>
-                              <input type="checkbox" id="check-all" class="flat">
-                            </th>
-                            <th class="column-title">Invoice </th>
-                            <th class="column-title">Invoice Date </th>
-                            <th class="column-title">Order </th>
-                            <th class="column-title">Bill to Name </th>
-                            <th class="column-title">Status </th>
-                            <th class="column-title">Amount </th>
-                            <th class="column-title no-link last"><span class="nobr">Action</span>
-                            </th>
-                            <th class="bulk-actions" colspan="7">
-                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                            </th>
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                          <tr class="even pointer">
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                            <td class=" ">121000040</td>
-                            <td class=" ">May 23, 2014 11:47:56 PM </td>
-                            <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i></td>
-                            <td class=" ">John Blank L</td>
-                            <td class=" ">Paid</td>
-                            <td class="a-right a-right ">$7.45</td>
-                            <td class=" last"><a href="#">View</a>
-                            </td>
-                          </tr>
-                        </tbody> -->
-                  <!--     <thead>
-                        <tr>
-                          <th>Group</th>
-                          <th>Family</th>
-                          <th>Type</th>
-                          <th>Parent Name</th>
-                          <th>Item Code</th>
-                          <th>Item Name</th>
-                          <th>Weight(g)</th>
-                          <th>Active</th>
-                          <th>Recommend</th>
-                          <th>Edit</th>
-                        </tr>
-                      </thead>
-
-
-                      <tbody>
-                        <tr>
-                          <td>Group 1</td>
-                          <td>Fam 2</td>
-                          <td>Grinder</td>
-                          <td>GS3</td>
-                          <td>FDHDH75445</td>
-                          <td>GS3</td>
-                          <td>40000</td>
-                          <td>Active</td>
-                          <td>Recommended</td>
-                          <td><button type="button" data-toggle="modal" data-target="#editProductModal" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-edit"></span> 
-        </button></td>
-                        </tr>
-
-
-                        <tr>
-                          <td>Group 1</td>
-                          <td>Fam 2</td>
-                          <td>Grinder</td>
-                          <td>GS3</td>
-                          <td>FDHDH75445</td>
-                          <td>GS3</td>
-                          <td>40000</td>
-                          <td>Active</td>
-                          <td>Recommended</td>
-                          <td><button type="button" data-toggle="modal" data-target="#editProductModal" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-edit"></span> 
-        </button></td>
-                        </tr>
-
-                        <tr>
-                          <td>Group 1</td>
-                          <td>Fam 2</td>
-                          <td>Grinder</td>
-                          <td>GS3</td>
-                          <td>FDHDH75445</td>
-                          <td>GS3</td>
-                          <td>40000</td>
-                          <td>Active</td>
-                          <td>Recommended</td>
-                          <td><button type="button" data-toggle="modal" data-target="#editProductModal" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-edit"></span> 
-        </button></td>
-                        </tr>
-
-                        <tr>
-                          <td>Group 1</td>
-                          <td>Fam 2</td>
-                          <td>Grinder</td>
-                          <td>GS3</td>
-                          <td>FDHDH75445</td>
-                          <td>GS3</td>
-                          <td>40000</td>
-                          <td>Active</td>
-                          <td>Recommended</td>
-                          <td><button type="button" data-toggle="modal" data-target="#editProductModal" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-edit"></span> 
-        </button></td>
-                        </tr>
-
-                        <tr>
-                          <td>Group 1</td>
-                          <td>Fam 2</td>
-                          <td>Grinder</td>
-                          <td>GS3</td>
-                          <td>FDHDH75445</td>
-                          <td>GS3</td>
-                          <td>40000</td>
-                          <td>Active</td>
-                          <td>Recommended</td>
-                          <td><button type="button" data-toggle="modal" data-target="#editProductModal" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-edit"></span> 
-        </button></td>
-                        </tr>
-                        
-                      </tbody> -->
-                    </table>
-
-
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-
-    </div>
-  </div>
-</div>
-</div>
-<!-- /page content -->
-
-
-
-
-<!-- Modal -->
-
-
-<!-- Modal for adding Single Product data -->
-<div class="modal fade bd-example-modal-l" id="singleUploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-  <div class="modal-dialog modal-l" role="document" >
-    <div class="modal-content">
-      <!--Header-->
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Add Single Product</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      
-      <div class="modal-body">
-        <!-- Sample Table -->
-        <div class="table-responsive">
-          <!-- <table class="table table-striped table-bordered table-sm"> -->
-            <div class="col-md-12 ">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Upload New Product<small></small></h2>
-                  <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Settings 1</a>
-                        <a class="dropdown-item" href="#">Settings 2</a>
-                      </div>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                  </ul>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <br>
-                  <form class="form-horizontal form-label-left">
-
-                   
-                    
-                    <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Select Item Family</label>
-                      <div class="col-md-9 col-sm-9 ">
-                        <select class="form-control">
-                          <option>Choose option</option>
-                          <option>Option one</option>
-                          <option>Option two</option>
-                          <option>Option three</option>
-                          <option>Option four</option>
-                        </select>
-                      </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Select Item Group</label>
-                      <div class="col-md-9 col-sm-9 ">
-                        <select class="form-control">
-                          <option>Choose option</option>
-                          <option>Option one</option>
-                          <option>Option two</option>
-                          <option>Option three</option>
-                          <option>Option four</option>
-                        </select>
-                      </div>
-                    </div>
-
-
-
-                    <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Select Item Type</label>
-                      <div class="col-md-9 col-sm-9 ">
-                        <select class="form-control">
-                          <option>Choose option</option>
-                          <option>Option one</option>
-                          <option>Option two</option>
-                          <option>Option three</option>
-                          <option>Option four</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Select Parent Name</label>
-                      <div class="col-md-9 col-sm-9 ">
-                        <select class="form-control">
-                          <option>Choose option</option>
-                          <option>Option one</option>
-                          <option>Option two</option>
-                          <option>Option three</option>
-                          <option>Option four</option>
-                        </select>
-                      </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Item Code</label>
-                      <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
-                      </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Item Name</label>
-                      <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Basic Price</label>
-                      <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
-                      </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                      <label class="control-label col-md-3 col-sm-3 ">Selling Price</label>
-                      <div class="col-md-9 col-sm-9 ">
-                        <input type="password" class="form-control" value="">
-                      </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Upload Images</label>
-
-                      <div class="col-sm-9">
-                        
-                        <div class="input-group">
-                          <input type="text" class="form-control">
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-primary">Browse</button>
-                          </span>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>Product Master</h3>
                         </div>
-                      </div>
-                    </div>
-
-
-                    
-                    
-                    
-
-                    
-                    
-
-                   <!--          
-                            <div class="form-group row">
-                              <label class="control-label col-md-3 col-sm-3 ">Status</label>
-                              <div class="col-md-9 col-sm-9 ">
-                                <div class="">
-                                  <label>
-                                    <input type="checkbox" class="js-switch" checked="" style="display: none;" data-switchery="true"><span class="switchery switchery-default" style="background-color: rgb(38, 185, 154); border-color: rgb(38, 185, 154); box-shadow: rgb(38, 185, 154) 0px 0px 0px 11px inset; transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s, background-color 1.2s ease 0s;"><small style="left: 12px; transition: background-color 0.4s ease 0s, left 0.2s ease 0s; background-color: rgb(255, 255, 255);"></small></span> Active
-                                  </label>
+                        <div class="title_right">
+                            <!-- <div class="col-md-6 col-sm-6 col-xs-12 form-group pull-right top_search"> -->
+                            <div class="form-group pull-right top_search">
+                                <div class="input-group">
+                                    <button class="btn upload btn-primary" data-toggle="modal" data-target="#bulkUploadModal">Excel Upload</button>
                                 </div>
-                                <div class="">
-                                  <label>
-                                    <input type="checkbox" class="js-switch" style="display: none;" data-switchery="true"><span class="switchery switchery-default" style="box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset; border-color: rgb(223, 223, 223); background-color: rgb(255, 255, 255); transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;"><small style="left: 0px; transition: background-color 0.4s ease 0s, left 0.2s ease 0s;"></small></span> Recommend
-                                  </label>
-                                </div>
-                                
-                                
-                              </div>
-                            </div> -->
-
-
-                            <div class="ln_solid"></div>
-                            <div class="form-group">
-                              <div class="col-md-9 col-sm-9  offset-md-3">
-                                <button type="button" class="btn btn-primary">Cancel</button>
-                                <button type="reset" class="btn btn-primary">Reset</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
-                              </div>
                             </div>
-
-                          </form>
                         </div>
-                      </div>
                     </div>
-                  </div>
-                  
-                  <div class="container">
+                    <div class="clearfix"></div>
                     <div class="row">
-                      <div class="col-12">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered table-sm" id="tab3">
-                            <thead><tr></tr></thead>
-                            <tbody></tbody>
-                          </table>
+                        <div class="col-md-12 col-sm-12 ">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Product Master Data</h2>
+                                    <select style="position: absolute;right: 40px" id="selectBulkUpdate" autocomplete="off">
+                                        <!-- <option value="3" selected="selected"> 3 </option> -->
+                                        <option selected="selected" disabled="true">Bulk Update</option>
+                                        <option>Recommended</option>
+                                        <option>Not Recommended</option>
+                                        <option>Active</option>
+                                        <option>Inactive</option>
+                                        <option>Is Consumable</option>
+                                        <option>Not Consumable</option>
+                                        <option>Slow Moving</option>
+                                        <option>Fast Moving</option>
+                                        <option>Price</option>
+                                    </select>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card-box table-responsive">
+                                                <p class="text-muted font-13 m-b-30">
+                                                    Below table consists of the complete inventory with options to add and update product.
+                                                </p>
+                                                <table id="items_master" class="table table-striped table-bordered" style="width:100%">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
-
-                  <table class="table table-hover" id="tab2">
-                    <thead><tr></tr></thead>
-                  </table>
                 </div>
-              </div>
             </div>
-          </div>
-
-
-
-
-
-          <!-- Modal for uploading Excel/Bulk data -->
-          <div class="modal fade bd-example-modal-xl" id="bulkUploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog modal-xl" role="document" >
-              <div class="modal-content">
+        </div>
+    </div>
+    <!-- /page content -->
+    <!-- Modal -->
+    <!-- Modal for adding Single Product data -->
+    <div class="modal fade bd-example-modal-l" id="singleUploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-l" role="document">
+            <div class="modal-content">
                 <!--Header-->
                 <div class="modal-header">
-                  <h4 class="modal-title" id="myModalLabel">Upload Data</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
+                    <h4 class="modal-title" id="myModalLabel">Add Single Product</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-                
                 <div class="modal-body">
-                  <!-- Sample Table -->
-                  <div class="table-responsive">
-                    <h5>Sample Data:</h5>
-                    <!-- <table class="table table-striped table-bordered table-sm"> -->
-                      <table id="sampleUploadFormatTable" class="table table-striped table-bordered" style="width:100%">
-                        <tr>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>  
-                          <th></th> 
-                          <th></th>
-                          <th></th>  
-                          <th></th>  
-                          <th></th> 
-                          <th></th>  
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          
-                        </tr>
-                        <tr>
-                          <th>Model # </th>
-                          <th>Itemcode</th>
-                          <th>ItemName</th>
-                          <th>ShortCode</th>
-                          <th>Itemtype (Machine/SpareParts/Merchandise)</th>
-                          <th>FamilyCode</th>
-                          <th>FamilyDesc (Commercial / LM Home / Grinder / Modbar / Water Filter / GS3)</th>
-                          <th>ParentItemName</th>
-                          <th>Isactive</th>
-                          <th>Length</th>  
-                          <th>LengthUoM</th> 
-                          <th>Width</th>
-                          <th>WidthUoM</th>  
-                          <th>Height</th>  
-                          <th>HeightUoM</th> 
-                          <th>Volume</th>  
-                          <th>VolumeUoM</th>
-                          <th>Weight</th>
-                          <th>WeightUoM</th>
-                          <th>Supersessionitem</th>
-                          <th>ManageSerialNumber</th>
-                          <th>IsConsumable</th>
-                          <th>IsRecommended</th>
-                          <th>IsSlowmoving</th>
-                          <th>Itemgroup</th>
-                          <th>GroupDescription</th>
-                          <th>ImageName</th>
-                          <th>PartRefNum</th>
-
-                          <th>Boiler Type</th>
-                          <th>PID Temperature Controller</th>
-                          <th>Pump Type</th>
-                          <th>Indicator Lights</th>
-                          <th>Voltage</th>
-                          <th>Steam Boiler</th>
-                          <th>Water Reservoir capacity</th>
-                          <th>price</th>
-                          <th>currency</th>
-                          
-                        </tr>
-                        <tr>
-                          <td>2GPBAVSC</td>
-                          <td>1GAV</td>
-                          <td>La Marzocco 1 Group AV Linea</td>
-                          <td>6.112.112</td>
-                          <td>Machines - LINEA</td>
-                          <td>LINEA</td>
-                          <td>Commercial Machine</td>
-                          <td>Main Machine</td>
-                          <td>LMBAR</td>
-                          <td>Commercial Machines</td>
-                          <td>N</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>47000</td>
-                          <td>Grams</td>
-                          <td>0</td>
-                          <td>N</td>
-                          <td>N</td>
-                          <td>Y</td>
-                          <td>N</td>
-                          <td>SPMAVI</td>
-                          <td>screws, nuts, bolts, washers…</td>
-                          <td></td>
-                          <td></td>
-
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td>113</td>
-                          <td>AUD</td>
-                        </tr>
-                      </table>
+                    <!-- Sample Table -->
+                    <div class="table-responsive">
+                        <!-- <table class="table table-striped table-bordered table-sm"> -->
+                        <div class="col-md-12 ">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Upload New Product<small></small></h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Settings 1</a>
+                                                <a class="dropdown-item" href="#">Settings 2</a>
+                                            </div>
+                                        </li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <br>
+                                    <form class="form-horizontal form-label-left">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3 col-sm-3 ">Select Item Family</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <select class="form-control">
+                                                    <option>Choose option</option>
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3 col-sm-3 ">Select Item Group</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <select class="form-control">
+                                                    <option>Choose option</option>
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3 col-sm-3 ">Select Item Type</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <select class="form-control">
+                                                    <option>Choose option</option>
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3 col-sm-3 ">Select Parent Name</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <select class="form-control">
+                                                    <option>Choose option</option>
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3 col-sm-3 ">Item Code</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <input type="password" class="form-control" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3 col-sm-3 ">Item Name</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <input type="password" class="form-control" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3 col-sm-3 ">Basic Price</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <input type="password" class="form-control" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3 col-sm-3 ">Selling Price</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <input type="password" class="form-control" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Upload Images</label>
+                                            <div class="col-sm-9">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-primary">Browse</button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-9 col-sm-9  offset-md-3">
+                                                <button type="button" class="btn btn-primary">Cancel</button>
+                                                <button type="reset" class="btn btn-primary">Reset</button>
+                                                <button type="submit" class="btn btn-success">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-sm" id="tab3">
+                                        <thead>
+                                            <tr></tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-hover" id="tab2">
+                        <thead>
+                            <tr></tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+      .mandatory_field{
+        background-color: #bff7ed;
+      }
+      .optional_field{
+        background-color: #0eb7b5;  
+      }
+    </style>
+    <!-- Modal for uploading Excel/Bulk data -->
+    <div class="modal fade bd-example-modal-xl" id="bulkUploadModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Upload Data</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Sample Table -->
+                    <div class="table-responsive">
+                        <h5>Sample Data:</h5>
+                        <!-- <table class="table table-striped table-bordered table-sm"> -->
+                        <table id="sampleUploadFormatTable" class="table table-striped table-bordered" style="width:100%">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th class="mandatory_field">Model # </th>
+                                <th class="mandatory_field">Itemcode</th>
+                                <th class="mandatory_field">ItemName</th>
+                                <th class="mandatory_field">ShortCode</th>
+                                <th class="mandatory_field">Itemtype (Machine/SpareParts/Merchandise)</th>
+                                <th class="mandatory_field">FamilyCode</th>
+                                <th class="mandatory_field">FamilyDesc (Commercial / LM Home / Grinder / Modbar / Water Filter / GS3)</th>
+                                <th class="mandatory_field">ParentItemName</th>
+                                <th class="mandatory_field">Isactive</th>
+                                <th class="optional_field">Length</th>
+                                <th class="optional_field">LengthUoM</th>
+                                <th class="optional_field">Width</th>
+                                <th class="optional_field">WidthUoM</th>
+                                <th class="optional_field">Height</th>
+                                <th class="optional_field">HeightUoM</th>
+                                <th class="optional_field">Volume</th>
+                                <th class="optional_field">VolumeUoM</th>
+                                <th class="mandatory_field">Weight</th>
+                                <th class="mandatory_field">WeightUoM</th>
+                                <th class="mandatory_field">Supersessionitem</th>
+                                <th class="mandatory_field">ManageSerialNumber</th>
+                                <th class="mandatory_field">IsConsumable</th>
+                                <th class="mandatory_field">IsRecommended</th>
+                                <th class="mandatory_field">IsSlowmoving</th>
+                                <th class="mandatory_field">Itemgroup</th>
+                                <th class="mandatory_field">GroupDescription</th>
+                                <th class="mandatory_field">ImageName</th>
+                                <th class="mandatory_field">PartRefNum</th>
+                                <th class="optional_field">Boiler Type</th>
+                                <th class="optional_field">PID Temperature Controller</th>
+                                <th class="optional_field">Pump Type</th>
+                                <th class="optional_field">Indicator Lights</th>
+                                <th class="optional_field">Voltage</th>
+                                <th class="optional_field">Steam Boiler</th>
+                                <th class="optional_field">Water Reservoir capacity</th>
+                                <th class="mandatory_field">price</th>
+                                <th class="mandatory_field">currency</th>
+                            </tr>
+                            <tr>
+                                <td>2GPBAVSC</td>
+                                <td>1GAV</td>
+                                <td>La Marzocco 1 Group AV Linea</td>
+                                <td>6.112.112</td>
+                                <td>Machines - LINEA</td>
+                                <td>LINEA</td>
+                                <td>Commercial Machine</td>
+                                <td>Main Machine</td>
+                                <td>LMBAR</td>
+                                <td>Commercial Machines</td>
+                                <td>N</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>47000</td>
+                                <td>Grams</td>
+                                <td>0</td>
+                                <td>N</td>
+                                <td>N</td>
+                                <td>Y</td>
+                                <td>N</td>
+                                <td>SPMAVI</td>
+                                <td>screws, nuts, bolts, washers…</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>113</td>
+                                <td>AUD</td>
+                            </tr>
+                        </table>
+                        <p>Note : Red fields are mandatory and green fields are optional. Download below excel and input quantity for the required products and upload. </p>
                     </div>
                     <br>
-
                     <form>
-                      <input type="button" class="btn btn-success" value="Download Sample Data Template" onClick="window.location.href='files/productMaster_sample.xlsx'">
+                        <input type="button" class="btn btn-success" value="Download Sample Data Template" onClick="window.location.href='files/productMaster_sample.xlsx'">
                     </form>
                     <br>
-
                     <!-- Upload data -->
                     <h5>Upload Product Master Excel:</h5>
                     <div>
-                      <input type="file" class="btn btn-info" accept=".xls, .xlsx" id="excelfile"/>  
-                      <input type="button" class="btn btn-primary" id="uploadFile" value="Upload" />  
-                      <table id="exceltable" ></table>
+                        <input type="file" class="btn btn-info" accept=".xls, .xlsx" id="excelfile" />
+                        <input type="button" class="btn btn-primary" id="uploadFile" value="Upload" />
+                        <table id="exceltable"></table>
                     </div>
                     <br>
                     <div class="container">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-sm" id="tab3">
-                              <thead><tr></tr></thead>
-                              <tbody></tbody>
-                            </table>
-                          </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-sm" id="tab3">
+                                        <thead>
+                                            <tr></tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-
                     <table class="table table-hover" id="tab2">
-                      <thead><tr></tr></thead>
+                        <thead>
+                            <tr></tr>
+                        </thead>
                     </table>
-                  </div>
                 </div>
-              </div>
             </div>
-
-
-
-          <!-- Modal for uploading Excel/Bulk data -->
-          <div class="modal fade bd-example-modal-xl" id="manageImagesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-            <div class="modal-dialog modal-xl" role="document" >
-              <div class="modal-content">
+        </div>
+    </div>
+    <!-- Modal for uploading Excel/Bulk data -->
+    <div class="modal fade bd-example-modal-xl" id="manageImagesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
                 <!--Header-->
                 <div class="modal-header">
-                  <h4 class="modal-title" id="myModalLabel">Upload Data</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
+                    <h4 class="modal-title" id="myModalLabel">Upload Data</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-                
                 <div class="modal-body">
-                  <!-- Sample Table -->
-                  <div class="table-responsive">
-                    <h5>Product Images</h5>
-                    <!-- <table class="table table-striped table-bordered table-sm"> -->
-                      <table id="manageImagesTable" class="table table-striped table-bordered" style="width:100%">
-                       
-                      </table>
+                    <!-- Sample Table -->
+                    <div class="table-responsive">
+                        <h5>Product Images</h5>
+                        <!-- <table class="table table-striped table-bordered table-sm"> -->
+                        <table id="manageImagesTable" class="table table-striped table-bordered" style="width:100%">
+                        </table>
                     </div>
-                
-
                     <h6>Add Image</h6>
                     <div>
-                      <a>Color</a>
-                      <input  id="newImageColor"/>  
-                      <input type="file" accept="image/*" class="btn btn-info"  id="newImageFile"/>  
-                      <input type="button" class="btn btn-primary" id="addImage" value="Add Image" />  
-                      <table id="exceltable" ></table>
+                        <a>Color</a>
+                        <input id="newImageColor" />
+                        <input type="file" accept="image/*" class="btn btn-info" id="newImageFile" />
+                        <input type="button" class="btn btn-primary" id="addImage" value="Add Image" />
+                        <table id="exceltable"></table>
                     </div>
-                        <br>
-
+                    <br>
                     <form>
-                      <input type="button" id="saveImageChanges" class="btn btn-success" value="Save Changes">
+                        <input type="button" id="saveImageChanges" class="btn btn-success" value="Save Changes">
                     </form>
                     <br>
                     <br>
                     <div class="container">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-sm" id="tab3">
-                              <thead><tr></tr></thead>
-                              <tbody></tbody>
-                            </table>
-                          </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-sm" id="tab3">
+                                        <thead>
+                                            <tr></tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-
-                  </div>
                 </div>
-              </div>
             </div>
-
-
-
-            <!-- Modal for Edit data -->
-            <div class="modal fade bd-example-modal-l" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-              <div class="modal-dialog modal-l" role="document" >
-                <div class="modal-content">
-                  <!--Header-->
-                  <div class="modal-header">
+        </div>
+    </div>
+    <!-- Modal for Edit data -->
+    <div class="modal fade bd-example-modal-l" id="editItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-l" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">Edit Product</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  
-                  <div class="col-md-12 col-sm-12 ">
-                    <div class="x_panel">
-                      <div class="x_content">
-                        <br />
-                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
-                          <!-- <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Parent</label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <select id="input_item_parent" class="form-control" disabled="disabled">
-                                
-                              </select>
-                            </div>
-                          </div> -->
-
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Group</label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <select id="input_item_group" class="form-control" >
-                                
-                              </select>
-                            </div>
-                          </div>
-
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Family</label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <select  id="input_item_family"  class="form-control" disabled="disabled">
-                                
-                              </select>
-                            </div>
-                          </div>
-
-                          <div class="form-group row">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Type</label>
-                            <div class="col-md-6 col-sm-6 ">
-                              <select  id="input_item_type"   class="form-control" >
-                                
-                              </select>
-                            </div>
-                          </div>
-
-
-
-                          <form class="form-horizontal form-label-left" onsubmit="return false">
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code 
-                              </label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_code"  class="form-control  " disabled="disabled">
-                              </div>
-                            </div>
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Name <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_name" name="last-name" required="required" class="form-control">
-                              </div>
-                            </div>
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Short Code 
-                              </label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_short_code"  class="form-control">
-                              </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Super Session Item Id 
-                              </label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_super_session_item_id" name="last-name" class="form-control " disabled="disabled">
-                              </div>
-                            </div>
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align ">Manage Serial Number</label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <select id="input_manage_serial_no" class="form-control" >
-                                  <option value="0">No</option>
-                                  <option value="1">Yes</option>
-                                </select>
-                              </div>
-                            </div>
-
-
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Weight (grams) 
-                              </label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_weight"  class="form-control  " disabled="disabled">
-                              </div>
-                            </div>
-
-                      
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align ">Consumable</label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <select id="input_is_consumable" class="form-control">
-                                  <option value="0">No</option>
-                                  <option value="1">Yes</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align ">Recommended</label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <select id="input_is_recommended" class="form-control">
-                                  <option value="0">No</option>
-                                  <option value="1">Yes</option>
-                                </select>
-                              </div>
-                            </div>
-                            
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align ">Slow Moving</label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <select id="input_is_slow_moving" class="form-control">
-                                  <option value="0">No</option>
-                                  <option value="1">Yes</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align ">Active</label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <select id="input_is_active" class="form-control">
-                                  <option value="0">No</option>
-                                  <option value="1">Yes</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="form-group row">
-                              <label class="col-form-label col-md-3 col-sm-3 label-align" >Price 
-                              </label>
-                              <div class="col-md-6 col-sm-6 ">
-                                <input type="text" id="input_price"  class="form-control  ">
-                              </div>
-                            </div>
-
-                            
-                            <div class="ln_solid"></div>
-                            <div class="item form-group">
-                              <div class="col-md-6 col-sm-6 offset-md-3">
-                                <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
-                                <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-                                <button id="submitEditItemModal" type="button" class="btn btn-success">Submit</button>
-                              </div>
-                            </div>
-
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-
-
-
-              <!-- Modal for Bulk Update Price -->
-              <div class="modal fade bd-example-modal-l" id="bulkUpdatePrice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                <div class="modal-dialog modal-l" role="document" >
-                  <div class="modal-content">
-                    <!--Header-->
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="myModalLabel">Update Price</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
-                      </button>
-                    </div>
-                    
-                    <div class="modal-body">
-                      <!-- Sample Table -->
-                      <div class="table-responsive">
-                        <!-- <table class="table table-striped table-bordered table-sm"> -->
-                          <div class="col-md-12 ">
-                            <div class="x_panel">
-                              <div class="x_content">
-                                <br>
-                                <form class="form-horizontal form-label-left">
-
-                                  <div class="form-group row">
-                                    <label class="control-label col-md-3 col-sm-3 ">New Price</label>
-                                    <div class="col-md-9 col-sm-9 ">
-                                      <input type="Number" id="bulk_update_price" class="form-control" value="" placeholder="0">
-                                    </div>
-                                  </div>
-
-
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        
-                       
-                      </div>
-                                  <div class="item form-group">
-                                    <div class="col-md-6 col-sm-6 offset-md-3">
-                                      <!-- <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button> -->
-                                      <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
-                                      <button id="submitBulkPrice" type="button" class="btn btn-success">Submit</button>
-                                    </div>
-                                  </div>
-                    </div>
-                  </div>
+                    </button>
                 </div>
-
-
-                <!-- footer content -->
-                <footer>
-                  <div class="pull-right">
-                    <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-                    <p>  &copy; 2020 <a href="#">La Marzocco enabled by PCPL</a></p>
-                  </div>
-                  <div class="clearfix"></div>
-                </footer>
-                <!-- /footer content -->
-              </div>
+                <div class="col-md-12 col-sm-12 ">
+                    <div class="x_panel">
+                        <div class="x_content">
+                            <br />
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Group</label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <select id="input_item_group" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Family</label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <select id="input_item_family" class="form-control" disabled="disabled">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align ">Product Type</label>
+                                    <div class="col-md-6 col-sm-6 ">
+                                        <select id="input_item_type" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <form class="form-horizontal form-label-left" onsubmit="return false">
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Code
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="input_code" class="form-control  " disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name"> Name <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="input_name" name="last-name" required="required" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name"> Short Code
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="input_short_code" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Super Session Item Id
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="input_super_session_item_id" name="last-name" class="form-control " disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align ">Manage Serial Number</label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select id="input_manage_serial_no" class="form-control">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Weight (grams)
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="input_weight" class="form-control  " disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align ">Consumable</label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select id="input_is_consumable" class="form-control">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align ">Recommended</label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select id="input_is_recommended" class="form-control">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align ">Slow Moving</label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select id="input_is_slow_moving" class="form-control">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align ">Active</label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select id="input_is_active" class="form-control">
+                                                <option value="0">No</option>
+                                                <option value="1">Yes</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Price
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" id="input_price" class="form-control  ">
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                    <div class="item form-group">
+                                        <div class="col-md-6 col-sm-6 offset-md-3">
+                                            <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button>
+                                            <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+                                            <button id="submitEditItemModal" type="button" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+    <!-- Modal for Bulk Update Price -->
+    <div class="modal fade bd-example-modal-l" id="bulkUpdatePrice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-l" role="document">
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Update Price</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Sample Table -->
+                    <div class="table-responsive">
+                        <!-- <table class="table table-striped table-bordered table-sm"> -->
+                        <div class="col-md-12 ">
+                            <div class="x_panel">
+                                <div class="x_content">
+                                    <br>
+                                    <form class="form-horizontal form-label-left">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3 col-sm-3 ">New Price</label>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <input type="Number" id="bulk_update_price" class="form-control" value="" placeholder="0">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <div class="col-md-6 col-sm-6 offset-md-3">
+                        <!-- <button id="cancelEditItemModal" class="btn btn-primary" type="button">Cancel</button> -->
+                        <!-- <button class="btn btn-primary" type="reset">Reset</button> -->
+                        <button id="submitBulkPrice" type="button" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer content -->
+    <footer>
+        <div class="pull-right">
+            <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+            <p> &copy; 2020 <a href="#">La Marzocco enabled by PCPL</a></p>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+    </div>
+    </div>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+    <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+    <script src="../build/js/dataTables.cellEdit.js"></script>
+    <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script> -->
+    <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.1.0/js/dataTables.checkboxes.min.js"></script> -->
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> -->
+    <!-- <script src="../build/js/basic.js"></script> -->
+    <script src="js/productMaster.js"></script>
+    <!-- Side NavBar -->
+    <script src="js/sideNavBar.js"></script>
+    <!-- Custom Theme Scripts -->
+    <!-- <script src="../build/js/custom.js"></script> -->
+    <script src="../build/js/custom.min.js"></script>
+    <script src="../config.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="../assets/js/common/localstorage.js"></script>
+    <script src="../assets/js/common/notification.js"></script>
+    <!-- Main API -->
+    <script src="../assets/js/common/api.js"></script>
+    <script src="../assets/js/common/genericErrorHandler.js"></script>
+</body>
 
-            <!-- jQuery -->
-            <script src="../vendors/jquery/dist/jquery.min.js"></script>
-            <!-- Bootstrap -->
-            <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <!-- FastClick -->
-            <script src="../vendors/fastclick/lib/fastclick.js"></script>
-            <!-- NProgress -->
-            <script src="../vendors/nprogress/nprogress.js"></script>
-            <!-- iCheck -->
-            <script src="../vendors/iCheck/icheck.min.js"></script>
-
-
-
-
-
-
-            <!-- Datatables -->
-            <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-            <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-            <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-            <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-            <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-            <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-            <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-            <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-            <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-            <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-            <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-            <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-            <script src="../vendors/jszip/dist/jszip.min.js"></script>
-            <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-            <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-            <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
-
-
-            <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
-            <script src="../build/js/dataTables.cellEdit.js"></script>
-            <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.2.10/js/dataTables.checkboxes.min.js"></script> -->
-            <!-- <script src="https://gyrocode.github.io/jquery-datatables-checkboxes/1.1.0/js/dataTables.checkboxes.min.js"></script> -->
-            <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
-            <!-- <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script> -->
-            <!-- <script src="../build/js/basic.js"></script> -->
-
-            <script src="js/productMaster.js"></script>
-            <!-- Side NavBar -->
-            <script src="js/sideNavBar.js"></script>
-
-            <!-- Custom Theme Scripts -->
-            <!-- <script src="../build/js/custom.js"></script> -->
-            <script src="../build/js/custom.min.js"></script>
-<script src="../config.js"></script>
-
-            <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-            
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-
-            <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-
-            <script src="../assets/js/common/localstorage.js"></script>
-
-            <script src="../assets/js/common/notification.js"></script>
-
-            <!-- Main API -->
-            <script src="../assets/js/common/api.js"></script>
-            <script src="../assets/js/common/genericErrorHandler.js"></script>
-
-            
-
-          </body>
-          </html>
+</html>

@@ -43,7 +43,7 @@ async function showOrders(orderArr){
               var pageIndex = data.start / data.length + 1 ;
               getQuotationList(onResponse,onError,pageIndex,data.length);
         },
-       
+      
         buttons : [
             {
           extend: 'csv',
@@ -58,9 +58,17 @@ async function showOrders(orderArr){
                 titleAttr: 'Copy table data.',
                 text: 'PDF'
               }
+              
               ],
               columns: [
             
+              {
+                "title":" <input type=\"checkbox\" class=\"checkall\" id =\"checkall\" ><input type=\"button\" id=\"delete_record\" value=\"Delete\" >",
+                render: function(data, type, row, meta){
+                  // console.log(JSON.stringify(row,null,2))
+                  return "<input type=\"checkbox\" value="+row.id+" class=\"delete_check\">";
+                }
+              },
               {
                 "title":"Date",
                 render: function(data, type, row, meta){
@@ -112,12 +120,11 @@ async function showOrders(orderArr){
               // }
               }
             },
+          
         ]
       })
 
 }
-
-
 
 $(document).ready(function(){
 	// alert("sdad")
@@ -142,27 +149,72 @@ $(document).ready(function(){
   });
 
 
+$('#tableOrders').on('click', '#delete_record',async function () {
+          //   var RowIndex = $(this).closest('tr');
+          //   var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+          //   console.log('quotationid :' ,data.id)
+          //   var onError =function(error){
+          //   notifyError("Failed to Delete Quotation");
+          //     };
+          //   var onResponse = function(response){
+          //       if(response.data.status == true){
+          //           notifySuccess("Quotation Deleted Successfully");
+          //     location.reload();
+
+          //       }else{
+          //           notifyError(response.data.message);
+
+          //       }
+          //     };
+          // if (confirm("Proceed to  Delete Quotation ?")) {
+          //     txt = deleteQuotation(data.id,onResponse,onError);
+          // } 
+      var deleteids_arr = [];
+        $("input:checkbox[class=delete_check]:checked").each(function () {
+           deleteids_arr.push($(this).val());
+      });
+      if(deleteids_arr.length > 0){
+        // deleteQuotation(deleteids_arr,onResponse,onError);
+            var onError =function(error){
+              notifyError("Failed to Delete Quotation");
+            };
+            var onResponse = function(response){
+              if(response.data.status == true){
+                notifySuccess("Quotation Deleted Successfully");
+                location.reload();
+            }else{
+                notifyError(response.data.message);
+           }
+          };
+        if (confirm("Proceed to  Delete Quotation ?")) {
+            deleteQuotation(deleteids_arr,onResponse,onError);
+        }
+      }else{
+        alert('Please select quatation')
+      }             
+    });
+
+  $('#tableOrders').on('click', '#checkall',async function () { 
+
+     if($(this).is(':checked')){
+         $('.delete_check').prop('checked', true);
+      }else{
+         $('.delete_check').prop('checked', false);
+      }
+
+  });
   $('#tableOrders').on('click', '#btnCancelOrder',async function () {
       var RowIndex = $(this).closest('tr');
       var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
       console.log("this id data  : ", data)
-
-      // notifyInfo("Please wait");
-
       var order_item_arr = []
       for(i=0; i<data["order_line"].length;i++){
         order_item_arr.push(data["order_line"][i]["id"])
       }
-
       var orderId = data["id"]
       var orderLineIds = order_item_arr.toString()
-
       deleteOrderLineItem(orderId, orderLineIds)
-      // trackOrder(data.id,function(res){
-      //    showOrderTrackingDetails(res.data.track_items);
-      // })
-      // value1.replace(/,/g,'')
-  });
+    });
 });
 
 
@@ -255,58 +307,16 @@ orderDetailsHTML += '</tr>'
 orderDetailsHTML += '</tbody>'
 orderDetailsHTML += '</table>'
 
-    // hbnjmk
-
-
-	// orderDetailsHTML += '<table lass="table table-bordered">'
-	// orderDetailsHTML += '<thead>'
-	// orderDetailsHTML += '<tr>'
- //  orderDetailsHTML += '<th>#</th>'
-	// orderDetailsHTML += '<th >Product</th>'
-	// orderDetailsHTML += '<th >Name</th>'
-	// orderDetailsHTML += '<th price">Price</th>'
-	// orderDetailsHTML += '<th >Quantity</th>'
-	// orderDetailsHTML += '<th >Total</th>'
-	// orderDetailsHTML += '<th >Expected Delivery</th>'
-	// orderDetailsHTML += '<th></th>'
-	// orderDetailsHTML += '</tr>'
-	// orderDetailsHTML += '</thead>'
-	// orderDetailsHTML += '<tbody>'
-
-
-	// for(i=0;i<quoteLine.length;i++){
-	// 	const quoteItem = quoteLine[i];
-
-	// 	orderDetailsHTML += '<tr>'
-	// 	orderDetailsHTML += '<td ><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
-	// 	orderDetailsHTML += '<td ><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
-	// 	orderDetailsHTML += '<td price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
-	// 	orderDetailsHTML += '<td >'+safeAccess(["qty"],quoteItem,"-")+'</td>'
-	// 	orderDetailsHTML += '<td >'+safeAccess(["total"],quoteItem,"-")+'</td>'
-	// 	orderDetailsHTML += '<td >'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
-	// 	orderDetailsHTML += '</tr>'
-	// }
-
-
-	// orderDetailsHTML += '</tbody>'
-	// orderDetailsHTML += '</table>'
-
-
+ 
     $("#orderDetails").append(orderDetailsHTML);
     $('#modal_orderDetails').modal('show');
 }
 
 
-
-
 async function deleteOrderLineItem(orderId, orderLineIds) {
-
   notifyInfo("Please wait");
-    // var RowIndex = $(this).closest('tr');
-    // var data = customerMasterTable.api().row(RowIndex).data();
     var onResponse = function(response){
         notifySuccess("Deleted successfully");
-        // showOrderDetails(orderId, quoteLine)
         window.location.reload();
       };
       var onError =function(error){
@@ -314,8 +324,6 @@ async function deleteOrderLineItem(orderId, orderLineIds) {
       };
     if(confirm("Delete this item?")){
       deleteOrderItem(orderId,orderLineIds,onResponse,onError);
-      // console.log("successfully", orderId)
-      // console.log("successfully", orderLineIds)
     }
 
 }

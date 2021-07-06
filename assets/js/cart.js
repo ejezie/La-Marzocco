@@ -3,8 +3,6 @@
 async function showCart(cartItems){
 
 	var cartHTML = ""
-
-
 	cartHTML += '<table>'
 	cartHTML += '<thead>'
 	cartHTML += '<tr>'
@@ -26,20 +24,6 @@ async function showCart(cartItems){
 		cartHTML += '<td class="product_name"><a href="#">'+cartItems[i]["productName"]+'<br></a>';
 		if(!cartItems[i]["specs"]){cartHTML+= '<a onclick="showSpec('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+",`"+cartItems[i]["documentUrl"]+'`)">Specs</a>';}
 		cartHTML+= '</td>'
-
-		// 	if(cartItems[i]["documentUrl"]){
-		// 	var url = cartItems[i]["documentUrl"]+"";
-		// 	cartHTML += '<input type="button" class="btn btn-success" style="color:white; background:#414141" value="Download"  onClick="downloadFile(`'+url+'`)"  >'
-		// 	cartHTML += '<input type="file" class="btn upload-spec"  id="excelfile"/>'
-		// 	cartHTML += '<input type="button" class="btn upload-spec" value="Update">'
-		// }else{
-		// 	// cartHTML += '<div style="white-space:nowrap">'
-		// 	cartHTML += '<input type="file" id="fileUpload'+cartItems[i]["productId"]+'" class="btn upload-file"  id="excelfile"/>'
-		// 	cartHTML += '<input type="button" class="btn upload-spec" style="color:white" value="Upload Spec" id="'+cartItems[i]["productId"]+'" onclick="uploadExcel('+cartItems[i]["productId"]+","+cartItems[i]["productQuantity"]+')">'
-		// 	// cartHTML += '</div>'
-		// }
-
-
 		cartHTML += '<td class="product-price">'+cartItems[i]["productPrice"].toLocaleString("en-AU")+'</td>'
 		cartHTML += '<td class="product_quantity"><label>Quantity</label> <input onchange="editQuantity('+cartItems[i]["productItemId"]+',this)" min="1" max="100" value="'+cartItems[i]["productQuantity"]+'" type="number"><a ><i onclick="deleteItem('+cartItems[i]["productItemId"]+')" class="fa fa-trash-o" style="width: 30px;font-size:17px"></i></a></td>'
 		// cartHTML += '<td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>'
@@ -269,12 +253,6 @@ function refreshCart(){
 						cartItems.push(element);
 					}
 					showCart(cartItems);
-					// var cartSubTotals = {
-					// 					"subTotal" : "$"+ shoppingCart.totalCart(),
-					// 					"total" :  "$"+shoppingCart.totalCart()+20,
-					// 					"shipping" : "$20"
-					// 				}
-					// showSubTotal(cartSubTotals);
 					if(window.location.href.includes("bulkOrderConfirmation")){
 						generateQuote();
 					}
@@ -300,8 +278,6 @@ function generateQuote(){
 									"tax" : (safeAccess(["data","quote","total_tax"],response,0))
 								}
 				showSubTotal(cartSubTotals,safeAccess(["data","quote","id"],response));
-		
-
 				var p = 0;
 				for(item of safeAccess(["data","quote","quote_line"],response,[])){
 					p += item.price * item.qty;	
@@ -320,8 +296,6 @@ function generateQuote(){
 		});
 
 }
-
-
 
 
 async function uploadExcel(id,file,qty){

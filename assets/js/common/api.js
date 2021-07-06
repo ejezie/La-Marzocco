@@ -608,6 +608,78 @@ async function getQuotationList(onResponse,onError,page,page_size){
   .catch(onError);  
 
 }
+
+async function deleteQuotation(id,onResponse,onError){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'quotation/'+id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+async function bulkDeleteQuotation(id,onResponse,onError){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'quotation/bulk?quote_ids='+id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError);
+}
+
+
+async function addFavourite(id,onResponse,onError){
+
+  var config = {
+    method: 'post',
+    url: BASE_URL+'favorite?item_ids='+id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError); 
+}
+
+async function removeFavourite(id,onResponse,onError){
+
+  var config = {
+    method: 'delete',
+    url: BASE_URL+'favorite?item_ids='+id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError); 
+}
+
+
+async function listFavourite(onResponse,onError){
+
+  var config = {
+    method: 'get',
+    url: BASE_URL+'favorite?page_size=10000&page=1',
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     }
+  };
+  axios(config).then(onResponse).catch(onError); 
+}
+
 async function getOrderList(onResponse,onError,page,page_size){
 
   var data = new FormData();
@@ -1638,17 +1710,29 @@ async function getMappingGroup(onResponse,onError){
   axios(config).then(onResponse).catch(onError);
 }
 
+// async function getMappingParent(onResponse,onError){
+//   var config = {
+//     method: 'get',
+//     url: BASE_URL+'mapping/parent',
+//      headers: {
+//       'Content-Type': 'multipart/form-data',
+//       'Authorization': getAPIToken(),
+//       'Accept': 'application/json'
+//      },
+//   };
+//   axios(config).then(onResponse).catch(onError);
+// }
 async function getMappingParent(onResponse,onError){
-  var config = {
+ var config = {
     method: 'get',
-    url: BASE_URL+'mapping/parent',
+    url: BASE_URL+'mapping/category',
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(),
       'Accept': 'application/json'
      },
   };
-  axios(config).then(onResponse).catch(onError);
+  axios(config).then(onResponse).catch(onError); 
 }
 
 async function getMappingsMachine(onResponse,onError){
@@ -1792,10 +1876,103 @@ async function getItemParentImages(parent_id,main_item_id,onResponse,onError){
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(),
       'Accept': 'application/json'
-     }
+     },
+     withCredentials: false
+  };
+  // console.log("URL : ", BASE_URL+'item-parent-image?parent_id='+parent_id+"&main_item_id="+main_item_id+"&page_size=9999")
+  axios(config).then(onResponse).catch(onError);
+}
+
+async function getSvgContent(svg_id,onResponse,onError){
+  var config = {
+    method: 'get',
+    url: BASE_URL+'item-parent-image/'+svg_id,
+     headers: {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': getAPIToken(),
+      'Accept': 'application/json'
+     },
+     withCredentials: false
   };
   axios(config).then(onResponse).catch(onError);
 }
+
+// async function getSvgContent(svg_id,onResponse,onError){
+//   var url = "item-parent-image/"+svg_id,
+
+//   var config = {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'multipart/form-data',
+//       'Authorization': getAPIToken(),
+//       'Accept': 'application/json'
+//     },
+//   };
+//    axios(config).then(onResponse).catch(onError);
+// }
+
+// async function getItemParentImages(parent_id,main_item_id,onResponse,onError){
+//   var url = BASE_URL+'item-parent-image?parent_id='+parent_id+"&main_item_id="+main_item_id+"&page_size=9999"
+//   var config = {
+//     method: 'GET',
+//     headers: {
+//         'Content-Type': 'multipart/form-data',
+//         'Authorization': getAPIToken(),
+//         'Accept': 'application/json'
+//       },
+//       mode: 'cors',
+//     credentials: 'same-origin'
+//   }
+//   fetch(url, config).then(onResponse).catch(onError)
+// }
+
+// async function getItemParentImages(parent_id, main_item_id, onResponse, onError){
+//   var url = BASE_URL+'item-parent-image?parent_id='+parent_id+"&main_item_id="+main_item_id+"&page_size=9999"
+//   var config = {
+//     method: 'GET',
+//     headers: {
+//         'Content-Type': 'multipart/form-data',
+//         'Authorization': getAPIToken(),
+//         'Accept': 'application/json'
+//       },
+//       mode: 'cors',
+//     credentials: 'same-origin'
+//   }
+//   // fetch(url, config).then(onResponse).catch(onError)
+//   // var response = await fetch(url, config).
+//   //     then(function(resp) {
+//   //       console.log("resp : ", resp)
+//   //       console.log("resp : ", resp.text(), typeof(resp.text()))
+//   //       return resp.text()
+//   //     }, function(error) {
+//   //       console.log("error : ", error)
+//   //       return error
+//   //     }).catch(function(error){
+//   //       console.log("error : ", error)
+//   //       return error
+//   //     })
+
+//   // var response = await fetch(url, config).
+//   //     then(function(resp) {
+//   //       if (!resp.ok){
+//   //         return false
+//   //       }
+//   //       return resp.text()
+//   //       // console.log("resp : ", resp)
+//   //       // console.log("resp : ", resp.text(), typeof(resp.text()))
+//   //       // return resp.text()
+//   //     }, function(error) {
+//   //       console.log("error : ", error)
+//   //       return error
+//   //     }).catch(function(error){
+//   //       console.log("error : ", error)
+//   //       return error
+//   //     })
+
+//   fetch(url, config).then(onResponse).catch(onError)  
+// }
+
+
 async function getItemParentImagesForMachineDropdown(currentPage,pageSize,main_item_id,onResponse,onError){
   var config = {
     method: 'get',
@@ -1825,7 +2002,8 @@ async function getMachineParentMapping(itemParentId,onResponse,onError){
 async function getMachineParentList(currentPage,pageSize,onResponse,onError,machineId){
   var config = {
     method: 'get',
-    url: BASE_URL+'machine-parent?item_id='+machineId+'&page='+currentPage+ '&page_size='+pageSize,
+    // url: BASE_URL+'machine-parent?item_id='+machineId+'&page='+currentPage+ '&page_size='+pageSize,
+    url: BASE_URL+'machine-parent?family_id='+machineId+'&page='+currentPage+'&page_size='+pageSize,
      headers: {
       'Content-Type': 'multipart/form-data',
       'Authorization': getAPIToken(),
@@ -2529,3 +2707,4 @@ async function replyTrainingAftersalesEnquiry(details,enquiry_id,onResponse,onEr
   .then(onResponse)
   .catch(onError);  
 }
+

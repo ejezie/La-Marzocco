@@ -59,9 +59,6 @@ var orderArr = [
 					},
 				]
 
-
-
-
 async function showCart(orderArr){
 
 	var myOrdersHTML = ""
@@ -86,10 +83,7 @@ async function showCart(orderArr){
 		myOrdersHTML += '<td><a class="primary" data-toggle="modal" data-target="#modal_box" id='+orderArr[i]["orderId"]+' onclick="showOrderDetails(`'+orderArr[i]["orderId"]+'`)">View Details</a></td>'
 		myOrdersHTML += '<td>'+orderArr[i]["totalPrice"]+'</td>'
 		myOrdersHTML += '<td class="product_total">'+orderArr[i]["totalPrice"]+'</td>'
-		// myOrdersHTML += '<td>'+orderArr[i]["status"]+'</td>'
 		myOrdersHTML += '</tr>'
-
-
 	}
 
 	myOrdersHTML += '</tbody>'
@@ -97,59 +91,6 @@ async function showCart(orderArr){
 
 	$("#myOrders").append(myOrdersHTML)
 }
-
-
-// async function showOrderDetails(orderId){
-
-// 	var orderDetails = orderArr.filter(function(order){return order.orderId == orderId;});
-
-
-// 	console.log("orderDetails : ",orderDetails[0]["orderDetails"])
-
-
-// 	var orderDetailsHTML = ""
-// 	$("#orderDetails").empty()
-
-
-// 	orderDetailsHTML += '<table>'
-// 	orderDetailsHTML += '<thead>'
-// 	orderDetailsHTML += '<tr>'
-// 	orderDetailsHTML += '<th class="product_thumb">Product</th>'
-// 	orderDetailsHTML += '<th class="product_name">Name</th>'
-// 	orderDetailsHTML += '<th class="product-price">Price</th>'
-// 	orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
-// 	orderDetailsHTML += '<th class="product_total">Total</th>'
-// 	orderDetailsHTML += '<th class="product_status">Status</th>'
-// 	orderDetailsHTML += '<th></th>'
-// 	orderDetailsHTML += '</tr>'
-// 	orderDetailsHTML += '</thead>'
-// 	orderDetailsHTML += '<tbody>'
-
-
-// 	for(i=0;i<orderDetails[0]["orderDetails"].length;i++){
-
-// 		orderDetailsHTML += '<tr>'
-// 		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
-// 		orderDetailsHTML += '<td class="product_name"><a href="#">'+orderDetails[0]["orderDetails"][i]["productName"]+'</a></td>'
-// 		orderDetailsHTML += '<td class="product-price">'+orderDetails[0]["orderDetails"][i]["productPrice"]+'</td>'
-// 		orderDetailsHTML += '<td class="product_quantity">'+orderDetails[0]["orderDetails"][i]["productQuantity"]+'</td>'
-// 		orderDetailsHTML += '<td class="product_total">'+orderDetails[0]["orderDetails"][i]["totalProductPrice"]+'</td>'
-// 		orderDetailsHTML += '<td class="product_total">'+orderDetails[0]["orderDetails"][i]["status"]+'</td>'
-// 		orderDetailsHTML += '<td><a>Add to cart</a></td>'
-// 		orderDetailsHTML += '</tr>'
-// 	}
-
-
-// 	orderDetailsHTML += '</tbody>'
-// 	orderDetailsHTML += '</table>'
-
-
-//     $("#orderDetails").append(orderDetailsHTML)
-
-// }
-
-
-
 
 function capitalize(str) {
   strVal = '';
@@ -159,9 +100,6 @@ function capitalize(str) {
   }
   return strVal
 }
-
-
-
 
 var itemMasterTable;
 async function showOrders(orderArr){
@@ -257,19 +195,22 @@ async function showOrders(orderArr){
 		          }
         },
         {
+        	"title" : "Re Order",
+        	render: function(data, type, row){
+		           return "<button type=\"button\" id='reBtnDetails' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Re Order</span></button>"
+		          }
+        },
+        {
                 "title":"Status",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
                   return capitalize(safeAccess(['status'],row,"-"));
                 },
-              },
+        },
         ]
       })
 
 }
-
-
-
 $(document).ready(function(){
 	showOrders();
 
@@ -279,6 +220,11 @@ $(document).ready(function(){
   	showOrderDetails(data.order_line);
   });
 
+  $('#tableOrders').on('click', '#reBtnDetails', function () {
+  	var RowIndex = $(this).closest('tr');
+    var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+  	repeatShowOrderDetails(data.order_line);
+  })
 
   $('#tableOrders').on('click', '#btnTrackOrder',async function () {
   		var RowIndex = $(this).closest('tr');
@@ -287,17 +233,12 @@ $(document).ready(function(){
     	trackOrder(data.id,function(res){
     		 showOrderTrackingDetails(res.data.track_items);
     	})
-
   });
 });
-
-
 
 async function showOrderTrackingDetails(items){
 var orderDetailsHTML = ""
 	$("#orderTrackingDetails").empty()
-
-
 	orderDetailsHTML += '<table style="width:inherit">'
 	orderDetailsHTML += '<thead>'
 	orderDetailsHTML += '<tr>'
@@ -311,8 +252,6 @@ var orderDetailsHTML = ""
 	orderDetailsHTML += '</tr>'
 	orderDetailsHTML += '</thead>'
 	orderDetailsHTML += '<tbody>'
-
-
 	for(i=0;i<items.length;i++){
 		const item = items[i];
 		orderDetailsHTML += '<tr>'
@@ -330,22 +269,14 @@ var orderDetailsHTML = ""
 		}
 		orderDetailsHTML += '</tr>'
 	}
-
-
 	orderDetailsHTML += '</tbody>'
 	orderDetailsHTML += '</table>'
-
-// 
     $("#orderTrackingDetails").append(orderDetailsHTML);
     $('#modal_tracking').modal('show');
 }
-
 async function showOrderDetails(quoteLine){
-
 	var orderDetailsHTML = ""
 	$("#orderDetails").empty()
-
-
 	orderDetailsHTML += '<table style="width:inherit">'
 	orderDetailsHTML += '<thead>'
 	orderDetailsHTML += '<tr>'
@@ -360,13 +291,9 @@ async function showOrderDetails(quoteLine){
 	orderDetailsHTML += '</tr>'
 	orderDetailsHTML += '</thead>'
 	orderDetailsHTML += '<tbody>'
-
-
 	for(i=0;i<quoteLine.length;i++){
 		const quoteItem = quoteLine[i];
-
 		console.log("quoteItem : ", quoteItem)
-
 		orderDetailsHTML += '<tr>'
 		if(quoteItem.item.item_images[0]){
 
@@ -384,11 +311,119 @@ async function showOrderDetails(quoteLine){
 		orderDetailsHTML += '</tr>'
 	}
 
-
 	orderDetailsHTML += '</tbody>'
 	orderDetailsHTML += '</table>'
-
-
     $("#orderDetails").append(orderDetailsHTML);
     $('#modal_box').modal('show');
 }
+async function repeatShowOrderDetails(quoteLine){
+	var orderDetailsHTML = ""
+	$("#orderDetails").empty()
+	orderDetailsHTML += '<table id="repeatOrderTable" style="width:inherit">'
+	orderDetailsHTML += '<thead>'
+	orderDetailsHTML += '<tr>'
+	orderDetailsHTML += '<th class="product_thumb">Product</th>'
+	orderDetailsHTML += '<th class="product_code">Code</th>'
+	orderDetailsHTML += '<th class="product_name">Name</th>'
+	// orderDetailsHTML += '<th class="product-price">Price</th>'
+	// orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
+	// orderDetailsHTML += '<th class="product_total">Total</th>'
+	orderDetailsHTML += '<th class="product_status">Quantity</th>'
+	orderDetailsHTML += '<th></th>'
+	orderDetailsHTML += '</tr>'
+	orderDetailsHTML += '</thead>'
+	orderDetailsHTML += '<tbody>'
+	for(i=0;i<quoteLine.length;i++){
+		const quoteItem = quoteLine[i];
+		console.log("quoteItem : ", quoteItem)
+		orderDetailsHTML += '<tr>'
+		if(quoteItem.item.item_images[0]){
+
+		orderDetailsHTML += '<td class="product_thumb" id="testid" ><a href="#"><img src="'+quoteItem.item.item_images[0]["image"]["image"]+'" class="re_Order_Image" alt=""></a></td>'
+		}else{
+
+		orderDetailsHTML += '<td class="product_thumb"><a href="#"><img src="assets/img/lma_catalog_img.png" class="re_Order_Image" alt=""></a></td>'
+		}
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","code"],quoteItem,"-")+'</a></td>'
+		orderDetailsHTML += '<td class="product_name"><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
+		// orderDetailsHTML += '<td class="product-price">$'+safeAccess(["price"],quoteItem,"-").toLocaleString("en-AU")+'</td>'
+		// orderDetailsHTML += '<td class="product_quantity">''</td>'
+		// orderDetailsHTML += '<td class="product_total">$'+safeAccess(["total"],quoteItem,"-").toLocaleString("en-AU")+'</td>'
+		var inputId = "inputQuantity"+i
+		orderDetailsHTML += '<td class="product_total"><input id="'+inputId+'"  min="1" max="100"  value="'+safeAccess(["qty"],quoteItem,"-")+'" type="number"></td>'
+		// orderDetailsHTML += '<td class="hidden"><input id="inputItemId" class="inputItemId"  value="'+safeAccess(["item","id"],quoteItem,"-")+'" type="text"></td>'
+		// orderDetailsHTML += '<td class="hidden"><input id="inputItemLength"  value="'+quoteLine.length+'" type="text"></td>'
+		orderDetailsHTML += '</tr>'
+	}
+
+	orderDetailsHTML += '</tbody>'
+	orderDetailsHTML += '</table>'
+	orderDetailsHTML += '<br>'
+	orderDetailsHTML += '<button type="button"  id="btAddToCart" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-edit">Add To Cart</span></button>'
+  orderDetailsHTML += '<br>'
+  console.log("orderDetailsHTML",orderDetailsHTML) 	
+    $("#orderDetails").append(orderDetailsHTML);
+    $('#modal_box').modal('show');
+    $("section").each(function() {
+		   $(this).data("serial", current);
+		   current++;
+		});
+
+    $("#btAddToCart").click(async function(){
+
+			
+			// var length = $("#inputItemLength").val();
+			// for(i=0;i<length;i++){
+			// 	var itemId = $(".inputItemId").val();
+			// 	// $(".inputItemId").each(function() { 
+			// 	// 	var	itemId	= $(this).val("");
+			// 	// 	console.log("itemId:",itemId) 
+			// 	// });
+			// 	// var itemId	  =  safeAccess(["item","id"],quoteItem,"-");
+			// 	// var	itemId	=		$(this).attr(".inputItemId");
+			 // var counter =  0 ;
+				for (m=0;m<quoteLine.length;m++){
+					const newQty = $("#inputQuantity"+m).val();
+					console.log("newQty : ", newQty)
+					var itemId = quoteLine[m]["item_id"]
+					console.log("itemId : ",itemId);
+
+					if(newQty == '' || newQty >100){
+						counter++;
+						notifyError("Amount not valid!" );
+						break;
+					}else {
+						 // notifyError("Amoiunt Valid");
+						shoppingCart.modify(itemId,newQty,function(){reloadMiniCart();});
+					}
+				}
+			//   console.log("newQty:",newQty)
+			//   console.log("itemId:",itemId)
+			// }
+			// console.log("das:",das)
+			// console.log("item:",itemId)
+			// const newQty = $("#inputQuantity").val();
+			// console.log("newQty:",newQty)
+			// alert(newQty);
+			// if(newQty == ''){
+			// 	notifyError("Amount not valid!");
+			// }
+			// if(newQty>0){
+			 	 
+			 	 // shoppingCart.modify(itemId,newQty,function(){reloadMiniCart();});
+			// }
+			// if (newQty >100) {
+			// 	notifyError("Item Quantity not grater than 100!");
+			// }
+				// $('#repeatOrderTable tr').each(function() {
+				    // var customerId = $(this).find("td:first").html().attr("id");
+				    // var customerId = $(this).find("td:first").attr("id");
+				    console.log("quoteLine  >>>>>>>>>> ", quoteLine)
+
+				        
+				// });
+		});
+}
+
+
+

@@ -1,461 +1,464 @@
-$(document).ready(function(){
+var favouriteItemList = []
+// var favouriteItemList1 = []
+// async function getFavItemList() {
+//     var onError = function(error) {
+//         notifyError("Failed to Added Favourite Item");
+//     };
+//     var onResponse = function(response) {
+//         if (response.data.status == true) {
+//             // notifySuccess("Favourite Item Added Successfully");
+//             // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>> vbnm,.", response.data.favorite.data)
+//             // favouriteItemList.push(response.data.favorite.data)
+//             Array.prototype.push.apply(favouriteItemList, response.data.favorite.data)
+//             // Array.prototype.push.apply(favouriteItemList1,response.data.favorite.data)
+//         } else {
+//             notifyError(response.data.message);
+//         }
+//     };
+//     listFavourite(onResponse, onError);
+//     // await listFavourite(onResponse,onError);
+//     return favouriteItemList
+// }
 
-	shoppingCart.sync();
+
+
+$(document).ready(function() {
+
+    getFavItemList()
+
+    shoppingCart.sync();
 })
 
+function showRecommendedProducts(items) {
+    var getFavouriteItemList = favouriteItemList
+    var recommendedProductsHTML = ""
 
- function showRecommendedProducts(items){
+    for (item of items) {
+
+        recommendedProductsHTML += '<div class="single_product">'
+        recommendedProductsHTML += '<div class="product_content">'
+        recommendedProductsHTML += '<h3><a href="product-details.html?item=' + item.id + '" style="text-transform: lowercase;"><strong>' + item["name"] + '</strong></a></h3>'
+        recommendedProductsHTML += '<h5><a>' + safeAccess(["code"], item) + '</a></h5>'
+        recommendedProductsHTML += '<h5><a>' + safeAccess(["item_group", "desc"], item) + '</a></h5>'
+        recommendedProductsHTML += '<h5><a>' + safeAccess(["item_parent_images", 0, "parent", "name"], item) + '</a></h5>'
+        recommendedProductsHTML += '<h5><a>' + safeAccess(["item_family", 0, "code"], item) + '</a></h5>'
+        recommendedProductsHTML += '</div>'
+        recommendedProductsHTML += '<div class="product_thumb">'
+        if (item.item_images[0] != undefined) {
+            recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="' + item.item_images[0].image.thumbnail + '" alt=""></a>'
+        } else if (item.item_parent_images[0] != undefined) {
+
+            recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="' + item.item_parent_images[0].image.thumbnail + '" alt=""></a>'
+        } else {
+            recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+        }
+        if (itemIdExistsForRecommendedProducts(Number(item.id), getFavouriteItemList)) {
+
+            recommendedProductsHTML += '<span class="removeRecommendedProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
+        } else {
+            recommendedProductsHTML += '<span class="recommendedProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+        }
+        recommendedProductsHTML += '</div>'
+        recommendedProductsHTML += '</div>'
+
+    }
+
+    $("#recommendedProducts").append(recommendedProductsHTML)
+
+    $(".recommendedProducts").click(async function() {
+        var data = $(this).attr("value");
+        // console.log("id:",data)
+        var onError = function(error) {
+            notifyError("Failed to Added Favourite Item");
+        };
+        var onResponse = function(response) {
+            if (response.data.status == true) {
+                notifySuccess("Favourite Item Added Successfully");
+                window.location.reload();
+            } else {
+                notifyError(response.data.message);
+            }
+        };
+        addFavourite(data, onResponse, onError);
+    });
+
+    $(".removeRecommendedProducts").click(async function() {
+        var data = $(this).attr("value");
+        var onError = function(error) {
+            notifyError("Failed to Added Removed Item");
+        };
+        var onResponse = function(response) {
+            if (response.data.status == true) {
+                notifySuccess("Favourite Item Removed Successfully");
+                window.location.reload();
+            } else {
+                notifyError(response.data.message);
+            }
+        };
+        removeFavourite(data, onResponse, onError);
+    });
 
 
 
-	var recommendedProductsHTML = ""
-
-	for(item of items){
- 	// console.log("items  <>>>>  >>>>>> : ", item)
-
-		// recommendedProductsHTML += '<a >'
-		recommendedProductsHTML += '<div class="single_product">'
-		recommendedProductsHTML += '<div class="product_content">'
-		recommendedProductsHTML += '<h3><a href="product-details.html?item='+item.id+'" style="text-transform: lowercase;"><strong>'+item["name"]+'</strong></a></h3>'
-		// recommendedProductsHTML += '<div class="product_ratings">'
-		// recommendedProductsHTML += '<ul>'
-		// recommendedProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// recommendedProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// recommendedProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// recommendedProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// recommendedProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// recommendedProductsHTML += '</ul>'
-		// recommendedProductsHTML += '</div>'
-		recommendedProductsHTML += '<h5><a>'+safeAccess(["code"],item)+'</a></h5>'
-		recommendedProductsHTML += '<h5><a>'+safeAccess(["item_group","desc"],item)+'</a></h5>'
-		recommendedProductsHTML += '<h5><a>'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
-		recommendedProductsHTML += '<h5><a>'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
-
-		// recommendedProductsHTML += '<div class="price_box">'
-		// recommendedProductsHTML += '<span class="regular_price">'+recommendedProductsArray[i]["productPrice"]+'</span>'
-		// recommendedProductsHTML += '</div>'
-		recommendedProductsHTML += '</div>'
-		recommendedProductsHTML += '<div class="product_thumb">'
-		if(item.item_images[0] != undefined){
-
-			recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_images[0].image.thumbnail+'" alt=""></a>'
-		}else if(item.item_parent_images[0] != undefined){
-
-			recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
-		}else{
-			recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
-		}
-		recommendedProductsHTML += '</div>'
-		recommendedProductsHTML += '</div>'
-		// recommendedProductsHTML += '</a>'
-	}
-
-
-	// 	var owl1 = $('.product_column3');
-	// owl1.trigger('destroy.owl.carousel');
-	// owl.owlCarousel({
-	//    items: 5,
-	// });
-
-
-	// carouselLib()
-	$("#recommendedProducts").append(recommendedProductsHTML)
-
-	var owl1 = $('.product_column3');
-	owl1.trigger('destroy.owl.carousel');
+    var owl1 = $('.product_column3');
+    owl1.trigger('destroy.owl.carousel');
 
 
 
-	$('.product_column3').owlCarousel({
+    $('.product_column3').owlCarousel({
         autoplay: true,
-		loop: true,
+        loop: true,
         nav: true,
         autoplay: false,
         autoplayTimeout: 8000,
         items: 5,
         // margin:20,
-        dots:false,
-        navText: ['<i class="ion-ios-arrow-thin-left"></i>','<i class="ion-ios-arrow-thin-right"></i>'],
-        responsiveClass:true,
-		responsive:{
-				0:{
-				items:1,
-			},
-            200:{
-				items:2,
-			},
-            992:{
-				items:3,
-			},
-			
+        dots: false,
+        navText: ['<i class="ion-ios-arrow-thin-left"></i>', '<i class="ion-ios-arrow-thin-right"></i>'],
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            200: {
+                items: 2,
+            },
+            992: {
+                items: 3,
+            },
 
-		  }
+
+        }
     });
 
-    $('.product_column3 .owl-stage').css('transform','translate3d(-4440px, 0px, 0px)');
-
-
-
+    $('.product_column3 .owl-stage').css('transform', 'translate3d(-4440px, 0px, 0px)');
 }
 
 
-async function showTopSellingProducts(items){
+function itemIdExists(id, arr) {
+
+    return arr.some(function(el) {
+        return el.item_id === id;
+    });
+}
+
+function itemIdExistsForRecommendedProducts(id, arr) {
+    console.log("id", id)
+    console.log("arr", arr)
+    return arr.some(function(el) {
+        return el.item_id === id;
+    });
+}
 
 
+async function showTopSellingProducts(items) {
 
- 	console.log(" top selling items : ",items )
+    var getFavouriteItemList = favouriteItemList
+    // console.log("getFavsItemList >> : ", getFavsItemList)
 
-
-	var topSellingProductsHTML = ""
-	$("#topSellingProducts").empty(topSellingProductsHTML)
-
-	// for(i=0 ; i<topSellingItemList.length; i++){
-	for(item of items){
-
-		topSellingProductsHTML += '<div class="single_product">'
-		topSellingProductsHTML += '<div class="product_content">'
-		topSellingProductsHTML += '<h3><a href="product-details.html?item='+item.id+'" style="text-transform: lowercase;"><strong>'+item["name"]+'</strong></a></h3>'
-		// topSellingProductsHTML += '<div class="product_ratings">'
-		// topSellingProductsHTML += '<ul>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '</ul>'
-		// topSellingProductsHTML += '</div>'
-		// topSellingProductsHTML += '<div class="price_box">'
-		// topSellingProductsHTML += '<span class="regular_price">'+topSellingItemList[i]["productPrice"]+'</span>'
-		// topSellingProductsHTML += '</div>'
-		topSellingProductsHTML += '<h5><a>'+safeAccess(["code"],item)+'</a></h5>'
-		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_group","desc"],item)+'</a></h5>'
-		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
-		topSellingProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
-		topSellingProductsHTML += '</div>'
-		topSellingProductsHTML += '<div class="product_thumb">'
-		if(item.item_images[0] != undefined){
-
-			topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_images[0].image.thumbnail+'" alt=""></a>'
-		}else if(item.item_parent_images[0] != undefined){
-
-			topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt=""></a>'
-		}else{
-			topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
-		}
-		topSellingProductsHTML += '</div>'
-		topSellingProductsHTML += '</div>'
-	}
+    console.log(" top selling items : ", items)
 
 
-	$("#topSellingProducts").append(topSellingProductsHTML)
+    var topSellingProductsHTML = ""
+    $("#topSellingProducts").empty(topSellingProductsHTML)
+    for (item of items) {
+
+        topSellingProductsHTML += '<div class="single_product">'
+        topSellingProductsHTML += '<div class="product_content">'
+        topSellingProductsHTML += '<h3><a href="product-details.html?item=' + item.id + '" style="text-transform: lowercase;"><strong>' + item["name"] + '</strong></a></h3>'
+        topSellingProductsHTML += '<h5><a>' + safeAccess(["code"], item) + '</a></h5>'
+        topSellingProductsHTML += '<h5><a href="product-details.html">' + safeAccess(["item_group", "desc"], item) + '</a></h5>'
+        topSellingProductsHTML += '<h5><a href="product-details.html">' + safeAccess(["item_parent_images", 0, "parent", "name"], item) + '</a></h5>'
+        topSellingProductsHTML += '<h5><a href="product-details.html">' + safeAccess(["item_family", 0, "code"], item) + '</a></h5>'
+        topSellingProductsHTML += '</div>'
+        topSellingProductsHTML += '<div class="product_thumb">'
+        if (item.item_images[0] != undefined) {
+
+            topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="' + item.item_images[0].image.thumbnail + '" alt=""></a>'
+        } else if (item.item_parent_images[0] != undefined) {
+
+            topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="' + item.item_parent_images[0].image.thumbnail + '" alt=""></a>'
+        } else {
+            topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+        }
+        if (itemIdExists(Number(item.id), getFavouriteItemList)) {
+            topSellingProductsHTML += '<span class="imageChanged"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
+        } else {
+            topSellingProductsHTML += '<span class="topSellingProducts"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
 
 
+        }
+        topSellingProductsHTML += '</div>'
+        topSellingProductsHTML += '</div>'
+    }
 
-	var owl2 = $('.product_column3');
-	owl2.trigger('destroy.owl.carousel');
+
+    $("#topSellingProducts").append(topSellingProductsHTML)
+
+    $(".topSellingProducts").click(async function() {
+        var data = $(this).attr("value");
+        var onError = function(error) {
+            notifyError("Failed to Added Favourite Item");
+        };
+        var onResponse = function(response) {
+            if (response.data.status == true) {
+                notifySuccess("Favourite Item Added Successfully");
+                window.location.reload();
+            } else {
+                notifyError(response.data.message);
+            }
+        };
+        addFavourite(data, onResponse, onError);
+    });
+    $(".imageChanged").click(async function() {
+        var data = $(this).attr("value");
+        var onError = function(error) {
+            notifyError("Failed to Added Removed Item");
+        };
+        var onResponse = function(response) {
+            if (response.data.status == true) {
+                notifySuccess("Favourite Item Removed Successfully");
+                window.location.reload();
+            } else {
+                notifyError(response.data.message);
+            }
+        };
+        removeFavourite(data, onResponse, onError);
+    });
+
+    var owl2 = $('.product_column3');
+    owl2.trigger('destroy.owl.carousel');
 
 
-	$('.product_column3').owlCarousel({
+    $('.product_column3').owlCarousel({
         autoplay: true,
-		loop: true,
+        loop: true,
         nav: true,
         autoplay: false,
         autoplayTimeout: 8000,
         items: 5,
         // margin:20,
-        dots:false,
-        navText: ['<i class="ion-ios-arrow-thin-left"></i>','<i class="ion-ios-arrow-thin-right"></i>'],
-        responsiveClass:true,
-		responsive:{
-				0:{
-				items:1,
-			},
-            200:{
-				items:2,
-			},
-            992:{
-				items:3,
-			},
-			
+        dots: false,
+        navText: ['<i class="ion-ios-arrow-thin-left"></i>', '<i class="ion-ios-arrow-thin-right"></i>'],
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            200: {
+                items: 2,
+            },
+            992: {
+                items: 3,
+            },
 
-		  }
+
+        }
     });
 
-    $('.product_column3 .owl-stage').css('transform','translate3d(-4440px, 0px, 0px)');
-    $('.product_column3 .owl-stage .owl-item .active').css('width','300px');
+    $('.product_column3 .owl-stage').css('transform', 'translate3d(-4440px, 0px, 0px)');
+    $('.product_column3 .owl-stage .owl-item .active').css('width', '300px');
 }
 
 
+async function showSpecialOffersProducts(items) {
+
+    var specialOffersProductsHTML = ""
+    var getFavouriteItemList = favouriteItemList
+    for (item of items) {
+        specialOffersProductsHTML += '<div class="single_product">'
+        specialOffersProductsHTML += '<div class="product_content">'
+        specialOffersProductsHTML += '<h3><a href="product-details.html?item=' + item.id + '" style="text-transform: lowercase;"><strong>' + item["name"] + '</strong></a></h3>'
+        specialOffersProductsHTML += '<h5><a>' + safeAccess(["code"], item) + '</a></h5>'
+        specialOffersProductsHTML += '<h5><a href="product-details.html">' + safeAccess(["item_group", "desc"], item) + '</a></h5>'
+        specialOffersProductsHTML += '<h5><a href="product-details.html">' + safeAccess(["item_parent_images", 0, "parent", "name"], item) + '</a></h5>'
+        specialOffersProductsHTML += '<h5><a href="product-details.html">' + safeAccess(["item_family", 0, "code"], item) + '</a></h5>'
+        specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += '<div class="product_thumb">'
+        if (item.item_images[0] != undefined) {
+            specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="' + item.item_images[0].image.thumbnail + '" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+        } else if (item.item_parent_images[0] != undefined) {
+            specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="' + item.item_parent_images[0].image.thumbnail + '" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+        } else {
+            specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+        }
+        if (itemIdExists(Number(item.id), getFavouriteItemList)) {
+            specialOffersProductsHTML += '<span class="removeSpecialOffersProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
+        } else {
+            specialOffersProductsHTML += '<span class="specialOffersProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+        }
+        specialOffersProductsHTML += '<span class="results" class="imgTop" value="' + item.id + '" style="background-color:#fff;" id=fa' + item.id + '  ></span>'
+        specialOffersProductsHTML += '</div>'
+        specialOffersProductsHTML += '</div>'
+    }
+    $("#specialOffersProducts").append(specialOffersProductsHTML)
+
+    $(".specialOffersProducts").click(async function() {
+        var data = $(this).attr("value");
+        console.log("id:", data)
+        var onError = function(error) {
+            notifyError("Failed to Added Favourite Item");
+        };
+        var onResponse = function(response) {
+            if (response.data.status == true) {
+                notifySuccess("Favourite Item Added Successfully");
+                window.location.reload();
+            } else {
+                notifyError(response.data.message);
+            }
+        };
+        addFavourite(data, onResponse, onError);
+    });
 
 
-
-async function showSpecialOffersProducts(items){
-
-
-	var specialOffersProductsHTML = ""
-
-	for(item of items){
-
-
-		specialOffersProductsHTML += '<div class="single_product">'
-		specialOffersProductsHTML += '<div class="product_content">'
-		specialOffersProductsHTML += '<h3><a href="product-details.html?item='+item.id+'" style="text-transform: lowercase;"><strong>'+item["name"]+'</strong></a></h3>'
-		// topSellingProductsHTML += '<div class="product_ratings">'
-		// topSellingProductsHTML += '<ul>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '<li><a href="#"><i class="ion-star"></i></a></li>'
-		// topSellingProductsHTML += '</ul>'
-		// topSellingProductsHTML += '</div>'
-		// topSellingProductsHTML += '<div class="price_box">'
-		// topSellingProductsHTML += '<span class="regular_price">'+topSellingItemList[i]["productPrice"]+'</span>'
-		// topSellingProductsHTML += '</div>'
-		specialOffersProductsHTML += '<h5><a>'+safeAccess(["code"],item)+'</a></h5>'
-		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_group","desc"],item)+'</a></h5>'
-		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_parent_images",0,"parent","name"],item)+'</a></h5>'
-		specialOffersProductsHTML += '<h5><a href="product-details.html">'+safeAccess(["item_family",0,"code"],item)+'</a></h5>'
-		specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += '<div class="product_thumb">'
-		if(item.item_images[0] != undefined){
-			specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_images[0].image.thumbnail+'" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
-		}else if(item.item_parent_images[0] != undefined){
-			specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="'+item.item_parent_images[0].image.thumbnail+'" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
-		}else{
-			specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item='+item.id+'"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
-		}
-		specialOffersProductsHTML += '</div>'
-		specialOffersProductsHTML += '</div>'
-	}
+    $(".removeSpecialOffersProducts").click(async function() {
+        var data = $(this).attr("value");
+        var onError = function(error) {
+            notifyError("Failed to Added Removed Item");
+        };
+        var onResponse = function(response) {
+            if (response.data.status == true) {
+                notifySuccess("Favourite Item Removed Successfully");
+                window.location.reload();
+            } else {
+                notifyError(response.data.message);
+            }
+        };
+        removeFavourite(data, onResponse, onError);
+    });
 
 
-
-
-
-
-
-	$("#specialOffersProducts").append(specialOffersProductsHTML)
-
-
-	var owl3 = $('.product_column3');
-	owl3.trigger('destroy.owl.carousel');
-
-
-	$('.product_column3').owlCarousel({
+    var owl3 = $('.product_column3');
+    owl3.trigger('destroy.owl.carousel');
+    $('.product_column3').owlCarousel({
         autoplay: true,
-		loop: true,
+        loop: true,
         nav: true,
         autoplay: false,
         autoplayTimeout: 8000,
         items: 5,
         // margin:20,
-        dots:false,
-        navText: ['<i class="ion-ios-arrow-thin-left"></i>','<i class="ion-ios-arrow-thin-right"></i>'],
-        responsiveClass:true,
-		responsive:{
-				0:{
-				items:1,
-			},
-            200:{
-				items:2,
-			},
-            992:{
-				items:3,
-			},
-			
+        dots: false,
+        navText: ['<i class="ion-ios-arrow-thin-left"></i>', '<i class="ion-ios-arrow-thin-right"></i>'],
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            200: {
+                items: 2,
+            },
+            992: {
+                items: 3,
+            },
 
-		  }
+
+        }
     });
-
-
-	$('.product_column3 .owl-stage').css('transform','translate3d(-4440px, 0px, 0px)');
-
+    $('.product_column3 .owl-stage').css('transform', 'translate3d(-4440px, 0px, 0px)');
 }
-
-
-
-// carouselLib()
-
-
-
 
 async function showPromotion(promotionData) {
 
-	console.log("promotionData :   >>> ", promotionData)
+    console.log("promotionData :   >>> ", promotionData)
 
-	var promotionImages = promotionData.images.data
+    var promotionImages = promotionData.images.data
 
-	var promotionHTML = ''
+    var promotionHTML = ''
 
-	for(i=0; i<promotionImages.length;i++){
+    for (i = 0; i < promotionImages.length; i++) {
+        promotionHTML += '<div class="item">'
+        promotionHTML += '<a href="shop.html"><img class="owl-lazy" data-src="' + promotionImages[i]["image"]["name"] + '" alt=""></a>'
+        promotionHTML += '</div>'
+    }
+    $("#carousel").append(promotionHTML)
 
+    $("#carousel").owlCarousel({
+        autoplay: true,
+        lazyLoad: true,
+        rewind: true,
+        margin: 20,
+        responsiveClass: true,
+        navText: [],
+        autoHeight: true,
+        autoplayTimeout: 7000,
+        smartSpeed: 800,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
 
-		// promotionHTML += '<div class="single_banner">'
-		// promotionHTML += '<div class="banner_thumb">'
-		// promotionHTML += '<a href="#"><img src="'+promotionImages[i]["image"]["name"]+'" alt=""></a>'
-		// promotionHTML += '<div class="banner_text">'
-		// // promotionHTML += '<!-- <h3>Coffee Machine</h3>'
-		// // promotionHTML += '<h2>Best in Quality</h2> -->'
-		// // promotionHTML += '<!-- <a href="shop.html">Shop Now</a> -->'
-		// promotionHTML += '</div>'
-		// promotionHTML += '</div>'
-		// promotionHTML += '</div>'
-
-
-// promotionHTML += '<div class="item">'
-// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-// promotionHTML += '</div>'
-// promotionHTML += '<div class="item">'
-// promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
-// promotionHTML += '</div>'
-// promotionHTML += '<div class="item">'
-// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-// promotionHTML += '</div>'
-// promotionHTML += '<div class="item">'
-// promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
-// promotionHTML += '</div>'
-// promotionHTML += '<div class="item">'
-// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-// promotionHTML += '</div>'
-// promotionHTML += '<div class="item">'
-// promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
-// promotionHTML += '</div>'
-// promotionHTML += '<div class="item">'
-// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-// promotionHTML += '</div>'
-// promotionHTML += '<div class="item">'
-// promotionHTML += '<img class="owl-lazy" data-src="http://desktop-backgrounds-org.s3.amazonaws.com/400x300/twitter-nature-high-definition.jpg" alt="">'
-// promotionHTML += '</div>'
-// promotionHTML += '<div class="item">'
-// promotionHTML += '<img class="owl-lazy" data-src="https://i.pinimg.com/originals/84/67/26/846726299dc5abbeb5d60016f0fb32e9.jpg" alt="">'
-// promotionHTML += '</div>'
-		promotionHTML += '<div class="item">'
-		promotionHTML += '<a href="shop.html"><img class="owl-lazy" data-src="'+promotionImages[i]["image"]["name"]+'" alt=""></a>'
-		promotionHTML += '</div>'
-
-
-	}
-
-
-	// $("#promotion").append(promotionHTML)
-	$("#carousel").append(promotionHTML)
-
-	$("#carousel").owlCarousel({
-  autoplay: true,
-  lazyLoad: true,
-  rewind: true,
-  margin: 20,
-   /*
-  animateOut: 'fadeOut',
-  animateIn: 'fadeIn',
-  */
-  responsiveClass: true,
-  navText: [],
-  autoHeight: true,
-  autoplayTimeout: 7000,
-  smartSpeed: 800,
-  nav: true,
-  responsive: {
-    0: {
-      items: 1
-    },
-
-    992: {
-      items: 3
-    },
-
-    // 1024: {
-    //   items: 4
-    // },
-
-    // 1366: {
-    //   items: 4
-    // }
-  }
-});
+            992: {
+                items: 3
+            },
+        }
+    });
 
 }
-
 async function carouselLib() {
-	// body...
+    // body...
+    var owl1 = $('.product_column3');
+    owl1.trigger('destroy.owl.carousel');
+    $('.product_column3').data('owlCarousel').reinit();
 
 
-		var owl1 = $('.product_column3');
-	owl1.trigger('destroy.owl.carousel');
-	// owl.owlCarousel({
-	//    items: 5,
-	// });
-
-$('.product_column3').data('owlCarousel').reinit();
-
-
-	$('.product_column3').owlCarousel({
+    $('.product_column3').owlCarousel({
         autoplay: true,
-		loop: true,
+        loop: true,
         nav: true,
         autoplay: false,
         autoplayTimeout: 8000,
         // items: 5,
         // margin:20,
-        dots:false,
-        navText: ['<i class="ion-ios-arrow-thin-left"></i>','<i class="ion-ios-arrow-thin-right"></i>'],
-        responsiveClass:true,
-		responsive: {
-    0: {
-      items: 1
-    },
+        dots: false,
+        navText: ['<i class="ion-ios-arrow-thin-left"></i>', '<i class="ion-ios-arrow-thin-right"></i>'],
+        responsiveClass: true,
+        responsive: {
+            0: {
+                items: 1
+            },
 
-    600: {
-      items: 3
-    },
+            600: {
+                items: 3
+            },
 
-    1024: {
-      items: 4
-    },
+            1024: {
+                items: 4
+            },
 
-    1366: {
-      items: 4
-    }
-  }
+            1366: {
+                items: 4
+            }
+        }
     });
 }
 
-
-$(document).ready(function(){
-
-
-	var user_profile = JSON.parse(localStorage.getItem("user_profile"))
-	var role = user_profile["user_role"]
-	if (role != 1){
-		logout()
-	}
-
-	var onError =function(error){
-		// notifyError("Failed to");
-	};
-
-
-
-	getRecommendedProducts(function(res){
-		showRecommendedProducts(safeAccess(["data","items","data"],res));
-	},onError)
-	getTopSellingProducts(function(res){
-		showTopSellingProducts(safeAccess(["data","items","data"],res));
-	},onError)
-	getMostViewedProducts(function(res){
-		showSpecialOffersProducts(safeAccess(["data","items","data"],res));
-	},onError)
+$(document).ready(function() {
+    var user_profile = JSON.parse(localStorage.getItem("user_profile"))
+    var role = user_profile["user_role"]
+    if (role != 1) {
+        logout()
+    }
+    var onError = function(error) {
+        // notifyError("Failed to");
+    };
+    getRecommendedProducts(function(res) {
+        showRecommendedProducts(safeAccess(["data", "items", "data"], res));
+    }, onError)
+    getTopSellingProducts(function(res) {
+        showTopSellingProducts(safeAccess(["data", "items", "data"], res));
+    }, onError)
+    getMostViewedProducts(function(res) {
+        showSpecialOffersProducts(safeAccess(["data", "items", "data"], res));
+    }, onError)
 
 
-	getPromotion(function(response){
-		showPromotion(response.data)
-	},onError);
-	
+    getPromotion(function(response) {
+        showPromotion(response.data)
+    }, onError);
+
 });
-
-
-
 
 $.fn.dropdown = (function() {
     var $bsDropdown = $.fn.dropdown;
@@ -477,37 +480,30 @@ $(function() {
     });
     $('.dropdown').on('hide.bs.dropdown', function(e) {
         if ($(this).is('.has-child-dropdown-show')) {
-        	$(this).removeClass('has-child-dropdown-show');
+            $(this).removeClass('has-child-dropdown-show');
             e.preventDefault();
         }
-        e.stopPropagation();    // do not need pop in multi level mode
+        e.stopPropagation(); // do not need pop in multi level mode
     });
 });
-
 // for hover
-$('.dropdown-hover').on('mouseenter',function() {
-  if(!$(this).hasClass('show')){
-    $('>[data-toggle="dropdown"]', this).dropdown('toggle');
-  }
+$('.dropdown-hover').on('mouseenter', function() {
+    if (!$(this).hasClass('show')) {
+        $('>[data-toggle="dropdown"]', this).dropdown('toggle');
+    }
 });
-$('.dropdown-hover').on('mouseleave',function() {
-  if($(this).hasClass('show')){
-    $('>[data-toggle="dropdown"]', this).dropdown('toggle');
-  }
+$('.dropdown-hover').on('mouseleave', function() {
+    if ($(this).hasClass('show')) {
+        $('>[data-toggle="dropdown"]', this).dropdown('toggle');
+    }
 });
 $('.dropdown-hover-all').on('mouseenter', '.dropdown', function() {
-  if(!$(this).hasClass('show')){
-    $('>[data-toggle="dropdown"]', this).dropdown('toggle');
-  }
+    if (!$(this).hasClass('show')) {
+        $('>[data-toggle="dropdown"]', this).dropdown('toggle');
+    }
 });
 $('.dropdown-hover-all').on('mouseleave', '.dropdown', function() {
-  if($(this).hasClass('show')){
-    $('>[data-toggle="dropdown"]', this).dropdown('toggle');
-  }
+    if ($(this).hasClass('show')) {
+        $('>[data-toggle="dropdown"]', this).dropdown('toggle');
+    }
 });
-
-
-
-
-
-

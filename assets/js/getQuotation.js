@@ -111,20 +111,27 @@ async function showQuotation(orderArr){
               ],
               columns: [
             
-              {
+          
+             {
                 "title":"Date",
                 render: function(data, type, row, meta){
                   // console.log(JSON.stringify(row,null,2))
                   return safeAccess(['created_at',],row,"").match(/([^T]+)/)[0].split("-").reverse().join("/");
                 }
-              },
-              {
+              }, 
+             {
                 "title":"Items",
                 render: function(data, type, row){
                   return safeAccess(['quote_line',],row,[]).length;
                 }
               },
               {
+                "title":"Quation  ID",
+                render: function(data, type, row){
+				  return  safeAccess(['id'],row,"-");
+                }
+              },
+			  {
                 "title":"Price",
                 render: function(data, type, row){
                   return  "$"+safeAccess(['total'],row,"-").toLocaleString("en-AU");
@@ -142,6 +149,12 @@ async function showQuotation(orderArr){
 		           return "<button type=\"button\" id='btnAddToCart' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Submit</span></button>"
 		          }
 		      },
+			  	{
+		        "title":"Quation Delete",
+		        render: function(data, type, row){
+		           return "<button type=\"button\" id='btnAddToDelete' class=\"btn btn-default btn-sm\"><span class=\"glyphicon glyphicon-edit\">Delete</span></button>"
+		          }
+		      },
 		       {
 		        "title":"PDF",
 		        render: function(data, type, row){
@@ -153,6 +166,8 @@ async function showQuotation(orderArr){
       })
 
 }
+
+
 
 
 async function showOrderDetails(quoteLine){
@@ -245,5 +260,58 @@ $(document).ready(function(){
     	// window.location.href  ="cart.html";
   });
 
-  
+// $('#').click(function(){
+	$('#tableQuoteList').on('click', '#delete_record',async function () { 
+		 var deleteids_arr = [];
+      $("input:checkbox[class=delete_check]:checked").each(function () {
+         deleteids_arr.push($(this).val());
+      });
+
+      // Check checkbox checked or not
+      if(deleteids_arr.length > 0){
+      	// deleteQuotation(deleteids_arr,onResponse,onError);
+		      	var onError =function(error){
+							notifyError("Failed to Delete Quotation");
+		      	};
+		      	var onResponse = function(response){
+		        	if(response.data.status == true){
+		            notifySuccess("Quotation Deleted Successfully");
+								location.reload();
+		        }else{
+		            notifyError(response.data.message);
+		       }
+		      };
+	      if (confirm("Proceed to  Delete Quotation ?")) {
+						deleteQuotation(deleteids_arr,onResponse,onError);
+				}
+      }else{
+      	alert('bulk delete processing')
+      }
+	});
+$('#tableQuoteList').on('click', '#checkall',async function () {	
+      if($(this).is(':checked')){
+         $('.delete_check').prop('checked', true);
+      }else{
+         $('.delete_check').prop('checked', false);
+      }
+ });
+  $('#tableQuoteList').on('click', '#btnAddToDelete',async function () {
+  		var RowIndex = $(this).closest('tr');
+    	var data = $('#tableQuoteList').dataTable().api().row(RowIndex).data();
+    	console.log('quotationid :' ,data.id)
+		  var onError =function(error){
+				notifyError("Failed to Delete Quotation");
+      };
+      var onResponse = function(response){
+        	if(response.data.status == true){
+            notifySuccess("Quotation Deleted Successfully");
+						location.reload();
+        	}else{
+            	notifyError(response.data.message);
+        	}
+      };
+			if (confirm("Proceed to  Delete Quotation ?")) {
+					bulkDeleteQuotation(data.id,onResponse,onError);
+			} 	
+  	})
 });

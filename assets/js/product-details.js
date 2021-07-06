@@ -1,19 +1,25 @@
-	var currentImageIndex = 0;
+
+
+function itemIdExists(id,arr) {
+	
+  return arr.some(function(el) {
+    return el.item_id === id;
+  }); 
+}
 	async function showProductDetails(item, cart){
 
-		console.log("cart ", cart)
+		// console.log("cart ", cart)
 
-		console.log("ITEM   ++======= "+JSON.stringify(item,null,2));
+		// console.log("ITEM   ++======= "+JSON.stringify(item,null,2));
 
+		getFavouriteItemList	=	favouriteItemList
+		
+		console.log("getFavouriteItemList ", getFavouriteItemList)
 
 		var detailsHTML = ""
 		detailsHTML += '<div class="container">'
 		detailsHTML += '<div class="row">'
 		detailsHTML += '<div class="col">'
-				// if(item["description"]){detailsHTML += '<div class="">'+item["description"]+'</div>'}
-				// detailsHTML += '</div>'
-				// detailsHTML += '</div>'
-
 		detailsHTML += '<div class="row">'
 		detailsHTML += '<div class="col-lg-6 col-md-6">'
 		detailsHTML += '<div class="product-details-tab">'
@@ -36,22 +42,41 @@
 		detailsHTML += '<span class="current_price">'+item["price"]+'</span>'
 		detailsHTML += ''
 		detailsHTML += '<div class="product_variant quantity">'
+	
 		detailsHTML += '<label>quantity</label>'
 		if(cart.length > 0){
 
 			var cartItem = cart.filter(function(cartItem){return cartItem.item_id == item.id;});
             // console.log("cartItem : ", cartItem)
             // console.log("test : ", cart , item)
-            if(cartItem.length > 0){
-                detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="'+cartItem[0].qty+'" type="number">'
-				detailsHTML += '<button class="button"  id="btAddToCart" type="button">added to cart</button>'
-            }else {
-            	detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
-				detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
-            }
+    if(cartItem.length > 0){
+      detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="'+cartItem[0].qty+'" type="number">'
+			detailsHTML += '<button class="button"  id="btAddToCart" type="button">added to cart</button>'
+					if(itemIdExists(Number(item.id),getFavouriteItemList)) {
+			detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
+		}else{
+			detailsHTML += '<span class="topSellingProducts" id="btAddToFav"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+		}
+			// detailsHTML += '<button class="button"  id="btAddToFav" type="button">added to Fav</button>'
+   }else {
+      detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
+			detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
+			if(itemIdExists(Number(item.id),getFavouriteItemList)) {
+					detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
+				}else{
+					detailsHTML += '<span class="topSellingProducts"  id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+				}
+			// detailsHTML += '<button class="button"  id="btAddToFav" type="button">added to Fav</button>'
+    }
 		}else{
 			detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
 			detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
+					if(itemIdExists(Number(item.id),getFavouriteItemList)) {
+			detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
+		}else{
+			detailsHTML += '<span class="topSellingProducts" id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+		}
+			// detailsHTML += '<button class="button"  id="btAddToFav" type="button">added to Fav</button>'
 		}
 		detailsHTML += ''
 		detailsHTML += '</div>'
@@ -101,6 +126,23 @@
 		    }
 		}
 
+
+	$(".productImageDelete").click(async function() { 	
+		var	data	=		$(this).attr("value");
+		var onError =function(error){
+			notifyError("Failed to Added Removed Item");
+    };
+   var onResponse = function(response){
+      if(response.data.status == true){
+        notifySuccess("Favourite Item Removed Successfully");
+        window.location.reload();
+      }else{
+        notifyError(response.data.message);
+      }
+    };
+     removeFavourite(data,onResponse,onError);
+	});
+
      	 // Object.keys(obj).forEach(e => {console.log(`key=${e}  value=${obj[e]}`);
      	 // 		 colorDropdown.append($("<option>").text(`${e}`).val(`${obj[e]})`);
      	 // 	});
@@ -108,8 +150,6 @@
         // for(color of colors){
         //   colorDropdown.append($("<option>").text(color.color).val(color.image.image));
         // }
-
-      
 
         $('#input_color').change(function(){
 		  var data= colors[($(this).val())];
@@ -227,21 +267,33 @@
 		infoHTML += '</div>'
 
 		$("#productInfo").append(infoHTML);
+		
+		$("#btAddToFav").click(async function(){	
+			var data = item.id;
+			console.log("id:",data)
+			var onError =function(error){
+			notifyError("Failed to Delete Quotation");
+      	};
+      var onResponse = function(response){
+        	if(response.data.status == true){
+            notifySuccess("Favourite Item Added Successfully");
+						location.reload();
+        	}else{
+            	notifyError(response.data.message);
+        	}
+      	};
+      	addFavourite(data,onResponse,onError);	
+		 });
+
+
 		$("#btAddToCart").click(async function(){
 
 			// alert("1")
-
 			const newQty = $("#inputQuantity").val();
 			if(newQty>0){
 			$("#btAddToCart").html("Added to Cart");
-			// if(!shoppingCart.itemExists(itemId)){
-			// 	shoppingCart.addItemToCart(itemId,i.name,999,newQty);
-			// }else{
-			// 	shoppingCart.setCountForItem(itemId,newQty);
-			// }
-
 			shoppingCart.modify(itemId,newQty,function(){reloadMiniCart();});
-			// reloadMiniCart();
+			
 		}else{
 			notifyError("Amount not valid!");
 		}

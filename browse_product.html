@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>La Marzocco - product details</title>
+    <title>La Marzocco - shop</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="https://au.lamarzocco.com/wp-content/uploads/2016/11/cropped-SiteIcon-217x217.png">
     <!-- CSS 
     ========================= -->
@@ -30,11 +31,192 @@
     <link rel="stylesheet" href="assets/css/slinky.menu.css">
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="assets/css/plugins.css">
-    <link rel="stylesheet" href="https://au.lamarzocco.com/wp-content/plugins/megamenu-pro/icons/fontawesome/css/font-awesome.min.css">
+    <!-- Side Menu bar css Link : https://bootsnipp.com/snippets/8k3 -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Customer Page Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
     <!--modernizr min js here-->
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+    <!--jquery min js-->
+    <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
+    <style type="text/css">
+    .btn-info {
+        background: #414141
+    }
+
+    .dropdown-large {
+        position: static !important;
+    }
+
+    .dropdown-menu-large {
+        margin-left: 16px;
+        margin-right: 16px;
+        padding: 20px 0px;
+    }
+
+    .dropdown-menu-large>li>ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-menu-large>li>ul>li {
+        list-style: none;
+    }
+
+    .dropdown-menu-large>li>ul>li>a {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: normal;
+        line-height: 1.428571429;
+        color: #333333;
+        white-space: normal;
+    }
+
+    .dropdown-menu-large>li ul>li>a:hover,
+    .dropdown-menu-large>li ul>li>a:focus {
+        text-decoration: none;
+        color: #262626;
+        background-color: #f5f5f5;
+    }
+
+    .dropdown-menu-large .disabled>a,
+    .dropdown-menu-large .disabled>a:hover,
+    .dropdown-menu-large .disabled>a:focus {
+        color: #999999;
+    }
+
+    .dropdown-menu-large .disabled>a:hover,
+    .dropdown-menu-large .disabled>a:focus {
+        text-decoration: none;
+        background-color: transparent;
+        background-image: none;
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+        cursor: not-allowed;
+    }
+
+    .dropdown-menu-large .dropdown-header {
+        color: #428bca;
+        font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+        .dropdown-menu-large {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .dropdown-menu-large>li {
+            margin-bottom: 30px;
+        }
+
+        .dropdown-menu-large>li:last-child {
+            margin-bottom: 0;
+        }
+
+        .dropdown-menu-large .dropdown-header {
+            padding: 3px 15px !important;
+        }
+    }
+
+
+
+    /*Product Name Grid*/
+    .product_name {
+        height: 80px;
+    }
+
+
+
+    /* Base for label styling */
+    [type="checkbox"]:not(:checked),
+    [type="checkbox"]:checked {
+        position: absolute;
+        left: -9999px;
+    }
+
+    [type="checkbox"]:not(:checked)+label,
+    [type="checkbox"]:checked+label {
+        position: relative;
+        padding-left: 1.95em;
+        cursor: pointer;
+    }
+
+    /* checkbox aspect */
+    [type="checkbox"]:not(:checked)+label:before,
+    [type="checkbox"]:checked+label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1.25em;
+        height: 1.25em;
+        border: 2px solid #ccc;
+        background: #fff;
+        border-radius: 4px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+    }
+
+    /* checked mark aspect */
+    [type="checkbox"]:not(:checked)+label:after,
+    [type="checkbox"]:checked+label:after {
+        content: '\2713\0020';
+        position: absolute;
+        top: .15em;
+        left: .22em;
+        font-size: 1.3em;
+        line-height: 0.8;
+        color: #09ad7e;
+        transition: all .2s;
+        font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+    }
+
+    /* checked mark aspect changes */
+    [type="checkbox"]:not(:checked)+label:after {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    [type="checkbox"]:checked+label:after {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* disabled checkbox */
+    [type="checkbox"]:disabled:not(:checked)+label:before,
+    [type="checkbox"]:disabled:checked+label:before {
+        box-shadow: none;
+        border-color: #bbb;
+        background-color: #ddd;
+    }
+
+    [type="checkbox"]:disabled:checked+label:after {
+        color: #999;
+    }
+
+    [type="checkbox"]:disabled+label {
+        color: #aaa;
+    }
+
+    /* accessibility */
+    [type="checkbox"]:checked:focus+label:before,
+    [type="checkbox"]:not(:checked):focus+label:before {
+        border: 2px dotted blue;
+    }
+
+    /* hover style just for information */
+    label:hover:before {
+        border: 2px solid #4778d9 !important;
+    }
+
+
+
+    .current_price {
+        color: green
+    }
+    </style>
 </head>
 
 <body>
@@ -61,7 +243,6 @@
                                         </ul>
                                     </li>
                                     <li class="language"><a href="#" style="color: white"><img src="assets/img/logo/aus_language.png" alt="" style="width: 30px">Aus</a>
-                                    </li>
                                     <li class="currency"><a href="#" style="color: white">$ AUD</a>
                                     </li>
                                 </ul>
@@ -92,15 +273,16 @@
                                 </form>
                             </div>
                             <div class="middel_right_info">
-                                <div class="mini_cart_wrapper">
-                                    <a href="javascript:void(0)" style="color: white"><span class="lnr lnr-cart"></span>My Cart </a>
-                                    <span id="cart_quantity" class="cart_quantity" style="font-weight: bold;"></span>
-                                </div>
+                            </div> -->
+                            <div class="mini_cart_wrapper">
+                                <a href="javascript:void(0)" style="color: white"><span class="lnr lnr-cart"></span>My Cart </a>
+                                <span id="cart_quantity" class="cart_quantity" style="font-weight: bold;"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <!--header middel end-->
         <!--mini cart-->
@@ -128,7 +310,8 @@
                                     <li><a href="home.html" style="padding-left: 20px;"> home</a>
                                     </li>
                                     <li class="mega_items"><a href="shop.html">Commercial machines<i class="fa fa-angle-down"></i></a>
-                                        <div class="mega_menu" id="commercial_machine_menu"></div>
+                                        <div class="mega_menu" id="commercial_machine_menu">
+                                        </div>
                                     </li>
                                     <!-- Grinder Menu -->
                                     <li class="mega_items"><a href="shop.html">Grinders<i class="fa fa-angle-down"></i></a>
@@ -185,8 +368,7 @@
                                 </li>
                                 <li class="language"><a href="#" style="color: white"><img src="assets/img/logo/aus_language.png" alt="" style="width: 30px">Aus</a>
                                 </li>
-                                <li class="currency"><a href="#" style="color: white">$ AUD</a>
-                                </li>
+                                <li class="currency"><a href="#" style="color: white">$ AUD</a></li>
                             </ul>
                         </div>
                         <div class="search-container">
@@ -243,8 +425,8 @@
                     <div class="breadcrumb_content">
                         <ul>
                             <li><a href="home.html">home</a></li>
-                            <li><a href="javascript:history.back()">shop</a></li>
-                            <li>product details</li>
+                            <!-- <li>Camera & Video </li> -->
+                            <li>shop</li>
                         </ul>
                     </div>
                 </div>
@@ -252,41 +434,48 @@
         </div>
     </div>
     <!--breadcrumbs area end-->
-    <!--product details start-->
-    <div class="product_details mt-20" id="productDetails">
-        </form>
-    </div>
-    <!--product details end-->
-    <!--product info start-->
-    <div class="product_d_info" id="productInfo">
-    </div>
-    <!--product info end-->
-    <!--footer area start-->
-    <footer class="footer_widgets" style="background: #414141;color: #fff;" id="footer">
-    </footer>
-    <!--footer area end-->
-    <!-- modal area start-->
-    <div class="modal fade" id="modalKits" tabindex="-1" role="dialog" aria-hidden="true" id="footer">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <span style="padding-top: 30px;font-size: 20px;padding-left: 30px;"><strong>Customization</strong></span>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal_body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <!-- <div class="table_desc">     -->
-                                <div class="cart_page table-responsive" id="kits">
-                                </div>
-                            </div>
+    <!--shop  area start-->
+    <section class="slider_section mb-50">
+        <!-- <div class="shop_area shop_reverse"> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-12">
+                    <div class="categories_menu">
+                        <div class="categories_title">
+                            <h2 class="categori_toggle">Browse Products</h2>
                         </div>
+                    </div>
+                    <br>
+                    <a href="bulkOrders.html"><button class="w3-button w3-black" style="background: #333;color: #fff;width: 100%;height: 50px;border: #333;">
+                            <h4 style="align-content: ; text-align: left; margin: auto;" href="bulkOrders.html"><span class="fa fa-upload" aria-hidden="true" style="padding-right: 10px;padding-left: 12px;"></span> Upload Bulk Order</h4>
+                            </p>
+                        </button></a>
+                </div>
+                <div class="col-lg-9 col-md-12">
+                    <div class="shop_title" id="shopTitle">
+                        <!-- <br> -->
+                        <h1>Product Details:Browse Product</h1>
+                    </div>
+                    <div class="shop_toolbar_wrapper">
+                        <div class="shop_toolbar_btn">
+                            <button data-role="grid_3" type="button" class="active btn-grid-3" data-toggle="tooltip" title="3"></button>
+                            <button data-role="grid_4" type="button" class=" btn-grid-4" data-toggle="tooltip" title="4"></button>
+                            <button data-role="grid_list" type="button" class="btn-list" data-toggle="tooltip" title="List"></button>
+                        </div>
+                    </div>
+                    <div class="row shop_wrapper" id="resultsGrid">
+                    </div>
+                    <div id="pagination-container">
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- </div> -->
+    </section>
+    <!--shop  area end-->
+    <!--footer area start-->
+    <footer class="footer_widgets" id="footer" style="background: #414141;color: #fff;"></footer>
+    <!--footer area end-->
     <!-- modal area start-->
     <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -397,11 +586,6 @@
             </div>
         </div>
     </div>
-    <!-- modal area end-->
-    <!-- JS
-============================================ -->
-    <!--jquery min js-->
-    <script src="assets/js/vendor/jquery-3.4.1.min.js"></script>
     <!--popper min js-->
     <script src="assets/js/popper.js"></script>
     <!--bootstrap min js-->
@@ -432,21 +616,21 @@
     <script src="assets/js/footer.js"></script>
     <!-- Mini Cart JS -->
     <script src="assets/js/miniCart.js"></script>
-    <!-- Header -->
-    <script src="assets/js/header.js"></script>
-    <script src="assets/js/home.js"></script>
+    <script src="assets/js/common/cart.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <link rel="stylesheet" href="assets/css/simplePagination.css">
+    <script type="text/javascript" src="assets/js/jquery.simplePagination.js"></script>
     <script src="config.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/underscore@1.11.0/underscore-min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-    <script src="assets/js/common/cart.js"></script>
     <script src="assets/js/common/localstorage.js"></script>
     <script src="assets/js/common/notification.js"></script>
     <script src="assets/js/common/api.js"></script>
     <script src="assets/js/common/genericErrorHandler.js"></script>
-    <script src="assets/js/listFavourite.js"></script>
-    <script src="assets/js/product-details.js"></script>
+    <!-- SideBar filter JS -->
+    <script src="assets/js/browse_product.js"></script>
+    <!-- Header -->
+    <script src="assets/js/header.js"></script>
 </body>
 
 </html>
