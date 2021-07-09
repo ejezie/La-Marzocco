@@ -1,5 +1,4 @@
 
-
 function itemIdExists(id,arr) {
 	
   return arr.some(function(el) {
@@ -7,10 +6,6 @@ function itemIdExists(id,arr) {
   }); 
 }
 	async function showProductDetails(item, cart){
-
-		// console.log("cart ", cart)
-
-		// console.log("ITEM   ++======= "+JSON.stringify(item,null,2));
 
 		getFavouriteItemList	=	favouriteItemList
 		
@@ -47,8 +42,6 @@ function itemIdExists(id,arr) {
 		if(cart.length > 0){
 
 			var cartItem = cart.filter(function(cartItem){return cartItem.item_id == item.id;});
-            // console.log("cartItem : ", cartItem)
-            // console.log("test : ", cart , item)
     if(cartItem.length > 0){
       detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="'+cartItem[0].qty+'" type="number">'
 			detailsHTML += '<button class="button"  id="btAddToCart" type="button">added to cart</button>'

@@ -1,40 +1,14 @@
 var favouriteItemList = []
-// var favouriteItemList1 = []
-// async function getFavItemList() {
-//     var onError = function(error) {
-//         notifyError("Failed to Added Favourite Item");
-//     };
-//     var onResponse = function(response) {
-//         if (response.data.status == true) {
-//             // notifySuccess("Favourite Item Added Successfully");
-//             // console.log(">>>>>>>>>>>>>>>>>>>>>>>>>> vbnm,.", response.data.favorite.data)
-//             // favouriteItemList.push(response.data.favorite.data)
-//             Array.prototype.push.apply(favouriteItemList, response.data.favorite.data)
-//             // Array.prototype.push.apply(favouriteItemList1,response.data.favorite.data)
-//         } else {
-//             notifyError(response.data.message);
-//         }
-//     };
-//     listFavourite(onResponse, onError);
-//     // await listFavourite(onResponse,onError);
-//     return favouriteItemList
-// }
-
-
 
 $(document).ready(function() {
-
     getFavItemList()
-
     shoppingCart.sync();
 })
 
 function showRecommendedProducts(items) {
     var getFavouriteItemList = favouriteItemList
     var recommendedProductsHTML = ""
-
     for (item of items) {
-
         recommendedProductsHTML += '<div class="single_product">'
         recommendedProductsHTML += '<div class="product_content">'
         recommendedProductsHTML += '<h3><a href="product-details.html?item=' + item.id + '" style="text-transform: lowercase;"><strong>' + item["name"] + '</strong></a></h3>'
@@ -52,22 +26,19 @@ function showRecommendedProducts(items) {
         } else {
             recommendedProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
         }
-        if (itemIdExistsForRecommendedProducts(Number(item.id), getFavouriteItemList)) {
+        if (itemIdExists(Number(item.id), getFavouriteItemList)) {
 
             recommendedProductsHTML += '<span class="removeRecommendedProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
         } else {
-            recommendedProductsHTML += '<span class="recommendedProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+            recommendedProductsHTML += '<span class="recommendedProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.jpg" title="Favorite" style="width:50px;height:50px;text-align:right"></span>'
         }
         recommendedProductsHTML += '</div>'
         recommendedProductsHTML += '</div>'
 
     }
-
     $("#recommendedProducts").append(recommendedProductsHTML)
-
     $(".recommendedProducts").click(async function() {
         var data = $(this).attr("value");
-        // console.log("id:",data)
         var onError = function(error) {
             notifyError("Failed to Added Favourite Item");
         };
@@ -81,7 +52,6 @@ function showRecommendedProducts(items) {
         };
         addFavourite(data, onResponse, onError);
     });
-
     $(".removeRecommendedProducts").click(async function() {
         var data = $(this).attr("value");
         var onError = function(error) {
@@ -134,31 +104,9 @@ function showRecommendedProducts(items) {
     $('.product_column3 .owl-stage').css('transform', 'translate3d(-4440px, 0px, 0px)');
 }
 
-
-function itemIdExists(id, arr) {
-
-    return arr.some(function(el) {
-        return el.item_id === id;
-    });
-}
-
-function itemIdExistsForRecommendedProducts(id, arr) {
-    console.log("id", id)
-    console.log("arr", arr)
-    return arr.some(function(el) {
-        return el.item_id === id;
-    });
-}
-
-
 async function showTopSellingProducts(items) {
 
     var getFavouriteItemList = favouriteItemList
-    // console.log("getFavsItemList >> : ", getFavsItemList)
-
-    console.log(" top selling items : ", items)
-
-
     var topSellingProductsHTML = ""
     $("#topSellingProducts").empty(topSellingProductsHTML)
     for (item of items) {
@@ -184,7 +132,7 @@ async function showTopSellingProducts(items) {
         if (itemIdExists(Number(item.id), getFavouriteItemList)) {
             topSellingProductsHTML += '<span class="imageChanged"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
         } else {
-            topSellingProductsHTML += '<span class="topSellingProducts"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+            topSellingProductsHTML += '<span class="topSellingProducts"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.jpg" title="Favorite" style="width:50px;height:50px;text-align:right"></span>'
 
 
         }
@@ -285,7 +233,7 @@ async function showSpecialOffersProducts(items) {
         if (itemIdExists(Number(item.id), getFavouriteItemList)) {
             specialOffersProductsHTML += '<span class="removeSpecialOffersProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
         } else {
-            specialOffersProductsHTML += '<span class="specialOffersProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+            specialOffersProductsHTML += '<span class="specialOffersProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.jpg" title="Favorite" style="width:50px;height:50px;text-align:right"></span>'
         }
         specialOffersProductsHTML += '<span class="results" class="imgTop" value="' + item.id + '" style="background-color:#fff;" id=fa' + item.id + '  ></span>'
         specialOffersProductsHTML += '</div>'
@@ -295,7 +243,6 @@ async function showSpecialOffersProducts(items) {
 
     $(".specialOffersProducts").click(async function() {
         var data = $(this).attr("value");
-        console.log("id:", data)
         var onError = function(error) {
             notifyError("Failed to Added Favourite Item");
         };
@@ -360,7 +307,6 @@ async function showSpecialOffersProducts(items) {
 
 async function showPromotion(promotionData) {
 
-    console.log("promotionData :   >>> ", promotionData)
 
     var promotionImages = promotionData.images.data
 

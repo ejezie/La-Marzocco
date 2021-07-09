@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Product Wise Report</title>
-
     <!-- Bootstrap -->
     <link href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,216 +17,183 @@
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
     <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
     <!-- bootstrap-daterangepicker -->
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-
     <!-- Datatables -->
-    
     <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-
-     <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
-
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Admin Dashboard Custom CSS -->
     <link href="css/adminDashboard.css" rel="stylesheet">
-
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
-  </head>
+</head>
 
-  <body class="nav-md">
+<body class="nav-md">
     <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view" id="accordionSidebar">
-            
-            <!-- /menu footer buttons -->
-          </div>
-        </div>
-
-        <!-- top navigation -->
-        <div class="top_nav">
-            <div class="nav_menu">
-                <div class="nav toggle">
-                  <a id="menu_toggle" style="padding-bottom: 15px;"><i class="fa fa-bars"></i></a>
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view" id="accordionSidebar">
+                    <!-- /menu footer buttons -->
                 </div>
             </div>
-          </div>
-        <!-- /top navigation -->
-
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Report</h3>
-              </div>
-
-              <!-- <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-secondary" type="button">Go!</button>
-                    </span>
-                  </div>
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle" style="padding-bottom: 15px;"><i class="fa fa-bars"></i></a>
+                    </div>
                 </div>
-              </div> -->
             </div>
+            <style type="text/css">
+            .input-container {
+                padding-bottom: 1em;
+            }
 
-            <div class="clearfix"></div>
+            .left-inner-addon {
+                position: relative;
+            }
 
-            <div class="row">
-              <div class="col-md-12 col-sm-12 ">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Customer Order Report</h2>
+            .left-inner-addon input {
+                padding-left: 35px !important;
+            }
 
-                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                        <!-- <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> -->
-                        <i class="fa fa-calendar"></i>
-                        <span></span> <b class="caret"></b>
-                      </div>
-                    <!-- <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Settings 1</a>
-                            <a class="dropdown-item" href="#">Settings 2</a>
-                          </div>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul> -->
+            .left-inner-addon i {
+                position: absolute;
+                padding: 12px 12px;
+                pointer-events: none;
+            }
+            </style>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>Report</h3>
+                        </div>
+                    </div>
                     <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                      <div class="row">
-                          <div class="col-sm-12">
-                            <div class="card-box table-responsive">
-                    <p class="text-muted font-13 m-b-30">
-                      Product wise sales accross all regions.
-                    </p>
-                    <table id="tableProductReport" class="table table-striped table-bordered" style="width:100%">
-                
-
-                      <!-- <thead>
-                        <tr>
-                          <th>Item Name</th>
-                          <th>Category</th>
-                          <th>Type</th>
-                          <th>SKU</th>
-                          <th>Weight</th>
-                          <th>Orders</th>
-                          <th>Sale</th>
-                        </tr>
-                      </thead>
-
-
-                      <tbody>
-                        <tr>
-                          <td>Leva x</td>
-                          <td>Espresso Machines</td>
-                          <td>Machine</td>
-                          <td>LKt78632SD</td>
-                          <td>50 kg</td>
-                          <td>40</td>
-                          <td>$ 40,000</td>
-                        </tr>
-                        
-                        <tr>
-                          <td>Leva s</td>
-                          <td>Espresso Machines</td>
-                          <td>Machine</td>
-                          <td>RB028632SD</td>
-                          <td>50 kg</td>
-                          <td>40</td>
-                          <td>$ 40,000</td>
-                        </tr>
-
-                        <tr>
-                          <td>GS3</td>
-                          <td>Grinders</td>
-                          <td>Machine</td>
-                          <td>PL98632SD</td>
-                          <td>50 kg</td>
-                          <td>40</td>
-                          <td>$ 40,000</td>
-                        </tr>
-
-                        <tr>
-                          <td>Water Pump</td>
-                          <td>Espresso Machines</td>
-                          <td>Assemble Part</td>
-                          <td>QA87632SD</td>
-                          <td>50 kg</td>
-                          <td>40</td>
-                          <td>$ 40,000</td>
-                        </tr>
-
-                        <tr>
-                          <td>Volcano</td>
-                          <td>Modbar</td>
-                          <td>Machine</td>
-                          <td>XC86632SD</td>
-                          <td>50 kg</td>
-                          <td>40</td>
-                          <td>$ 40,000</td>
-                        </tr>
-
-                        <tr>
-                          <td>Linea pb</td>
-                          <td>Espresso Machines</td>
-                          <td>Machine</td>
-                          <td>HF25632SD</td>
-                          <td>50 kg</td>
-                          <td>40</td>
-                          <td>$ 40,000</td>
-                        </tr>
-
-                     
-                       
-                      </tbody> -->
-                    </table>
-                  </div>
-                  </div>
-              </div>
-            </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 ">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Customer Order Report</h2>
+                                    <!-- Large modal -->
+                                    <button type="button" class="btn " data-toggle="modal" data-target="#myModal" style="float:right;margin-right: 10px;">Mail</button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal" role="dialog">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button><br>
+                                                    <!-- <h4 class="modal-title">Modal Header</h4> -->
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- <p>This is a large modal.</p> -->
+                                                    <div class="container">
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-8">
+                                                            <div class="card">
+                                                                <div class="card-header">
+                                                                    <h3>Send Email</h3>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="form-row">
+                                                                        <label>Start Date</label>
+                                                                        <!-- <div class="left-inner-addon input-container"> -->
+                                                                        <!-- <i class="fa fa-calendar"></i> -->
+                                                                        <input type="date" class="form-control" id="start_mail_date" placeholder="Date" />
+                                                                        <!-- </div> -->
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="form-row">
+                                                                        <label>End Date</label>
+                                                                        <input type="date" class="form-control" id="end_mail_date" placeholder="Date" />
+                                                                        <!-- </div> -->
+                                                                    </div>
+                                                                    <br>
+                                                                    <div class="form-row">
+                                                                        <label>Select Mail Option</label>
+                                                                        <select class="form-control" id="file_type">
+                                                                            <option value="">Choose One</option>
+                                                                            <option value="1">Pdf</option>
+                                                                            <option value="2">Excel</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-footer">
+                                                                    <center><button class="btn btn-primary" id="send_mail">Send Mail</button></center>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2"></div>
+                                                    </div>
+                                                    <!-- <input type="text" name="datefilter" value="" /> -->
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg" style="cursor: pointer; float: right;margin-left: 15px;">Large modal</button>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Modal Heading</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <input type="text" name="datefilter" value="" />
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                        <i class="fa fa-calendar"></i>
+                                        <span></span> <b class="caret"></b>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card-box table-responsive">
+                                                <p class="text-muted font-13 m-b-30">
+                                                    Product wise sales accross all regions.
+                                                </p>
+                                                <table id="tableProductReport" class="table table-striped table-bordered" style="width:100%">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
-
-
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-        <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
-            <p>  &copy; 2020 <a href="#">La Marzocco enabled by PCPL</a></p>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-      </div>
     </div>
-
+    <!-- /page content -->
+    <!-- footer content -->
+    <footer>
+        <div class="pull-right">
+            <!-- Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a> -->
+            <p> &copy; 2020 <a href="#">La Marzocco enabled by PCPL</a></p>
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
+    </div>
+    </div>
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-   <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
     <script src="../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
@@ -250,362 +216,352 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-
     <!-- bootstrap-daterangepicker -->
     <script src="../vendors/moment/min/moment.min.js"></script>
     <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-
     <!-- Side NavBar -->
     <script src="js/sideNavBar.js"></script>
-
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-<script src="../config.js"></script>
-
+    <script src="../config.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="../assets/js/common/localstorage.js"></script>
+    <script src="../assets/js/common/notification.js"></script>
+    <script src="../assets/js/common/api.js"></script>
+    <script src="assets/js/cart.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#send_mail").click(function() {
+            var start_mail_date = $("#start_mail_date").val();
+            var end_mail_date = $("#end_mail_date").val();
+            // var date              = $("#mail_date").val();
+            var file = $("#file_type").val();
+            // console.log("date------->", start_mail_date)
+            // console.log("date------->", end_mail_date)
+            // console.log("File_type------->", file)
+            var onError = function(error) {
+                notifyError("Failed to sent Mail");
+            };
+            var onResponse = function(response) {
+                if (response.data.status == true) {
+                    notifySuccess("Mail sent successfully!");
+                } else {
+                    notifyError(response.data.message);
+                }
+            };
+            sendMailCustomerOrderReport(onResponse, onError,start_mail_date, end_mail_date, file);
+        });
+    });
+    $(function() {
 
-          <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        $('input[name="datefilter"]').daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+                cancelLabel: 'Clear'
+            }
+        });
 
-          <script src="../assets/js/common/localstorage.js"></script>
+        $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+        });
 
-          <script src="../assets/js/common/notification.js"></script>
+        $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
 
-          <script src="../assets/js/common/api.js"></script>
+    });
 
-      <script src="assets/js/cart.js"></script>
+    function initDatePicker(start_date, end_date) {
+        var cb = function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        };
 
-      <script>
-      function initDatePicker(start_date,end_date){
-             var cb = function (start, end, label) {
-                  console.log(start.toISOString(), end.toISOString(), label);
-                  $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-              };
+        var optionSet1 = {
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment(),
+            // minDate: '01/01/2012',
+            // maxDate: '12/31/2015',
+            dateLimit: {
+                days: 1000
+            },
+            showDropdowns: true,
+            showWeekNumbers: true,
+            timePicker: false,
+            timePickerIncrement: 1,
+            timePicker12Hour: true,
+            opens: 'left',
+            buttonClasses: ['btn btn-default'],
+            applyClass: 'btn-small btn-primary',
+            cancelClass: 'btn-small',
+            format: 'MM/DD/YYYY',
+            separator: ' to ',
+            locale: {
+                applyLabel: 'Submit',
+                cancelLabel: 'Clear',
+                fromLabel: 'From',
+                toLabel: 'To',
+                customRangeLabel: 'Custom',
+                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                firstDay: 1
+            }
+        };
 
-              var optionSet1 = {
-                  startDate: moment().subtract(29, 'days'),
-                  endDate: moment(),
-                  // minDate: '01/01/2012',
-                  // maxDate: '12/31/2015',
-                  dateLimit: {
-                      days: 1000
-                  },
-                  showDropdowns: true,
-                  showWeekNumbers: true,
-                  timePicker: false,
-                  timePickerIncrement: 1,
-                  timePicker12Hour: true,
-                  // ranges: {
-                  //     'Today': [moment(), moment()],
-                  //     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                  //     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                  //     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                  //     'This Month': [moment().startOf('month'), moment().endOf('month')],
-                  //     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                  // },
-                  opens: 'left',
-                  buttonClasses: ['btn btn-default'],
-                  applyClass: 'btn-small btn-primary',
-                  cancelClass: 'btn-small',
-                  format: 'MM/DD/YYYY',
-                  separator: ' to ',
-                  locale: {
-                      applyLabel: 'Submit',
-                      cancelLabel: 'Clear',
-                      fromLabel: 'From',
-                      toLabel: 'To',
-                      customRangeLabel: 'Custom',
-                      daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                      monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                      firstDay: 1
-                  }
-              };
-
-              if(start_date&&end_date){
-                $('#reportrange span').html(start_date+ ' to ' + end_date);
-              }else{
-                // $('#reportrange span').html("Last 30 days")
-                $('#reportrange span').html("Apply Date Filter")
-              }
-
-              $('#reportrange').daterangepicker(optionSet1, cb);
-              $('#reportrange').on('show.daterangepicker', function () {
-                  console.log("show event fired");
-              });
-              $('#reportrange').on('hide.daterangepicker', function () {
-                  console.log("hide event fired");
-              });
-              $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-                  console.log("apply event fired, start/end dates are " + picker.startDate.format('YYYY-MM-DD') + " to " + picker.endDate.format('YYYY-MM-DD'));
-                  var start_date = picker.startDate.format('YYYY-MM-DD');
-                  var end_date =  picker.endDate.format('YYYY-MM-DD');
-                  // window.location.href = '../adminDashboard/dashboard.html?start_date='+start_date+'&end_date='+end_date;
-
-                  
-                  showTable(start_date, end_date)
-              });
-              $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
-                  console.log("cancel event fired");
-              });
-              $('#options1').click(function () {
-                  $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-              });
-              $('#options2').click(function () {
-                  $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-              });
-              $('#destroy').click(function () {
-                  $('#reportrange').data('daterangepicker').remove();
-              });
+        if (start_date && end_date) {
+            $('#reportrange span').html(start_date + ' to ' + end_date);
+        } else {
+            // $('#reportrange span').html("Last 30 days")
+            $('#reportrange span').html("Apply Date Filter")
         }
 
-
-
-    async function showTable(startDate, endDate){
-
-     itemMasterTable = $('#tableProductReport').DataTable( {
-     dom: 'Blfrtip',
-     "bDestroy": true,
-     searching : true,
-     processing: true,
-     serverSide: true,
-     pageLength: 10,
-     bSort : true,
-     lengthMenu: [[10, 20, 500, 1000, -1], [10, 20, 500, 1000, "All"]],
-          columnDefs: [ {
-            orderable: true,
-            // className: 'select-checkbox',
-            targets:   0
-        } ,
-        {
-        'targets': [1,4], // column index (start from 0)
-        'orderable': false, // set orderable false for selected columns
-        },
-        {
-             targets: '_all',
-             defaultContent: '-'
-            },],
-        select: {
-            style:    'multi',
-            selector: 'td:first-child'
-        },
-    ajax: function(data, callback, settings) {
-    const loadingId = notifyInfo("Please wait");
-    var onResponse = function(res){
-
-              dismiss(loadingId);
-              callback({
-                draw:data.draw,
-                recordsTotal: res.data.report.total,
-                recordsFiltered: res.data.report.total,
-                data: res.data.report.data
-              });
-
-            };
-            var onError =function(error){
-              console.log(error);
-              dismiss(loadingId);
-            };
-              // var pageIndex = data.start / data.length + 1 ;
-
-              var sortedCol = $('#tableProductReport').dataTable().fnSettings().aaSorting[0][0];
-
-          var sort_key;
-          if(data.order && data.order.length>0){
-              columnIndex = data.order[0].column;//alert(columnIndex)
-              columnSortType = data.order[0].dir;//alert(columnIndex)
-              console.log(">>>>>>>>>>>>>>> ----- ",columnSortType)
-
-              if(columnIndex == 2){
-                sort_key = "sort_by_full_name";
-              }else
-              if(columnIndex == 3){
-                sort_key = "sort_by_company";
-              }else
-              if(columnIndex == 5){
-                sort_key = "sort_by_sales";
-              }
-
-              if(columnSortType == 'asc'){
-                sort_value = 1
-              } else if(columnSortType == 'desc'){
-                sort_value = 0
-              }
-
-
-          }
-
-          const searchQuery = data.search.value;
-          if(searchQuery && searchQuery.length<3){
-            // notifyError("The search text must be at least 3 characters");
-            // return;
-          }
-          var pageIndex = data.start / data.length + 1 ;
-          // console.log("apgedinnnnnnnnnnndex  " +JSON.stringify(data,null,2))
-
-          if(startDate && endDate){
-            getCustomerOrderReport(onResponse,startDate,endDate,null,pageIndex,data.length,searchQuery,sort_key,sort_value,onError);
-          }else{
-            getCustomerOrderReport(onResponse,null,null,null,pageIndex,data.length,searchQuery,sort_key,sort_value,onError);
-
-          }
-        },
-       
-        buttons : [
-             // {  
-                // extend: 'csv',
-                //       // className: 'btn btn-sm btn-success',
-                //       titleAttr: 'CSV export.',
-                //       text: 'CSV',
-                //       // filename: 'attendance',
-                //       extension: '.csv'
-                //     }, {
-                //       extend: 'pdf',
-                //       // className: 'btn btn-sm btn-danger',
-                //       titleAttr: 'Copy table data.',
-                //       text: 'PDF'
-                //     },
-
-
-                        {
-                          text: 'PDF',
-                          action: async function () {
-
-
-                              var onResponse = function(res){
-                                  console.log("resssssss : ",res)    
-                                  if(res.data.report){
-                                    window.location.href=res.data.report
-                                  }                
-
-                            };
-                            var onError =function(error){
-                              console.log(error);
-                              dismiss(loadingId);
-                            };
-                              // var pageIndex = data.start / data.length + 1 ;
-                              var download_format = 2
-                              if(startDate && endDate){
-                                getCustomerOrderReport(onResponse, startDate, endDate ,download_format);
-                              }else{
-                                getCustomerOrderReport(onResponse, null, null ,download_format);
-                              }
-                          }
-                          
-                      },
-                      {
-                          text: 'CSV',
-                          action: async function () {
-
-
-                            var onResponse = function(res){
-                                console.log("resssssss : ",res)    
-                                if(res.data.report){
-                                  window.location.href=res.data.report
-                                  // window.location.href='https://file-examples-com.github.io/uploads/2017/02/file_example_XLS_10.xls'
-                                }                
-
-                            };
-                            var onError =function(error){
-                              console.log(error);
-                              dismiss(loadingId);
-                            };
-                              // var pageIndex = data.start / data.length + 1 ;
-                              var download_format = 1
-                              if(startDate && endDate){
-                                getCustomerOrderReport(onResponse, startDate, endDate ,download_format);
-                              }else{
-                                getCustomerOrderReport(onResponse, null, null ,download_format);
-                              }
-                          }
-                          
-                      },
-              ],
-              columns: [ 
-            
-              {
-                "title":"Date",
-                render: function(data, type, row, meta){
-                  // console.log(JSON.stringify(row,null,2))
-                  // return safeAccess(['date'],row,"-");
-
-                  var date = new Date(row["date"])
-                  // date = new Date(date.getTime() - date.getTimezoneOffset()*60*1000).toISOString().match(/([^T]+)/)[0].split("-").reverse().join("/");;;;
-                  date = new Date(date.getTime() - date.getTimezoneOffset()*60*1000).toDateString().split(' ').slice(1).join('-')
-
-                  return date
-                }
-              },
-              {
-                "title":"Order Id",
-                render: function(data, type, row, meta){
-                  // console.log(JSON.stringify(row,null,2))
-                  return safeAccess(['sap_order_id'],row,"-")
-                }
-              },
-              
-              {
-                "title":"Company Name",
-                render: function(data, type, row){
-                  return  safeAccess(['company_name'],row,"-");
-                }
-              },
-
-              {
-                "title":"Customer Name",
-                render: function(data, type, row){
-                  return safeAccess(['full_name'],row,"-");
-                }
-              },
-              {
-                "title":"Quantity",
-                render: function(data, type, row){
-                  return  safeAccess(['quantity'],row,"-");
-                }
-              },
-              {
-                "title":"Sales",
-                render: function(data, type, row){
-                  return  "$"+safeAccess(['sales'],row,"-").toLocaleString("en-AU")
-                }
-              },
-        ]
-      })
-
-   }
-
-
-      // $('#datatable').on('click', '#btnDetails', function () {
-      //   var RowIndex = $(this).closest('tr');
-      //   var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
-
-      //   showOrderDetails(data.id, data.order_line);
-      // });
-
-
-      // $('#datatable').on('click', '#btnTrackOrder',async function () {
-      //     var RowIndex = $(this).closest('tr');
-      //     var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
-      //     notifyInfo("Please wait");
-      //     trackOrder(data.id,function(res){
-      //        showOrderTrackingDetails(res.data.track_items);
-      //     })
-
-      // });
-        $(document).ready(function(){
-
-          var start_date = findGetParameter("start_date");
-          var end_date = findGetParameter("end_date");
-          initDatePicker(start_date,end_date);
-
-          showTable()
-
+        $('#reportrange').daterangepicker(optionSet1, cb);
+        $('#reportrange').on('show.daterangepicker', function() {
+            console.log("show event fired");
         });
-      </script>
+        $('#reportrange').on('hide.daterangepicker', function() {
+            console.log("hide event fired");
+        });
+        $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+            console.log("apply event fired, start/end dates are " + picker.startDate.format('YYYY-MM-DD') + " to " + picker.endDate.format('YYYY-MM-DD'));
+            var start_date = picker.startDate.format('YYYY-MM-DD');
+            var end_date = picker.endDate.format('YYYY-MM-DD');
+            // window.location.href = '../adminDashboard/dashboard.html?start_date='+start_date+'&end_date='+end_date;
+
+
+            showTable(start_date, end_date)
+        });
+        $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+            console.log("cancel event fired");
+        });
+        $('#options1').click(function() {
+            $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+        });
+        $('#options2').click(function() {
+            $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+        });
+        $('#destroy').click(function() {
+            $('#reportrange').data('daterangepicker').remove();
+        });
+    }
 
 
 
+    async function showTable(startDate, endDate) {
 
-  </body>
+        itemMasterTable = $('#tableProductReport').DataTable({
+            dom: 'Blfrtip',
+            "bDestroy": true,
+            searching: true,
+            processing: true,
+            serverSide: true,
+            pageLength: 10,
+            bSort: true,
+            lengthMenu: [
+                [10, 20, 500, 1000, -1],
+                [10, 20, 500, 1000, "All"]
+            ],
+            columnDefs: [{
+                    orderable: true,
+                    // className: 'select-checkbox',
+                    targets: 0
+                },
+                {
+                    'targets': [1, 4], // column index (start from 0)
+                    'orderable': false, // set orderable false for selected columns
+                },
+                {
+                    targets: '_all',
+                    defaultContent: '-'
+                },
+            ],
+            select: {
+                style: 'multi',
+                selector: 'td:first-child'
+            },
+            ajax: function(data, callback, settings) {
+                const loadingId = notifyInfo("Please wait");
+                var onResponse = function(res) {
+
+                    dismiss(loadingId);
+                    callback({
+                        draw: data.draw,
+                        recordsTotal: res.data.report.total,
+                        recordsFiltered: res.data.report.total,
+                        data: res.data.report.data
+                    });
+
+                };
+                var onError = function(error) {
+                    console.log(error);
+                    dismiss(loadingId);
+                };
+                // var pageIndex = data.start / data.length + 1 ;
+
+                var sortedCol = $('#tableProductReport').dataTable().fnSettings().aaSorting[0][0];
+
+                var sort_key;
+                if (data.order && data.order.length > 0) {
+                    columnIndex = data.order[0].column; //alert(columnIndex)
+                    columnSortType = data.order[0].dir; //alert(columnIndex)
+                    console.log(">>>>>>>>>>>>>>> ----- ", columnSortType)
+
+                    if (columnIndex == 2) {
+                        sort_key = "sort_by_full_name";
+                    } else
+                    if (columnIndex == 3) {
+                        sort_key = "sort_by_company";
+                    } else
+                    if (columnIndex == 5) {
+                        sort_key = "sort_by_sales";
+                    }
+
+                    if (columnSortType == 'asc') {
+                        sort_value = 1
+                    } else if (columnSortType == 'desc') {
+                        sort_value = 0
+                    }
+
+
+                }
+
+                const searchQuery = data.search.value;
+                if (searchQuery && searchQuery.length < 3) {
+                    // notifyError("The search text must be at least 3 characters");
+                    // return;
+                }
+                var pageIndex = data.start / data.length + 1;
+                // console.log("apgedinnnnnnnnnnndex  " +JSON.stringify(data,null,2))
+
+                if (startDate && endDate) {
+                    getCustomerOrderReport(onResponse, startDate, endDate, null, pageIndex, data.length, searchQuery, sort_key, sort_value, onError);
+                } else {
+                    getCustomerOrderReport(onResponse, null, null, null, pageIndex, data.length, searchQuery, sort_key, sort_value, onError);
+
+                }
+            },
+
+            buttons: [
+
+                {
+                    text: 'PDF',
+                    action: async function() {
+
+
+                        var onResponse = function(res) {
+                            console.log("resssssss : ", res)
+                            if (res.data.report) {
+                                window.location.href = res.data.report
+                            }
+
+                        };
+                        var onError = function(error) {
+                            console.log(error);
+                            dismiss(loadingId);
+                        };
+                        // var pageIndex = data.start / data.length + 1 ;
+                        var download_format = 2
+                        if (startDate && endDate) {
+                            getCustomerOrderReport(onResponse, startDate, endDate, download_format);
+                        } else {
+                            getCustomerOrderReport(onResponse, null, null, download_format);
+                        }
+                    }
+
+                },
+                {
+                    text: 'CSV',
+                    action: async function() {
+
+
+                        var onResponse = function(res) {
+                            console.log("resssssss : ", res)
+                            if (res.data.report) {
+                                window.location.href = res.data.report
+                                // window.location.href='https://file-examples-com.github.io/uploads/2017/02/file_example_XLS_10.xls'
+                            }
+
+                        };
+                        var onError = function(error) {
+                            console.log(error);
+                            dismiss(loadingId);
+                        };
+                        // var pageIndex = data.start / data.length + 1 ;
+                        var download_format = 1
+                        if (startDate && endDate) {
+                            getCustomerOrderReport(onResponse, startDate, endDate, download_format);
+                        } else {
+                            getCustomerOrderReport(onResponse, null, null, download_format);
+                        }
+                    }
+
+                },
+            ],
+            columns: [
+
+                {
+                    "title": "Date",
+                    render: function(data, type, row, meta) {
+                        // console.log(JSON.stringify(row,null,2))
+                        // return safeAccess(['date'],row,"-");
+
+                        var date = new Date(row["date"])
+                        // date = new Date(date.getTime() - date.getTimezoneOffset()*60*1000).toISOString().match(/([^T]+)/)[0].split("-").reverse().join("/");;;;
+                        date = new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000).toDateString().split(' ').slice(1).join('-')
+
+                        return date
+                    }
+                },
+                {
+                    "title": "Order Id",
+                    render: function(data, type, row, meta) {
+                        // console.log(JSON.stringify(row,null,2))
+                        return safeAccess(['sap_order_id'], row, "-")
+                    }
+                },
+
+                {
+                    "title": "Company Name",
+                    render: function(data, type, row) {
+                        return safeAccess(['company_name'], row, "-");
+                    }
+                },
+
+                {
+                    "title": "Customer Name",
+                    render: function(data, type, row) {
+                        return safeAccess(['full_name'], row, "-");
+                    }
+                },
+                {
+                    "title": "Quantity",
+                    render: function(data, type, row) {
+                        return safeAccess(['quantity'], row, "-");
+                    }
+                },
+                {
+                    "title": "Sales",
+                    render: function(data, type, row) {
+                        return "$" + safeAccess(['sales'], row, "-").toLocaleString("en-AU")
+                    }
+                },
+            ]
+        })
+
+    }
+
+    $(document).ready(function() {
+
+        var start_date = findGetParameter("start_date");
+        var end_date = findGetParameter("end_date");
+        initDatePicker(start_date, end_date);
+
+        showTable()
+
+    });
+    </script>
+</body>
+
 </html>

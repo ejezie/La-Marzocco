@@ -149,8 +149,6 @@ async function showOrders(orderArr) {
             getOrderList(onResponse, onError, pageIndex, data.length);
         },
         buttons: [
-            // 'selectAll',
-            // 'selectNone',
         ],
         columns: [
 
@@ -247,7 +245,6 @@ async function showOrderTrackingDetails(items) {
     orderDetailsHTML += '<thead>'
     orderDetailsHTML += '<tr>'
     orderDetailsHTML += '<th class="product_thumb">Item Part No.</th>'
-    // orderDetailsHTML += '<th class="product_thumb">Item Name</th>'
     orderDetailsHTML += '<th class="product_name">Quantity</th>'
     orderDetailsHTML += '<th class="product-status">Status</th>'
     orderDetailsHTML += '<th class="product-awb">AWB</th>'
@@ -329,9 +326,6 @@ async function repeatShowOrderDetails(quoteLine) {
     orderDetailsHTML += '<th class="product_thumb">Product</th>'
     orderDetailsHTML += '<th class="product_code">Code</th>'
     orderDetailsHTML += '<th class="product_name">Name</th>'
-    // orderDetailsHTML += '<th class="product-price">Price</th>'
-    // orderDetailsHTML += '<th class="product_quantity">Quantity</th>'
-    // orderDetailsHTML += '<th class="product_total">Total</th>'
     orderDetailsHTML += '<th class="product_status">Quantity</th>'
     orderDetailsHTML += '<th></th>'
     orderDetailsHTML += '</tr>'
@@ -350,13 +344,8 @@ async function repeatShowOrderDetails(quoteLine) {
         }
         orderDetailsHTML += '<td class="product_name"><a href="#">' + safeAccess(["item", "code"], quoteItem, "-") + '</a></td>'
         orderDetailsHTML += '<td class="product_name"><a href="#">' + safeAccess(["item", "name"], quoteItem, "-") + '</a></td>'
-        // orderDetailsHTML += '<td class="product-price">$'+safeAccess(["price"],quoteItem,"-").toLocaleString("en-AU")+'</td>'
-        // orderDetailsHTML += '<td class="product_quantity">''</td>'
-        // orderDetailsHTML += '<td class="product_total">$'+safeAccess(["total"],quoteItem,"-").toLocaleString("en-AU")+'</td>'
         var inputId = "inputQuantity" + i
         orderDetailsHTML += '<td class="product_total"><input id="' + inputId + '"  min="1" max="100"  value="' + safeAccess(["qty"], quoteItem, "-") + '" type="number"></td>'
-        // orderDetailsHTML += '<td class="hidden"><input id="inputItemId" class="inputItemId"  value="'+safeAccess(["item","id"],quoteItem,"-")+'" type="text"></td>'
-        // orderDetailsHTML += '<td class="hidden"><input id="inputItemLength"  value="'+quoteLine.length+'" type="text"></td>'
         orderDetailsHTML += '</tr>'
     }
 
@@ -385,7 +374,6 @@ async function repeatShowOrderDetails(quoteLine) {
                 notifyError("Amount not valid!");
                 break;
             } else {
-                // notifyError("Amoiunt Valid");
                 shoppingCart.modify(itemId, newQty, function() { reloadMiniCart(); });
             }
         }

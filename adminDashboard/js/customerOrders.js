@@ -24,7 +24,7 @@ async function showOrders(orderArr){
             selector: 'td:first-child'
         },
         order: [[ 1, 'asc' ]],
-   	ajax: function(data, callback, settings) {
+    ajax: function(data, callback, settings) {
     const loadingId = notifyInfo("Please wait");
     var onResponse = function(res){
               dismiss(loadingId);
@@ -42,7 +42,7 @@ async function showOrders(orderArr){
               dismiss(loadingId);
             };
               var pageIndex = data.start / data.length + 1 ;
-			getOrderList(onResponse,onError,pageIndex,data.length);
+      getOrderList(onResponse,onError,pageIndex,data.length);
         },
        
         buttons : [
@@ -139,22 +139,22 @@ async function showOrders(orderArr){
                   return  "$"+safeAccess(['amount_paid'],row,"-").toLocaleString("en-AU");
                 }
               },
-		       {
-		        "title":"Product Details",
-		        render: function(data, type, row){
+           {
+            "title":"Product Details",
+            render: function(data, type, row){
               // if(row.status != "cancelled"){
-		           return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"fa fa-bars\" style=\"white-space: nowrap;\"> Details</span></button>"
+               return "<button type=\"button\" id='btnDetails' class=\"btn btn-default btn-sm\"><span class=\"fa fa-bars\" style=\"white-space: nowrap;\"> Details</span></button>"
               // }
-		          }
-		        },
-		       {
-		        "title":"Track Order",
-		        render: function(data, type, row){
+              }
+            },
+           {
+            "title":"Track Order",
+            render: function(data, type, row){
               if(row.status != "cancelled"){
 
-		           return "<button type=\"button\" id='btnTrackOrder' class=\"btn btn-default btn-sm\"><span class=\"fa fa-map-marker\" style=\"white-space: nowrap;\"> Track</span></button>"
+               return "<button type=\"button\" id='btnTrackOrder' class=\"btn btn-default btn-sm\"><span class=\"fa fa-map-marker\" style=\"white-space: nowrap;\"> Track</span></button>"
               }
-		          }
+              }
             },
             {
                 "title":"PO",
@@ -201,8 +201,8 @@ async function showOrders(orderArr){
 
 
 $(document).ready(function(){
-	// alert("sdad")
-	showOrders();
+  // alert("sdad")
+  showOrders();
 
 
     // Login check - Show table to operations manager
@@ -216,20 +216,20 @@ $(document).ready(function(){
 
 
   $('#tableOrders').on('click', '#btnDetails', function () {
-  	var RowIndex = $(this).closest('tr');
+    var RowIndex = $(this).closest('tr');
     var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
 
-  	showOrderDetails(data.id, data.order_line);
+    showOrderDetails(data.id, data.order_line);
   });
 
 
   $('#tableOrders').on('click', '#btnTrackOrder',async function () {
-  		var RowIndex = $(this).closest('tr');
-    	var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
-    	notifyInfo("Please wait");
-    	trackOrder(data.id,function(res){
-    		 showOrderTrackingDetails(res.data.track_items);
-    	})
+      var RowIndex = $(this).closest('tr');
+      var data = $('#tableOrders').dataTable().api().row(RowIndex).data();
+      notifyInfo("Please wait");
+      trackOrder(data.id,function(res){
+         showOrderTrackingDetails(res.data.track_items);
+      })
 
   });
 
@@ -277,7 +277,7 @@ $(document).ready(function(){
 
 async function showOrderTrackingDetails(items){
 var orderDetailsHTML = ""
-	$("#orderTrackingDetails").empty()
+  $("#orderTrackingDetails").empty()
 
 
 
@@ -325,8 +325,8 @@ var orderDetailsHTML = ""
 
 async function showOrderDetails(orderId, quoteLine){
 
-	var orderDetailsHTML = ""
-	$("#orderDetails").empty()
+  var orderDetailsHTML = ""
+  $("#orderDetails").empty()
 
 
 
@@ -373,38 +373,38 @@ orderDetailsHTML += '</table>'
     // hbnjmk
 
 
-	// orderDetailsHTML += '<table lass="table table-bordered">'
-	// orderDetailsHTML += '<thead>'
-	// orderDetailsHTML += '<tr>'
+  // orderDetailsHTML += '<table lass="table table-bordered">'
+  // orderDetailsHTML += '<thead>'
+  // orderDetailsHTML += '<tr>'
  //  orderDetailsHTML += '<th>#</th>'
-	// orderDetailsHTML += '<th >Product</th>'
-	// orderDetailsHTML += '<th >Name</th>'
-	// orderDetailsHTML += '<th price">Price</th>'
-	// orderDetailsHTML += '<th >Quantity</th>'
-	// orderDetailsHTML += '<th >Total</th>'
-	// orderDetailsHTML += '<th >Expected Delivery</th>'
-	// orderDetailsHTML += '<th></th>'
-	// orderDetailsHTML += '</tr>'
-	// orderDetailsHTML += '</thead>'
-	// orderDetailsHTML += '<tbody>'
+  // orderDetailsHTML += '<th >Product</th>'
+  // orderDetailsHTML += '<th >Name</th>'
+  // orderDetailsHTML += '<th price">Price</th>'
+  // orderDetailsHTML += '<th >Quantity</th>'
+  // orderDetailsHTML += '<th >Total</th>'
+  // orderDetailsHTML += '<th >Expected Delivery</th>'
+  // orderDetailsHTML += '<th></th>'
+  // orderDetailsHTML += '</tr>'
+  // orderDetailsHTML += '</thead>'
+  // orderDetailsHTML += '<tbody>'
 
 
-	// for(i=0;i<quoteLine.length;i++){
-	// 	const quoteItem = quoteLine[i];
+  // for(i=0;i<quoteLine.length;i++){
+  //  const quoteItem = quoteLine[i];
 
-	// 	orderDetailsHTML += '<tr>'
-	// 	orderDetailsHTML += '<td ><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
-	// 	orderDetailsHTML += '<td ><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
-	// 	orderDetailsHTML += '<td price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
-	// 	orderDetailsHTML += '<td >'+safeAccess(["qty"],quoteItem,"-")+'</td>'
-	// 	orderDetailsHTML += '<td >'+safeAccess(["total"],quoteItem,"-")+'</td>'
-	// 	orderDetailsHTML += '<td >'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
-	// 	orderDetailsHTML += '</tr>'
-	// }
+  //  orderDetailsHTML += '<tr>'
+  //  orderDetailsHTML += '<td ><a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a></td>'
+  //  orderDetailsHTML += '<td ><a href="#">'+safeAccess(["item","name"],quoteItem,"-")+'</a></td>'
+  //  orderDetailsHTML += '<td price">'+safeAccess(["price"],quoteItem,"-")+'</td>'
+  //  orderDetailsHTML += '<td >'+safeAccess(["qty"],quoteItem,"-")+'</td>'
+  //  orderDetailsHTML += '<td >'+safeAccess(["total"],quoteItem,"-")+'</td>'
+  //  orderDetailsHTML += '<td >'+safeAccess(["expected_delivery_date"],quoteItem,"-")+'</td>'
+  //  orderDetailsHTML += '</tr>'
+  // }
 
 
-	// orderDetailsHTML += '</tbody>'
-	// orderDetailsHTML += '</table>'
+  // orderDetailsHTML += '</tbody>'
+  // orderDetailsHTML += '</table>'
 
 
     $("#orderDetails").append(orderDetailsHTML);

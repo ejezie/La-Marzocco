@@ -73,24 +73,116 @@ var groupList = ["Commercial Machines", "Panels and external parts", "Group1", "
 var familyList = ["LINEA", "MODBAR", "ESPRESSO MACHINES"]
 
 
+
+// async function showMachinesSideFilter(machineList){
+//  var sidebarHTML = ""
+
+//  for(i=0; i<machineList.length ;i++){
+
+//      sidebarHTML += '<li class="menu_item_children">'
+//      sidebarHTML += '<div class="widget_list widget_categories">'
+//      sidebarHTML += '<h2>'+machineList[i]["family"]+'</h2>'
+//      sidebarHTML += '<ul>'
+
+//      for(j=0; j<machineList[i]["machines"].length;j++){
+
+//          sidebarHTML += '<li><input type="checkbox"><a href="#">'+machineList[i]["machines"][j]+'</a><span class="checkmark"></span></li>'
+//      }
+//      sidebarHTML += '</ul>'
+//      sidebarHTML += '</div>'
+//      sidebarHTML += '</li>'
+//  }
+
+//  $("#sidebarMachineFilter").append(sidebarHTML)
+
+// }
+
+
+// async function showGroupSideFilter(groupList){
+//  var sidebarHTML = ""
+
+//  sidebarHTML += '<li class="menu_item_children">'
+//  sidebarHTML += '<div class="widget_list widget_categories">'
+//  sidebarHTML += '<h2>Group</h2>'
+//  sidebarHTML += '<ul>'
+
+//  for(i=0; i<groupList.length ;i++){
+
+//      sidebarHTML += '<li><input type="checkbox"><a href="#">'+groupList[i]+'</a><span class="checkmark"></span></li>'
+//      // sidebarHTML += '<li class="menu_item_children"><input type="checkbox"><a href="#">'+groupList[i]+'</a>'
+//      // sidebarHTML += '<li class="menu_item_children"><a href="#">'+groupList[i]+'</a>'
+//  }
+
+//  sidebarHTML += '</ul>'
+//  sidebarHTML += '</div>'
+//  sidebarHTML += '</li>'
+
+//  $("#sidebarGroupFilter").append(sidebarHTML)
+
+// }
+
+
+// async function showFamilySideFilter(familyList){
+//  var sidebarHTML = ""
+
+//  sidebarHTML += '<li class="menu_item_children">'
+//  sidebarHTML += '<div class="widget_list widget_categories">'
+//  sidebarHTML += '<h2>Family</h2>'
+//  sidebarHTML += '<ul>'
+
+//  for(i=0; i<familyList.length ;i++){
+//      sidebarHTML += '<li><input type="checkbox"><a href="#">'+familyList[i]+'</a><span class="checkmark"></span></li>'
+//      // sidebarHTML += '<li class="menu_item_children"><a href="#">'+familyList[i]+'</a>'
+//  }
+
+//  sidebarHTML += '</ul>'
+//  sidebarHTML += '</div>'
+//  sidebarHTML += '</li>'
+
+//  $("#sidebarFamilyFilter").append(sidebarHTML)
+
+// }
+
+
+// 
+
+
+
+
+
 async function showMachinesSideFilter(machineList) {
 
     var sidebarHTML = ""
+
+    // for(i=0; i<machineList.length ;i++){
     for (i = machineList.length - 1; i >= 0; i--) {
 
         sidebarHTML += '<li class="dropdown dropdown-large">'
         sidebarHTML += '<a class="dropdown-toggle dropdown1" data-toggle="dropdown" style="white-space: nowrap;font-size:14px; font-weight:500;color:#333">' + machineList[i]["code"] + ' </a>'
         sidebarHTML += '<ul id="machine-menu" class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
+
         sidebarHTML += '<li class="col-sm-3">'
         sidebarHTML += '<ul>'
+        // sidebarHTML += '<li class="dropdown-header">'+machineList[i]["code"]+'</li>'
+
         for (k = 0; k < machineList[i]["machines"].length; k++) {
-        sidebarHTML += '<li><form><p><input class="example" type="checkbox" value="' + machineList[i]["machines"][k]["id"] + '" id="' + machineList[i]["machines"][k]["id"] + '"  /><label for="' + machineList[i]["machines"][k]["id"] + '" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">' + machineList[i]["machines"][k]["name"] + '</label></p></form></li>'
+
+            // console.log(">>>>>>>>>>",machineList[i]["machines"]) 
+            // sidebarHTML += '<li><label class="custom-control"> <input type="checkbox"  class="custom-control-input"><div class="custom-control-label">'+machineList[i]["machines"][k]["code"]+' </div></label></li>'
+            sidebarHTML += '<li><form><p><input class="example" type="checkbox" value="' + machineList[i]["machines"][k]["id"] + '" id="' + machineList[i]["machines"][k]["id"] + '"  /><label for="' + machineList[i]["machines"][k]["id"] + '" style="white-space: nowrap;font-size:14px; font-weight:500 ; ">' + machineList[i]["machines"][k]["name"] + '</label></p></form></li>'
+
         }
+
+
         sidebarHTML += '</ul>'
         sidebarHTML += '</li>'
+
         sidebarHTML += '</ul>'
         sidebarHTML += '</li>'
+
     }
+
+
     $("#sidebarMachineFilter").append(sidebarHTML);
     $('#sidebarMachineFilter input[type="checkbox"]').on('change', function() {
         $('input[type="checkbox"]').not(this).prop('checked', false);
@@ -99,17 +191,22 @@ async function showMachinesSideFilter(machineList) {
         resultController = machineResultController;
         machineResultController.currentPage = 1;
         resultController.loadResults(getCheckedMachine());
+
+        // Get selected labe; as heading  (Start)
         var label = $(this).prop("labels"),
             text = $(label).text()
         $("#shopTitle").empty()
         var shopTitleHTML = ''
         shopTitleHTML += '<h1>Product Details : Machine - ' + text + '</h1>'
         $("#shopTitle").append(shopTitleHTML)
+        // Get selected labe; as heading  (End)
+
+
     });
 
 }
 
-
+// Collapse all on clicking one- start
 $("#more-btn-machines").on("click", function() {
     $('.catalog-collapse').removeClass("show");
     $('.group-collapse').removeClass("show");
@@ -297,18 +394,18 @@ async function showParentSideFilter(familyList) {
         // sidebarHTML += '<ul id="catalog-menu_2" class="catalog-menu">'
 
 
-        for (j = 0; j < item["parents"].length; j++) {
+        for (j = 0; j < item["machines"].length; j++) {
 
-            const inneritem = familyList[i]["parents"][j];
+            const inneritem = familyList[i]["machines"][j];
 
             // console.log("njsjdnc : ", inneritem)
             // sidebarHTML += '<li class="dropdown-header">'+inneritem["code"]+'</li>'
             // sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+inneritem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+inneritem["name"]+' </div></label></li>'
             sidebarHTML += '<li><form><p><input type="checkbox" value="' + inneritem["id"] + '" id="' + inneritem["name"] + '"  /><label for="' + inneritem["name"] + '" style="white-space: nowrap;font-size:14px; font-weight:500;">' + inneritem["name"] + '</label></p></form></li>'
-            // 	for(k=0; k<inneritem["parents"].length;k++){
-            // 		const innerMostitem = inneritem["parents"][k];
-            // 		sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
-            // 	}
+            //  for(k=0; k<inneritem["parents"].length;k++){
+            //      const innerMostitem = inneritem["parents"][k];
+            //      sidebarHTML += '<li><label class="custom-control"> <input type="checkbox" value="'+innerMostitem["id"]+'" class="custom-control-input"><div class="custom-control-label" style="white-space: nowrap;">'+innerMostitem["name"]+' </div></label></li>'
+            //  }
         }
 
 
@@ -344,7 +441,6 @@ async function showParentSideFilter(familyList) {
         var shopTitleHTML = ''
         shopTitleHTML += '<h1>Product Details : Catalogue - ' + text + '</h1>'
         $("#shopTitle").append(shopTitleHTML)
-        // $("#shopTitle").html("")
         // Get selected labe; as heading  (End)
     });
 }
@@ -432,10 +528,6 @@ $("#more-btn-machine").on('click', function(e) {
         $(this).html(htmlBefore);
     }
 });
-
-
-
-
 
 $('.child').hide(); //Hide children by default
 $('.parent').children().click(function() {

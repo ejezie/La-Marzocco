@@ -13,3 +13,8 @@ async function getFavItemList() {
     listFavourite(onResponse, onError);
     return favouriteItemList
 }
+function itemIdExists(id, arr) {
+    return arr.some(function(el) {
+        return el.item_id === id;
+    });
+}
