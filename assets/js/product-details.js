@@ -46,18 +46,18 @@ function itemIdExists(id,arr) {
       detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="'+cartItem[0].qty+'" type="number">'
 			detailsHTML += '<button class="button"  id="btAddToCart" type="button">added to cart</button>'
 					if(itemIdExists(Number(item.id),getFavouriteItemList)) {
-			detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
+			detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;text-align:right"></span>'
 		}else{
-			detailsHTML += '<span class="topSellingProducts" id="btAddToFav"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+			detailsHTML += '<span class="topSellingProducts" id="btAddToFav"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.png" style="width:50px;height:50px;text-align:right"></span>'
 		}
 			// detailsHTML += '<button class="button"  id="btAddToFav" type="button">added to Fav</button>'
    }else {
       detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
 			detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
 			if(itemIdExists(Number(item.id),getFavouriteItemList)) {
-					detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
+					detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;text-align:right"></span>'
 				}else{
-					detailsHTML += '<span class="topSellingProducts"  id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+					detailsHTML += '<span class="topSellingProducts"  id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.png" style="width:50px;height:50px;text-align:right"></span>'
 				}
 			// detailsHTML += '<button class="button"  id="btAddToFav" type="button">added to Fav</button>'
     }
@@ -65,9 +65,9 @@ function itemIdExists(id,arr) {
 			detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
 			detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
 					if(itemIdExists(Number(item.id),getFavouriteItemList)) {
-			detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;text-align:right"></span>'
+			detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;text-align:right"></span>'
 		}else{
-			detailsHTML += '<span class="topSellingProducts" id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;text-align:right"></span>'
+			detailsHTML += '<span class="topSellingProducts" id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.png" style="width:50px;height:50px;text-align:right"></span>'
 		}
 			// detailsHTML += '<button class="button"  id="btAddToFav" type="button">added to Fav</button>'
 		}

@@ -1,7 +1,7 @@
 var favouriteItemList = []
 async function getFavItemList() {
     var onError = function(error) {
-        notifyError("Failed to Added Favourite Item");
+        // notifyError("Failed to Added Favourite Item");
     };
     var onResponse = function(response) {
         if (response.data.status == true) {

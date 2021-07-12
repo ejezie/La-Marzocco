@@ -6,8 +6,6 @@ $(document).ready(function() {
     var onResponse = function(response) {
         if (response.data.status == true) {
             var data = response.data.favorite.data;
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>> vbnm,.", data)
-
             var onResp = function(resp) {
                 var cart = safeAccess(['data', 'carts', 'data'], resp);
                 favoriteDisplay(data, cart);
@@ -45,7 +43,6 @@ async function favoriteDisplay(data, cart) {
             catalogHTML += '<div class="content_inner">'
             if (cart.length > 0) {
                 var cartItem = cart.filter(function(cartItem) { return cartItem.item_id == data[i].item_id; });
-
                 if (cartItem.length > 0) {
                     catalogHTML += '<div class="quantity"><label>quantity </label><input id="inputQuantity_' + data[i]["item_id"] + '" style="height:30px; width:100%" onchange="changeQuantity(' + data[i].item_id + ',this.value)" min="1" max="100" value="' + cartItem[0].qty + '" type="number"><button class="button" id="btnAddToCart_' + data[i]["item_id"] + '" onclick="funcAddToCart(' + data[i]["item_id"] + ')" type="button" style="width:100%">added to cart</button></div>'
                 } else {
@@ -58,7 +55,7 @@ async function favoriteDisplay(data, cart) {
             catalogHTML += '<div class="price_box">'
             catalogHTML += '<span class="current_price">' + data[i]["item"]["price"] + '</span>'
             var id = data[i]["item_id"]
-            catalogHTML += '<span class="deleteFavorite"  onclick="myFunction(' + id + ')" value="' + id + '" style="margin-left:120px;"  ><img src="assets/img/Favorite/changed.jpg" style="width:25px;height:25px;float:right"></span>'
+            catalogHTML += '<span class="deleteFavorite"  onclick="myFunction(' + id + ')" value="' + id + '" style="margin-left:120px;"  ><img src="assets/img/Favorite/changed.png" style="width:25px;height:25px;float:right"></span>'
             catalogHTML += '</div>'
             catalogHTML += '</div>'
             catalogHTML += '</div>'
@@ -105,9 +102,7 @@ async function favoriteDisplay(data, cart) {
 
 }
 
-
 function myFunction(id) {
-
     var onError = function(error) {
         notifyError("Failed to Added Removed Item");
     };
@@ -122,12 +117,14 @@ function myFunction(id) {
     removeFavourite(id, onResponse, onError);
 }
 
+
 function changeQuantity(itemId, quantity) {
+    
     $("#btnAddToCart_" + itemId).html("Update")
 }
 
-function funcAddToCart(itemId) {
 
+function funcAddToCart(itemId) {
     const newQty = $("#inputQuantity_" + itemId).val();
     if (newQty > 0) {
         $("#btnAddToCart_" + itemId).html("Added to Cart");

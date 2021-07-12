@@ -84,10 +84,7 @@
                                                                 <div class="card-body">
                                                                     <div class="form-row">
                                                                         <label>Start Date</label>
-                                                                        <!-- <div class="left-inner-addon input-container"> -->
-                                                                        <!-- <i class="fa fa-calendar"></i> -->
-                                                                        <input type="date" class="form-control" id="start_mail_date" placeholder="Date" />
-                                                                        <!-- </div> -->
+                                                                         <input type="date" class="form-control" id="start_mail_date" placeholder="Date" />
                                                                     </div>
                                                                     <br>
                                                                     <div class="form-row">
@@ -100,8 +97,8 @@
                                                                         <label>Select Mail Option</label>
                                                                         <select class="form-control" id="file_type">
                                                                             <option value="">Choose One</option>
-                                                                            <option value="1">Pdf</option>
-                                                                            <option value="2">Excel</option>
+                                                                            <option value="2">Pdf</option>
+                                                                            <option value="1">Excel</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -112,7 +109,6 @@
                                                         </div>
                                                         <div class="col-md-2"></div>
                                                     </div>
-                                                    <!-- <input type="text" name="datefilter" value="" /> -->
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -204,17 +200,14 @@
         $("#send_mail").click(function() {
             var start_mail_date = $("#start_mail_date").val();
             var end_mail_date = $("#end_mail_date").val();
-            // var date              = $("#mail_date").val();
             var file = $("#file_type").val();
-            // console.log("date------->", start_mail_date)
-            // console.log("date------->", end_mail_date)
-            // console.log("File_type------->", file)
             var onError = function(error) {
                 notifyError("Failed to sent Mail");
             };
             var onResponse = function(response) {
                 if (response.data.status == true) {
                     notifySuccess("Mail sent successfully!");
+                    window.location.reload();
                 } else {
                     notifyError(response.data.message);
                 }
@@ -242,14 +235,6 @@
             timePicker: false,
             timePickerIncrement: 1,
             timePicker12Hour: true,
-            // ranges: {
-            //     'Today': [moment(), moment()],
-            //     'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            //     'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            //     'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            //     'This Month': [moment().startOf('month'), moment().endOf('month')],
-            //     'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-            // },
             opens: 'left',
             buttonClasses: ['btn btn-default'],
             applyClass: 'btn-small btn-primary',
@@ -480,15 +465,15 @@
                     }
                 },
                 {
-                    "title": "Family",
+                    "title": "Group Name",
                     render: function(data, type, row) {
-                        return safeAccess(['family'], row, "-");
+                        return safeAccess(['group_name'], row, "-");
                     }
                 },
                 {
-                    "title": "Family Description",
+                    "title": "Group Description",
                     render: function(data, type, row) {
-                        return safeAccess(['family_desc'], row, "-");
+                        return safeAccess(['group_desc'], row, "-");
                     }
                 },
                 {

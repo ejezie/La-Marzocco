@@ -116,12 +116,8 @@ function addFunction(id) {
     addFavourite(id, onResponse, onError);
 }
 
-
 async function showCarouselPartsProducts(parts, cart) {
-
     var getFavouriteItemList = favouriteItemList
-
-
     var recommendedProductsHTMLS = ""
 
     for (i = 0; i < parts.length; i++) {
@@ -152,9 +148,9 @@ async function showCarouselPartsProducts(parts, cart) {
         var id = parts[i]["item_id"]
         console.log("getFavouriteItemList : ", getFavouriteItemList[0])
         if (itemIdExists(Number(id), getFavouriteItemList)) {
-            recommendedProductsHTMLS += '<span  onclick=removeFunction("' + id + '")  value="' + parts[i]["item_id"] + '" id=' + parts[i]["item_id"] + '  ><img src="assets/img/Favorite/changed.jpg" style="width:50px;height:50px;"></span>'
+            recommendedProductsHTMLS += '<span  onclick=removeFunction("' + id + '")  value="' + parts[i]["item_id"] + '" id=' + parts[i]["item_id"] + '  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;"></span>'
         } else {
-            recommendedProductsHTMLS += '<span   onclick=addFunction("' + id + '") value="' + parts[i]["item_id"] + '"  id=' + parts[i]["item_id"] + '  ><img src="assets/img/Favorite/favorite.jpg" style="width:50px;height:50px;"></span>'
+            recommendedProductsHTMLS += '<span   onclick=addFunction("' + id + '") value="' + parts[i]["item_id"] + '"  id=' + parts[i]["item_id"] + '  ><img src="assets/img/Favorite/favorite.png" style="width:50px;height:50px;"></span>'
         }
 
         recommendedProductsHTMLS += ''
@@ -187,12 +183,8 @@ async function showCarouselPartsProducts(parts, cart) {
             992: {
                 items: 3,
             },
-
-
         }
     });
-
-    // $('.owl-stage-outer .owl-stage').css('transform','translate3d(-375px, 0px, 0px)');
     $('.owl-stage-outer .owl-stage').css('transform', 'translate3d(-11%, 0px, 0px)');
 
 
@@ -213,18 +205,11 @@ async function showCarouselPartsProducts(parts, cart) {
                 break
             }
         }
-
         if (counter == 0) {
             alert("Not in stock")
         }
-
     });
-
-
-
 }
-
-
 
 function funcAddToCart(itemId) {
 
@@ -302,23 +287,7 @@ $(document).ready(function() {
                 ]
             });
         });
-        // });
-
     }
-
-    // $('#Parts').click(function (e){
-    //     var elm = $(this);
-    //     var xPos = e.pageX - elm.offset().left;
-    //     var yPos = e.pageY - elm.offset().top;
-
-    //     console.log(">>>>>>>>>>>>>>>>>>",xPos, yPos);
-    //     var clickedPart = sessionStorage.getItem("svg_path");
-    //     console.log("you have clicked : ",clickedPart)
-    //     // carousel.trigger('to.owl.carousel', index);
-    //     var carousel = $("#specialOffersProducts")
-    //     carousel.trigger('to.owl.carousel', 3);
-
-    //  });
     $(".add_Product").click(async function() {
         var data = $(this).attr("value");
         var onError = function(error) {

@@ -2341,7 +2341,7 @@ async function getDashboardReport(onResponse, start_date, end_date, download_for
 }
 
 async function sendMailCustomerOrderReport(onResponse, onError,start_date, end_date, send_mail) {
-    var url = BASE_URL + 'report/customer-order?start_date='+start_date+'&end_date='+end_date+'&page=1&page_size=20&send_mail='+send_mail+'&download_format'+send_mail;
+    var url = BASE_URL + 'report/customer-order?start_date='+start_date+'&end_date='+end_date+'&send_mail='+send_mail;
     var config = {
         method: 'get',
         url: url,
@@ -2354,7 +2354,7 @@ async function sendMailCustomerOrderReport(onResponse, onError,start_date, end_d
     axios(config).then(onResponse).catch(onError);
 }
 async function sendMailRegionWiseReport(onResponse, onError,start_date, end_date, send_mail){
-    var url = BASE_URL + 'report/region-wise?start_date='+start_date+'&end_date='+end_date+'&page=1&page_size=20&send_mail='+send_mail+'&download_format'+send_mail;
+    var url = BASE_URL + 'report/region-wise?start_date='+start_date+'&end_date='+end_date+'&send_mail='+send_mail;
     var config = {
         method: 'get',
         url: url,
@@ -2367,7 +2367,7 @@ async function sendMailRegionWiseReport(onResponse, onError,start_date, end_date
     axios(config).then(onResponse).catch(onError); 
 }
 async function sendMailProductWiseReport(onResponse, onError,start_date, end_date, send_mail){
-    var url = BASE_URL + 'report/product-wise?start_date='+start_date+'&end_date='+end_date+'&page=1&page_size=20&send_mail='+send_mail+'&download_format'+send_mail;
+    var url = BASE_URL + 'report/product-wise?start_date='+start_date+'&end_date='+end_date+'&send_mail='+send_mail;
     var config = {
         method: 'get',
         url: url,
@@ -2380,7 +2380,7 @@ async function sendMailProductWiseReport(onResponse, onError,start_date, end_dat
     axios(config).then(onResponse).catch(onError); 
 }
 async function sendMailPeriodWiseReport(onResponse, onError,start_date, end_date, send_mail){
-    var url = BASE_URL + 'report/periodic?start_date='+start_date+'&end_date='+end_date+'&page=1&page_size=20&send_mail='+send_mail+'&download_format'+send_mail;
+    var url = BASE_URL + 'report/periodic?start_date='+start_date+'&end_date='+end_date+'&send_mail='+send_mail;
     var config = {
         method: 'get',
         url: url,
@@ -2393,12 +2393,7 @@ async function sendMailPeriodWiseReport(onResponse, onError,start_date, end_date
     axios(config).then(onResponse).catch(onError); 
 }
 async function getPeriodicReport(onResponse, start_date, end_date, download_format, onError) {
-
     var url = BASE_URL + 'report/periodic';
-    // if(start_date){updateUrlParameter(url,"start_date",start_date)}
-    // if(end_date){updateUrlParameter(url,"end_date",end_date)}
-    // if(download_format){updateUrlParameter(url,"download_format",download_format)}
-
     if (start_date && end_date && download_format) {
         url += "?start_date=" + start_date;
         url += "&end_date=" + end_date;
@@ -2421,11 +2416,7 @@ async function getPeriodicReport(onResponse, start_date, end_date, download_form
     axios(config).then(onResponse).catch(onError);
 }
 async function getRegionwiseReport(onResponse, start_date, end_date, download_format, onError) {
-
     var url = BASE_URL + 'report/region-wise';
-    // if(start_date){updateUrlParameter(url,"start_date",start_date)}
-    // if(end_date){updateUrlParameter(url,"end_date",end_date)}
-    // if(download_format){updateUrlParameter(url,"download_format",download_format)}
     if (start_date && end_date && download_format) {
         url += "?start_date=" + start_date;
         url += "&end_date=" + end_date;
