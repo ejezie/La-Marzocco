@@ -7,17 +7,13 @@ var basicResultController = (function() {
     var currentPage = 1;
     var filterParentId;
     obj.loadResults = function(filterGroupId, filterFamilyId) {
-
         var loadingNotification = notifyInfo("Loading results");
         var onResponse = function(response) {
             dismiss(loadingNotification);
             var results = [];
-            // console.log("Data "+JSON.stringify(response.data,null,2))
             for (var i = 0; i < response.data.items.data.length; i++) {
                 const item = response.data.items.data[i];
-
-                // console.log("_____________item_________ :", item)
-                const element = {
+            const element = {
                     "productId": item.id,
                     "href": "product-details.html?item=" + item["id"],
                     "productCode": item.code,
@@ -41,19 +37,15 @@ var basicResultController = (function() {
                     cssStyle: 'dark-theme',
                     onPageClick: function(pageNo) {
                         currentPage = pageNo;
-                        // obj.loadResults(results);
                         obj.loadResults();
                     }
                 });
             }
             var onResp = function(resp) {
                 var cart = safeAccess(['data', 'carts', 'data'], resp);
-                console.log("Cart_Data-------->", cart)
-                // favoriteDisplay(data, cart);
                 obj.showResult(results, cart);
             }
             cartList(onResp);
-            // obj.showResult(results);
             window.scroll({ top: 0, left: 0 });
 
         };

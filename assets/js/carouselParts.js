@@ -100,7 +100,6 @@ function removeFunction(id) {
     };
     removeFavourite(id, onResponse, onError);
 }
-
 function addFunction(id) {
     var onError = function(error) {
         notifyError("Failed to Added Favourite Item");
@@ -119,7 +118,6 @@ function addFunction(id) {
 async function showCarouselPartsProducts(parts, cart) {
     var getFavouriteItemList = favouriteItemList
     var recommendedProductsHTMLS = ""
-
     for (i = 0; i < parts.length; i++) {
         recommendedProductsHTMLS += '<div class="single_product" style="height:auto">'
         recommendedProductsHTMLS += '<div class="product_content">'
@@ -139,14 +137,18 @@ async function showCarouselPartsProducts(parts, cart) {
         }
         recommendedProductsHTMLS += '</div>'
         recommendedProductsHTMLS += '<div class="product_thumb">'
-        if (parts[i]["image"]["thumbnail"] != undefined) {
-
-            recommendedProductsHTMLS += '<a class="primary_img" href="product-details.html?item=' + parts[i]["item_id"] + '"><img src="' + parts[i]["image"]["image"] + '" alt=""></a>'
+        var item_Images_Display = parts[i]["item"]["item_images"];
+        if (item_Images_Display.length === 0) {
+            if (parts[i]["image"]["thumbnail"] != undefined) {
+                recommendedProductsHTMLS += '<a class="primary_img" href="product-details.html?item=' + parts[i]["item_id"] + '"><img src="' + parts[i]["image"]["image"] + '" alt=""></a>'
+            } else {
+                recommendedProductsHTMLS += '<a class="primary_img" href="product-details.html?item=' + parts[i]["item_id"] + '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+            }
         } else {
-            recommendedProductsHTMLS += '<a class="primary_img" href="product-details.html?item=' + parts[i]["item_id"] + '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+            recommendedProductsHTMLS += '<a class="primary_img" href="product-details.html?item=' + parts[i]["item_id"] + '"><img src="' + parts[i]["item"]["item_images"][0]["image"]["thumbnail"] + '" alt=""></a>'
+
         }
         var id = parts[i]["item_id"]
-        console.log("getFavouriteItemList : ", getFavouriteItemList[0])
         if (itemIdExists(Number(id), getFavouriteItemList)) {
             recommendedProductsHTMLS += '<span  onclick=removeFunction("' + id + '")  value="' + parts[i]["item_id"] + '" id=' + parts[i]["item_id"] + '  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;"></span>'
         } else {
@@ -252,9 +254,12 @@ $(document).ready(function() {
         notifyError("This item is not available");
     } else {
         getItemParentImages(parentId, mainitemid, function(response2) {
+
             const imageUrl = safeAccess(["data", "item_parent_images", "data", 0, "image", "image"], response2);
             const imageId = safeAccess(["data", "item_parent_images", "data", 0, "id"], response2);
+            var loadingNotification = notifyInfo("Loading results");
             var onResponse = function(response) {
+                dismiss(loadingNotification);
                 var imageCOntent = response.data.item_parent_images.image.content;
                 mainParts(imageCOntent);
             }
