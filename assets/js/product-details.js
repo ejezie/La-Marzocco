@@ -46,65 +46,44 @@ function itemIdExists(id,arr) {
       detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="'+cartItem[0].qty+'" type="number">'
 			detailsHTML += '<button class="button"  id="btAddToCart" type="button">added to cart</button>'
 					if(itemIdExists(Number(item.id),getFavouriteItemList)) {
-			detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;text-align:right"></span>'
+			detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>'
 		}else{
-			detailsHTML += '<span class="topSellingProducts" id="btAddToFav"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.png" style="width:50px;height:50px;text-align:right"></span>'
+			detailsHTML += '<span class="topSellingProducts" id="btAddToFav"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img title="Add to Favorite" src="assets/img/Favorite/add_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>'
 		}
-			// detailsHTML += '<button class="button"  id="btAddToFav" type="button">added to Fav</button>'
-   }else {
+	}else {
       detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
 			detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
 			if(itemIdExists(Number(item.id),getFavouriteItemList)) {
-					detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;text-align:right"></span>'
+					detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>'
 				}else{
-					detailsHTML += '<span class="topSellingProducts"  id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.png" style="width:50px;height:50px;text-align:right"></span>'
+					detailsHTML += '<span class="topSellingProducts"  id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img title="Add to Favorite" src="assets/img/Favorite/add_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>'
 				}
-			// detailsHTML += '<button class="button"  id="btAddToFav" type="button">added to Fav</button>'
-    }
+	}
 		}else{
 			detailsHTML += '<input id="inputQuantity" onchange="changeQuantity('+item["id"]+',this.value)" min="1" max="100" value="1" type="number">'
 			detailsHTML += '<button class="button" id="btAddToCart" type="button">add to cart</button>'
 					if(itemIdExists(Number(item.id),getFavouriteItemList)) {
 			detailsHTML += '<span class="productImageDelete"  value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;text-align:right"></span>'
 		}else{
-			detailsHTML += '<span class="topSellingProducts" id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img src="assets/img/Favorite/favorite.png" style="width:50px;height:50px;text-align:right"></span>'
+			detailsHTML += '<span class="topSellingProducts" id="btAddToFav" value="'+item.id+'" style="background-color:#fff;float:right" id='+item.id+'  ><img title="Add to Favorite" src="assets/img/Favorite/add_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>'
 		}
-			// detailsHTML += '<button class="button"  id="btAddToFav" type="button">added to Fav</button>'
-		}
+	}
 		detailsHTML += ''
 		detailsHTML += '</div>'
-		// detailsHTML += '<button class="button" style="display:none;" id="btCustomize" type="button">CUSTOMIZE</button>'
-		
 		detailsHTML += '</form>'
 		detailsHTML += '</div>'
 		detailsHTML += '</div>'
 		detailsHTML += '<div>'
 		detailsHTML += ' <select id="input_color" class="form-control">'
-		
-		// if(item.item_images){
-		// 	for(color of item.item_images){
-		// 		detailsHTML += '<button onclick="showImage(`'+color.image.image+'`)" class="button btn-sm" type="button">'+color.color+'</button>'
-		// 	}
-		// }
-
 		detailsHTML += ''
 		detailsHTML += '</div>'
 		detailsHTML += '<p>'+safeAccess(["desc"],item,"")+'</p>'
-
 		detailsHTML += '</div>'
-
 		detailsHTML += '</div>'
-
 		if(item["description"]){detailsHTML += '<div class="col-lg-6 col-md-6">xxxxxxxxxxxxxxxxxxxxxxxx</div>'}
 		detailsHTML += '</div>'
-
 		detailsHTML += '</div>'
-
-
-		// if(item["description"]){detailsHTML += '<div><p>'+item["description"]+'</p></div>'}
-
 		$("#productDetails").append(detailsHTML);
-
 		 var colorDropdown = $("#input_color");
      	 colorDropdown.empty();
      	 
@@ -115,10 +94,8 @@ function itemIdExists(id,arr) {
 		    if (Object.prototype.hasOwnProperty.call(colors, prop)) {
 		    	(console.log(colors[prop]))
 		         colorDropdown.append($("<option>").text(prop).val(prop));
-		         		  // console.log(JSON.stringify(colors[prop]));
 		    }
 		}
-
 
 	$(".productImageDelete").click(async function() { 	
 		var	data	=		$(this).attr("value");
@@ -135,15 +112,6 @@ function itemIdExists(id,arr) {
     };
      removeFavourite(data,onResponse,onError);
 	});
-
-     	 // Object.keys(obj).forEach(e => {console.log(`key=${e}  value=${obj[e]}`);
-     	 // 		 colorDropdown.append($("<option>").text(`${e}`).val(`${obj[e]})`);
-     	 // 	});
-
-        // for(color of colors){
-        //   colorDropdown.append($("<option>").text(color.color).val(color.image.image));
-        // }
-
         $('#input_color').change(function(){
 		  var data= colors[($(this).val())];
 		  currentImageIndex = 0;
@@ -164,12 +132,6 @@ function itemIdExists(id,arr) {
 				currentImageIndex = checkIndex;
         		$('#productImage').attr('src',arr[checkIndex].image.image);
         	}
-       //  	if(currentIndex<(arr.length-1)){
-       //  		$('#productImage').data('imageIndex',currentIndex+1);
-		   		// $('#productImage').attr('src',arr[currentIndex+1].image.image);
-       //  	}else{
-       //  		notifyInfo("No more images")
-       //  	}
         });
 
           $('#btNextImage').unbind();
@@ -231,7 +193,6 @@ function itemIdExists(id,arr) {
 		infoHTML += '<tbody>'
 
 		Object.keys(item["specification"][0]).forEach(function(key) {
-		  // console.table('Key : ' + key + ', Value : ' + data[key])
 		  infoHTML += '<tr>'
 		  infoHTML += '<td class="first_child">'+key+'</td>'
 		  infoHTML += '<td>'+item["specification"][0][key]+'</td>'

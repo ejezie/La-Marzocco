@@ -55,7 +55,7 @@ async function favoriteDisplay(data, cart) {
             catalogHTML += '<div class="price_box">'
             catalogHTML += '<span class="current_price">' + data[i]["item"]["price"] + '</span>'
             var id = data[i]["item_id"]
-            catalogHTML += '<span class="deleteFavorite"  onclick="myFunction(' + id + ')" value="' + id + '" style="margin-left:120px;"  ><img src="assets/img/Favorite/changed.png" style="width:25px;height:25px;float:right"></span>'
+            catalogHTML += '<span class="deleteFavorite"  onclick="myFunction(' + id + ')" value="' + id + '" style="margin-left:120px;"  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:25px;height:25px;float:right"></span>'
             catalogHTML += '</div>'
             catalogHTML += '</div>'
             catalogHTML += '</div>'

@@ -96,9 +96,9 @@ var basicResultController = (function() {
             catalogHTML += '<span class="current_price">' + catalogList[i]["productActualPrice"] + '</span>'
             var id =  catalogList[i]["productId"];
             if (itemIdExists(Number(id), getFavouriteItemList)) {
-                catalogHTML += '<span  onclick=removeFunction("' + id + '")  value="' + id + '" id=' +id+ '  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;margin-left:80px"></span>'
+                catalogHTML += '<span  onclick=removeFunction("' + id + '")  value="' + id + '" id=' +id+ '  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;margin-left:80px"></span>'
             } else {
-                catalogHTML += '<span   onclick=addFunction("' + id + '") value="' + id+ '"  id=' +id+ '  ><img src="assets/img/Favorite/favorite.png" style="width:50px;height:50px;margin-left:80px"></span>'
+                catalogHTML += '<span   onclick=addFunction("' + id + '") value="' + id+ '"  id=' +id+ '  ><img src="assets/img/Favorite/add_favorite.PNG" title="Add to Favorite" style="width:50px;height:50px;margin-left:80px"></span>'
             }
             catalogHTML += '</div>'
             catalogHTML += '</div>'
@@ -166,7 +166,6 @@ $(document).ready(function() {
     resultController = basicResultController;
     resultController.loadResults();
 });
-
 
 function funcAddToCart(itemId) {
 

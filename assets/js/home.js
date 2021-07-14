@@ -28,9 +28,9 @@ function showRecommendedProducts(items) {
         }
         if (itemIdExists(Number(item.id), getFavouriteItemList)) {
 
-            recommendedProductsHTML += '<span class="removeRecommendedProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;text-align:right"></span>'
+            recommendedProductsHTML += '<span class="removeRecommendedProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>'
         } else {
-            recommendedProductsHTML += '<span class="recommendedProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.png" title="Favorite" style="width:50px;height:50px;text-align:right"></span>'
+            recommendedProductsHTML += '<span class="recommendedProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/add_favorite.PNG" title="Add to Favorite" style="width:50px;height:50px;text-align:right"></span>'
         }
         recommendedProductsHTML += '</div>'
         recommendedProductsHTML += '</div>'
@@ -130,11 +130,9 @@ async function showTopSellingProducts(items) {
             topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
         }
         if (itemIdExists(Number(item.id), getFavouriteItemList)) {
-            topSellingProductsHTML += '<span class="imageChanged"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;text-align:right"></span>'
+            topSellingProductsHTML += '<span class="imageChanged"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>'
         } else {
-            topSellingProductsHTML += '<span class="topSellingProducts"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.png" title="Favorite" style="width:50px;height:50px;text-align:right"></span>'
-
-
+            topSellingProductsHTML += '<span class="topSellingProducts"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/add_favorite.PNG" title="Add to Favorite" style="width:50px;height:50px;text-align:right"></span>'
         }
         topSellingProductsHTML += '</div>'
         topSellingProductsHTML += '</div>'
@@ -231,9 +229,9 @@ async function showSpecialOffersProducts(items) {
             specialOffersProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
         }
         if (itemIdExists(Number(item.id), getFavouriteItemList)) {
-            specialOffersProductsHTML += '<span class="removeSpecialOffersProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/changed.png" style="width:50px;height:50px;text-align:right"></span>'
+            specialOffersProductsHTML += '<span class="removeSpecialOffersProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>'
         } else {
-            specialOffersProductsHTML += '<span class="specialOffersProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/favorite.png" title="Favorite" style="width:50px;height:50px;text-align:right"></span>'
+            specialOffersProductsHTML += '<span class="specialOffersProducts" class="imgTop" value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/add_favorite.PNG" title="Add to Favorite" style="width:50px;height:50px;text-align:right"></span>'
         }
         specialOffersProductsHTML += '<span class="results" class="imgTop" value="' + item.id + '" style="background-color:#fff;" id=fa' + item.id + '  ></span>'
         specialOffersProductsHTML += '</div>'
