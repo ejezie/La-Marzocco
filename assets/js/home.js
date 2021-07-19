@@ -107,6 +107,7 @@ function showRecommendedProducts(items) {
 async function showTopSellingProducts(items) {
 
     var getFavouriteItemList = favouriteItemList
+    console.log("items-+----->",items)
     var topSellingProductsHTML = ""
     $("#topSellingProducts").empty(topSellingProductsHTML)
     for (item of items) {
@@ -127,7 +128,7 @@ async function showTopSellingProducts(items) {
 
             topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="' + item.item_parent_images[0].image.thumbnail + '" alt=""></a>'
         } else {
-            topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>'
+            topSellingProductsHTML += '<a class="primary_img" href="product-details.html?item=' + item.id + '"><img src="assets/img/lma_catalog_img.png" alt="" ></a>'
         }
         if (itemIdExists(Number(item.id), getFavouriteItemList)) {
             topSellingProductsHTML += '<span class="imageChanged"  value="' + item.id + '" style="background-color:#fff;float:right" id=' + item.id + '  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>'

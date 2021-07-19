@@ -150,9 +150,9 @@ async function showCarouselPartsProducts(parts, cart) {
         }
         var id = parts[i]["item_id"]
         if (itemIdExists(Number(id), getFavouriteItemList)) {
-            recommendedProductsHTMLS += '<span  onclick=removeFunction("' + id + '")  value="' + parts[i]["item_id"] + '" id=' + parts[i]["item_id"] + '  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;"></span>'
+            recommendedProductsHTMLS += '<span  onclick=removeFunction("' + id + '")  value="' + parts[i]["item_id"] + '" id=' + parts[i]["item_id"] + '  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;margin-left:90px"></span>'
         } else {
-            recommendedProductsHTMLS += '<span   onclick=addFunction("' + id + '") value="' + parts[i]["item_id"] + '"  id=' + parts[i]["item_id"] + '  ><img src="assets/img/Favorite/add_favorite.PNG" title="Add to Favorite" style="width:50px;height:50px;"></span>'
+            recommendedProductsHTMLS += '<span   onclick=addFunction("' + id + '") value="' + parts[i]["item_id"] + '"  id=' + parts[i]["item_id"] + '  ><img src="assets/img/Favorite/add_favorite.PNG" title="Add to Favorite" style="width:50px;height:50px;margin-left:90px"></span>'
         }
 
         recommendedProductsHTMLS += ''

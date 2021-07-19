@@ -82,6 +82,7 @@ var parentResultController = (function () {
 				catalogHTML += '<div class="product_content list_content">'
 				catalogHTML += '<div class="left_caption" style="width:300px">'
 				catalogHTML += '<div class="product_name">'
+				catalogHTML += '<h3><strong><a style="text-transform: lowercase;">'+catalogList[i]["code"]+'</a></strong></h3>'
 				catalogHTML += '</div>'
 				catalogHTML += ''
 				catalogHTML += '<div class="product_desc">'

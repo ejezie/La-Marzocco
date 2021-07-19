@@ -1710,6 +1710,19 @@ async function getMappingGroup(onResponse, onError) {
     };
     axios(config).then(onResponse).catch(onError);
 }
+async function getMappingGroups(onResponse, onError) {
+    var config = {
+        method: 'get',
+        url: BASE_URL + 'group/',
+        headers: {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': getAPIToken(),
+            'Accept': 'application/json',
+            // Access-Control-Allow-Origin: *
+        },
+    };
+    axios(config).then(onResponse).catch(onError);
+}
 
 // async function getMappingParent(onResponse,onError){
 //   var config = {

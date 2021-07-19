@@ -148,8 +148,7 @@ async function showOrders(orderArr) {
             var pageIndex = data.start / data.length + 1;
             getOrderList(onResponse, onError, pageIndex, data.length);
         },
-        buttons: [
-        ],
+        buttons: [],
         columns: [
 
             {
@@ -196,7 +195,7 @@ async function showOrders(orderArr) {
                     return safeAccess(['sap_order_id'], row, "");;
                 }
             },
-            
+
             {
                 "title": "Track Order",
                 render: function(data, type, row) {
@@ -363,21 +362,38 @@ async function repeatShowOrderDetails(quoteLine) {
         current++;
     });
 
+
     $("#btAddToCart").click(async function() {
+        var counters = 0;
+        var flage = false;
         for (m = 0; m < quoteLine.length; m++) {
             const newQty = $("#inputQuantity" + m).val();
-            console.log("newQty : ", newQty)
             var itemId = quoteLine[m]["item_id"]
-            console.log("itemId : ", itemId);
-
-            if (newQty == '' || newQty > 100) {
-                counter++;
-                notifyError("Amount not valid!");
-                break;
-            } else {
-                shoppingCart.modify(itemId, newQty, function() { reloadMiniCart(); });
+            if (newQty == '') {
+                notifyError("Amount Should not Empty!");
+                
+            } else if (newQty > 100){
+                // counters = counters + 1;
+                notifyError("Amount should not greater than 100!");
+                
+            }else if(newQty === 0){
+                notifyError("Amount should not equal to 0!");
+                
+            }else{
+                 shoppingCart.modify(itemId, newQty, function() { reloadMiniCart(); });
             }
+            // if (quoteLine.length === counters) {
+            //     flage = true;
+            //     counters = 0;
+            //     console.log("flage  >>>>>>>>>> ", flage)
+            // }
         }
-        console.log("quoteLine  >>>>>>>>>> ", quoteLine)
+        // if (flage === true) {
+        //     for (m = 0; m < quoteLine.length; m++) {
+        //         const newQty = $("#inputQuantity" + m).val();
+        //         var itemId = quoteLine[m]["item_id"];
+        //         shoppingCart.modify(itemId, newQty, function() { reloadMiniCart(); });
+        //     }
+        // }
     });
 }

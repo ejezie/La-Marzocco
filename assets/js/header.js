@@ -1,14 +1,14 @@
 
 $('#itemSearchBtn').click(function(){
 
-   location.href='shop.html?q=' + document.getElementById('inputSearch').value
+   location.href='browse_product.html?q=' + document.getElementById('inputSearch').value
    return false;
 })
 
 
 $('#canvasItemSearchBtn').click(function(){
 
-   location.href='shop.html?q=' + document.getElementById('canvasInputSearch').value
+   location.href='browse_product.html?q=' + document.getElementById('canvasInputSearch').value
    return false;
 })
 
