@@ -376,7 +376,7 @@ async function repeatShowOrderDetails(quoteLine) {
                 // counters = counters + 1;
                 notifyError("Amount should not greater than 100!");
                 
-            }else if(newQty === 0){
+            }else if(newQty <= 0){
                 notifyError("Amount should not equal to 0!");
                 
             }else{
