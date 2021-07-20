@@ -1713,7 +1713,7 @@ async function getMappingGroup(onResponse, onError) {
 async function getMappingGroups(onResponse, onError) {
     var config = {
         method: 'get',
-        url: BASE_URL + 'group/',
+        url: BASE_URL + 'group?page_size=500',
         headers: {
             'Content-Type': 'multipart/form-data',
             'Authorization': getAPIToken(),

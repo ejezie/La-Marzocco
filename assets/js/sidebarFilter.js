@@ -198,36 +198,34 @@ function getCheckedParent() {
 }
 
 
-async function showGroupSideFilter(groupList) {
+async function  showGroupSideFilter(groupList) {
     var sidebarHTML = ""
 
 
     console.log("groupList >>>>>>>>>>------------- ", groupList)
 
-    for (i = groupList.length - 1; i >= 0; i--) {
+    // for (i = groupList.length - 1; i >= 0; i--) {
 
-        const item = groupList[i];
+    //     const item = groupList[i];
 
+        for (i = 0; i < groupList.length; i++) {
         sidebarHTML += '<li class="dropdown dropdown-large">'
-        sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="font-size:14px; font-weight:500 ;color:#333">' + item["code"] + ' </a>'
-        sidebarHTML += '<ul id="group-menu" class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
+        // sidebarHTML += '<a class="dropdown-toggle" data-toggle="dropdown" style="font-size:14px; font-weight:500 ;color:#333"></a>'
+        // sidebarHTML += '<ul id="group-menu" class="dropdown-menu dropdown-menu-large row" style="width: 500px">'
 
-        sidebarHTML += '<li class="col-sm-3">'
-        sidebarHTML += '<ul>'
-        const inneritem = groupList[i]["machines"][0];
+        // sidebarHTML += '<li class="col-sm-3">'
+        // const inneritem = groupList[i]["machines"][0];
 
-        for (k = 0; k < inneritem["groups"].length; k++) {
+            // const innerMostitem = inneritem["groups"][k];
+            sidebarHTML += '<div  ><p ><input class="example" type="checkbox" data-family="' + groupList[i].id + '" value="' + groupList[i].id + '" id="' + groupList[i].desc + '" /><label for="' + groupList[i].desc + '"  style="white-space: normal;font-size:10; font-weight:300;">' + groupList[i].desc + '</label></p></div>'
+      
 
-            const innerMostitem = inneritem["groups"][k];
-            sidebarHTML += '<li><form><p><input class="example" type="checkbox" data-family="' + groupList[i].id + '" value="' + innerMostitem["id"] + '" id="' + innerMostitem["desc"] + '" /><label for="' + innerMostitem["desc"] + '" style="white-space: nowrap;font-size:14px; font-weight:500;">' + innerMostitem["desc"] + '</label></p></form></li>'
-        }
-        sidebarHTML += '</ul>'
+        // sidebarHTML += '</li>'
+  
+        // sidebarHTML += '</ul>'
         sidebarHTML += '</li>'
-
-        sidebarHTML += '</ul>'
-        sidebarHTML += '</li>'
-
-    }
+}
+    // }
 
 
     $("#sidebarGroupFilter").append(sidebarHTML);
@@ -305,8 +303,9 @@ $(document).ready(function() {
     }, onError);
 
 
-    getMappingGroup(function(response) {
-        showGroupSideFilter(response.data.mapping)
+    getMappingGroups(function(response) {
+        console.log("data--------->",response.data.groups.data)
+        showGroupSideFilter(response.data.groups.data)
     }, onError);
 
 
