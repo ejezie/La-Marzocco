@@ -288,17 +288,12 @@ async function showSpecialOffersProducts(items) {
     specialOffersProductsHTML +=
       "<h5><a>" + safeAccess(["code"], item) + "</a></h5>";
     specialOffersProductsHTML +=
-      '<h5><a href="product-details.html">' +
-      safeAccess(["item_group", "desc"], item) +
+      '<h5><a style="color:#ED8719; font-weight:900">$' +
+      safeAccess(["price"], item) +
       "</a></h5>";
     specialOffersProductsHTML +=
-      '<h5><a href="product-details.html">' +
-      safeAccess(["item_parent_images", 0, "parent", "name"], item) +
-      "</a></h5>";
-    specialOffersProductsHTML +=
-      '<h5><a href="product-details.html">' +
-      safeAccess(["item_family", 0, "code"], item) +
-      "</a></h5>";
+      '<button style="width: 100%; background-color: #3E3E3E; color: white; border: none;"><a>ADD TO CART</a></button>';
+   
     specialOffersProductsHTML += "</div>";
     specialOffersProductsHTML += '<div class="product_thumb">';
     if (item.item_images[0] != undefined) {
@@ -307,41 +302,35 @@ async function showSpecialOffersProducts(items) {
         item.id +
         '"><img src="' +
         item.item_images[0].image.thumbnail +
-        '" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>';
+        '" alt="" onerror="this.src=`assets/img/Rectangle.png`;"></a>';
     } else if (item.item_parent_images[0] != undefined) {
       specialOffersProductsHTML +=
         '<a class="primary_img" href="product-details.html?item=' +
         item.id +
         '"><img src="' +
         item.item_parent_images[0].image.thumbnail +
-        '" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>';
+        '" alt="" onerror="this.src=`assets/img/Rectangle.png`;"></a>';
     } else {
       specialOffersProductsHTML +=
         '<a class="primary_img" href="product-details.html?item=' +
         item.id +
-        '"><img src="assets/img/lma_catalog_img.png" alt="" onerror="this.src=`assets/img/lma_catalog_img.png`;"></a>';
+        '"><img src="assets/img/Rectangle.png" alt="" onerror="this.src=`assets/img/Rectangle.png`;"></a>';
     }
     if (itemIdExists(Number(item.id), getFavouriteItemList)) {
-      specialOffersProductsHTML +=
-        '<span class="removeSpecialOffersProducts" class="imgTop" value="' +
-        item.id +
-        '" style="background-color:#fff;float:right" id=' +
-        item.id +
-        '  ><img src="assets/img/Favorite/remove_favorite.PNG" style="width:50px;height:50px;text-align:right"></span>';
-    } else {
-      specialOffersProductsHTML +=
-        '<span class="specialOffersProducts" class="imgTop" value="' +
-        item.id +
-        '" style="background-color:#fff;float:right" id=' +
-        item.id +
-        '  ><img src="assets/img/Favorite/add_favorite.PNG" title="Add to Favorite" style="width:50px;height:50px;text-align:right"></span>';
-    }
-    specialOffersProductsHTML +=
-      '<span class="results" class="imgTop" value="' +
-      item.id +
-      '" style="background-color:#fff;" id=fa' +
-      item.id +
-      "  ></span>";
+        specialOffersProductsHTML +=
+          '<span class="imageChanged"  value="' +
+          item.id +
+          '" style="background-color:#fff;float:right" id=' +
+          item.id +
+          '  ><div style="display: flex; justify-content: center; cursor:pointer; border-radius:50%; height: 40px; width:40px;  background-color:#FCEDDD;"><i class="fal fa-heart" style="font-size: 2rem; color:#ED8719; padding:10px;"></i></div></span>';
+      } else {
+        specialOffersProductsHTML +=
+          '<span class="topSellingProducts"  value="' +
+          item.id +
+          '" style="background-color:#fff;float:right" id=' +
+          item.id +
+          '  ><div style="display: flex; justify-content: center; cursor:pointer; border-radius:50%; height: 40px; width:40px;  background-color:#FCEDDD;"><i class="fal fa-heart" style="font-size: 2rem; color:#ED8719; padding:10px;"></i></div></span>';
+      }
     specialOffersProductsHTML += "</div>";
     specialOffersProductsHTML += "</div>";
   }
@@ -387,23 +376,26 @@ async function showSpecialOffersProducts(items) {
     nav: true,
     autoplay: false,
     autoplayTimeout: 8000,
-    items: 5,
-    // margin:20,
+    items: 1,
+    // margin: 2,
     dots: false,
     navText: [
-      '<i class="ion-ios-arrow-thin-left"></i>',
-      '<i class="ion-ios-arrow-thin-right"></i>',
+      '<div style="border: solid 1px #E5E5E5; color:#959595; border-radius: 50%; padding:20%; width:50px;"><i class="fas fa-chevron-left"></i></div>',
+      '<div style="border: solid 1px #E5E5E5; color:#959595; border-radius: 50%; padding:20%; width:50px;"><i class="fas fa-chevron-right "></i></div>',
     ],
     responsiveClass: true,
     responsive: {
-      0: {
+      400: {
         items: 1,
       },
-      200: {
+      600: {
         items: 2,
       },
       992: {
         items: 3,
+      },
+      1200: {
+        items: 4,
       },
     },
   });
@@ -434,7 +426,9 @@ async function showPromotion(promotionData) {
     rewind: true,
     margin: 20,
     responsiveClass: true,
-    navText: [],
+    navText: [
+        
+    ],
     autoHeight: true,
     autoplayTimeout: 7000,
     smartSpeed: 800,

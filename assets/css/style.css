@@ -3478,7 +3478,6 @@ textarea:-ms-input-placeholder {
   position: absolute;
   top: -56px;
   right: 0;
-  background: #12863f;
   display: flex;
   padding: 0 9px;
   border-radius: 25px;
@@ -3490,7 +3489,9 @@ textarea:-ms-input-placeholder {
   }
 }
 .product_carousel .owl-nav > div {
-  width: 25px;
+  display: flex;
+  align-items: center;
+  width: 60px;
   height: 30px;
   line-height: 30px;
   font-size: 20px;
@@ -3498,7 +3499,6 @@ textarea:-ms-input-placeholder {
   text-align: center;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  background: red;
 }
 .product_carousel .owl-nav > div:hover {
   color: #414141;
