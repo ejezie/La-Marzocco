@@ -168,21 +168,21 @@ async function showTopSellingProducts(items) {
       topSellingProductsHTML +=
         '<a class="primary_img" href="product-details.html?item=' +
         item.id +
-        '"><img src="' +
+        '"><img class="product_image" src="' +
         item.item_images[0].image.thumbnail +
         '" alt=""></a>';
     } else if (item.item_parent_images[0] != undefined) {
       topSellingProductsHTML +=
         '<a class="primary_img" href="product-details.html?item=' +
         item.id +
-        '"><img src="' +
+        '"><img class="product_image" src="' +
         item.item_parent_images[0].image.thumbnail +
         '" alt=""></a>';
     } else {
       topSellingProductsHTML +=
         '<a class="primary_img" href="product-details.html?item=' +
         item.id +
-        '"><img src="assets/img/Rectangle.png" alt="" ></a>';
+        '"><img class="product_image" src="assets/img/Rectangle.png" alt="" ></a>';
     }
     if (itemIdExists(Number(item.id), getFavouriteItemList)) {
       topSellingProductsHTML +=
@@ -293,44 +293,44 @@ async function showSpecialOffersProducts(items) {
       "</a></h5>";
     specialOffersProductsHTML +=
       '<button style="width: 100%; background-color: #3E3E3E; color: white; border: none;"><a>ADD TO CART</a></button>';
-   
+
     specialOffersProductsHTML += "</div>";
     specialOffersProductsHTML += '<div class="product_thumb">';
     if (item.item_images[0] != undefined) {
       specialOffersProductsHTML +=
         '<a class="primary_img" href="product-details.html?item=' +
         item.id +
-        '"><img src="' +
+        '"><img class="product_image" src="' +
         item.item_images[0].image.thumbnail +
         '" alt="" onerror="this.src=`assets/img/Rectangle.png`;"></a>';
     } else if (item.item_parent_images[0] != undefined) {
       specialOffersProductsHTML +=
         '<a class="primary_img" href="product-details.html?item=' +
         item.id +
-        '"><img src="' +
+        '"><img class="product_image" src="' +
         item.item_parent_images[0].image.thumbnail +
         '" alt="" onerror="this.src=`assets/img/Rectangle.png`;"></a>';
     } else {
       specialOffersProductsHTML +=
         '<a class="primary_img" href="product-details.html?item=' +
         item.id +
-        '"><img src="assets/img/Rectangle.png" alt="" onerror="this.src=`assets/img/Rectangle.png`;"></a>';
+        '"><img class="product_image" src="assets/img/Rectangle.png" alt="" onerror="this.src=`assets/img/Rectangle.png`;"></a>';
     }
     if (itemIdExists(Number(item.id), getFavouriteItemList)) {
-        specialOffersProductsHTML +=
-          '<span class="imageChanged"  value="' +
-          item.id +
-          '" style="background-color:#fff;float:right" id=' +
-          item.id +
-          '  ><div style="display: flex; justify-content: center; cursor:pointer; border-radius:50%; height: 40px; width:40px;  background-color:#FCEDDD;"><i class="fal fa-heart" style="font-size: 2rem; color:#ED8719; padding:10px;"></i></div></span>';
-      } else {
-        specialOffersProductsHTML +=
-          '<span class="topSellingProducts"  value="' +
-          item.id +
-          '" style="background-color:#fff;float:right" id=' +
-          item.id +
-          '  ><div style="display: flex; justify-content: center; cursor:pointer; border-radius:50%; height: 40px; width:40px;  background-color:#FCEDDD;"><i class="fal fa-heart" style="font-size: 2rem; color:#ED8719; padding:10px;"></i></div></span>';
-      }
+      specialOffersProductsHTML +=
+        '<span class="imageChanged"  value="' +
+        item.id +
+        '" style="background-color:#fff;float:right" id=' +
+        item.id +
+        '  ><div style="display: flex; justify-content: center; cursor:pointer; border-radius:50%; height: 40px; width:40px;  background-color:#FCEDDD;"><i class="fal fa-heart" style="font-size: 2rem; color:#ED8719; padding:10px;"></i></div></span>';
+    } else {
+      specialOffersProductsHTML +=
+        '<span class="topSellingProducts"  value="' +
+        item.id +
+        '" style="background-color:#fff;float:right" id=' +
+        item.id +
+        '  ><div style="display: flex; justify-content: center; cursor:pointer; border-radius:50%; height: 40px; width:40px;  background-color:#FCEDDD;"><i class="fal fa-heart" style="font-size: 2rem; color:#ED8719; padding:10px;"></i></div></span>';
+    }
     specialOffersProductsHTML += "</div>";
     specialOffersProductsHTML += "</div>";
   }
@@ -377,6 +377,8 @@ async function showSpecialOffersProducts(items) {
     autoplay: false,
     autoplayTimeout: 8000,
     items: 1,
+    stagePadding: 4,
+    // center: true,
     // margin: 2,
     dots: false,
     navText: [
@@ -394,7 +396,7 @@ async function showSpecialOffersProducts(items) {
       992: {
         items: 3,
       },
-      1200: {
+      1100: {
         items: 4,
       },
     },
@@ -424,10 +426,12 @@ async function showPromotion(promotionData) {
     autoplay: true,
     lazyLoad: true,
     rewind: true,
-    margin: 20,
+    items: 1,
+    margin: 0,
     responsiveClass: true,
     navText: [
-        
+      '<div style="border: solid 1px #E5E5E5; color:#959595; border-radius: 50%; padding:20%; width:50px;"><i class="fas fa-chevron-left"></i></div>',
+      '<div style="border: solid 1px #E5E5E5; color:#959595; border-radius: 50%; padding:20%; width:50px;"><i class="fas fa-chevron-right "></i></div>',
     ],
     autoHeight: true,
     autoplayTimeout: 7000,
@@ -439,50 +443,50 @@ async function showPromotion(promotionData) {
       },
 
       992: {
-        items: 3,
-      },
-    },
-  });
-}
-async function carouselLib() {
-  // body...
-  var owl1 = $(".product_column3");
-  owl1.trigger("destroy.owl.carousel");
-  $(".product_column3").data("owlCarousel").reinit();
-
-  $(".product_column3").owlCarousel({
-    autoplay: true,
-    loop: true,
-    nav: true,
-    autoplay: false,
-    autoplayTimeout: 8000,
-    // items: 5,
-    // margin:20,
-    dots: false,
-    navText: [
-      '<i class="ion-ios-arrow-thin-left"></i>',
-      '<i class="ion-ios-arrow-thin-right"></i>',
-    ],
-    responsiveClass: true,
-    responsive: {
-      0: {
-        items: 1,
-      },
-
-      600: {
-        items: 3,
-      },
-
-      1024: {
-        items: 4,
-      },
-
-      1366: {
         items: 4,
       },
     },
   });
 }
+// async function carouselLib() {
+//   // body...
+//   var owl1 = $(".product_column3");
+//   owl1.trigger("destroy.owl.carousel");
+//   $(".product_column3").data("owlCarousel").reinit();
+
+//   $(".product_column3").owlCarousel({
+//     autoplay: true,
+//     loop: true,
+//     nav: true,
+//     autoplay: false,
+//     autoplayTimeout: 8000,
+//     items: 1,
+//     // margin:20,
+//     dots: false,
+//     navText: [
+//       '<div style="border: solid 1px #E5E5E5; color:#959595; border-radius: 50%; padding:20%; width:50px;"><i class="fas fa-chevron-left"></i></div>',
+//       '<div style="border: solid 1px #E5E5E5; color:#959595; border-radius: 50%; padding:20%; width:50px;"><i class="fas fa-chevron-right "></i></div>',
+//     ],
+//     responsiveClass: true,
+//     responsive: {
+//       0: {
+//         items: 1,
+//       },
+
+//       600: {
+//         items: 3,
+//       },
+
+//       990: {
+//         items: 4,
+//       },
+
+//       1100: {
+//         items: 4,
+//       },
+//     },
+//   });
+// }
 
 $(document).ready(function () {
   var user_profile = JSON.parse(localStorage.getItem("user_profile"));

@@ -3335,15 +3335,15 @@ textarea:-ms-input-placeholder {
     margin-bottom: 0;
   }
 }
-.section_title::before {
+/* .section_title::before {
   position: absolute;
   content: "";
-  height: 1px;
-  width: 100%;
-  background: #e9e9e9;
+  height: 1.4px;
+  width: 40%;
+  background: #ed8719;
   left: 0;
-  top: 50%;
-  transform: translatey(-50%);
+  top: 80%;
+  transform: translatey(-50%); */
 }
 @media only screen and (max-width: 767px) {
   .section_title::before {
@@ -3459,8 +3459,8 @@ textarea:-ms-input-placeholder {
 }
 .product_thumb a.primary_img .product_image {
   object-fit: cover;
-  height: 17rem;
-  width: 17rem;
+  height: 16rem;
+  width: 16rem;
   margin-left: 10%;
 }
 .product_thumb a.secondary_img {
@@ -3472,7 +3472,6 @@ textarea:-ms-input-placeholder {
 }
 .product_carousel {
   height: 55vh;
-  
 }
 .product_carousel .owl-nav {
   position: absolute;
@@ -3482,6 +3481,15 @@ textarea:-ms-input-placeholder {
   padding: 0 9px;
   border-radius: 25px;
   /* border: 1px solid #e9e9e9; */
+}
+
+.owl_slider .owl-carousel .owl-nav {
+  position: absolute;
+  top: -56px;
+  right: 0;
+  display: flex;
+  padding: 0 9px;
+  border-radius: 25px;
 }
 @media only screen and (max-width: 767px) {
   .product_carousel .owl-nav {
@@ -3510,12 +3518,12 @@ textarea:-ms-input-placeholder {
 .product_content h3 a {
   text-transform: lowercase;
   font-size: medium;
-  height:3rem;
+  height: 3rem;
   color: #000;
   font-weight: 900;
-  width:100%;
+  width: 100%;
 }
-.product_carousel .owl-item{
+.product_carousel .owl-item {
   height: 317px;
   width: 209px;
   /* border: 1px solid #f0f0f0; */
@@ -3839,9 +3847,9 @@ textarea:-ms-input-placeholder {
 /*small product area css here*/
 .small_product .single_product {
   display: flex;
-  border: 1px solid #E5E5E5;
+  border: 1px solid #e5e5e5;
   height: 317px;
-  width: 259px;
+  width: 239px;
 }
 .small_product .product_content {
   width: 90%;
@@ -7213,6 +7221,7 @@ textarea:-ms-input-placeholder {
 
 .coupon_code {
   border: 1px solid #f0f0f0;
+  margin-bottom: 10px;
 }
 @media only screen and (max-width: 767px) {
   .coupon_code.left {
@@ -7226,7 +7235,7 @@ textarea:-ms-input-placeholder {
   background: #333;
   text-transform: uppercase;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 800;
 }
 @media only screen and (max-width: 767px) {
   .coupon_code h3 {
@@ -7234,6 +7243,24 @@ textarea:-ms-input-placeholder {
     padding: 5px 15px;
     font-size: 15px;
   }
+}
+/* style=" width: 100%;;font-size: 14px;width: 100%;" */
+.optionsecoptions{
+  display: flex;
+  /* flex-direction: column; */
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: lowercase;
+}
+.address_slider{
+  overflow: scroll;
+  /* border: black solid 1px; */
+}
+.address_slider::-webkit-scrollbar {
+  display: none;
+}
+.radio-check{
+  /* background: brown; */
 }
 
 .cart_subtotal {
@@ -7451,6 +7478,7 @@ textarea:-ms-input-placeholder {
   color: #ffffff;
   background: #333;
   font-weight: 500;
+  border-radius: 5px 5px 0px 0px;
 }
 .checkout_form input {
   border: 1px solid #f0f0f0;
@@ -7515,13 +7543,14 @@ textarea:-ms-input-placeholder {
   font-size: 16px;
   line-height: 30px;
   padding: 5px 10px;
+  min-width: 135px;
   text-transform: capitalize;
   color: #ffffff;
-  background: #414141;
-  font-weight: 500;
+  background: #ed8719;
+  font-weight: 700;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  margin-bottom: 0;
+  margin: 4.4% 0% 0% -2%;
   border-radius: 5px;
 }
 .order_button button:hover {
@@ -7981,28 +8010,36 @@ textarea:-ms-input-placeholder {
 
 /*faq page css end*/
 /*  18. my account css here */
+
+.dashboard_tab_button {
+  border: 1.5px solid #e5e5e5;
+  border-radius: 5px;
+  height: 430px;
+}
+
 @media only screen and (max-width: 767px) {
   .dashboard_tab_button {
     margin-bottom: 20px;
   }
 }
 .dashboard_tab_button ul li {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 .dashboard_tab_button ul li a {
   font-size: 18px;
-  color: #ffffff;
+  color: #3e3e3e;
   font-weight: 500;
   text-transform: capitalize;
-  background: #333;
+  font-size: 1rem;
+  font-weight: 800;
+  /* background: #333; */
   border-radius: 3px;
 }
 .dashboard_tab_button ul li a:hover {
-  background: #414141;
-  color: #ffffff;
+  color: #ed8719;
 }
 .dashboard_tab_button ul li a.active {
-  background: #414141;
+  /* background: #414141; */
 }
 
 .main_content_area {
